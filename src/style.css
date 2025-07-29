@@ -1,0 +1,129 @@
+:root {
+  /* font-family: PingFangSC-Medium; */
+  font-weight: 400;
+  background-color: #242424;
+  --el-color-primary: #3d3d3d !important;
+  --el-bg-color-overlay: #F6F6F7 !important;
+  --el-border-radius-base: 10px !important;
+  --el-component-size-large: 45px !important;
+  --el-text-color-regular: #303133 !important;
+  --up: #0065ff;
+  --down: #f05150;
+  --van-font-size-md: 24px;
+  --header-me-width: 50px;
+  --main-color: #007513;
+  --header-logo-width: 150px;
+}
+
+.el-input {
+  --el-input-border-color: #3d3d3d !important;
+  font-weight: 800 !important;
+  font-size: 15px !important;
+}
+
+.el-input__wrapper {
+  box-shadow: 0 0 0 2px #3d3d3d !important;
+}
+
+html {
+  overflow: hidden;
+}
+
+.el-popover {
+  --el-popover-padding: 24px !important;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #FFF;
+  height: 100%;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: PingFangSC-Medium !important;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* text-align: center; */
+}
+
+input {
+  background-color: transparent;
+  outline: none;
+}
+
+.hidden-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.bg {
+  background-image: url(@/static/images/bg.jpg);
+}
+
+.bg-blue {
+  background-color: #0065ff !important;
+}
+.bg-green {
+  background-color: #007513 !important;
+}
+
+.bg-gray {
+  background-color: hsla(0, 0%, 92.9%, .46);
+}
+
+.bg-red {
+  background-color: #f05150;
+}
+
+
+
+.text-blue {
+  color: #0065ff !important;
+}
+
+.text-red {
+  color: #f05150 !important;
+}
+
+.text-main-bg {
+  color: #007513;
+}
+
+.text-up {
+  color: var(--up) !important;
+}
+
+.text-down {
+  color: var(--down) !important;
+}
+
+
+
+.bg-up {
+  background-color: var(--up) !important;
+}
+
+.bg-down {
+  background-color: var(--down) !important;
+}
+
+.el-input__wrapper {
+  box-shadow: none !important;
+
+}
+.el-input__inner {
+  font-weight: initial;
+}
+
+.van-nav-bar .van-icon,.van-nav-bar__title,.van-tab--active {
+  color: #007513 !important;
+}
