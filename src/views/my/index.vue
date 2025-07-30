@@ -91,6 +91,7 @@
         </div>
         <div
           class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
+          @click="toPage('/withdraw')"
         >
           <div class="flex items-center justify-between w-full">
             <div class="text-[#000] text-sm font-medium">
@@ -110,6 +111,7 @@
       <div class="flex flex-col rounded-xl bg-[#fff]">
         <div
           class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
+          @click="toPage('/profileItem')"
         >
           <div class="flex items-center justify-between w-full">
             <div class="text-[#000] text-sm font-medium">
@@ -139,6 +141,7 @@
       <div class="flex flex-col rounded-xl bg-[#fff]">
         <div
           class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
+          @click="customer"
         >
           <div class="flex items-center justify-between w-full">
             <div class="text-[#000] text-sm font-medium">
@@ -179,10 +182,13 @@
         </div>
       </div>
     </div>
+    <ContactUs ref="ContactUsRef"></ContactUs>
   </div>
 </template>
 <script setup>
+import ContactUs from "@/components/ContactUs.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
+const ContactUsRef = ref(null);
 const bgImage = new URL("@/static/images/profile_bg1.png", import.meta.url)
   .href;
 import { onMounted, ref } from "vue";
@@ -192,5 +198,8 @@ const toPage = (path) =>{
     router.push({
         path: path
     }) 
+}
+const customer = () =>{
+ContactUsRef.value.open();
 }
 </script>

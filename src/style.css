@@ -124,6 +124,9 @@ input {
   font-weight: initial;
 }
 
-.van-nav-bar .van-icon,.van-nav-bar__title,.van-tab--active {
+.van-nav-bar .van-icon,.van-nav-bar__title{
   color: #007513 !important;
+}
+.van-cell,.van-cell-group {
+  background: transparent !important;
 }

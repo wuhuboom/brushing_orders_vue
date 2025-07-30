@@ -27,7 +27,7 @@ const { t } = useI18n()
 const active = ref(props.name)
 const menus = computed(() => [
     { title: t('首页'), url: '/', icon: 'home' },
-    // { title: t('开始'), url: '/starting', icon: 'position' },
+    { title: t('开始'), url: '/starting', icon: 'position' },
      { title: t('记录'), url: '/records', icon: 'user' },
     // { title: t('我的'), url: '/user', icon: 'user' }
 ])
