@@ -19,10 +19,10 @@
           >
             <font dir="auto" style="vertical-align: inherit">
               <font dir="auto" style="vertical-align: inherit"
-                >我们通过数字营销</font
+                >{{$t('我们通过数字营销')}}</font
               >
               <font dir="auto" style="vertical-align: inherit"
-                >帮助小型企业盈利</font
+                >{{$t('帮助小型企业盈利')}}</font
               >
             </font>
           </div>
@@ -31,12 +31,12 @@
           <div
             class="text-white mr-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
           >
-            雇佣我们
+            {{$t('雇佣我们')}}
           </div>
           <div
             class="text-white ml-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
           >
-            与我们合作
+            {{ $t('与我们合作') }}
           </div>
         </div>
       </div>
