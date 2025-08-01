@@ -259,7 +259,7 @@
       <div class="mt-6 pb-4"></div>
     </div>
 
-    <Footer name="/"></Footer>
+    <Footer name="/starting"></Footer>
   </div>
 </template>
 <script setup>

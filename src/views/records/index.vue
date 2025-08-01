@@ -66,7 +66,7 @@
         </div>
         
     </div>
-    <Footer name="/"></Footer>
+    <Footer name="/records"></Footer>
 
     <van-dialog v-model:show="show" title="标题" :show-confirm-button="false">
         <div class="w-[5rem] mx-auto" style="width: 6rem; z-index: 999;">
@@ -100,10 +100,6 @@
                 <van-button color="#007513" class="w-full">提交</van-button>
             </div>
         </div>
-        
-    
-
-
     </van-dialog>
   </div>
 </template>

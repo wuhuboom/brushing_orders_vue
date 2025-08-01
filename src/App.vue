@@ -22,7 +22,7 @@ const commonStore = useCommonStore();
 const marketStore = useMarketStore();
 // 更新时间
 marketStore.startTimeUpdate();
-commonStore.getSystemConfig();
+// commonStore.getSystemConfig();
 const { locale } = useI18n();
 if (userStore.token){
   userStore.getUserInfo();
