@@ -6,9 +6,7 @@
 import { useUserStore } from '@/store/modules/user';
 import { useCommonStore } from '@/store/modules/common';
 import { useI18n } from 'vue-i18n';
-import { useMarketStore } from './store/modules/market';
 import BigNumber from 'bignumber.js';
-import { closeUserRemind, setUserRemind } from './common/remind';
 import { onUnmounted } from 'vue';
 // 在文件顶部添加BigNumber全局配置
 BigNumber.config({
@@ -19,22 +17,12 @@ BigNumber.config({
 // import webSocket from '@/common/webSocket'; // socket启动
 const userStore = useUserStore();
 const commonStore = useCommonStore();
-const marketStore = useMarketStore();
-// 更新时间
-marketStore.startTimeUpdate();
 // commonStore.getSystemConfig();
 const { locale } = useI18n();
 if (userStore.token){
   userStore.getUserInfo();
-  userStore.getUserBalance();
-  setUserRemind();
 } 
 if (commonStore.lang) locale.value = commonStore.lang;
-
-onUnmounted(() => {
-  closeUserRemind(false);
-})
-// websocket
 </script>
 
 <style>

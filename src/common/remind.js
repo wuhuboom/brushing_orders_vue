@@ -1,4 +1,4 @@
-import WebSocketClient from "@/util/userSocket"
+// import WebSocketClient from "@/util/userSocket"
 let wsClient = null
 export function setUserRemind() {
 	wsClient = new WebSocketClient();

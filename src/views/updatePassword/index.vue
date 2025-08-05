@@ -14,7 +14,7 @@
           <van-cell-group inset>
             <van-field
               label-width="150"
-              v-model="value"
+              v-model="ruleForm.oldPassword"
               :label="$t('旧密码')"
               placeholder="旧密码"
               input-align="right"
@@ -25,7 +25,7 @@
           <van-cell-group inset>
             <van-field
               label-width="150"
-              v-model="value"
+              v-model="ruleForm.newPassword"
               :label="$t('新密码')"
               placeholder="新密码"
               input-align="right"
@@ -36,7 +36,7 @@
           <van-cell-group inset>
             <van-field
               label-width="150"
-              v-model="value"
+              v-model="agentNewPassword"
               :label="$t('确认密码')"
               placeholder="确认密码"
               input-align="right"
@@ -45,12 +45,31 @@
         </div>
       </div>
       <div class="w-full mt-4">
-        <van-button color="#007513" class="w-full">{{ $t("更新") }}</van-button>
+        <van-button color="#007513" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref,reactive } from "vue";
 const onClickLeft = () => history.back();
+import { editPassword } from "../../api/apis";
+import { useRouter } from "vue-router";
+const router = useRouter();
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+const agentNewPassword = ref('');
+const ruleForm = reactive({
+  oldPassword: "",
+  newPassword: "",
+});
+const submitForm = async() =>{
+  if (!ruleForm.oldPassword) return ElMessage.error(t("请输入旧密码"));
+  if (!ruleForm.newPassword) return ElMessage.error(t("请输入新密码"));
+  if (ruleForm.newPassword != agentNewPassword.value) return ElMessage.error(t("两次密码不一致"));
+  let res = await editPassword(ruleForm);
+  ElMessage({ message: t("修改成功"), type: "success" });
+  router.push({ path: "/profileItem" });
+
+}
 </script>

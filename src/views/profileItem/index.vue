@@ -25,7 +25,7 @@
           <div class="flex items-center text-black text-sm font-medium">
             {{ $t("用户名") }}
           </div>
-          <div class="text-[#666] text-sm font-medium">用户名称</div>
+          <div class="text-[#666] text-sm font-medium">{{userStore.userInfo.username}}</div>
         </div>
         <div
           class="flex items-center justify-between p-4 box-border border-b-[2px] border-[#fff]"
@@ -33,7 +33,7 @@
           <div class="flex items-center text-black text-sm font-medium">
             {{ $t("电话") }}
           </div>
-          <div class="text-[#666] text-sm font-medium">1111</div>
+          <div class="text-[#666] text-sm font-medium">{{userStore.userInfo.phone}}</div>
         </div>
       </div>
       <div class="mt-4 flex flex-col bg-[#e8f7ec]">
@@ -61,11 +61,17 @@
 </template>
 <script setup>
 import { useRouter } from "vue-router";
+import { useUserStore } from '../../store/modules/user';
+import { computed, onMounted, ref } from 'vue';
+const userStore = useUserStore()
 const router = useRouter();
 const toPage = (path) => {
   router.push({
     path: path,
   });
 };
+onMounted(() => {
+  userStore.getUserInfo()
+})
 const onClickLeft = () => history.back();
 </script>

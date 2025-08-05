@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
-import { reqUserInfo, reqGetAllWallet } from '@/api/apis.js';
+// import { reqUserInfo, reqGetAllWallet } from '@/api/apis.js';
 import router from '@/router/index.js';
-import { reqGetUserBalance } from '../../api/apis';
+import { userGetInfo } from '../../api/apis';
 import BigNumber from 'bignumber.js';
 
 export const useUserStore = defineStore('user', {
@@ -33,18 +33,9 @@ export const useUserStore = defineStore('user', {
             this.allWallet = allWallet;
         },
         getUserInfo({ callback } = {}) {
-            reqUserInfo(callback).then((res) => {
+            userGetInfo(callback).then((res) => {
                 this.userInfo = res.data;
-                this.getAllWallet();
                 if (callback) callback();
-            });
-        },
-        getAllWallet() {
-            reqGetAllWallet().then((res) => {
-                if (res.data) {
-                    // 调用setAllWallet mutations
-                    this.setAllWallet(res.data);
-                }
             });
         },
         logout() {
@@ -52,11 +43,6 @@ export const useUserStore = defineStore('user', {
             this.userInfo = {};
             this.allWallet = [];
             router.replace({ path: '/account/login' });
-        },
-        getUserBalance() {
-            reqGetUserBalance().then((res) => {
-                this.setUserBalance(res.data);
-            })
         },
         setUserBalance(data) {
             this.assets = data;

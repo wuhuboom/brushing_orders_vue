@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center">
+  <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-5">
     <div class="flex flex-col items-center pt-6 pb-3">
       <img
         src="@/static/images/account-lang.png"
@@ -18,9 +18,6 @@
       <div class="text-center text-xs text-white pt-4">
         {{ $t("为旧金山和爱丁堡各地的客户提供服务") }}
       </div>
-      <!-- <div class="w-full mt-5">
-                <Tabs :menus="accountTypeList" :selectMenu="accountType" @change="handleChangeType"></Tabs>
-            </div> -->
       <el-form
         ref="ruleFormRef"
         :model="ruleForm"
@@ -29,9 +26,9 @@
         label-width="auto"
         class="w-full mt-4"
       >
-        <el-form-item label="" prop="email" label-position="top">
+        <el-form-item label="" prop="username" label-position="top">
           <el-input
-            v-model="ruleForm.email"
+            v-model="ruleForm.username"
             :placeholder="$t('用户名')"
             type="text"
             autocomplete="off"
@@ -39,29 +36,29 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item label="" prop="email" label-position="top">
+        <el-form-item label="" prop="password" label-position="top">
           <el-input
-            v-model="ruleForm.email"
+            v-model="ruleForm.password"
             :placeholder="$t('密码')"
-            type="text"
+            type="password"
             autocomplete="off"
             size="large"
           >
           </el-input>
         </el-form-item>
-        <el-form-item label="" prop="email" label-position="top">
+        <el-form-item label="" prop="agentPassword" label-position="top">
           <el-input
-            v-model="ruleForm.email"
+            v-model="agentPassword"
             :placeholder="$t('确认密码')"
-            type="text"
+            type="password"
             autocomplete="off"
             size="large"
           >
           </el-input>
         </el-form-item>
-        <el-form-item label="" prop="email" label-position="top">
+        <el-form-item label="" prop="phone" label-position="top">
           <el-input
-            v-model="ruleForm.email"
+            v-model="ruleForm.phone"
             :placeholder="$t('电话')"
             type="text"
             autocomplete="off"
@@ -69,9 +66,9 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item label="" prop="email" label-position="top">
+        <el-form-item label="" prop="tradePassword" label-position="top">
           <el-input
-            v-model="ruleForm.email"
+            v-model="ruleForm.tradePassword"
             :placeholder="$t('交易密码')"
             type="text"
             autocomplete="off"
@@ -79,20 +76,18 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item label="" prop="email" label-position="top">
+        <div
+          class="w-full flex items-center justify-between p-4 mb-4 py-3 bg-[#fff] rounded-md"
+        >
+          <div class="text-sm pl-2 text-[#999]">{{ $t("性别") }}</div>
+          <van-radio-group v-model="ruleForm.sex" direction="horizontal">
+            <van-radio :name="1" checked-color="#007513">{{ $t("男") }}</van-radio>
+            <van-radio :name="2" checked-color="#007513">{{ $t("女") }}</van-radio>
+          </van-radio-group>
+        </div>
+        <el-form-item label="" prop="inviteCode" label-position="top">
           <el-input
-            v-model="ruleForm.email"
-            :placeholder="$t('性别')"
-            disabled
-            type="text"
-            autocomplete="off"
-            size="large"
-          >
-          </el-input>
-        </el-form-item>
-        <el-form-item label="" prop="email" label-position="top">
-          <el-input
-            v-model="ruleForm.email"
+            v-model="ruleForm.inviteCode"
             :placeholder="$t('邀请码')"
             type="text"
             autocomplete="off"
@@ -101,6 +96,10 @@
           </el-input>
         </el-form-item>
       </el-form>
+      <van-checkbox checked-color='#007513' class='m-5' v-model="checked">
+        <span class='text-[#fff] font-semibold text-sm'>{{$t('我同意')}}</span>
+        <span class="ml-2 text-[#fff] text-sm underline font-bold" @click='jump'>{{$t('条款和条件')}}</span>
+      </van-checkbox>
       <div @click="sendCode" class="w-full" size="large" round>
         <div
           class="w-full text-white text-lg font-semibold mx-auto py-3 rounded-lg flex items-center justify-center bg-green"
@@ -114,8 +113,8 @@
         @click="toLogin"
       >
         <p class="text-sm text-center w-full pb-2" @click="toRegister">
-            {{ $t("已有账户?")
-            }}<span class="text-white">{{ $t("立即登录") }}</span>
+          {{ $t("已有账户?")
+          }}<span class="text-white">{{ $t("立即登录") }}</span>
         </p>
       </div>
     </div>
@@ -128,7 +127,7 @@ import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import Tabs from "@/components/Tabs.vue";
-import { reqSendCodeToEmail, reqSendCodeToPhone } from "../../api/apis";
+import { register } from "../../api/apis";
 import { areas } from "@/config/area";
 import { formatPhoneNumber } from "../../util/utils";
 onMounted(() => {
@@ -143,73 +142,49 @@ const router = useRouter();
 const { t } = useI18n();
 const ruleFormRef = ref(null);
 const langRef = ref(null);
+const agentPassword = ref("");
+const checked = ref(true)
 const ruleForm = reactive({
-  email: "",
+  username: "",
+  password: "",
+  tradePassword: "",
+  phone: "",
+  sex: 1,
+  inviteCode: "",
 });
-const select = ref("US +1");
 const rules = computed(() => {
   return {};
 });
-const accountType = ref(1);
-const accountTypeList = computed(() => [
-  {
-    label: t("邮箱"),
-    value: 1,
-  },
-  {
-    label: t("手机号"),
-    value: 2,
-  },
-]);
-
-const onInput = () => {
-  ruleForm.email = formatPhoneNumber(ruleForm.email);
-};
 function toLogin() {
   router.push("/account/login");
 }
 
 function sendCode() {
-  ruleForm.email = ruleForm.email.replace(/\s+/g, "");
-  if (accountType.value === 1) {
-    if (!ruleForm.email) return ElMessage.error(t("请输入邮箱"));
-    // 增加验证是否是正确邮箱地址
-    if (!ruleForm.email.includes("@"))
-      return ElMessage.error(t("请输入正确的邮箱地址"));
-    reqSendCodeToEmail({ email: ruleForm.email, biz: "ureg" }).then((res) => {
-      ElMessage({ message: t("验证码发送成功"), type: "success" });
-      router.push({
-        path: "/account/setPassword",
-        query: { email: ruleForm.email, type: 1 },
-      });
+  if (!ruleForm.username) return ElMessage.error(t("请输入用户名"));
+  if (!ruleForm.password) return ElMessage.error(t("请输入密码"));
+  if (!agentPassword.value) return ElMessage.error(t("请输入确认密码"));
+  if (agentPassword.value != ruleForm.password)
+    return ElMessage.error(t("两次密码不一致"));
+  // if (!ruleForm.phone) return ElMessage.error(t("请输入电话"));
+  if (!/^[0-9]*$/.test(ruleForm.phone))
+    return ElMessage.error(t("请输入正确电话号码"));
+  if (!ruleForm.tradePassword) return ElMessage.error(t("请输入交易密码"));
+  if (!ruleForm.inviteCode) return ElMessage.error(t("请输入邀请码"));
+  register(ruleForm).then((res) => {
+    ElMessage({ message: t("注册成功"), type: "success" });
+    router.push({
+      path: "/account/login",
     });
-  } else {
-    if (!ruleForm.email) return ElMessage.error(t("请输入手机号"));
-    // 手机号码需要时纯数字
-    if (!/^[0-9]*$/.test(ruleForm.email))
-      return ElMessage.error(t("请输入正确的手机号"));
-    const country = areas.find((item) => item.label === select.value);
-    reqSendCodeToPhone(`${country.value}${ruleForm.email}`).then((res) => {
-      ElMessage({ message: t("验证码发送成功"), type: "success" });
-
-      router.push({
-        path: "/account/setPassword",
-        query: {
-          phone: `${country.value}${ruleForm.email}`,
-          type: 2,
-          country: country.area,
-        },
-      });
-    });
-  }
+  });
 }
 
 function handleChangeLang() {
   langRef.value.open();
 }
-
-function handleChangeType(value) {
-  accountType.value = value;
+const jump = () =>{
+  router.push({
+      path: "/tc",
+    });
 }
 </script>
 

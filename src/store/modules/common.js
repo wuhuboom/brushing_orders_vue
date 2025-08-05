@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { reqGetSystemConfig, reqGetClientVersion } from '../../api/apis';
+// import { reqGetSystemConfig, reqGetClientVersion } from '../../api/apis';
 
 export const useCommonStore = defineStore('common', {
     // 启用持久化
@@ -21,27 +21,6 @@ export const useCommonStore = defineStore('common', {
         },
         setPath(path) {
             this.path = path
-        },
-        getSystemConfig() {
-            reqGetSystemConfig().then(res => {
-                this.setting = res.data
-                this.updateClientVersion()
-            })
-        },
-        getClientVersion() {
-            reqGetClientVersion().then(res => {
-                const clientVersionCode = this.clientVersion || 0;
-                if (clientVersionCode > 0 && clientVersionCode !== res.data) {
-                    window.location.href = this.setting.h5Link;
-                }
-                this.clientVersion = res.data;
-                this.updateClientVersion()
-            })
-        },
-        updateClientVersion() {
-            setTimeout(() => {
-                this.getClientVersion()
-            }, 5000);
         },
     },
 });

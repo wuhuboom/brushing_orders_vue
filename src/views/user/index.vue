@@ -81,7 +81,6 @@ const langRef = ref(null)
 const changeAccountTypeRef = ref(null)
 
 onMounted(() => {
-  userStore.getUserBalance()
   userStore.getUserInfo()
 })
 

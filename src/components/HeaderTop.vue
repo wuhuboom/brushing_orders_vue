@@ -8,6 +8,7 @@
         </div>
         <div class="flex justify-start items-center">
           <div
+          @click="customer"
             class="text-white bg-[var(--main-color)] mr-2 text-xs px-3 py-1 rounded-full"
           >
             {{ $t("客服") }}
@@ -16,8 +17,24 @@
             src="@/static/images/user2.png"
             class="w-[var(--header-me-width)]"
             alt=""
+            @click="toMy"
           />
         </div>
       </div>
+      <ContactUs ref="ContactUsRef"></ContactUs>
     </van-sticky>
 </template>
+<script setup>
+import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+import ContactUs from "@/components/ContactUs.vue";
+const ContactUsRef = ref(null);
+
+const customer = () => {
+  ContactUsRef.value.open();
+};
+const router = useRouter();
+const toMy = ()=>{
+router.push({ path: "/my" });
+}
+</script>

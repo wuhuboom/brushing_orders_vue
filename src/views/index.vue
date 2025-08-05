@@ -111,7 +111,7 @@
 import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import { onMounted, ref } from "vue";
-import { reqGetBannerList, reqGetHotCoinList } from "../api/apis";
+// import { reqGetBannerList, reqGetHotCoinList } from "../api/apis";
 import { useRouter } from "vue-router";
 const bannerList = ref([]);
 const hot = ref([]);
