@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 // import { reqUserInfo, reqGetAllWallet } from '@/api/apis.js';
 import router from '@/router/index.js';
-import { userGetInfo } from '../../api/apis';
+import { userGetInfo,getGlobalConfig } from '../../api/apis';
 import BigNumber from 'bignumber.js';
 
 export const useUserStore = defineStore('user', {
@@ -10,6 +10,7 @@ export const useUserStore = defineStore('user', {
     state: () => ({
         token: '',
         userInfo: {},
+        GlobalConfig:{},
         accountType: 'REAL',
         allWallet: [],
         assets: {}
@@ -47,6 +48,11 @@ export const useUserStore = defineStore('user', {
         setUserBalance(data) {
             this.assets = data;
             this.assets.totalAssets = new BigNumber(data.balance).plus(data.frozen).plus(data.value).toFixed();
+        },
+        getGetGlobalConfig(){
+            getGlobalConfig().then(res =>{
+                this.GlobalConfig = res
+            })
         }
     },
 });

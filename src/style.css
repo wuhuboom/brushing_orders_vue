@@ -130,3 +130,7 @@ input {
 .van-cell,.van-cell-group {
   background: transparent !important;
 }
+.van-pull-refresh {
+  height: 100%;
+  overflow-y: auto;
+}

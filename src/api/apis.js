@@ -10,13 +10,18 @@ export const login = (params) => api.post('/user/login', params, { loading: true
 export const editTradePassword = (params) => api.post('/user/editTradePassword', params, { loading: true, showMsg: true, })// 修改交易密码
 export const editPassword = (params) => api.post('user/editPassword', params, { loading: true, showMsg: true, })// 修改密码
 export const checkTradePassword = (params) => api.post(`user/checkTradePassword`, params, { loading: true, showMsg: true, })// 验证交易密码
-
+export const addWithdrawalMethod = (params) => api.post(`user/addWithdrawalMethod`, params, { loading: true, showMsg: true, })// 验证交易密码
 
 export const userGetInfo = (params) => api.get('/user/getInfo', { params: params, loading: false, showMsg: false, })// 获取交易配置
 
 export const getCustomerService = (params) => api.get('/config/getCustomerService', { params: params, loading: false, showMsg: false, })// 获取交易配置
 
 export const getGlobalConfig = (params) => api.get('/config/getGlobalConfig', { params: params, loading: false, showMsg: false, })// 获取基本配置
+
+export const getNoticeList = (params) => api.get('/config/getNoticeList', { params: params, loading: false, showMsg: false, })// 获取公告配置
+
+export const getLevel = (params) => api.get('/config/getLevel', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
+
 
 
 

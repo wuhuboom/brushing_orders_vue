@@ -12,11 +12,11 @@
               src="@/static/images/user2.png"
               alt=""
             />
-            <div class="flex items-center">
-              <div class="text-black font-semibold">Hi, mao1</div>
+            <div class="flex items-center pl-2">
+              <div class="text-black font-semibold">Hi, {{userInfo.username}}</div>
             </div>
           </div>
-          <div class="text-black font-semibold">VIP1</div>
+          <div class="text-black font-semibold">VIP{{ userInfo.levelId }}</div>
         </div>
       </div>
       <div class="w-[100%] px-4 mx-auto">
@@ -33,16 +33,16 @@
                 />
                 <div class="flex flex-col justify-around">
                   <div class="text-[#000] text-sm font-bold mb-1">
-                    Wallet Balance
+                    {{$t('钱包余额')}}
                   </div>
                   <div class="text-[#999] text-[10px]">
-                    Commission will be added here
+                    {{$t('佣金将在此处添加')}}
                   </div>
                 </div>
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[var(--main-color)] font-bold mb-1">
-                  -999
+                  {{ userInfo.balance }}
                 </div>
                 <div class="text-[#999] text-xs">usd</div>
               </div>
@@ -60,16 +60,16 @@
                 />
                 <div class="flex flex-col justify-around">
                   <div class="text-[#000] text-sm font-bold mb-1">
-                    Hold Amount
+                    {{$t('持有金额')}}
                   </div>
                   <div class="text-[#999] text-[10px]">
-                    Contact Support for inquiries
+                    {{$t('如有疑问，请联系客服')}}
                   </div>
                 </div>
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[var(--main-color)] font-bold mb-1">
-                  -999
+                   {{ userInfo.totalBalance }}
                 </div>
                 <div class="text-[#999] text-xs">usd</div>
               </div>
@@ -87,16 +87,16 @@
                 />
                 <div class="flex flex-col justify-around">
                   <div class="text-[#000] text-sm font-bold mb-1">
-                    Commission
+                    {{$t('当日佣金')}}
                   </div>
                   <div class="text-[#999] text-[10px]">
-                    Daily commission earned
+                     {{$t('每日赚取佣金')}}
                   </div>
                 </div>
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[var(--main-color)] font-bold mb-1">
-                  -999
+                  {{ userInfo.commission }}
                 </div>
                 <div class="text-[#999] text-xs">usd</div>
               </div>
@@ -263,6 +263,19 @@
   </div>
 </template>
 <script setup>
+import { onMounted, ref } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
+import { userGetInfo } from "../../api/apis";
+const url = import.meta.env.VITE_API_IMG_URL;
+const userInfo = ref({});
+const avatarUrl = ref("");
+
+onMounted(() => {
+  userGetInfo().then((res) => {
+    userInfo.value = res.data;
+    avatarUrl.value = `${url}${res.data.userLevel.icon}`;
+    console.log(userInfo.value);
+  });
+});
 </script>

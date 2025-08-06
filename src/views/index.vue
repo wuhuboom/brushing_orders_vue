@@ -18,12 +18,12 @@
             class="text-center text-2xl lg:text-5xl font-semibold text-white"
           >
             <font dir="auto" style="vertical-align: inherit">
-              <font dir="auto" style="vertical-align: inherit"
-                >{{$t('我们通过数字营销')}}</font
-              >
-              <font dir="auto" style="vertical-align: inherit"
-                >{{$t('帮助小型企业盈利')}}</font
-              >
+              <font dir="auto" style="vertical-align: inherit">{{
+                $t("我们通过数字营销")
+              }}</font>
+              <font dir="auto" style="vertical-align: inherit">{{
+                $t("帮助小型企业盈利")
+              }}</font>
             </font>
           </div>
         </div>
@@ -31,12 +31,12 @@
           <div
             class="text-white mr-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
           >
-            {{$t('雇佣我们')}}
+            {{ $t("雇佣我们") }}
           </div>
           <div
             class="text-white ml-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
           >
-            {{ $t('与我们合作') }}
+            {{ $t("与我们合作") }}
           </div>
         </div>
       </div>
@@ -72,6 +72,7 @@
           >
             <div class="w-[35%]">员工级别</div>
             <div
+              @click="toVips"
               class="w-[65%] font-normal text-xs text-[var(--main-color)] text-right flex justify-end items-center"
             >
               <div>查看更多</div>
@@ -81,20 +82,24 @@
         </div>
         <div class="items-con flex overflow-x-scroll p-4">
           <div
-            v-for="item in lever"
+            v-for="item in levelList"
             class="vip-item flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
             :style="{
-              background: `url(${item.bgImage}) 0 0 / 100% 100% no-repeat`,
+              background: `url(${
+                bgMap[item.nameEn]
+              }) 0 0 / 100% 100% no-repeat`,
             }"
           >
             <div class="flex justify-between items-start">
               <div class="font-bold text-lg">
-                <p class="mt-4 text-[var(--main-color)]">{{ $t(item.name) }}</p>
+                <p class="mt-4 text-[var(--main-color)]">
+                  {{ $t(item.nameZh) }}
+                </p>
               </div>
-              <img class="w-24" :src="item.start" alt="" />
+              <img class="w-24" :src="bgMapStart[item.nameEn]" alt="" />
             </div>
             <div class="w-[260px] text-xs mt-2 text-black">
-              <p v-html="item.con"></p>
+              <p v-html="item.descriptionZh"></p>
             </div>
           </div>
         </div>
@@ -105,16 +110,33 @@
 
     <!-- 行情结束 -->
     <Footer name="/"></Footer>
+    <tradePassword ref="tradePasswordRef"></tradePassword>
   </div>
 </template>
 <script setup>
 import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
+import tradePassword from "@/components/tradePassword.vue";
 import { onMounted, ref } from "vue";
-// import { reqGetBannerList, reqGetHotCoinList } from "../api/apis";
+import { getLevel } from "../api/apis";
 import { useRouter } from "vue-router";
-const bannerList = ref([]);
-const hot = ref([]);
+const tradePasswordRef = ref(null);
+
+const bgMap = {
+  VIP1: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
+  VIP2: new URL("@/static/images/bg_vip2.png", import.meta.url).href,
+  VIP3: new URL("@/static/images/bg_vip3.png", import.meta.url).href,
+  VIP4: new URL("@/static/images/bg_vip4.png", import.meta.url).href,
+  VIP5: new URL("@/static/images/bg_vip5.png", import.meta.url).href,
+};
+const bgMapStart = {
+  VIP1: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
+  VIP2: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png",
+  VIP3: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png",
+  VIP4: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png",
+  VIP5: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png",
+};
+
 const router = useRouter();
 
 const items = [
@@ -139,92 +161,108 @@ const items = [
     route: "/profile",
   },
   {
-    name: "收入指南", // 用于 $t('收入指南')
+    name: "条款及细则", // 用于 $t('收入指南')
     icon: new URL("@/static/images/icon-2.png", import.meta.url).href,
-    route: "/income-guide",
+    route: "/clause",
   },
   {
-    name: "事件",
+    name: "证书",
     icon: new URL("@/static/images/icon-4.png", import.meta.url).href,
-    route: "/events",
+    route: "/cert",
   },
   {
-    name: "提款",
+    name: "常见问题解答",
     icon: new URL("@/static/images/icon-6.png", import.meta.url).href,
-    route: "/notifications",
+    route: "/faqs",
   },
   {
-    name: "定金",
+    name: "关于",
     icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
-    route: "/profile",
+    route: "/about",
   },
 ];
 
-const lever = [
-  {
-    name: "VIP1",
-    bgImage: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
-    start:
-      "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
-    con: `普通用户可获得通用数据收集访问权限。<br />
-          ● 适用于大多数涉及轻度到中度使用的数据采集场景<br />
-          ● 每件产品利润 0.5% - 每套 40 个任务<br />
-          ● 每天最多 80 个优化任务<br />
-          ● 无法访问其他高级功能`,
-  },
-  {
-    name: "VIP2",
-    bgImage: new URL("@/static/images/bg_vip2.png", import.meta.url).href,
-    start:
-      "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png",
-    con: `VIP 2 用户可以无限制使用平台的所有功能。根据我们的更新活动进行的存款可获得奖励 <br />
-    ●每个任务 1% 的利润 - 每套优化产品 45 <br />
-      ●更好的利润和权限 <br />
-      ●VIP 2 用户每天最多可以提交 90 个任务 <br />
-      ●完全访问所有其他高级功能 <br />
-      ●登录 15 天后可以邀请下属`,
-  },
-  {
-    name: "VIP3",
-    bgImage: new URL("@/static/images/bg_vip3.png", import.meta.url).href,
-    start:
-      "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png",
-    con: `VIP 3 用户可以无限制使用平台的所有功能。根据我们更新活动的存款可获得奖励<br />
-    ●每个任务1.5%的利润 - 每套优化产品50个 <br />
-          ●更好的利润和权限 <br />
-          ●VIP 3用户每天最多可以提交100个任务 <br />
-          ●完全访问所有其他高级功能 <br />
-          ●升级到VIP 3后可以邀请下属`,
-  },
-  {
-    name: "VIP4",
-    bgImage: new URL("@/static/images/bg_vip4.png", import.meta.url).href,
-    start:
-      "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png",
-    con: `VIP 4 用户可以无限制使用平台的所有功能。根据我们的更新活动进行的存款可获得奖励<br />
-    ●每个任务 2% 的利润 - 每套优化产品 55<br />
-          ●更好的利润和权限 <br />
-          ●VIP 4 用户每天最多可以提交 110 个任务 <br />
-          ●完全访问所有其他高级功能 <br />
-          ●升级到 VIP 4 后可以邀请下属`,
-  },
-  {
-    name: "VIP5",
-    bgImage: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
-    start:
-      "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png",
-    con: `
-    VIP 5 用户可以无限制使用平台的所有功能。根据我们的更新活动进行的存款可获得奖励 <br />
-    ●每个任务 2.5% 的利润 - 每套优化产品 60 个 <br />
-        ●更好的利润和权限 <br />
-        ●VIP 5 用户每天最多可以提交 120 个任务 <br />
-        ●完全访问所有其他高级功能 <br />
-        ●升级到 VIP 5 后可以邀请下属`,
-  },
-];
+// const lever = [
+//   {
+//     name: "VIP1",
+//     bgImage: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
+//     start:
+//       "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
+//     con: `普通用户可获得通用数据收集访问权限。<br />
+//           ● 适用于大多数涉及轻度到中度使用的数据采集场景<br />
+//           ● 每件产品利润 0.5% - 每套 40 个任务<br />
+//           ● 每天最多 80 个优化任务<br />
+//           ● 无法访问其他高级功能`,
+//   },
+//   {
+//     name: "VIP2",
+//     bgImage: new URL("@/static/images/bg_vip2.png", import.meta.url).href,
+//     start:
+//       "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png",
+//     con: `VIP 2 用户可以无限制使用平台的所有功能。根据我们的更新活动进行的存款可获得奖励 <br />
+//     ●每个任务 1% 的利润 - 每套优化产品 45 <br />
+//       ●更好的利润和权限 <br />
+//       ●VIP 2 用户每天最多可以提交 90 个任务 <br />
+//       ●完全访问所有其他高级功能 <br />
+//       ●登录 15 天后可以邀请下属`,
+//   },
+//   {
+//     name: "VIP3",
+//     bgImage: new URL("@/static/images/bg_vip3.png", import.meta.url).href,
+//     start:
+//       "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png",
+//     con: `VIP 3 用户可以无限制使用平台的所有功能。根据我们更新活动的存款可获得奖励<br />
+//     ●每个任务1.5%的利润 - 每套优化产品50个 <br />
+//           ●更好的利润和权限 <br />
+//           ●VIP 3用户每天最多可以提交100个任务 <br />
+//           ●完全访问所有其他高级功能 <br />
+//           ●升级到VIP 3后可以邀请下属`,
+//   },
+//   {
+//     name: "VIP4",
+//     bgImage: new URL("@/static/images/bg_vip4.png", import.meta.url).href,
+//     start:
+//       "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png",
+//     con: `VIP 4 用户可以无限制使用平台的所有功能。根据我们的更新活动进行的存款可获得奖励<br />
+//     ●每个任务 2% 的利润 - 每套优化产品 55<br />
+//           ●更好的利润和权限 <br />
+//           ●VIP 4 用户每天最多可以提交 110 个任务 <br />
+//           ●完全访问所有其他高级功能 <br />
+//           ●升级到 VIP 4 后可以邀请下属`,
+//   },
+//   {
+//     name: "VIP5",
+//     bgImage: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
+//     start:
+//       "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png",
+//     con: `
+//     VIP 5 用户可以无限制使用平台的所有功能。根据我们的更新活动进行的存款可获得奖励 <br />
+//     ●每个任务 2.5% 的利润 - 每套优化产品 60 个 <br />
+//         ●更好的利润和权限 <br />
+//         ●VIP 5 用户每天最多可以提交 120 个任务 <br />
+//         ●完全访问所有其他高级功能 <br />
+//         ●升级到 VIP 5 后可以邀请下属`,
+//   },
+// ];
 function goTo(path) {
-  router.push(path);
+  if (path == "/notifications") {
+    tradePasswordRef.value.open(2);
+  } else if (path == "/profile") {
+    tradePasswordRef.value.open(3);
+  } else {
+    router.push(path);
+  }
 }
-onMounted(() => {});
+function toVips() {
+  router.push("/vips");
+}
+const levelList = ref([]);
+const level = async () => {
+  let res = await getLevel();
+  levelList.value = res.data;
+};
+onMounted(() => {
+  level();
+});
 </script>
 <style scoped></style>

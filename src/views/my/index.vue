@@ -202,7 +202,8 @@
       </div>
     </div>
     <ContactUs ref="ContactUsRef"></ContactUs>
-    <van-popup
+    <tradePassword ref="tradePasswordRef"></tradePassword>
+    <!-- <van-popup
       v-model:show="show"
       closeable
       position="bottom"
@@ -224,18 +225,20 @@
         <van-button color="#007513" class="w-full" @click="submitTradePassword">{{ $t("提交") }}</van-button>
       </div>
 
-    </van-popup>
+    </van-popup> -->
   </div>
 </template>
 <script setup>
 import ContactUs from "@/components/ContactUs.vue";
+import tradePassword from "@/components/tradePassword.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
-import { userGetInfo,checkTradePassword } from "../../api/apis";
+import { userGetInfo, checkTradePassword } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { showConfirmDialog } from "vant";
 const { t } = useI18n();
 const ContactUsRef = ref(null);
+const tradePasswordRef = ref(null);
 const bgImage = new URL("@/static/images/profile_bg1.png", import.meta.url)
   .href;
 import { onMounted, ref } from "vue";
@@ -245,8 +248,8 @@ const url = import.meta.env.VITE_API_IMG_URL;
 const router = useRouter();
 const userInfo = ref({});
 const avatarUrl = ref("");
-const show = ref(false);
-const tradePassword = ref("");
+// const show = ref(false);
+// const tradePassword = ref("");
 const toPage = (path) => {
   router.push({
     path: path,
@@ -269,19 +272,20 @@ const logout = () => {
 };
 
 const payMethod = () => {
-  show.value = true;
+  // show.value = true;
+  tradePasswordRef.value.open(1);
 };
 const submitTradePassword = async () => {
   if (!tradePassword.value) return ElMessage.error(t("请输入交易密码"));
-  console.log(tradePassword.value)
+  console.log(tradePassword.value);
   let ruleForm = {
-tradePassword:tradePassword.value
-  }
+    tradePassword: tradePassword.value,
+  };
   let res = await checkTradePassword(ruleForm);
   router.push({
-    path: '/paymentMethods',
+    path: "/paymentMethods",
   });
-}
+};
 
 onMounted(() => {
   userGetInfo().then((res) => {
