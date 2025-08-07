@@ -10,7 +10,7 @@
     </van-sticky>
 
     <div class="mt-10">
-      <van-tabs color="#007513" v-model:active="active">
+      <van-tabs color="#007513" @change="swichTab" v-model:active="active">
         <van-tab :title="$t('定金')">
           <div class="p-4 box-border flex flex-col">
             <div
@@ -67,7 +67,24 @@
 </template>
 <script setup>
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
-import { onMounted, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
+import { getDeposit } from "../../api/apis";
 const active = ref(0);
+const swichTab = () => {
+  console.log(active.value);
+  if(active.value == 1) {
+    deposit()
+  }
+};
+const query = reactive({
+  pageNum: 1,
+  pageSize: 10,
+});
+const deposit = async () => {
+  let res = await getDeposit(query);
+};
+onMounted (() =>{
+  deposit()
+})
 const onClickLeft = () => history.back();
 </script>

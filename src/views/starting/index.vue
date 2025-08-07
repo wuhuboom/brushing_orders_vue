@@ -13,7 +13,9 @@
               alt=""
             />
             <div class="flex items-center pl-2">
-              <div class="text-black font-semibold">Hi, {{userInfo.username}}</div>
+              <div class="text-black font-semibold">
+                Hi, {{ userInfo.username }}
+              </div>
             </div>
           </div>
           <div class="text-black font-semibold">VIP{{ userInfo.levelId }}</div>
@@ -33,10 +35,10 @@
                 />
                 <div class="flex flex-col justify-around">
                   <div class="text-[#000] text-sm font-bold mb-1">
-                    {{$t('钱包余额')}}
+                    {{ $t("钱包余额") }}
                   </div>
                   <div class="text-[#999] text-[10px]">
-                    {{$t('佣金将在此处添加')}}
+                    {{ $t("佣金将在此处添加") }}
                   </div>
                 </div>
               </div>
@@ -60,16 +62,16 @@
                 />
                 <div class="flex flex-col justify-around">
                   <div class="text-[#000] text-sm font-bold mb-1">
-                    {{$t('持有金额')}}
+                    {{ $t("持有金额") }}
                   </div>
                   <div class="text-[#999] text-[10px]">
-                    {{$t('如有疑问，请联系客服')}}
+                    {{ $t("如有疑问，请联系客服") }}
                   </div>
                 </div>
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[var(--main-color)] font-bold mb-1">
-                   {{ userInfo.totalBalance }}
+                  {{ userInfo.totalBalance }}
                 </div>
                 <div class="text-[#999] text-xs">usd</div>
               </div>
@@ -87,10 +89,10 @@
                 />
                 <div class="flex flex-col justify-around">
                   <div class="text-[#000] text-sm font-bold mb-1">
-                    {{$t('当日佣金')}}
+                    {{ $t("当日佣金") }}
                   </div>
                   <div class="text-[#999] text-[10px]">
-                     {{$t('每日赚取佣金')}}
+                    {{ $t("每日赚取佣金") }}
                   </div>
                 </div>
               </div>
@@ -112,135 +114,48 @@
         <div class="mt-5 flex flex-col p-4 box-border bg-[#f1f1f1] rounded-xl">
           <div class="mt-5 flex flex-col box-border bg-[#f1f1f1] rounded-xl">
             <div class="w-full grid grid-cols-3 gap-6">
-              <div
-                class="grid-span-1 text-[#666666] text-center text-xs font-normal"
-              >
+              <template v-for="(item, index) in totalCount" :key="index">
                 <div
-                  class="p-2 overflow-hidden"
-                  style="
-                    background-image: radial-gradient(
-                      circle at 100% 0%,
-                      rgb(247, 247, 247) 0%,
-                      rgb(252, 252, 252) 106%
-                    );
-                    border-radius: 8px;
-                  "
+                  v-if="index === 4"
+                  class="grid-span-1 text-center text-xs font-normal"
                 >
-                  <div class="overflow-hidden">
-                    <img
-                      src="https://bigwnew.oss-ap-northeast-1.aliyuncs.com/nextleft/202501246635190013342556160.png"
-                      class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
-                      alt=""
-                    />
+                  <div
+                    class="flex items-center justify-center overflow-hidden rounded-xl bg-cover text-lg text-white font-medium relative"
+                  >
+                    <div class="overflow-hidden">
+                      <img
+                        src="@/static/images/start-button.png"
+                        class="w-[100%] shadow"
+                        alt=""
+                      />
+                      <div class="absolute"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div
-                class="grid-span-1 text-[#666666] text-center text-xs font-normal"
-              >
                 <div
-                  class="p-2 overflow-hidden"
-                  style="
-                    background-image: radial-gradient(
-                      circle at 100% 0%,
-                      rgb(247, 247, 247) 0%,
-                      rgb(252, 252, 252) 106%
-                    );
-                    border-radius: 8px;
-                  "
+                  class="grid-span-1 text-[#666666] text-center text-xs font-normal"
                 >
-                  <div class="overflow-hidden">
-                    <img
-                      src="https://bigwnew.oss-ap-northeast-1.aliyuncs.com/nextleft/202501246635190013342556160.png"
-                      class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
-                      alt=""
-                    />
+                  <div
+                    class="p-2 overflow-hidden"
+                    style="
+                      background-image: radial-gradient(
+                        circle at 100% 0%,
+                        rgb(247, 247, 247) 0%,
+                        rgb(252, 252, 252) 106%
+                      );
+                      border-radius: 8px;
+                    "
+                  >
+                    <div class="overflow-hidden">
+                      <img
+                        :src="`${url}${getImageByIndex(index)}`"
+                        class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
+                        alt=""
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div
-                class="grid-span-1 text-[#666666] text-center text-xs font-normal"
-              >
-                <div
-                  class="p-2 overflow-hidden"
-                  style="
-                    background-image: radial-gradient(
-                      circle at 100% 0%,
-                      rgb(247, 247, 247) 0%,
-                      rgb(252, 252, 252) 106%
-                    );
-                    border-radius: 8px;
-                  "
-                >
-                  <div class="overflow-hidden">
-                    <img
-                      src="https://bigwnew.oss-ap-northeast-1.aliyuncs.com/nextleft/202501246635190013342556160.png"
-                      class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-              <div
-                class="grid-span-1 text-[#666666] text-center text-xs font-normal"
-              >
-                <div
-                  class="p-2 overflow-hidden"
-                  style="
-                    background-image: radial-gradient(
-                      circle at 100% 0%,
-                      rgb(247, 247, 247) 0%,
-                      rgb(252, 252, 252) 106%
-                    );
-                    border-radius: 8px;
-                  "
-                >
-                  <div class="overflow-hidden">
-                    <img
-                      src="https://bigwnew.oss-ap-northeast-1.aliyuncs.com/nextleft/202501246635190013342556160.png"
-                      class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="grid-span-1 text-center text-xs font-normal">
-                <div
-                  class="flex items-center justify-center overflow-hidden rounded-xl bg-cover text-lg text-white font-medium relative"
-                >
-                  <div class="overflow-hidden">
-                    <img
-                      src="@/static/images/start-button.png"
-                      class="w-[100%] shadow"
-                      alt=""
-                    />
-                    <div class="absolute"></div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="grid-span-1 text-[#666666] text-center text-xs font-normal"
-              >
-                <div
-                  class="p-2 overflow-hidden"
-                  style="
-                    background-image: radial-gradient(
-                      circle at 100% 0%,
-                      rgb(247, 247, 247) 0%,
-                      rgb(252, 252, 252) 106%
-                    );
-                    border-radius: 8px;
-                  "
-                >
-                  <div class="overflow-hidden">
-                    <img
-                      src="https://bigwnew.oss-ap-northeast-1.aliyuncs.com/nextleft/202501246635190013342556160.png"
-                      class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
+              </template>
             </div>
           </div>
         </div>
@@ -263,13 +178,41 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref,onUnmounted } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
-import { userGetInfo } from "../../api/apis";
+import { userGetInfo, getGoodsList } from "../../api/apis";
 const url = import.meta.env.VITE_API_IMG_URL;
 const userInfo = ref({});
 const avatarUrl = ref("");
+const totalCount = 8; // 插入一个“开始按钮”
+let timer = null;
+
+const goodsList = ref([]);
+const getList = async () => {
+  // let res = await getGoodsList();
+  // goodsList.value = res.data;
+  try {
+    const res = await getGoodsList();
+    goodsList.value = res.data;
+  } catch (e) {
+    console.error("获取商品列表失败:", e);
+  } finally {
+    // 每次请求完成后再等 10 秒再发下一次，避免堆积
+    timer = setTimeout(getList, 10000);
+  }
+};
+
+const getImageByIndex = (i) => {
+  if (i === 4) return null; // 第 5 项是“开始按钮”，不用图
+  const realIndex = i < 4 ? i : i - 1;
+  return goodsList.value[realIndex]?.coverUrl || "";
+};
+
+onUnmounted(() => {
+  // 清除定时器，防止组件卸载后还在请求
+  if (timer) clearTimeout(timer);
+});
 
 onMounted(() => {
   userGetInfo().then((res) => {
@@ -277,5 +220,6 @@ onMounted(() => {
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     console.log(userInfo.value);
   });
+  getList();
 });
 </script>

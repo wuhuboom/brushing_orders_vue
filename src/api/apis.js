@@ -22,6 +22,10 @@ export const getNoticeList = (params) => api.get('/config/getNoticeList', { para
 
 export const getLevel = (params) => api.get('/config/getLevel', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
 
+export const getDeposit = (params) => api.get('/account/getDeposit', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
+
+export const getGoodsList = (params) => api.get('/goods/getGoodsList', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
+
 
 
 

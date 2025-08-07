@@ -170,6 +170,7 @@
         </div>
         <div
           class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
+          @click="toPage('/notice')"
         >
           <div class="flex items-center justify-between w-full">
             <div class="text-[#000] text-sm font-medium">
