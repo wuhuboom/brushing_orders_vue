@@ -70,12 +70,12 @@
           <div
             class="flex justify-between pt-4 pb-2 text-base text-black font-semibold"
           >
-            <div class="w-[35%]">员工级别</div>
+            <div class="w-[35%]">{{$t('员工级别')}}</div>
             <div
               @click="toVips"
               class="w-[65%] font-normal text-xs text-[var(--main-color)] text-right flex justify-end items-center"
             >
-              <div>查看更多</div>
+              <div>{{$t('查看更多')}}</div>
               <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" />
             </div>
           </div>
