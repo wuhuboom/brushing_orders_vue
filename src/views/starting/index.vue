@@ -118,6 +118,7 @@
                 <div
                   v-if="index === 4"
                   class="grid-span-1 text-center text-xs font-normal"
+                  @click="handleClick"
                 >
                   <div
                     class="flex items-center justify-center overflow-hidden rounded-xl bg-cover text-lg text-white font-medium relative"
@@ -147,10 +148,16 @@
                     "
                   >
                     <div class="overflow-hidden">
-                      <img
+                      <!-- <img
                         :src="`${url}${getImageByIndex(index)}`"
                         class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
                         alt=""
+                      /> -->
+                      <van-image
+                        width="6rem"
+                        height="6rem"
+                        fit="contain"
+                        :src="`${url}${getImageByIndex(index)}`"
                       />
                     </div>
                   </div>
@@ -173,22 +180,84 @@
       </div>
       <div class="mt-6 pb-4"></div>
     </div>
-
     <Footer name="/starting"></Footer>
+    <van-popup
+      v-model:show="showCenter"
+      round
+      closeable
+      :style="{ width:'80%' }"
+    >
+      <div class="w-[5rem] mx-auto">
+        <van-image
+          width="6rem"
+          height="6rem"
+          fit="contain"
+          :src="goods.coverUrl"
+        />
+      </div>
+      <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
+        <div class="w-[100%] mx-auto text-center text-sm font-semibold">
+          {{goods.goodsName}}
+        </div>
+        <div class="flex w-full items-center pt-4 pb-4 mt-4">
+          <div
+            class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
+          >
+            <div class="text-[#000] font-semibold">{{$t('价格')}}</div>
+            <div class="text-xs text-[#000] mt-1">
+              <span class="text-sm mr-1 text-[#000] font-semibold">{{goods.price}}</span>
+              USD
+            </div>
+          </div>
+          <div
+            class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
+          >
+            <div class="text-[#000] font-semibold">{{ $t('佣金') }}</div>
+            <div class="text-xs text-[#000] mt-1">
+              <span class="text-sm mr-1 text-[#000] font-semibold">{{goods.commission}}</span>
+              USD
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#d8d8d8] p-4">
+          <div class="flex justify-between items-center box-border">
+            <div class="text-[#000] text-sm">{{$t('创建时间')}}</div>
+            <div class="text-[#000] text-sm font-bold">{{goods.createTime}}</div>
+          </div>
+          <div class="flex justify-between items-center box-border mt-2">
+            <div class="whitespace-nowrap text-[#000] text-sm">
+              {{$t('编号')}}
+            </div>
+            <div class="text-[#000] text-xs font-bold">
+              {{goods.orderNo}}
+            </div>
+          </div>
+        </div>
+        <div class="w-full mt-4">
+          <van-button color="#007513" class="w-full" @click="submitForm">{{
+            $t("提交")
+          }}</van-button>
+        </div>
+      </div>
+    </van-popup>
   </div>
 </template>
 <script setup>
-import { onMounted, ref,onUnmounted } from "vue";
+import { onMounted, ref, onUnmounted } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
-import { userGetInfo, getGoodsList } from "../../api/apis";
+import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
+import { useI18n } from "vue-i18n";
+import { userGetInfo, getGoodsList, createOrder,submitOrder } from "../../api/apis";
 const url = import.meta.env.VITE_API_IMG_URL;
+const { t } = useI18n();
 const userInfo = ref({});
 const avatarUrl = ref("");
 const totalCount = 8; // 插入一个“开始按钮”
 let timer = null;
-
 const goodsList = ref([]);
+const showCenter = ref(false);
+const goods = ref({});
 const getList = async () => {
   // let res = await getGoodsList();
   // goodsList.value = res.data;
@@ -207,6 +276,37 @@ const getImageByIndex = (i) => {
   if (i === 4) return null; // 第 5 项是“开始按钮”，不用图
   const realIndex = i < 4 ? i : i - 1;
   return goodsList.value[realIndex]?.coverUrl || "";
+};
+
+// 抢单
+const handleClick = () => {
+  showLoadingToast({
+    message: t("创建中..."),
+    forbidClick: true,
+    duration: 0, // 不自动关闭，直到你手动关闭
+  });
+  createOrder()
+    .then((res) => {
+      closeToast(); // 关闭 loading
+      showSuccessToast(t("创建成功"));
+      showCenter.value = true;
+      goods.value = res.data;
+
+      // 其他逻辑...
+    })
+    .catch((err) => {
+      console.log(err)
+      closeToast(); // 关闭 loading
+      showFailToast(err.msg);
+    });
+};
+
+const submitForm = () => {
+  submitOrder(goods.value.id).then(()=>{
+        showSuccessToast(t("提交成功"));
+        showCenter.value = false;
+    })
+
 };
 
 onUnmounted(() => {

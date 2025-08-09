@@ -192,9 +192,10 @@
         </div>
         <div
           class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
+          @click="handleChangeLang"
         >
           <div class="flex items-center justify-between w-full">
-            <div class="text-[#000] text-sm font-medium">
+            <div class="text-[#000] text-sm font-medium" >
               {{ $t("更改语言") }}
             </div>
             <van-icon name="arrow" size="22px" />
@@ -204,6 +205,7 @@
     </div>
     <ContactUs ref="ContactUsRef"></ContactUs>
     <tradePassword ref="tradePasswordRef"></tradePassword>
+    <Lang ref="langRef"></Lang>
     <!-- <van-popup
       v-model:show="show"
       closeable
@@ -237,6 +239,7 @@ import { userGetInfo, checkTradePassword } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { showConfirmDialog } from "vant";
+const langRef = ref(null);
 const { t } = useI18n();
 const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
@@ -287,6 +290,10 @@ const submitTradePassword = async () => {
     path: "/paymentMethods",
   });
 };
+
+function handleChangeLang() {
+  langRef.value.open();
+}
 
 onMounted(() => {
   userGetInfo().then((res) => {

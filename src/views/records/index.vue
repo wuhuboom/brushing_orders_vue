@@ -1,10 +1,10 @@
 <template>
   <div>
     <HeaderTop></HeaderTop>
-    <van-tabs color="#007513" v-model:active="active">
-      <van-tab title="全部"></van-tab>
-      <van-tab title="待办"></van-tab>
-      <van-tab title="完成"></van-tab>
+    <van-tabs color="#007513"  @change="swichTab" v-model:active="active">
+      <van-tab :title="$t('全部')"></van-tab>
+      <van-tab :title="$t('待办')"></van-tab>
+      <van-tab :title="$t('完成')"></van-tab>
     </van-tabs>
     <div class="h-[80vh] overflow-y-scroll">
         <div class="w-full px-2 pt-6 box-border flex flex-col">
@@ -19,28 +19,28 @@
                         <div class="w-full flex flex-col mb-6 bg-[#f1f4eb] border-[1px] border-[#eee] p-3 box-border rounded-xl">
                                 <div class="w-full flex">
                                     <div class="mr-2 w-[20%]" style="width: 4rem;">
-                                        <img src="https://bigwnew.oss-ap-northeast-1.aliyuncs.com/nextleft/202501246635286893376348160.png" alt="">
+                                        <img :src="item.coverUrl" alt="">
                                     </div>
                                     <div class="w-[80%] flex flex-col h-[3rem] justify-between">
                                         <div>
                                             <div class="text-[#000] text-sm font-semibold whitespace-nowrap  text-ellipsis overflow-hidden">
-                                            商务休闲修身西装男士三件套英伦帅气西服正装SJT823-S280
+                                            {{item.goodsName}}
                                         </div>
                                         <div class="grid grid-cols-4 mt-2">
                                             <div class="col-span-2 flex flex-col">
                                                 <div class="text-xs text-[#666] font-medium">
-                                                    总金额
+                                                    {{$t('总金额')}}
                                                 </div>
                                                 <div class="mt-1 text-sm text-[var(--main-color)] font-semibold">
-                                                    4460.54 美元
+                                                    {{item.price}} {{$t('美元')}}
                                                 </div>
                                             </div>
                                             <div class="col-span-2 flex flex-col">
                                                 <div class="text-xs text-[#666] font-medium">
-                                                    委员会
+                                                    {{$t("佣金")}}
                                                 </div>
                                                 <div class="mt-1 text-sm text-[var(--main-color)] font-semibold">
-                                                    4460.54 美元
+                                                    {{item.commission}} {{$t('美元')}}
                                                 </div>
                                             </div>
                                         </div>
@@ -50,14 +50,14 @@
                                 <div class="w-full h-[1px] my-4" style="border-bottom: 1px dashed rgb(255, 255, 255);"></div>
                                 <div class="w-full flex justify-between items-center">
                                     <div class="text-[#666] text-sm font-medium">
-                                        2025年7月27日 14:34:10
+                                        {{item.createTime}}
                                     </div>
-                                    <div class="text-white text-xs p-1 bg-[#666] font-medium rounded">
-                                        待办的
+                                    <div class="text-white text-xs p-1  font-medium rounded" :class="item.status == '2'?'bg-[var(--main-color)]':item.status == '1'?'bg-[#F56C6C]':'bg-[var(--main-color)]'">
+                                        {{item.status=='0'? $t('已完成'): item.status == '1'?$t('冻结'): $t('待提交')}}
                                     </div>
                                 </div>
-                                <div class="flex justify-end items-center mt-2">
-                                    <van-button color="#007513" size="small">提交</van-button>
+                                <div class="flex justify-end items-center mt-2" v-if="item.status == '2'">
+                                    <van-button color="#007513" @click="submit(item)" size="small">{{$t("提交")}}</van-button>
                                 </div>
                         </div>
                     </van-cell>
@@ -68,36 +68,36 @@
     </div>
     <Footer name="/records"></Footer>
 
-    <van-dialog v-model:show="show" title="标题" :show-confirm-button="false">
+    <van-dialog v-model:show="show" closeable title="标题" :show-confirm-button="false">
         <div class="w-[5rem] mx-auto" style="width: 6rem; z-index: 999;">
-            <img src="https://bigwnew.oss-ap-northeast-1.aliyuncs.com/nextleft/202501246635286893376348160.png" alt="">
+            <img :src="goodsData.coverUrl" alt="">
         </div>
         <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
             <div class="w-[100%] mx-auto text-center text-sm font-semibold">
-                休闲
+                {{goodsData.goodsName}}
             </div>
             <div class="flex w-full items-center pt-4 pb-4 mt-4">
                 <div class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center">
-                    <div class="text-[#000] font-semibold">总金额</div>
-                    <div class="text-xs text-[#000] mt-1">5美元</div>
+                    <div class="text-[#000] font-semibold">{{$t('总金额')}}</div>
+                    <div class="text-xs text-[#000] mt-1">{{goodsData.price}}{{$t('美元')}}</div>
                 </div>
                 <div class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center">
-                    <div class="text-[#000] font-semibold">总金额</div>
-                    <div class="text-xs text-[#000] mt-1">5美元</div>
+                    <div class="text-[#000] font-semibold">{{$t('佣金')}}</div>
+                    <div class="text-xs text-[#000] mt-1">{{goodsData.commission}}{{$t('美元')}}</div>
                 </div>
             </div>
             <div class="bg-[#d8d8d8] p-4">
                 <div class="flex justify-between items-center box-border">
-                    <div class="text-[#000] text-sm">创建</div>
-                    <div class="text-[#000] text-sm font-bold">2025年</div>
+                    <div class="text-[#000] text-sm">{{$t('创建时间')}}</div>
+                    <div class="text-[#000] text-sm font-bold">{{goodsData.createTime}}</div>
                 </div>
                 <div class="flex justify-between items-center box-border">
-                    <div class="text-[#000] text-sm">创建</div>
-                    <div class="text-[#000] text-sm font-bold">2025年</div>
+                    <div class="text-[#000] text-sm">{{$t('编号')}}</div>
+                    <div class="text-[#000] text-sm font-bold">{{goodsData.createTime}}</div>
                 </div>
             </div>
             <div class="w-full mt-4">
-                <van-button color="#007513" class="w-full">提交</van-button>
+                <van-button color="#007513" class="w-full" @click="submitVal">提交</van-button>
             </div>
         </div>
     </van-dialog>
@@ -106,8 +106,85 @@
 
 <script setup>
 import HeaderTop from "@/components/HeaderTop.vue";
-import { onMounted, ref } from "vue";
+import { onMounted, ref ,reactive} from "vue";
+import {getOrderInfos,submitOrder} from "../../api/apis";
+import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 const active = ref(0);
-const list =  5;
-const show = ref(false)
+const list =  ref([]);
+const show = ref(false);
+const refreshing = ref(false);
+const finished = ref(false);
+const loading = ref(false);
+const goodsData =  ref({})
+const query = reactive({
+  pageNum: 1,
+  pageSize: 10,
+  status:''
+});
+const onRefresh = async () => {
+  refreshing.value = true;
+  finished.value = false;
+  query.pageNum = 1;
+  list.value = [];
+  await loadData();
+  refreshing.value = false;
+};
+const onLoad = async () => {
+  if (finished.value || loading.value) return;
+  loading.value = true;
+  await loadData();
+  loading.value = false;
+};
+const loadData = async () => {
+  try {
+    let res = await getOrderInfos(query);
+    const data = res.rows;
+    if (data.length < query.pageSize) {
+      finished.value = true;
+    } else {
+      query.pageNum++;
+    }
+
+    list.value.push(...data);
+  } catch (error) {
+    console.error("加载失败", error);
+    finished.value = true; // 避免无限加载
+  }
+};
+const submit = (item) => {
+    goodsData.value = item;
+    show.value = true
+}
+
+const submitVal = () =>{
+    submitOrder(goodsData.value.id).then(()=>{
+        showSuccessToast(t("提交成功"));
+        onRefresh()
+        // refreshing.value = true;
+        // finished.value = false;
+        show.value = false;
+        // onLoad()
+    })
+
+}
+
+const swichTab = () =>{
+    console.log(active.value)
+    if(active.value == 0) {
+        query.status = ''
+    } else if (active.value == 1) {
+        query.status = 2
+    } else {
+        query.status = 0
+    }
+    onRefresh()
+   
+
+}
+onMounted(() =>{
+    onLoad()
+})
 </script>
+<style scoped></style>

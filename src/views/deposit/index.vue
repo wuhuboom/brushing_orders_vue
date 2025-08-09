@@ -24,7 +24,7 @@
               </div>
               <div class="flex mt-4">
                 <div class="text-white text-3xl font-bold flex items-center">
-                  -41
+                  {{userStore.userInfo.balance}}
                 </div>
                 <div
                   class="text-white text-sm font-bold flex items-center ml-2 pt-[12px]"
@@ -42,23 +42,36 @@
         </van-tab>
         <van-tab :title="$t('历史')">
           <div class="w-full px-2 pt-6 box-border flex flex-col">
-            <div class="w-full mb-4 bg-[#e8f7ec] rounded-lg flex flex-col p-3">
-              <div class="flex justify-between">
-                <div class="text-sm font-semibold text-[#999]">
-                  202507047217734232855060480
-                </div>
-              </div>
-              <div
-                class="flex text-base text-[#000] font-semibold items-center mt-3"
+            <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+              <van-list
+                v-model:loading="loading"
+                :finished="finished"
+                :finished-text="$t('没有更多了')"
+                @load="onLoad"
               >
-                1980美元
-              </div>
-              <div class="flex justify-between mt-3">
-                <div class="text-sm font-normal text-[#999]">
-                  2025年7月4日 04:27:43
-                </div>
-              </div>
-            </div>
+                <van-cell v-for="item in list" :key="item" :title="item">
+                  <div
+                    class="w-full mb-4 bg-[#e8f7ec] rounded-lg flex flex-col p-3"
+                  >
+                    <div class="flex justify-between">
+                      <div class="text-sm font-semibold text-[#999]">
+                        {{ item.code }}
+                      </div>
+                    </div>
+                    <div
+                      class="flex text-base text-[#000] font-semibold items-center mt-3"
+                    >
+                      {{ item.amout }}{{ $t("美元") }}
+                    </div>
+                    <div class="flex justify-between mt-3">
+                      <div class="text-sm font-normal text-[#999]">
+                        {{ item.createTime }}
+                      </div>
+                    </div>
+                  </div>
+                </van-cell>
+              </van-list>
+            </van-pull-refresh>
           </div>
         </van-tab>
       </van-tabs>
@@ -68,23 +81,56 @@
 <script setup>
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { onMounted, reactive, ref } from "vue";
+import { useUserStore } from "@/store/modules/user";
 import { getDeposit } from "../../api/apis";
 const active = ref(0);
+const refreshing = ref(false);
+const finished = ref(false);
+const loading = ref(false);
+const userStore = useUserStore();
 const swichTab = () => {
-  console.log(active.value);
-  if(active.value == 1) {
-    deposit()
+  if (active.value == 1) {
+    onRefresh();
   }
 };
+const list = ref([]);
 const query = reactive({
   pageNum: 1,
   pageSize: 10,
 });
-const deposit = async () => {
-  let res = await getDeposit(query);
+const onRefresh = async () => {
+  refreshing.value = true;
+  finished.value = false;
+  query.pageNum = 1;
+  list.value = [];
+  await loadData();
+  refreshing.value = false;
 };
-onMounted (() =>{
-  deposit()
-})
+const onLoad = async () => {
+  if (finished.value || loading.value) return;
+  loading.value = true;
+  await loadData();
+  loading.value = false;
+};
+const loadData = async () => {
+  try {
+    let res = await getDeposit(query);
+    const data = res.rows;
+    if (data.length < query.pageSize) {
+      finished.value = true;
+    } else {
+      query.pageNum++;
+    }
+
+    list.value.push(...data);
+  } catch (error) {
+    console.error("加载失败", error);
+    finished.value = true; // 避免无限加载
+  }
+};
+onMounted(() => {
+  // onLoad();
+  userStore.getUserInfo();
+});
 const onClickLeft = () => history.back();
 </script>

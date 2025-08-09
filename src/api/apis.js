@@ -12,6 +12,7 @@ export const editPassword = (params) => api.post('user/editPassword', params, { 
 export const checkTradePassword = (params) => api.post(`user/checkTradePassword`, params, { loading: true, showMsg: true, })// 验证交易密码
 export const addWithdrawalMethod = (params) => api.post(`user/addWithdrawalMethod`, params, { loading: true, showMsg: true, })// 验证交易密码
 
+export const withdrawal = (params) => api.post(`/account/withdrawal`, params, { loading: true, showMsg: true, })// 验证交易密码
 export const userGetInfo = (params) => api.get('/user/getInfo', { params: params, loading: false, showMsg: false, })// 获取交易配置
 
 export const getCustomerService = (params) => api.get('/config/getCustomerService', { params: params, loading: false, showMsg: false, })// 获取交易配置
@@ -26,6 +27,12 @@ export const getDeposit = (params) => api.get('/account/getDeposit', { params: p
 
 export const getGoodsList = (params) => api.get('/goods/getGoodsList', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
 
+export const getWithdrawals = (params) => api.get('/account/getWithdrawals', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
 
+export const getOrderInfos = (params) => api.get('/order/getOrderInfos', { params: params, loading: false, showMsg: false, })// 获取用户订单记录
 
+export const createOrder = (params) => api.get('/order/createOrder', { params: params, loading: false, showMsg: false, })// 创建新订单
 
+export const submitOrder = (params) => api.get(`/order/submitOrder/${params}`, { params: params, loading: false, showMsg: false, })// 提交订单
+
+export const getTradeConfig = (params) => api.get(`/config/getTradeConfig`, { params: params, loading: false, showMsg: false, })// 提交订单

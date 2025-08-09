@@ -46,6 +46,6 @@ app.use(Checkbox);
 app.use(CheckboxGroup);
 app.use(PullRefresh);
 app.use(Tag);
-app.use(Toast)
+app.use(Toast);
 // app.use(ElementPlus) // 使用 Element Plus
 app.mount('#app')

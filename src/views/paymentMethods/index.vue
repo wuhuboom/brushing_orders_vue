@@ -54,10 +54,12 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref ,reactive} from "vue";
+import { onMounted, ref, reactive } from "vue";
 import { addWithdrawalMethod } from "../../api/apis";
+import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
+const userStore = useUserStore();
 const router = useRouter();
 const { t } = useI18n();
 const form = reactive({
@@ -77,4 +79,10 @@ const submitForm = async () => {
 const onClickLeft = () => {
   router.push({ path: "/my" });
 };
+onMounted(async () => {
+  await userStore.getUserInfo();
+  form.withdrawName = userStore.userInfo.withdrawName;
+  form.withdrawAddress = userStore.userInfo.withdrawAddress;
+  form.withdrawType = userStore.userInfo.withdrawType;
+});
 </script>
