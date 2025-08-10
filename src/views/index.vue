@@ -9,7 +9,7 @@
               color="#fff"
               left-icon="volume-o"
               background="#007513"
-              text="无论我们能活多久，我们能够享受的只有无法分割的此刻，此外别无其他。"
+              :text="pureNoticeContent"
             />
           </div>
         </div>
@@ -117,8 +117,8 @@
 import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import tradePassword from "@/components/tradePassword.vue";
-import { onMounted, ref } from "vue";
-import { getLevel } from "../api/apis";
+import { onMounted, ref ,reactive,computed } from "vue";
+import { getLevel,getNoticeList } from "../api/apis";
 import { useRouter } from "vue-router";
 const tradePasswordRef = ref(null);
 
@@ -182,68 +182,7 @@ const items = [
   },
 ];
 
-// const lever = [
-//   {
-//     name: "VIP1",
-//     bgImage: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
-//     start:
-//       "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
-//     con: `普通用户可获得通用数据收集访问权限。<br />
-//           ● 适用于大多数涉及轻度到中度使用的数据采集场景<br />
-//           ● 每件产品利润 0.5% - 每套 40 个任务<br />
-//           ● 每天最多 80 个优化任务<br />
-//           ● 无法访问其他高级功能`,
-//   },
-//   {
-//     name: "VIP2",
-//     bgImage: new URL("@/static/images/bg_vip2.png", import.meta.url).href,
-//     start:
-//       "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png",
-//     con: `VIP 2 用户可以无限制使用平台的所有功能。根据我们的更新活动进行的存款可获得奖励 <br />
-//     ●每个任务 1% 的利润 - 每套优化产品 45 <br />
-//       ●更好的利润和权限 <br />
-//       ●VIP 2 用户每天最多可以提交 90 个任务 <br />
-//       ●完全访问所有其他高级功能 <br />
-//       ●登录 15 天后可以邀请下属`,
-//   },
-//   {
-//     name: "VIP3",
-//     bgImage: new URL("@/static/images/bg_vip3.png", import.meta.url).href,
-//     start:
-//       "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png",
-//     con: `VIP 3 用户可以无限制使用平台的所有功能。根据我们更新活动的存款可获得奖励<br />
-//     ●每个任务1.5%的利润 - 每套优化产品50个 <br />
-//           ●更好的利润和权限 <br />
-//           ●VIP 3用户每天最多可以提交100个任务 <br />
-//           ●完全访问所有其他高级功能 <br />
-//           ●升级到VIP 3后可以邀请下属`,
-//   },
-//   {
-//     name: "VIP4",
-//     bgImage: new URL("@/static/images/bg_vip4.png", import.meta.url).href,
-//     start:
-//       "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png",
-//     con: `VIP 4 用户可以无限制使用平台的所有功能。根据我们的更新活动进行的存款可获得奖励<br />
-//     ●每个任务 2% 的利润 - 每套优化产品 55<br />
-//           ●更好的利润和权限 <br />
-//           ●VIP 4 用户每天最多可以提交 110 个任务 <br />
-//           ●完全访问所有其他高级功能 <br />
-//           ●升级到 VIP 4 后可以邀请下属`,
-//   },
-//   {
-//     name: "VIP5",
-//     bgImage: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
-//     start:
-//       "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png",
-//     con: `
-//     VIP 5 用户可以无限制使用平台的所有功能。根据我们的更新活动进行的存款可获得奖励 <br />
-//     ●每个任务 2.5% 的利润 - 每套优化产品 60 个 <br />
-//         ●更好的利润和权限 <br />
-//         ●VIP 5 用户每天最多可以提交 120 个任务 <br />
-//         ●完全访问所有其他高级功能 <br />
-//         ●升级到 VIP 5 后可以邀请下属`,
-//   },
-// ];
+
 function goTo(path) {
   if (path == "/notifications") {
     tradePasswordRef.value.open(2);
@@ -261,8 +200,31 @@ const level = async () => {
   let res = await getLevel();
   levelList.value = res.data;
 };
+
+const query = reactive({
+  pageNum: 1,
+  pageSize: 10,
+});
+const noticeContent  = ref('')
+
+const getData = async () => {
+  const res = await getNoticeList(query); // 你自己的接口
+  console.log(res)
+  noticeContent.value = res.rows.length>0? res.rows[0].noticeContent :'';
+
+}
+
+// 计算属性，去除所有HTML标签
+const pureNoticeContent = computed(() => {
+  return noticeContent.value.replace(/<\/?[^>]+(>|$)/g, "")
+})
+
+
+
+
 onMounted(() => {
   level();
+  getData()
 });
 </script>
 <style scoped></style>
