@@ -302,11 +302,14 @@ const handleClick = () => {
 };
 
 const submitForm = () => {
-  submitOrder(goods.value.id).then(()=>{
+  submitOrder(goods.value.id).then((res)=>{
         showSuccessToast(t("提交成功"));
-        showCenter.value = false;
+        if(res.code == 201) {
+           goods.value =  res.data
+        } else {
+            showCenter.value = false;
+        }
     })
-
 };
 
 onUnmounted(() => {

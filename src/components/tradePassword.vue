@@ -14,7 +14,7 @@
         <van-field
           v-model="tradePassword"
           label=""
-          placeholder="交易密码"
+          :placeholder="$t('交易密码')"
           label-align="top"
         />
       </div>

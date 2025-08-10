@@ -20,7 +20,7 @@
       <van-field
         v-model="form.withdrawName"
         label=""
-        placeholder="钱包"
+        :placeholder="$t('钱包')"
         label-align="top"
       />
     </div>
@@ -31,7 +31,7 @@
       <van-field
         v-model="form.withdrawType"
         label=""
-        placeholder="网络"
+        :placeholder='$t("网络")'
         label-align="top"
       />
     </div>
@@ -42,7 +42,7 @@
       <van-field
         v-model="form.withdrawAddress"
         label=""
-        placeholder="地址"
+        :placeholder='$t("地址")'
         label-align="top"
       />
     </div>

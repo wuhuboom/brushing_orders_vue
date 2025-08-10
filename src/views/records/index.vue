@@ -159,13 +159,14 @@ const submit = (item) => {
 }
 
 const submitVal = () =>{
-    submitOrder(goodsData.value.id).then(()=>{
+    submitOrder(goodsData.value.id).then((res)=>{
         showSuccessToast(t("提交成功"));
         onRefresh()
-        // refreshing.value = true;
-        // finished.value = false;
-        show.value = false;
-        // onLoad()
+        if(res.code == 201) {
+            goodsData.value =  res.data
+        }else {
+            show.value = false;
+        }
     })
 
 }

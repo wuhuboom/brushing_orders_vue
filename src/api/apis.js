@@ -13,6 +13,9 @@ export const checkTradePassword = (params) => api.post(`user/checkTradePassword`
 export const addWithdrawalMethod = (params) => api.post(`user/addWithdrawalMethod`, params, { loading: true, showMsg: true, })// 验证交易密码
 
 export const withdrawal = (params) => api.post(`/account/withdrawal`, params, { loading: true, showMsg: true, })// 验证交易密码
+export const upload = (params) => api.post(`/config/upload`, params, { loading: true, showMsg: true, headers: { 'Content-Type': 'multipart/form-data' }})// 上传头像
+
+export const updateAvatar = (params) => api.post(`/user/updateAvatar`, params, { loading: true, showMsg: true, })// 上传头像
 export const userGetInfo = (params) => api.get('/user/getInfo', { params: params, loading: false, showMsg: false, })// 获取交易配置
 
 export const getCustomerService = (params) => api.get('/config/getCustomerService', { params: params, loading: false, showMsg: false, })// 获取交易配置

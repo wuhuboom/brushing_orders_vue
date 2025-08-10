@@ -264,7 +264,7 @@ const customer = () => {
 };
 const logout = () => {
   showConfirmDialog({
-    title: "退出",
+    title: t('退出'),
     message: t("确定要退出?"),
   })
     .then(() => {

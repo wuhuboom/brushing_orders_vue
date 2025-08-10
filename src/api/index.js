@@ -22,8 +22,13 @@ api.interceptors.request.use(
       loading = ElLoading.service({ fullscreen: true });
     }
     const userStore = useUserStore(pinia);
-    config.headers["authorization"] = userStore.token || "";
-    config.headers["lang"] = useCommonStore().clientLang;
+    // config.headers["authorization"] = userStore.token || "";
+    // config.headers["lang"] = useCommonStore().clientLang;
+    config.headers = {
+      ...config.headers, // 先保留已有的 headers
+      authorization: userStore.token || "",
+      lang: useCommonStore().clientLang
+    };
 
     // 添加accountType到请求参数
     console.log(config.url);
@@ -56,14 +61,17 @@ api.interceptors.response.use(
       let result = response.data;
       if (result.code == 200) {
         return result;
-      } else if (result.code == 401) {
+      } else if(result.code == 201) {
+        return result;
+      }else if (result.code == 401) {
         useUserStore().logout();
         return Promise.reject(result);
       } else {
         if (config.showMsg) ElMessage({ message: result.msg, type: "error" });
         return Promise.reject(result);
       }
-    } else if (response.status == 401) {
+    }
+     else if (response.status == 401) {
       useUserStore().logout();
       return Promise.reject(result);
     } else {
