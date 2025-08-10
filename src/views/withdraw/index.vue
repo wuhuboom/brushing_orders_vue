@@ -71,7 +71,7 @@
                     style="background: #005713"
                     @click="All"
                     size="default"
-                    >全部</el-button
+                    >{{$t('全部')}}</el-button
                   >
                 </template>
               </el-input>

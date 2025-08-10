@@ -128,5 +128,10 @@
   "点击更改": "Click to change",
   "修改信息": "Edit information",
   "修改个人信息":"Modify Personal Information",
-  "确定要退出?":"Are you sure you want to logout?"
+  "确定要退出?":"Are you sure you want to logout?",
+  "联系客服":"Contact Customer Service",
+  "账户金额":"Account Amount",
+  "您将在一小时内收到提款":"You will receive your withdrawal within an hour",
+  "添加成功":"Added successfully"
+  
 }

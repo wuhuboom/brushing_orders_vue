@@ -49,7 +49,6 @@ const query = reactive({
   pageSize: 10,
 });
 const onRefresh = async () => {
-    console.log('111')
   refreshing.value = true;
   finished.value = false;
   query.pageNum = 1;

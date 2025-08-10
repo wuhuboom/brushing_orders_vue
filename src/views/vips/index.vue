@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f4f4f5]">
+  <div class="w-full min-h-[100vh] bg-white">
     <div
       class="w-full p-6 box-border flex flex-col font-montserrat text-[#666]"
     >
