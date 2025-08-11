@@ -5,15 +5,28 @@
       <div class="pb-4 pt-4 absolute top-5 w-full" style="z-index: 2">
         <div class="w-[90%] mx-auto">
           <div class="w-full overflow-hidden rounded-full">
-            <van-notice-bar
+            <!-- <van-notice-bar
               color="#fff"
               left-icon="bell"
               background="#007513"
               :text="pureNoticeContent"
-            />
+            /> -->
+            <van-notice-bar
+              color="#fff"
+              background="#007513"
+              :text="pureNoticeContent"
+            >
+              <template #left-icon>
+                <img
+                  src="@/static/images/notice.png"
+                  class="w-5 h-5"
+                  alt="icon"
+                />
+              </template>
+            </van-notice-bar>
           </div>
         </div>
-        <div class="w-[90%] mx-auto pt-5">
+        <div class="mx-auto pt-5">
           <div
             class="text-center text-2xl lg:text-5xl font-semibold text-white"
           >
@@ -21,7 +34,7 @@
           {{$t("帮助小型企业盈利")}}
           </div>
         </div>
-        <div class="flex justify-center items-center mt-4">
+        <div class="flex justify-center items-center mt-5">
           <div
             class="text-white mr-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
           >

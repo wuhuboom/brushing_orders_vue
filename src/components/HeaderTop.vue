@@ -11,7 +11,7 @@
           @click="customer"
             class="text-white bg-[var(--main-color)] mr-2 text-xs px-3 py-1 rounded-full"
           >
-            {{ $t("客服") }}
+            {{ $t("联系") }}
           </div>
           <img
             src="@/static/images/user2.png"
