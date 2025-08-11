@@ -38,7 +38,7 @@
                 </div>
               </div>
               <div
-                class="text-white opacity-70 text-sm font-semibold pt-4 pb-2"
+                class="text-white opacity-70 text-xs font-semibold pt-4 pb-2"
               >
                 {{ $t("您将在一小时内收到提款") }}
               </div>
@@ -230,7 +230,8 @@ const ruleForm = reactive({
 });
 
 const All = () => {
-  ruleForm.money = amount.value;
+  console.log(amount.value)
+  ruleForm.amount = amount.value;
 };
 const swichTab = () => {
   if (active.value == 1) {

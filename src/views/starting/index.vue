@@ -46,7 +46,7 @@
                 <div class="text-sm text-[var(--main-color)] font-bold mb-1">
                   {{ userInfo.balance }}
                 </div>
-                <div class="text-[#999] text-xs">usd</div>
+                <div class="text-[#999] text-xs">USD</div>
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@
                 <div class="text-sm text-[var(--main-color)] font-bold mb-1">
                   {{ userInfo.totalBalance }}
                 </div>
-                <div class="text-[#999] text-xs">usd</div>
+                <div class="text-[#999] text-xs">USD</div>
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@
                 <div class="text-sm text-[var(--main-color)] font-bold mb-1">
                   {{ userInfo.commission }}
                 </div>
-                <div class="text-[#999] text-xs">usd</div>
+                <div class="text-[#999] text-xs">USD</div>
               </div>
             </div>
           </div>
@@ -170,8 +170,8 @@
       <div class="w-[90%] mx-auto pt-5">
         <div class="mt-4 rounded-lg bg-[#f5f5f5]">
           <div class="flex flex-col p-4 box-border relative rounded-xl">
-            <div class="mb-2 text-black text-base font-bold">Notice</div>
-            <div class="text-black text-sm font-light">
+            <div class="mb-2  text-base font-bold" style="color: black;">Notice</div>
+            <div class=" text-sm font-light" style="color: black;">
               Online Support Hours 10:00 - 22:59 <br />
               Please contact online support for your assistance!
             </div>

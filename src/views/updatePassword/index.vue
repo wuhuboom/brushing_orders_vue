@@ -53,6 +53,7 @@
 <script setup>
 import { onMounted, ref,reactive } from "vue";
 const onClickLeft = () => history.back();
+import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
 import { editPassword } from "../../api/apis";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -64,11 +65,11 @@ const ruleForm = reactive({
   newPassword: "",
 });
 const submitForm = async() =>{
-  if (!ruleForm.oldPassword) return ElMessage.error(t("请输入旧密码"));
-  if (!ruleForm.newPassword) return ElMessage.error(t("请输入新密码"));
-  if (ruleForm.newPassword != agentNewPassword.value) return ElMessage.error(t("两次密码不一致"));
+  if (!ruleForm.oldPassword) return showFailToast(t("请输入旧密码"));
+  if (!ruleForm.newPassword) return showFailToast(t("请输入新密码"));
+  if (ruleForm.newPassword != agentNewPassword.value) return showFailToast(t("两次密码不一致"));
   let res = await editPassword(ruleForm);
-  ElMessage({ message: t("修改成功"), type: "success" });
+  showSuccessToast(t("修改成功"))
   router.push({ path: "/profileItem" });
 
 }

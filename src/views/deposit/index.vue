@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="w-full mt-6 p-5">
-            <van-button color="#007513" class="w-full">{{
+            <van-button color="#007513" class="w-full" @click="customer">{{
               $t("联系客服")
             }}</van-button>
           </div>
@@ -76,6 +76,7 @@
         </van-tab>
       </van-tabs>
     </div>
+    <ContactUs ref="ContactUsRef"></ContactUs>
   </div>
 </template>
 <script setup>
@@ -88,6 +89,7 @@ const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
 const userStore = useUserStore();
+const ContactUsRef = ref(null);
 const swichTab = () => {
   if (active.value == 1) {
     onRefresh();
@@ -127,6 +129,9 @@ const loadData = async () => {
     console.error("加载失败", error);
     finished.value = true; // 避免无限加载
   }
+};
+const customer = () => {
+  ContactUsRef.value.open();
 };
 onMounted(() => {
   // onLoad();

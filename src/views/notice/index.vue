@@ -1,7 +1,7 @@
 <template>
   <div class="container w-full bg-white min-h-[100vh]">
     <van-nav-bar
-      :title="$t('公告')"
+      :title="$t('通知')"
       fixed
       left-arrow
       @click-left="onClickLeft"

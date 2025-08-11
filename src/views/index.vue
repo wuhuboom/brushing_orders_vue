@@ -7,7 +7,7 @@
           <div class="w-full overflow-hidden rounded-full">
             <van-notice-bar
               color="#fff"
-              left-icon="volume-o"
+              left-icon="bell"
               background="#007513"
               :text="pureNoticeContent"
             />
@@ -17,14 +17,8 @@
           <div
             class="text-center text-2xl lg:text-5xl font-semibold text-white"
           >
-            <font dir="auto" style="vertical-align: inherit">
-              <font dir="auto" style="vertical-align: inherit">{{
-                $t("我们通过数字营销")
-              }}</font>
-              <font dir="auto" style="vertical-align: inherit">{{
-                $t("帮助小型企业盈利")
-              }}</font>
-            </font>
+          {{$t("我们通过数字营销")}}
+          {{$t("帮助小型企业盈利")}}
           </div>
         </div>
         <div class="flex justify-center items-center mt-4">
@@ -70,7 +64,7 @@
           <div
             class="flex justify-between pt-4 pb-2 text-base text-black font-semibold"
           >
-            <div class="w-[35%]">{{$t('员工级别')}}</div>
+            <div class="w-[35%]">{{$t('员工等级')}}</div>
             <div
               @click="toVips"
               class="w-[65%] font-normal text-xs text-[var(--main-color)] text-right flex justify-end items-center"

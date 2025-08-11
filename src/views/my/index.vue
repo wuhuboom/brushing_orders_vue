@@ -3,9 +3,9 @@
     <HeaderTop></HeaderTop>
     <div class="w-full py-6">
       <div class="w-[90%] mx-auto">
-        <div class="w-[12rem] mx-auto relative" style="z-index: 99">
+        <div class="w-[12rem] mx-auto relative" style="z-index: 19">
           <img
-            :src="avatarUrl"
+            :src="userInfo.avatar"
             class="w-[6rem] h-[6rem] mx-auto rounded-full"
             alt=""
           />

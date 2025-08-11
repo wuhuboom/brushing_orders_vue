@@ -70,6 +70,7 @@ onMounted(() => {
     userInfo.value = res.data;
     console.log(userInfo.value.avatar)
     fileList.value.push({ url: userInfo.value.avatar });
+    avatarUrl.value = userInfo.value.avatar;
     console.log(fileList.value)
   });
 });
