@@ -105,8 +105,8 @@
               </div>
               <img class="w-24" :src="bgMapStart[item.nameEn]" alt="" />
             </div>
-            <div class="w-[260px] text-xs mt-2 text-black">
-              <p v-html="item.descriptionZh"></p>
+            <div class="w-[260px] text-xs mt-2 text-black" >
+              <p class="w-[260px] text-xs mt-2 text-black" v-html="item.descriptionEn"></p>
             </div>
           </div>
         </div>
@@ -206,6 +206,12 @@ const levelList = ref([]);
 const level = async () => {
   let res = await getLevel();
   levelList.value = res.data;
+  levelList.value.forEach(item => {
+     if (item.descriptionEn) {
+      // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
+      item.descriptionEn = item.descriptionEn.replace(/(●|•|&#8226;|&#9679;)/g, '<span class="small-dot">●</span>');
+    }
+  });
 };
 
 const query = reactive({
@@ -218,6 +224,7 @@ const getData = async () => {
   const res = await getNoticeList(query); // 你自己的接口
   console.log(res)
   noticeContent.value = res.rows.length>0? res.rows[0].noticeContent :'';
+  
 
 }
 
@@ -234,4 +241,12 @@ onMounted(() => {
   getData()
 });
 </script>
-<style scoped></style>
+<style>
+.small-dot {
+  font-size: 8px;       /* 调整大小 */
+  line-height: 1;
+  vertical-align: middle;
+  display: inline-block; /* 保证可以控制尺寸/对齐 */
+  /* 如需更细微缩放也可用 transform: scale(0.8); */
+}
+</style>

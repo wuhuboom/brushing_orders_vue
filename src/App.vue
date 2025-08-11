@@ -48,9 +48,9 @@ if (commonStore.lang) locale.value = commonStore.lang;
   /* max-width: 1440px; */
 }
 
-.text-black {
+/* .text-black {
   color: #303133 !important;
-}
+} */
 
 .el-drawer {
   border-top-left-radius: 20px !important;

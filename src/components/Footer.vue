@@ -6,7 +6,7 @@
                 class="flex-1 flex flex-col items-center text-xs gap-1 font-light"  @click="onClickMenu(menu)">
                 <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}.png`)"
                     alt="" class="h-7 w-7" :class="menu.title == $t('开始')?'starting':''">
-                <span  class="leading-normal text-[10px] text-white">
+                <span  class="leading-normal text-[10px] text-white" style="font-size: 12px;">
                     {{ menu.title }}
                 </span>
             </div>

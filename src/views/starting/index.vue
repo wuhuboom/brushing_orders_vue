@@ -171,7 +171,7 @@
         <div class="mt-4 rounded-lg bg-[#f5f5f5]">
           <div class="flex flex-col p-4 box-border relative rounded-xl">
             <div class="mb-2  text-base font-bold" style="color: black;">Notice</div>
-            <div class=" text-sm font-light" style="color: black;">
+            <div class="text-black text-sm ">
               Online Support Hours 10:00 - 22:59 <br />
               Please contact online support for your assistance!
             </div>

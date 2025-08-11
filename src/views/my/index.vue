@@ -38,6 +38,7 @@
                   src="@/static/images/copy.png"
                   class="w-4 h-4 ml-2"
                   alt=""
+                  @click="copyContent(userInfo.inviteCode)"
                 />
               </p>
             </div>
@@ -247,6 +248,7 @@ const bgImage = new URL("@/static/images/profile_bg1.png", import.meta.url)
   .href;
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import { copyContent } from '../../util/utils';
 const userStore = useUserStore();
 const url = import.meta.env.VITE_API_IMG_URL;
 const router = useRouter();
@@ -295,6 +297,9 @@ function handleChangeLang() {
   langRef.value.open();
 }
 
+const copy = (text) => {
+  
+}
 onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;

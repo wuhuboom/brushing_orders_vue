@@ -7,13 +7,13 @@
   "与我们合作": "PARTNER WITH US",
   "菜单列表": "Menu list",
   "员工级别": "Staff level",
-  "收入指南": "Income guide",
-  "事件": "Events",
+  "收入指南": "Income Guide",
+  "事件": "Event",
   "提款": "Withdrawal",
   "定金": "Deposit",
-  "条款及细则": "Terms and conditions",
+  "条款及细则": "T & C",
   "证书": "Certificate",
-  "常见问题解答": "FAQ",
+  "常见问题解答": "FAQs",
   "关于": "About",
   "修改成功": "Modification successful",
   "更新": "Update",
@@ -119,7 +119,7 @@
   "客服": "Customer",
   "联系":"CONTACT",
   "开始": "Starting",
-  "记录": "Record",
+  "记录": "Records",
   "首页": "Home",
   "查看更多": "View more",
   "网络错误": "Network error",
@@ -137,6 +137,8 @@
   "信用评分":"Credit Score",
   "提交成功":"Mission Submitted Completed",
   "价格":"Total Account",
-  "提款金额":"Withdrawal Amount"
+  "提款金额":"Withdrawal Amount",
+  "请输入旧密码": "Please enter the old password",
+  "复制成功": "Copied successfully"
   
 }
