@@ -66,13 +66,22 @@ const ruleForm = reactive({
   oldTradePassword: "",
   newTradePassword: "",
 });
-const onClickLeft = () => history.back();
-const submitForm = async() =>{
+const onClickLeft = () => router.replace('/profileItem');
+const submitForm = async () => {
   if (!ruleForm.oldTradePassword) return showFailToast(t("请输入旧密码"));
   if (!ruleForm.newTradePassword) return showFailToast(t("请输入新密码"));
-  if (ruleForm.newTradePassword != agentNewPassword.value) return showFailToast(t("两次密码不一致"));
+
+  // 校验密码长度 6-18 位
+  if (ruleForm.newTradePassword.length < 6 || ruleForm.newTradePassword.length > 18) {
+    return showFailToast(t("密码长度需为 6-18 位"));
+  }
+
+  if (ruleForm.newTradePassword !== agentNewPassword.value) {
+    return showFailToast(t("两次密码不一致"));
+  }
+
   let res = await editTradePassword(ruleForm);
-  showSuccessToast(t("修改成功"))
+  showSuccessToast(t("修改成功"));
   router.push({ path: "/profileItem" });
-}
+};
 </script>

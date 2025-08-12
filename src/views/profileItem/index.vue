@@ -73,5 +73,5 @@ const toPage = (path) => {
 onMounted(() => {
   userStore.getUserInfo()
 })
-const onClickLeft = () => history.back();
+const onClickLeft = () => router.replace('/my');
 </script>

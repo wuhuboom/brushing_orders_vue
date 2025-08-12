@@ -55,7 +55,7 @@
 </template>
 <script setup>
 import { onMounted, ref,reactive } from "vue";
-const onClickLeft = () => history.back();
+const onClickLeft = () => router.replace('/profileItem');
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
 import { editPassword } from "../../api/apis";
 import { useRouter } from "vue-router";
@@ -67,13 +67,18 @@ const ruleForm = reactive({
   oldPassword: "",
   newPassword: "",
 });
-const submitForm = async() =>{
+const submitForm = async () => {
   if (!ruleForm.oldPassword) return showFailToast(t("请输入旧密码"));
   if (!ruleForm.newPassword) return showFailToast(t("请输入新密码"));
-  if (ruleForm.newPassword != agentNewPassword.value) return showFailToast(t("两次密码不一致"));
+  // 校验密码长度 6-18 位
+  if (ruleForm.newPassword.length < 6 || ruleForm.newPassword.length > 18) {
+    return showFailToast(t("密码长度需为 6-18 位"));
+  }
+  if (ruleForm.newPassword !== agentNewPassword.value) {
+    return showFailToast(t("两次密码不一致"));
+  }
   let res = await editPassword(ruleForm);
-  showSuccessToast(t("修改成功"))
+  showSuccessToast(t("修改成功"));
   router.push({ path: "/profileItem" });
-
-}
+};
 </script>

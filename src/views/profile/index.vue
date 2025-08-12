@@ -34,7 +34,7 @@ import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
 const router = useRouter();
-const onClickLeft = () => history.back();
+const onClickLeft = () => router.replace('/profileItem');
 const { t } = useI18n();
 const userInfo = ref({})
 const fileList = ref([]);
