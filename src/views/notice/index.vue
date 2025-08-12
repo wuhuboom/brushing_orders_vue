@@ -17,6 +17,7 @@
           <van-cell v-for="item in list" :key="item" :title="item">
             <div
               class="w-full mb-4 shadow flex flex-col p-3 bg-[#e8f7ec] rounded-xl"
+              @click="goDetail(item)"
             >
               <div class="flex justify-between">
                 <div class="text-base font-semibold text-[#333]">{{item.noticeTitle}}</div>
@@ -40,6 +41,8 @@
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { getNoticeList } from "../../api/apis";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const list = ref([]);
 const loading = ref(false);
 const finished = ref(false);
@@ -80,6 +83,15 @@ const loadData = async () => {
     finished.value = true; // 避免无限加载
   }
 };
+
+const goDetail = (item) =>{
+  router.push({
+    path:'/noticeDetail',
+    query:{
+      id:item.noticeId
+    }
+  })
+}
 onMounted(() => {
   //   getgetNoticeList();
   onLoad();

@@ -31,9 +31,11 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import { onMounted, ref } from "vue";
 import {updateAvatar,upload,userGetInfo} from "../../api/apis";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
 const router = useRouter();
 const onClickLeft = () => history.back();
+const { t } = useI18n();
 const userInfo = ref({})
 const fileList = ref([]);
 const avatarUrl = ref('')
@@ -59,7 +61,7 @@ const updateAvatarMethods = async () => {
     if (updateRes.code === 200) {
       showSuccessToast(t('头像更新成功'))
       router.push({
-        path: '/',
+        path: '/profileItem',
       });
     } else {
       showSuccessToast(updateRes.msg || t('头像更新失败'))

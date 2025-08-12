@@ -14,6 +14,7 @@
           <van-cell-group inset>
             <van-field
               label-width="150"
+              type="password"
               v-model="ruleForm.oldPassword"
               :label="$t('旧密码')"
               :placeholder="$t('旧密码')"
@@ -27,6 +28,7 @@
               label-width="150"
               v-model="ruleForm.newPassword"
               :label="$t('新密码')"
+              type="password"
               :placeholder="$t('新密码')"
               input-align="right"
             />
@@ -38,6 +40,7 @@
               label-width="150"
               v-model="agentNewPassword"
               :label="$t('确认密码')"
+              type="password"
               :placeholder="$t('确认密码')"
               input-align="right"
             />

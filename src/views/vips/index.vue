@@ -23,7 +23,7 @@
                 <div class="mt-2 text-[var(--main-color)] text-sm font-semibold">
                     {{item.price}}{{$t('美元')}}
                 </div>
-                <div class="mt-2 text-xs text-[#000] font-light" v-html="item.descriptionZh">
+                <div class="mt-2 text-xs text-[#000] font-light" v-html="item.descriptionEn">
                     
                 </div>
             </div>
@@ -51,6 +51,13 @@ const levelList = ref([]);
 const level = async () => {
   let res = await getLevel();
   levelList.value = res.data;
+  levelList.value.forEach(item => {
+     if (item.descriptionEn) {
+      // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
+      item.descriptionEn = item.descriptionEn.replace(/(●|•|&#8226;|&#9679;)/g, '<span class="small-dot">●</span>');
+    }
+  });
+  
 };
 const toUpgrade = () =>{
 showToast(t('联系客服'));
@@ -62,3 +69,12 @@ onMounted(() => {
 });
 const onClickLeft = () => history.back();
 </script>
+<style>
+.small-dot {
+  font-size: 8px;       /* 调整大小 */
+  line-height: 1;
+  vertical-align: middle;
+  display: inline-block; /* 保证可以控制尺寸/对齐 */
+  /* 如需更细微缩放也可用 transform: scale(0.8); */
+}
+</style>

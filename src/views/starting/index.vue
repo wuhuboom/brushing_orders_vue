@@ -108,7 +108,7 @@
         <div class="mt-5 flex justify-between text-black font-bold text-base">
           <div>Start Optimization</div>
           <div>
-            <span class="text-[var(--main-color)]">21</span>/<span>40</span>
+            <span class="text-[var(--main-color)]">{{ userInfo.dealCount }}</span>/<span>{{orderCount}}</span>
           </div>
         </div>
         <div class="mt-5 flex flex-col p-4 box-border bg-[#f1f1f1] rounded-xl">
@@ -154,8 +154,6 @@
                         alt=""
                       /> -->
                       <van-image
-                        width="6rem"
-                        height="6rem"
                         fit="contain"
                         :src="`${url}${getImageByIndex(index)}`"
                       />
@@ -317,12 +315,17 @@ onUnmounted(() => {
   if (timer) clearTimeout(timer);
 });
 
+const getUserGetInfo = () =>{
+  
+}
+
+const orderCount = ref(0)
 onMounted(() => {
+  getList();
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
-    console.log(userInfo.value);
+    orderCount.value = res.data.userLevel.orderCount
   });
-  getList();
 });
 </script>

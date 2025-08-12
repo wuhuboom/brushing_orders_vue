@@ -16,6 +16,7 @@
               label-width="150"
               v-model="ruleForm.oldTradePassword"
               :label="$t('旧密码')"
+              type="password"
               :placeholder="$t('旧密码')"
               input-align="right"
             />
@@ -25,6 +26,7 @@
           <van-cell-group inset>
             <van-field
               label-width="150"
+              type="password"
               v-model="ruleForm.newTradePassword"
               :label="$t('新密码')"
               :placeholder="$t('新密码')"
@@ -36,6 +38,7 @@
           <van-cell-group inset>
             <van-field
               label-width="150"
+              type="password"
               v-model="agentNewPassword"
               :label="$t('确认密码')"
               :placeholder="$t('确认密码')"
