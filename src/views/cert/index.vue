@@ -7,7 +7,7 @@
         left-arrow
         @click-left="onClickLeft"
       />
-      <div class="w-full p-6 box-border flex flex-col font-montserrat text-[#333]">
+      <div class="w-full p-6 box-border flex flex-col font-montserrat text-[#333] mt-10">
         <div v-html="certificateEn"></div>
       </div>
     </div>

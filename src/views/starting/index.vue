@@ -134,6 +134,7 @@
                   </div>
                 </div>
                 <div
+                v-else
                   class="grid-span-1 text-[#666666] text-center text-xs font-normal"
                 >
                   <div
@@ -251,17 +252,19 @@ const url = import.meta.env.VITE_API_IMG_URL;
 const { t } = useI18n();
 const userInfo = ref({});
 const avatarUrl = ref("");
-const totalCount = 8; // 插入一个“开始按钮”
+
 let timer = null;
 const goodsList = ref([]);
 const showCenter = ref(false);
 const goods = ref({});
+const totalCount = ref(0); // 插入一个“开始按钮”
 const getList = async () => {
   // let res = await getGoodsList();
   // goodsList.value = res.data;
   try {
     const res = await getGoodsList();
     goodsList.value = res.data;
+    totalCount.value = goodsList.value.length + 1; // 插入一个“开始按钮”
   } catch (e) {
     console.error("获取商品列表失败:", e);
   } finally {
@@ -272,7 +275,8 @@ const getList = async () => {
 
 const getImageByIndex = (i) => {
   if (i === 4) return null; // 第 5 项是“开始按钮”，不用图
-  const realIndex = i < 4 ? i : i - 1;
+  const realIndex = i < 5 ? i : i - 1;
+  console.log(goodsList.value[realIndex]?.coverUrl);
   return goodsList.value[realIndex]?.coverUrl || "";
 };
 

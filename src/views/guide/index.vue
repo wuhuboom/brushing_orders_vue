@@ -8,7 +8,7 @@
         left-arrow
         @click-left="onClickLeft"
     />
-     <div v-html="incomeGuideEn"></div>
+     <div v-html="incomeGuideEn" class="mt-10"></div>
     </div>
   </div>
 </template>
