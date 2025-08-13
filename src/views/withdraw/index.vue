@@ -71,7 +71,7 @@
                     style="background: #005713"
                     @click="All"
                     size="default"
-                    >{{$t('全部')}}</el-button
+                    >{{ $t("全部") }}</el-button
                   >
                 </template>
               </el-input>
@@ -88,25 +88,25 @@
             </el-form-item>
           </el-form>
 
-          <div class="w-full  pl-5 pr-5">
+          <div class="w-full pl-5 pr-5">
             <van-button color="#007513" @click="getWithdrawal" class="w-full">{{
               $t("提取")
             }}</van-button>
           </div>
         </van-tab>
         <van-tab :title="$t('历史')">
-            <van-tabs
-              v-model:active="orderActive"
-              @change="changeOrder"
-              color="#005713"
-              title-active-color="#fff"
-              type="card"
-              class="m-6"
-            >
-              <van-tab :title="$t('待审核')"></van-tab>
-              <van-tab :title="$t('审核成功')"></van-tab>
-              <van-tab :title="$t('审核拒绝')"></van-tab>
-            </van-tabs>
+          <van-tabs
+            v-model:active="orderActive"
+            @change="changeOrder"
+            color="#005713"
+            title-active-color="#fff"
+            type="card"
+            class="m-6"
+          >
+            <van-tab :title="$t('待审核')"></van-tab>
+            <van-tab :title="$t('审核成功')"></van-tab>
+            <van-tab :title="$t('审核拒绝')"></van-tab>
+          </van-tabs>
           <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
             <van-list
               v-model:loading="loading"
@@ -121,47 +121,71 @@
                   <div
                     class="flex items-center justify-between font-medium pb-2 text-sm"
                   >
-                    {{item.code}}
+                    {{ item.code }}
                   </div>
                   <div class="w-full h-[1px] bg-[#EBEBEB]"></div>
                   <div class="flex flex-col text-sm font-medium mt-2">
                     <div class="flex mt-1">
                       <div class="w-[50%]">{{ $t("姓名") }}</div>
-                      <div class="w-[50%] break-words">：{{item.username}}</div>
+                      <div class="w-[50%] break-words">
+                        ：{{ item.username }}
+                      </div>
                     </div>
                     <div class="flex mt-1">
                       <div class="w-[50%]">{{ $t("钱包地址") }}</div>
-                      <div class="w-[50%] break-words">：{{item.withdrawAddress}}</div>
+                      <div class="w-[50%] break-words">
+                        ：{{ item.withdrawAddress }}
+                      </div>
                     </div>
                     <div class="flex mt-1">
                       <div class="w-[50%]">{{ $t("钱包名称") }}</div>
-                      <div class="w-[50%] break-words">：{{item.withdrawType}}</div>
+                      <div class="w-[50%] break-words">
+                        ：{{ item.withdrawType }}
+                      </div>
                     </div>
                     <div class="flex mt-1">
                       <div class="w-[50%]">{{ $t("提现金额") }}</div>
-                      <div class="w-[50%] break-words">：{{item.amount}}</div>
+                      <div class="w-[50%] break-words">：{{ item.amount }}</div>
                     </div>
                     <div class="flex mt-1">
                       <div class="w-[50%]">{{ $t("到账金额") }}</div>
-                      <div class="w-[50%] break-words">：{{item.creditedAmount}}</div>
+                      <div class="w-[50%] break-words">
+                        ：{{ item.creditedAmount }}
+                      </div>
                     </div>
                     <div class="flex mt-1">
                       <div class="w-[50%]">{{ $t("费率") }}</div>
-                      <div class="w-[50%] break-words">：{{item.fee}}</div>
+                      <div class="w-[50%] break-words">：{{ item.fee }}</div>
                     </div>
                     <div class="flex mt-1">
                       <div class="w-[50%]">{{ $t("手续费") }}</div>
-                      <div class="w-[50%] break-words">：
-                        {{ (item.amount * TradeInfor.withdrawFeePercent / 100).toFixed(2) }}
+                      <div class="w-[50%] break-words">
+                        ：
+                        {{
+                          (
+                            (item.amount * TradeInfor.withdrawFeePercent) /
+                            100
+                          ).toFixed(2)
+                        }}
                       </div>
                     </div>
                     <div class="flex mt-1">
                       <div class="w-[50%]">{{ $t("状态") }}</div>
-                      <div class="w-[50%] break-words">：{{item.status == 0?$t('通过'):item.status == 1?$t('待审核'):$t('拒绝')}}</div>
+                      <div class="w-[50%] break-words">
+                        ：{{
+                          item.status == 0
+                            ? $t("通过")
+                            : item.status == 1
+                            ? $t("待审核")
+                            : $t("拒绝")
+                        }}
+                      </div>
                     </div>
                     <div class="flex mt-1">
                       <div class="w-[50%]">{{ $t("创建时间") }}</div>
-                      <div class="w-[50%] break-words">：{{item.applicationTime}}</div>
+                      <div class="w-[50%] break-words">
+                        ：{{ item.applicationTime }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -176,22 +200,28 @@
 <script setup>
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import {getWithdrawals,withdrawal,getTradeConfig} from "../../api/apis";
+import { getWithdrawals, withdrawal, getTradeConfig,userGetInfo } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
-
-const orderActive = ref(0)
+import {
+  showLoadingToast,
+  closeToast,
+  showFailToast,
+  showSuccessToast,
+} from "vant";
+import { useI18n } from "vue-i18n";
+const orderActive = ref(0);
 const active = ref(0);
 const list = ref([]);
 const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
-const amount = ref('')
+const amount = ref("");
 const userStore = useUserStore();
+const { t } = useI18n();
 const query = reactive({
   pageNum: 1,
   pageSize: 10,
-  status:'1'
+  status: "1",
 });
 const onRefresh = async () => {
   refreshing.value = true;
@@ -230,7 +260,7 @@ const ruleForm = reactive({
 });
 
 const All = () => {
-  console.log(amount.value)
+  console.log(amount.value);
   ruleForm.amount = amount.value;
 };
 const swichTab = () => {
@@ -238,38 +268,37 @@ const swichTab = () => {
     onRefresh();
   }
 };
-const getWithdrawal = () =>{
-  if(!ruleForm.amount) return ElMessage.error(t("请输入金额"));
-  if(!ruleForm.tradePassword) return ElMessage.error(t("请输入交易密码"));
-   withdrawal(ruleForm).then(res =>{
-    ElMessage({ message: t("提现成功"), type: "success" });
-      router.push({ path: "/my" });
-   })
-
-
-}
-const changeOrder = () =>{
-  if(orderActive.value == 0) {
-    query.status = '1'
-  } else if (orderActive.value ==1) {
-    query.status = '0'
+const getWithdrawal = () => {
+  if (!ruleForm.amount) return ElMessage.error(t("请输入金额"));
+  if (!ruleForm.tradePassword) return ElMessage.error(t("请输入交易密码"));
+  withdrawal(ruleForm).then((res) => {
+    showSuccessToast(t("提现成功"));
+    router.push({ path: "/my" });
+  });
+};
+const changeOrder = () => {
+  if (orderActive.value == 0) {
+    query.status = "1";
+  } else if (orderActive.value == 1) {
+    query.status = "0";
   } else {
-    query.status = '2'
+    query.status = "2";
   }
-  onRefresh()
-}
-const TradeInfor = ref({})
+  onRefresh();
+};
+const TradeInfor = ref({});
 
-const tradeConfig =async () =>{
-  let res = await getTradeConfig()
-  TradeInfor.value = res.data
-}
+const tradeConfig = async () => {
+  let res = await getTradeConfig();
+  TradeInfor.value = res.data;
+};
 
-onMounted(async () => {
-  tradeConfig()
-  await userStore.getUserInfo();
-  amount.value = userStore.userInfo.balance;
-})
+onMounted( () => {
+  tradeConfig();
+  userGetInfo().then((res) => {
+    amount.value = res.data.balance;
+  });
+});
 </script>
 <style>
 .withdraw .el-input__wrapper {

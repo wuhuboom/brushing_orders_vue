@@ -56,7 +56,7 @@
         <div class="p-4 text-lg font-semibold text-black">
           {{ $t("菜单列表") }}
         </div>
-        <div class="w-full p-6 grid grid-cols-4 gap-4">
+        <div class="w-full p-4 grid grid-cols-4 gap-4">
           <div
             class="flex flex-col w-full justify-center rounded-lg items-start text-center box-border text-[#000]"
             v-for="(item, index) in items"
@@ -66,7 +66,7 @@
             <div class="w-full">
               <img class="mx-auto w-12 h-12" :src="item.icon" alt="" />
             </div>
-            <span class="mx-auto text-center text-xs mt-1">
+            <span class="mx-auto text-center text-xs mt-1 whitespace-nowrap">
               {{ $t(item.name) }}
             </span>
           </div>

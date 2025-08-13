@@ -67,11 +67,12 @@ api.interceptors.response.use(
         useUserStore().logout();
         return Promise.reject(result);
       } else {
+        console.log(config.showMsg)
         if (config.showMsg) ElMessage({ message: result.msg, type: "error" });
         return Promise.reject(result);
       }
     }
-     else if (response.status == 401) {
+    else if (response.status == 401) {
       useUserStore().logout();
       return Promise.reject(result);
     } else {
