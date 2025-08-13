@@ -10,7 +10,7 @@
     </van-sticky>
 
     <div class="mt-10">
-      <van-tabs color="#007513" @change="swichTab" v-model:active="active">
+      <van-tabs color="#007513" background="#f4f4f5" @change="swichTab" v-model:active="active">
         <van-tab :title="$t('定金')">
           <div class="p-4 box-border flex flex-col">
             <div
@@ -34,7 +34,7 @@
               </div>
             </div>
           </div>
-          <div class="w-full mt-6 p-5">
+          <div class="w-full mt-2 pl-5 pr-5">
             <van-button color="#007513" class="w-full" @click="customer">{{
               $t("联系客服")
             }}</van-button>

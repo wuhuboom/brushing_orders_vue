@@ -88,7 +88,7 @@
             </el-form-item>
           </el-form>
 
-          <div class="w-full mt-6 p-5">
+          <div class="w-full  pl-5 pr-5">
             <van-button color="#007513" @click="getWithdrawal" class="w-full">{{
               $t("提取")
             }}</van-button>
