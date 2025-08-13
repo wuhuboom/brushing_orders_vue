@@ -19,7 +19,7 @@
                         <div class="w-full flex flex-col mb-6 bg-[#f1f4eb] border-[1px] border-[#eee] p-3 box-border rounded-xl">
                                 <div class="w-full flex">
                                     <div class="mr-2 w-[20%]" style="width: 4rem;">
-                                        <img :src="item.coverUrl" alt="">
+                                        <img :src="VITE_API_IMG_URL+item.coverUrl" alt="">
                                     </div>
                                     <div class="w-[80%] flex flex-col h-[3rem] justify-between">
                                         <div>
@@ -70,7 +70,7 @@
 
     <van-dialog v-model:show="show" closeable title="标题" :show-confirm-button="false">
         <div class="w-[5rem] mx-auto" style="width: 6rem; z-index: 999;">
-            <img :src="goodsData.coverUrl" alt="">
+            <img :src="VITE_API_IMG_URL+goodsData.coverUrl" alt="">
         </div>
         <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
             <div class="w-[100%] mx-auto text-center text-sm font-semibold">
@@ -110,6 +110,7 @@ import { onMounted, ref ,reactive} from "vue";
 import {getOrderInfos,submitOrder} from "../../api/apis";
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
 import { useI18n } from "vue-i18n";
+const VITE_API_IMG_URL = import.meta.env.VITE_API_IMG_URL;
 const { t } = useI18n();
 const active = ref(0);
 const list =  ref([]);
