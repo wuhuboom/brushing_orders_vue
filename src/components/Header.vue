@@ -40,12 +40,12 @@ import { useRouter } from 'vue-router';
 import Tabs from './Tabs.vue';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useTradeStore } from '../store/modules/trade';
+// import { useTradeStore } from '../store/modules/trade';
 
 const { t } = useI18n();
 const router = useRouter()
 const emit = defineEmits(['rightClick'])
-const tradeStore = useTradeStore()
+// const tradeStore = useTradeStore()
 const props = defineProps({
   label: {
     type: String,
