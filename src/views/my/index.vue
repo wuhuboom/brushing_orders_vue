@@ -17,11 +17,7 @@
           }"
         >
           <div class="text-white text-center absolute top-5 right-5">
-            <img
-              src="https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png"
-              class="w-12"
-              alt=""
-            />
+            <img :src="bgMapStart[userInfo.levelId]" class="w-12" alt="" />
             <p class="text-[#fff] text-sm font-semibold">
               VIP{{ userInfo.levelId }}
             </p>
@@ -196,7 +192,7 @@
           @click="handleChangeLang"
         >
           <div class="flex items-center justify-between w-full">
-            <div class="text-[#000] text-sm font-medium" >
+            <div class="text-[#000] text-sm font-medium">
               {{ $t("更改语言") }}
             </div>
             <van-icon name="arrow" size="22px" />
@@ -254,8 +250,14 @@ const url = import.meta.env.VITE_API_IMG_URL;
 const router = useRouter();
 const userInfo = ref({});
 const avatarUrl = ref("");
-// const show = ref(false);
-// const tradePassword = ref("");
+
+const bgMapStart = [
+  "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
+  "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png",
+   "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png",
+   "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png",
+ "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png",
+]
 const toPage = (path) => {
   router.push({
     path: path,
@@ -299,7 +301,7 @@ function handleChangeLang() {
 }
 
 const copy = (text) => {
-  
+
 }
 onMounted(() => {
   userGetInfo().then((res) => {

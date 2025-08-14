@@ -1,12 +1,21 @@
 <template>
   <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-5">
-    <div class="flex flex-col items-center pt-6 pb-3">
-      <img
-        src="@/static/images/account-lang.png"
-        alt=""
-        class="w-5 h-5 self-end mb-4 mt-4"
-        @click="handleChangeLang"
-      />
+    <div class="fixed top-2 right-5 h-9 flex items-center justify-center">
+      <div
+        class="flex items-center ml-2 overflow-hidden bg-[var(--main-color)] px-3 py-2 rounded-full box-border text-white leading-none"
+        style="line-height: 1"
+      >
+        <img
+          src="@/static/images/lang-white.png"
+          alt=""
+          class="w-5 h-5 block object-contain"
+          @click="handleChangeLang"
+        />
+        <div class="ml-2 uppercase font-bold leading-none" style="margin-top: -2px;">{{lang}}</div>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center pt-10 mt-5 pb-3">
       <img
         src="@/static/images/logo.png"
         alt=""
@@ -92,6 +101,7 @@ import Tabs from "@/components/Tabs.vue";
 import { useUserStore } from "@/store/modules/user";
 import ContactUs from "@/components/ContactUs.vue";
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
+import { useCommonStore } from '@/store/modules/common';
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { setUserRemind } from "../../common/remind";
@@ -117,6 +127,8 @@ const ruleForm = reactive({
   email: "",
   password: "",
 });
+const commonStore = useCommonStore();
+const lang = computed(() => commonStore.clientLang);
 const select = ref("US +1");
 const rules = computed(() => {
   return {};
@@ -158,9 +170,9 @@ function handleChangeLang() {
   langRef.value.open();
 }
 
-const customer = () =>{
+const customer = () => {
   ContactUsRef.value.open();
-}
+};
 </script>
 
 <style scoped>

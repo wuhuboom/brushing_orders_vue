@@ -186,12 +186,12 @@
       closeable
       :style="{ width:'80%' }"
     >
-      <div class="w-[5rem] mx-auto">
+      <div class="w-[5rem] mx-auto mt-6">
         <van-image
           width="6rem"
           height="6rem"
           fit="contain"
-          :src="goods.coverUrl"
+          :src="url+goods.coverUrl"
         />
       </div>
       <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
