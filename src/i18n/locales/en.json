@@ -108,7 +108,7 @@
   "钱包名称": "Wallet name",
   "提现金额": "Withdrawal amount",
   "到账金额": "Received amount",
-  "费率": "Rate",
+  "费率": "Commission Fee",
   "手续率": "Handling fee rate",
   "状态": "Status",
   "通过": "Approved",
@@ -141,6 +141,9 @@
   "请输入旧密码": "Please enter the old password",
   "复制成功": "Copied successfully",
   "密码长度需为 6-18 位": "Please enter a 6-18 digit password",
-  "请输入新密码": "Please enter a new password"
+  "请输入新密码": "Please enter a new password",
+  "已有账户?":"Already have an account?",
+  "提现成功": "Withdrawal successful",
+  "手续费": "Commission Fee Ratio"
   
 }
