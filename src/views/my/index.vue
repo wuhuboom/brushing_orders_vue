@@ -268,6 +268,7 @@ const logout = () => {
   showConfirmDialog({
     title: t('退出'),
     message: t("确定要退出?"),
+    confirmButtonColor: '#007513', // 确认按钮颜色（红色示例）
   })
     .then(() => {
       userStore.logout();

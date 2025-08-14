@@ -9,7 +9,7 @@
         left-arrow
         @click-left="onClickLeft"
       />
-      <div class="mt-10" v-html="termsEn">
+      <div class="mt-10" v-html="registerProtocolEn">
 
       </div>
     </div>
@@ -19,10 +19,10 @@
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import {getGlobalConfig} from "../../api/apis"
 const onClickLeft = () => history.back();
-const termsEn = ref('');
+const registerProtocolEn = ref('');
 const getGetGlobalConfig = async() =>{
     let res = await getGlobalConfig();
-    termsEn.value = res.data.termsEn
+    registerProtocolEn.value = res.data.registerProtocolEn
     console.log(res)
 }
 onMounted(() =>{

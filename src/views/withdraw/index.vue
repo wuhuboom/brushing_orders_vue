@@ -163,7 +163,7 @@
                         ：
                         {{
                           (
-                            (item.amount * TradeInfor.withdrawFeePercent) /
+                            (item.amount * item.withdrawFee) /
                             100
                           ).toFixed(2)
                         }}

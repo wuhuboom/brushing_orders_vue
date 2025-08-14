@@ -24,7 +24,7 @@
               </div>
               <div class="flex mt-4">
                 <div class="text-white text-3xl font-bold flex items-center">
-                  {{userStore.userInfo.balance}}
+                  {{userInfo.balance}}
                 </div>
                 <div
                   class="text-white text-sm font-bold flex items-center ml-2 pt-[12px]"
@@ -83,13 +83,14 @@
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { onMounted, reactive, ref } from "vue";
 import { useUserStore } from "@/store/modules/user";
-import { getDeposit } from "../../api/apis";
+import { getDeposit,userGetInfo } from "../../api/apis";
 const active = ref(0);
 const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
 const userStore = useUserStore();
 const ContactUsRef = ref(null);
+const userInfo = ref({})
 const swichTab = () => {
   if (active.value == 1) {
     onRefresh();
@@ -134,8 +135,9 @@ const customer = () => {
   ContactUsRef.value.open();
 };
 onMounted(() => {
-  // onLoad();
-  userStore.getUserInfo();
+  userGetInfo().then((res) => {
+    userInfo.value = res.data;
+  });
 });
 const onClickLeft = () => history.back();
 </script>
