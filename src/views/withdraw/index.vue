@@ -269,8 +269,8 @@ const swichTab = () => {
   }
 };
 const getWithdrawal = () => {
-  if (!ruleForm.amount) return showFailToast("请输入金额");
-  if (!ruleForm.tradePassword) return showFailToast('请输入交易密码');
+  if (!ruleForm.amount) return showFailToast(t('请输入金额'));
+  if (!ruleForm.tradePassword) return showFailToast(t('请输入交易密码'));
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     router.push({ path: "/my" });

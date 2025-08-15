@@ -68,8 +68,8 @@
     </div>
     <Footer name="/records"></Footer>
 
-    <van-dialog v-model:show="show" closeable title="标题" :show-confirm-button="false">
-        <div class="w-[5rem] mx-auto" style="width: 6rem; z-index: 999;">
+    <van-dialog v-model:show="show" closeable :title="''" :show-confirm-button="false">
+        <div class="w-[5rem] mx-auto pt-10" style="width: 6rem; z-index: 999;">
             <img :src="VITE_API_IMG_URL+goodsData.coverUrl" alt="">
         </div>
         <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="w-full mt-4">
-                <van-button color="#007513" class="w-full" @click="submitVal">提交</van-button>
+                <van-button color="#007513" class="w-full" @click="submitVal">{{$t('提交')}}</van-button>
             </div>
         </div>
     </van-dialog>
