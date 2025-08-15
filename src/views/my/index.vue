@@ -17,7 +17,7 @@
           }"
         >
           <div class="text-white text-center absolute top-5 right-5">
-            <img :src="bgMapStart[userInfo.levelId]" class="w-12" alt="" />
+            <img :src="bgMapStart[userInfo.levelId-1]" class="w-12" alt="" />
             <p class="text-[#fff] text-sm font-semibold">
               VIP{{ userInfo.levelId }}
             </p>

@@ -60,7 +60,7 @@
             >
               <el-input
                 v-model="ruleForm.amount"
-                type="text"
+                type="number"
                 :placeholder="$t('提款金额')"
                 autocomplete="off"
                 size="large"
@@ -269,8 +269,8 @@ const swichTab = () => {
   }
 };
 const getWithdrawal = () => {
-  if (!ruleForm.amount) return ElMessage.error(t("请输入金额"));
-  if (!ruleForm.tradePassword) return ElMessage.error(t("请输入交易密码"));
+  if (!ruleForm.amount) return showFailToast("请输入金额");
+  if (!ruleForm.tradePassword) return showFailToast('请输入交易密码');
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     router.push({ path: "/my" });
