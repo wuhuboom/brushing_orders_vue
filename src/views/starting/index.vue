@@ -1,26 +1,34 @@
 <template>
   <div>
-    <HeaderTop></HeaderTop>
-    <div class="w-full bg-[#f8f8f8] relative">
+    <!-- <HeaderTop></HeaderTop> -->
+    <div class="w-full px-5 mx-auto bg-[#206645] rounded-b-[20px]">
+      <div class="w-full pt-6 flex justify-between">
+        <div class="text-[#fff]">webworks</div>
+        <img
+          src="@/static/images/user2.png"
+          class="w-[24px]"
+          alt=""
+          @click="toMy"
+        />
+      </div>
       <div class="w-full h-full py-5">
         <div
-          class="flex w-[90%] mx-auto justify-between mt-4 mb-4 items-center"
+          class="flex justify-between mt-4 mb-4 items-center"
         >
           <div class="flex">
-            <img
-              style="width: 50px; height: 50px; border-radius: 50%"
-              src="@/static/images/user2.png"
-              alt=""
-            />
             <div class="flex items-center pl-2">
-              <div class="text-black font-semibold">
-                Hi, {{ userInfo.username }}
+              <div class="text-[#fff] ">
+                <div class="text-xl">Hi, {{ userInfo.username }}</div>
+                <div class="text-[rgba(255,255,255,0.8)] text-sm text-inherits pt-2">Welcome back</div>
               </div>
             </div>
           </div>
-          <div class="text-black font-semibold">VIP{{ userInfo.levelId }}</div>
+          <div class="text-[#fff] w-[62px] h-[36px] flex justify-center items-center bg-[rgba(255,255,255,0.2)] rounded-[20px]">VIP{{ userInfo.levelId }}</div>
         </div>
       </div>
+    </div>
+
+    <div class="w-full bg-[#f8f8f8] relative pt-10">
       <div class="w-[100%] px-4 mx-auto">
         <div class="grid grid-cols-1 gap-3">
           <div
@@ -34,7 +42,7 @@
                   alt=""
                 />
                 <div class="flex flex-col justify-around">
-                  <div class="text-[#000] text-sm font-bold mb-1">
+                  <div class="text-[#000] text-sm mb-1">
                     {{ $t("钱包余额") }}
                   </div>
                   <div class="text-[#999] text-[10px]">
@@ -43,7 +51,7 @@
                 </div>
               </div>
               <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[var(--main-color)] font-bold mb-1">
+                <div class="text-sm text-[#000] font-bold mb-1">
                   {{ userInfo.balance }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
@@ -61,7 +69,7 @@
                   alt=""
                 />
                 <div class="flex flex-col justify-around">
-                  <div class="text-[#000] text-sm font-bold mb-1">
+                  <div class="text-[#000] text-sm mb-1">
                     {{ $t("持有金额") }}
                   </div>
                   <div class="text-[#999] text-[10px]">
@@ -70,7 +78,7 @@
                 </div>
               </div>
               <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[var(--main-color)] font-bold mb-1">
+                <div class="text-sm text-[#000] font-bold mb-1">
                   {{ userInfo.totalBalance }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
@@ -88,7 +96,7 @@
                   alt=""
                 />
                 <div class="flex flex-col justify-around">
-                  <div class="text-[#000] text-sm font-bold mb-1">
+                  <div class="text-[#000] text-sm mb-1">
                     {{ $t("当日佣金") }}
                   </div>
                   <div class="text-[#999] text-[10px]">
@@ -97,7 +105,7 @@
                 </div>
               </div>
               <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[var(--main-color)] font-bold mb-1">
+                <div class="text-sm text-[#000] font-bold mb-1">
                   {{ userInfo.commission }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
@@ -105,14 +113,17 @@
             </div>
           </div>
         </div>
-        <div class="mt-5 flex justify-between text-black font-bold text-base">
+        <!-- <div class="mt-5 flex justify-between text-black font-bold text-base">
           <div>Start Optimization</div>
           <div>
-            <span class="text-[var(--main-color)]">{{ userInfo.dealCount }}</span>/<span>{{orderCount}}</span>
+            <span class="text-[var(--main-color)]">{{
+              userInfo.dealCount
+            }}</span
+            >/<span>{{ orderCount }}</span>
           </div>
-        </div>
-        <div class="mt-5 flex flex-col p-4 box-border bg-[#f1f1f1] rounded-xl">
-          <div class="mt-5 flex flex-col box-border bg-[#f1f1f1] rounded-xl">
+        </div> -->
+        <div class="mt-5 flex flex-col p-4 box-border bg-[linear-gradient(180deg,_#FFFBEB_0%,_#FEF3C7_100%)] rounded-xl">
+          <div class="flex flex-col box-border  rounded-xl">
             <div class="w-full grid grid-cols-3 gap-6">
               <template v-for="(item, index) in totalCount" :key="index">
                 <div
@@ -134,7 +145,7 @@
                   </div>
                 </div>
                 <div
-                v-else
+                  v-else
                   class="grid-span-1 text-[#666666] text-center text-xs font-normal"
                 >
                   <div
@@ -165,12 +176,22 @@
             </div>
           </div>
         </div>
+
+        <div class="mt-5 flex justify-center items-center text-black text-base h-[60px] bg-[#FACC15] rounded-[20px]">
+          Start
+            <span class="pl-2">({{
+              userInfo.dealCount
+            }}</span
+            >/<span>{{ orderCount }})</span>
+        </div>
       </div>
       <div class="w-[90%] mx-auto pt-5">
-        <div class="mt-4 rounded-lg bg-[#f5f5f5]">
-          <div class="flex flex-col p-4 box-border relative rounded-xl">
-            <div class="mb-2  text-base font-bold" style="color: black;">Notice</div>
-            <div class="text-black text-sm ">
+        <div class="mt-4 rounded-lg bg-[#FFFFFF]">
+          <div class="flex flex-col p-4 box-border relative rounded-[10px]">
+            <div class="mb-1 text-base" style="color: black">
+              Notice
+            </div>
+            <div class="text-[#6B7280] text-[12px]">
               Online Support Hours 10:00 - 22:59 <br />
               Please contact online support for your assistance!
             </div>
@@ -184,51 +205,57 @@
       v-model:show="showCenter"
       round
       closeable
-      :style="{ width:'80%' }"
+      :style="{ width: '80%' }"
     >
       <div class="w-[5rem] mx-auto mt-6">
         <van-image
           width="6rem"
           height="6rem"
           fit="contain"
-          :src="url+goods.coverUrl"
+          :src="url + goods.coverUrl"
         />
       </div>
       <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
         <div class="w-[100%] mx-auto text-center text-sm font-semibold">
-          {{goods.goodsName}}
+          {{ goods.goodsName }}
         </div>
         <div class="flex w-full items-center pt-4 pb-4 mt-4">
           <div
             class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
           >
-            <div class="text-[#000] font-semibold">{{$t('价格')}}</div>
+            <div class="text-[#000] font-semibold">{{ $t("价格") }}</div>
             <div class="text-xs text-[#000] mt-1">
-              <span class="text-sm mr-1 text-[#000] font-semibold">{{goods.price}}</span>
+              <span class="text-sm mr-1 text-[#000] font-semibold">{{
+                goods.price
+              }}</span>
               USD
             </div>
           </div>
           <div
             class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
           >
-            <div class="text-[#000] font-semibold">{{ $t('佣金') }}</div>
+            <div class="text-[#000] font-semibold">{{ $t("佣金") }}</div>
             <div class="text-xs text-[#000] mt-1">
-              <span class="text-sm mr-1 text-[#000] font-semibold">{{goods.commission}}</span>
+              <span class="text-sm mr-1 text-[#000] font-semibold">{{
+                goods.commission
+              }}</span>
               USD
             </div>
           </div>
         </div>
         <div class="bg-[#d8d8d8] p-4">
           <div class="flex justify-between items-center box-border">
-            <div class="text-[#000] text-sm">{{$t('创建时间')}}</div>
-            <div class="text-[#000] text-sm font-bold">{{goods.createTime}}</div>
+            <div class="text-[#000] text-sm">{{ $t("创建时间") }}</div>
+            <div class="text-[#000] text-sm font-bold">
+              {{ goods.createTime }}
+            </div>
           </div>
           <div class="flex justify-between items-center box-border mt-2">
             <div class="whitespace-nowrap text-[#000] text-sm">
-              {{$t('编号')}}
+              {{ $t("编号") }}
             </div>
             <div class="text-[#000] text-xs font-bold">
-              {{goods.orderNo}}
+              {{ goods.orderNo }}
             </div>
           </div>
         </div>
@@ -245,9 +272,19 @@
 import { onMounted, ref, onUnmounted } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
+import {
+  showLoadingToast,
+  closeToast,
+  showFailToast,
+  showSuccessToast,
+} from "vant";
 import { useI18n } from "vue-i18n";
-import { userGetInfo, getGoodsList, createOrder,submitOrder } from "../../api/apis";
+import {
+  userGetInfo,
+  getGoodsList,
+  createOrder,
+  submitOrder,
+} from "../../api/apis";
 const url = import.meta.env.VITE_API_IMG_URL;
 const { t } = useI18n();
 const userInfo = ref({});
@@ -297,21 +334,21 @@ const handleClick = () => {
       // 其他逻辑...
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       closeToast(); // 关闭 loading
       showFailToast(err.msg);
     });
 };
 
 const submitForm = () => {
-  submitOrder(goods.value.id).then((res)=>{
-        showSuccessToast(t("提交成功"));
-        if(res.code == 201) {
-           goods.value =  res.data
-        } else {
-            showCenter.value = false;
-        }
-    })
+  submitOrder(goods.value.id).then((res) => {
+    showSuccessToast(t("提交成功"));
+    if (res.code == 201) {
+      goods.value = res.data;
+    } else {
+      showCenter.value = false;
+    }
+  });
 };
 
 onUnmounted(() => {
@@ -319,17 +356,15 @@ onUnmounted(() => {
   if (timer) clearTimeout(timer);
 });
 
-const getUserGetInfo = () =>{
-  
-}
+const getUserGetInfo = () => {};
 
-const orderCount = ref(0)
+const orderCount = ref(0);
 onMounted(() => {
   getList();
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
-    orderCount.value = res.data.userLevel.orderCount
+    orderCount.value = res.data.userLevel.orderCount;
   });
 });
 </script>

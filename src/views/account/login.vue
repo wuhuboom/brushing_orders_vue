@@ -1,32 +1,32 @@
 <template>
-  <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-5">
-    <div class="fixed top-2 right-5 h-9 flex items-center justify-center">
-      <div
+  <div class="login-con flex flex-col w-full h-[100vh] bg bg-cover bg-center p-5">
+    <div class="fixed right-5 h-9 flex items-center justify-center">
+      <!-- <div
         class="flex items-center ml-2 overflow-hidden bg-[var(--main-color)] px-3 py-2 rounded-full box-border text-white leading-none"
         style="line-height: 1"
-      >
+      > -->
         <img
           src="@/static/images/lang-white.png"
           alt=""
           class="w-5 h-5 block object-contain"
-          @click="handleChangeLang"
+          @click="customer"
         />
-        <div class="ml-2 uppercase font-bold leading-none" style="margin-top: -2px;">{{lang}}</div>
-      </div>
+        <!-- <div class="ml-2 uppercase font-bold leading-none" style="margin-top: -2px;">{{lang}}</div> -->
+      <!-- </div> -->
     </div>
 
-    <div class="flex flex-col items-center pt-10 mt-5 pb-3">
+    <div class="flex flex-col items-center pt-10 mt-[150px] pb-3 bg-[#ffffff] rounded-xl">
       <img
         src="@/static/images/logo.png"
         alt=""
-        class="w-[50%] lg:w-[300px] mx-auto"
+        class="w-[80%] lg:w-[300px] mx-auto"
       />
-      <div class="text-3xl text-main-bg font-semibold text-center py-4 pt-12">
+      <!-- <div class="text-3xl text-main-bg font-semibold text-center py-4 pt-12">
         {{ $t("登入") }}
       </div>
       <div class="text-center text-sm text-main-bg pb-4">
         {{ $t("输入您的用户名和密码以访问") }}
-      </div>
+      </div> -->
 
       <el-form
         ref="ruleFormRef"
@@ -34,7 +34,7 @@
         status-icon
         :rules="rules"
         label-width="auto"
-        class="w-full mt-4"
+        class="w-[80%] mt-4"
       >
         <el-form-item prop="" label-position="top">
           <el-input
@@ -43,7 +43,12 @@
             :placeholder="$t('用户名/电话')"
             autocomplete="off"
             size="large"
-          />
+            class="bg--[#E5E7EB]"
+          >
+          <template #prefix>
+            <img class="w-[18px]" src="@/static/images/user.png" alt="">
+          </template>
+          </el-input>
         </el-form-item>
         <el-form-item class="relative w-full">
           <el-input
@@ -53,33 +58,30 @@
             autocomplete="off"
             size="large"
             show-password
-          />
+          >
+          <template #prefix>
+            <img class="w-[18px]" src="@/static/images/word.png" alt="">
+          </template>
+          </el-input>
         </el-form-item>
-        <el-form-item label-position="top" class="relative w-full">
+        <!-- <el-form-item label-position="top" class="relative w-full">
           <template class="w-full" #label>
             <div class="flex items-center w-full">
-              <!-- <div class="text-sm">{{ $t("密码") }}</div> -->
               <div class="ml-auto text-white" @click="customer">
                 {{ $t("忘记密码") }}
               </div>
             </div>
           </template>
-        </el-form-item>
-        <!-- <el-form-item>
-          <div class="text-center w-full opacity-50" @click="toRegister">
-            {{ $t("新用户?")
-            }}<span class="text-blue-600">{{ $t("立即加入") }}</span>
-          </div>
         </el-form-item> -->
       </el-form>
-      <div @click="submitForm(ruleFormRef)" class="w-full" size="large" round>
+      <div @click="submitForm(ruleFormRef)" class="w-[80%] pb-[10px]" size="large" round>
         <div
-          class="w-full text-white text-lg font-semibold mx-auto py-3 rounded-lg flex items-center justify-center bg-green"
+          class="w-full text-white text-lg font-semibold mx-auto py-3 rounded-lg flex items-center justify-center bg-[#206645]"
         >
           <div>{{ $t("登录") }}</div>
         </div>
       </div>
-      <div class="w-full mt-4 text-sm text-white text-center pt-2">
+      <!-- <div class="w-full mt-4 text-sm text-white text-center pt-2">
         <p class="text-sm text-center w-full pb-2" @click="toRegister">
           {{ $t("还没有账户?")
           }}<span class="text-white">{{ $t("立即注册") }}</span>
@@ -89,8 +91,19 @@
           {{ $t("无法登录?")
           }}<span class="text-white">{{ $t("请联系我们的用户支持") }}</span>
         </div>
-      </div>
+      </div> -->
     </div>
+    <div class="w-full mt-4 text-sm text-white text-center pt-2">
+        <p class="text-sm text-center w-full pb-2" @click="toRegister">
+          <!-- {{ $t("还没有账户?")}} -->
+          <span class="text-white underline">{{ $t("立即注册") }}</span>
+        </p>
+
+        <!-- <div class="text-sm text-center w-full" @click="customer">
+          {{ $t("无法登录?")
+          }}<span class="text-white">{{ $t("请联系我们的用户支持") }}</span>
+        </div> -->
+      </div>
     <Lang ref="langRef"></Lang>
     <ContactUs ref="ContactUsRef"></ContactUs>
   </div>

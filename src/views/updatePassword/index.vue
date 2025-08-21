@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-white">
+  <div class="updataPass container w-full min-h-[100vh] bg-white">
     <van-sticky type="primary">
       <van-nav-bar
         :title="$t('更新密码')"
@@ -8,47 +8,48 @@
         @click-left="onClickLeft"
       />
     </van-sticky>
-    <div class="w-full pl-6 mt-6 pr-6 box-border flex flex-col">
+    <div class="w-full  mt-6  box-border flex flex-col">
       <div class="w-full mt-12 flex flex-col">
-        <div class="w-full overflow-hidden bg-[#e8f7ec] py-2">
+        <div class="w-full">
           <van-cell-group inset>
             <van-field
+              label-align="top"
               label-width="150"
               type="password"
               v-model="ruleForm.oldPassword"
               :label="$t('旧密码')"
               :placeholder="$t('旧密码')"
-              input-align="right"
             />
           </van-cell-group>
         </div>
-        <div class="w-full mt-2 overflow-hidden bg-[#e8f7ec] py-2">
+        <div class="w-full">
           <van-cell-group inset>
             <van-field
+            label-align="top"
               label-width="150"
               v-model="ruleForm.newPassword"
               :label="$t('新密码')"
               type="password"
               :placeholder="$t('新密码')"
-              input-align="right"
             />
           </van-cell-group>
         </div>
-        <div class="w-full mt-2 overflow-hidden bg-[#e8f7ec] py-2">
+        <div class="w-full ">
           <van-cell-group inset>
             <van-field
+            label-align="top"
               label-width="150"
               v-model="agentNewPassword"
               :label="$t('确认密码')"
               type="password"
               :placeholder="$t('确认密码')"
-              input-align="right"
+
             />
           </van-cell-group>
         </div>
       </div>
-      <div class="w-full mt-4">
-        <van-button color="#007513" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
+      <div class="w-[85%] mx-auto mt-4">
+        <van-button color="#206645" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
       </div>
     </div>
   </div>

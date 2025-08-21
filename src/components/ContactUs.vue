@@ -3,8 +3,9 @@
     <van-dialog
     v-model:show="showCenter"
     :showConfirmButton="false"
-    show-cancel-button
+    closeOnClickOverlay
     cancelButtonColor="#005713"
+    width="240px"
   >
     <div class="flex flex-col rounded-xl overflow-hidden bg-white">
       <div
@@ -16,7 +17,7 @@
           <img src="@/static/images/service.png" alt="" class="w-6 h-6 mr-3" />
           <div class="flex items-center">{{ item.name }}</div>
         </div>
-        <van-icon name="arrow" size="18px" />
+        <van-icon name="arrow" color="#aeb4eb" size="18px" />
       </div>
     </div>
   </van-dialog>

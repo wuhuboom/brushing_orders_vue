@@ -1,12 +1,12 @@
 <template>
-  <div class="container w-full bg-white min-h-[100vh]">
+  <div class="container w-full bg-[#f5f5f5] min-h-[100vh]">
     <van-nav-bar
       :title="$t('通知')"
       fixed
       left-arrow
       @click-left="onClickLeft"
     />
-    <div class="pl-3 pr-3 mt-10 pt-5">
+    <div class="mt-10 pt-5">
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model:loading="loading"
@@ -16,20 +16,20 @@
         >
           <van-cell v-for="item in list" :key="item" :title="item">
             <div
-              class="w-full mb-4 shadow flex flex-col p-3 bg-[#e8f7ec] rounded-xl"
+              class="w-full mb-4 bg-[#fff] flex flex-col p-3  border-l-4 border-[#206645]"
               @click="goDetail(item)"
             >
               <div class="flex justify-between">
-                <div class="text-base font-semibold text-[#333]">{{item.noticeTitle}}</div>
+                <div class="text-base font-semibold text-[#206645]">{{item.noticeTitle}}</div>
               </div>
               <div
-                class="flex text-sm text-[#666666] font-semibold items-center mt-3"
+                class="flex text-sm text-[#206645] items-center mt-3"
                 v-html="item.noticeContent"
               >
                
               </div>
               <div class="flex justify-between mt-3">
-                <div class="text-sm font-normal text-[#999999]">{{ item.createTime }}</div>
+                <div class="text-sm font-normal text-[#333333]">{{ item.createTime }}</div>
               </div>
             </div>
           </van-cell>

@@ -1,118 +1,85 @@
 <template>
-  <div class="w-full h-[100vh] overflow-y-scroll bg-white flex flex-col pb-6">
-    <HeaderTop></HeaderTop>
-    <div class="w-full py-6">
-      <div class="w-[90%] mx-auto">
-        <div class="w-[12rem] mx-auto relative" style="z-index: 19">
-          <img
-            :src="userInfo.avatar"
-            class="w-[6rem] h-[6rem] mx-auto rounded-full"
-            alt=""
+  <div class="my-bor w-full flex flex-col pb-6">
+     <van-nav-bar
+        :title="$t('我的')"
+        fixed
+        left-arrow
+        @click-left="onClickLeft"
+      />
+    <div
+      class="mt-[45px]"
+      style="background: linear-gradient(180deg, #206645 0%, #2e8b57 100%)"
+    >
+      <div class="flex justify-between items-center p-[23px]">
+        <img
+          :src="userInfo.avatar"
+          class="w-[60px] h-[60px] rounded-full"
+          alt=""
+        />
+        <img :src="bgMapStart[userInfo.levelId - 1]" class="w-12" alt="" />
+      </div>
+      <div class="text-white text-[24px] px-[23px] pb-[8px]">
+        {{ userInfo.username }}
+      </div>
+      <div class="text-white text-[14px] px-[23px]">
+        <span>{{ $t("邀请码") }}:</span>{{ userInfo.inviteCode }}
+      </div>
+      <div class="px-[23px]">
+        <div class="flex items-center justify-between text-white text-[14px] mt-5">
+          <div class="text-[10px] mr-2">{{ $t("信用评分") }}:</div>
+          <div class="text-white text-[10px] ml-1">
+              {{ userInfo.creditScore }}%
+          </div>
+        </div>
+        <div class="flex-auto">
+          <van-progress
+            color="rgb(137, 206, 79)"
+            :percentage="userInfo.creditScore"
+            :show-pivot="false"
+            stroke-width="8"
           />
         </div>
+        <div class="border-t border-white/30 h-1 mt-5"></div>
         <div
-          class="w-full p-4 mt-[-3rem] pb-10 relative"
-          :style="{
-            background: `url(${bgImage}) 0 0 / 100% 100% no-repeat`,
-          }"
-        >
-          <div class="text-white text-center absolute top-5 right-5">
-            <img :src="bgMapStart[userInfo.levelId-1]" class="w-12" alt="" />
-            <p class="text-[#fff] text-sm font-semibold">
-              VIP{{ userInfo.levelId }}
-            </p>
-          </div>
-          <div class="w-full text-center mt-[2rem]">
-            <div class="flex text-white text-lg flex-col">
-              <p class="text-2xl font-bold text-white">
-                {{ userInfo.username }}
-              </p>
-              <p class="text-xs flex justify-center items-center">
-                <span>{{ $t("邀请码") }}:: </span>
-                <span>{{ userInfo.inviteCode }}</span>
-                <img
-                  src="@/static/images/copy.png"
-                  class="w-4 h-4 ml-2"
-                  alt=""
-                  @click="copyContent(userInfo.inviteCode)"
-                />
-              </p>
-            </div>
-          </div>
-          <div
-            class="w-full mt-3 flex justify-start items-center pl-1 pr-1 text-white"
-          >
-            <div class="text-[10px] mr-2">{{ $t("信用评分") }}:</div>
-            <div class="flex-auto">
-              <van-progress
-                color="rgb(137, 206, 79)"
-                :percentage="userInfo.creditScore"
-                :show-pivot="false"
-                stroke-width="8"
-              />
-            </div>
-            <div class="text-white text-[10px] ml-1">
-              {{ userInfo.creditScore }}%
-            </div>
-          </div>
-          <div
-            class="w-full flex items-center pt-4 pb-4 text-center box-border overflow-hidden mt-4"
+            class="w-full flex items-center  pb-4 text-center box-border overflow-hidden mt-2"
           >
             <div class="w-[50%] flex flex-col justify-center items-center">
               <div class="text-[#fff] text-[12px]">
                 {{ $t("钱包余额") }}
-                <div>(USD)</div>
               </div>
               <div class="text-xs text-[#fff] mt-1">
                 <span class="text-base font-semibold">{{
                   userInfo.totalBalance
-                }}</span>
+                }}USD</span>
               </div>
             </div>
-            <div class="w-[1px] h-8 bg-[#fff]"></div>
+            <div class="border-l h-[80px] border-white/30"></div>
             <div class="w-[50%] flex flex-col justify-center items-center">
               <div class="text-[#fff] text-[12px]">
                 {{ $t("当日佣金") }}
-                <div>(USD)</div>
               </div>
               <div class="text-xs text-[#fff] mt-1">
                 <span class="text-base font-semibold">{{
                   userInfo.commission
-                }}</span>
+                }}USD</span>
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
-
     <!-- 我的财务 -->
     <div class="flex flex-col w-[90%] mx-auto mt-2">
       <div class="mt-4 mb-4 text-[var(--main-color)] text-base font-semibold">
         {{ $t("我的财务") }}
       </div>
-      <div class="flex flex-col rounded-xl bg-[#fff]">
-        <div
-          class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
-          @click="toPage('/deposit')"
-        >
-          <div class="flex items-center justify-between w-full">
-            <div class="text-[#000] text-sm font-medium">
-              {{ $t("定金") }}
-            </div>
-            <van-icon name="arrow" size="22px" />
-          </div>
+      <div class="flex items-center justify-between">
+        <div class="px-[60px] py-[16px] bg-[#F9FAFB] rounded"  @click="toPage('/deposit')">
+          <img class="w-[32px]" src="@/static/images/qian.png" alt="">
+          <div class="pt-[8px]">{{ $t("定金") }}</div>
         </div>
-        <div
-          class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
-          @click="toPage('/withdraw')"
-        >
-          <div class="flex items-center justify-between w-full">
-            <div class="text-[#000] text-sm font-medium">
-              {{ $t("提取") }}
-            </div>
-            <van-icon name="arrow" size="22px" />
-          </div>
+        <div class="px-[60px] py-[16px] bg-[#F9FAFB] rounded" @click="toPage('/withdraw')">
+          <img class="w-[32px]" src="@/static/images/qian1.png" alt="">
+          <div class="pt-[8px]">{{ $t("提取") }}</div>
         </div>
       </div>
     </div>
@@ -124,81 +91,67 @@
       </div>
       <div class="flex flex-col rounded-xl bg-[#fff]">
         <div
-          class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
+          class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl"
           @click="toPage('/profileItem')"
         >
-          <div class="flex items-center justify-between w-full">
-            <div class="text-[#000] text-sm font-medium">
+          <div class="flex items-center justify-between w-full ">
+            <div class="flex text-[#000] text-sm font-medium ">
+              <img class="w-[18px] mr-[12px]" src="@/static/images/my1.png" alt="">
               {{ $t("个人信息") }}
             </div>
-            <van-icon name="arrow" size="22px" />
+            <van-icon name="arrow" color="#206645" size="18px" />
           </div>
         </div>
         <div
-          class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
+          class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl mt-3"
           @click="payMethod"
         >
           <div class="flex items-center justify-between w-full">
-            <div class="text-[#000] text-sm font-medium">
-              {{ $t("付款方式") }}
+            <div class="flex text-[#000] text-sm font-medium ">
+              <img class="w-[18px] mr-[12px]" src="@/static/images/my2.png" alt="">
+               {{ $t("付款方式") }}
             </div>
-            <van-icon name="arrow" size="22px" />
+            <van-icon name="arrow" color="#206645" size="18px" />
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- 其他 -->
-    <div class="flex flex-col w-[90%] mx-auto mt-2">
-      <div class="mt-4 mb-4 text-[var(--main-color)] text-base font-semibold">
-        {{ $t("其他") }}
-      </div>
-      <div class="flex flex-col rounded-xl bg-[#fff]">
         <div
-          class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
+          class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl mt-3"
           @click="customer"
         >
           <div class="flex items-center justify-between w-full">
-            <div class="text-[#000] text-sm font-medium">
-              {{ $t("联系我们") }}
+            <div class="flex text-[#000] text-sm font-medium ">
+              <img class="w-[18px] mr-[12px]" src="@/static/images/my3.png" alt="">
+               {{ $t("联系我们") }}
             </div>
             <van-icon name="arrow" size="22px" />
           </div>
         </div>
         <div
-          class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
+          class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl mt-3"
           @click="toPage('/notice')"
         >
           <div class="flex items-center justify-between w-full">
-            <div class="text-[#000] text-sm font-medium">
-              {{ $t("通知") }}
+            <div class="flex text-[#000] text-sm font-medium ">
+              <img class="w-[18px] mr-[12px]" src="@/static/images/my4.png" alt="">
+               {{ $t("通知") }}
             </div>
             <van-icon name="arrow" size="22px" />
           </div>
         </div>
         <div
-          class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
-          @click="logout"
-        >
-          <div class="flex items-center justify-between w-full">
-            <div class="text-[#000] text-sm font-medium">
-              {{ $t("登出") }}
-            </div>
-            <van-icon name="arrow" size="22px" />
-          </div>
-        </div>
-        <div
-          class="flex items-center justify-between p-4 pl-2 box-border border-b-[1px] border-[#ccc]"
+          class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl mt-3"
           @click="handleChangeLang"
         >
           <div class="flex items-center justify-between w-full">
-            <div class="text-[#000] text-sm font-medium">
-              {{ $t("更改语言") }}
+            <div class="flex text-[#000] text-sm font-medium ">
+              <img class="w-[18px] mr-[12px]" src="@/static/images/my4.png" alt="">
+               {{ $t("更改语言") }}
             </div>
             <van-icon name="arrow" size="22px" />
           </div>
         </div>
       </div>
+      <div @click="logout" class="w-full h-[40px] flex items-center justify-center bg-[#000000] rounded-xl text-white mt-[32px]">{{ $t("登出") }}</div>
     </div>
     <ContactUs ref="ContactUsRef"></ContactUs>
     <tradePassword ref="tradePasswordRef"></tradePassword>
@@ -244,7 +197,7 @@ const bgImage = new URL("@/static/images/profile_bg1.png", import.meta.url)
   .href;
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-import { copyContent } from '../../util/utils';
+import { copyContent } from "../../util/utils";
 const userStore = useUserStore();
 const url = import.meta.env.VITE_API_IMG_URL;
 const router = useRouter();
@@ -252,12 +205,12 @@ const userInfo = ref({});
 const avatarUrl = ref("");
 
 const bgMapStart = [
-  "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
-  "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png",
-   "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png",
-   "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png",
- "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png",
-]
+  new URL("@/static/images/bg_vipStart0.png", import.meta.url).href,
+  new URL("@/static/images/bg_vipStart1.png", import.meta.url).href,
+  new URL("@/static/images/bg_vipStart2.png", import.meta.url).href,
+  new URL("@/static/images/bg_vipStart3.png", import.meta.url).href,
+  new URL("@/static/images/bg_vipStart4.png", import.meta.url).href,
+];
 const toPage = (path) => {
   router.push({
     path: path,
@@ -268,9 +221,9 @@ const customer = () => {
 };
 const logout = () => {
   showConfirmDialog({
-    title: t('退出'),
+    title: t("退出"),
     message: t("确定要退出?"),
-    confirmButtonColor: '#007513', // 确认按钮颜色（红色示例）
+    confirmButtonColor: "#007513", // 确认按钮颜色（红色示例）
   })
     .then(() => {
       userStore.logout();
@@ -300,9 +253,13 @@ function handleChangeLang() {
   langRef.value.open();
 }
 
-const copy = (text) => {
-
+const onClickLeft = () =>{
+  router.replace({
+    path:"/"
+  })
 }
+
+const copy = (text) => {};
 onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;

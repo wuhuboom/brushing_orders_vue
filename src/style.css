@@ -125,7 +125,7 @@ input {
 }
 
 .van-nav-bar .van-icon,.van-nav-bar__title{
-  color: #007513 !important;
+  color: #206645 !important;
 }
 .van-cell,.van-cell-group {
   background: transparent !important;
@@ -133,4 +133,40 @@ input {
 .van-pull-refresh {
   height: 100%;
   overflow-y: auto;
+}
+
+.login-con .el-input__wrapper {
+  background:  #F9FAFB !important;
+  border: 1px solid #E5E7EB;
+}
+.register .el-input__wrapper {
+  background:  #F9FAFB !important;
+}
+.register .el-form-item--label-top .el-form-item__label {
+  color: #333333 !important;
+}
+.my-bor .van-nav-bar__content,.my-bor .van-nav-bar--fixed {
+  background: #206645 !important ;
+}
+.my-bor .van-nav-bar__title {
+  color: #fff !important;
+}
+.my-bor .van-nav-bar .van-icon, .my-bor .van-nav-bar__title {
+color: #fff !important;
+}
+.van-hairline--bottom:after {
+  border-bottom-width:0 !important;
+}
+
+.updataPass .van-field__label {
+  color: #206645;
+
+}
+.updataPass .van-field__value {
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid rgba(32,102,69,0.2);
+  height: 44px;
+  line-height: 44px;
+  padding-left: 5px;
 }

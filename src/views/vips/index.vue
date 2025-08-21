@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-white">
+  <div class="w-full min-h-[100vh] bg-[#F9FAFB]">
     <div
       class="w-full p-6 box-border flex flex-col font-montserrat text-[#666]"
     >
@@ -10,21 +10,17 @@
         @click-left="onClickLeft"
       />
       <div class="w-full mt-10 box-border flex flex-col">
-        <div class="w-full mb-4 p-4 rounded-lg bg-[#e8f7ec] flex items-center" v-for="item in levelList">
-            <div class="flex mr-4 w-20">
-                <img :src="bgMapStart[item.nameEn]" alt="">
-            </div>
+        <div class="w-full mb-4 p-4 rounded-lg bg-[#fff] flex items-center shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),_0px_0px_0px_0px_rgba(0,0,0,0),_0px_0px_0px_0px_rgba(0,0,0,0)]" v-for="item in levelList">
             <div class="flex flex-col flex-1">
-                <div class="flex items-center">
-                    <div class="text-base text-[#000] font-semibold mr-2">{{item.nameEn}}</div>
-                    <van-tag round type="primary" color="#007513" v-if="userStore.userInfo.levelId == item.id">{{$t('当前等级')}}</van-tag>
-                     <div class="text-sm text-[var(--main-color)] font-semibold mr-2 underline" @click="toUpgrade" v-if="userStore.userInfo.levelId != item.id">{{$t('立即升级')}}</div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                      <img :src="bgMapStart[item.nameEn]" class="w-[48px] h-[48px] mr-[6px]" alt="">
+                      <div class="text-base text-[#000] font-semibold mr-2">{{item.nameEn}}</div>
+                    </div>
+                    <div class="w-[93px] h-[36px] flex justify-center items-center  rounded-md text-white" :class="userStore.userInfo.levelId == item.id?'bg-[#9333EA]':'bg-[#206645]'">{{userStore.userInfo.levelId == item.id?$t('当前等级'):`USD ${item.price}`}}</div>
                 </div>
-                <div class="mt-2 text-[var(--main-color)] text-sm font-semibold">
-                    {{item.price}}{{$t('美元')}}
-                </div>
-                <div class="mt-2 text-xs text-[#000] font-light" v-html="item.descriptionEn">
-                    
+                <div class="mt-2 text-xs text-[#000] font-light custom-html" v-html="item.descriptionEn">
+              
                 </div>
             </div>
         </div>
@@ -40,12 +36,14 @@ import { showToast } from 'vant';
 import { useI18n } from "vue-i18n";
 const userStore = useUserStore()
 const { t } = useI18n();
+const more = new URL("@/static/images/more10.png", import.meta.url).href;
+
 const bgMapStart = {
-  VIP1: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png',
-  VIP2: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png',
-  VIP3: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png',
-  VIP4: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png',
-  VIP5: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png',
+  VIP1: new URL("@/static/images/vips1.png", import.meta.url).href,
+  VIP2: new URL("@/static/images/vips2.png", import.meta.url).href,
+  VIP3: new URL("@/static/images/vips3.png", import.meta.url).href,
+  VIP4: new URL("@/static/images/vips4.png", import.meta.url).href,
+  VIP5: new URL("@/static/images/vips5.png", import.meta.url).href,
 };
 const levelList = ref([]);
 const level = async () => {
@@ -54,7 +52,7 @@ const level = async () => {
   levelList.value.forEach(item => {
      if (item.descriptionEn) {
       // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
-      item.descriptionEn = item.descriptionEn.replace(/(●|•|&#8226;|&#9679;)/g, '<span class="small-dot">●</span>');
+      item.descriptionEn = item.descriptionEn.replace(/(●|•|&#8226;|&#9679;)/g, `<img src="${more}" class="inline-block w-[11px] h-[11px] mr-2" />`);
     }
   });
   
@@ -77,4 +75,22 @@ const onClickLeft = () => history.back();
   display: inline-block; /* 保证可以控制尺寸/对齐 */
   /* 如需更细微缩放也可用 transform: scale(0.8); */
 }
+.custom-html p{
+  line-height: 20px;
+  padding-bottom: 5px;
+  font-family: Inter, Inter;
+  font-weight: 400;
+  font-size: 14px;
+  color: #4B5563;
+}
+
+.custom-html li{
+  line-height: 20px;
+  padding-bottom: 5px;
+  font-family: Inter, Inter;
+  font-weight: 400;
+  font-size: 12px;
+  color: #4B5563;
+}
+
 </style>

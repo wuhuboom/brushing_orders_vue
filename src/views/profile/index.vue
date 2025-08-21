@@ -14,11 +14,11 @@
           <van-uploader v-model="fileList" :after-read="afterRead" reupload max-count="1" />
           <div class="text-[#666] text-sm mt-2 flex items-center">
             <div class="mr-1">{{$t('点击更改')}}</div>
-            <van-icon name="edit" />
+             <img src="@/static/images/edit.png" class="w-[16px] h-[16px]" alt="">
           </div>
 
-           <div class="w-full mt-4">
-                <van-button color="#007513" class="w-full" @click="updateAvatarMethods">{{$t('更新')}}</van-button>
+           <div class="w-[80%] fixed bottom-[30px]  mt-4">
+                <van-button color="#206645" class="w-full" @click="updateAvatarMethods">{{$t('更新')}}</van-button>
             </div>
         </div>
       </div>
@@ -37,9 +37,9 @@ const router = useRouter();
 const onClickLeft = () => router.replace('/profileItem');
 const { t } = useI18n();
 const userInfo = ref({})
-const fileList = ref([]);
 const avatarUrl = ref('')
-
+const user4 = new URL("@/static/images/user4.png", import.meta.url).href;
+const fileList = ref([]);
 const afterRead = async (file) => {
   try {
     // 1. 先上传文件
@@ -71,7 +71,8 @@ onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     console.log(userInfo.value.avatar)
-    fileList.value.push({ url: userInfo.value.avatar });
+  
+    fileList.value.push({ url: userInfo.value.avatar==null?user4:userInfo.value.avatar });
     avatarUrl.value = userInfo.value.avatar;
     console.log(fileList.value)
   });
