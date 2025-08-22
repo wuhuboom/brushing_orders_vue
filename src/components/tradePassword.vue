@@ -21,7 +21,7 @@
       </div>
       <div class="w-full mt-4">
         <van-button
-          color="#007513"
+          color="#206645"
           class="w-full"
           @click="submitTradePassword"
           >{{ $t("提交") }}</van-button

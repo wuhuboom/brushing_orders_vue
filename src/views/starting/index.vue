@@ -5,7 +5,7 @@
       <div class="w-full pt-6 flex justify-between">
         <div class="text-[#fff]">webworks</div>
         <img
-          src="@/static/images/user2.png"
+          src="@/static/images/user3.png"
           class="w-[24px]"
           alt=""
           @click="toMy"
@@ -132,16 +132,11 @@
                   @click="handleClick"
                 >
                   <div
-                    class="flex items-center justify-center overflow-hidden rounded-xl bg-cover text-lg text-white font-medium relative"
+                    class="flex items-center justify-center "
                   >
-                    <div class="overflow-hidden">
-                      <img
-                        src="@/static/images/start-button.png"
-                        class="w-[100%] shadow"
-                        alt=""
-                      />
-                      <div class="absolute"></div>
-                    </div>
+                  <div class="w-[104px] h-[84px] rounded-[10px] text-[#fff] text-[18px]" style="line-height: 84px; background: linear-gradient(180deg, #F97316  0%, #EA580C  100%);">
+                        DRAW
+                  </div>
                   </div>
                 </div>
                 <div
@@ -272,6 +267,8 @@
 import { onMounted, ref, onUnmounted } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 import {
   showLoadingToast,
   closeToast,
@@ -350,6 +347,9 @@ const submitForm = () => {
     }
   });
 };
+const toMy = ()=>{
+router.push({ path: "/my" });
+}
 
 onUnmounted(() => {
   // 清除定时器，防止组件卸载后还在请求

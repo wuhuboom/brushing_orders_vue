@@ -73,11 +73,11 @@
         {{ $t("我的财务") }}
       </div>
       <div class="flex items-center justify-between">
-        <div class="px-[60px] py-[16px] bg-[#F9FAFB] rounded"  @click="toPage('/deposit')">
+        <div class="px-[60px] py-[16px] bg-[#F9FAFB] rounded flex flex-col items-center"  @click="toPage('/deposit')">
           <img class="w-[32px]" src="@/static/images/qian.png" alt="">
           <div class="pt-[8px]">{{ $t("定金") }}</div>
         </div>
-        <div class="px-[60px] py-[16px] bg-[#F9FAFB] rounded" @click="toPage('/withdraw')">
+        <div class="px-[60px] py-[16px] bg-[#F9FAFB] rounded flex flex-col items-center" @click="toPage('/withdraw')">
           <img class="w-[32px]" src="@/static/images/qian1.png" alt="">
           <div class="pt-[8px]">{{ $t("提取") }}</div>
         </div>

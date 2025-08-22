@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-white">
+  <div class="container w-full min-h-[100vh] bg-[#f3f3f3]">
     <van-sticky type="primary">
       <van-nav-bar
         :title="$t('修改信息')"
@@ -9,51 +9,51 @@
       />
     </van-sticky>
     <div class="w-full p-6 box-border flex flex-col mt-10">
-      <div class="flex flex-col bg-[#e8f7ec]">
+      <div class="flex flex-col bg-[#fff] rounded-[20px]">
         <div
-          class="flex items-center justify-between p-4 box-border border-b-[2px] border-[#fff]"
+          class="flex items-center justify-between py-4 mx-[15px] box-border border-b-[1px] border-[#f3f3f3]"
           @click="toPage('/profile')"
         >
           <div class="flex items-center text-black text-sm font-medium">
             {{ $t("修改个人信息") }}
           </div>
-          <van-icon name="arrow" size="22px" />
+          <van-icon name="arrow" color="#206645" size="18px" />
         </div>
         <div
-          class="flex items-center justify-between p-4 box-border border-b-[2px] border-[#fff]"
+          class="flex items-center justify-between py-4 mx-[15px] box-border border-b-[1px] border-[#f3f3f3]"
         >
-          <div class="flex items-center text-black text-sm font-medium">
+          <div class="flex items-center text-[#666] text-sm">
             {{ $t("用户名") }}
           </div>
-          <div class="text-[#666] text-sm font-medium">{{userStore.userInfo.username}}</div>
+          <div class="text-black text-sm ">{{userStore.userInfo.username}}</div>
         </div>
         <div
-          class="flex items-center justify-between p-4 box-border border-b-[2px] border-[#fff]"
+          class="flex items-center justify-between py-4 mx-[15px] box-border border-b-[1px] border-[#f3f3f3]"
         >
-          <div class="flex items-center text-black text-sm font-medium">
+          <div class="flex items-center text-[#666] text-sm">
             {{ $t("电话") }}
           </div>
-          <div class="text-[#666] text-sm font-medium">{{userStore.userInfo.phone}}</div>
+          <div class="text-black text-sm ">{{userStore.userInfo.phone}}</div>
         </div>
       </div>
-      <div class="mt-4 flex flex-col bg-[#e8f7ec]">
+      <div class="mt-4 flex flex-col bg-[#fff] rounded-[20px]">
         <div
           class="flex items-center justify-between p-4 box-border border-b-[2px] border-[#fff]"
           @click="toPage('/updatePassword')"
         >
-          <div class="flex items-center text-black text-sm font-medium">
+          <div class="flex items-center text-black text-sm ">
             {{ $t("更新密码") }}
           </div>
-          <van-icon name="arrow" size="18px" />
+          <van-icon name="arrow" color="#206645" size="18px" />
         </div>
         <div
           class="flex items-center justify-between p-4 box-border border-b-[2px] border-[#fff]"
           @click="toPage('/updateTransactionPassword')"
           >
-          <div class="flex items-center text-black text-sm font-medium">
+          <div class="flex items-center text-black  text-sm">
             {{ $t("更新交易密码") }}
           </div>
-          <van-icon name="arrow" size="18px" />
+          <van-icon name="arrow" color="#206645" size="18px" />
         </div>
       </div>
     </div>
