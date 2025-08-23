@@ -71,7 +71,7 @@
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[var(--main-color)] font-bold mb-1">
-                  {{ userInfo.totalBalance }}
+                  {{ userInfo.frozenBalance }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
               </div>
