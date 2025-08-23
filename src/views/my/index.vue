@@ -123,7 +123,7 @@
               <img class="w-[18px] mr-[12px]" src="@/static/images/my3.png" alt="">
                {{ $t("联系我们") }}
             </div>
-            <van-icon name="arrow" size="22px" />
+            <van-icon name="arrow" color="#206645" size="18px" />
           </div>
         </div>
         <div
@@ -135,10 +135,10 @@
               <img class="w-[18px] mr-[12px]" src="@/static/images/my4.png" alt="">
                {{ $t("通知") }}
             </div>
-            <van-icon name="arrow" size="22px" />
+            <van-icon name="arrow" color="#206645" size="18px" />
           </div>
         </div>
-        <div
+        <!-- <div
           class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl mt-3"
           @click="handleChangeLang"
         >
@@ -149,7 +149,7 @@
             </div>
             <van-icon name="arrow" size="22px" />
           </div>
-        </div>
+        </div> -->
       </div>
       <div @click="logout" class="w-full h-[40px] flex items-center justify-center bg-[#000000] rounded-xl text-white mt-[32px]">{{ $t("登出") }}</div>
     </div>

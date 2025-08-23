@@ -1,12 +1,12 @@
 <template>
     <div class="w-full relative z-50">
-        <div class="h-[65px]"></div> <!-- 占位 -->
-        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[65px] w-full bg-[#007513] " style="bottom: -1px;">
+        <div class="h-[80px]"></div> <!-- 占位 -->
+        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[80px] w-full bg-white " style="bottom: -1px;">
             <div v-for="menu in menus" :key="menu.title"
                 class="flex-1 flex flex-col items-center text-xs gap-1 font-light"  @click="onClickMenu(menu)">
                 <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}.png`)"
                     alt="" class="h-7 w-7" :class="menu.title == $t('开始')?'starting':''">
-                <span  class="leading-normal text-[10px] text-white" style="font-size: 12px;">
+                <span  class="leading-normal text-[10px] " :class="name === menu.url?'text-[#4CAF50]':'text-[#6B7280]',menu.title == $t('开始')?'startingText':''" style="font-size: 12px;">
                     {{ menu.title }}
                 </span>
             </div>
@@ -49,8 +49,11 @@ function onClickMenu(menu) {
     box-shadow: 0px -1px 4px 0px #0000000D;
 }
 .starting {
-    margin-top: -2.7rem;
-    width: 4rem;
-    height: 4rem;
+    margin-top: -3rem;
+    width: 5.5rem;
+    height: 5.5rem;
+}
+.startingText {
+    margin-top: -1rem;
 }
 </style>

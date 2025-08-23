@@ -6,9 +6,9 @@
         style="line-height: 1"
       > -->
         <img
-          src="@/static/images/lang-white.png"
+          src="@/static/images/cur.png"
           alt=""
-          class="w-5 h-5 block object-contain"
+          class="w-[35px] h-[35px] block object-contain"
           @click="customer"
         />
         <!-- <div class="ml-2 uppercase font-bold leading-none" style="margin-top: -2px;">{{lang}}</div> -->
