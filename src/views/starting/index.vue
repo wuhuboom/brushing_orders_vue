@@ -239,6 +239,14 @@
         </div>
       </div>
     </van-popup>
+    <van-popup
+      v-model:show="showImg"
+      round
+      closeable
+      :style="{ width:'80%',background: 'transparent' }"
+    >
+      <img class="w-[100%]" src="../../static/images/super.png" alt="">
+    </van-popup>
   </div>
 </template>
 <script setup>
@@ -248,10 +256,12 @@ import Footer from "@/components/Footer.vue";
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
 import { useI18n } from "vue-i18n";
 import { userGetInfo, getGoodsList, createOrder,submitOrder } from "../../api/apis";
+import { tr } from "element-plus/es/locales.mjs";
 const url = import.meta.env.VITE_API_IMG_URL;
 const { t } = useI18n();
 const userInfo = ref({});
 const avatarUrl = ref("");
+const showImg = ref(false)
 
 let timer = null;
 const goodsList = ref([]);
@@ -282,24 +292,38 @@ const getImageByIndex = (i) => {
 
 // 抢单
 const handleClick = () => {
+  if(userInfo.value.cardNumber == userInfo.dealCount) {
+    showImg.value = true;
+    // 2. 延时 2 秒后关闭图片，并继续创建订单
+    setTimeout(() => {
+      showImg.value = false;
+      doCreateOrder();
+    }, 4000);
+
+    return;
+  }
+  // 不满足条件时，直接创建订单
+  doCreateOrder();
+};
+
+const doCreateOrder = () => {
   showLoadingToast({
     message: t("创建中..."),
     forbidClick: true,
-    duration: 0, // 不自动关闭，直到你手动关闭
+    duration: 0,
   });
+
   createOrder()
     .then((res) => {
-      closeToast(); // 关闭 loading
+      closeToast();
       showSuccessToast(t("创建成功"));
       showCenter.value = true;
       goods.value = res.data;
-
-      // 其他逻辑...
     })
     .catch((err) => {
-      console.log(err)
-      closeToast(); // 关闭 loading
-      showFailToast(err.msg);
+      console.log(err);
+      closeToast();
+      showFailToast(err.msg || "创建失败");
     });
 };
 
@@ -318,10 +342,6 @@ onUnmounted(() => {
   // 清除定时器，防止组件卸载后还在请求
   if (timer) clearTimeout(timer);
 });
-
-const getUserGetInfo = () =>{
-  
-}
 
 const orderCount = ref(0)
 onMounted(() => {
