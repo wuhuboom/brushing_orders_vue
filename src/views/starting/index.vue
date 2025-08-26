@@ -261,6 +261,13 @@
         </div>
       </div>
     </van-popup>
+    <van-popup
+      v-model:show="showImg"
+      round
+      :style="{ width:'80%',background: 'transparent' }"
+    >
+      <img class="w-[100%]" src="../../static/images/super.png" alt="">
+    </van-popup>
   </div>
 </template>
 <script setup>
@@ -290,6 +297,7 @@ const avatarUrl = ref("");
 let timer = null;
 const goodsList = ref([]);
 const showCenter = ref(false);
+const showImg = ref(false)
 const goods = ref({});
 const totalCount = ref(0); // 插入一个“开始按钮”
 const getList = async () => {
@@ -314,28 +322,46 @@ const getImageByIndex = (i) => {
   return goodsList.value[realIndex]?.coverUrl || "";
 };
 
+
 // 抢单
 const handleClick = () => {
+  if(userInfo.value.cardNumber == userInfo.value.dealCount) {
+    showImg.value = true;
+    // 2. 延时 2 秒后关闭图片，并继续创建订单
+    setTimeout(() => {
+      showImg.value = false;
+      doCreateOrder();
+    }, 2000);
+
+    return;
+  }
+  // 不满足条件时，直接创建订单
+  doCreateOrder();
+};
+
+const doCreateOrder = () => {
   showLoadingToast({
     message: t("创建中..."),
     forbidClick: true,
-    duration: 0, // 不自动关闭，直到你手动关闭
+    duration: 0,
   });
+
   createOrder()
     .then((res) => {
-      closeToast(); // 关闭 loading
+      closeToast();
       showSuccessToast(t("创建成功"));
       showCenter.value = true;
       goods.value = res.data;
-
-      // 其他逻辑...
     })
     .catch((err) => {
       console.log(err);
-      closeToast(); // 关闭 loading
-      showFailToast(err.msg);
+      closeToast();
+      showFailToast(err.msg || "创建失败");
     });
 };
+
+
+
 
 const submitForm = () => {
   submitOrder(goods.value.id).then((res) => {
