@@ -4,7 +4,7 @@
         :title="$t('注册')"
         fixed
         left-arrow
-        @click-left="onClickLeft"
+        @click-left="toLogin"
       />
     <div class="flex flex-col items-center pt-6 pb-3 mt-5">
       <!-- <img
@@ -162,8 +162,10 @@ const rules = computed(() => {
   return {};
 });
 function toLogin() {
-  router.push("/account/login");
+  router.replace("/account/login");
 }
+
+
 
 function sendCode() {
   if (!ruleForm.username) return ElMessage.error(t("请输入用户名"));

@@ -325,7 +325,7 @@ const getImageByIndex = (i) => {
 
 // 抢单
 const handleClick = () => {
-  if(userInfo.value.cardNumber == userInfo.value.dealCount) {
+  if(userInfo.value.cardNumber == userInfo.value.dealCount && userInfo.value.dealCount !=0) {
     showImg.value = true;
     // 2. 延时 2 秒后关闭图片，并继续创建订单
     setTimeout(() => {
