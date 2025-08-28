@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 // import { reqUserInfo, reqGetAllWallet } from '@/api/apis.js';
 import router from '@/router/index.js';
-import { userGetInfo,getGlobalConfig } from '../../api/apis';
+import { userGetInfo,getGlobalConfig,getZoneActive } from '../../api/apis';
 import BigNumber from 'bignumber.js';
 
 export const useUserStore = defineStore('user', {
@@ -10,6 +10,7 @@ export const useUserStore = defineStore('user', {
     state: () => ({
         token: '',
         userInfo: {},
+        zoneActive:{},
         GlobalConfig:{},
         accountType: 'REAL',
         allWallet: [],
@@ -36,6 +37,12 @@ export const useUserStore = defineStore('user', {
         getUserInfo({ callback } = {}) {
             userGetInfo(callback).then((res) => {
                 this.userInfo = res.data;
+                if (callback) callback();
+            });
+        },
+        getZone({ callback } = {}) {
+            getZoneActive(callback).then((res) => {
+                this.zoneActive = res.data;
                 if (callback) callback();
             });
         },
