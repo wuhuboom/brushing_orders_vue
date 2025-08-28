@@ -134,3 +134,22 @@ export const formatPhoneNumber = (input) => {
 
   return (prefix ? prefix + " " : "") + groups.join(" ");
 };
+
+export const formatWithTimezone = (timestamp, tzName) => {
+  const options = {
+    timeZone: tzName,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  };
+
+  // 拿到 parts（数组形式，每个部分拆开）
+  const parts = new Intl.DateTimeFormat("zh-CN", options).formatToParts(new Date(timestamp));
+  const get = (type) => parts.find(p => p.type === type)?.value || "";
+
+  return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
+};
+
