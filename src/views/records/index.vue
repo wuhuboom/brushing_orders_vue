@@ -34,7 +34,7 @@
               >
                 <div class="w-full flex justify-between items-center">
                   <div class="text-[#666] text-sm">
-                    {{ item.createTime }}
+                    {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
                   </div>
                   <div
                     class="text-xs p-1 rounded"
@@ -170,7 +170,7 @@
           <div class="flex justify-between items-center box-border">
             <div class="text-[#000] text-sm">{{ $t("创建时间") }}</div>
             <div class="text-[#000] text-sm font-bold">
-              {{ goodsData.createTime }}
+              {{ formatWithTimezone(goodsData.createTime,userStore.zoneActive.tzName)  }}
             </div>
           </div>
           <div class="flex justify-between items-center box-border">
@@ -201,6 +201,9 @@ import {
   showSuccessToast,
 } from "vant";
 import { useI18n } from "vue-i18n";
+import {formatWithTimezone} from "../../util/utils"
+import { useUserStore } from '@/store/modules/user';
+const userStore = useUserStore();
 const VITE_API_IMG_URL = import.meta.env.VITE_API_IMG_URL;
 const { t } = useI18n();
 const active = ref(0);

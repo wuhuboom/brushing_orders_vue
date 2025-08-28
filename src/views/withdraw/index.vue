@@ -111,7 +111,7 @@
                 <div class="bg-[#fff] flex justify-between items-center px-[16px] py-[16px] rounded-[10px] " :class="item.status==0?'activetab':item.status==1?'activetab1':item.status==2?'activetab2':''">
                   <div class="flex flex-col">
                     <div class="text-[#111827] text-[16px] pb-[4px]">-{{ item.amount }}USD</div>
-                    <div class="text-[#6B7280] text-[12px]">{{ item.applicationTime }}</div>
+                    <div class="text-[#6B7280] text-[12px]"> {{ formatWithTimezone(item.applicationTime,userStore.zoneActive.tzName)  }}</div>
                   </div>
                   <div :class="item.status==0?'text-[#15803D ]':item.status==1?'text-[#D97706]':'text-[#B91C1C]'">
                     {{
@@ -138,6 +138,7 @@ import {
   getTradeConfig,
   userGetInfo,
 } from "../../api/apis";
+import {formatWithTimezone} from "../../util/utils"
 import { useUserStore } from "@/store/modules/user";
 import {
   showLoadingToast,

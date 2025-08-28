@@ -22,6 +22,8 @@ const { locale } = useI18n();
 if (userStore.token){
   userStore.getUserInfo();
 } 
+
+userStore.getZone();
 if (commonStore.lang) locale.value = commonStore.lang;
 </script>
 

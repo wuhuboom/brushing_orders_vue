@@ -242,7 +242,7 @@
           <div class="flex justify-between items-center box-border">
             <div class="text-[#000] text-sm">{{ $t("创建时间") }}</div>
             <div class="text-[#000] text-sm font-bold">
-              {{ goods.createTime }}
+              {{ formatWithTimezone(goods.createTime,userStore.zoneActive.tzName)  }}
             </div>
           </div>
           <div class="flex justify-between items-center box-border mt-2">
@@ -275,6 +275,9 @@ import { onMounted, ref, onUnmounted } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
 import { useRouter } from "vue-router";
+import {formatWithTimezone} from "../../util/utils"
+import { useUserStore } from '@/store/modules/user';
+const userStore = useUserStore();
 const router = useRouter();
 import {
   showLoadingToast,

@@ -74,7 +74,7 @@
                 </div>
                 <div class="flex justify-between">
                   <div class="text-sm font-normal text-[#757575]">
-                    {{ item.createTime }}
+                    {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
                   </div>
                 </div>
               </div>
@@ -91,6 +91,7 @@ const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { onMounted, reactive, ref } from "vue";
 import { useUserStore } from "@/store/modules/user";
 import { getDeposit, userGetInfo } from "../../api/apis";
+import {formatWithTimezone} from "../../util/utils"
 const active = ref(0);
 const refreshing = ref(false);
 const finished = ref(false);
