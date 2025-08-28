@@ -221,7 +221,7 @@
         <div class="bg-[#d8d8d8] p-4">
           <div class="flex justify-between items-center box-border">
             <div class="text-[#000] text-sm">{{$t('创建时间')}}</div>
-            <div class="text-[#000] text-sm font-bold">{{goods.createTime}}</div>
+            <div class="text-[#000] text-sm font-bold">{{ formatWithTimezone(goods.createTime,userStore.zoneActive.tzName)  }}</div>
           </div>
           <div class="flex justify-between items-center box-border mt-2">
             <div class="whitespace-nowrap text-[#000] text-sm">
@@ -257,6 +257,9 @@ import { useI18n } from "vue-i18n";
 import { userGetInfo, getGoodsList, createOrder,submitOrder } from "../../api/apis";
 import { tr } from "element-plus/es/locales.mjs";
 const url = import.meta.env.VITE_API_IMG_URL;
+import {formatWithTimezone}  from '../../util/utils'
+import { useUserStore } from "@/store/modules/user";
+const userStore = useUserStore();
 const { t } = useI18n();
 const userInfo = ref({});
 const avatarUrl = ref("");

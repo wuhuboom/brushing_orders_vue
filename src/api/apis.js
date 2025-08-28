@@ -43,5 +43,5 @@ export const getTradeConfig = (params) => api.get(`/config/getTradeConfig`, { pa
 
 export const getNotice = (params) => api.get(`/config/getNotice/`+params.id, { params: params, loading: false, showMsg: false, })// 提交订单
 
-export const getZoneActive = (params) => api.get(`/config/getZoneActive/`, { params: params, loading: false, showMsg: false, })// 获取时区
+export const getZoneActive = (params) => api.get(`/config/getZoneActive`, { params: params, loading: false, showMsg: false, })// 获取时区
 

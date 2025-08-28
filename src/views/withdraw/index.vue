@@ -184,7 +184,7 @@
                     <div class="flex mt-1">
                       <div class="w-[50%]">{{ $t("创建时间") }}</div>
                       <div class="w-[50%] break-words">
-                        ：{{ item.applicationTime }}
+                        ：{{ formatWithTimezone(item.applicationTime,userStore.zoneActive.tzName)  }}
                       </div>
                     </div>
                   </div>
@@ -202,6 +202,7 @@ const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { getWithdrawals, withdrawal, getTradeConfig,userGetInfo } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
+import {formatWithTimezone}  from '../../util/utils'
 import {
   showLoadingToast,
   closeToast,

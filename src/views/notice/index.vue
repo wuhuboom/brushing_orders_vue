@@ -29,7 +29,7 @@
                
               </div>
               <div class="flex justify-between mt-3">
-                <div class="text-sm font-normal text-[#999999]">{{ item.createTime }}</div>
+                <div class="text-sm font-normal text-[#999999]">{{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}</div>
               </div>
             </div>
           </van-cell>
@@ -42,6 +42,9 @@
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { getNoticeList } from "../../api/apis";
 import { useRouter } from "vue-router";
+import {formatWithTimezone}  from '../../util/utils'
+import { useUserStore } from "@/store/modules/user";
+const userStore = useUserStore();
 const router = useRouter();
 const list = ref([]);
 const loading = ref(false);

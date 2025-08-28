@@ -50,7 +50,7 @@
                                 <div class="w-full h-[1px] my-4" style="border-bottom: 1px dashed rgb(255, 255, 255);"></div>
                                 <div class="w-full flex justify-between items-center">
                                     <div class="text-[#666] text-sm font-medium">
-                                        {{item.createTime}}
+                                        {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
                                     </div>
                                     <div class="text-white text-xs p-1  font-medium rounded" :class="item.status == '2'?'bg-[var(--main-color)]':item.status == '1'?'bg-[#F56C6C]':'bg-[var(--main-color)]'">
                                         {{item.status=='0'? $t('已完成'): item.status == '1'?$t('冻结'): $t('待提交')}}
@@ -89,7 +89,7 @@
             <div class="bg-[#d8d8d8] p-4">
                 <div class="flex justify-between items-center box-border">
                     <div class="text-[#000] text-sm">{{$t('创建时间')}}</div>
-                    <div class="text-[#000] text-sm font-bold">{{goodsData.createTime}}</div>
+                    <div class="text-[#000] text-sm font-bold">{{ formatWithTimezone(goodsData.createTime,userStore.zoneActive.tzName)  }}</div>
                 </div>
                 <div class="flex justify-between items-center box-border">
                     <div class="text-[#000] text-sm">{{$t('编号')}}</div>
@@ -111,6 +111,8 @@ import {getOrderInfos,submitOrder} from "../../api/apis";
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
 import { useI18n } from "vue-i18n";
 import {formatWithTimezone}  from '../../util/utils'
+import { useUserStore } from "@/store/modules/user";
+const userStore = useUserStore();
 const VITE_API_IMG_URL = import.meta.env.VITE_API_IMG_URL;
 const { t } = useI18n();
 const active = ref(0);
@@ -188,6 +190,7 @@ const swichTab = () =>{
 }
 onMounted(() =>{
     onLoad()
+    // console.log(userStore)
 })
 </script>
 <style scoped></style>
