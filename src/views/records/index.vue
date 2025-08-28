@@ -89,11 +89,11 @@
             <div class="bg-[#d8d8d8] p-4">
                 <div class="flex justify-between items-center box-border">
                     <div class="text-[#000] text-sm">{{$t('创建时间')}}</div>
-                    <div class="text-[#000] text-sm font-bold">{{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}</div>
+                    <div class="text-[#000] text-sm font-bold">{{ formatWithTimezone(goodsData.createTime,userStore.zoneActive.tzName)  }}</div>
                 </div>
                 <div class="flex justify-between items-center box-border">
                     <div class="text-[#000] text-sm">{{$t('编号')}}</div>
-                    <div class="text-[#000] text-sm font-bold">{{goodsData.createTime}}</div>
+                    <div class="text-[#000] text-sm font-bold">{{goodsData.orderNo}}</div>
                 </div>
             </div>
             <div class="w-full mt-4">
