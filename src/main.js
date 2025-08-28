@@ -20,13 +20,12 @@ const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-
-Locale.use('en-US', enUS);
 Locale.use('fr-FR', frFR);
 Locale.use('de-DE', deDE);
 Locale.use('it-IT', itIT);
 Locale.use('ko-KR', koKR);
 Locale.use('id-ID', idID);
+Locale.use('en-US', enUS);
 // 设置一个全局的图片上传路径import.meta.env.VITE_UPLOAD_URL
 app.config.globalProperties.$uploadUrl = import.meta.env.VITE_UPLOAD_URL;
 app.use(i18n); // 使用 Vue I18n

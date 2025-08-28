@@ -21,7 +21,7 @@
       <div class="text-white text-[24px] px-[23px] pb-[8px]">
         {{ userInfo.username }}
       </div>
-      <div class="text-white text-[14px] px-[23px]">
+      <div class="text-white text-[14px] px-[23px]" @click="copy(userInfo.inviteCode)">
         <span>{{ $t("邀请码") }}:</span>{{ userInfo.inviteCode }}
       </div>
       <div class="px-[23px]">

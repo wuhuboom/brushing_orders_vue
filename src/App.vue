@@ -8,6 +8,7 @@ import { useCommonStore } from '@/store/modules/common';
 import { useI18n } from 'vue-i18n';
 import BigNumber from 'bignumber.js';
 import { onUnmounted } from 'vue';
+import { useCurrentLang } from 'vant';
 // 在文件顶部添加BigNumber全局配置
 BigNumber.config({
   DECIMAL_PLACES: 10, // 全局设置保留10位小数
@@ -19,6 +20,8 @@ const userStore = useUserStore();
 const commonStore = useCommonStore();
 // commonStore.getSystemConfig();
 const { locale } = useI18n();
+const currentLang = useCurrentLang();
+console.log(currentLang.value); // --> 'zh-CN'
 if (userStore.token){
   userStore.getUserInfo();
 } 
