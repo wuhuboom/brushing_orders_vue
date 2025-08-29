@@ -4,6 +4,10 @@ import { ElMessage, ElLoading } from "element-plus";
 import pinia from "@/store/index.js";
 import { useUserStore } from "@/store/modules/user";
 import { useCommonStore } from "@/store/modules/common";
+import { errorMessages } from "./errorCodeMap";
+import i18n from "../i18n/index.js"; // 引入全局 i18n 实例
+// 获取 BASEPATH，确保 window.BASEPATH 存在
+const baseURL = window.VITE_API_BASE_URL ? window.VITE_API_BASE_URL :import.meta.env.VITE_API_BASE_URL; // 兜底默认值
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -68,7 +72,7 @@ api.interceptors.response.use(
         return Promise.reject(result);
       } else {
         console.log(config.showMsg)
-        if (config.showMsg) ElMessage({ message: result.msg, type: "error" });
+        if (config.showMsg) ElMessage({ message: i18n.global.t(errorMessages[result.code])|| result.msg , type: "error" });
         return Promise.reject(result);
       }
     }
