@@ -113,7 +113,7 @@ import { useI18n } from "vue-i18n";
 import {formatWithTimezone}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
 const userStore = useUserStore();
-const VITE_API_IMG_URL = import.meta.env.VITE_API_IMG_URL;
+const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 const { t } = useI18n();
 const active = ref(0);
 const list =  ref([]);

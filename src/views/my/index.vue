@@ -12,7 +12,7 @@
     >
       <div class="flex justify-between items-center p-[23px]">
         <img
-          :src="userInfo.avatar"
+          :src="userInfo.avatar==null?userImg:userInfo.avatar"
           class="w-[60px] h-[60px] rounded-full"
           alt=""
         />
@@ -193,13 +193,13 @@ const langRef = ref(null);
 const { t } = useI18n();
 const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
-const bgImage = new URL("@/static/images/profile_bg1.png", import.meta.url)
+const userImg = new URL("@/static/images/userImg.png", import.meta.url)
   .href;
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { copyContent } from "../../util/utils";
 const userStore = useUserStore();
-const url = import.meta.env.VITE_API_IMG_URL;
+const url = window.g.VITE_API_IMG_URL;
 const router = useRouter();
 const userInfo = ref({});
 const avatarUrl = ref("");

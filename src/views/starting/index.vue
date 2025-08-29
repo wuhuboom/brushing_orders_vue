@@ -292,7 +292,7 @@ import {
   createOrder,
   submitOrder,
 } from "../../api/apis";
-const url = import.meta.env.VITE_API_IMG_URL;
+const url = window.g.VITE_API_IMG_URL;
 const { t } = useI18n();
 const userInfo = ref({});
 const avatarUrl = ref("");
