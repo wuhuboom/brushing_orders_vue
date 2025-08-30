@@ -5,7 +5,7 @@
       <div class="w-[90%] mx-auto">
         <div class="w-[12rem] mx-auto relative" style="z-index: 19">
           <img
-            :src="userInfo.avatar"
+            :src="userInfo.avatar ==null?userImg:userInfo.avatar"
             class="w-[6rem] h-[6rem] mx-auto rounded-full"
             alt=""
           />
@@ -13,7 +13,7 @@
         <div
           class="w-full p-4 mt-[-3rem] pb-10 relative"
           :style="{
-            background: `url(${userImg}) 0 0 / 100% 100% no-repeat`,
+            background: `url(${bgImage}) 0 0 / 100% 100% no-repeat`,
           }"
         >
           <div class="text-white text-center absolute top-5 right-5">
@@ -240,7 +240,9 @@ const langRef = ref(null);
 const { t } = useI18n();
 const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
-const userImg = new URL("@/static/images/bg-3.png", import.meta.url)
+const userImg = new URL("@/static/images/userImg.png", import.meta.url)
+  .href;
+const bgImage = new URL("@/static/images/bg-3.png", import.meta.url)
   .href;
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
