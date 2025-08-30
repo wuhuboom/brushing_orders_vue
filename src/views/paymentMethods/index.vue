@@ -59,6 +59,9 @@ import { addWithdrawalMethod } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
+import {
+  showToast
+} from "vant";
 const userStore = useUserStore();
 const router = useRouter();
 const { t } = useI18n();
@@ -68,11 +71,11 @@ const form = reactive({
   withdrawType: "",
 });
 const submitForm = async () => {
-  if (!form.withdrawName) return ElMessage.error(t("请输入钱包名称"));
-  if (!form.withdrawAddress) return ElMessage.error(t("请输入网络"));
-  if (!form.withdrawAddress) return ElMessage.error(t("请输入地址"));
+  if (!form.withdrawName) return showToast(t("请输入钱包名称"));
+  if (!form.withdrawAddress) return showToast(t("请输入网络"));
+  if (!form.withdrawAddress) return showToast(t("请输入地址"));
   let res = await addWithdrawalMethod(form);
-  ElMessage({ message: t("添加成功"), type: "success" });
+  showToast(t("添加成功"))
   router.push({ path: "/my" });
 };
 

@@ -112,6 +112,8 @@ import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'va
 import { useI18n } from "vue-i18n";
 import {formatWithTimezone}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const userStore = useUserStore();
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 const { t } = useI18n();
@@ -171,6 +173,13 @@ const submitVal = () =>{
         }else {
             show.value = false;
         }
+    }).catch((err)=>{
+        if(err.code == 916) {
+            router.push('/deposit')
+
+        } else {
+            ElMessage({ message: err.status, type: "error" });
+        }  
     })
 
 }

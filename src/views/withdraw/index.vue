@@ -145,6 +145,7 @@ import {
   closeToast,
   showFailToast,
   showSuccessToast,
+  showToast
 } from "vant";
 import { useI18n } from "vue-i18n";
 const orderActive = ref(0);
@@ -209,8 +210,8 @@ const swichTab = (value) => {
   }
 };
 const getWithdrawal = () => {
-  if (!ruleForm.amount) return showFailToast(t("请输入金额"));
-  if (!ruleForm.tradePassword) return showFailToast(t("请输入交易密码"));
+  if (!ruleForm.amount) return showToast(t('请输入金额'));
+  if (!ruleForm.tradePassword) return showToast(t('请输入交易密码'));
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     router.push({ path: "/my" });
@@ -238,6 +239,7 @@ onMounted(() => {
   tradeConfig();
   userGetInfo().then((res) => {
     amount.value = res.data.balance;
+    ruleForm.amount = amount.value;
   });
 });
 </script>

@@ -79,7 +79,7 @@
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[#000] font-bold mb-1">
-                  {{ userInfo.totalBalance }}
+                  {{ userInfo.frozenBalance }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
               </div>
@@ -274,17 +274,7 @@
 import { onMounted, ref, onUnmounted } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
-import { useRouter } from "vue-router";
-import {formatWithTimezone} from "../../util/utils"
-import { useUserStore } from '@/store/modules/user';
-const userStore = useUserStore();
-const router = useRouter();
-import {
-  showLoadingToast,
-  closeToast,
-  showFailToast,
-  showSuccessToast,
-} from "vant";
+import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
 import { useI18n } from "vue-i18n";
 import {
   userGetInfo,
@@ -352,14 +342,14 @@ const doCreateOrder = () => {
   createOrder()
     .then((res) => {
       closeToast();
-      showSuccessToast(t("创建成功"));
+      showToast(t("创建成功"));
       showCenter.value = true;
       goods.value = res.data;
     })
     .catch((err) => {
       console.log(err);
       closeToast();
-      showFailToast(err.msg || "创建失败");
+      showToast(err.msg || "创建失败");
     });
 };
 
@@ -374,7 +364,14 @@ const submitForm = () => {
     } else {
       showCenter.value = false;
     }
-  });
+  }).catch((err) =>{
+    if(err.code == 916) {
+            router.push('/deposit')
+
+        } else {
+            ElMessage({ message: err.status, type: "error" });
+        }  
+  })
 };
 const toMy = ()=>{
 router.push({ path: "/my" });

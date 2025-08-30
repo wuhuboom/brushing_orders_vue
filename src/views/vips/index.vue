@@ -17,7 +17,7 @@
                       <img :src="bgMapStart[item.nameEn]" class="w-[48px] h-[48px] mr-[6px]" alt="">
                       <div class="text-base text-[#000] font-semibold mr-2">{{item.nameEn}}</div>
                     </div>
-                    <div class="w-[93px] h-[36px] flex justify-center items-center  rounded-md text-white" :class="userStore.userInfo.levelId == item.id?'bg-[#9333EA]':'bg-[#206645]'">{{userStore.userInfo.levelId == item.id?$t('当前等级'):`USD ${item.price}`}}</div>
+                    <div class="w-[93px] h-[36px] flex justify-center items-center  rounded-md text-white" @click="toUpgrade(item.id)" :class="userStore.userInfo.levelId == item.id?'bg-[#9333EA]':'bg-[#206645]'">{{userStore.userInfo.levelId == item.id?$t('当前等级'):`USD ${item.price}`}}</div>
                 </div>
                 <div class="mt-2 text-xs text-[#000] font-light custom-html" v-html="item.descriptionEn">
               
@@ -57,7 +57,11 @@ const level = async () => {
   });
   
 };
-const toUpgrade = () =>{
+const toUpgrade = (id) =>{
+  if(userStore.userInfo.levelId == id) {
+    return false
+  }
+  
 showToast(t('联系客服'));
 }
 onMounted(() => {

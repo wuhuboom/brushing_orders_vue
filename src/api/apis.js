@@ -36,7 +36,7 @@ export const getOrderInfos = (params) => api.get('/order/getOrderInfos', { param
 
 export const createOrder = (params) => api.get('/order/createOrder', { params: params, loading: false, showMsg: false, })// 创建新订单
 
-export const submitOrder = (params) => api.get(`/order/submitOrder/${params}`, { params: params, loading: false, showMsg: true, })// 提交订单
+export const submitOrder = (params) => api.get(`/order/submitOrder/${params}`, { params: params, loading: false, })// 提交订单
 
 export const getTradeConfig = (params) => api.get(`/config/getTradeConfig`, { params: params, loading: false, showMsg: false, })// 提交订单
 
