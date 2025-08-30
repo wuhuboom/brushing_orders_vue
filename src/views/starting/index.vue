@@ -262,6 +262,7 @@
     </van-popup>
     <van-popup
       v-model:show="showImg"
+      closeable
       round
       :style="{ width:'80%',background: 'transparent' }"
     >
@@ -326,10 +327,10 @@ const handleClick = () => {
   if(userInfo.value.cardNumber == userInfo.value.dealCount && userInfo.value.dealCount !=0) {
     showImg.value = true;
     // 2. 延时 2 秒后关闭图片，并继续创建订单
-    setTimeout(() => {
-      showImg.value = false;
-      doCreateOrder();
-    }, 2000);
+    // setTimeout(() => {
+    //   showImg.value = false;
+    //   doCreateOrder();
+    // }, 2000);
 
     return;
   }
