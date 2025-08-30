@@ -101,6 +101,7 @@ import Tabs from "@/components/Tabs.vue";
 import { useUserStore } from "@/store/modules/user";
 import ContactUs from "@/components/ContactUs.vue";
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
+import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
 import { useCommonStore } from '@/store/modules/common';
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
@@ -145,8 +146,8 @@ function toRegister() {
 function submitForm(formEl) {
   // if (!ruleForm.email) return accountType.value === 1 ? ElMessage.error(t("请输入邮箱")) : ElMessage.error(t("请输入手机号"));
   // 统一清除空格
-  if (!ruleForm.username) return ElMessage.error(t("请输入用户名/电话"));
-  if (!ruleForm.password) return ElMessage.error(t("请输入密码"));
+  if (!ruleForm.username) return showToast(t('请输入用户名/电话'));
+  if (!ruleForm.password) return showToast(t('请输入密码'));
   formEl.validate((valid) => {
     if (valid) {
       let data = {

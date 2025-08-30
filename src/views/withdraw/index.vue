@@ -202,12 +202,13 @@ const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { getWithdrawals, withdrawal, getTradeConfig,userGetInfo } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
-import {formatWithTimezone}  from '../../util/utils'
+import {formatWithTimezone} from '../../util/utils'
 import {
   showLoadingToast,
   closeToast,
   showFailToast,
   showSuccessToast,
+  showToast
 } from "vant";
 import { useI18n } from "vue-i18n";
 const orderActive = ref(0);
@@ -270,8 +271,8 @@ const swichTab = () => {
   }
 };
 const getWithdrawal = () => {
-  if (!ruleForm.amount) return showFailToast(t('请输入金额'));
-  if (!ruleForm.tradePassword) return showFailToast(t('请输入交易密码'));
+  if (!ruleForm.amount) return showToast(t('请输入金额'));
+  if (!ruleForm.tradePassword) return showToast(t('请输入交易密码'));
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     router.push({ path: "/my" });
@@ -298,6 +299,7 @@ onMounted( () => {
   tradeConfig();
   userGetInfo().then((res) => {
     amount.value = res.data.balance;
+    ruleForm.amount = amount.value;
   });
 });
 </script>

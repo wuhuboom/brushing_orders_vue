@@ -252,7 +252,7 @@
 import { onMounted, ref, onUnmounted } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
+import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
 import { useI18n } from "vue-i18n";
 import {formatWithTimezone}  from '../../util/utils'
 import {
@@ -299,7 +299,7 @@ const getImageByIndex = (i) => {
 
 // 抢单
 const handleClick = () => {
-  if(userInfo.value.cardNumber == userInfo.value.dealCount) {
+  if(userInfo.value.cardNumber == userInfo.value.dealCount && userInfo.value.cardNumber !=0) {
     showImg.value = true;
     // 2. 延时 2 秒后关闭图片，并继续创建订单
     setTimeout(() => {
@@ -323,14 +323,14 @@ const doCreateOrder = () => {
   createOrder()
     .then((res) => {
       closeToast();
-      showSuccessToast(t("创建成功"));
+      showToast(t("创建成功"));
       showCenter.value = true;
       goods.value = res.data;
     })
     .catch((err) => {
       console.log(err);
       closeToast();
-      showFailToast(err.msg || "创建失败");
+      showToast(err.msg || "创建失败");
     });
 };
 

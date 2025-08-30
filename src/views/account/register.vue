@@ -130,6 +130,7 @@ import Tabs from "@/components/Tabs.vue";
 import { register } from "../../api/apis";
 import { areas } from "@/config/area";
 import { formatPhoneNumber } from "../../util/utils";
+import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
 onMounted(() => {
   document.getElementById("app").style.background = "#fff";
 });
@@ -160,18 +161,18 @@ function toLogin() {
 }
 
 function sendCode() {
-  if (!ruleForm.username) return ElMessage.error(t("请输入用户名"));
-  if (!ruleForm.password) return ElMessage.error(t("请输入密码"));
-  if (!agentPassword.value) return ElMessage.error(t("请输入确认密码"));
+  if (!ruleForm.username) return showToast(t("请输入用户名"));
+  if (!ruleForm.password) return showToast(t("请输入密码"));
+  if (!agentPassword.value) return showToast(t("请输入确认密码"));
   if (agentPassword.value != ruleForm.password)
-    return ElMessage.error(t("两次密码不一致"));
+    return showToast(t("两次密码不一致"));
   // if (!ruleForm.phone) return ElMessage.error(t("请输入电话"));
   if (!/^[0-9]*$/.test(ruleForm.phone))
-    return ElMessage.error(t("请输入正确电话号码"));
-  if (!ruleForm.tradePassword) return ElMessage.error(t("请输入交易密码"));
-  if (!ruleForm.inviteCode) return ElMessage.error(t("请输入邀请码"));
+    return showToast(t("请输入正确电话号码"));
+  if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
+  if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));
   register(ruleForm).then((res) => {
-    ElMessage({ message: t("注册成功"), type: "success" });
+    showToast(t("注册成功"))
     router.push({
       path: "/account/login",
     });
