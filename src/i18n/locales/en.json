@@ -181,7 +181,7 @@
   "用户名不能为空": "Username cannot be empty",
   "用户不存在": "User does not exist",
   "该用户不允许抢单": "This user is not allowed to take orders",
-  "余额低于最低交易额度": "Balance is below the minimum transaction amount",
+  "余额低于最低交易额度": "There are pending orders",
   "存在未完成订单": "There is an unfinished order",
   "请稍后再试": "Please try again later",
   "今日可接单数已满": "The maximum number of orders for today has been reached",
@@ -197,6 +197,7 @@
 
   "无新的订单，订单提交成功": "No new orders, order submitted successfully",
   "用户存在连单，返回新的订单信息": "User has ongoing orders, returning new order information",
-  "用户余额不足（联系管理员，常用于冻结金额不足）": "Insufficient user balance (contact administrator, often due to insufficient frozen funds)"
+  "用户余额不足（联系管理员，常用于冻结金额不足）": "Insufficient user balance (contact administrator, often due to insufficient frozen funds)",
+  "我的": "My"
   
 }

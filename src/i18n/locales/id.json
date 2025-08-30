@@ -193,5 +193,6 @@
 
   "无新的订单，订单提交成功": "Tidak ada pesanan baru, pesanan berhasil dikirim",
   "用户存在连单，返回新的订单信息": "Pengguna memiliki pesanan berkelanjutan, mengembalikan informasi pesanan baru",
-  "用户余额不足（联系管理员，常用于冻结金额不足）": "Saldo pengguna tidak cukup (hubungi administrator, sering digunakan saat saldo beku tidak cukup)"
+  "用户余额不足（联系管理员，常用于冻结金额不足）": "Saldo pengguna tidak cukup (hubungi administrator, sering digunakan saat saldo beku tidak cukup)",
+  "我的": "Saya"
 }

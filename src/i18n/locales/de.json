@@ -193,5 +193,6 @@
 
   "无新的订单，订单提交成功": "Keine neue Bestellung, Bestellung erfolgreich übermittelt",
   "用户存在连单，返回新的订单信息": "Der Benutzer hat eine laufende Bestellung, neue Bestellinformationen werden zurückgegeben",
-  "用户余额不足（联系管理员，常用于冻结金额不足）": "Unzureichendes Benutzer-Guthaben (bitte Administrator kontaktieren, häufig bei unzureichendem eingefrorenem Betrag)"
+  "用户余额不足（联系管理员，常用于冻结金额不足）": "Unzureichendes Benutzer-Guthaben (bitte Administrator kontaktieren, häufig bei unzureichendem eingefrorenem Betrag)",
+  "我的": "Meine"
 }

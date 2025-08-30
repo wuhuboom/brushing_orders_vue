@@ -286,6 +286,7 @@ const userStore = useUserStore();
 import {formatWithTimezone} from "../../util/utils"
 import { useUserStore } from '@/store/modules/user';
 import { useRouter } from "vue-router";
+import { errorMessages } from "../../api/errorCodeMap";
 const router = useRouter();
 const { t } = useI18n();
 const userInfo = ref({});
@@ -353,7 +354,8 @@ const doCreateOrder = () => {
     .catch((err) => {
       console.log(err);
       closeToast();
-      showToast(err.msg || "创建失败");
+      
+      showToast(t(errorMessages[err.code] || "创建失败"));
     });
 };
 

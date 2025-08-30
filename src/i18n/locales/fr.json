@@ -193,5 +193,6 @@
 
   "无新的订单，订单提交成功": "Pas de nouvelle commande, commande soumise avec succès",
   "用户存在连单，返回新的订单信息": "L'utilisateur a une commande en cours, de nouvelles informations de commande sont renvoyées",
-  "用户余额不足（联系管理员，常用于冻结金额不足）": "Solde utilisateur insuffisant (veuillez contacter l'administrateur, souvent en cas de fonds gelés insuffisants)"
+  "用户余额不足（联系管理员，常用于冻结金额不足）": "Solde utilisateur insuffisant (veuillez contacter l'administrateur, souvent en cas de fonds gelés insuffisants)",
+  "我的": "Mon"
 }
