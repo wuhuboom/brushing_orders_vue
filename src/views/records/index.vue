@@ -50,7 +50,8 @@
                                 <div class="w-full h-[1px] my-4" style="border-bottom: 1px dashed rgb(255, 255, 255);"></div>
                                 <div class="w-full flex justify-between items-center">
                                     <div class="text-[#666] text-sm font-medium">
-                                        {{item.createTime}}
+                                        <!-- {{item.createTime}} -->
+                                        {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
                                     </div>
                                     <div class="text-white text-xs p-1  font-medium rounded" :class="item.status == '2'?'bg-[var(--main-color)]':item.status == '1'?'bg-[#F56C6C]':'bg-[var(--main-color)]'">
                                         {{item.status=='0'? $t('已完成'): item.status == '1'?$t('冻结'): $t('待提交')}}

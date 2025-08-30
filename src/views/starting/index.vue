@@ -125,8 +125,8 @@
         <div class="mt-5 flex flex-col p-4 box-border bg-[linear-gradient(180deg,_#FFFBEB_0%,_#FEF3C7_100%)] rounded-xl">
           <div class="flex flex-col box-border  rounded-xl">
             <div class="w-full grid grid-cols-3 gap-6">
-              <template v-for="(item, index) in totalCount" :key="index">
-                <div
+              <template v-for="(item, index) in goodsList" :key="index">
+                <!-- <div
                   v-if="index === 4"
                   class="grid-span-1 text-center text-xs font-normal"
                   @click="handleClick"
@@ -138,9 +138,8 @@
                         DRAW
                   </div>
                   </div>
-                </div>
+                </div> -->
                 <div
-                  v-else
                   class="grid-span-1 text-[#666666] text-center text-xs font-normal"
                 >
                   <div
@@ -162,7 +161,7 @@
                       /> -->
                       <van-image
                         fit="contain"
-                        :src="`${url}${getImageByIndex(index)}`"
+                        :src="`${url}${item.coverUrl}`"
                       />
                     </div>
                   </div>
@@ -172,7 +171,7 @@
           </div>
         </div>
 
-        <div class="mt-5 flex justify-center items-center text-black text-base h-[60px] bg-[#FACC15] rounded-[20px]">
+        <div class="mt-5 flex justify-center items-center text-black text-base h-[60px] bg-[#FACC15] rounded-[20px]" @click="handleClick">
           Start
             <span class="pl-2">({{
               userInfo.dealCount
@@ -278,11 +277,16 @@ import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   
 import { useI18n } from "vue-i18n";
 import {
   userGetInfo,
-  getGoodsList,
+  getGoodsListTwo,
   createOrder,
   submitOrder,
 } from "../../api/apis";
 const url = window.g.VITE_API_IMG_URL;
+const userStore = useUserStore();
+import {formatWithTimezone} from "../../util/utils"
+import { useUserStore } from '@/store/modules/user';
+import { useRouter } from "vue-router";
+const router = useRouter();
 const { t } = useI18n();
 const userInfo = ref({});
 const avatarUrl = ref("");
@@ -297,9 +301,9 @@ const getList = async () => {
   // let res = await getGoodsList();
   // goodsList.value = res.data;
   try {
-    const res = await getGoodsList();
+    const res = await getGoodsListTwo();
     goodsList.value = res.data;
-    totalCount.value = goodsList.value.length + 1; // 插入一个“开始按钮”
+    // totalCount.value = goodsList.value.length + 1; // 插入一个“开始按钮”
   } catch (e) {
     console.error("获取商品列表失败:", e);
   } finally {
@@ -359,6 +363,7 @@ const doCreateOrder = () => {
 const submitForm = () => {
   submitOrder(goods.value.id).then((res) => {
     showSuccessToast(t("提交成功"));
+    userGetInfoMethods()
     if (res.code == 201) {
       goods.value = res.data;
     } else {
@@ -382,15 +387,18 @@ onUnmounted(() => {
   if (timer) clearTimeout(timer);
 });
 
-const getUserGetInfo = () => {};
-
-const orderCount = ref(0);
-onMounted(() => {
-  getList();
-  userGetInfo().then((res) => {
+const userGetInfoMethods = () =>{
+userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     orderCount.value = res.data.userLevel.orderCount;
   });
+}
+
+const orderCount = ref(0);
+onMounted(() => {
+  getList();
+  userGetInfoMethods()
+  
 });
 </script>

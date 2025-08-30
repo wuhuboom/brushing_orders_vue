@@ -30,6 +30,8 @@ export const getDeposit = (params) => api.get('/account/getDeposit', { params: p
 
 export const getGoodsList = (params) => api.get('/goods/getGoodsList', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
 
+export const getGoodsListTwo = (params) => api.get('/goods/getGoodsListTwo', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
+
 export const getWithdrawals = (params) => api.get('/account/getWithdrawals', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
 
 export const getOrderInfos = (params) => api.get('/order/getOrderInfos', { params: params, loading: false, showMsg: false, })// 获取用户订单记录

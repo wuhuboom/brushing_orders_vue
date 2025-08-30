@@ -1,6 +1,7 @@
 // api.js
 import axios from "axios";
 import { ElMessage, ElLoading } from "element-plus";
+import { showConfirmDialog,showToast } from "vant";
 import pinia from "@/store/index.js";
 import { useUserStore } from "@/store/modules/user";
 import { useCommonStore } from "@/store/modules/common";
@@ -72,7 +73,7 @@ api.interceptors.response.use(
         return Promise.reject(result);
       } else {
         console.log(config.showMsg)
-        if (config.showMsg) ElMessage({ message: i18n.global.t(errorMessages[result.code])|| result.msg , type: "error" });
+        if (config.showMsg) showToast(i18n.global.t(errorMessages[result.code])|| result.msg);
         return Promise.reject(result);
       }
     }
@@ -81,7 +82,7 @@ api.interceptors.response.use(
       return Promise.reject(result);
     } else {
       if (config.showMsg)
-        ElMessage({ message: response.status, type: "error" });
+        showToast(response.status);
       return Promise.reject(response);
     }
   },
@@ -94,7 +95,7 @@ api.interceptors.response.use(
     if (error.status) {
       useUserStore().logout();
     }
-    if (config.showMsg) ElMessage({ message: error.message, type: "error" });
+    if (config.showMsg) showToast(error.message);
     return Promise.reject(error);
   }
 );

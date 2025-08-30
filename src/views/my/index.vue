@@ -188,7 +188,7 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import { userGetInfo, checkTradePassword } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
-import { showConfirmDialog } from "vant";
+import { showConfirmDialog,showToast } from "vant";
 const langRef = ref(null);
 const { t } = useI18n();
 const ContactUsRef = ref(null);
@@ -238,7 +238,7 @@ const payMethod = () => {
   tradePasswordRef.value.open(1);
 };
 const submitTradePassword = async () => {
-  if (!tradePassword.value) return ElMessage.error(t("请输入交易密码"));
+  if (!tradePassword.value) return showToast(t("请输入交易密码"));
   console.log(tradePassword.value);
   let ruleForm = {
     tradePassword: tradePassword.value,

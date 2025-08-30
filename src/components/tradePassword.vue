@@ -34,6 +34,7 @@
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { checkTradePassword } from "../api/apis";
+import { showToast   } from 'vant';
 const router = useRouter();
 const show = ref(false);
 const tradePassword = ref("");
@@ -45,7 +46,7 @@ const open = async (v) => {
 };
 
 const submitTradePassword = async () => {
-  if (!tradePassword.value) return ElMessage.error(t("请输入交易密码"));
+  if (!tradePassword.value) return showToast(t("请输入交易密码"));
   let ruleForm = {
     tradePassword: tradePassword.value,
   };
