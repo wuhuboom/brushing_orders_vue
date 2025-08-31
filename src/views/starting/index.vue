@@ -350,10 +350,11 @@ const doCreateOrder = () => {
       closeToast();
       showToast(t("创建成功"));
       showCenter.value = true;
+      userGetInfoMethods()
       goods.value = res.data;
     })
     .catch((err) => {
-      console.log(err);
+      console.log(errorMessages[err.code]);
       closeToast();
       
       showToast(t(errorMessages[err.code] || "创建失败"));
@@ -366,7 +367,7 @@ const doCreateOrder = () => {
 const submitForm = () => {
   submitOrder(goods.value.id).then((res) => {
     showSuccessToast(t("提交成功"));
-    userGetInfoMethods()
+   
     if (res.code == 201) {
       goods.value = res.data;
     } else {
