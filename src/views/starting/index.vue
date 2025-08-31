@@ -12,18 +12,24 @@
         />
       </div>
       <div class="w-full h-full py-5">
-        <div
-          class="flex justify-between mt-4 mb-4 items-center"
-        >
+        <div class="flex justify-between mt-4 mb-4 items-center">
           <div class="flex">
             <div class="flex items-center pl-2">
-              <div class="text-[#fff] ">
+              <div class="text-[#fff]">
                 <div class="text-xl">Hi, {{ userInfo.username }}</div>
-                <div class="text-[rgba(255,255,255,0.8)] text-sm text-inherits pt-2">Welcome back</div>
+                <div
+                  class="text-[rgba(255,255,255,0.8)] text-sm text-inherits pt-2"
+                >
+                  Welcome back
+                </div>
               </div>
             </div>
           </div>
-          <div class="text-[#fff] w-[62px] h-[36px] flex justify-center items-center bg-[rgba(255,255,255,0.2)] rounded-[20px]">VIP{{ userInfo.levelId }}</div>
+          <div
+            class="text-[#fff] w-[62px] h-[36px] flex justify-center items-center bg-[rgba(255,255,255,0.2)] rounded-[20px]"
+          >
+            VIP{{ userInfo.levelId }}
+          </div>
         </div>
       </div>
     </div>
@@ -122,8 +128,10 @@
             >/<span>{{ orderCount }}</span>
           </div>
         </div> -->
-        <div class="mt-5 flex flex-col p-4 box-border bg-[linear-gradient(180deg,_#FFFBEB_0%,_#FEF3C7_100%)] rounded-xl">
-          <div class="flex flex-col box-border  rounded-xl">
+        <div
+          class="mt-5 flex flex-col p-4 box-border bg-[linear-gradient(180deg,_#FFFBEB_0%,_#FEF3C7_100%)] rounded-xl"
+        >
+          <div class="flex flex-col box-border rounded-xl">
             <div class="w-full grid grid-cols-3 gap-6">
               <template v-for="(item, index) in goodsList" :key="index">
                 <!-- <div
@@ -171,20 +179,19 @@
           </div>
         </div>
 
-        <div class="mt-5 flex justify-center items-center text-black text-base h-[60px] bg-[#FACC15] rounded-[20px]" @click="handleClick">
+        <div
+          class="mt-5 flex justify-center items-center text-black text-base h-[60px] bg-[#FACC15] rounded-[20px]"
+          @click="handleClick"
+        >
           Start
-            <span class="pl-2">({{
-              userInfo.dealCount
-            }}</span
-            >/<span>{{ orderCount }})</span>
+          <span class="pl-2">({{ userInfo.dealCount }}</span
+          >/<span>{{ orderCount }})</span>
         </div>
       </div>
       <div class="w-[90%] mx-auto pt-5">
         <div class="mt-4 rounded-lg bg-[#FFFFFF]">
           <div class="flex flex-col p-4 box-border relative rounded-[10px]">
-            <div class="mb-1 text-base" style="color: black">
-              Notice
-            </div>
+            <div class="mb-1 text-base" style="color: black">Notice</div>
             <div class="text-[#6B7280] text-[12px]">
               Online Support Hours 10:00 - 22:59 <br />
               Please contact online support for your assistance!
@@ -241,7 +248,12 @@
           <div class="flex justify-between items-center box-border">
             <div class="text-[#000] text-sm">{{ $t("创建时间") }}</div>
             <div class="text-[#000] text-sm font-bold">
-              {{ formatWithTimezone(goods.createTime,userStore.zoneActive.tzName)  }}
+              {{
+                formatWithTimezone(
+                  goods.createTime,
+                  userStore.zoneActive.tzName
+                )
+              }}
             </div>
           </div>
           <div class="flex justify-between items-center box-border mt-2">
@@ -264,9 +276,9 @@
       v-model:show="showImg"
       closeable
       round
-      :style="{ width:'80%',background: 'transparent' }"
+      :style="{ width: '80%', background: 'transparent' }"
     >
-      <img class="w-[100%]" src="../../static/images/super.png" alt="">
+      <img class="w-[100%]" src="../../static/images/super.png" alt="" />
     </van-popup>
   </div>
 </template>
@@ -274,7 +286,13 @@
 import { onMounted, ref, onUnmounted } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
+import {
+  showLoadingToast,
+  closeToast,
+  showFailToast,
+  showSuccessToast,
+  showToast,
+} from "vant";
 import { useI18n } from "vue-i18n";
 import {
   userGetInfo,
@@ -284,8 +302,8 @@ import {
 } from "../../api/apis";
 const url = window.g.VITE_API_IMG_URL;
 const userStore = useUserStore();
-import {formatWithTimezone} from "../../util/utils"
-import { useUserStore } from '@/store/modules/user';
+import { formatWithTimezone } from "../../util/utils";
+import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";
 const router = useRouter();
@@ -296,7 +314,7 @@ const avatarUrl = ref("");
 let timer = null;
 const goodsList = ref([]);
 const showCenter = ref(false);
-const showImg = ref(false)
+const showImg = ref(false);
 const goods = ref({});
 const totalCount = ref(0); // 插入一个“开始按钮”
 const getList = async () => {
@@ -321,10 +339,12 @@ const getImageByIndex = (i) => {
   return goodsList.value[realIndex]?.coverUrl || "";
 };
 
-
 // 抢单
 const handleClick = () => {
-  if(userInfo.value.cardNumber == userInfo.value.dealCount && userInfo.value.dealCount !=0) {
+  if (
+    userInfo.value.cardNumber == userInfo.value.dealCount &&
+    userInfo.value.dealCount != 0
+  ) {
     showImg.value = true;
     // 2. 延时 2 秒后关闭图片，并继续创建订单
     // setTimeout(() => {
@@ -350,59 +370,66 @@ const doCreateOrder = () => {
       closeToast();
       showToast(t("创建成功"));
       showCenter.value = true;
-      userGetInfoMethods()
+      userGetInfoMethods();
       goods.value = res.data;
     })
     .catch((err) => {
       console.log(errorMessages[err.code]);
       closeToast();
-      
-      showToast(t(errorMessages[err.code] || "创建失败"));
+      if (err.code == 906) {
+        showToast("Transaction failed");
+      } else {
+        showToast(t(errorMessages[err.code] || "创建失败"));
+      }
     });
 };
 
-
-
-
 const submitForm = () => {
-  submitOrder(goods.value.id).then((res) => {
-    showSuccessToast(t("提交成功"));
-   userGetInfoMethods()
-    if (res.code == 201) {
-      goods.value = res.data;
-    } else {
-      showCenter.value = false;
-    }
-  }).catch((err) =>{
-    if(err.code == 916) {
-            router.push('/deposit')
-
+  submitOrder(goods.value.id)
+    .then((res) => {
+      showSuccessToast(t("提交成功"));
+      userGetInfoMethods();
+      if (res.code == 201) {
+        goods.value = res.data;
+      } else {
+        showCenter.value = false;
+      }
+    })
+    .catch((err) => {
+      if (err.code == 916) {
+        router.push("/deposit");
+      }
+      if (err.code == 906) {
+        if (userInfo.value.balance == 0) {
+          showToast("Transaction failed");
         } else {
-            ElMessage({ message: err.status, type: "error" });
-        }  
-  })
+          showToast(t(errorMessages[err.code] || "Failed to create"));
+        }
+      } else {
+        showToast(t(errorMessages[err.code] || "Failed to create"));
+      }
+    });
 };
-const toMy = ()=>{
-router.push({ path: "/my" });
-}
+const toMy = () => {
+  router.push({ path: "/my" });
+};
 
 onUnmounted(() => {
   // 清除定时器，防止组件卸载后还在请求
   if (timer) clearTimeout(timer);
 });
 
-const userGetInfoMethods = () =>{
-userGetInfo().then((res) => {
+const userGetInfoMethods = () => {
+  userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     orderCount.value = res.data.userLevel.orderCount;
   });
-}
+};
 
 const orderCount = ref(0);
 onMounted(() => {
   getList();
-  userGetInfoMethods()
-  
+  userGetInfoMethods();
 });
 </script>
