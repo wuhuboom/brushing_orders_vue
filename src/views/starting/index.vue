@@ -367,7 +367,7 @@ const doCreateOrder = () => {
 const submitForm = () => {
   submitOrder(goods.value.id).then((res) => {
     showSuccessToast(t("提交成功"));
-   
+   userGetInfoMethods()
     if (res.code == 201) {
       goods.value = res.data;
     } else {
