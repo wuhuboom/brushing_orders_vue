@@ -199,6 +199,6 @@
   "无新的订单，订单提交成功": "No new orders, order submitted successfully",
   "用户存在连单，返回新的订单信息": "User has ongoing orders, returning new order information",
   "用户余额不足（联系管理员，常用于冻结金额不足）": "Insufficient user balance (contact administrator, often due to insufficient frozen funds)",
-  "我的": "My"
-  
+  "我的": "My",
+  "请勾选用户协议":"Please tick and agree to the argeement" 
 }
