@@ -141,13 +141,12 @@ import {
 import {formatWithTimezone} from "../../util/utils"
 import { useUserStore } from "@/store/modules/user";
 import {
-  showLoadingToast,
-  closeToast,
-  showFailToast,
   showSuccessToast,
   showToast
 } from "vant";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const orderActive = ref(0);
 const active = ref(0);
 const list = ref([]);
@@ -156,6 +155,7 @@ const finished = ref(false);
 const loading = ref(false);
 const amount = ref("");
 const userStore = useUserStore();
+const userInfo = ref({})
 const { t } = useI18n();
 const query = reactive({
   pageNum: 1,
@@ -203,7 +203,6 @@ const All = () => {
   ruleForm.amount = amount.value;
 };
 const swichTab = (value) => {
-  console.log(11);
   active.value = value;
   if (active.value == 1) {
     onRefresh();
@@ -211,10 +210,21 @@ const swichTab = (value) => {
 };
 const getWithdrawal = () => {
   if (!ruleForm.amount) return showToast(t('请输入金额'));
+  if (ruleForm.amount<TradeInfor.value.minWithdrawAmount || ruleForm.amount>TradeInfor.value.maxWithdrawAmount) return showToast(
+    t("rechargeLimit", { 
+    min: TradeInfor.value.minWithdrawAmount, 
+    max: TradeInfor.value.maxWithdrawAmount 
+  })
+  );
   if (!ruleForm.tradePassword) return showToast(t('请输入交易密码'));
+  if(!userInfo.value.withdrawAddress) {
+    router.push({ path: "/paymentMethods" });
+    return false
+  }
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
-    router.push({ path: "/my" });
+    // router.push({ path: "/my" });
+    swichTab(1)
   });
 };
 const changeOrder = (value) => {
@@ -240,6 +250,7 @@ onMounted(() => {
   userGetInfo().then((res) => {
     amount.value = res.data.balance;
     ruleForm.amount = amount.value;
+    userInfo.value = res.data
   });
 });
 </script>

@@ -400,7 +400,7 @@ const submitForm = () => {
         router.push("/deposit");
       }
       if (err.code == 906) {
-        if (userInfo.value.balance == 0) {
+        if (userInfo.value.balance <= 0) {
           showToast("Transaction failed");
         } else {
           showToast(t(errorMessages[err.code] || "Failed to create"));
