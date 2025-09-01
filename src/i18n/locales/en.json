@@ -35,11 +35,11 @@
   "通知": "Notification",
   "登出": "Log out",
   "更改语言": "Change language",
-  "登入": "Login",
+  "登入": "Login Now",
   "输入您的用户名和密码以访问": "Enter your username and password to access",
   "用户名/电话": "Username/Phone",
   "密码": "Password",
-  "忘记密码": "Forgot password",
+  "忘记密码?": "Forgot password?",
   "登录": "Log in",
   "还没有账户?": "Don't have an account?",
   "立即注册": "Register now",
@@ -199,6 +199,8 @@
   "无新的订单，订单提交成功": "No new orders, order submitted successfully",
   "用户存在连单，返回新的订单信息": "User has ongoing orders, returning new order information",
   "用户余额不足（联系管理员，常用于冻结金额不足）": "Insufficient user balance (contact administrator, often due to insufficient frozen funds)",
-  "我的": "My"
+  "我的": "My",
+  "取消":"Cancel",
+  "注册1":"Register Now"
   
 }

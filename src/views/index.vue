@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="bg-[#f1f1f1]">
     <HeaderTop></HeaderTop>
-    <div class="w-full relative">
+    <!-- <div class="w-full relative">
       <div class="pb-4 pt-4 absolute top-5 w-full" style="z-index: 2">
         <div class="mx-auto pt-5">
           <div
@@ -11,18 +11,6 @@
             {{ $t("帮助小型企业盈利") }}
           </div>
         </div>
-        <!-- <div class="flex justify-center items-center mt-5">
-          <div
-            class="text-white mr-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
-          >
-            {{ $t("雇佣我们") }}
-          </div>
-          <div
-            class="text-white ml-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
-          >
-            {{ $t("与我们合作") }}
-          </div>
-        </div> -->
       </div>
       <div class="w-full absolute bottom-0 overflow-hidden">
         <van-notice-bar
@@ -38,11 +26,105 @@
 
       <img
         class="w-full h-[200px] object-cover"
-        src="@/static/images/bg.jpg"
+        src="@/static/images/bg.png"
         alt=""
       />
+    </div> -->
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+      <van-swipe-item>
+        <img
+          src="https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/marriott/1710172513828575829.png"
+          class="w-5 h-5"
+          alt="icon"
+        />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img
+          src="https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/marriott/1710172531651592383.png"
+          class="w-5 h-5"
+          alt="icon"
+        />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img
+          src="https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/marriott/171017253950534437.png"
+          class="w-5 h-5"
+          alt="icon"
+        />
+      </van-swipe-item>
+      <van-swipe-item>4</van-swipe-item>
+    </van-swipe>
+    <div class="w-full mt-[5px]">
+      <van-notice-bar color="#000" background="#fff" :text="pureNoticeContent">
+        <template #left-icon>
+          <img src="@/static/images/notice.png" class="w-7 h-7" alt="icon" />
+        </template>
+      </van-notice-bar>
     </div>
-    <div class="relative bg-white">
+    <!-- 菜单列表 -->
+    <div class="py-4 pb-2">
+      <div
+        class="flex justify-between items-center text-black w-[90%] mx-auto mt-2"
+      >
+        <div class="text-base font-bold">
+          Menu
+          <span class="text-[#ff9662]">List</span>
+          <div class="text-xs">MARRIOT BONVOY</div>
+        </div>
+      </div>
+      <div class="items-con flex p-4 pl-3 pr-3 font-light overflow-x-scroll">
+        <div
+          class="flex flex-col items-center justify-around box-border p-2 pl-4 pr-4 text-[#fff]"
+          :style="{
+            borderRadius: '10px',
+            background: `url(${item.icon_bg}) 0px 0px / 140px 100px no-repeat`,
+          }"
+          v-for="(item, index) in items"
+          :key="index"
+          @click="goTo(item.route)"
+        >
+          <div class="w-[120px] h-[80px] flex justify-start items-end">
+            <img
+              class="w-6 h-6 mr-2"
+              :src="item.icon"
+              alt=""
+            />
+            <span class="whitespace-nowrap text-xs mt-1 pb-1">{{$t(item.name)}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 产品介绍 -->
+    <div class="py-4 pb-2">
+      <div
+        class="flex justify-between items-center text-black w-[90%] mx-auto mt-2"
+      >
+        <div class="text-base font-bold">
+          Welcome to New Hotels
+          <div class="text-xs">Celebrate spring in style.</div>
+        </div>
+        
+      </div>
+      <van-swipe
+        class="my-swipe2"
+        :autoplay="3000"
+        indicator-color="white"
+        style="--van-swipe-slide-size: 160px;"
+        :loop="false"
+      >
+        <van-swipe-item v-for="item in 5" :key="item">
+          <van-image
+            width="160px"
+            height="210px"
+            fit="cover"
+            src="https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385264768284139520.png"
+          />
+          <span class="absolute left-5 bottom-5 text-white">Di-Ann City Centre Hotel</span>
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+
+    <div class="relati">
       <!-- 员工等级 -->
       <div class="w-full mx-auto">
         <div class="w-[90%] mx-auto">
@@ -86,7 +168,7 @@
         </div>
       </div>
       <!-- 菜单列表 -->
-      <div class="w-[95%] rounded-xl mx-auto flex flex-col">
+      <!-- <div class="w-[95%] rounded-xl mx-auto flex flex-col">
         <div class="pt-4 pr-4 pl-4 text-sm text-black">
           {{ $t("菜单列表") }}
         </div>
@@ -105,32 +187,35 @@
             </span>
           </div>
         </div>
-      </div>
-      
+      </div> -->
 
       <div class="w-full bg-[#F0F9FF] mb-[30px]">
-        <div class="test-[#333] text-center text-sm p-4 mb-3">Business Partner</div>
-        <img class="w-[90%] mx-auto" src="@/static/images/b.png" alt="" /> 
+        <div class="test-[#333] text-center text-sm p-4 mb-3">
+          Business Partner
+        </div>
+        <img class="w-[90%] mx-auto" src="@/static/images/b.png" alt="" />
       </div>
       <img class="w-full" src="@/static/images/a.png" alt="" />
 
-      
       <!-- <img class="w-full" src="@/static/images/b.png" alt="" /> -->
     </div>
 
     <!-- 行情结束 -->
     <Footer name="/"></Footer>
     <tradePassword ref="tradePasswordRef"></tradePassword>
+    <ContactUs ref="ContactUsRef"></ContactUs>
   </div>
 </template>
 <script setup>
 import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
+import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import { onMounted, ref, reactive, computed } from "vue";
 import { getLevel, getNoticeList } from "../api/apis";
 import { useRouter } from "vue-router";
 const tradePasswordRef = ref(null);
+const ContactUsRef = ref(null);
 
 const bgMap = {
   VIP1: "linear-gradient( 180deg, #FFFFFF 0%, #FEFCE8 100%)",
@@ -154,47 +239,56 @@ const bgMapStart = {
   VIP5: new URL("@/static/images/bg_vipStart4.png", import.meta.url).href,
 };
 
+
 const router = useRouter();
 
 const items = [
   {
-    name: "收入指南", // 用于 $t('收入指南')
-    icon: new URL("@/static/images/icon-0.png", import.meta.url).href,
-    route: "/guide",
+    name: "客服", // 用于 $t('收入指南')
+    icon: new URL("@/static/images/service1.png", import.meta.url).href,
+    icon_bg: new URL("@/static/images/icon_bg1.png", import.meta.url).href,
+    route: "/server",
   },
   {
     name: "事件",
-    icon: new URL("@/static/images/icon-3.png", import.meta.url).href,
+    icon: new URL("@/static/images/Event.png", import.meta.url).href,
+    icon_bg: new URL("@/static/images/icon_bg2.png", import.meta.url).href,
     route: "/event",
   },
   {
     name: "提款",
-    icon: new URL("@/static/images/icon-5.png", import.meta.url).href,
+    icon: new URL("@/static/images/Withdrawal.png", import.meta.url).href,
+    icon_bg: new URL("@/static/images/icon_bg3.png", import.meta.url).href,
     route: "/notifications",
   },
   {
     name: "定金",
-    icon: new URL("@/static/images/icon-7.png", import.meta.url).href,
+    icon: new URL("@/static/images/Deposit1.png", import.meta.url).href,
+    icon_bg: new URL("@/static/images/icon_bg4.png", import.meta.url).href,
     route: "/profile",
   },
   {
     name: "条款及细则", // 用于 $t('收入指南')
-    icon: new URL("@/static/images/icon-2.png", import.meta.url).href,
+    icon: new URL("@/static/images/T&C.png", import.meta.url).href,
+    icon_bg: new URL("@/static/images/icon_bg5.png", import.meta.url).href,
     route: "/clause",
   },
   {
     name: "证书",
-    icon: new URL("@/static/images/icon-4.png", import.meta.url).href,
+    icon: new URL("@/static/images/Certificate.png", import.meta.url).href,
+    icon_bg: new URL("@/static/images/icon_bg1.png", import.meta.url).href,
     route: "/cert",
   },
   {
     name: "常见问题解答",
-    icon: new URL("@/static/images/icon-6.png", import.meta.url).href,
+    icon: new URL("@/static/images/FAQs.png", import.meta.url).href,
+    icon_bg: new URL("@/static/images/icon_bg2.png", import.meta.url).href,
     route: "/faqs",
   },
   {
     name: "关于",
-    icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
+    icon: new URL("@/static/images/About.png", import.meta.url).href,
+    icon_bg: new URL("@/static/images/icon_bg3.png", import.meta.url).href,
     route: "/about",
   },
 ];
@@ -204,6 +298,8 @@ function goTo(path) {
     tradePasswordRef.value.open(2);
   } else if (path == "/profile") {
     tradePasswordRef.value.open(3);
+  } else if(path == "/server") {
+    ContactUsRef.value.open();
   } else {
     router.push(path);
   }
@@ -255,5 +351,26 @@ onMounted(() => {
   vertical-align: middle;
   display: inline-block; /* 保证可以控制尺寸/对齐 */
   /* 如需更细微缩放也可用 transform: scale(0.8); */
+}
+
+.my-swipe .van-swipe-item {
+  color: #fff;
+  font-size: 20px;
+  line-height: 360px;
+  text-align: center;
+  background-color: #39a9ed;
+}
+.my-swipe .van-swipe-item img {
+  width: 100%;
+  height: 100%;
+}
+.my-swipe2 .van-swipe-item {
+  width: 160px;
+  height: 210px;
+
+}
+.my-swipe2 .van-swipe-item img {
+  width: 100%;
+  height: 100%;
 }
 </style>

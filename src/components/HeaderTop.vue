@@ -1,10 +1,10 @@
 <template>
     <van-sticky type="primary">
       <div
-        class="w-full flex justify-between shadow-md items-center p-2  box-border bg-white"
+        class="w-full flex justify-between shadow-md items-center px-4 py-2 box-border bg-white"
       >
         <div class="w-[var(--header-logo-width)]" @click="jump">
-          <img class="w-full" src="@/static/images/logo.png" alt="" />
+          <img class="w-[80px] h-[46px]" src="@/static/images/logo.png" alt="" />
         </div>
         <div class="flex justify-start items-center">
           <!-- <div
@@ -14,8 +14,8 @@
             {{ $t("联系") }}
           </div> -->
           <img
-            src="@/static/images/user2.png"
-            class="w-[24px]"
+            src="@/static/images/me.png"
+            class="w-[32px]"
             alt=""
             @click="toMy"
           />

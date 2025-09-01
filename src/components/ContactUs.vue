@@ -4,8 +4,8 @@
     v-model:show="showCenter"
     :showConfirmButton="false"
     closeOnClickOverlay
-    cancelButtonColor="#005713"
-    width="240px"
+    cancelButtonColor="#ff9662"
+    width="95%"
   >
     <div class="flex flex-col rounded-xl overflow-hidden bg-white">
       <div
@@ -15,10 +15,13 @@
       >
         <div class="flex items-center" >
           <img src="@/static/images/service.png" alt="" class="w-6 h-6 mr-3" />
-          <div class="flex items-center">{{ item.name }}</div>
+          <div class="flex items-center text-[14px]">{{ item.name }}</div>
         </div>
-        <van-icon name="arrow" color="#aeb4eb" size="18px" />
+        <van-icon name="arrow" color="#1658b6" size="16px" />
       </div>
+    </div>
+    <div class="w-full flex items-center justify-center pt-3 pb-3" @click="close">
+      <span class="text-[var(--main-color)] text-sm text-[#ff9662]">{{$t('取消')}}</span>
     </div>
   </van-dialog>
   </div>
@@ -36,6 +39,7 @@ const open = async() =>{
   customerList.value = res.data
   console.log(customerList.value)
 }
+
 const close = () => (showCenter.value = false);
 
 const jump = (url) =>{

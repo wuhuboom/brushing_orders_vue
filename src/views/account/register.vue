@@ -1,12 +1,12 @@
 <template>
-  <div class="register flex flex-col w-full h-[100vh] bg-[#F5F7FA] p-5">
-    <van-nav-bar
+  <div class="register flex flex-col w-full h-[100vh] bg bg-cover">
+    <!-- <van-nav-bar
         :title="$t('注册')"
         fixed
         left-arrow
         @click-left="toLogin"
-      />
-    <div class="flex flex-col items-center pt-6 pb-3 mt-5">
+      /> -->
+    <div class="flex flex-col items-center  pb-3 ">
       <!-- <img
         src="@/static/images/account-lang.png"
         alt=""
@@ -24,15 +24,23 @@
       <div class="text-center text-xs text-white pt-4">
         {{ $t("为旧金山和爱丁堡各地的客户提供服务") }}
       </div> -->
+      <img
+        src="@/static/images/logo.png"
+        alt=""
+        class="w-[180px] mx-auto"
+      />
+      <div class="text-xl text-[#fff] font-semibold text-center py-4 pt-5">
+        {{ $t("注册1") }}
+      </div>
       <el-form
         ref="ruleFormRef"
         :model="ruleForm"
         status-icon
         :rules="rules"
         label-width="auto"
-        class="w-full bg-[#ffffff] p-5"
+        class="w-full p-8"
       >
-        <el-form-item :label="$t('用户名')" prop="username" label-position="top">
+        <el-form-item label="" prop="username" label-position="top">
           <el-input
             v-model="ruleForm.username"
             :placeholder="$t('用户名')"
@@ -40,9 +48,12 @@
             autocomplete="off"
             size="large"
           >
+          <template #prefix>
+            <div class="text-black">{{$t('用户名')}}</div>
+          </template>
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('密码')" prop="password" label-position="top">
+        <el-form-item label="" prop="password" label-position="top">
           <el-input
             v-model="ruleForm.password"
             :placeholder="$t('密码')"
@@ -50,9 +61,12 @@
             autocomplete="off"
             size="large"
           >
+          <template #prefix>
+            <div class="text-black">{{$t('密码')}}</div>
+          </template>
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('确认密码')" prop="agentPassword" label-position="top">
+        <el-form-item label="" prop="agentPassword" label-position="top">
           <el-input
             v-model="agentPassword"
             :placeholder="$t('确认密码')"
@@ -60,9 +74,12 @@
             autocomplete="off"
             size="large"
           >
+          <template #prefix>
+            <div class="text-black">{{$t('确认密码')}}</div>
+          </template>
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('电话')" prop="phone" label-position="top">
+        <el-form-item label="" prop="phone" label-position="top">
           <el-input
             v-model="ruleForm.phone"
             :placeholder="$t('电话')"
@@ -70,9 +87,12 @@
             autocomplete="off"
             size="large"
           >
+          <template #prefix>
+            <div class="text-black">{{$t('电话')}}</div>
+          </template>
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('交易密码')" prop="tradePassword" label-position="top">
+        <el-form-item label="" prop="tradePassword" label-position="top">
           <el-input
             v-model="ruleForm.tradePassword"
             :placeholder="$t('交易密码')"
@@ -80,18 +100,22 @@
             autocomplete="off"
             size="large"
           >
+          <template #prefix>
+            <div class="text-black">{{$t('交易密码')}}</div>
+          </template>
           </el-input>
         </el-form-item>
         <div
-          class="w-full mb-4 py-3  bg-[#fff] rounded-md"
+          class="w-full mb-4 py-3 flex justify-between items-center h-[57px]  rounded-md"
+          style="background: rgba(255, 255, 255, 0.5) !important;"
         >
-          <div class="text-sm  pb-5 text-[#333]">{{ $t("性别") }}</div>
-          <van-radio-group shape="dot" v-model="ruleForm.sex" direction="horizontal">
-            <van-radio :name="1" checked-color="#4070f7">{{ $t("男") }}</van-radio>
-            <van-radio :name="2" checked-color="#4070f7">{{ $t("女") }}</van-radio>
+          <div class="text-[#000] text-base font-bold pl-[15px]">{{ $t("性别") }}</div>
+          <van-radio-group v-model="ruleForm.sex" direction="horizontal">
+            <van-radio :name="1" checked-color="#ff9662">{{ $t("男") }}</van-radio>
+            <van-radio :name="2" checked-color="#ff9662">{{ $t("女") }}</van-radio>
           </van-radio-group>
         </div>
-        <el-form-item :label="$t('邀请码')" prop="inviteCode" label-position="top">
+        <el-form-item label="" prop="inviteCode" label-position="top">
           <el-input
             v-model="ruleForm.inviteCode"
             :placeholder="$t('邀请码')"
@@ -99,28 +123,37 @@
             autocomplete="off"
             size="large"
           >
+          <template #prefix>
+            <div class="text-[#ff9662]" style="font-weight: normal;">{{$t('邀请码')}}</div>
+          </template>
           </el-input>
         </el-form-item>
-        <van-checkbox checked-color='#4070f7' v-model="checked">
-          <span class='text-[#4B5563]  text-sm'>{{$t('我同意')}}</span>
-          <span class="ml-2 text-[#206645] text-sm underline" @click='jump'>{{$t('条款和条件')}}</span>
-        </van-checkbox>
+        <div
+          class="w-full mb-4 py-3 flex justify-between items-center  rounded-md h-[57px] pl-[15px]"
+          style="background: rgba(255, 255, 255, 0.5) !important;"
+        >
+          <van-checkbox checked-color='#ff9662' v-model="checked">
+            <span class='text-[#000] text-[16px] '>{{$t('我同意')}}</span>
+            <span class="ml-2 text-[#1b72e1] text-[16px] underline" @click='jump'>{{$t('条款和条件')}}</span>
+          </van-checkbox>
+        </div>
+        
         <div @click="sendCode" class="w-full" size="large" round>
           <div
-            class="w-full mt-5 text-white text-lg font-semibold mx-auto py-3 rounded-lg flex items-center justify-center bg-[#206645]"
+            class="w-full mt-5 text-white text-lg font-semibold mx-auto py-3 rounded-lg flex items-center justify-center bg-[#ff9662]"
           >
             <div>{{ $t("登记") }}</div>
-            <img class="w-[22px] ml-4" src="@/static/images/back1.png" alt="">
+            <!-- <img class="w-[22px] ml-4" src="@/static/images/back1.png" alt=""> -->
           </div>
         </div>
       </el-form>
       <div
-        class="w-full mt-4 text-sm"
+        class="w-full mt-10"
         @click="toLogin"
       >
-        <p class="text-sm text-center w-full pb-2" @click="toRegister">
+        <p class="text-center w-full pb-2" @click="toRegister">
           <!-- {{ $t("已有账户?")}} -->
-          <span class="text-[#206645]">{{ $t("立即登录") }}</span>
+          <span class="text-[#fff] underline text-[18px]">{{ $t("立即登录") }}</span>
         </p>
       </div>
     </div>
