@@ -1,24 +1,27 @@
 <template>
-  <div>
+  <div class="bg-[#f5f5f5]">
     <!-- <HeaderTop></HeaderTop> -->
-    <div class="w-full px-5 mx-auto bg-[#206645] rounded-b-[20px]">
-      <div class="w-full pt-6 flex justify-between">
-        <div class="text-[#fff]">webworks</div>
+      <div class="w-full flex justify-between items-center bg-[#fff] px-[15px] py-[8px]">
         <img
-          src="@/static/images/user3.png"
-          class="w-[24px]"
+          src="@/static/images/logo.png"
+          class="w-[80px]"
+          alt=""
+        />
+        <img
+          src="@/static/images/me.png"
+          class="w-[32px] h-[32px]"
           alt=""
           @click="toMy"
         />
       </div>
-      <div class="w-full h-full py-5">
+    <!-- <div class="w-full h-full py-5">
         <div class="flex justify-between mt-4 mb-4 items-center">
           <div class="flex">
             <div class="flex items-center pl-2">
-              <div class="text-[#fff]">
+              <div class="text-[#000]">
                 <div class="text-xl">Hi, {{ userInfo.username }}</div>
                 <div
-                  class="text-[rgba(255,255,255,0.8)] text-sm text-inherits pt-2"
+                  class="text-[#000] text-sm text-inherits pt-2"
                 >
                   Welcome back
                 </div>
@@ -26,15 +29,29 @@
             </div>
           </div>
           <div
-            class="text-[#fff] w-[62px] h-[36px] flex justify-center items-center bg-[rgba(255,255,255,0.2)] rounded-[20px]"
+            class="text-[#000] w-[62px] h-[36px] flex justify-center items-center bg-[rgba(255,255,255,0.2)] rounded-[20px]"
           >
             VIP{{ userInfo.levelId }}
           </div>
         </div>
+    </div> -->
+    <div class="flex justify-between mb-4 items-center w-[90%] mx-auto mt-5">
+      <div class="flex">
+        <img
+          :src="userInfo.avatar==null?userImg:userInfo.avatar"
+          class="w-[45px] h-[45px] rounded-full mr-5"
+          alt=""
+        />
+        <div class="flex items-center">
+          <div class="text-black font-semibold">hi</div>
+          <img src="../../static/images/welcome.png" class="w-5 ml-2" alt="">
+        </div>
+
       </div>
+      <div class="text-black font-semibold">vip4</div>
     </div>
 
-    <div class="w-full bg-[#f8f8f8] relative pt-10">
+    <div class="w-full bg-[#f8f8f8] relative pt-[4px]">
       <div class="w-[100%] px-4 mx-auto">
         <div class="grid grid-cols-1 gap-3">
           <div
@@ -57,7 +74,7 @@
                 </div>
               </div>
               <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[#000] font-bold mb-1">
+                <div class="text-sm text-[#ff9662] font-bold mb-1">
                   {{ userInfo.balance }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
@@ -84,14 +101,14 @@
                 </div>
               </div>
               <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[#000] font-bold mb-1">
+                <div class="text-sm text-[#ff9662] font-bold mb-1">
                   {{ userInfo.frozenBalance }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
               </div>
             </div>
           </div>
-          <div
+          <!-- <div
             class="w-full col-span-1 flex p-3 box-border rounded-xl bg-[#fff] border-[1px] border-[#EDEDEE]"
           >
             <div class="w-full flex justify-between">
@@ -117,17 +134,17 @@
                 <div class="text-[#999] text-xs">USD</div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
-        <!-- <div class="mt-5 flex justify-between text-black font-bold text-base">
+        <div class="mt-5 flex justify-between text-black font-bold text-base">
           <div>Start Optimization</div>
           <div>
-            <span class="text-[var(--main-color)]">{{
+            <span class="text-[#ff9662]">{{
               userInfo.dealCount
             }}</span
             >/<span>{{ orderCount }}</span>
           </div>
-        </div> -->
+        </div>
         <div
           class="mt-5 flex flex-col p-4 box-border bg-[linear-gradient(180deg,_#FFFBEB_0%,_#FEF3C7_100%)] rounded-xl"
         >
@@ -286,6 +303,8 @@
 import { onMounted, ref, onUnmounted } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
+const userImg = new URL("@/static/images/userImg.png", import.meta.url)
+  .href;
 import {
   showLoadingToast,
   closeToast,
