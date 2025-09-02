@@ -35,12 +35,13 @@
           </template>
         </van-notice-bar>
       </div>
+      <video src="https://videos.pexels.com/video-files/1448735/1448735-uhd_4096_2160_24fps.mp4" autoplay muted loop playsinline></video>
 
-      <img
+      <!-- <img
         class="w-full h-[200px] object-cover"
         src="@/static/images/bg.jpg"
         alt=""
-      />
+      /> -->
     </div>
     <div class="relative bg-white">
       <!-- 员工等级 -->
