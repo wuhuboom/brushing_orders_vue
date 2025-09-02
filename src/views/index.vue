@@ -97,56 +97,62 @@
     <!-- 产品介绍 -->
     <div class="py-4 pb-2">
       <div
-        class="flex justify-between items-center text-black w-[90%] mx-auto mt-2"
+        class="flex justify-between items-center text-black w-[90%] mx-auto mt-2 mb-3"
       >
         <div class="text-base font-bold">
           Welcome to New Hotels
           <div class="text-xs">Celebrate spring in style.</div>
         </div>
-        
       </div>
-      <van-swipe
-        class="my-swipe2"
-        :autoplay="3000"
-        indicator-color="white"
-        style="--van-swipe-slide-size: 160px;"
+      <div class="px-[10px]">
+        <van-swipe
+        :autoplay="1500"
+        :show-indicators="false"
         :loop="false"
-      >
-        <van-swipe-item v-for="item in 5" :key="item">
-          <van-image
-            width="160px"
-            height="210px"
-            fit="cover"
-            src="https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385264768284139520.png"
-          />
-          <span class="absolute left-5 bottom-5 text-white">Di-Ann City Centre Hotel</span>
-        </van-swipe-item>
+        :width="170"  
+        >
+          <van-swipe-item
+            v-for="item in vanList"
+            :key="item"
+            class="relative pr-[10px]" 
+          >
+            <van-image
+              width="160px"
+              height="210px"
+              fit="cover"
+              :src="item.img"
+            />
+            <span class="absolute left-2 bottom-2 text-white text-sm">
+              {{item.name}}
+            </span>
+          </van-swipe-item>
       </van-swipe>
+      </div>
+      
     </div>
 
-    <div class="relati">
+    <div class="relati mb-[50px]">
       <!-- 员工等级 -->
       <div class="w-full mx-auto">
         <div class="w-[90%] mx-auto">
           <div class="flex justify-between pt-4 pb-2 text-base text-black">
-            <div class="w-[35%]">{{ $t("员工等级") }}</div>
+            <div class="w-[35%] font-bold">{{ $t("员工等级") }}</div>
             <div
               @click="toVips"
               class="w-[65%] font-normal text-xs text-[var(--main-color)] text-right flex justify-end items-center"
             >
               <div class="mr-[3px]">{{ $t("查看更多") }}</div>
-              <van-icon name="arrow" color="#4CAF50" />
-              <!-- <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" /> -->
+              <!-- <van-icon name="arrow" color="#4CAF50" /> -->
+              <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" />
             </div>
           </div>
         </div>
-        <div class="items-con flex overflow-x-scroll p-4">
+        <!-- <div class="items-con flex overflow-x-scroll p-4">
           <div
             v-for="item in levelList"
-            class="vip-item flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
+            class="vip-item flex flex-col box-border rounded-xl p-4 mr-3"
             :style="{
-              background: `${bgMap[item.nameEn]}`,
-              border: `1px solid ${borderMap[item.nameEn]}`,
+              background: `url(${bgMap[item.nameEn]}) 0px 0px / 140px 100px no-repeat`,
             }"
           >
             <div class="flex justify-between items-start">
@@ -163,6 +169,19 @@
                 class="w-[260px] text-xs mt-2 text-black"
                 v-html="item.descriptionEn"
               ></p>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="items-con flex overflow-x-scroll p-4">
+          <div class="flex flex-col box-border rounded-xl p-4 mr-3" v-for="item in levelList" 
+            :style="{
+              background: `url(${bgMap[item.nameEn]}) 0px 0px / 100% 100% no-repeat`,
+            }">
+            <img class="w-16 h-16" :src="bgMapStart[item.nameEn]" alt="">
+            <div class="font-bold text-[16px] text-[#0C2D54]">{{ $t(item.nameZh) }}</div>
+            <div class="w-36">
+              <div class="w-32 text-xs mt-3 font-light text-[#0C2D54]" v-html="item.descriptionEn"></div>
             </div>
           </div>
         </div>
@@ -188,14 +207,14 @@
           </div>
         </div>
       </div> -->
-
+<!-- 
       <div class="w-full bg-[#F0F9FF] mb-[30px]">
         <div class="test-[#333] text-center text-sm p-4 mb-3">
           Business Partner
         </div>
         <img class="w-[90%] mx-auto" src="@/static/images/b.png" alt="" />
       </div>
-      <img class="w-full" src="@/static/images/a.png" alt="" />
+      <img class="w-full" src="@/static/images/a.png" alt="" /> -->
 
       <!-- <img class="w-full" src="@/static/images/b.png" alt="" /> -->
     </div>
@@ -218,10 +237,10 @@ const tradePasswordRef = ref(null);
 const ContactUsRef = ref(null);
 
 const bgMap = {
-  VIP1: "linear-gradient( 180deg, #FFFFFF 0%, #FEFCE8 100%)",
-  VIP2: "linear-gradient( 180deg, #FFFFFF 0%, #EFF6FF 100%)",
-  VIP3: "linear-gradient( 180deg, #FFFFFF 0%, #F5F3FF 100%)",
-  VIP4: "linear-gradient( 180deg, #FFFFFF 0%, #ECFDF5 100%)",
+  VIP1: new URL("@/static/images/vip_bg1.png", import.meta.url).href,
+  VIP2: new URL("@/static/images/vip_bg1.png", import.meta.url).href,
+  VIP3: new URL("@/static/images/vip_bg1.png", import.meta.url).href,
+  VIP4: new URL("@/static/images/vip_bg2.png", import.meta.url).href,
   VIP5: "linear-gradient( 180deg, #FFFFFF 0%, #FDF2F8 100%)",
 };
 const borderMap = {
@@ -232,12 +251,47 @@ const borderMap = {
   VIP5: "#FBCFE8",
 };
 const bgMapStart = {
-  VIP1: new URL("@/static/images/bg_vipStart0.png", import.meta.url).href,
-  VIP2: new URL("@/static/images/bg_vipStart1.png", import.meta.url).href,
-  VIP3: new URL("@/static/images/bg_vipStart2.png", import.meta.url).href,
-  VIP4: new URL("@/static/images/bg_vipStart3.png", import.meta.url).href,
+  VIP1: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135431630339970.png',
+  VIP2: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135431630339970.png',
+  VIP3: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135461467660218.png',
+  VIP4: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135471230297283.png',
   VIP5: new URL("@/static/images/bg_vipStart4.png", import.meta.url).href,
 };
+
+const vanList = [
+  {
+    name:'Pan Pacific',
+    img:'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385275613579878400.png'
+  },
+  {
+    name:'Holiday Inn Express & Suites At Seaworld',
+    img:'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385266569653821440.png'
+  },
+  {
+    name:'Hilton City Santa Fe',
+    img:'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385266668555509760.png'
+  },
+  {
+    name:'Mowbray Court Hotel',
+    img:'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385277575801118720.png'
+  },
+  {
+    name:'Biz Cevahir Hotel Sultanahmet',
+    img:'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385287369291243520.png'
+  },
+   {
+    name:'Country Mile Escape',
+    img:'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385269376146513920.png'
+  },
+  {
+    name:'Di-Ann City Centre Hotel',
+    img:'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385264768284139520.png'
+  },
+  {
+    name:'Campus Boutique Hotel',
+    img:'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385271272391352320.png'
+  }
+]
 
 
 const router = useRouter();
