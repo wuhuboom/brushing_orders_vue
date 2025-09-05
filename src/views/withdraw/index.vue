@@ -8,7 +8,7 @@
         @click-left="onClickLeft"
       />
     </van-sticky>
-    <div
+    <!-- <div
       class="bg-white mt-[65px] flex justify-between items-center py-[15px] px-[73px] text-[#6B7280]"
     >
       <div class="tab" :class="{ active: active === 0 }" @click="swichTab(0)">
@@ -17,29 +17,32 @@
       <div class="tab" :class="{ active: active === 1 }" @click="swichTab(1)">
         {{ $t("历史") }}
       </div>
-    </div>
+    </div> -->
+
+    <van-tabs color="#ff9662" class="mt-[45px]"  @change="swichTab" v-model:active="active">
+      <van-tab :title="$t('提取')"></van-tab>
+      <van-tab :title="$t('历史')"></van-tab>
+    </van-tabs>
     <div v-if="active === 0">
       <div class="p-4 box-border flex flex-col">
         <div
-          class="flex flex-col justify-between p-4 box-border rounded-[15px]"
-          :style="{
-            background: 'linear-gradient( 180deg, #206645 0%, #1A533A 100%)',
-          }"
+          class="flex flex-col justify-between p-4 box-border rounded-xl bg-[url(@/static/images/bg3.png)] bg-cover shadow mb-4"
+          style="background-size: 100% 100%"
         >
-          <div class="text-white opacity-70 text-sm">
+          <div class="text-white font-bold text-sm">
             {{ $t("账户金额") }}
           </div>
           <div class="flex mt-4">
-            <div class="text-white text-3xl  flex items-center">
+            <div class="text-white font-bold text-[34px] text-bold flex items-center">
               {{ amount }}
             </div>
             <div
-              class="text-white text-sm flex items-center ml-2 pt-[12px]"
+              class="text-white font-bold text-sm flex items-center ml-1 pt-[12px]"
             >
               {{ $t("美元") }}
             </div>
           </div>
-          <div class="text-white opacity-70 text-xs pt-4 pb-2">
+          <div class="text-white font-bold text-xs pt-4 ">
             {{ $t("您将在一小时内收到提款") }}
           </div>
         </div>
@@ -50,7 +53,7 @@
         status-icon
         :rules="rules"
         label-width="auto"
-        class="w-full mt-4 p-4"
+        class="w-full p-4"
       >
         <el-form-item
           :label="$t('提款金额')"
@@ -69,7 +72,7 @@
               <el-button
                 type="primary"
                 class="router"
-                style="background: #206645; border-color: #005713;height: 100%;color: #fff;"
+                style="background: #ff9662; border-color: #ff9662;height: 100%;color: #fff;"
                 @click="All"
               >
                 {{ $t("全部") }}
@@ -89,16 +92,16 @@
         </el-form-item>
       </el-form>
       <div class="w-full pl-5 pr-5">
-        <van-button color="#206645" @click="getWithdrawal" class="w-full">{{
+        <van-button color="#ff9662" @click="getWithdrawal" class="w-full">{{
           $t("提取")
         }}</van-button>
       </div>
     </div>
     <div class="w-[90%] mx-auto" v-else>
-      <div class="flex justify-start mb-[16px] mt-[24px]">
-        <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==0?'bg-[#DCFCE7] text-[#166534]':''" @click="changeOrder(0)">{{$t('待审核')}}</div>
-        <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==1?'bg-[#DCFCE7] text-[#166534]':''" @click="changeOrder(1)">{{$t('审核成功')}}</div>
-        <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==2?'bg-[#DCFCE7] text-[#166534]':''" @click="changeOrder(2)">{{$t('审核拒绝')}}</div>
+      <div class="flex justify-start mb-[16px] mt-[24px] bg-[#e3e3e3]  leading-[40px] border text-[16px] border-[#ff9662]">
+        <div class="flex-1 flex items-center justify-center px-[16px] " :class="orderActive==0?'bg-[#ff9662] text-[#fff]':'text-[#ff9662]'" @click="changeOrder(0)">{{$t('待审核')}}</div>
+        <div class="flex-1 flex items-center justify-center px-[16px]  " :class="orderActive==1?'bg-[#ff9662] text-[#fff]':'text-[#ff9662]'" @click="changeOrder(1)">{{$t('审核成功')}}</div>
+        <div class="flex-1 flex items-center justify-center px-[16px] " :class="orderActive==2?'bg-[#ff9662] text-[#fff]':'text-[#ff9662]'" @click="changeOrder(2)">{{$t('审核拒绝')}}</div>
       </div>
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
             <van-list
@@ -258,13 +261,21 @@ onMounted(() => {
 .withdraw .el-input__wrapper {
   border: 1px solid #E5E7EB;
 }
+.van-tabs--card>.van-tabs__wrap {
+  line-height: 40px !important;
+  height: 40px !important;
+}
+.van-tab {
+  line-height: 40px !important;
+
+}
 </style>
 <style scoped>
 .router {
-  border-top-right-radius: 8px;   /* 右上角圆角 */
-border-bottom-right-radius: 8px; /* 右下角圆角 */
-border-top-left-radius: 0;      /* 左上角不圆 */
-border-bottom-left-radius: 0;   /* 左下角不圆 */
+  border-top-right-radius: 8px;   
+border-bottom-right-radius: 8px; 
+border-top-left-radius: 0;      
+border-bottom-left-radius: 0;  
 }
 .tab {
   position: relative;

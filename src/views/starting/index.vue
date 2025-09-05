@@ -39,16 +39,16 @@
       <div class="flex">
         <img
           :src="userInfo.avatar==null?userImg:userInfo.avatar"
-          class="w-[45px] h-[45px] rounded-full mr-5"
+          class="w-[45px] h-[45px] rounded-full mr-3"
           alt=""
         />
         <div class="flex items-center">
-          <div class="text-black font-semibold">hi</div>
+          <div class="text-black font-semibold">Hi, {{ userInfo.username }}</div>
           <img src="../../static/images/welcome.png" class="w-5 ml-2" alt="">
         </div>
 
       </div>
-      <div class="text-black font-semibold">vip4</div>
+      <div class="text-black font-semibold">VIP{{ userInfo.levelId }}</div>
     </div>
 
     <div class="w-full bg-[#f8f8f8] relative pt-[4px]">
@@ -145,50 +145,42 @@
             >/<span>{{ orderCount }}</span>
           </div>
         </div>
-        <div
-          class="mt-5 flex flex-col p-4 box-border bg-[linear-gradient(180deg,_#FFFBEB_0%,_#FEF3C7_100%)] rounded-xl"
-        >
-          <div class="flex flex-col box-border rounded-xl">
+        <div class="mt-5 flex flex-col shadow p-4 box-border bg-white rounded-xl">
+          <div class="mt-5 flex flex-col box-border  rounded-xl">
             <div class="w-full grid grid-cols-3 gap-6">
-              <template v-for="(item, index) in goodsList" :key="index">
-                <!-- <div
+              <template v-for="(item, index) in totalCount" :key="index">
+                <div
                   v-if="index === 4"
                   class="grid-span-1 text-center text-xs font-normal"
                   @click="handleClick"
                 >
                   <div
-                    class="flex items-center justify-center "
+                    class="flex items-center justify-center overflow-hidden rounded-xl bg-cover text-lg text-white font-medium relative"
                   >
-                  <div class="w-[104px] h-[84px] rounded-[10px] text-[#fff] text-[18px]" style="line-height: 84px; background: linear-gradient(180deg, #F97316  0%, #EA580C  100%);">
-                        DRAW
+                    <div class="overflow-hidden">
+                      <img
+                        src="@/static/images/start-button.png"
+                        class="w-[100%] shadow"
+                        alt=""
+                      />
+                      <div class="absolute"></div>
+                    </div>
                   </div>
-                  </div>
-                </div> -->
+                </div>
                 <div
+                v-else
                   class="grid-span-1 text-[#666666] text-center text-xs font-normal"
                 >
                   <div
                     class="p-2 overflow-hidden"
                     style="
-                      background-image: radial-gradient(
-                        circle at 100% 0%,
-                        rgb(247, 247, 247) 0%,
-                        rgb(252, 252, 252) 106%
-                      );
-                      border-radius: 8px;
+                      background-image: radial-gradient(circle at 100% 0%, rgb(247, 247, 247) 0%, rgb(252, 252, 252) 106%); border-radius: 8px;
                     "
                   >
-                    <div class="overflow-hidden">
-                      <!-- <img
-                        :src="`${url}${getImageByIndex(index)}`"
-                        class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
-                        alt=""
-                      /> -->
-                      <van-image
-                        fit="contain"
-                        :src="`${url}${item.coverUrl}`"
-                      />
+                    <div class="rounded-xl overflow-hidden">
+                      <img class="w-20 h-20 lg:w-[273px] lg:h-[273px] object-cover" :src="`${url}${getImageByIndex(index)}`" alt="">
                     </div>
+                     <div class="text-xs whitespace-nowrap w-20 lg:w-[273px] mt-1 overflow-hidden text-ellipsis">{{getImageByIndexName(index)}}</div>
                   </div>
                 </div>
               </template>
@@ -196,24 +188,25 @@
           </div>
         </div>
 
-        <div
+        <!-- <div
           class="mt-5 flex justify-center items-center text-black text-base h-[60px] bg-[#FACC15] rounded-[20px]"
           @click="handleClick"
         >
           Start
           <span class="pl-2">({{ userInfo.dealCount }}</span
           >/<span>{{ orderCount }})</span>
-        </div>
+        </div> -->
       </div>
       <div class="w-[90%] mx-auto pt-5">
-        <div class="mt-4 rounded-lg bg-[#FFFFFF]">
-          <div class="flex flex-col p-4 box-border relative rounded-[10px]">
-            <div class="mb-1 text-base" style="color: black">Notice</div>
-            <div class="text-[#6B7280] text-[12px]">
+        <div class="w-[90%] h-10 rounded-xl mx-auto bg-[#E7E7E7]"></div>
+        <div class="mt-[-1.5rem] flex flex-col shadow p-4 box-border relative rounded-xl bg-[#fff]">
+          <!-- <div class="flex flex-col box-border relative rounded-[10px]"> -->
+            <div class="mb-2 text-black text-base font-bold">Notice</div>
+            <div class="text-black text-sm font-light">
               Online Support Hours 10:00 - 22:59 <br />
               Please contact online support for your assistance!
             </div>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
       <div class="mt-6 pb-4"></div>
@@ -315,7 +308,7 @@ import {
 import { useI18n } from "vue-i18n";
 import {
   userGetInfo,
-  getGoodsListTwo,
+  getGoodsList,
   createOrder,
   submitOrder,
 } from "../../api/apis";
@@ -340,9 +333,9 @@ const getList = async () => {
   // let res = await getGoodsList();
   // goodsList.value = res.data;
   try {
-    const res = await getGoodsListTwo();
+    const res = await getGoodsList();
     goodsList.value = res.data;
-    // totalCount.value = goodsList.value.length + 1; // 插入一个“开始按钮”
+    totalCount.value = goodsList.value.length + 1; // 插入一个“开始按钮”
   } catch (e) {
     console.error("获取商品列表失败:", e);
   } finally {
@@ -356,6 +349,11 @@ const getImageByIndex = (i) => {
   const realIndex = i < 5 ? i : i - 1;
   console.log(goodsList.value[realIndex]?.coverUrl);
   return goodsList.value[realIndex]?.coverUrl || "";
+};
+const getImageByIndexName = (i) => {
+  if (i === 4) return null; // 第 5 项是“开始按钮”，不用图
+  const realIndex = i < 5 ? i : i - 1;
+  return goodsList.value[realIndex]?.name || "";
 };
 
 // 抢单

@@ -6,7 +6,7 @@ import pinia from './store'; // 导入 Pinia
 import router from './router'; // 导入 Vue Router
 import i18n from './i18n/index';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import { Calendar,CountDown,NoticeBar,NavBar,Image as VanImage,List,Tab, Tabs,Button,Dialog,Sticky,Icon,Uploader ,Field, CellGroup ,Progress,Popup,RadioGroup, Radio,Checkbox, CheckboxGroup,PullRefresh,Tag,Toast,Swipe, SwipeItem    } from 'vant';
+import { Calendar,CountDown,NoticeBar,NavBar,Image as VanImage,List,Tab, Tabs,Button,Dialog,Sticky,Icon,Uploader ,Field, CellGroup ,Progress,Popup,RadioGroup, Radio,Checkbox, CheckboxGroup,PullRefresh,Tag,Toast,Swipe, SwipeItem,Rate } from 'vant';
 // 2. 引入组件样式
 import 'vant/lib/index.css';
 import { Locale } from 'vant';
@@ -57,5 +57,6 @@ app.use(Tag);
 app.use(Toast);
 app.use(Swipe);
 app.use(SwipeItem);
+app.use(Rate);
 // app.use(ElementPlus) // 使用 Element Plus
 app.mount('#app')

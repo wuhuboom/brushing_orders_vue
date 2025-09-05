@@ -156,14 +156,14 @@ input {
 .register .el-form-item--label-top .el-form-item__label {
   color: #333333 !important;
 }
-.my-bor .van-nav-bar__content,.my-bor .van-nav-bar--fixed {
+/* .my-bor .van-nav-bar__content,.my-bor .van-nav-bar--fixed {
   background: #206645 !important ;
-}
+} */
 .my-bor .van-nav-bar__title {
-  color: #fff !important;
+  color: #000 !important;
 }
 .my-bor .van-nav-bar .van-icon, .my-bor .van-nav-bar__title {
-color: #fff !important;
+color: #000 !important;
 }
 .van-hairline--bottom:after {
   border-bottom-width:0 !important;
@@ -180,4 +180,15 @@ color: #fff !important;
   height: 44px;
   line-height: 44px;
   padding-left: 5px;
+}
+ .van-tabs__nav {
+  background: #e3e3e3 !important; 
+   
+}
+
+.el-form-item__label {
+  padding-left: 23px !important;
+  font-weight: bold;
+  color: #000;
+  font-size: 16px !important;
 }

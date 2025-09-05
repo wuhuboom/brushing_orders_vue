@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-[#f5f5f5] records">
     <HeaderTop></HeaderTop>
     <van-tabs color="#007513"  @change="swichTab" v-model:active="active">
       <van-tab :title="$t('全部')"></van-tab>
@@ -7,7 +7,7 @@
       <van-tab :title="$t('完成')"></van-tab>
     </van-tabs>
     <div class="h-[80vh] overflow-y-scroll">
-        <div class="w-full px-2 pt-6 box-border flex flex-col">
+        <div class="w-full pl-6 pr-6 pt-6 box-border flex flex-col">
             <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
                 <van-list
                     v-model:loading="loading"
@@ -16,50 +16,41 @@
                     @load="onLoad"
                 >
                     <van-cell v-for="item in list" :key="item" :title="item">
-                        <div class="w-full flex flex-col mb-6 bg-[#f1f4eb] border-[1px] border-[#eee] p-3 box-border rounded-xl">
-                                <div class="w-full flex">
-                                    <div class="mr-2 w-[20%]" style="width: 4rem;">
-                                        <img :src="VITE_API_IMG_URL+item.coverUrl" alt="">
+                        <div>
+                            <div class="w-full flex justify-between items-center mb-2">
+                                <div class="text-[#999] text-sm font-medium">{{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}</div>
+                                <div class="text-white text-xs rounded p-1 bg-[#ff9662] font-medium"  :class="item.status=='0'?'bg-[#ff9662]':item.status == '1'?'bg-[#7E8FA2]':''">{{item.status=='0'? $t('已完成'): item.status == '1'?$t('冻结'): $t('待提交')}}</div>
+                            </div>
+                            <div class="w-full flex flex-col mb-6 bg-[#fff] overflow-hidden rounded-xl p-3 box-border" style="border: 1px solid rgb(240, 240, 240);">
+                                <div class="flex">
+                                    <div class="mr-4" style="width: 6rem;">
+                                         <img :src="VITE_API_IMG_URL+item.coverUrl" alt="">
                                     </div>
-                                    <div class="w-[80%] flex flex-col h-[3rem] justify-between">
-                                        <div>
-                                            <div class="text-[#000] text-sm font-semibold whitespace-nowrap  text-ellipsis overflow-hidden">
-                                            {{item.goodsName}}
+                                    <div class="flex flex-col h-[6rem] justify-between">
+                                        <div class="flex flex-col">
+                                            <div class="text-[#999] text-base font-semibold whitespace-nowrap w-[52vw] overflow-hidden text-ellipsis">{{item.goodsName}}</div>
+                                            <div class="text-[#999] text-sm mt-2"><span class="pr-[5px]">{{$t('美元')}}</span>{{item.price}}</div>
                                         </div>
-                                        <div class="grid grid-cols-4 mt-2">
-                                            <div class="col-span-2 flex flex-col">
-                                                <div class="text-xs text-[#666] font-medium">
-                                                    {{$t('总金额')}}
-                                                </div>
-                                                <div class="mt-1 text-sm text-[var(--main-color)] font-semibold">
-                                                    {{item.price}} {{$t('美元')}}
-                                                </div>
-                                            </div>
-                                            <div class="col-span-2 flex flex-col">
-                                                <div class="text-xs text-[#666] font-medium">
-                                                    {{$t("佣金")}}
-                                                </div>
-                                                <div class="mt-1 text-sm text-[var(--main-color)] font-semibold">
-                                                    {{item.commission}} {{$t('美元')}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
+                                        <van-rate
+                                            v-model="value"
+                                            :size="20"
+                                            color="#ffd21e"
+                                            void-icon="star"
+                                            void-color="#eee"
+                                            />
                                     </div>
                                 </div>
-                                <div class="w-full h-[1px] my-4" style="border-bottom: 1px dashed rgb(255, 255, 255);"></div>
-                                <div class="w-full flex justify-between items-center">
-                                    <div class="text-[#666] text-sm font-medium">
-                                        <!-- {{item.createTime}} -->
-                                        {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
+                                <div class="mt-5 grid grid-cols-4 gap-2">
+                                    <div class="col-span-2 flex flex-col">
+                                        <div class="text-xs text-[#999] font-medium">{{$t('总金额')}}</div>
+                                        <div class="mt-2 text-sm text-[#ff9662] font-semibold">{{item.price}} {{$t('美元')}}</div>
                                     </div>
-                                    <div class="text-white text-xs p-1  font-medium rounded" :class="item.status == '2'?'bg-[var(--main-color)]':item.status == '1'?'bg-[#F56C6C]':'bg-[var(--main-color)]'">
-                                        {{item.status=='0'? $t('已完成'): item.status == '1'?$t('冻结'): $t('待提交')}}
+                                    <div class="col-span-2 flex flex-col">
+                                        <div class="text-xs text-[#999] font-medium">{{$t("佣金")}}</div>
+                                        <div class="mt-2 text-sm text-[#ff9662] font-semibold">{{item.commission}} {{$t('美元')}}</div>
                                     </div>
                                 </div>
-                                <div class="flex justify-end items-center mt-2" v-if="item.status == '2'">
-                                    <van-button color="#007513" @click="submit(item)" size="small">{{$t("提交")}}</van-button>
-                                </div>
+                            </div>
                         </div>
                     </van-cell>
                 </van-list>
@@ -125,6 +116,7 @@ const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
 const goodsData =  ref({})
+const value= ref(5)
 const query = reactive({
   pageNum: 1,
   pageSize: 10,
