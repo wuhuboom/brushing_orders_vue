@@ -13,7 +13,7 @@
         )
       }}
     </div>
-    <div class="text-[#666] font-semibold mt-10">
+    <div class="text-[#000] font-semibold mt-10 pl-[8px]">
       {{ $t("钱包") }}
     </div>
     <div class="w-full mt-2 overflow-hidden shadow">
@@ -22,9 +22,10 @@
         label=""
         :placeholder="$t('钱包')"
         label-align="top"
+        size='large'
       />
     </div>
-    <div class="text-[#666] font-semibold mt-5">
+    <div class="text-[#000] font-semibold mt-5 pl-[8px]">
       {{ $t("网络") }}
     </div>
     <div class="w-full mt-2 overflow-hidden shadow">
@@ -33,9 +34,10 @@
         label=""
         :placeholder='$t("网络")'
         label-align="top"
+        size='large'
       />
     </div>
-    <div class="text-[#666] font-semibold mt-5">
+    <div class="text-[#000] font-semibold mt-5 pl-[8px]">
       {{ $t("地址") }}
     </div>
     <div class="w-full mt-2 overflow-hidden shadow">
@@ -44,10 +46,15 @@
         label=""
         :placeholder='$t("地址")'
         label-align="top"
+        size='large'
       />
     </div>
     <div class="w-full mt-10">
-      <van-button color="#007513" class="w-full" @click="submitForm">{{
+      <van-button  
+      color="#ff9662"
+          class="w-full"
+          round 
+          size="large" @click="submitForm">{{
         $t("更新")
       }}</van-button>
     </div>

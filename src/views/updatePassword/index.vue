@@ -1,5 +1,5 @@
 <template>
-  <div class="updataPass container w-full min-h-[100vh] bg-white">
+  <div class="updataPass container w-full min-h-[100vh] bg-[#f1f1f1]">
     <van-sticky type="primary">
       <van-nav-bar
         :title="$t('更新密码')"
@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="w-[85%] mx-auto mt-4">
-        <van-button color="#206645" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
+        <van-button color="#ff9662" size="large" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
       </div>
     </div>
   </div>

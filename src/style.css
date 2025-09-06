@@ -159,10 +159,10 @@ input {
 /* .my-bor .van-nav-bar__content,.my-bor .van-nav-bar--fixed {
   background: #206645 !important ;
 } */
-.my-bor .van-nav-bar__title {
+ .van-nav-bar__title {
   color: #000 !important;
 }
-.my-bor .van-nav-bar .van-icon, .my-bor .van-nav-bar__title {
+ .van-nav-bar .van-icon, .my-bor .van-nav-bar__title {
 color: #000 !important;
 }
 .van-hairline--bottom:after {
@@ -170,7 +170,12 @@ color: #000 !important;
 }
 
 .updataPass .van-field__label {
-  color: #206645;
+  color: #000;
+  font-weight: bold;
+  padding-left: 10px;
+  font-size: 16px;
+  padding-bottom: 7px;
+
 
 }
 .updataPass .van-field__value {

@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="w-[85%] mx-auto mt-4">
-        <van-button color="#206645" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
+        <van-button color="#ff9662" size="large" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
       </div>
     </div>
   </div>

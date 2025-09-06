@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-[#f9f9f9] min-h-[100vh] h-full withdraw">
+  <div class="w-full bg-[#f1f1f1] min-h-[100vh] h-full withdraw">
     <van-sticky type="primary">
       <van-nav-bar
         :title="$t('提取')"
@@ -111,24 +111,82 @@
               @load="onLoad"
             >
               <van-cell v-for="item in list" :key="item" :title="item">
-                <div class="bg-[#fff] flex justify-between items-center px-[16px] py-[16px] rounded-[10px] " :class="item.status==0?'activetab':item.status==1?'activetab1':item.status==2?'activetab2':''">
-                  <div class="flex flex-col">
-                    <div class="text-[#111827] text-[16px] pb-[4px]">-{{ item.amount }}USD</div>
-                    <div class="text-[#6B7280] text-[12px]"> {{ formatWithTimezone(item.applicationTime,userStore.zoneActive.tzName)  }}</div>
+                <div
+                  class="shadow rounded-xl bg-[#fff] text-[#666]  p-3 box-border flex flex-col m-2"
+                >
+                  <div
+                    class="flex items-center justify-between font-medium pb-2 text-sm"
+                  >
+                    {{ item.code }}
                   </div>
-                  <div :class="item.status==0?'text-[#15803D ]':item.status==1?'text-[#D97706]':'text-[#B91C1C]'">
-                    {{
+                  <div class="w-full h-[1px] bg-[#EBEBEB]"></div>
+                  <div class="flex flex-col text-[14px] mt-2">
+                    <div class="flex mt-1">
+                      <div class="w-[50%] ">{{ $t("姓名") }}</div>
+                      <div class="w-[50%] ">
+                        :{{ item.username }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("钱包地址") }}</div>
+                      <div class="w-[50%] break-words">
+                        :{{ item.withdrawAddress }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("钱包名称") }}</div>
+                      <div class="w-[50%] break-words">
+                        :{{ item.withdrawType }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("提现金额") }}</div>
+                      <div class="w-[50%] break-words">:{{ item.amount }}</div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("到账金额") }}</div>
+                      <div class="w-[50%] break-words">
+                        :{{ item.creditedAmount }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("费率") }}</div>
+                      <div class="w-[50%] break-words">:{{ item.fee }}</div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("手续费") }}</div>
+                      <div class="w-[50%] break-words">
+                        :{{
+                          (
+                            (item.amount * item.withdrawFee) /
+                            100
+                          ).toFixed(2)
+                        }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("状态") }}</div>
+                      <div class="w-[50%] break-words" :class="item.status == 0?' text-green-500 ':item.status == 0?'text-yellow-500':'text-red-500'">
+                        :{{
                           item.status == 0
                             ? $t("通过")
                             : item.status == 1
                             ? $t("待审核")
                             : $t("拒绝")
                         }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("创建时间") }}</div>
+                      <div class="w-[50%] break-words">
+                        :{{ formatWithTimezone(item.applicationTime,userStore.zoneActive.tzName)  }}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </van-cell>
             </van-list>
-      </van-pull-refresh>
+          </van-pull-refresh>
     </div>
   </div>
 </template>

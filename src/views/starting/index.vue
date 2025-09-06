@@ -212,7 +212,7 @@
       <div class="mt-6 pb-4"></div>
     </div>
     <Footer name="/starting"></Footer>
-    <van-popup
+    <!-- <van-popup
       v-model:show="showCenter"
       round
       closeable
@@ -281,7 +281,108 @@
           }}</van-button>
         </div>
       </div>
-    </van-popup>
+    </van-popup> -->
+
+    <van-dialog
+      v-model:show="showCenter"
+      closeable
+      :title="$t('提交1')"
+      :show-confirm-button="false"
+    >
+      <div class="flex flex-col p-3 box-border mt-3">
+        <div
+          class="flex border-b-[1px] border-[#e5e7eb] pb-4"
+          style="width: 6rem"
+        >
+          <div
+            class="w-[6rem] h-[6rem] overflow-hidden rounded-md flex-shrink-0 mr-4"
+          >
+            <img
+              :src="url + goods.coverUrl"
+              class="w-full h-full object-cover"
+              alt=""
+            />
+          </div>
+          <div class="flex flex-col h-[6rem] justify-between">
+            <div class="flex flex-col">
+              <div
+                class="text-[#666] w-44 whitespace-nowrap overflow-hidden text-ellipsis text-sm font-semibold"
+              >
+                {{ goods.goodsName }}
+              </div>
+              <div class="text-[#666] text-sm mt-2 font-semibold">
+                USD {{ goods.price }}
+              </div>
+            </div>
+            <van-rate
+              v-model="value"
+              :size="20"
+              color="#ffd21e"
+              void-icon="star"
+              void-color="#eee"
+            />
+          </div>
+        </div>
+        <div
+          class="flex items-center pt-4 pb-4 box-border border-b-[1px] border-[#e5e7eb]"
+        >
+          <div
+            class="w-[50%] flex flex-col border-r-[1px] border-[#e5e7eb] justify-center items-center"
+          >
+            <div class="text-[#333] font-semibold">
+              {{ $t("总金额") }}
+            </div>
+            <div class="text-xs text-[#999] mt-1">
+              USD
+              <span class="text-sm text-[#ff9662] font-semibold">{{
+                goods.price
+              }}</span>
+            </div>
+          </div>
+          <div
+            class="w-[50%] flex flex-col border-[#e5e7eb] justify-center items-center"
+          >
+            <div class="text-[#333] font-semibold">
+              {{ $t("佣金") }}
+            </div>
+            <div class="text-xs text-[#999] mt-1">
+              USD
+              <span class="text-sm text-[#ff9662] font-semibold">{{
+                goods.commission
+              }}</span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-between items-center pt-4 pb-4 box-border border-b-[1px] border-[#e5e7eb]"
+        >
+          <div class="text-[#666] text-sm">{{ $t("创建时间") }}</div>
+          <div class="text-[#333] text-sm font-bold">
+            {{
+              formatWithTimezone(
+                goods.createTime,
+                userStore.zoneActive.tzName
+              )
+            }}
+          </div>
+        </div>
+        <div
+          class="flex justify-between items-center pt-4 pb-4 box-border border-b-[1px] border-[#e5e7eb]"
+        >
+          <div class="text-[#666] text-sm">{{ $t("编号") }}</div>
+          <div class="text-[#ff9662] text-xs font-bold">
+             {{ goods.orderNo }}
+          </div>
+        </div>
+        <div class="w-full mt-4">
+          <van-button color="#ff9662" round class="w-full" @click="submitForm">{{
+            $t("提交")
+          }}</van-button>
+        </div>
+      </div>
+    </van-dialog>
+
+
     <van-popup
       v-model:show="showImg"
       closeable
@@ -313,6 +414,7 @@ import {
   submitOrder,
 } from "../../api/apis";
 const url = window.g.VITE_API_IMG_URL;
+const value = ref(5);
 const userStore = useUserStore();
 import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";

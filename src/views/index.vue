@@ -52,7 +52,6 @@
           alt="icon"
         />
       </van-swipe-item>
-      <van-swipe-item>4</van-swipe-item>
     </van-swipe>
     <div class="w-full mt-[5px]">
       <van-notice-bar color="#000" background="#fff" :text="pureNoticeContent">

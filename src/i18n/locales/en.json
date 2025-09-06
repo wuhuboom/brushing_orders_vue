@@ -201,6 +201,7 @@
   "用户余额不足（联系管理员，常用于冻结金额不足）": "Insufficient user balance (contact administrator, often due to insufficient frozen funds)",
   "我的": "My",
   "取消":"Cancel",
-  "注册1":"Register Now"
+  "注册1":"Register Now",
+  "提交1":"Submition"
   
 }
