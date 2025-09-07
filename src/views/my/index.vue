@@ -75,7 +75,9 @@
             {{ $t("当日佣金") }}
           </div>
           <div class="text-xs text-[#fff] mt-1">
-            <span class="text-sm font-semibold">652500.84</span>
+            <span class="text-sm font-semibold">{{
+                  userInfo.commission
+                }}</span>
             <span class="opacity-80 ml-1">USD</span>
           </div>
         </div>
