@@ -270,6 +270,10 @@ const swichTab = (value) => {
   }
 };
 const getWithdrawal = () => {
+  if(!userInfo.value.withdrawAddress) {
+    router.push({ path: "/paymentMethods" });
+    return false
+  }
   if (!ruleForm.amount) return showToast(t('请输入金额'));
   if (ruleForm.amount<TradeInfor.value.minWithdrawAmount || ruleForm.amount>TradeInfor.value.maxWithdrawAmount) return showToast(
     t("rechargeLimit", { 
@@ -278,10 +282,7 @@ const getWithdrawal = () => {
   })
   );
   if (!ruleForm.tradePassword) return showToast(t('请输入交易密码'));
-  if(!userInfo.value.withdrawAddress) {
-    router.push({ path: "/paymentMethods" });
-    return false
-  }
+  
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     // router.push({ path: "/my" });

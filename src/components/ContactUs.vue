@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="w-full flex items-center justify-center pt-3 pb-3" @click="close">
-      <span class="text-[var(--main-color)] text-sm text-[#ff9662]">{{$t('取消')}}</span>
+      <span class="text-sm text-[#ff9662]">{{$t('取消')}}</span>
     </div>
   </van-dialog>
   </div>

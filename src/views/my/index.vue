@@ -27,14 +27,15 @@
                 {{ userInfo.username }}
               </div>
             </div>
+            <div class="text-[#fff] text-xs whitespace-nowrap mt-2">
+                <span class="opacity-50">{{ $t("邀请码") }}:</span>
+                <span class="text-[#fff] font-semibold">{{
+                  userInfo.inviteCode
+                }}</span>
+              </div>
           </div>
         </div>
-        <div class="text-[#fff] text-xs whitespace-nowrap mt-2">
-          <span class="opacity-50">{{ $t("邀请码") }}:</span>
-          <span class="text-[#fff] font-semibold">{{
-            userInfo.inviteCode
-          }}</span>
-        </div>
+        
         <div class="mt-3 w-full flex flex-col items-center pl-1 pr-1">
           <div class="w-full flex justify-between">
             <div class="text-[#fff] text-xs whitespace-nowrap">
@@ -238,7 +239,7 @@ const logout = () => {
   showConfirmDialog({
     title: t("退出"),
     message: t("确定要退出?"),
-    confirmButtonColor: "#007513", // 确认按钮颜色（红色示例）
+    confirmButtonColor: "#ff9663", // 确认按钮颜色（红色示例）
   })
     .then(() => {
       userStore.logout();

@@ -57,9 +57,11 @@
 <script setup>
 import { onMounted, ref,reactive } from "vue";
 const onClickLeft = () => router.replace('/profileItem');
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
+import { useUserStore } from "../../store/modules/user";
+import { showLoadingToast,closeToast,showFailToast,showToast  } from 'vant';
 import { editPassword } from "../../api/apis";
 import { useRouter } from "vue-router";
+const userStore = useUserStore();
 const router = useRouter();
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
@@ -79,7 +81,8 @@ const submitForm = async () => {
     return showFailToast(t("两次密码不一致"));
   }
   let res = await editPassword(ruleForm);
-  showSuccessToast(t("修改成功"));
-  router.push({ path: "/profileItem" });
+  showToast(t("密码修改成功"));
+  // router.push({ path: "/profileItem" });
+  userStore.logout();
 };
 </script>

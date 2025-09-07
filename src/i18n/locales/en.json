@@ -9,7 +9,7 @@
   "菜单列表": "Menu list",
   "员工级别": "Staff level",
   "收入指南": "Income Guide",
-  "事件": "Event",
+  "事件": "Events",
   "提款": "Withdrawal",
   "定金": "Deposit",
   "条款及细则": "T & C",
@@ -67,7 +67,7 @@
   "我同意": "I agree",
   "条款和条件": "Terms and conditions",
   "条款协议": "Terms and Conditions",
-  "条款": "Clause",
+  "条款": "Terms & Conditions",
   "钱包余额": "Wallet Balance",
   "佣金将在此处添加": "Commission will be added here",
   "持有金额": "Hold Amount",
@@ -202,6 +202,7 @@
   "我的": "My",
   "取消":"Cancel",
   "注册1":"Register Now",
-  "提交1":"Submition"
+  "提交1":"Submition",
+  "密码修改成功":"Password changed successfully"
   
 }

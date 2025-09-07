@@ -16,6 +16,7 @@
             <div class="flex items-center">
               <div class="text-base text-[#333] font-semibold mr-2">{{item.nameEn}}</div>
               <van-tag round type="primary" color="#ff9662" text-color="#fff" size="medium" v-if="userStore.userInfo.levelId == item.id">{{$t('当前等级')}}</van-tag>
+              <div @click="toUpgrade(item.id)" v-if="userStore.userInfo.levelId < item.id" class="text-sm text-[#ff9662] font-semibold mr-2 underline">Upgrade now</div>
             </div>
             <div class="mt-2 text-[#ff9662] text-sm font-semibold">{{`USD ${item.price}`}}</div>
           </div>
@@ -37,17 +38,19 @@
             </div>
         </div>
       </div> -->
-
     </div>
+    <ContactUs ref="ContactUsRef"></ContactUs>
   </div>
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { getLevel } from "../../api/apis";
 import { useUserStore } from '../../store/modules/user';
+import ContactUs from "@/components/ContactUs.vue";
 import { showToast } from 'vant';
 import { useI18n } from "vue-i18n";
-const userStore = useUserStore()
+const userStore = useUserStore();
+const ContactUsRef = ref(null);
 const { t } = useI18n();
 const more = new URL("@/static/images/more10.png", import.meta.url).href;
 
@@ -63,7 +66,7 @@ const bgMapStart = {
   VIP2: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135431630339970.png',
   VIP3: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135461467660218.png',
   VIP4: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135471230297283.png',
-  VIP5: new URL("@/static/images/bg_vipStart4.png", import.meta.url).href,
+  // VIP5: new URL("@/static/images/bg_vipStart4.png", import.meta.url).href,
 };
 const levelList = ref([]);
 const level = async () => {
@@ -82,7 +85,8 @@ const toUpgrade = (id) =>{
     return false
   }
   
-showToast(t('联系客服'));
+// showToast(t('联系客服'));
+ContactUsRef.value.open();
 }
 onMounted(() => {
   userStore.getUserInfo()
