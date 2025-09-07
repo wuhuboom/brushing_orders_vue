@@ -5,6 +5,7 @@
         <img
           src="@/static/images/logo.png"
           class="w-[80px]"
+          @click="jump"
           alt=""
         />
         <img
@@ -445,6 +446,10 @@ const getList = async () => {
     timer = setTimeout(getList, 10000);
   }
 };
+const jump = () => {
+  router.replace('/')
+  
+}
 
 const getImageByIndex = (i) => {
   if (i === 4) return null; // 第 5 项是“开始按钮”，不用图

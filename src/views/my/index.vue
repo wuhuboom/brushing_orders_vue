@@ -27,7 +27,7 @@
                 {{ userInfo.username }}
               </div>
             </div>
-            <div class="text-[#fff] text-xs whitespace-nowrap mt-2">
+            <div class="text-[#fff] text-xs whitespace-nowrap mt-2" @click="copyContent(userInfo.inviteCode)">
                 <span class="opacity-50">{{ $t("邀请码") }}:</span>
                 <span class="text-[#fff] font-semibold">{{
                   userInfo.inviteCode
@@ -225,7 +225,7 @@ const avatarUrl = ref("");
 
 const bgMapStart = [
   "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135431630339970.png",
-  "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135431630339970.png",
+  "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135444978440962.png",
   "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135461467660218.png",
   "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135471230297283.png",
 ];

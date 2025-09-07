@@ -251,10 +251,9 @@ const borderMap = {
 };
 const bgMapStart = {
   VIP1: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135431630339970.png',
-  VIP2: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135431630339970.png',
+  VIP2: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135444978440962.png',
   VIP3: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135461467660218.png',
   VIP4: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135471230297283.png',
-  VIP5: new URL("@/static/images/bg_vipStart4.png", import.meta.url).href,
 };
 
 const vanList = [
