@@ -11,7 +11,7 @@ import i18n from "../i18n/index.js"; // 引入全局 i18n 实例
 const baseURL = window.VITE_API_BASE_URL ? window.VITE_API_BASE_URL :import.meta.env.VITE_API_BASE_URL; // 兜底默认值
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: baseURL,
   timeout: 20000,
 });
 
