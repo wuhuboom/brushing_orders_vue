@@ -229,7 +229,6 @@ import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const userStore = useUserStore();
-
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 const { t } = useI18n();
 const active = ref(0);
