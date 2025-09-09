@@ -28,14 +28,14 @@
                   </div>
                   <div
                     class="text-white text-xs rounded p-1 bg-[#ff9662] font-medium"
-                    :class="item.status == '2'?'bg-[#7E8FA2]':'bg-[#ff9662]'"
+                    :class="Number(item.status) === 2?'bg-[#7E8FA2]':'bg-[#ff9662]'"
                   >
                     {{
-                      item.status == "0"
+                      Number(item.status) == 0
                         ? $t("已完成")
-                        : item.status == "1"
+                        : Number(item.status) == 1
                         ? $t("冻结")
-                        : $t("待提交1")
+                        : $t("待提交")
                     }}
                   </div>
                 </div>
