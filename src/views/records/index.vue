@@ -28,7 +28,9 @@
                   </div>
                   <div
                     class="text-white text-xs rounded p-1 bg-[#ff9662] font-medium"
-                    :class="Number(item.status) === 2?'bg-[#7E8FA2]':'bg-[#ff9662]'"
+                    :style="{
+                      backgroundColor: Number(item.status) === 2 ? '#7E8FA2' : '#ff9662'
+                    }"
                   >
                     {{
                       Number(item.status) == 0
