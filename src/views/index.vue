@@ -173,14 +173,21 @@
         </div> -->
 
         <div class="items-con flex overflow-x-scroll p-4">
-          <div class="flex flex-col box-border rounded-xl p-4 mr-3" v-for="item in levelList" 
-            :style="{
-              background: `url(${bgMap[item.nameEn]}) 0px 0px / 100% 100% no-repeat`,
-            }">
+          <div
+              class="flex flex-col box-border rounded-xl p-4 mr-3"
+              :class="userInfo.levelId == item.id?'text-[#fff]':'text-[#0C2D54]'"
+              v-for="item in levelList"
+              :key="item.id"
+              :style="{
+                background: userInfo.levelId == item.id
+                  ? `url(${vip_bg2}) no-repeat center/100% 100%`
+                  : `url(${vip_bg1}) no-repeat center/100% 100%`
+              }"
+            >
             <img class="w-16 h-16" :src="bgMapStart[item.nameEn]" alt="">
-            <div class="font-bold text-[16px] text-[#0C2D54]">{{ $t(item.nameZh) }}</div>
+            <div class="font-bold text-[16px]">{{ $t(item.nameZh) }}</div>
             <div class="w-36">
-              <div class="w-32 text-xs mt-3 font-light text-[#0C2D54]" v-html="item.descriptionEn"></div>
+              <div class="w-32 text-xs mt-3 font-light " v-html="item.descriptionEn"></div>
             </div>
           </div>
         </div>
@@ -230,24 +237,19 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import { onMounted, ref, reactive, computed } from "vue";
-import { getLevel, getNoticeList } from "../api/apis";
+import { getLevel, getNoticeList,userGetInfo } from "../api/apis";
 import { useRouter } from "vue-router";
 const tradePasswordRef = ref(null);
 const ContactUsRef = ref(null);
+const userInfo = ref({})
+const vip_bg1 = new URL("@/static/images/vip_bg1.png", import.meta.url).href;
+const vip_bg2 = new URL("@/static/images/vip_bg2.png", import.meta.url).href;
 
 const bgMap = {
   VIP1: new URL("@/static/images/vip_bg1.png", import.meta.url).href,
   VIP2: new URL("@/static/images/vip_bg1.png", import.meta.url).href,
   VIP3: new URL("@/static/images/vip_bg1.png", import.meta.url).href,
   VIP4: new URL("@/static/images/vip_bg2.png", import.meta.url).href,
-  VIP5: "linear-gradient( 180deg, #FFFFFF 0%, #FDF2F8 100%)",
-};
-const borderMap = {
-  VIP1: "#FDE68A",
-  VIP2: "#93C5FD",
-  VIP3: "#C4B5FD",
-  VIP4: "#6EE7B7",
-  VIP5: "#FBCFE8",
 };
 const bgMapStart = {
   VIP1: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135431630339970.png',
@@ -391,9 +393,20 @@ const pureNoticeContent = computed(() => {
   return noticeContent.value.replace(/<\/?[^>]+(>|$)/g, "");
 });
 
+window.addEventListener('updateTrade', (e) => {
+    getUserGetInfo();
+})
+
+const getUserGetInfo = () =>{
+  userGetInfo().then((res) => {
+      userInfo.value = res.data
+    });
+}
+
 onMounted(() => {
   level();
   getData();
+  getUserGetInfo();
 });
 </script>
 <style>

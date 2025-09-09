@@ -128,10 +128,16 @@ const loadData = async () => {
 const customer = () => {
   ContactUsRef.value.open();
 };
-onMounted(() => {
+window.addEventListener('updateTrade', (e) => {
+    getUserGetInfo();
+})
+const getUserGetInfo = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
   });
+}
+onMounted(() => {
+  getUserGetInfo()
 });
 const onClickLeft = () => history.back();
 </script>

@@ -72,6 +72,10 @@ const toPage = (path) => {
     path: path,
   });
 };
+
+window.addEventListener('updateTrade', (e) => {
+    userGetInfoMethods();
+})
 const userGetInfoMethods = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;

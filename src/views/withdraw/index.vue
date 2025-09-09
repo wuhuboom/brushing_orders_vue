@@ -307,13 +307,22 @@ const tradeConfig = async () => {
   TradeInfor.value = res.data;
 };
 
-onMounted(() => {
-  tradeConfig();
-  userGetInfo().then((res) => {
+window.addEventListener('updateTrade', (e) => {
+    userGetInfoMethods();
+})
+const userGetInfoMethods = () =>{
+userGetInfo().then((res) => {
     amount.value = res.data.balance;
     ruleForm.amount = amount.value;
     userInfo.value = res.data
   });
+}
+
+
+
+onMounted(() => {
+  tradeConfig();
+  userGetInfoMethods();
 });
 </script>
 <style>

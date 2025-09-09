@@ -278,11 +278,17 @@ const onClickLeft = () => {
 };
 
 const copy = (text) => {};
-onMounted(() => {
-  userGetInfo().then((res) => {
+window.addEventListener('updateTrade', (e) => {
+    getUserGetInfo();
+})
+const getUserGetInfo = () =>{
+userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     console.log(userInfo.value);
   });
+}
+onMounted(() => {
+  getUserGetInfo()
 });
 </script>

@@ -67,14 +67,23 @@ const updateAvatarMethods = async () => {
       showSuccessToast(updateRes.msg || t('头像更新失败'))
     }
 }
+window.addEventListener('updateTrade', (e) => {
+    getUserGetInfo();
+})
+
+const getUserGetInfo = () =>{
+    userGetInfo().then((res) => {
+        userInfo.value = res.data;
+        console.log(userInfo.value.avatar)
+      
+        fileList.value.push({ url: userInfo.value.avatar==null?user4:userInfo.value.avatar });
+        avatarUrl.value = userInfo.value.avatar;
+        console.log(fileList.value)
+      });
+}
+
+
 onMounted(() => {
-  userGetInfo().then((res) => {
-    userInfo.value = res.data;
-    console.log(userInfo.value.avatar)
-  
-    fileList.value.push({ url: userInfo.value.avatar==null?user4:userInfo.value.avatar });
-    avatarUrl.value = userInfo.value.avatar;
-    console.log(fileList.value)
-  });
+  getUserGetInfo()
 });
 </script>

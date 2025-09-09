@@ -543,6 +543,9 @@ onUnmounted(() => {
   if (timer) clearTimeout(timer);
 });
 
+window.addEventListener('updateTrade', (e) => {
+    userGetInfoMethods();
+})
 const userGetInfoMethods = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;

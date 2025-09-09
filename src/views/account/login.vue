@@ -154,8 +154,8 @@ function submitForm(formEl) {
       };
       login(data).then((res) => {
         userStore.setToken(`Bearer ${res.data.token}`);
-        userStore.setUserInfo(res.data.info);
-        // setUserRemind();
+        userStore.setUserInfo(res.data.user);
+        setUserRemind();
         router.push({ path: "/" });
       });
       //   if (this)

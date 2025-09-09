@@ -7,7 +7,7 @@ const FN = {
 }
 
 // const ws=new web_socket(url,token)
-function web_socket(url, token = null) {
+function web_socket(url, id = null) {
   //重连时间间隔设置
   this.reconcat_time = 2000
   // 主动发送消息失败 重发间隔时间
@@ -23,6 +23,8 @@ function web_socket(url, token = null) {
   //token发送
   this.token = token
 
+  this.id = id
+
   //初始化
   this.init = init
   //连接
@@ -36,6 +38,8 @@ function web_socket(url, token = null) {
 
   //设置token
   this.setToken = setToken
+
+  this.setId = setId
   //添加信息回调
   this.addFn = addFn
   //移除信息回调
@@ -160,6 +164,16 @@ function setToken(token) {
     this.sendMessage({
       type: 'token',
       token: token,
+    })
+  }
+}
+
+function setId(id) {
+  this.id = token
+  if (this.ws.readyState === 1) {
+    this.sendMessage({
+      type: 'id',
+      id: id,
     })
   }
 }

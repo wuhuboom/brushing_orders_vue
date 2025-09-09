@@ -5,6 +5,7 @@
 <script setup>
 import { useUserStore } from '@/store/modules/user';
 import { useCommonStore } from '@/store/modules/common';
+import { setUserRemind } from "./common/remind";
 import { useI18n } from 'vue-i18n';
 import BigNumber from 'bignumber.js';
 import { onUnmounted } from 'vue';
@@ -24,6 +25,7 @@ const currentLang = useCurrentLang();
 console.log(currentLang.value); // --> 'zh-CN'
 if (userStore.token){
   userStore.getUserInfo();
+  setUserRemind();
 } 
 
 userStore.getZone();
