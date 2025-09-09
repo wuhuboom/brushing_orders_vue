@@ -28,6 +28,7 @@
                   </div>
                   <div
                     class="text-white text-xs rounded p-1 bg-[#ff9662] font-medium"
+                    :class="item.status == '2'?'bg-[#7E8FA2]':'bg-[#ff9662]'"
                   >
                     {{
                       item.status == "0"
