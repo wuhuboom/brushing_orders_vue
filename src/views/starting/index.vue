@@ -109,14 +109,14 @@
               </div>
             </div>
           </div>
-          <!-- <div
+          <div
             class="w-full col-span-1 flex p-3 box-border rounded-xl bg-[#fff] border-[1px] border-[#EDEDEE]"
           >
             <div class="w-full flex justify-between">
               <div class="flex items-center">
                 <img
                   class="w-10 h-10 mr-3"
-                  src="@/static/images/icon-20.png"
+                  src="@/static/images/icon-22.png"
                   alt=""
                 />
                 <div class="flex flex-col justify-around">
@@ -129,13 +129,13 @@
                 </div>
               </div>
               <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[#000] font-bold mb-1">
+                <div class="text-sm text-[#ff9662] font-bold mb-1">
                   {{ userInfo.commission }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
         <div class="mt-5 flex justify-between text-black font-bold text-base">
           <div>Start Optimization</div>

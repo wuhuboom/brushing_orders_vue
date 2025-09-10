@@ -216,4 +216,5 @@ function close() {
   if (this.timeoutId) clearInterval(this.timeoutId)
 }
 
-export default new web_socket(import.meta.env.VITE_WS_URL)
+export default new web_socket(window.VITE_API_BASE_URL ? window.VITE_API_BASE_URL :import.meta.env.VITE_API_BASE_URL // 兜底默认值
+)
