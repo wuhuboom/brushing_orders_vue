@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>ABANS</title>
+    <!-- <title>%window.VITE_TITLE%</title> -->
+     <title></title>
   </head>
   <body>
     <div id="app"></div>
@@ -14,4 +15,7 @@
   </body>
   <!-- 直接加载 config.js，确保在 main.js 前可用 -->
   <script src="/config.js?t=123456"></script>
+  <script>
+    document.title = window.g.VITE_TITLE || '默认标题';
+  </script>
 </html>

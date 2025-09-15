@@ -1,8 +1,8 @@
 <template>
   <div>
     <HeaderTop></HeaderTop>
-    <div class="w-full relative">
-      <div class="pb-4 pt-4 absolute top-5 w-full" style="z-index: 2">
+    <div class="w-full h-[400px] relative">
+      <div class="pb-4 pt-4 absolute top-5 w-full h-[400px]" style="z-index: 2">
         <div class="mx-auto pt-5">
           <div
             class="text-center text-2xl lg:text-5xl font-semibold text-white"
@@ -11,18 +11,6 @@
             {{ $t("帮助小型企业盈利") }}
           </div>
         </div>
-        <!-- <div class="flex justify-center items-center mt-5">
-          <div
-            class="text-white mr-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
-          >
-            {{ $t("雇佣我们") }}
-          </div>
-          <div
-            class="text-white ml-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
-          >
-            {{ $t("与我们合作") }}
-          </div>
-        </div> -->
       </div>
       <div class="w-full absolute bottom-0 overflow-hidden">
         <van-notice-bar
@@ -35,15 +23,30 @@
           </template>
         </van-notice-bar>
       </div>
-      <video src="https://videos.pexels.com/video-files/1448735/1448735-uhd_4096_2160_24fps.mp4" autoplay muted loop playsinline></video>
-
-      <!-- <img
-        class="w-full h-[200px] object-cover"
-        src="@/static/images/bg.jpg"
-        alt=""
-      /> -->
+      <video class="w-full h-[400px] object-cover" src="https://videos.pexels.com/video-files/1448735/1448735-uhd_4096_2160_24fps.mp4" autoplay muted loop playsinline></video>
     </div>
     <div class="relative bg-white">
+      <!-- 菜单列表 -->
+      <div class="w-[95%] rounded-xl mx-auto flex flex-col">
+        <div class="pt-4 pr-4 pl-4 text-sm text-black">
+          {{ $t("菜单列表") }}
+        </div>
+        <div class="w-full p-4 grid grid-cols-4 gap-4">
+          <div
+            class="flex flex-col w-full justify-center rounded-lg items-start text-center box-border text-[#000]"
+            v-for="(item, index) in items"
+            :key="index"
+            @click="goTo(item.route)"
+          >
+            <div class="w-full">
+              <img class="mx-auto w-12 h-12" :src="item.icon" alt="" />
+            </div>
+            <span class="mx-auto text-center text-xs mt-1 whitespace-nowrap">
+              {{ $t(item.name) }}
+            </span>
+          </div>
+        </div>
+      </div>
       <!-- 员工等级 -->
       <div class="w-full mx-auto">
         <div class="w-[90%] mx-auto">
@@ -51,10 +54,10 @@
             <div class="w-[35%]">{{ $t("员工等级") }}</div>
             <div
               @click="toVips"
-              class="w-[65%] font-normal text-xs text-[var(--main-color)] text-right flex justify-end items-center"
+              class="w-[65%] font-normal text-xs text-[#000] text-right flex justify-end items-center"
             >
               <div class="mr-[3px]">{{ $t("查看更多") }}</div>
-              <van-icon name="arrow" color="#4CAF50" />
+              <van-icon name="arrow" color="#000" />
               <!-- <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" /> -->
             </div>
           </div>
@@ -86,27 +89,7 @@
           </div>
         </div>
       </div>
-      <!-- 菜单列表 -->
-      <div class="w-[95%] rounded-xl mx-auto flex flex-col">
-        <div class="pt-4 pr-4 pl-4 text-sm text-black">
-          {{ $t("菜单列表") }}
-        </div>
-        <div class="w-full p-4 grid grid-cols-4 gap-4">
-          <div
-            class="flex flex-col w-full justify-center rounded-lg items-start text-center box-border text-[#000]"
-            v-for="(item, index) in items"
-            :key="index"
-            @click="goTo(item.route)"
-          >
-            <div class="w-full">
-              <img class="mx-auto w-12 h-12" :src="item.icon" alt="" />
-            </div>
-            <span class="mx-auto text-center text-xs mt-1 whitespace-nowrap">
-              {{ $t(item.name) }}
-            </span>
-          </div>
-        </div>
-      </div>
+      
       
 
       <div class="w-full bg-[#F0F9FF] mb-[30px]">

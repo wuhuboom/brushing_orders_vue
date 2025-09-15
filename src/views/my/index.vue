@@ -1,158 +1,202 @@
 <template>
-  <div class="my-bor w-full flex flex-col pb-6">
+  <div class="my-bor w-full flex flex-col pb-6 pt-[10px]">
      <van-nav-bar
         :title="$t('我的')"
         fixed
         left-arrow
         @click-left="onClickLeft"
       />
-    <div
-      class="mt-[45px]"
-      style="background: linear-gradient(180deg, #206645 0%, #2e8b57 100%)"
-    >
-      <div class="flex justify-between items-center p-[23px]">
+    <div class="flex justify-between px-[17px] mb-[5px] mt-[45px]">
+      <div>
+        <div class="text-[#000] text-[14px] pb-[3px]">hi,{{ userInfo.username }}</div>
+        <div class="text-[#6A7187] text-[12px]">
+          <span>{{ $t("邀请码") }}:</span>{{ userInfo.inviteCode }}
+        </div>
+      </div>
+      <div class="flex items-center">
+        <div
+          @click="customer"
+          class="bg-[#f0f9f8] border border-[#A0DBD1] rounded-[18px] h-[36px] w-[93px] flex justify-center items-center text-[12px]"
+        >
+          <img class="w-[18px] mr-[4px]" src="@/static/images/my5.png" alt="" />
+          <span class="text-[#12A58C]">{{ $t("联系我们") }}</span>
+        </div>
         <img
-          :src="userInfo.avatar==null?userImg:userInfo.avatar"
-          class="w-[60px] h-[60px] rounded-full"
+          :src="userInfo.avatar == null ? userImg : userInfo.avatar"
+          class="w-[35px] h-[35spx] rounded-full ml-[5px]"
           alt=""
         />
-        <img :src="bgMapStart[userInfo.levelId - 1]" class="w-12" alt="" />
       </div>
-      <div class="text-white text-[24px] px-[23px] pb-[8px]">
-        {{ userInfo.username }}
-      </div>
-      <div class="text-white text-[14px] px-[23px]" @click="copyContent(userInfo.inviteCode)">
-        <span>{{ $t("邀请码") }}:</span>{{ userInfo.inviteCode }}
-      </div>
-      <div class="px-[23px]">
-        <div class="flex items-center justify-between text-white text-[14px] mt-5">
-          <div class="text-[10px] mr-2">{{ $t("信用评分") }}:</div>
-          <div class="text-white text-[10px] ml-1">
-              {{ userInfo.creditScore }}%
-          </div>
+    </div>
+    <div
+      class="h-[197px] w-full px-[30px] py-[17px]"
+      :style="{
+        backgroundImage: `url(${bg5})`,
+        backgroundSize: '100% 100%',
+        backgroundPosition: 'center'
+      }"
+    >
+      <div class="flex justify-between">
+        <div class="text-[#fff] text-[24px]">
+          <div class="pt-[10px] pb-[10px]" style="font-family: Helvetica">${{ userInfo.totalBalance }}</div>
+          <div class="text-[#A1FFC1] text-[12px]">{{ $t("钱包余额") }}</div>
         </div>
-        <div class="flex-auto">
+        <div>
+          <img class="w-[34px]" src="@/static/images/vip11.png" alt="" />
+          <span class="text-[#EEBB69]">vip{{userInfo.levelId}}</span>
+        </div>
+      </div>
+      <div class="flex justify-between items-end mt-[10px]">
+        <div class="pb-[10px]">
+          <div class="text-[#A1FFC1] text-[12px]">
+            {{ $t("当日佣金") }}
+          </div>
+          <div class="text-[#FFFFFF] text-[14px] pt-[5px]">{{ userInfo.commission }}</div>
+        </div>
+        <div
+         @click="payMethod"
+          class="w-[calc(100%-52%)] h-[48px] bg-[#000] text-[#fff] flex justify-center items-center rounded-[12px] mr-[-20px] mt-[35px]"
+        >
+          + Bind Wallet
+        </div>
+      </div>
+    </div>
+    <div style="border: 1px solid rgba(1,198,166,0.2);border-radius: 12px;" class="bg-[rgba(1,198,166,0.2)] mx-[17px] px-[21px]">
+      <div
+        class="flex items-center justify-start text-[#000] text-[12px] pt-[14px] pb-[12px]"
+      >
+        <div class="text-[10px] mr-2">{{ $t("信用评分") }}:</div>
+        <div class="text-[#000] text-[10px] ml-1">
+          {{ userInfo.creditScore }}%
+        </div>
+      </div>
+      <div class="flex-auto pb-[14px]">
           <van-progress
-            color="rgb(137, 206, 79)"
+            color="#01C6A6"
             :percentage="userInfo.creditScore"
             :show-pivot="false"
             stroke-width="8"
           />
         </div>
-        <div class="border-t border-white/30 h-1 mt-5"></div>
+    </div>
+
+    <!-- 提取 -->
+    <div class="flex flex-col w-[90%] mx-auto mt-[14px]">
+      <div class="flex flex-col rounded-xl bg-[#F7F9FC]">
         <div
-            class="w-full flex items-center  pb-4 text-center box-border overflow-hidden mt-2"
-          >
-            <div class="w-[50%] flex flex-col justify-center items-center">
-              <div class="text-[#fff] text-[12px]">
-                {{ $t("钱包余额") }}
-              </div>
-              <div class="text-xs text-[#fff] mt-1">
-                <span class="text-base font-semibold">{{
-                  userInfo.totalBalance
-                }}USD</span>
-              </div>
+          class="flex items-center justify-between p-4 pl-2"
+          @click="toPage('/deposit')"
+        >
+          <div class="flex items-center justify-between w-full">
+            <div class="flex items-center text-[#38415F] text-sm font-medium">
+              <img
+                class="w-[32px] h-[32px] mr-[12px]"
+                src="@/static/images/img1.png"
+                alt=""
+              />
+              {{ $t("定金") }}
             </div>
-            <div class="border-l h-[80px] border-white/30"></div>
-            <div class="w-[50%] flex flex-col justify-center items-center">
-              <div class="text-[#fff] text-[12px]">
-                {{ $t("当日佣金") }}
-              </div>
-              <div class="text-xs text-[#fff] mt-1">
-                <span class="text-base font-semibold">{{
-                  userInfo.commission
-                }}USD</span>
-              </div>
-            </div>
+            <van-icon name="arrow" color="#E8EAED" size="18px" />
           </div>
+        </div>
+        <div class="h-[1px] bg-[#E8EAED] mx-[20px]"></div>
+        <div
+          class="flex items-center justify-between p-4 pl-2"
+          @click="toPage('/withdraw')"
+        >
+          <div class="flex items-center justify-between w-full">
+            <div class="flex items-center text-[#38415F] text-sm font-medium">
+              <img
+                class="w-[32px] h-[32px] mr-[12px]"
+                src="@/static/images/img2.png"
+                alt=""
+              />
+              {{ $t("提取") }}
+            </div>
+            <van-icon name="arrow" color="#E8EAED" size="18px" />
+          </div>
+        </div>
       </div>
     </div>
-    <!-- 我的财务 -->
-    <div class="flex flex-col w-[90%] mx-auto mt-2">
-      <div class="mt-4 mb-4 text-[var(--main-color)] text-base font-semibold">
-        {{ $t("我的财务") }}
+    <!-- 个人信息 -->
+    <div class="flex flex-col w-[90%] mx-auto">
+      <div class="mt-4 mb-4 text-[#83899B] text-[14px]">
+       Accounts
       </div>
-      <div class="flex items-center justify-between">
-        <div class="px-[60px] py-[16px] bg-[#F9FAFB] rounded flex flex-col items-center"  @click="toPage('/deposit')">
-          <img class="w-[32px]" src="@/static/images/qian.png" alt="">
-          <div class="pt-[8px]">{{ $t("定金") }}</div>
+      <div class="flex flex-col rounded-xl bg-[#F7F9FC]">
+        <div
+          class="flex items-center justify-between p-4 pl-2"
+         @click="toPage('/profileItem')"
+        >
+          <div class="flex items-center justify-between w-full">
+            <div class="flex items-center text-[#38415F] text-sm font-medium">
+              <img
+                class="w-[23px] h-[23px] mr-[12px]"
+                src="@/static/images/img3.png"
+                alt=""
+              />
+              {{ $t("个人信息") }}
+            </div>
+            <van-icon name="arrow" color="#E8EAED" size="18px" />
+          </div>
         </div>
-        <div class="px-[60px] py-[16px] bg-[#F9FAFB] rounded flex flex-col items-center" @click="toPage('/withdraw')">
-          <img class="w-[32px]" src="@/static/images/qian1.png" alt="">
-          <div class="pt-[8px]">{{ $t("提取") }}</div>
+        <div class="h-[1px] bg-[#E8EAED] mx-[20px]"></div>
+        <div
+          class="flex items-center justify-between p-4 pl-2"
+          @click="payMethod"
+        >
+          <div class="flex items-center justify-between w-full">
+            <div class="flex items-center text-[#38415F] text-sm font-medium">
+              <img
+                class="w-[23px] h-[23px] mr-[12px]"
+                src="@/static/images/img4.png"
+                alt=""
+              />
+               {{ $t("付款方式") }}
+            </div>
+            <van-icon name="arrow" color="#E8EAED" size="18px" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col w-[90%] mx-auto mt-[15px]">
+      <div class="flex flex-col rounded-xl bg-[#F7F9FC]">
+        <div
+          class="flex items-center justify-between p-4 pl-2"
+          @click="toPage('/notice')"
+        >
+          <div class="flex items-center justify-between w-full">
+            <div class="flex items-center text-[#38415F] text-sm font-medium">
+              <img
+                class="w-[23px] h-[23px] mr-[12px]"
+                src="@/static/images/img5.png"
+                alt=""
+              />
+              {{ $t("通知") }}
+            </div>
+            <van-icon name="arrow" color="#E8EAED" size="18px" />
+          </div>
+        </div>
+        <div class="h-[1px] bg-[#E8EAED] mx-[20px]"></div>
+        <div
+          class="flex items-center justify-between p-4 pl-2"
+          @click="logout"
+        >
+          <div class="flex items-center justify-between w-full">
+            <div class="flex items-center text-[#38415F] text-sm font-medium">
+              <img
+                class="w-[23px] h-[23px] mr-[12px]"
+                src="@/static/images/img6.png"
+                alt=""
+              />
+              {{ $t("登出") }}
+            </div>
+            <van-icon name="arrow" color="#E8EAED" size="18px" />
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 我的详细信息 -->
-    <div class="flex flex-col w-[90%] mx-auto mt-2">
-      <div class="mt-4 mb-4 text-[var(--main-color)] text-base font-semibold">
-        {{ $t("我的详细信息") }}
-      </div>
-      <div class="flex flex-col rounded-xl bg-[#fff]">
-        <div
-          class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl"
-          @click="toPage('/profileItem')"
-        >
-          <div class="flex items-center justify-between w-full ">
-            <div class="flex text-[#000] text-sm font-medium ">
-              <img class="w-[18px] mr-[12px]" src="@/static/images/my1.png" alt="">
-              {{ $t("个人信息") }}
-            </div>
-            <van-icon name="arrow" color="#206645" size="18px" />
-          </div>
-        </div>
-        <div
-          class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl mt-3"
-          @click="payMethod"
-        >
-          <div class="flex items-center justify-between w-full">
-            <div class="flex text-[#000] text-sm font-medium ">
-              <img class="w-[18px] mr-[12px]" src="@/static/images/my2.png" alt="">
-               {{ $t("付款方式") }}
-            </div>
-            <van-icon name="arrow" color="#206645" size="18px" />
-          </div>
-        </div>
-        <div
-          class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl mt-3"
-          @click="customer"
-        >
-          <div class="flex items-center justify-between w-full">
-            <div class="flex text-[#000] text-sm font-medium ">
-              <img class="w-[18px] mr-[12px]" src="@/static/images/my3.png" alt="">
-               {{ $t("联系我们") }}
-            </div>
-            <van-icon name="arrow" color="#206645" size="18px" />
-          </div>
-        </div>
-        <div
-          class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl mt-3"
-          @click="toPage('/notice')"
-        >
-          <div class="flex items-center justify-between w-full">
-            <div class="flex text-[#000] text-sm font-medium ">
-              <img class="w-[18px] mr-[12px]" src="@/static/images/my4.png" alt="">
-               {{ $t("通知") }}
-            </div>
-            <van-icon name="arrow" color="#206645" size="18px" />
-          </div>
-        </div>
-        <!-- <div
-          class="flex items-center justify-between p-4 pl-2 box-border bg-[#F9FAFB] rounded-xl mt-3"
-          @click="handleChangeLang"
-        >
-          <div class="flex items-center justify-between w-full">
-            <div class="flex text-[#000] text-sm font-medium ">
-              <img class="w-[18px] mr-[12px]" src="@/static/images/my4.png" alt="">
-               {{ $t("更改语言") }}
-            </div>
-            <van-icon name="arrow" size="22px" />
-          </div>
-        </div> -->
-      </div>
-      <div @click="logout" class="w-full h-[40px] flex items-center justify-center bg-[#000000] rounded-xl text-white mt-[32px]">{{ $t("登出") }}</div>
-    </div>
     <ContactUs ref="ContactUsRef"></ContactUs>
     <tradePassword ref="tradePasswordRef"></tradePassword>
     <Lang ref="langRef"></Lang>
@@ -188,13 +232,13 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import { userGetInfo, checkTradePassword } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
-import { showConfirmDialog,showToast } from "vant";
+import { showConfirmDialog, showToast } from "vant";
 const langRef = ref(null);
 const { t } = useI18n();
 const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
-const userImg = new URL("@/static/images/userImg.png", import.meta.url)
-  .href;
+const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
+const bg5 = new URL("@/static/images/bg5.png", import.meta.url).href;
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { copyContent } from "../../util/utils";
@@ -253,11 +297,11 @@ function handleChangeLang() {
   langRef.value.open();
 }
 
-const onClickLeft = () =>{
+const onClickLeft = () => {
   router.replace({
-    path:"/"
-  })
-}
+    path: "/",
+  });
+};
 
 const copy = (text) => {};
 onMounted(() => {

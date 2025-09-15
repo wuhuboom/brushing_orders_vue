@@ -145,15 +145,6 @@ input {
 .register .el-form-item--label-top .el-form-item__label {
   color: #333333 !important;
 }
-.my-bor .van-nav-bar__content,.my-bor .van-nav-bar--fixed {
-  background: #206645 !important ;
-}
-.my-bor .van-nav-bar__title {
-  color: #fff !important;
-}
-.my-bor .van-nav-bar .van-icon, .my-bor .van-nav-bar__title {
-color: #fff !important;
-}
 .van-hairline--bottom:after {
   border-bottom-width:0 !important;
 }
