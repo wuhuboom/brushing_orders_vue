@@ -55,7 +55,7 @@
         </div>
         <div
          @click="payMethod"
-          class="w-[calc(100%-52%)] h-[48px] bg-[#000] text-[#fff] flex justify-center items-center rounded-[12px] mr-[-20px] mt-[35px]"
+          class="w-[calc(100%-52%)] h-[48px] bg-[#000] text-[#fff] flex justify-center items-center rounded-[12px] mr-[-20px] mt-[45px]"
         >
           + Bind Wallet
         </div>

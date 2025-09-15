@@ -65,24 +65,27 @@
         <div class="items-con flex overflow-x-scroll p-4">
           <div
             v-for="item in levelList"
-            class="vip-item flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
+            class="vip-item w-[471px] h-[220px] flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
             :style="{
-              background: `${bgMap[item.nameEn]}`,
-              border: `1px solid ${borderMap[item.nameEn]}`,
+              background: `url(${
+                bgMap[item.nameEn]
+              }) 0 0 / 100% 100% no-repeat`,
             }"
           >
             <div class="flex justify-between items-start">
-              <div class="font-bold text-lg">
-                <p class="mt-4 text-[var(--main-color)]">
+              <div class="font-bold text-lg p1-[14px] pt-[5px] pb-[5px]">
+                <!-- <p class="mt-4 text-[var(--main-color)]">
                   {{ $t(item.nameZh) }}
-                </p>
+                </p> -->
+                <img class="w-[52px]" :src="bgMapStart[item.nameEn]" alt="" />
               </div>
 
-              <img class="w-14" :src="bgMapStart[item.nameEn]" alt="" />
+              <!-- <img class="w-14" :src="bgMapStart[item.nameEn]" alt="" /> -->
             </div>
-            <div class="w-[260px] text-xs mt-2 text-black">
+            <div class="w-[260px] text-[10px] text-white pl-[5px]">
               <p
-                class="w-[260px] text-xs mt-2 text-black"
+                style="font-family: PingFang SC, PingFang SC;line-height: 15px; font-weight: normal;"
+                class="w-[260px] text-[10px] text-white"
                 v-html="item.descriptionEn"
               ></p>
             </div>
@@ -92,10 +95,10 @@
       
       
 
-      <div class="w-full bg-[#F0F9FF] mb-[30px]">
+      <!-- <div class="w-full bg-[#F0F9FF] mb-[30px]">
         <div class="test-[#333] text-center text-sm p-4 mb-3">Business Partner</div>
         <img class="w-[90%] mx-auto" src="@/static/images/b.png" alt="" /> 
-      </div>
+      </div> -->
       <img class="w-full" src="@/static/images/a.png" alt="" />
 
       
@@ -117,11 +120,11 @@ import { useRouter } from "vue-router";
 const tradePasswordRef = ref(null);
 
 const bgMap = {
-  VIP1: "linear-gradient( 180deg, #FFFFFF 0%, #FEFCE8 100%)",
-  VIP2: "linear-gradient( 180deg, #FFFFFF 0%, #EFF6FF 100%)",
-  VIP3: "linear-gradient( 180deg, #FFFFFF 0%, #F5F3FF 100%)",
-  VIP4: "linear-gradient( 180deg, #FFFFFF 0%, #ECFDF5 100%)",
-  VIP5: "linear-gradient( 180deg, #FFFFFF 0%, #FDF2F8 100%)",
+  VIP1: new URL("@/static/images/indexbg1.png", import.meta.url).href,
+  VIP2: new URL("@/static/images/indexbg2.png", import.meta.url).href,
+  VIP3: new URL("@/static/images/indexbg3.png", import.meta.url).href,
+  VIP4: new URL("@/static/images/indexbg4.png", import.meta.url).href,
+  VIP5: new URL("@/static/images/indexbg5.png", import.meta.url).href,
 };
 const borderMap = {
   VIP1: "#FDE68A",
