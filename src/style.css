@@ -133,10 +133,10 @@ input {
 }
 
 .login-con .el-input__wrapper ,.register .el-input__wrapper{
-    background: rgba(255, 255, 255, 0.5) !important;
-    border: 1px solid rgba(0, 0, 0, 0.15) !important;
-    border-radius: 6px !important;
-    height: 57px !important;
+    background: #fff !important;
+    /* border: 1px solid rgba(0, 0, 0, 0.15) !important; */
+    border-radius: 26px !important;
+    height: 50px !important;
 }
 
 .login-con .el-input__prefix-inner ,.register .el-input__prefix-inner {
@@ -150,8 +150,8 @@ input {
 }
 
 .login-con .el-input__inner,.register .el-input__inner {
-  text-align: right !important;
-  color: #323233 !important;
+  /* text-align: right !important; */
+  color: #64748B  !important;
 }
 .register .el-form-item--label-top .el-form-item__label {
   color: #333333 !important;
