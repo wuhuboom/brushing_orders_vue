@@ -38,6 +38,7 @@ const onClickLeft = () => router.replace('/profileItem');
 const { t } = useI18n();
 const userInfo = ref({})
 const avatarUrl = ref('')
+const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 const user4 = new URL("@/static/images/user4.png", import.meta.url).href;
 const fileList = ref([]);
 const afterRead = async (file) => {
@@ -50,14 +51,14 @@ const afterRead = async (file) => {
       showSuccessToast(uploadRes.msg || t('图片上传失败'))
       return
     }
-    avatarUrl.value = uploadRes.url
+    avatarUrl.value = uploadRes.fileName
   } catch (error) {
     showSuccessToast(t('网络错误'))
   }
 }
 
 const updateAvatarMethods = async () => {
-    const updateRes = await updateAvatar({ avatar: avatarUrl.value })
+    const updateRes = await updateAvatar({ avatar: VITE_API_IMG_URL+avatarUrl.value })
     if (updateRes.code === 200) {
       showSuccessToast(t('头像更新成功'))
       router.push({
