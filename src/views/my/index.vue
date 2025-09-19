@@ -21,10 +21,32 @@
           <img class="w-[18px] mr-[4px]" src="@/static/images/my5.png" alt="" />
           <span class="text-[#12A58C]">{{ $t("联系我们") }}</span>
         </div>
-        <img
+        <!-- <img
           :src="userInfo.avatar == null ? userImg : userInfo.avatar"
           class="w-[35px] h-[35spx] rounded-full ml-[5px]"
           alt=""
+        /> -->
+        <!-- 接口还没返回 avatar 字段（请求中） -->
+        <div
+          v-if="userInfo.avatar === undefined"
+          class="w-[35px] h-[35px] rounded-full ml-[5px] bg-gray-200 animate-pulse"
+        ></div>
+
+        <!-- 接口返回 null / 空字符串 → 直接显示默认头像（不会闪） -->
+        <img
+          v-else-if="!userInfo.avatar"
+          :src="userImg"
+          class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
+          alt="默认头像"
+        />
+
+        <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
+        <img
+          v-else
+          :src="userInfo.avatar"
+          class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
+          alt="用户头像"
+          @error="e => e.target.src = userImg"
         />
       </div>
     </div>
@@ -239,7 +261,7 @@ const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
 const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
 const bg5 = new URL("@/static/images/bg5.png", import.meta.url).href;
-import { onMounted, ref } from "vue";
+import { onMounted, ref,watch  } from "vue";
 import { useRouter } from "vue-router";
 import { copyContent } from "../../util/utils";
 const userStore = useUserStore();
@@ -303,7 +325,37 @@ const onClickLeft = () => {
   });
 };
 
-const copy = (text) => {};
+const loading = ref(true);
+const finalSrc = ref("");
+
+// 只在 userInfo.avatar 第一次变化时处理
+watch(
+  () => userInfo.value.avatar,
+  (val) => {
+    if (!val) {
+      // 接口返回 null 或空 → 用默认头像
+      finalSrc.value = userImg;
+      loading.value = false;
+    } else {
+      // 有头像地址 → 尝试加载一次
+      finalSrc.value = val;
+      loading.value = true;
+    }
+  },
+  { immediate: true }
+);
+
+const onLoad = () => {
+  loading.value = false;
+};
+
+const onError = () => {
+  finalSrc.value = userImg;
+  loading.value = false;
+};
+
+
+
 onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
