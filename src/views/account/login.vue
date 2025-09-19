@@ -15,7 +15,7 @@
       <!-- </div> -->
     </div>
 
-    <div class="flex flex-col items-center pt-10 mt-[50px] pb-3">
+    <div class="flex flex-col items-center pt-10 mt-[80px] pb-3">
       <img
         src="@/static/images/logo.png"
         alt=""
@@ -84,15 +84,14 @@
     </div>
     
     <div class="w-full mt-4 text-sm text-white text-center pt-2">
-        <p class="text-sm text-center w-full pb-2" @click="toRegister">
-          <!-- {{ $t("还没有账户?")}} -->
+        <!-- <p class="text-sm text-center w-full pb-2" @click="toRegister">
+          {{ $t("还没有账户?")}}
           <span class="text-white underline">{{ $t("立即注册") }}</span>
-        </p>
+        </p> -->
 
-        <!-- <div class="text-sm text-center w-full" @click="customer">
-          {{ $t("无法登录?")
-          }}<span class="text-white">{{ $t("请联系我们的用户支持") }}</span>
-        </div> -->
+        <div class="text-sm text-center w-full" @click="toRegister">
+          Don't have an account?<span class="text-[#F97316] text-[14px] pl-[2px]">Sign up</span>
+        </div>
     </div>
     <Lang ref="langRef"></Lang>
     <ContactUs ref="ContactUsRef"></ContactUs>
