@@ -186,14 +186,21 @@ color: #000 !important;
   line-height: 44px;
   padding-left: 5px;
 }
- .van-tabs__nav {
+ /* .van-tabs__nav {
   background: #e3e3e3 !important; 
    
-}
+} */
 
 .el-form-item__label {
   padding-left: 23px !important;
   font-weight: bold;
   color: #000;
   font-size: 16px !important;
+}
+
+.records .van-tabs__nav {
+  background: #fafafa !important;
+}
+.records .van-tab--active {
+  color:  #F97316 !important;
 }

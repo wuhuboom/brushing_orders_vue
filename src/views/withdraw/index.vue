@@ -19,30 +19,31 @@
       </div>
     </div> -->
 
-    <van-tabs color="#ff9662" class="mt-[45px]"  @change="swichTab" v-model:active="active">
+    <van-tabs color="#000" class="mt-[45px]"  @change="swichTab" v-model:active="active">
       <van-tab :title="$t('提取')"></van-tab>
       <van-tab :title="$t('历史')"></van-tab>
     </van-tabs>
+    <div class="h-[10px] bg-[#fff]"></div>
     <div v-if="active === 0">
       <div class="p-4 box-border flex flex-col">
         <div
           class="flex flex-col justify-between p-4 box-border rounded-xl bg-[url(@/static/images/bg3.png)] bg-cover shadow mb-4"
           style="background-size: 100% 100%"
         >
-          <div class="text-white font-bold text-sm">
+          <div class="text-white text-sm pt-[28px]">
             {{ $t("账户金额") }}
           </div>
-          <div class="flex mt-4">
+          <div class="flex mt-4 mb-[30px]">
             <div class="text-white font-bold text-[34px] text-bold flex items-center">
               {{ amount }}
             </div>
-            <div
+            <!-- <div
               class="text-white font-bold text-sm flex items-center ml-1 pt-[12px]"
             >
               {{ $t("美元") }}
-            </div>
+            </div> -->
           </div>
-          <div class="text-white font-bold text-xs pt-4 ">
+          <div class="text-white text-[14px] pt-4 ">
             {{ $t("您将在一小时内收到提款") }}
           </div>
         </div>
@@ -56,7 +57,7 @@
         class="w-full p-4"
       >
         <el-form-item
-          :label="$t('提款金额')"
+         
           prop="amount"
           label-position="top"
         >
@@ -68,7 +69,7 @@
             size="large"
            
           >
-            <template #append>
+            <!-- <template #append>
               <el-button
                 type="primary"
                 class="router"
@@ -77,10 +78,10 @@
               >
                 {{ $t("全部") }}
               </el-button>
-            </template>
+            </template> -->
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('交易密码')" label-position="top">
+        <el-form-item  label-position="top">
           <el-input
             v-model="ruleForm.tradePassword"
             :placeholder="$t('交易密码')"
@@ -91,8 +92,8 @@
           />
         </el-form-item>
       </el-form>
-      <div class="w-full pl-5 pr-5">
-        <van-button color="#ff9662" @click="getWithdrawal" class="w-full">{{
+      <div class="w-full pl-5 pr-5" style="position: fixed; bottom: 50px;">
+        <van-button color="#000" @click="getWithdrawal" class="w-full">{{
           $t("提取")
         }}</van-button>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-[#f1f1f1] min-h-[100vh] h-full">
+  <div class="w-full bg-[#fff] min-h-[100vh] h-full">
     <van-sticky type="primary">
       <van-nav-bar
         :title="$t('定金')"
@@ -9,10 +9,20 @@
       />
     </van-sticky>
 
-    <van-tabs color="#ff9662" class="mt-[45px]"  @change="swichTab" v-model:active="active">
+    <!-- <van-tabs color="#ff9662" class="mt-[45px]"  @change="swichTab" v-model:active="active">
       <van-tab :title="$t('定金')"></van-tab>
       <van-tab :title="$t('历史')"></van-tab>
-    </van-tabs>
+    </van-tabs> -->
+    <div
+      class="bg-white mt-[65px] flex justify-between items-center py-[15px]  text-[#757575]"
+    >
+      <div class="tab" :class="{ active: active === 0 }" @click="swichTab(0)">
+        {{ $t("提取") }}
+      </div>
+      <div class="tab" :class="{ active: active === 1 }" @click="swichTab(1)">
+        {{ $t("历史") }}
+      </div>
+    </div>
 
     <div v-if="active === 0">
       <div class="p-4 box-border flex flex-col">
@@ -33,13 +43,13 @@
         </div>
       </div>
       <div class="w-full mt-2 pl-5 pr-5">
-        <van-button color="#ff9662" size="large" class="w-full" @click="customer">{{
+        <van-button color="#000" size="large" class="w-full" @click="customer">{{
           $t("联系客服")
         }}</van-button>
       </div>
     </div>
     <div v-else>
-      <div class="w-full pl-6 pr-6 pt-6 box-border flex flex-col">
+      <div class="w-full  pt-6 box-border flex flex-col">
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
           <van-list
             v-model:loading="loading"
@@ -49,19 +59,21 @@
           >
             <van-cell v-for="item in list" :key="item" :title="item">
               <div
-                class="w-full mb-4 bg-[#fff] rounded-lg flex flex-col p-3"
+                class="w-full pl-[16px] mb-4 rounded-lg flex flex-col p-3"
+                style="border-bottom: 2px solid #f5f5f5;"
               >
                 <div class="flex justify-between">
-                  <div class="text-sm  text-[#000] font-bold">
+                  <div class="text-[14px]  text-[#757575] ">
                     {{ item.code }}
                   </div>
                 </div>
-                <div class="w-full flex items-center justify-between mt-2">
-                  <div class="text-[#999] text-sm flex items-center justify-center">
+                <div class="text-[#000] text-[18px] font-semibold py-[10px]">+{{ item.amout }}</div>
+                <!-- <div class="w-full flex items-center justify-between mt-2"> -->
+                  <div class="text-[#9E9E9E] text-sm">
                     {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
                   </div>
-                  <div class="text-[#000] font-semibold text-base flex items-center justify-center">+{{ item.amout }}</div>
-                </div>
+                  
+                <!-- </div> -->
               </div>
             </van-cell>
           </van-list>
@@ -150,16 +162,17 @@ const onClickLeft = () => history.back();
   height: 100%;
   padding: 15px 0;
   text-align: center;
+  font-size: 16px;
   /* padding-bottom: 10px; */
 }
 
 .tab.active {
   color: #000;
   font-weight: bold;
-  border-bottom: 2px solid #206645;
+  border-bottom: 2px solid #000000 ;
 }
 
 .tab.active::after {
-  background-color: #206645; /* 激活状态的下划线颜色 */
+  background-color: #000000; /* 激活状态的下划线颜色 */
 }
 </style>

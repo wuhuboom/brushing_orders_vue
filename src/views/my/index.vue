@@ -1,11 +1,68 @@
 <template>
   <div class="my-bor w-full flex flex-col pb-6 bg-[#f1f1f1]">
-    <van-nav-bar
+    <!-- <van-nav-bar
       :title="$t('我的')"
       fixed
       left-arrow
       @click-left="onClickLeft"
-    />
+    /> -->
+    <div class="flex items-center relative bg-[#000]">
+      <!-- 左侧箭头 -->
+      <div class="absolute left-3" @click="onClickLeft">
+        <van-icon name="arrow-left" color="#fff" size="24px" />
+      </div>
+      <!-- 中间标题 -->
+      <div class="mx-auto text-white text-[22px] py-[24px]">My</div>
+    </div>
+
+    
+    <div class="w-full mx-auto p-4 box-border flex flex-col relative">
+        <div class="flex pl-1 pr-1">
+          <img
+            :src="userInfo.avatar == null ? userImg : userInfo.avatar"
+            class="w-[4rem] h-[4rem] mr-4"
+            alt=""
+          />
+          <div class="flex flex-col justify-start">
+            <div class="flex items-center">
+              <div class="text-[#fff] font-semibold text-lg">
+                {{ userInfo.username }}
+              </div>
+            </div>
+            <div class="text-[#fff] text-xs whitespace-nowrap mt-2" @click="copyContent(userInfo.inviteCode)">
+                <span class="opacity-50">{{ $t("邀请码") }}:</span>
+                <span class="text-[#fff] font-semibold">{{
+                  userInfo.inviteCode
+                }}</span>
+              </div>
+          </div>
+        </div>
+        
+        <div class="mt-3 w-full flex flex-col items-center pl-1 pr-1">
+          <div class="w-full flex justify-between">
+            <div class="text-[#fff] text-xs whitespace-nowrap">
+              <span class="opacity-50"> {{ $t("信用评分") }}: </span>
+            </div>
+            <div class="ml-2 text-xs text-[#fff] font-semibold">
+              {{ userInfo.creditScore }}%
+            </div>
+          </div>
+          <div class="w-full mt-2">
+            <van-progress
+              color="#ff9662"
+              :percentage="userInfo.creditScore"
+              :show-pivot="false"
+              stroke-width="8"
+            />
+          </div>
+        </div>
+    </div>
+
+
+
+
+
+
     <div
       class="w-[90%] mt-[90px] mx-auto flex flex-col rounded-xl bg-[url(@/static/images/profile_bg2.png)] bg-cover"
     >

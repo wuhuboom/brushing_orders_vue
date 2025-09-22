@@ -1,7 +1,16 @@
 <template>
-  <div class="bg-[#151514] px-[16px]">
+  <div style="min-height: 100vh;" class="bg-[#151514]">
     <!-- <HeaderTop></HeaderTop> -->
-    <div class="w-full mx-auto rounded-b-[20px]">
+    <div class="flex items-center relative  bg-[#000] ">
+      <!-- 左侧箭头 -->
+      <!-- <div class="absolute left-3" @click="toLogin">
+        <van-icon name="arrow-left" color="#fff" size="24px" />
+      </div> -->
+      <!-- 中间标题 -->
+      <div class="mx-auto text-white text-[22px] py-[24px] ">Starting</div>
+    </div>
+    <div class="bg-[#151514] px-[16px]">
+      <div class="w-full mx-auto rounded-b-[20px]">
       <div class="w-full h-full py-5">
         <div class="flex justify-between mt-4 mb-4 items-center">
           <div class="flex">
@@ -27,10 +36,10 @@
         </div>
       </div>
     </div>
-    <div class="w-full bg-[#1F1F1F] relative pt-[20px] pb-[21px] px-[10px] rounded-[8px]">
-      <div
-        class="max-w-4xl mx-auto flex justify-between text-gray-400"
-      >
+    <div
+      class="w-full bg-[#1F1F1F] relative pt-[20px] pb-[21px] px-[10px] rounded-[8px]"
+    >
+      <div class="max-w-4xl mx-auto flex justify-between text-gray-400">
         <!-- Wallet Balance -->
         <div class="flex-1">
           <p class="text-[12px] text-[#B2B2B2]">Wallet Balance</p>
@@ -43,7 +52,9 @@
         <!-- Hold Amount -->
         <div class="flex-1">
           <p class="text-[12px] text-[#B2B2B2]">Hold Amount</p>
-          <p class="text-[20px] text-[#CEB04E] mt-1">{{ userInfo.frozenBalance }}</p>
+          <p class="text-[20px] text-[#CEB04E] mt-1">
+            {{ userInfo.frozenBalance }}
+          </p>
         </div>
 
         <!-- 分隔线 -->
@@ -52,34 +63,33 @@
         <!-- Commission -->
         <div class="flex-1">
           <p class="text-[12px] text-[#B2B2B2]">Commission</p>
-          <p class="text-[20px] text-[#CEB04E] mt-1">{{ userInfo.commission }}</p>
+          <p class="text-[20px] text-[#CEB04E] mt-1">
+            {{ userInfo.commission }}
+          </p>
         </div>
       </div>
     </div>
-
     <div class="w-full bg-[#151514] relative">
-      <div class="w-[100%]  mx-auto">
+      <div class="w-[100%] mx-auto">
         <div
-         style="border: 1px solid #CEB04E;"
-          class="mt-5 flex flex-col  box-border  rounded-xl"
+          style="border: 1px solid #ceb04e"
+          class="mt-5 flex flex-col box-border rounded-xl"
         >
-          <div class="w-full grid grid-cols-3 " >
-              <template v-for="(item, index) in goodsList" :key="index">
-                <div
-                    class="m-[7px] w-[103px] h-[103px]"
-                    style="
-                      border:1px dashed #5a5a5a;
-                    "
-                  >
-                      <img
-                        :src="`${url}${item.coverUrl}`"
-                        class="w-[103px] h-[103px]"
-                        style="border-radius: 8px;"
-                        alt=""
-                      />
-                  </div>
-              </template>
-            </div>
+          <div class="w-full grid grid-cols-3">
+            <template v-for="(item, index) in goodsList" :key="index">
+              <div
+                class="m-[7px] w-[103px] h-[103px]"
+                style="border: 1px dashed #5a5a5a"
+              >
+                <img
+                  :src="`${url}${item.coverUrl}`"
+                  class="w-[103px] h-[103px]"
+                  style="border-radius: 8px"
+                  alt=""
+                />
+              </div>
+            </template>
+          </div>
         </div>
 
         <div
@@ -94,7 +104,7 @@
       <div class="mx-auto">
         <div class="mt-4 rounded-lg">
           <div class="flex flex-col p-4 box-border relative rounded-[10px]">
-            <div class="mb-1 text-base" style="color: #F77115 ">Notice:</div>
+            <div class="mb-1 text-base" style="color: #f77115">Notice:</div>
             <div class="text-[#A5A5A5] text-[12px]">
               Online Support Hours 10:00 - 22:59 <br />
               Please contact online support for your assistance!
@@ -103,6 +113,7 @@
         </div>
       </div>
       <div class="mt-6 pb-4"></div>
+    </div>
     </div>
     <Footer name="/starting"></Footer>
     <van-popup

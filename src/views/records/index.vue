@@ -1,11 +1,21 @@
 <template>
-  <div class="bg-[#f5f5f5] records">
-    <HeaderTop></HeaderTop>
-    <van-tabs color="#ff9662" @change="swichTab" v-model:active="active">
+  <div class="bg-[#fafafa] records">
+    <!-- <HeaderTop></HeaderTop> -->
+    <div class="flex items-center relative bg-[#000]">
+      <!-- 左侧箭头 -->
+      <!-- <div class="absolute left-3" @click="toLogin">
+        <van-icon name="arrow-left" color="#fff" size="24px" />
+      </div> -->
+      <!-- 中间标题 -->
+      <div class="mx-auto text-white text-[22px] py-[24px]">Employee level</div>
+    </div>
+
+    <van-tabs color="#F97316" @change="swichTab" v-model:active="active">
       <van-tab :title="$t('全部')"></van-tab>
       <van-tab :title="$t('待办')"></van-tab>
       <van-tab :title="$t('完成')"></van-tab>
     </van-tabs>
+    <div class="h-[1px] w-full bg-[#E5E5E5] mt-[9px]"></div>
     <div class="h-[80vh] overflow-y-scroll">
       <div class="w-full pl-6 pr-6 pt-6 box-border flex flex-col">
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
@@ -16,9 +26,11 @@
             @load="onLoad"
           >
             <van-cell v-for="item in list" :key="item" :title="item">
-              <div>
+              <div
+                class="bg-[#fff] px-[16px] pt-[18px]  mb-[16px] rounded-xl"
+              >
                 <div class="w-full flex justify-between items-center mb-2">
-                  <div class="text-[#999] text-sm font-medium">
+                  <div class="text-[#6B7280] text-[14px] font-medium">
                     {{
                       formatWithTimezone(
                         item.createTime,
@@ -27,9 +39,10 @@
                     }}
                   </div>
                   <div
-                    class="text-white text-xs rounded p-1 bg-[#ff9662] font-medium"
+                    class="text-white text-xs rounded-[16px] p-2 bg-[#F97316] font-medium"
                     :style="{
-                      backgroundColor: Number(item.status) === 2 ? '#7E8FA2' : '#ff9662'
+                      backgroundColor:
+                        Number(item.status) === 2 ? '#E5E7EB' : '#F97316',
                     }"
                   >
                     {{
@@ -42,12 +55,11 @@
                   </div>
                 </div>
                 <div
-                  class="w-full flex flex-col mb-6 bg-[#fff] overflow-hidden rounded-xl p-3 box-border"
-                  style="border: 1px solid rgb(240, 240, 240)"
+                  class="w-full flex flex-col mb-6 bg-[#fff] overflow-hidden p-3 box-border"
                 >
                   <div class="flex">
                     <div
-                      class="w-[6rem] h-[6rem] overflow-hidden rounded-md flex-shrink-0 mr-4"
+                      class="w-[5rem] h-[5rem] overflow-hidden rounded-md flex-shrink-0 mr-4"
                     >
                       <img
                         :src="VITE_API_IMG_URL + item.coverUrl"
@@ -58,52 +70,64 @@
                     <div class="flex flex-col h-[6rem] justify-between">
                       <div class="flex flex-col">
                         <div
-                          class="text-[#999] text-base font-semibold whitespace-nowrap w-[52vw] overflow-hidden text-ellipsis"
+                          class="text-[#1F2937] text-base font-semibold overflow-hidden"
+                          style="
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            word-break: break-word; /* 允许单词内换行 */
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                          "
                         >
                           {{ item.goodsName }}
                         </div>
-                        <div class="text-[#999] text-sm mt-2">
+                        <div class="text-[#F97316] text-[16px] mt-2">
                           <span class="pr-[5px]">{{ $t("美元") }}</span
                           >{{ item.price }}
                         </div>
                       </div>
-                      <van-rate
+                      <!-- <van-rate
                         v-model="value"
                         :size="20"
                         color="#ffd21e"
                         void-icon="star"
                         void-color="#eee"
-                      />
+                      /> -->
                     </div>
                   </div>
-                  <div class="mt-5 grid grid-cols-4 gap-2">
-                    <div class="col-span-2 flex flex-col">
-                      <div class="text-xs text-[#999] font-medium">
+                  <div class="h-[1px] w-full bg-[#F3F4F6] mt-[10]"></div>
+                  <div class="mt-5 flex justify-between">
+                    <!-- 左侧 -->
+                    <div class="flex flex-col">
+                      <div class="text-[14px] text-[#6B7280] font-medium">
                         {{ $t("总金额") }}
                       </div>
-                      <div class="mt-2 text-sm text-[#ff9662] font-semibold">
+                      <div class="mt-2 text-[18px] text-[#1F2937] font-semibold">
                         {{ item.price }} {{ $t("美元") }}
                       </div>
                     </div>
-                    <div class="col-span-2 flex flex-col">
-                      <div class="text-xs text-[#999] font-medium">
+
+                    <!-- 右侧 -->
+                    <div class="flex flex-col">
+                      <div class="text-[14px] text-[#6B7280] font-medium">
                         {{ $t("佣金") }}
                       </div>
-                      <div class="mt-2 text-sm text-[#ff9662] font-semibold">
+                      <div class="mt-2 text-[18px] text-[#1F2937] font-semibold">
                         {{ item.commission }} {{ $t("美元") }}
                       </div>
                     </div>
-                    <div
-                      class="col-span-4 flex justify-end items-center mt-2"
-                      v-if="item.status == '2'"
+                  </div>
+                  <!-- 底部按钮 -->
+                  <div class="flex justify-end mt-4"  v-if="item.status == '2'">
+                    <van-button
+                      color="#F97316"
+                      size="small"
+                      round
+                      @click="submit(item)"
                     >
-                      <van-button
-                        color="#ff9662"
-                        size="small"
-                        @click="submit(item)"
-                        >{{ $t("提交") }}</van-button
-                      >
-                    </div>
+                      {{ $t("提交") }}
+                    </van-button>
                   </div>
                 </div>
               </div>
@@ -202,7 +226,7 @@
         >
           <div class="text-[#666] text-sm">{{ $t("编号") }}</div>
           <div class="text-[#ff9662] text-xs font-bold">
-             {{ goodsData.orderNo }}
+            {{ goodsData.orderNo }}
           </div>
         </div>
         <div class="w-full mt-4">

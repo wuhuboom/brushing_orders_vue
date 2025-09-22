@@ -17,7 +17,7 @@
           <div class="flex items-center text-black text-sm font-medium">
             {{ $t("修改个人信息") }}
           </div>
-          <van-icon name="arrow" color="#206645" size="18px" />
+          <!-- <van-icon name="arrow" color="#206645" size="18px" /> -->
         </div>
         <div
           class="flex items-center justify-between py-4 mx-[15px] box-border border-b-[1px] border-[#f3f3f3]"
@@ -41,19 +41,19 @@
           class="flex items-center justify-between p-4 box-border border-b-[2px] border-[#fff]"
           @click="toPage('/updatePassword')"
         >
-          <div class="flex items-center text-black text-sm">
+          <div class="flex items-center text-black text-sm font-medium">
             {{ $t("更新密码") }}
           </div>
-          <van-icon name="arrow" color="#206645" size="18px" />
+          <!-- <van-icon name="arrow" color="#206645" size="18px" /> -->
         </div>
         <div
           class="flex items-center justify-between p-4 box-border border-b-[2px] border-[#fff]"
           @click="toPage('/updateTransactionPassword')"
         >
-          <div class="flex items-center text-black text-sm">
+          <div class="flex items-center text-black text-sm font-medium">
             {{ $t("更新交易密码") }}
           </div>
-          <van-icon name="arrow" color="#206645" size="18px" />
+          <!-- <van-icon name="arrow" color="#206645" size="18px" /> -->
         </div>
       </div>
     </div>

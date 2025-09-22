@@ -11,14 +11,14 @@
     <div class="w-full pl-6 pr-6 mt-6 box-border flex flex-col">
       <div class="w-full flex flex-col">
         <div class="w-full flex flex-col items-center justify-center mt-20">
-          <van-uploader v-model="fileList" :after-read="afterRead" reupload max-count="1" />
+          <van-uploader v-model="fileList" :after-read="afterRead" reupload preview-size="130px" max-count="1" />
           <div class="text-[#666] text-sm mt-2 flex items-center">
             <div class="mr-1">{{$t('点击更改')}}</div>
              <img src="@/static/images/edit.png" class="w-[16px] h-[16px]" alt="">
           </div>
 
-           <div class="w-[80%] fixed bottom-[30px]  mt-4">
-                <van-button color="#206645" class="w-full" @click="updateAvatarMethods">{{$t('更新')}}</van-button>
+           <div class="w-[90%] fixed bottom-[30px]  mt-4">
+                <van-button color="#000" class="w-full" style="height: 56px;border-radius: 8px;" @click="updateAvatarMethods">{{$t('更新')}}</van-button>
             </div>
         </div>
       </div>
@@ -40,6 +40,7 @@ const userInfo = ref({})
 const avatarUrl = ref('')
 const user4 = new URL("@/static/images/user4.png", import.meta.url).href;
 const fileList = ref([]);
+const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 const afterRead = async (file) => {
   try {
     // 1. 先上传文件
@@ -50,14 +51,14 @@ const afterRead = async (file) => {
       showSuccessToast(uploadRes.msg || t('图片上传失败'))
       return
     }
-    avatarUrl.value = uploadRes.url
+    avatarUrl.value = uploadRes.fileName
   } catch (error) {
     showSuccessToast(t('网络错误'))
   }
 }
 
 const updateAvatarMethods = async () => {
-    const updateRes = await updateAvatar({ avatar: avatarUrl.value })
+    const updateRes = await updateAvatar({ avatar: VITE_API_IMG_URL+avatarUrl.value })
     if (updateRes.code === 200) {
       showSuccessToast(t('头像更新成功'))
       router.push({
@@ -69,9 +70,12 @@ const updateAvatarMethods = async () => {
 }
 window.addEventListener('updateTrade', (e) => {
     getUserGetInfo();
+
 })
 
 const getUserGetInfo = () =>{
+
+  fileList.value = [];
     userGetInfo().then((res) => {
         userInfo.value = res.data;
         console.log(userInfo.value.avatar)

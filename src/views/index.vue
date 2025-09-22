@@ -64,65 +64,54 @@
     </div>
 
     <!-- 产品介绍   -->
-    <div class="p-4">
+    <div >
       <!-- 标题 -->
-      <div class="flex justify-between items-center mb-[25px]">
+      <div class="flex justify-between items-center mb-[25px] p-4">
         <h2 class="text-[20px] font-semibold">Employee level</h2>
         <span class="text-[14px] text-[#F89C0D] cursor-pointer" @click="toVips">View More</span>
       </div>
-      <!-- 轮播 -->
-      <van-swipe
-        class="my-swipe"
-        :show-indicators="false"
-        :width="290"
-        :initial-swipe="1"
-        @change="onChange"
-      >
-        <van-swipe-item
-          v-for="(item, index) in cards"
-          :key="index"
-          class="transition-all duration-300"
-          :class="current === index ? 'scale-100' : 'scale-90 opacity-70'"
+      <div class="swiper-container">
+        <swiper
+          :modules="[EffectCoverflow, Pagination]"
+          effect="coverflow"
+          grab-cursor="true"
+          centered-slides="true"
+          slides-per-view="auto"
+          :space-between="40"
+          :loop="true"
+          :pagination="{
+            el: '.custom-pagination',
+            clickable: true,
+          }"
+          :coverflow-effect="{
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false
+          }"
+          class="mySwiper"
         >
-          <div
-            class="relative w-[285px] h-[333px] rounded-[15px] overflow-hidden shadow-xl"
-          >
-            <!-- 背景图 -->
-            <img :src="item.bg" alt="" class="w-full h-full object-cover" />
-            <!-- 遮罩层 -->
-            <div class="absolute inset-0 bg-black/40"></div>
-            <!-- 内容 -->
-            <div class="absolute inset-0 p-5 flex flex-col text-white">
-              <img
-                @click="toMy"
-                src="@/static/images/logowhite.png"
-                class="w-[30px] h-[30px] mt-[20px]"
-              />
-              <h3 class="text-[20px] font-bold mb-[21px] pt-[13px]">
-                {{ item.title }}
-              </h3>
-              <ul class="space-y-2 text-sm leading-snug">
-                <li
-                  v-for="(line, i) in item.content"
-                  :key="i"
-                  class="flex items-start"
-                >
-                  <span class="text-[14px] leading-[1] mr-2">•</span>
-                  <span>{{ line }}</span>
-                </li>
-              </ul>
+          <swiper-slide v-for="(item, index) in levelList" :key="index">
+            <div
+              class="relative w-[285px] h-[333px] rounded-[15px] overflow-hidden shadow-xl"
+            >
+              <!-- 背景图 -->
+              <img :src="item.bg" alt="" class="w-full h-full object-cover" />
+              <!-- 遮罩层 -->
+              <div class="absolute inset-0 bg-black/40"></div>
+              <!-- 内容 -->
+              <div class="absolute inset-0 p-5 flex flex-col text-white">
+                <h3 class="text-[20px] font-bold mb-[21px] pt-[13px]">
+                  {{ item.nameEn }}
+                </h3>
+                <div v-html="item.descriptionEn"></div>
+              </div>
             </div>
-          </div>
-        </van-swipe-item>
-      </van-swipe>
-      <!-- 自定义指示器 -->
-      <div class="flex justify-center mt-4 space-x-2">
-        <span
-          v-for="(item, i) in cards"
-          :key="i"
-          class="h-1 w-[50px] bg-gray-300"
-          :class="current === i ? 'bg-orange-500' : 'bg-gray-300'"
-        ></span>
+          </swiper-slide>
+        </swiper>
+        <!-- 自定义分页指示器 -->
+        <div class="custom-pagination mt-4 flex justify-center space-x-2"></div>
       </div>
     </div>
 
@@ -184,58 +173,24 @@ import { useRouter } from "vue-router";
 const tradePasswordRef = ref(null);
 const ContactUsRef = ref(null);
 const userInfo = ref({});
-const vip_bg1 = new URL("@/static/images/vip_bg1.png", import.meta.url).href;
-const vip_bg2 = new URL("@/static/images/vip_bg2.png", import.meta.url).href;
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import { EffectCoverflow, Pagination } from "swiper/modules";
+import { list } from "postcss";
 
-const bgMap = {
-  VIP1: new URL("@/static/images/vip_bg1.png", import.meta.url).href,
-  VIP2: new URL("@/static/images/vip_bg1.png", import.meta.url).href,
-  VIP3: new URL("@/static/images/vip_bg1.png", import.meta.url).href,
-  VIP4: new URL("@/static/images/vip_bg2.png", import.meta.url).href,
-};
-const bgMapStart = {
-  VIP1: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135431630339970.png",
-  VIP2: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135444978440962.png",
-  VIP3: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135461467660218.png",
-  VIP4: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/rcc/1683135471230297283.png",
-};
+// const vip_bg1 = new URL("@/static/images/vip_bg1.png", import.meta.url).href;
+// const vip_bg2 = new URL("@/static/images/vip_bg2.png", import.meta.url).href;
 
-const vanList = [
-  {
-    name: "Pan Pacific",
-    img: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385275613579878400.png",
-  },
-  {
-    name: "Holiday Inn Express & Suites At Seaworld",
-    img: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385266569653821440.png",
-  },
-  {
-    name: "Hilton City Santa Fe",
-    img: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385266668555509760.png",
-  },
-  {
-    name: "Mowbray Court Hotel",
-    img: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385277575801118720.png",
-  },
-  {
-    name: "Biz Cevahir Hotel Sultanahmet",
-    img: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385287369291243520.png",
-  },
-  {
-    name: "Country Mile Escape",
-    img: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385269376146513920.png",
-  },
-  {
-    name: "Di-Ann City Centre Hotel",
-    img: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385264768284139520.png",
-  },
-  {
-    name: "Campus Boutique Hotel",
-    img: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/hotel/202402145385271272391352320.png",
-  },
+const bgImages  = [
+  new URL("@/static/images/bgImages1.png", import.meta.url).href,
+  new URL("@/static/images/bgImages2.png", import.meta.url).href,
+  new URL("@/static/images/bgImages3.png", import.meta.url).href,
+  new URL("@/static/images/bgImages4.png", import.meta.url).href,
 ];
 
-const current = ref(1);
+const current = ref(0);
 
 const cards = ref([
   {
@@ -276,6 +231,8 @@ const cards = ref([
     ],
   },
 ]);
+
+
 
 const onChange = (index) => {
   current.value = index;
@@ -361,6 +318,12 @@ const level = async () => {
       );
     }
   });
+  levelList.value = levelList.value.map((item, index) => {
+  return {
+    ...item,
+    bg: bgImages[index % bgImages.length] // 按顺序循环使用
+  };
+});
 };
 const toMy = () => {
   router.push({ path: "/my" });
@@ -378,10 +341,6 @@ const getData = async () => {
   noticeContent.value = res.rows.length > 0 ? res.rows[0].noticeContent : "";
 };
 
-// 计算属性，去除所有HTML标签
-const pureNoticeContent = computed(() => {
-  return noticeContent.value.replace(/<\/?[^>]+(>|$)/g, "");
-});
 
 window.addEventListener("updateTrade", (e) => {
   getUserGetInfo();
@@ -400,37 +359,41 @@ onMounted(() => {
 });
 </script>
 <style>
-.small-dot {
-  font-size: 8px; /* 调整大小 */
-  line-height: 1;
-  vertical-align: middle;
-  display: inline-block; /* 保证可以控制尺寸/对齐 */
-  /* 如需更细微缩放也可用 transform: scale(0.8); */
+.swiper-container {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 40px;
 }
 
-.my-swipe {
+.mySwiper {
   width: 100%;
-  padding: 0 50px;
-  box-sizing: border-box;
 }
 
-/* .my-swipe .van-swipe-item {
-  color: #fff;
-  font-size: 20px;
-  line-height: 360px;
-  text-align: center;
-  background-color: #39a9ed;
-} */
-/* .my-swipe .van-swipe-item img {
-  width: 100%;
-  height: 100%;
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 285px; /* 卡片宽度 */
+  height: 333px; /* 卡片高度 */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.7; /* 默认偏暗 */
 }
-.my-swipe2 .van-swipe-item {
-  width: 160px;
-  height: 210px;
+
+.swiper-slide-active {
+  transform: scale(1.05); /* 中间放大 */
+  opacity: 1 !important; /* 中间高亮 */
 }
-.my-swipe2 .van-swipe-item img {
-  width: 100%;
-  height: 100%;
-} */
+
+/* 自定义指示器样式 */
+.custom-pagination .swiper-pagination-bullet {
+  width: 30px;
+  height: 4px;
+  border-radius: 2px;
+  background: #d1d5db; /* 默认灰色 */
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  background: #f97316; /* 选中橙色 */
+}
 </style>
