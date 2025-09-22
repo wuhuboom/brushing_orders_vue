@@ -1,5 +1,5 @@
 <template>
-  <div class="updataPass container w-full min-h-[100vh] bg-white">
+  <div class="updataPass container w-full min-h-[100vh] bg-[#F5F5F5]">
     <van-sticky type="primary">
       <van-nav-bar
         :title="$t('更新交易密码')"
@@ -16,7 +16,7 @@
               label-align="top"
               label-width="150"
               v-model="ruleForm.oldTradePassword"
-              :label="$t('旧密码')"
+              label=""
               type="password"
               :placeholder="$t('旧密码')"
               
@@ -30,7 +30,7 @@
               label-width="150"
               type="password"
               v-model="ruleForm.newTradePassword"
-              :label="$t('新密码')"
+              label=""
               :placeholder="$t('新密码')"
               
             />
@@ -43,14 +43,14 @@
               label-width="150"
               type="password"
               v-model="agentNewPassword"
-              :label="$t('确认密码')"
+              label=""
               :placeholder="$t('确认密码')"
             />
           </van-cell-group>
         </div>
       </div>
-      <div class="w-[85%] mx-auto mt-4">
-        <van-button color="#ff9662" size="large" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
+      <div class="w-[90%] fixed bottom-[30px] left-1/2 -translate-x-1/2 mt-4">
+        <van-button color="#000" size="large" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
       </div>
     </div>
   </div>

@@ -180,11 +180,15 @@ color: #000 !important;
 }
 .updataPass .van-field__value {
   background: #FFFFFF;
-  border-radius: 8px;
-  border: 1px solid rgba(32,102,69,0.2);
+  border-radius: 26px 26px 26px 26px;
+  border: 1px solid #E2E8F0;
   height: 44px;
   line-height: 44px;
-  padding-left: 5px;
+  padding-left: 25px;
+}
+.van-field__control::placeholder {
+  color: #64748B  !important; /* 灰色 */
+  font-size: 14px; /* 需要的话可以调大小 */
 }
  /* .van-tabs__nav {
   background: #e3e3e3 !important; 

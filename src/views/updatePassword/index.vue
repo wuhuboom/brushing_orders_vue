@@ -48,8 +48,8 @@
           </van-cell-group>
         </div>
       </div>
-      <div class="w-[85%] mx-auto mt-4">
-        <van-button color="#ff9662" size="large" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
+      <div class="w-[90%] fixed bottom-[30px] left-1/2 -translate-x-1/2 mt-4">
+        <van-button color="#000" size="large" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
       </div>
     </div>
   </div>

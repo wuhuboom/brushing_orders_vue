@@ -1,13 +1,21 @@
 <template>
-  <div class="w-full bg-[#f1f1f1] min-h-[100vh] h-full withdraw">
-    <van-sticky type="primary">
+  <div class="w-full bg-[#F5F5F5] min-h-[100vh] h-full withdraw">
+    <!-- <van-sticky type="primary">
       <van-nav-bar
         :title="$t('提取')"
         fixed
         left-arrow
         @click-left="onClickLeft"
       />
-    </van-sticky>
+    </van-sticky> -->
+    <div class="flex items-center relative bg-[#000]">
+      <!-- 左侧箭头 -->
+      <div class="absolute left-3" @click="onClickLeft">
+        <van-icon name="arrow-left" color="#fff" size="24px" />
+      </div>
+      <!-- 中间标题 -->
+      <div class="mx-auto text-white text-[22px] py-[24px]">{{$t('提取')}}</div>
+    </div>
     <!-- <div
       class="bg-white mt-[65px] flex justify-between items-center py-[15px] px-[73px] text-[#6B7280]"
     >
@@ -19,7 +27,11 @@
       </div>
     </div> -->
 
-    <van-tabs color="#000" class="mt-[45px]"  @change="swichTab" v-model:active="active">
+    <van-tabs
+      color="#000"
+      @change="swichTab"
+      v-model:active="active"
+    >
       <van-tab :title="$t('提取')"></van-tab>
       <van-tab :title="$t('历史')"></van-tab>
     </van-tabs>
@@ -34,7 +46,9 @@
             {{ $t("账户金额") }}
           </div>
           <div class="flex mt-4 mb-[30px]">
-            <div class="text-white font-bold text-[34px] text-bold flex items-center">
+            <div
+              class="text-white font-bold text-[34px] text-bold flex items-center"
+            >
               {{ amount }}
             </div>
             <!-- <div
@@ -43,7 +57,7 @@
               {{ $t("美元") }}
             </div> -->
           </div>
-          <div class="text-white text-[14px] pt-4 ">
+          <div class="text-white text-[14px] pt-4">
             {{ $t("您将在一小时内收到提款") }}
           </div>
         </div>
@@ -56,18 +70,13 @@
         label-width="auto"
         class="w-full p-4"
       >
-        <el-form-item
-         
-          prop="amount"
-          label-position="top"
-        >
+        <el-form-item prop="amount" label-position="top">
           <el-input
             v-model="ruleForm.amount"
             type="number"
             :placeholder="$t('提款金额')"
             autocomplete="off"
             size="large"
-           
           >
             <!-- <template #append>
               <el-button
@@ -81,7 +90,7 @@
             </template> -->
           </el-input>
         </el-form-item>
-        <el-form-item  label-position="top">
+        <el-form-item label-position="top">
           <el-input
             v-model="ruleForm.tradePassword"
             :placeholder="$t('交易密码')"
@@ -92,102 +101,63 @@
           />
         </el-form-item>
       </el-form>
-      <div class="w-full pl-5 pr-5" style="position: fixed; bottom: 50px;">
+      <div class="w-full pl-5 pr-5" style="position: fixed; bottom: 50px">
         <van-button color="#000" @click="getWithdrawal" class="w-full">{{
           $t("提取")
         }}</van-button>
       </div>
     </div>
     <div class="w-[90%] mx-auto" v-else>
-      <div class="flex justify-start mb-[16px] mt-[24px] bg-[#e3e3e3]  leading-[40px] border text-[16px] border-[#ff9662]">
-        <div class="flex-1 flex items-center justify-center px-[16px] " :class="orderActive==0?'bg-[#ff9662] text-[#fff]':'text-[#ff9662]'" @click="changeOrder(0)">{{$t('待审核')}}</div>
-        <div class="flex-1 flex items-center justify-center px-[16px]  " :class="orderActive==1?'bg-[#ff9662] text-[#fff]':'text-[#ff9662]'" @click="changeOrder(1)">{{$t('审核成功')}}</div>
-        <div class="flex-1 flex items-center justify-center px-[16px] " :class="orderActive==2?'bg-[#ff9662] text-[#fff]':'text-[#ff9662]'" @click="changeOrder(2)">{{$t('审核拒绝')}}</div>
+      <div class="flex justify-start mb-[16px] mt-[24px]">
+        <div
+          class="px-[16px] py-[6px] rounded-[15px] mr-[10px]"
+          :class="orderActive == 0 ? 'bg-[#DCFCE7] text-[#166534]' : ''"
+          @click="changeOrder(0)"
+        >
+          {{ $t("待审核") }}
+        </div>
+        <div
+          class="px-[16px] py-[6px] rounded-[15px] mr-[10px]"
+          :class="orderActive == 1 ? 'bg-[#DCFCE7] text-[#166534]' : ''"
+          @click="changeOrder(1)"
+        >
+          {{ $t("审核成功") }}
+        </div>
+        <div
+          class="px-[16px] py-[6px] rounded-[15px] mr-[10px]"
+          :class="orderActive == 2 ? 'bg-[#DCFCE7] text-[#166534]' : ''"
+          @click="changeOrder(2)"
+        >
+          {{ $t("审核拒绝") }}
+        </div>
       </div>
+
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-            <van-list
-              v-model:loading="loading"
-              :finished="finished"
-              :finished-text="$t('没有更多了')"
-              @load="onLoad"
-            >
-              <van-cell v-for="item in list" :key="item" :title="item">
-                <div
-                  class="shadow rounded-xl bg-[#fff] text-[#666]  p-3 box-border flex flex-col m-2"
-                >
-                  <div
-                    class="flex items-center justify-between font-medium pb-2 text-sm"
-                  >
-                    {{ item.code }}
+        <van-list
+          v-model:loading="loading"
+          :finished="finished"
+          :finished-text="$t('没有更多了')"
+          @load="onLoad"
+        >
+          <van-cell v-for="item in list" :key="item" :title="item">
+             <div class="bg-[#fff] flex justify-between items-center px-[16px] py-[16px] rounded-[10px] " :class="item.status==0?'activetab':item.status==1?'activetab1':item.status==2?'activetab2':''">
+                  <div class="flex flex-col">
+                    <div class="text-[#111827] text-[16px] pb-[12px]">-{{ item.amount }}USD</div>
+                    <div class="text-[#6B7280] text-[12px]"> {{ formatWithTimezone(item.applicationTime,userStore.zoneActive.tzName)  }}</div>
                   </div>
-                  <div class="w-full h-[1px] bg-[#EBEBEB]"></div>
-                  <div class="flex flex-col text-[14px] mt-2">
-                    <div class="flex mt-1">
-                      <div class="w-[50%] ">{{ $t("姓名") }}</div>
-                      <div class="w-[50%] ">
-                        :{{ item.username }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("钱包地址") }}</div>
-                      <div class="w-[50%] break-words">
-                        :{{ item.withdrawAddress }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("钱包名称") }}</div>
-                      <div class="w-[50%] break-words">
-                        :{{ item.withdrawType }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("提现金额") }}</div>
-                      <div class="w-[50%] break-words">:{{ item.amount }}</div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("到账金额") }}</div>
-                      <div class="w-[50%] break-words">
-                        :{{ item.creditedAmount }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("费率") }}</div>
-                      <div class="w-[50%] break-words">:{{ item.fee }}</div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("手续费") }}</div>
-                      <div class="w-[50%] break-words">
-                        :{{
-                          (
-                            (item.amount * item.withdrawFee) /
-                            100
-                          ).toFixed(2)
-                        }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("状态") }}</div>
-                      <div class="w-[50%] break-words" :class="item.status == 0?' text-green-500 ':item.status == 0?'text-yellow-500':'text-red-500'">
-                        :{{
+                  <div :class="item.status==0?'text-[#15803D]':item.status==1?'text-[#D97706]':'text-[#B91C1C]'">
+                    {{
                           item.status == 0
                             ? $t("通过")
                             : item.status == 1
                             ? $t("待审核")
                             : $t("拒绝")
                         }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("创建时间") }}</div>
-                      <div class="w-[50%] break-words">
-                        :{{ formatWithTimezone(item.applicationTime,userStore.zoneActive.tzName)  }}
-                      </div>
-                    </div>
                   </div>
                 </div>
-              </van-cell>
-            </van-list>
-          </van-pull-refresh>
+          </van-cell>
+        </van-list>
+      </van-pull-refresh>
     </div>
   </div>
 </template>
@@ -200,12 +170,9 @@ import {
   getTradeConfig,
   userGetInfo,
 } from "../../api/apis";
-import {formatWithTimezone} from "../../util/utils"
+import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
-import {
-  showSuccessToast,
-  showToast
-} from "vant";
+import { showSuccessToast, showToast } from "vant";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -217,7 +184,7 @@ const finished = ref(false);
 const loading = ref(false);
 const amount = ref("");
 const userStore = useUserStore();
-const userInfo = ref({})
+const userInfo = ref({});
 const { t } = useI18n();
 const query = reactive({
   pageNum: 1,
@@ -271,27 +238,31 @@ const swichTab = (value) => {
   }
 };
 const getWithdrawal = () => {
-  if(!userInfo.value.withdrawAddress) {
+  if (!userInfo.value.withdrawAddress) {
     router.push({ path: "/paymentMethods" });
-    return false
+    return false;
   }
-  if (!ruleForm.amount) return showToast(t('请输入金额'));
-  if (ruleForm.amount<TradeInfor.value.minWithdrawAmount || ruleForm.amount>TradeInfor.value.maxWithdrawAmount) return showToast(
-    t("rechargeLimit", { 
-    min: TradeInfor.value.minWithdrawAmount, 
-    max: TradeInfor.value.maxWithdrawAmount 
-  })
-  );
-  if (!ruleForm.tradePassword) return showToast(t('请输入交易密码'));
-  
+  if (!ruleForm.amount) return showToast(t("请输入金额"));
+  if (
+    ruleForm.amount < TradeInfor.value.minWithdrawAmount ||
+    ruleForm.amount > TradeInfor.value.maxWithdrawAmount
+  )
+    return showToast(
+      t("rechargeLimit", {
+        min: TradeInfor.value.minWithdrawAmount,
+        max: TradeInfor.value.maxWithdrawAmount,
+      })
+    );
+  if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
+
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     // router.push({ path: "/my" });
-    swichTab(1)
+    swichTab(1);
   });
 };
 const changeOrder = (value) => {
-  orderActive.value = value
+  orderActive.value = value;
   if (orderActive.value == 0) {
     query.status = "1";
   } else if (orderActive.value == 1) {
@@ -308,18 +279,16 @@ const tradeConfig = async () => {
   TradeInfor.value = res.data;
 };
 
-window.addEventListener('updateTrade', (e) => {
-    userGetInfoMethods();
-})
-const userGetInfoMethods = () =>{
-userGetInfo().then((res) => {
+window.addEventListener("updateTrade", (e) => {
+  userGetInfoMethods();
+});
+const userGetInfoMethods = () => {
+  userGetInfo().then((res) => {
     amount.value = res.data.balance;
     ruleForm.amount = amount.value;
-    userInfo.value = res.data
+    userInfo.value = res.data;
   });
-}
-
-
+};
 
 onMounted(() => {
   tradeConfig();
@@ -328,23 +297,22 @@ onMounted(() => {
 </script>
 <style>
 .withdraw .el-input__wrapper {
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e5e7eb;
 }
-.van-tabs--card>.van-tabs__wrap {
+.van-tabs--card > .van-tabs__wrap {
   line-height: 40px !important;
   height: 40px !important;
 }
 .van-tab {
   line-height: 40px !important;
-
 }
 </style>
 <style scoped>
 .router {
-  border-top-right-radius: 8px;   
-border-bottom-right-radius: 8px; 
-border-top-left-radius: 0;      
-border-bottom-left-radius: 0;  
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 .tab {
   position: relative;
@@ -372,10 +340,10 @@ border-bottom-left-radius: 0;
   background-color: #206645; /* 激活状态的下划线颜色 */
 }
 .activetab {
-  box-shadow: 0px 1px 2px 0px #DCFCE7;
+  box-shadow: 0px 1px 2px 0px #dcfce7;
 }
 .activetab1 {
-  box-shadow: 0px 1px 2px 0px #D97706;
+  box-shadow: 0px 1px 2px 0px #d97706;
 }
 .activetab2 {
   box-shadow: 0px 1px 2px 0px #206645;

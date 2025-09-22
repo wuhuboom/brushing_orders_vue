@@ -1,20 +1,28 @@
 <template>
   <div class="w-full bg-[#fff] min-h-[100vh] h-full">
-    <van-sticky type="primary">
+    <!-- <van-sticky type="primary">
       <van-nav-bar
         :title="$t('定金')"
         fixed
         left-arrow
         @click-left="onClickLeft"
       />
-    </van-sticky>
+    </van-sticky> -->
+    <div class="flex items-center relative bg-[#000]">
+      <!-- 左侧箭头 -->
+      <div class="absolute left-3" @click="onClickLeft">
+        <van-icon name="arrow-left" color="#fff" size="24px" />
+      </div>
+      <!-- 中间标题 -->
+      <div class="mx-auto text-white text-[22px] py-[24px]">{{$t('定金')}}</div>
+    </div>
 
     <!-- <van-tabs color="#ff9662" class="mt-[45px]"  @change="swichTab" v-model:active="active">
       <van-tab :title="$t('定金')"></van-tab>
       <van-tab :title="$t('历史')"></van-tab>
     </van-tabs> -->
     <div
-      class="bg-white mt-[65px] flex justify-between items-center py-[15px]  text-[#757575]"
+      class="bg-white  flex justify-between items-center py-[15px]  text-[#757575]"
     >
       <div class="tab" :class="{ active: active === 0 }" @click="swichTab(0)">
         {{ $t("提取") }}

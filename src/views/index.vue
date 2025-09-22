@@ -68,7 +68,7 @@
       <!-- 标题 -->
       <div class="flex justify-between items-center mb-[25px] p-4">
         <h2 class="text-[20px] font-semibold">Employee level</h2>
-        <span class="text-[14px] text-[#F89C0D] cursor-pointer" @click="toVips">View More</span>
+        <span class="text-[14px] text-[#F89C0D] cursor-pointer font-bold" @click="toVips">View More</span>
       </div>
       <div class="swiper-container">
         <swiper
@@ -78,6 +78,8 @@
           centered-slides="true"
           slides-per-view="auto"
           :space-between="40"
+          :looped-slides="levelList.length" 
+          :initial-slide="1"
           :loop="true"
           :pagination="{
             el: '.custom-pagination',
@@ -91,6 +93,7 @@
             slideShadows: false
           }"
           class="mySwiper"
+           @swiper="onSwiper"
         >
           <swiper-slide v-for="(item, index) in levelList" :key="index">
             <div
@@ -99,9 +102,10 @@
               <!-- 背景图 -->
               <img :src="item.bg" alt="" class="w-full h-full object-cover" />
               <!-- 遮罩层 -->
-              <div class="absolute inset-0 bg-black/40"></div>
+              <div class="absolute inset-0 "></div>
               <!-- 内容 -->
               <div class="absolute inset-0 p-5 flex flex-col text-white">
+                <img class="w-[30px] h-[30px]" src="@/static/images/logowhite.png" alt="">
                 <h3 class="text-[20px] font-bold mb-[21px] pt-[13px]">
                   {{ item.nameEn }}
                 </h3>
@@ -111,11 +115,11 @@
           </swiper-slide>
         </swiper>
         <!-- 自定义分页指示器 -->
-        <div class="custom-pagination mt-4 flex justify-center space-x-2"></div>
+        <div class="custom-pagination mt-[31px] flex justify-center space-x-2"></div>
       </div>
     </div>
 
-    <div class="mt-[10px]">
+    <div class="">
       <img  src="@/static/images/a.png" alt="" />
       <img  class="w-[90%] mt-[-60px]  mx-auto" src="@/static/images/b.png" alt="" />
       <img  class="w-[90%] mt-[20px] mx-auto" src="@/static/images/c.png" alt="" />
@@ -167,12 +171,13 @@ import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
-import { onMounted, ref, reactive, computed } from "vue";
+import { onMounted, ref, reactive, nextTick  } from "vue";
 import { getLevel, getNoticeList, userGetInfo } from "../api/apis";
 import { useRouter } from "vue-router";
 const tradePasswordRef = ref(null);
 const ContactUsRef = ref(null);
 const userInfo = ref({});
+const swiperInstance = ref(null)
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -306,6 +311,15 @@ function toVips() {
   router.push("/vips");
 }
 const levelList = ref([]);
+function onSwiper(swiper) {
+  swiperInstance.value = swiper
+  console.log(11)
+  // 这里实例已经就绪，可以安全调用
+  // nextTick(() => {
+  //   swiperInstance.value.slideToLoop(1)
+  // })
+  level()
+}
 const level = async () => {
   let res = await getLevel();
   levelList.value = res.data;
@@ -319,11 +333,14 @@ const level = async () => {
     }
   });
   levelList.value = levelList.value.map((item, index) => {
-  return {
-    ...item,
-    bg: bgImages[index % bgImages.length] // 按顺序循环使用
-  };
-});
+    return {
+      ...item,
+      bg: bgImages[index % bgImages.length] // 按顺序循环使用
+    };
+  });
+  nextTick(() => {
+    swiperInstance.value.slideToLoop(0, 0)
+  })
 };
 const toMy = () => {
   router.push({ path: "/my" });
@@ -353,9 +370,10 @@ const getUserGetInfo = () => {
 };
 
 onMounted(() => {
-  level();
+  // level();
   getData();
   getUserGetInfo();
+
 });
 </script>
 <style>
@@ -385,15 +403,15 @@ onMounted(() => {
 
 /* 自定义指示器样式 */
 .custom-pagination .swiper-pagination-bullet {
-  width: 30px;
-  height: 4px;
+  width: 50px;
+  height: 3px;
   border-radius: 2px;
-  background: #d1d5db; /* 默认灰色 */
+  background: #D8D8D8; /* 默认灰色 */
   opacity: 1;
   transition: all 0.3s ease;
 }
 
 .custom-pagination .swiper-pagination-bullet-active {
-  background: #f97316; /* 选中橙色 */
+  background: #FE9A00; /* 选中橙色 */
 }
 </style>
