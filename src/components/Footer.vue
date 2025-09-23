@@ -1,12 +1,12 @@
 <template>
     <div class="w-full relative z-50">
-        <div class="h-[80px]"></div> <!-- 占位 -->
-        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[64px] w-full bg-[#1a1a1a] " style="bottom: -1px;">
+        <div class="h-[98px]"></div> <!-- 占位 -->
+        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[98px] w-full bg-[#1a1a1a]" style="bottom: -1px;">
             <div v-for="menu in menus" :key="menu.title"
-                class="flex-1 flex flex-col items-center text-xs gap-1 font-light"  @click="onClickMenu(menu)">
+                class="flex-1 flex flex-col items-center text-xs gap-1 font-bold"  @click="onClickMenu(menu)">
                 <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}.png`)"
-                    alt="" class="h-7 w-7" :class="menu.title == $t('开始')?'starting':''">
-                <span  class="leading-normal text-[10px] " :class="name === menu.url?'text-[#ff9662]':'text-[#707070]',menu.title == $t('开始')?'startingText':''" style="font-size: 12px;">
+                    alt="" class="h-7 w-7">
+                <span  class="leading-normal text-[10px] " :class="name === menu.url?'text-[#FE9A00]':'text-[#707070]',menu.title == $t('开始')?'startingText':''" style="font-size: 12px;">
                     {{ menu.title }}
                 </span>
             </div>
@@ -28,8 +28,8 @@ const active = ref(props.name)
 const menus = computed(() => [
     { title: t('首页'), url: '/', icon: 'home' },
     { title: t('开始'), url: '/starting', icon: 'starting' },
-     { title: t('记录'), url: '/records', icon: 'records' },
-    // { title: t('我的'), url: '/user', icon: 'user' }
+    { title: t('记录'), url: '/records', icon: 'records' },
+    { title: t('我的'), url: '/my', icon: 'my' }
 ])
 
 watch(() => props.name, (val) => {

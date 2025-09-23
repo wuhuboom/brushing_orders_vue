@@ -8,9 +8,9 @@
     /> -->
     <div class="flex items-center relative bg-[#000]">
       <!-- 左侧箭头 -->
-      <div class="absolute left-3" @click="onClickLeft">
+      <!-- <div class="absolute left-3" @click="onClickLeft">
         <van-icon name="arrow-left" color="#fff" size="24px" />
-      </div>
+      </div> -->
       <!-- 中间标题 -->
       <div class="mx-auto text-white text-[22px] py-[24px]">My</div>
     </div>
@@ -300,7 +300,7 @@
         {{ $t("登出") }}
       </div>
     </div>
-
+    <Footer name="/my"></Footer>
     <ContactUs ref="ContactUsRef"></ContactUs>
     <tradePassword ref="tradePasswordRef"></tradePassword>
     <Lang ref="langRef"></Lang>
@@ -341,6 +341,7 @@ const langRef = ref(null);
 const { t } = useI18n();
 const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
+import Footer from "@/components/Footer.vue";
 const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
