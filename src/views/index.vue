@@ -326,7 +326,6 @@ onDeactivated(() => {
 // 回到页面时恢复滚动位置
 onActivated(() => {
   const fromRoute = sessionStorage.getItem("fromRoute");
-  console.log("从哪个页面返回的", fromRoute);
   sessionStorage.removeItem("fromRoute"); // 用完删除
   const scrollY = sessionStorage.getItem(STORAGE_KEY);
   if (scrollY && fromRoute) {
@@ -339,7 +338,6 @@ function handleScroll() {
 }
 
 onMounted(() => {
-  // level();
   container = document.getElementById("router-view");
   if (container) container.addEventListener("scroll", handleScroll);
 
