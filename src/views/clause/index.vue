@@ -10,10 +10,10 @@
       <div class="flex items-center relative bg-[#000]">
         <!-- 左侧箭头 -->
         <div class="absolute left-3" @click="onClickLeft">
-          <van-icon name="arrow-left" color="#fff" size="24px" />
+          <van-icon name="arrow-left" color="#fff" size="22px" />
         </div>
         <!-- 中间标题 -->
-        <div class="mx-auto text-white text-[22px] py-[20px]">
+        <div class="mx-auto text-white text-[18px] py-[20px]">
           {{ $t("条款") }}
         </div>
       </div>

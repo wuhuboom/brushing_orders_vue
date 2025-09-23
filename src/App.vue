@@ -1,5 +1,13 @@
 <template>
-  <router-view class="text-white font-normal dark:text-[#303133] text-sm w-full hide-scroll overflow-scroll" id="router-view" />
+  <router-view v-slot="{ Component }">
+  <keep-alive include="ListPage">
+    <component
+      :is="Component"
+      class="text-white font-normal dark:text-[#303133] text-sm w-full hide-scroll overflow-scroll"
+      id="router-view"
+    />
+  </keep-alive>
+</router-view>
 </template>
 
 <script setup>
@@ -10,6 +18,7 @@ import { useI18n } from 'vue-i18n';
 import BigNumber from 'bignumber.js';
 import { onUnmounted } from 'vue';
 import { useCurrentLang } from 'vant';
+
 // 在文件顶部添加BigNumber全局配置
 BigNumber.config({
   DECIMAL_PLACES: 10, // 全局设置保留10位小数

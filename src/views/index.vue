@@ -40,7 +40,6 @@
         </div>
       </div> -->
     </div>
-
     <!-- 菜单列表 -->
     <div class="w-[95%] rounded-xl mt-[21px] mx-auto flex flex-col">
       <!-- <div class="pt-4 pr-4 pl-4 text-sm text-black">
@@ -118,7 +117,6 @@
         <div class="custom-pagination mt-[31px]  flex justify-center space-x-2"></div>
       </div>
     </div>
-
     <div class="">
       <img  src="@/static/images/a.png" alt="" />
       <img  class="w-[90%] mt-[-60px]  mx-auto" src="@/static/images/b.png" alt="" />
@@ -171,9 +169,9 @@ import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
-import { onMounted, ref, reactive, nextTick  } from "vue";
+import { onMounted, onUnmounted,ref, reactive, nextTick,onActivated,onDeactivated  } from "vue";
 import { getLevel, getNoticeList, userGetInfo } from "../api/apis";
-import { useRouter } from "vue-router";
+import { useRouter,useRoute } from "vue-router";
 const tradePasswordRef = ref(null);
 const ContactUsRef = ref(null);
 const userInfo = ref({});
@@ -183,11 +181,11 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
-import { list } from "postcss";
-
 // const vip_bg1 = new URL("@/static/images/vip_bg1.png", import.meta.url).href;
 // const vip_bg2 = new URL("@/static/images/vip_bg2.png", import.meta.url).href;
-
+defineOptions({
+  name: "ListPage"
+})
 const bgImages  = [
   new URL("@/static/images/bgImages1.png", import.meta.url).href,
   new URL("@/static/images/bgImages2.png", import.meta.url).href,
@@ -195,50 +193,8 @@ const bgImages  = [
   new URL("@/static/images/bgImages4.png", import.meta.url).href,
 ];
 
-const current = ref(0);
-
-const cards = ref([
-  {
-    title: "VIP1",
-    bg: "https://picsum.photos/id/1011/400/300",
-    content: [
-      "Normal users receive general purpose data collection access.",
-      "Suitable for most data capture scenarios",
-      "Profit of 0.5% per product - 40 mission per set",
-      "Up to 80 optimise mission per day",
-    ],
-  },
-  {
-    title: "VIP2",
-    bg: "https://picsum.photos/id/1015/400/300",
-    content: [
-      "Higher profit margin: 1% per product",
-      "Up to 100 missions per set",
-      "Exclusive advanced data capture tools",
-    ],
-  },
-  {
-    title: "VIP3",
-    bg: "https://picsum.photos/id/1016/400/300",
-    content: [
-      "Exclusive access for premium members",
-      "Up to 200 missions per set",
-      "Customised data optimisation",
-    ],
-  },
-  {
-    title: "VIP4",
-    bg: "https://picsum.photos/id/1016/400/300",
-    content: [
-      "Exclusive access for premium members",
-      "Up to 200 missions per set",
-      "Customised data optimisation",
-    ],
-  },
-]);
-
-
 const router = useRouter();
+const route = useRoute();
 
 const items = [
   {
@@ -300,19 +256,16 @@ function goTo(path) {
     ContactUsRef.value.open();
   } else {
     router.push(path);
+    sessionStorage.setItem("fromRoute", path);
   }
 }
 function toVips() {
   router.push("/vips");
+   sessionStorage.setItem("fromRoute", '/vips');
 }
 const levelList = ref([]);
 function onSwiper(swiper) {
   swiperInstance.value = swiper
-  console.log(11)
-  // 这里实例已经就绪，可以安全调用
-  // nextTick(() => {
-  //   swiperInstance.value.slideToLoop(1)
-  // })
   level()
 }
 const level = async () => {
@@ -353,7 +306,6 @@ const getData = async () => {
   noticeContent.value = res.rows.length > 0 ? res.rows[0].noticeContent : "";
 };
 
-
 window.addEventListener("updateTrade", (e) => {
   getUserGetInfo();
 });
@@ -363,12 +315,40 @@ const getUserGetInfo = () => {
     userInfo.value = res.data;
   });
 };
+const STORAGE_KEY = "ListPageScrollY"; // 本地缓存 key
+const scrollTop = ref(0)
+let container;
+// 离开页面时记录滚动位置
+onDeactivated(() => {
+  sessionStorage.setItem(STORAGE_KEY, scrollTop.value);
+});
+
+// 回到页面时恢复滚动位置
+onActivated(() => {
+  const fromRoute = sessionStorage.getItem("fromRoute");
+  console.log("从哪个页面返回的", fromRoute);
+  sessionStorage.removeItem("fromRoute"); // 用完删除
+  const scrollY = sessionStorage.getItem(STORAGE_KEY);
+  if (scrollY && fromRoute) {
+    container.scrollTo(0, +scrollY); // 容器滚动
+  }
+});
+
+function handleScroll() {
+  scrollTop.value = container.scrollTop;
+}
 
 onMounted(() => {
   // level();
+  container = document.getElementById("router-view");
+  if (container) container.addEventListener("scroll", handleScroll);
+
   getData();
   getUserGetInfo();
 
+});
+onUnmounted(() => {
+  if (container) container.removeEventListener("scroll", handleScroll);
 });
 </script>
 <style>
