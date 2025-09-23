@@ -1,13 +1,13 @@
 <template>
   <div class="bg-[#fff]">
     <div
-      class="relative h-[521px] w-full rounded-b-[40px]"
+      class="relative h-[443px] w-full rounded-b-[40px]"
       style="overflow: hidden"
     >
       <img
         src="@/static/images/indexBg.png"
         alt="background"
-        class="absolute inset-0 w-full h-[521px] object-cover"
+        class="absolute inset-0 w-full h-[443px]"
       />
       <!-- 顶部导航栏 -->
       <div
@@ -66,7 +66,7 @@
     <!-- 产品介绍   -->
     <div >
       <!-- 标题 -->
-      <div class="flex justify-between items-center mb-[25px] p-4">
+      <div class="flex justify-between items-center mb-[10px] p-4">
         <h2 class="text-[20px] font-semibold">Employee level</h2>
         <span class="text-[14px] text-[#F89C0D] cursor-pointer font-bold" @click="toVips">View More</span>
       </div>
@@ -97,7 +97,7 @@
         >
           <swiper-slide v-for="(item, index) in levelList" :key="index">
             <div
-              class="relative w-[285px] h-[333px] rounded-[15px] overflow-hidden shadow-xl"
+              class="relative w-[285px] h-[190px] rounded-[15px] overflow-hidden shadow-xl"
             >
               <!-- 背景图 -->
               <img :src="item.bg" alt="" class="w-full h-full object-cover" />
@@ -115,7 +115,7 @@
           </swiper-slide>
         </swiper>
         <!-- 自定义分页指示器 -->
-        <div class="custom-pagination mt-[31px] flex justify-center space-x-2"></div>
+        <div class="custom-pagination mt-[31px]  flex justify-center space-x-2"></div>
       </div>
     </div>
 
@@ -237,11 +237,6 @@ const cards = ref([
   },
 ]);
 
-
-
-const onChange = (index) => {
-  current.value = index;
-};
 
 const router = useRouter();
 
@@ -391,7 +386,7 @@ onMounted(() => {
   background-position: center;
   background-size: cover;
   width: 285px; /* 卡片宽度 */
-  height: 333px; /* 卡片高度 */
+  height: 190px; /* 卡片高度 */
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0.7; /* 默认偏暗 */
 }

@@ -37,7 +37,7 @@
       </div>
     </div>
     <div
-      class="w-full bg-[#1F1F1F] relative pt-[20px] pb-[21px] px-[10px] rounded-[8px]"
+      class="w-full bg-[#1F1F1F] relative pt-[20px] pb-[21px] px-[7px] rounded-[8px]"
     >
       <div class="max-w-4xl mx-auto flex justify-between text-gray-400">
         <!-- Wallet Balance -->

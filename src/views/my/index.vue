@@ -19,13 +19,31 @@
       class="w-full mx-auto p-4 box-border flex flex-col relative bg-[#E6EDF6]"
     >
       <div class="flex pl-1 pr-1">
+        <!-- 接口还没返回 avatar 字段（请求中） -->
+        <div
+          v-if="userInfo.avatar === undefined"
+          class="w-[60px] h-[60px] rounded-full ml-[5px] bg-gray-200 animate-pulse"
+        ></div>
+
+        <!-- 接口返回 null / 空字符串 → 直接显示默认头像（不会闪） -->
         <img
-          :src="userInfo.avatar == null ? userImg : userInfo.avatar"
-          class="w-[60px] h-[60px] mr-4"
-          style="border-radius: 50%"
-          alt=""
+          v-else-if="!userInfo.avatar"
+          :src="userImg"
+          class="w-[60px] h-[60px] rounded-full ml-[5px] object-cover"
+          alt="默认头像"
         />
-        <div class="flex flex-col justify-start">
+
+        <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
+        <img
+          v-else
+          :src="userInfo.avatar"
+          class="w-[60px] h-[60px] rounded-full ml-[5px] object-cover"
+          alt="用户头像"
+          @error="e => e.target.src = userImg"
+        />
+
+
+        <div class="flex flex-col justify-start ml-[10px]">
           <div class="flex items-center">
             <div class="text-[#333333] font-semibold text-[20px]">
               Hi,{{ userInfo.username }}
