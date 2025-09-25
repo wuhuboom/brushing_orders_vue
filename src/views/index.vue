@@ -1,13 +1,13 @@
 <template>
   <div class="bg-[#fff]">
     <div
-      class="relative h-[443px] w-full rounded-b-[40px]"
+      class="relative h-[222px] w-full"
       style="overflow: hidden"
     >
       <img
         src="@/static/images/indexBg.png"
         alt="background"
-        class="absolute inset-0 w-full h-[443px]"
+        class="absolute inset-0 w-full h-[222px]"
       />
       <!-- 顶部导航栏 -->
       <div
@@ -15,11 +15,11 @@
       >
         <!-- 右边菜单按钮 -->
         <div class="absolute right-4">
-          <img
+          <!-- <img
             @click="toMy"
             src="@/static/images/user3.png"
             class="w-[22px] h-[22px]"
-          />
+          /> -->
         </div>
       </div>
       <!-- 下面内容 -->
@@ -117,7 +117,7 @@
         <div class="custom-pagination mt-[31px]  flex justify-center space-x-2"></div>
       </div>
     </div>
-    <div class="">
+    <div >
       <img  src="@/static/images/a.png" alt="" />
       <img  class="w-[90%] mt-[-60px]  mx-auto" src="@/static/images/b.png" alt="" />
       <img  class="w-[90%] mt-[20px] mx-auto" src="@/static/images/c.png" alt="" />
@@ -353,7 +353,7 @@ onUnmounted(() => {
 .swiper-container {
   width: 100%;
   padding-top: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 30px;
 }
 
 .mySwiper {
