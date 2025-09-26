@@ -361,7 +361,7 @@ const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
 import Footer from "@/components/Footer.vue";
 const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
-import { onMounted, ref } from "vue";
+import { onMounted,onUnmounted,ref } from "vue";
 import { useRouter } from "vue-router";
 import { copyContent } from "../../util/utils";
 const userStore = useUserStore();
@@ -400,7 +400,10 @@ const logout = () => {
 
 const payMethod = () => {
   // show.value = true;
-  tradePasswordRef.value.open(1);
+  // tradePasswordRef.value.open(1);
+  router.push({
+    path: '/paymentMethods',
+  });
 };
 const submitTradePassword = async () => {
   if (!tradePassword.value) return showToast(t("请输入交易密码"));
@@ -424,10 +427,10 @@ const onClickLeft = () => {
   });
 };
 
-const copy = (text) => {};
-window.addEventListener("updateTrade", (e) => {
+const updateHandler = () => {
   getUserGetInfo();
-});
+};
+window.addEventListener("updateTrade",updateHandler);
 const getUserGetInfo = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
@@ -437,5 +440,8 @@ const getUserGetInfo = () => {
 };
 onMounted(() => {
   getUserGetInfo();
+});
+onUnmounted(() => {
+  window.removeEventListener("updateTrade", updateHandler);
 });
 </script>
