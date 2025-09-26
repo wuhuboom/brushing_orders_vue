@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#fff]">
-    <div
+    <!-- <div
       class="relative h-[222px] w-full"
       style="overflow: hidden"
     >
@@ -9,37 +9,16 @@
         alt="background"
         class="absolute inset-0 w-full h-[222px]"
       />
-      <!-- 顶部导航栏 -->
-      <div
-        class="flex items-center justify-center relative h-[44px] bg-transparent text-white px-4"
-      >
-        <!-- 右边菜单按钮 -->
-        <div class="absolute right-4">
-          <!-- <img
-            @click="toMy"
-            src="@/static/images/user3.png"
-            class="w-[22px] h-[22px]"
-          /> -->
-        </div>
-      </div>
-      <!-- 下面内容 -->
-      <!-- <div class="absolute bottom-6 w-full px-4 text-white">
-        <div class="bg-[rgba(0,0,0,0.5)] rounded-xl p-4 flex items-center">
-          <div
-            class="w-12 h-12 rounded-full bg-white flex items-center justify-center mr-3"
-          >
-            <span class="text-[#F4A300] font-bold">SUG</span>
-          </div>
-          <div class="text-sm leading-5">
-            <p class="text-[20px]">OUR CUSTOMERS SOLD</p>
-            <p class="text-[20px] text-[#D4AF37] font-bold text-lg">
-              $1,000,000,000
-            </p>
-            <p class="text-[20px]">ON AMAZON LAST YEAR</p>
-          </div>
-        </div>
-      </div> -->
-    </div>
+    </div> -->
+    <van-swipe class="my-swipe h-[333px]" :autoplay="3000" indicator-color="white">
+      <van-swipe-item v-for="item in bannerArr" :key="item.id">
+        <img
+        :src="VITE_API_IMG_URL+item.imageUrl"
+        alt="background"
+        class="absolute inset-0 w-full h-[333px]"
+      />
+      </van-swipe-item>
+    </van-swipe>
     <!-- 菜单列表 -->
     <div class="w-[95%] rounded-xl mt-[21px] mx-auto flex flex-col">
       <!-- <div class="pt-4 pr-4 pl-4 text-sm text-black">
@@ -170,13 +149,14 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import { onMounted, onUnmounted,ref, reactive, nextTick,onActivated,onDeactivated  } from "vue";
-import { getLevel, getNoticeList, userGetInfo } from "../api/apis";
+import { getLevel, getNoticeList, userGetInfo,bannerList } from "../api/apis";
 import { useRouter,useRoute } from "vue-router";
 const tradePasswordRef = ref(null);
 const ContactUsRef = ref(null);
 const userInfo = ref({});
 const swiperInstance = ref(null)
 import { Swiper, SwiperSlide } from "swiper/vue";
+const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -249,9 +229,16 @@ const items = [
 
 function goTo(path) {
   if (path == "/notifications") {
-    tradePasswordRef.value.open(2);
+    // tradePasswordRef.value.open(2);
+    
+  router.push({
+    path: '/withdraw',
+  });
   } else if (path == "/profile") {
-    tradePasswordRef.value.open(3);
+    // tradePasswordRef.value.open(3);
+    router.push({
+    path: '/deposit',
+  });
   } else if (path == "/server") {
     ContactUsRef.value.open();
   } else {
@@ -337,12 +324,18 @@ function handleScroll() {
   scrollTop.value = container.scrollTop;
 }
 
+const bannerArr = ref([])
+const getbannerList = async () => {
+  const res = await bannerList(); // 你自己的接口
+  bannerArr.value = res.data;
+}
+
 onMounted(() => {
   container = document.getElementById("router-view");
   if (container) container.addEventListener("scroll", handleScroll);
-
   getData();
   getUserGetInfo();
+  getbannerList()
 
 });
 onUnmounted(() => {

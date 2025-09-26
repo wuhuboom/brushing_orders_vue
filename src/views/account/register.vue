@@ -106,7 +106,7 @@
           </el-input>
         </el-form-item>
         
-        <el-form-item label="" prop="tradePassword" label-position="top">
+        <!-- <el-form-item label="" prop="tradePassword" label-position="top">
           <el-input
             v-model="ruleForm.tradePassword"
             :placeholder="$t('交易密码')"
@@ -118,7 +118,7 @@
             <img class="w-[22px]" src="@/static/images/tradePassword.png" alt="">
           </template>
           </el-input>
-        </el-form-item>
+        </el-form-item> -->
        
         <el-form-item label="" prop="inviteCode" label-position="top">
           <el-input
@@ -227,7 +227,6 @@ const checked = ref(true);
 const ruleForm = reactive({
   username: "",
   password: "",
-  tradePassword: "",
   phone: "",
   sex: 1,
   inviteCode: "",
@@ -248,7 +247,7 @@ function sendCode() {
   // if (!ruleForm.phone) return ElMessage.error(t("请输入电话"));
   if (!/^[0-9]*$/.test(ruleForm.phone))
     return showToast(t("请输入正确电话号码"));
-  if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
+  // if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));
   register(ruleForm).then((res) => {
     showToast(t("注册成功"));

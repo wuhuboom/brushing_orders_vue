@@ -90,7 +90,7 @@
             </template> -->
           </el-input>
         </el-form-item>
-        <el-form-item label-position="top">
+        <!-- <el-form-item label-position="top">
           <el-input
             v-model="ruleForm.tradePassword"
             :placeholder="$t('交易密码')"
@@ -99,7 +99,7 @@
             size="large"
             show-password
           />
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
       <div class="w-full pl-5 pr-5" style="position: fixed; bottom: 50px">
         <van-button color="#000" @click="getWithdrawal" class="w-full">{{
@@ -224,7 +224,7 @@ const loadData = async () => {
 const onClickLeft = () => history.back();
 const ruleForm = reactive({
   amount: "",
-  tradePassword: "",
+  // tradePassword: "",
 });
 
 const All = () => {
@@ -253,7 +253,7 @@ const getWithdrawal = () => {
         max: TradeInfor.value.maxWithdrawAmount,
       })
     );
-  if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
+  // if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
 
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));

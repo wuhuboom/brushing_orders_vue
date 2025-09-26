@@ -47,3 +47,5 @@ export const getNotice = (params) => api.get(`/config/getNotice/`+params.id, { p
 
 export const getZoneActive = (params) => api.get(`/config/getZoneActive`,{ params: params, loading: false, showMsg: false, })// 提交订单
 
+export const bannerList = (params) => api.get(`/config/bannerList`,{ params: params, loading: false, showMsg: false, })// 获取轮播图
+
