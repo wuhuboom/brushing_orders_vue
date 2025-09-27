@@ -263,7 +263,7 @@ const submitVal = async () => {
     } finally {
       isSubmitting.value = false;
     }
-  }, 500); // 2000 毫秒 = 2 秒
+  }, 1000); // 2000 毫秒 = 2 秒
 };
 
 const swichTab = () => {
