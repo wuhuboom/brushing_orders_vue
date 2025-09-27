@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="w-full mt-4">
-                <van-button color="#007513" class="w-full" @click="submitVal">{{$t('提交')}}</van-button>
+                <van-button color="#007513" :disabled="isSubmitting"  class="w-full" @click="submitVal">{{$t('提交')}}</van-button>
             </div>
         </div>
     </van-dialog>
@@ -165,25 +165,35 @@ const submit = (item) => {
     show.value = true
 }
 
-const submitVal = () =>{
-    submitOrder(goodsData.value.id).then((res)=>{
-        showSuccessToast(t("提交成功"));
-        onRefresh()
-        if(res.code == 201) {
-            goodsData.value =  res.data
-        }else {
-            show.value = false;
-        }
-    }).catch((err)=>{
-        if(err.code == 916) {
-            router.push('/deposit')
+const isSubmitting = ref(false); // 防重提交标志
 
-        } else {
-            ElMessage({ message: err.status, type: "error" });
-        }  
-    })
+const submitVal = async (e) => {
+//   if (isSubmitting.value) return; // 正在提交，直接返回
+    if (isSubmitting.value) {
+        e?.preventDefault(); // 阻止事件继续
+        return;
+    } 
+  isSubmitting.value = true;
+  try {
+    const res = await submitOrder(goodsData.value.id);
+    showSuccessToast(t("提交成功"));
+    onRefresh();
 
-}
+    if (res.code == 201) {
+      goodsData.value = res.data;
+    } else {
+      show.value = false;
+    }
+  } catch (err) {
+    if (err.code == 916) {
+      router.push("/deposit");
+    } else {
+      ElMessage({ message: err.status, type: "error" });
+    }
+  } finally {
+    isSubmitting.value = false; // 请求完成后重置标志
+  }
+};
 
 const swichTab = () =>{
     console.log(active.value)
