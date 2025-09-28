@@ -29,7 +29,8 @@
                   <div
                     class="text-white text-xs rounded p-1 bg-[#ff9662] font-medium"
                     :style="{
-                      backgroundColor: Number(item.status) === 2 ? '#7E8FA2' : '#ff9662'
+                      backgroundColor:
+                        Number(item.status) === 2 ? '#7E8FA2' : '#ff9662',
                     }"
                   >
                     {{
@@ -202,11 +203,14 @@
         >
           <div class="text-[#666] text-sm">{{ $t("编号") }}</div>
           <div class="text-[#ff9662] text-xs font-bold">
-             {{ goodsData.orderNo }}
+            {{ goodsData.orderNo }}
           </div>
         </div>
         <div class="w-full mt-4">
-          <van-button color="#ff9662" round class="w-full" @click="submitVal">{{
+          <van-button color="#ff9662" 
+          :loading="isSubmitting"
+          :disabled="isSubmitting"
+          round class="w-full" @click="submitVal">{{
             $t("提交")
           }}</van-button>
         </div>
@@ -281,9 +285,15 @@ const submit = (item) => {
   show.value = true;
 };
 
-const submitVal = () => {
-  submitOrder(goodsData.value.id)
-    .then((res) => {
+const isSubmitting = ref(false); // 防重提交标志
+const submitVal = async () => {
+  if (isSubmitting.value) return;
+  isSubmitting.value = true;
+
+  // 延迟 2 秒触发请求
+  setTimeout(async () => {
+    try {
+      const res = await submitOrder(goodsData.value.id);
       showSuccessToast(t("提交成功"));
       onRefresh();
       if (res.code == 201) {
@@ -291,14 +301,16 @@ const submitVal = () => {
       } else {
         show.value = false;
       }
-    })
-    .catch((err) => {
+    } catch (err) {
       if (err.code == 916) {
         router.push("/deposit");
       } else {
         ElMessage({ message: err.status, type: "error" });
       }
-    });
+    } finally {
+      isSubmitting.value = false;
+    }
+  }, 1000); // 2000 毫秒 = 2 秒
 };
 
 const swichTab = () => {
