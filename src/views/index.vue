@@ -149,14 +149,18 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import { onMounted, onUnmounted,ref, reactive, nextTick,onActivated,onDeactivated  } from "vue";
-import { getLevel, getNoticeList, userGetInfo,bannerList } from "../api/apis";
+import { getLevel, getNoticeList, userGetInfo,bannerList,getTradeConfig } from "../api/apis";
 import { useRouter,useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
+import { showToast } from "vant";
+const { t } = useI18n();
 const tradePasswordRef = ref(null);
 const ContactUsRef = ref(null);
 const userInfo = ref({});
 const swiperInstance = ref(null)
 import { Swiper, SwiperSlide } from "swiper/vue";
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
+import { checkWorkTimeLocal } from "../util/utils";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -240,7 +244,13 @@ function goTo(path) {
     path: '/deposit',
   });
   } else if (path == "/server") {
-    ContactUsRef.value.open();
+    // ContactUsRef.value.open();
+    const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd);
+    if(time) {
+      ContactUsRef.value.open();
+    } else {
+      showToast(t("Sorry, the customer support server hours are from 9:00 AM to 9:00 PM."))
+    }
   } else {
     router.push(path);
     sessionStorage.setItem("fromRoute", path);
@@ -329,6 +339,11 @@ const getbannerList = async () => {
   const res = await bannerList(); // 你自己的接口
   bannerArr.value = res.data;
 }
+const TradeInfor = ref({})
+const tradeConfig = async () => {
+  let res = await getTradeConfig();
+  TradeInfor.value = res.data;
+};
 
 onMounted(() => {
   container = document.getElementById("router-view");
@@ -336,6 +351,7 @@ onMounted(() => {
   getData();
   getUserGetInfo();
   getbannerList()
+  tradeConfig()
 
 });
 onUnmounted(() => {

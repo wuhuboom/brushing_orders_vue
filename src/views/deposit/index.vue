@@ -95,8 +95,11 @@
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { onMounted, reactive, ref } from "vue";
 import { useUserStore } from "@/store/modules/user";
-import { getDeposit, userGetInfo } from "../../api/apis";
-import {formatWithTimezone} from "../../util/utils"
+import { getDeposit, userGetInfo,getTradeConfig } from "../../api/apis";
+import {formatWithTimezone,checkWorkTimeLocal} from "../../util/utils"
+import { useI18n } from "vue-i18n";
+import { showToast } from "vant";
+const { t } = useI18n();
 const active = ref(0);
 const refreshing = ref(false);
 const finished = ref(false);
@@ -146,7 +149,17 @@ const loadData = async () => {
   }
 };
 const customer = () => {
-  ContactUsRef.value.open();
+  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd);
+  if(time) {
+     ContactUsRef.value.open();
+  } else {
+     showToast(t("Sorry, the customer support server hours are from 9:00 AM to 9:00 PM."))
+  }
+};
+const TradeInfor = ref({})
+const tradeConfig = async () => {
+  let res = await getTradeConfig();
+  TradeInfor.value = res.data;
 };
 window.addEventListener('updateTrade', (e) => {
     getUserGetInfo();
@@ -158,6 +171,7 @@ const getUserGetInfo = () => {
 }
 onMounted(() => {
   getUserGetInfo()
+  tradeConfig()
 });
 const onClickLeft = () => history.back();
 </script>

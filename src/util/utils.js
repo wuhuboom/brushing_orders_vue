@@ -103,3 +103,29 @@ export const formatWithTimezone = (timestamp, tzName) => {
 
   return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
 };
+
+// 客服工作时间
+export const checkWorkTimeLocal = (workTimeStart, workTimeEnd) => {
+  const now = new Date();
+
+  // 本地当前小时和分钟
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const currentHM = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+
+  // 转分钟数方便比较
+  const toMinutes = (hm) => {
+    const [h, m] = hm.split(":").map(Number);
+    return h * 60 + m;
+  };
+
+  const nowMinutes = toMinutes(currentHM);
+  const startMinutes = toMinutes(workTimeStart);
+  const endMinutes = toMinutes(workTimeEnd);
+
+  if (nowMinutes >= startMinutes && nowMinutes <= endMinutes) {
+    return true;
+  } else {
+    return false
+  }
+};

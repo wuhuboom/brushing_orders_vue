@@ -108,9 +108,9 @@ import { useCommonStore } from '@/store/modules/common';
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { setUserRemind } from "../../common/remind";
-import { login } from "../../api/apis";
+import { login,getTradeConfig } from "../../api/apis";
 import { areas } from "@/config/area";
-import { formatPhoneNumber } from "../../util/utils";
+import { checkWorkTimeLocal  } from "../../util/utils";
 const ContactUsRef = ref(null);
 
 onMounted(() => {
@@ -173,9 +173,23 @@ function handleChangeLang() {
   langRef.value.open();
 }
 
-const customer = () => {
-  ContactUsRef.value.open();
+const TradeInfor = ref({})
+const tradeConfig = async () => {
+  let res = await getTradeConfig();
+  TradeInfor.value = res.data;
 };
+
+const customer = () => {
+  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd);
+  if(time) {
+     ContactUsRef.value.open();
+  } else {
+     showToast(t("Sorry, the customer support server hours are from 9:00 AM to 9:00 PM."))
+  }
+};
+onMounted(() => {
+  tradeConfig();
+});
 </script>
 
 <style scoped>

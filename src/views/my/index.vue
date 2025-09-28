@@ -351,10 +351,11 @@
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
-import { userGetInfo, checkTradePassword } from "../../api/apis";
+import { userGetInfo, checkTradePassword,getTradeConfig } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { showConfirmDialog, showToast } from "vant";
+import { checkWorkTimeLocal } from "../../util/utils";
 const langRef = ref(null);
 const { t } = useI18n();
 const ContactUsRef = ref(null);
@@ -382,7 +383,12 @@ const toPage = (path) => {
   });
 };
 const customer = () => {
-  ContactUsRef.value.open();
+  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd);
+  if(time) {
+     ContactUsRef.value.open();
+  } else {
+     showToast(t("Sorry, the customer support server hours are from 9:00 AM to 9:00 PM."))
+  }
 };
 const logout = () => {
   showConfirmDialog({
@@ -417,9 +423,9 @@ const submitTradePassword = async () => {
   });
 };
 
-function handleChangeLang() {
-  langRef.value.open();
-}
+// function handleChangeLang() {
+//   langRef.value.open();
+// }
 
 const onClickLeft = () => {
   router.replace({
@@ -438,8 +444,14 @@ const getUserGetInfo = () => {
     console.log(userInfo.value);
   });
 };
+const TradeInfor = ref({})
+const tradeConfig = async () => {
+  let res = await getTradeConfig();
+  TradeInfor.value = res.data;
+};
 onMounted(() => {
   getUserGetInfo();
+  tradeConfig()
 });
 onUnmounted(() => {
   window.removeEventListener("updateTrade", updateHandler);

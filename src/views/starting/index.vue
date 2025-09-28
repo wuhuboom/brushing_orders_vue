@@ -188,11 +188,10 @@
     </van-popup>
     <van-popup
       v-model:show="showImg"
-      closeable
       round
       :style="{ width: '80%', background: 'transparent' }"
     >
-      <img class="w-[100%]" src="../../static/images/super.png" alt="" />
+      <img class="w-[100%]" @click="closeImg" src="../../static/images/super.png" alt="" />
     </van-popup>
   </div>
 </template>
@@ -273,6 +272,9 @@ const handleClick = () => {
   doCreateOrder();
 };
 
+const closeImg = () =>{
+  showImg.value = false
+}
 const doCreateOrder = () => {
   showLoadingToast({
     message: t("创建中..."),
