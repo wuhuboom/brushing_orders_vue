@@ -188,7 +188,7 @@ const customer = () => {
   }
 };
 onMounted(() => {
-  tradeConfig();
+  // tradeConfig();
 });
 </script>
 

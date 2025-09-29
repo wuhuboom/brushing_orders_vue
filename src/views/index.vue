@@ -55,6 +55,8 @@
           grab-cursor="true"
           centered-slides="true"
           slides-per-view="auto"
+          :observer="true"
+          :observe-parents="true"
           :space-between="40"
           :looped-slides="levelList.length" 
           :initial-slide="1"
@@ -148,7 +150,7 @@ import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
-import { onMounted, onUnmounted,ref, reactive, nextTick,onActivated,onDeactivated  } from "vue";
+import { onMounted, onUnmounted,ref, reactive, nextTick,onActivated,onDeactivated,watch   } from "vue";
 import { getLevel, getNoticeList, userGetInfo,bannerList,getTradeConfig } from "../api/apis";
 import { useRouter,useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
@@ -263,8 +265,19 @@ function toVips() {
 const levelList = ref([]);
 function onSwiper(swiper) {
   swiperInstance.value = swiper
-  level()
 }
+// ⭐ watch 保证 “数据 + swiper 实例” 都 ready 后再操作
+// watch(
+//   () => [levelList.value, swiperInstance.value],
+//   async ([list, swiper]) => {
+//     if (list.length && swiper) {
+//       await nextTick()
+//       swiper.update()
+//       swiper.slideToLoop(0, , 0) // 立即切换到第一个
+//     }
+//   },
+//   { immediate: true, deep: true }
+// )
 const level = async () => {
   let res = await getLevel();
   levelList.value = res.data;
@@ -283,13 +296,19 @@ const level = async () => {
       bg: bgImages[index % bgImages.length] // 按顺序循环使用
     };
   });
-  nextTick(() => {
-    swiperInstance.value.slideToLoop(0, 0)
-  })
+  // 等数据渲染完
+  await nextTick()
+  // 确保 swiper 已经初始化
+   if (swiperInstance.value) {
+    swiperInstance.value.update() // 关键：强制刷新 swiper
+    swiperInstance.value.slideToLoop(1, 0) // 再切换到第一个
+    setTimeout(() => {
+      swiperInstance.value.slideToLoop(0, 0) // 再切换到第一个
+    },100)
+    
+  }
 };
-const toMy = () => {
-  router.push({ path: "/my" });
-};
+
 
 const query = reactive({
   pageNum: 1,
@@ -345,14 +364,15 @@ const tradeConfig = async () => {
   TradeInfor.value = res.data;
 };
 
-onMounted(() => {
+onActivated (() => {
   container = document.getElementById("router-view");
   if (container) container.addEventListener("scroll", handleScroll);
   getData();
   getUserGetInfo();
   getbannerList()
-  tradeConfig()
-
+  tradeConfig();
+  level();
+  
 });
 onUnmounted(() => {
   if (container) container.removeEventListener("scroll", handleScroll);
