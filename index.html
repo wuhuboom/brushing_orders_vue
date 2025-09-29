@@ -31,10 +31,10 @@
 
     // 先加载 config.js，再加载 main.js
     loadConfig(() => {
-      const mainScript = document.createElement('script');
-      mainScript.src = '/src/main.js';
-      mainScript.type = 'module';  // ✅ 关键：告诉浏览器这是 ES Module
-      document.head.appendChild(mainScript);
+      // const mainScript = document.createElement('script');
+      // mainScript.src = '/src/main.js';
+      // mainScript.type = 'module';  // ✅ 关键：告诉浏览器这是 ES Module
+      // document.head.appendChild(mainScript);
       document.title = window.g.VITE_TITLE || '';
     });
   </script>
