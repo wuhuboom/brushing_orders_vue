@@ -48,7 +48,7 @@
         <h2 class="text-[20px] font-semibold">Employee level</h2>
         <span class="text-[14px] text-[#F89C0D] cursor-pointer font-bold" @click="toVips">View More</span>
       </div>
-      <div class="swiper-container">
+      <div class="swiper-container" v-if="ready">
         <swiper
           :modules="[EffectCoverflow, Pagination]"
           effect="coverflow"
@@ -59,7 +59,7 @@
           :observe-parents="true"
           :space-between="40"
           :looped-slides="levelList.length" 
-          :initial-slide="1"
+          :initial-slide="0"
           :loop="true"
           :pagination="{
             el: '.custom-pagination',
@@ -71,6 +71,10 @@
             depth: 100,
             modifier: 1,
             slideShadows: false
+          }"
+          :autoplay="{
+            delay: 1000,          // 每隔 3 秒切换
+            disableOnInteraction: false // 用户滑动后仍然继续自动播放
           }"
           class="mySwiper"
            @swiper="onSwiper"
@@ -263,8 +267,12 @@ function toVips() {
    sessionStorage.setItem("fromRoute", '/vips');
 }
 const levelList = ref([]);
-function onSwiper(swiper) {
-  swiperInstance.value = swiper
+const onSwiper = (swiper) => {
+  swiperInstance.value = swiper;
+  setTimeout(() => {
+    swiper.update();          // 重新计算 slide 尺寸和 loop
+    swiper.slideToLoop(1, 0); // 修复左侧留白
+  }, 50); // 延迟一帧，保证 DOM 尺寸正确
 }
 // ⭐ watch 保证 “数据 + swiper 实例” 都 ready 后再操作
 // watch(
@@ -278,6 +286,7 @@ function onSwiper(swiper) {
 //   },
 //   { immediate: true, deep: true }
 // )
+const ready = ref(false);
 const level = async () => {
   let res = await getLevel();
   levelList.value = res.data;
@@ -296,15 +305,15 @@ const level = async () => {
       bg: bgImages[index % bgImages.length] // 按顺序循环使用
     };
   });
+  ready.value = true;
   // 等数据渲染完
   await nextTick()
   // 确保 swiper 已经初始化
    if (swiperInstance.value) {
-    swiperInstance.value.update() // 关键：强制刷新 swiper
     swiperInstance.value.slideToLoop(1, 0) // 再切换到第一个
-    setTimeout(() => {
+    // setTimeout(() => {
       swiperInstance.value.slideToLoop(0, 0) // 再切换到第一个
-    },100)
+    // },1000)
     
   }
 };
@@ -392,7 +401,7 @@ onUnmounted(() => {
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 285px; /* 卡片宽度 */
+  width: 285px !important; /* 卡片宽度 */
   height: 190px; /* 卡片高度 */
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0.7; /* 默认偏暗 */
