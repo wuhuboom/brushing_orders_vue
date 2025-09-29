@@ -13,8 +13,7 @@
     <script type="module" src="/src/main.js"></script>
   </body>
   <!-- 直接加载 config.js，确保在 main.js 前可用 -->
-  <!-- 动态加载 config.js，带时间戳 -->
-  <script>
+  <!-- <script>
     function loadConfig(callback) {
       const script = document.createElement('script');
       script.src = '/config.js?t=' + Date.now(); // 防缓存
@@ -31,15 +30,17 @@
 
     // 先加载 config.js，再加载 main.js
     loadConfig(() => {
-      // const mainScript = document.createElement('script');
-      // mainScript.src = '/src/main.js';
-      // mainScript.type = 'module';  // ✅ 关键：告诉浏览器这是 ES Module
-      // document.head.appendChild(mainScript);
       document.title = window.g.VITE_TITLE || '';
     });
-  </script>
-
-  <!-- <script>
-    document.title = window.g.VITE_TITLE || '';
   </script> -->
+  <script>
+  const script = document.createElement('script');
+    script.src = '/config.js?t=' + Date.now(); // 每次刷新都会生成新的时间戳
+    document.head.appendChild(script);
+    script.onload = () => {
+      // config.js 已经加载完成，可以安全访问 window.g
+      document.title = window.g?.VITE_TITLE || '';
+      // console.log('config.js 已加载', window.g);
+    };
+  </script>
 </html>
