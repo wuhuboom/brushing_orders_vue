@@ -188,7 +188,7 @@ import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const userStore = useUserStore();
-const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
+const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL ? window.g.VITE_API_IMG_URL :import.meta.env.VITE_API_IMG_URL; // 兜底默认值
 const { t } = useI18n();
 const active = ref(0);
 const list = ref([]);
