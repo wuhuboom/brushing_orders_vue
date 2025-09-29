@@ -59,4 +59,21 @@ app.use(Swipe);
 app.use(SwipeItem);
 app.use(Rate);
 // app.use(ElementPlus) // 使用 Element Plus
+async function loadConfig() {
+  const res = await fetch('/config.js?t=' + Date.now());
+  const text = await res.text();
+  eval(text); // 执行 config.js
+}
+
+async function bootstrap() {
+  // ✅ 等待 config.js 加载完成
+  await loadConfig();
+  // 这里访问 window.g 是安全的
+  const baseURL = window.g?.VITE_API_BASE_URL || import.meta.env.VITE_API_BASE_URL;
+  console.log('API BASE URL:', baseURL);
+  document.title = window.g?.VITE_TITLE || '1';
+}
+
+// 启动
+bootstrap();
 app.mount('#app')
