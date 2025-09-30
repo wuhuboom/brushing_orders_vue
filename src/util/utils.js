@@ -97,10 +97,15 @@ export const formatWithTimezone = (timestamp, tzName) => {
     second: "2-digit",
   };
 
-  // 拿到 parts（数组形式，每个部分拆开）
-  const parts = new Intl.DateTimeFormat("zh-CN", options).formatToParts(new Date(timestamp));
-  const get = (type) => parts.find(p => p.type === type)?.value || "";
+  let parts;
+  try {
+    parts = new Intl.DateTimeFormat("zh-CN", options).formatToParts(new Date(timestamp));
+  } catch (err) {
+    console.warn(`[formatWithTimezone] Invalid timezone: ${tzName}`);
+    return ""; // ❌ 时区非法，直接返回空字符串
+  }
 
+  const get = (type) => parts.find(p => p.type === type)?.value || "";
   return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
 };
 
