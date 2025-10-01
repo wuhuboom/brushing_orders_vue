@@ -6,7 +6,7 @@ class WebSocketClient {
       return WebSocketClient.instance;
     }
     console.log('WebSocketClient初始化');
-    this.url = `${import.meta.env.VITE_WS_URL}websocket/message/${useUserStore().userInfo.id}`;
+    this.url = `${window.g.VITE_WS_URL}websocket/message/${useUserStore().userInfo.id}`;
     this.protocols = protocols;
     this.ws = null;
     this.heartbeatInterval = 30000; // 心跳间隔时间，单位毫秒
