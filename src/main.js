@@ -5,6 +5,7 @@ import "./index.css";
 import pinia from "./store"; // 导入 Pinia
 import router from "./router"; // 导入 Vue Router
 import i18n from "./i18n/index";
+import { initAPI, debugConfig } from "@/api";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import {
   Calendar,
@@ -58,6 +59,10 @@ async function bootstrap() {
   document.title = window.g?.VITE_TITLE || "";
 
   const app = createApp(App);
+  // / 初始化全局 axios 实例
+  const api = initAPI();
+  app.config.globalProperties.$api = api; // Vue组件中可以 this.$api 使用
+  debugConfig();
   for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component);
   }
