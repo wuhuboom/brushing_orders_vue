@@ -14,8 +14,35 @@
   </body>
   <!-- 直接加载 config.js，确保在 main.js 前可用 -->
   <!-- <script src="/config.js?t=123456"></script> -->
-  <script src="/config.js?t=<%= new Date().getTime() %>"></script>  
+  <!-- <script src="/config.js?t=<%= new Date().getTime() %>"></script>   -->
+  <!-- <script src="/config.js?t=" + Date.now()></script>
   <script>
     document.title = window.g.VITE_TITLE || '';
-  </script>
+  </script> -->
+   <script>
+      // 动态加载 config.js
+      async function loadConfig() {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = "/config.js?t=" + Date.now(); // 防缓存
+          script.onload = () => resolve();
+          script.onerror = () => reject(new Error("config.js 加载失败"));
+          document.head.appendChild(script);
+        });
+      }
+
+      async function bootstrap() {
+        // ✅ 等待 config.js 加载完成
+        await loadConfig();
+        console.log("配置文件加载成功:", window.g);
+
+        // 设置页面标题
+        document.title = window.g?.VITE_TITLE || "默认标题";
+
+        // ✅ 再去加载 main.js，确保能访问 window.g
+        import("/src/main.js");
+      }
+
+      bootstrap();
+    </script>
 </html>
