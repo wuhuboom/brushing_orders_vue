@@ -54,6 +54,7 @@ async function loadConfig() {
 }
 async function bootstrap() {
   await loadConfig(); // ✅ 等待 config.js 加载完成
+  document.title = window.g?.VITE_TITLE || "";
 
   const app = createApp(App);
   for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
