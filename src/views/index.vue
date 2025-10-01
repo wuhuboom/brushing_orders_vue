@@ -10,15 +10,18 @@
         class="absolute inset-0 w-full h-[222px]"
       />
     </div> -->
-    <van-swipe class="my-swipe h-[333px]" :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="item in bannerArr" :key="item.id">
-        <img
-        :src="VITE_API_IMG_URL+item.imageUrl"
-        alt="background"
-        class="absolute inset-0 w-full h-[333px]"
-      />
-      </van-swipe-item>
-    </van-swipe>
+    <div class="h-[333px]">
+      <van-swipe class="my-swipe h-[333px]"  :autoplay="3000" indicator-color="white">
+        <van-swipe-item v-for="item in bannerArr" :key="item.id">
+          <img
+          :src="VITE_API_IMG_URL+item.imageUrl"
+          alt="background"
+          class="absolute inset-0 w-full h-[333px]"
+        />
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+    
     <!-- 菜单列表 -->
     <div class="w-[95%] rounded-xl mt-[21px] mx-auto flex flex-col">
       <!-- <div class="pt-4 pr-4 pl-4 text-sm text-black">

@@ -31,6 +31,7 @@ import {
   PullRefresh,
   Tag,
   Toast,
+  Swipe, SwipeItem
 } from "vant";
 // 2. 引入组件样式
 import "vant/lib/index.css";
@@ -95,6 +96,8 @@ async function bootstrap() {
   app.use(PullRefresh);
   app.use(Tag);
   app.use(Toast);
+  app.use(Swipe);
+app.use(SwipeItem);
   // app.use(ElementPlus) // 使用 Element Plus
   app.mount("#app");
 }
