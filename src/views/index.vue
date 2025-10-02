@@ -389,6 +389,7 @@ onActivated (() => {
   
 });
 onUnmounted(() => {
+   window.removeEventListener("updateTrade", handleUpdateTrade);
   if (container) container.removeEventListener("scroll", handleScroll);
 });
 </script>

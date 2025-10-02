@@ -362,7 +362,7 @@ const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
 import Footer from "@/components/Footer.vue";
 const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
-import { onMounted,onUnmounted,ref } from "vue";
+import { onMounted,onUnmounted,ref,onDeactivated } from "vue";
 import { useRouter } from "vue-router";
 import { copyContent } from "../../util/utils";
 const userStore = useUserStore();
@@ -436,7 +436,7 @@ const onClickLeft = () => {
 const updateHandler = () => {
   getUserGetInfo();
 };
-window.addEventListener("updateTrade",updateHandler);
+
 const getUserGetInfo = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
@@ -450,10 +450,15 @@ const tradeConfig = async () => {
   TradeInfor.value = res.data;
 };
 onMounted(() => {
+  window.addEventListener("updateTrade", updateHandler);
   getUserGetInfo();
   tradeConfig()
 });
 onUnmounted(() => {
+  window.removeEventListener("updateTrade", updateHandler);
+});
+onDeactivated(() => {
+  // 组件被缓存但离开时
   window.removeEventListener("updateTrade", updateHandler);
 });
 </script>
