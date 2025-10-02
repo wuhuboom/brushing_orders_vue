@@ -191,11 +191,12 @@ const tradeConfig = async () => {
 };
 
 const customer = () => {
-  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd);
+  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);
   if(time) {
      ContactUsRef.value.open();
   } else {
-     showToast(t("Sorry, the customer support server hours are from 9:00 AM to 9:00 PM."))
+    showToast(t(`Sorry, the customer support server hours are from ${TradeInfor.value.workTimeStart} AM to ${TradeInfor.value.workTimeEnd} PM.`))
+
   }
 };
 onMounted(() => {
