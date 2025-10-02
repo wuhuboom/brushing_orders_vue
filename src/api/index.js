@@ -1,106 +1,111 @@
 // api.js
 import axios from "axios";
 import { ElMessage, ElLoading } from "element-plus";
-import { showConfirmDialog,showToast } from "vant";
+import { showConfirmDialog, showToast } from "vant";
 import pinia from "@/store/index.js";
 import { useUserStore } from "@/store/modules/user";
 import { useCommonStore } from "@/store/modules/common";
 import { errorMessages } from "./errorCodeMap";
 import i18n from "../i18n/index.js"; // 引入全局 i18n 实例
-// 获取 BASEPATH，确保 window.BASEPATH 存在
-// const baseURL = window.g.VITE_API_BASE_URL ? window.g.VITE_API_BASE_URL :import.meta.env.VITE_API_BASE_URL; // 兜底默认值
-// 获取 BASEPATH，确保 window.BASEPATH 存在
+
+let api = null; // 延迟创建 axios 实例
+let loading = null;
+
+// 获取 BASEURL，确保 window.g 已加载
 export function getBaseURL() {
   return window.g?.VITE_API_BASE_URL || import.meta.env.VITE_API_BASE_URL;
 }
-const api = axios.create({
-  baseURL: getBaseURL(),
-  timeout: 20000,
-});
 
-let loading = null;
+// 初始化 axios 实例（在 main.js 等待 config.js 加载后调用）
+export function initAPI() {
+  if (!api) {
+    api = axios.create({
+      baseURL: getBaseURL(),
+      timeout: 20000,
+    });
 
-api.interceptors.request.use(
-  (config) => {
-    if (config.loading === true) {
-      if (loading) {
-        loading.close();
-        loading = null;
+    // 请求拦截器
+    api.interceptors.request.use(
+      (config) => {
+        if (config.loading === true) {
+          if (loading) {
+            loading.close();
+            loading = null;
+          }
+          loading = ElLoading.service({ fullscreen: true });
+        }
+        const userStore = useUserStore(pinia);
+        config.headers = {
+          ...config.headers,
+          authorization: userStore.token || "",
+          lang: useCommonStore().clientLang,
+        };
+
+        // 添加请求参数
+        if (config.method === "get") {
+          config.params = {
+            ...config.params,
+          };
+        } else {
+          config.data = {
+            ...config.data,
+          };
+        }
+
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
       }
-      loading = ElLoading.service({ fullscreen: true });
-    }
-    const userStore = useUserStore(pinia);
-    // config.headers["authorization"] = userStore.token || "";
-    // config.headers["lang"] = useCommonStore().clientLang;
-    config.headers = {
-      ...config.headers, // 先保留已有的 headers
-      authorization: userStore.token || "",
-      lang: useCommonStore().clientLang
-    };
+    );
 
-    // 添加accountType到请求参数
-    console.log(config.url);
-    if (config.method === "get") {
-      config.params = {
-        ...config.params,
-      };
-    } else {
-      config.data = {
-        ...config.data,
-      };
-    }
+    // 响应拦截器
+    api.interceptors.response.use(
+      (response) => {
+        const config = response.config;
+        if (config.loading === true && loading) {
+          loading.close();
+          loading = null;
+        }
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-api.interceptors.response.use(
-  (response) => {
-    console.log(response.status);
-    const config = response.config;
-    if (config.loading === true && loading) {
-      loading.close();
-      loading = null;
-    }
-    if (response.status == 200) {
-      let result = response.data;
-      if (result.code == 200) {
-        return result;
-      } else if(result.code == 201) {
-        return result;
-      }else if (result.code == 401) {
-        useUserStore().logout();
-        return Promise.reject(result);
-      } else {
-        console.log(config.showMsg)
-        if (config.showMsg) showToast(i18n.global.t(errorMessages[result.code])|| result.msg);
-        return Promise.reject(result);
+        if (response.status === 200) {
+          const result = response.data;
+          if (result.code === 200 || result.code === 201) {
+            return result;
+          } else if (result.code === 401) {
+            useUserStore().logout();
+            return Promise.reject(result);
+          } else {
+            if (config.showMsg) showToast(i18n.global.t(errorMessages[result.code]) || result.msg);
+            return Promise.reject(result);
+          }
+        } else if (response.status === 401) {
+          useUserStore().logout();
+          return Promise.reject(response);
+        } else {
+          if (config.showMsg) showToast(response.status);
+          return Promise.reject(response);
+        }
+      },
+      (error) => {
+        const config = error.config || {};
+        if (config.loading === true && loading) {
+          loading.close();
+          loading = null;
+        }
+        if (error.status) useUserStore().logout();
+        if (config.showMsg) showToast(error.message);
+        return Promise.reject(error);
       }
-    }
-    else if (response.status == 401) {
-      useUserStore().logout();
-      return Promise.reject(result);
-    } else {
-      if (config.showMsg)
-        showToast(response.status);
-      return Promise.reject(response);
-    }
-  },
-  (error) => {
-    const config = error.config;
-    if (config.loading === true && loading) {
-      loading.close();
-      loading = null;
-    }
-    if (error.status) {
-      useUserStore().logout();
-    }
-    if (config.showMsg) showToast(error.message);
-    return Promise.reject(error);
+    );
   }
-);
 
-export default api;
+  return api;
+}
+
+// 调试 window.g
+export function debugConfig() {
+  console.log("window.g:", window.g);
+}
+
+export default api; // 注意：在 main.js 调用 initAPI() 后再使用 api
