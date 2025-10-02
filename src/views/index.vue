@@ -160,8 +160,10 @@ import tradePassword from "@/components/tradePassword.vue";
 import { onMounted, onUnmounted,ref, reactive, nextTick,onActivated,onDeactivated,watch   } from "vue";
 import { getLevel, getNoticeList, userGetInfo,bannerList,getTradeConfig } from "../api/apis";
 import { useRouter,useRoute } from "vue-router";
+import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { showToast } from "vant";
+const userStore = useUserStore();
 const { t } = useI18n();
 const tradePasswordRef = ref(null);
 const ContactUsRef = ref(null);
@@ -254,7 +256,7 @@ function goTo(path) {
   });
   } else if (path == "/server") {
     // ContactUsRef.value.open();
-    const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd);
+    const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);
     if(time) {
       ContactUsRef.value.open();
     } else {

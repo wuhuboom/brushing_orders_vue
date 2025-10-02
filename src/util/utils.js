@@ -110,15 +110,56 @@ export const formatWithTimezone = (timestamp, tzName) => {
 };
 
 // 客服工作时间
-export const checkWorkTimeLocal = (workTimeStart, workTimeEnd) => {
-  const now = new Date();
+// export const checkWorkTimeLocal = (workTimeStart, workTimeEnd) => {
+//   const now = new Date();
 
-  // 本地当前小时和分钟
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const currentHM = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+//   // 本地当前小时和分钟
+//   const hours = now.getHours();
+//   const minutes = now.getMinutes();
+//   const currentHM = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
 
-  // 转分钟数方便比较
+//   // 转分钟数方便比较
+//   const toMinutes = (hm) => {
+//     const [h, m] = hm.split(":").map(Number);
+//     return h * 60 + m;
+//   };
+
+//   const nowMinutes = toMinutes(currentHM);
+//   const startMinutes = toMinutes(workTimeStart);
+//   const endMinutes = toMinutes(workTimeEnd);
+
+//   if (nowMinutes >= startMinutes && nowMinutes <= endMinutes) {
+//     return true;
+//   } else {
+//     return false
+//   }
+// };
+
+// 客服工作时间校验（根据后台时区，兜底本地时间）
+export const checkWorkTimeLocal = (workTimeStart, workTimeEnd, tzName) => {
+  let hours, minutes;
+
+  try {
+    const formatter = new Intl.DateTimeFormat("zh-CN", {
+      timeZone: tzName || Intl.DateTimeFormat().resolvedOptions().timeZone, // 没有返回就用本地时区
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+
+    const parts = formatter.formatToParts(new Date());
+    hours = parts.find((p) => p.type === "hour").value;
+    minutes = parts.find((p) => p.type === "minute").value;
+  } catch (err) {
+    console.warn(`[checkWorkTimeWithTimezone] 无效时区 ${tzName}，回退到本地时间`);
+    const now = new Date();
+    hours = String(now.getHours()).padStart(2, "0");
+    minutes = String(now.getMinutes()).padStart(2, "0");
+  }
+
+  const currentHM = `${hours}:${minutes}`;
+
+  // 转换成分钟方便比较
   const toMinutes = (hm) => {
     const [h, m] = hm.split(":").map(Number);
     return h * 60 + m;
@@ -128,9 +169,6 @@ export const checkWorkTimeLocal = (workTimeStart, workTimeEnd) => {
   const startMinutes = toMinutes(workTimeStart);
   const endMinutes = toMinutes(workTimeEnd);
 
-  if (nowMinutes >= startMinutes && nowMinutes <= endMinutes) {
-    return true;
-  } else {
-    return false
-  }
+  return nowMinutes >= startMinutes && nowMinutes <= endMinutes;
 };
+

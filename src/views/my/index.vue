@@ -383,7 +383,7 @@ const toPage = (path) => {
   });
 };
 const customer = () => {
-  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd);
+  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);
   if(time) {
      ContactUsRef.value.open();
   } else {
