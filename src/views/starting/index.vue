@@ -106,7 +106,8 @@
           <div class="flex flex-col p-4 box-border relative rounded-[10px]">
             <div class="mb-1 text-base" style="color: #f77115">Notice:</div>
             <div class="text-[#A5A5A5] text-[12px]">
-              Online Support Hours 10:00 - 22:59 <br />
+              
+              Online Support Hours {{ TradeInfor?.workTimeStart || '--:--' }} - {{ TradeInfor?.workTimeEnd || '--:--' }} <br />
               Please contact online support for your assistance!
             </div>
           </div>
@@ -213,6 +214,7 @@ import {
   getGoodsListTwo,
   createOrder,
   submitOrder,
+  getTradeConfig
 } from "../../api/apis";
 const url = window.g.VITE_API_IMG_URL;
 const userStore = useUserStore();
@@ -331,6 +333,12 @@ const toMy = () => {
   router.push({ path: "/my" });
 };
 
+const TradeInfor = ref({})
+const tradeConfig = async () => {
+  let res = await getTradeConfig();
+  TradeInfor.value = res.data;
+};
+
 onUnmounted(() => {
   // 清除定时器，防止组件卸载后还在请求
   if (timer) clearTimeout(timer);
@@ -346,6 +354,7 @@ const userGetInfoMethods = () => {
 
 const orderCount = ref(0);
 onMounted(() => {
+  tradeConfig()
   getList();
   userGetInfoMethods();
 });
