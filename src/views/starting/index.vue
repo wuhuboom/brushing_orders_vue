@@ -7,7 +7,7 @@
         <van-icon name="arrow-left" color="#fff" size="24px" />
       </div> -->
       <!-- 中间标题 -->
-      <div class="mx-auto text-white text-[22px] py-[24px] ">Starting</div>
+      <div class="mx-auto text-white text-[22px] py-[24px] ">{{$t('开始')}}</div>
     </div>
     <div class="bg-[#151514] px-[16px]">
       <div class="w-full mx-auto rounded-b-[20px]">
@@ -28,7 +28,7 @@
                   >
                     VIP{{ userInfo.levelId }}
                   </div>
-                  <span>Welcome back</span>
+                  <span>{{$t('欢迎回来')}}</span>
                 </div>
               </div>
             </div>
@@ -42,7 +42,7 @@
       <div class="max-w-4xl mx-auto flex justify-between text-gray-400">
         <!-- Wallet Balance -->
         <div class="flex-1">
-          <p class="text-[12px] text-[#B2B2B2]">Wallet Balance</p>
+          <p class="text-[12px] text-[#B2B2B2]">{{$t('钱包余额')}}</p>
           <p class="text-[20px] text-[#CEB04E] mt-1">{{ userInfo.balance }}</p>
         </div>
 
@@ -51,7 +51,7 @@
 
         <!-- Hold Amount -->
         <div class="flex-1">
-          <p class="text-[12px] text-[#B2B2B2]">Hold Amount</p>
+          <p class="text-[12px] text-[#B2B2B2]">{{$t('持有金额')}}</p>
           <p class="text-[20px] text-[#CEB04E] mt-1">
             {{ userInfo.frozenBalance }}
           </p>
@@ -62,7 +62,7 @@
 
         <!-- Commission -->
         <div class="flex-1">
-          <p class="text-[12px] text-[#B2B2B2]">Commission</p>
+          <p class="text-[12px] text-[#B2B2B2]">{{$t('当日佣金')}}</p>
           <p class="text-[20px] text-[#CEB04E] mt-1">
             {{ userInfo.commission }}
           </p>
@@ -96,7 +96,7 @@
           class="mt-5 flex justify-center items-center text-[#fff] text-base h-[60px] bg-[#F09F39] rounded-[20px]"
           @click="handleClick"
         >
-          Start
+          {{$t('开始')}}
           <span class="pl-2">({{ userInfo.dealCount }}</span
           >/<span>{{ orderCount }})</span>
         </div>
@@ -107,8 +107,8 @@
             <div class="mb-1 text-base" style="color: #f77115">Notice:</div>
             <div class="text-[#A5A5A5] text-[12px]">
               
-              Online Support Hours {{ TradeInfor?.workTimeStart || '--:--' }} - {{ TradeInfor?.workTimeEnd || '--:--' }} <br />
-              Please contact online support for your assistance!
+              {{$t('在线客服服务时间')}} {{ TradeInfor?.workTimeStart || '--:--' }} - {{ TradeInfor?.workTimeEnd || '--:--' }} <br />
+              {{$t('请联系客服获取帮助')}}
             </div>
           </div>
         </div>

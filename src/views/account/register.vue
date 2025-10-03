@@ -6,16 +6,16 @@
         <van-icon name="arrow-left" color="#fff" size="24px" />
       </div>
       <!-- 中间标题 -->
-      <div class="mx-auto text-white text-[22px]">Sign up</div>
+      <div class="mx-auto text-white text-[22px]">{{$t('register')}}</div>
     </div>
     <div>
     </div>
     <div class="pl-[35px]">
       <div class="text-[22px] font-semibold mt-6 text-[#fff]">
-       Create your account
+       {{$t('创建你的账户')}}
       </div>
       <div class=" text-xs text-[#94A3B8] pt-4">
-        Sign in-up to enjoy the best managing experience
+        {{$t('登录 / 注册，享受最佳的管理体验')}}
       </div>
     </div>
     <div class="flex flex-col items-center pb-3">

@@ -1,15 +1,26 @@
 <template>
   <div class="bg-[#fff]">
-    <!-- <div
-      class="relative h-[222px] w-full"
-      style="overflow: hidden"
-    >
-      <img
-        src="@/static/images/indexBg.png"
-        alt="background"
-        class="absolute inset-0 w-full h-[222px]"
-      />
-    </div> -->
+    <div
+        class="w-full flex justify-between shadow-md items-center px-4 py-2 box-border bg-[#000]"
+      >
+        <div class="w-[var(--header-logo-width)]" @click="jump">
+          <img class="w-[32px] h-[32px]" src="@/static/images/logo.png" alt="" />
+        </div>
+        <div class="flex justify-start items-center">
+           <img
+            src="@/static/images/ENImg.png"
+            class="w-[22px]"
+            alt=""
+            @click="handleChangeLang"
+          />
+          <img
+            src="@/static/images/myImg.png"
+            class="w-[22px] ml-[16px]"
+            alt=""
+            @click="toMy"
+          />
+        </div>
+      </div>
     <div class="h-[333px]">
       <van-swipe class="my-swipe h-[333px]"  :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="item in bannerArr" :key="item.id">
@@ -48,8 +59,8 @@
     <div >
       <!-- 标题 -->
       <div class="flex justify-between items-center mb-[10px] p-4">
-        <h2 class="text-[20px] font-semibold">Employee level</h2>
-        <span class="text-[14px] text-[#F89C0D] cursor-pointer font-bold" @click="toVips">View More</span>
+        <h2 class="text-[20px] font-semibold">{{$t('员工等级')}}</h2>
+        <span class="text-[14px] text-[#F89C0D] cursor-pointer font-bold" @click="toVips">{{$t('查看更多')}}</span>
       </div>
       <div class="swiper-container" v-if="ready">
         <swiper
@@ -150,6 +161,7 @@
     <Footer name="/"></Footer>
     <tradePassword ref="tradePasswordRef"></tradePassword>
     <ContactUs ref="ContactUsRef"></ContactUs>
+    <Lang ref="langRef"></Lang>
   </div>
 </template>
 <script setup>
@@ -163,6 +175,7 @@ import { useRouter,useRoute } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { showToast } from "vant";
+const langRef = ref(null);
 const userStore = useUserStore();
 const { t } = useI18n();
 const tradePasswordRef = ref(null);
@@ -260,7 +273,12 @@ function goTo(path) {
     if(time) {
       ContactUsRef.value.open();
     } else {
-      showToast(t(`Sorry, the customer support server hours are from ${TradeInfor.value.workTimeStart} AM to ${TradeInfor.value.workTimeEnd} PM.`))
+      showToast(
+        t("supportHours", {
+          start: TradeInfor.value.workTimeStart,
+          end: TradeInfor.value.workTimeEnd
+        })
+      )
     }
   } else {
     router.push(path);
@@ -279,18 +297,6 @@ const onSwiper = (swiper) => {
     swiper.slideToLoop(1, 0); // 修复左侧留白
   }, 50); // 延迟一帧，保证 DOM 尺寸正确
 }
-// ⭐ watch 保证 “数据 + swiper 实例” 都 ready 后再操作
-// watch(
-//   () => [levelList.value, swiperInstance.value],
-//   async ([list, swiper]) => {
-//     if (list.length && swiper) {
-//       await nextTick()
-//       swiper.update()
-//       swiper.slideToLoop(0, , 0) // 立即切换到第一个
-//     }
-//   },
-//   { immediate: true, deep: true }
-// )
 const ready = ref(false);
 const level = async () => {
   let res = await getLevel();
@@ -322,8 +328,6 @@ const level = async () => {
     
   }
 };
-
-
 const query = reactive({
   pageNum: 1,
   pageSize: 10,
@@ -336,10 +340,9 @@ const getData = async () => {
   noticeContent.value = res.rows.length > 0 ? res.rows[0].noticeContent : "";
 };
 
-window.addEventListener("updateTrade", (e) => {
+const updateHandler = () => {
   getUserGetInfo();
-});
-
+};
 const getUserGetInfo = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
@@ -377,6 +380,15 @@ const tradeConfig = async () => {
   let res = await getTradeConfig();
   TradeInfor.value = res.data;
 };
+const toMy = ()=>{
+  router.push({ path: "/my" });
+}
+function handleChangeLang() {
+  langRef.value.open();
+}
+onMounted(() =>{
+  window.addEventListener("updateTrade", updateHandler);
+})
 
 onActivated (() => {
   container = document.getElementById("router-view");
@@ -389,7 +401,7 @@ onActivated (() => {
   
 });
 onUnmounted(() => {
-   window.removeEventListener("updateTrade", handleUpdateTrade);
+  window.removeEventListener("updateTrade", updateHandler);
   if (container) container.removeEventListener("scroll", handleScroll);
 });
 </script>

@@ -228,7 +228,7 @@ const loadData = async () => {
 
     list.value.push(...data);
   } catch (error) {
-    console.error("加载失败", error);
+    // console.error("加载失败", error);
     finished.value = true; // 避免无限加载
   }
 };

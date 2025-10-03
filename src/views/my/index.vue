@@ -12,7 +12,7 @@
         <van-icon name="arrow-left" color="#fff" size="24px" />
       </div> -->
       <!-- 中间标题 -->
-      <div class="mx-auto text-white text-[22px] py-[24px]">My</div>
+      <div class="mx-auto text-white text-[22px] py-[24px]">{{$t('我的')}}</div>
     </div>
 
     <div
@@ -30,7 +30,7 @@
           v-else-if="!userInfo.avatar"
           :src="userImg"
           class="w-[60px] h-[60px] rounded-full ml-[5px] object-cover"
-          alt="默认头像"
+          :alt="$t('默认头像')"
         />
 
         <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
@@ -38,7 +38,7 @@
           v-else
           :src="userInfo.avatar"
           class="w-[60px] h-[60px] rounded-full ml-[5px] object-cover"
-          alt="用户头像"
+          :alt="$t('用户头像')"
           @error="e => e.target.src = userImg"
         />
 
@@ -56,7 +56,7 @@
             >
               VIP{{userInfo.levelId}}
             </div>
-            <span class="text-[#B3A369] pl-[5px]">Welcome back!</span>
+            <span class="text-[#B3A369] pl-[5px]">{{$t('欢迎回来')}}!</span>
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@
       "
     >
       <div class="text-[#333333] text-[14px] font-bold">
-        Member Invitation Code
+        {{$t('邀请码')}}
       </div>
       <div class="text-[#333] text-[24px] font-bold text-center mb-[12px] mt-[16px]">
         {{ userInfo.inviteCode }}
@@ -99,7 +99,7 @@
         @click="copyContent(userInfo.inviteCode)"
       >
         <img src="@/static/images/Copy.png" class="w-[19px] h-[19px]" alt="" />
-        Copy Invitation Code
+        {{$t('复制邀请码')}}
       </div>
     </div>
 
@@ -111,7 +111,7 @@
       "
     >
       <div class="text-[#333333] text-[14px] font-bold">
-        Wallet Balance
+        {{$t('钱包余额')}}
       </div>
       <div class="text-[#333] text-[24px] font-bold pt-[10px]">
         {{
@@ -384,10 +384,16 @@ const toPage = (path) => {
 };
 const customer = () => {
   const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);
+
   if(time) {
      ContactUsRef.value.open();
   } else {
-    showToast(t(`Sorry, the customer support server hours are from ${TradeInfor.value.workTimeStart} AM to ${TradeInfor.value.workTimeEnd} PM.`))
+    showToast(
+        t("supportHours", {
+          start: TradeInfor.value.workTimeStart,
+          end: TradeInfor.value.workTimeEnd
+        })
+      )
   }
 };
 const logout = () => {
@@ -423,9 +429,9 @@ const submitTradePassword = async () => {
   });
 };
 
-// function handleChangeLang() {
-//   langRef.value.open();
-// }
+function handleChangeLang() {
+  langRef.value.open();
+}
 
 const onClickLeft = () => {
   router.replace({

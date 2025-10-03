@@ -87,3 +87,6 @@ export const getZoneActive = (params) =>
 
 export const bannerList = (params) =>
   getApi().get(`/config/bannerList`, { params, loading: false, showMsg: false });
+
+export const getEmailAddress = (params) =>
+  getApi().get(`/config/getEmailAddress`, { params, loading: false, showMsg: false });

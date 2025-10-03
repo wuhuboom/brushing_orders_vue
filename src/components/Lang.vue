@@ -1,11 +1,9 @@
 <template>
   <van-popup
     v-model:show="dialogVisible"
-    closeable
-    position="right"
-    :style="{ width: '50%', height: '100%',background: 'black' }"
+    :style="{ width: '240px', height: '264px',background: '#fff',borderRadius: '12px' }"
   >
-    <template #header>
+    <!-- <template #header>
       <div>
         <div
           class="bg-gray w-8 h-8 flex items-center justify-center rounded-2.5"
@@ -17,16 +15,19 @@
         </div>
         <p class="text-[25px] mt-5 text-black">{{ $t("选择语言") }}</p>
       </div>
-    </template>
-    <div class="flex flex-col gap-4 mt-20">
+    </template> -->
+    <div class="flex flex-col gap-4 mt-[30px]">
       <div
         v-for="item in LANGS"
         :key="item.code"
-        class="flex items-center gap-4"
+        class="flex items-center pb-[12px]"
         @click="handleChangeLang(item)"
       >
-        <div class="w-full h-full flex flex-col  box-border">
-          <div class="w-full h-16 flex items-center justify-center text-white text-lg uppercase">{{item.name}}</div>
+        <div class="w-full h-full flex items-center px-[19px]">
+          <img :src="getStaticImageUrl(`${item.code}.png`)"
+                    alt="" class="h-[32px] w-[32px]">
+          <div class="text-[14px] text-black pl-[12px]">{{item.name}}</div>
+          <img v-if="locale == item.code" src="../static/images/check.png" alt="" class="h-[20px] w-[20px] ml-auto">
         </div>
       </div>
     </div>
@@ -52,6 +53,8 @@ const { setLocale } = useLocale();
 const open = () => (dialogVisible.value = true);
 const close = () => (dialogVisible.value = false);
 
+
+
 defineExpose({
   open,
   close, // 新增关闭方法
@@ -61,6 +64,7 @@ function handleChangeLang(item) {
   if (commonStore.clientLang === item.code) return;
   commonStore.updateLang(item.code);
   locale.value = item.code;
+  console.log()
   setLocale(locale.value);
   close();
 }

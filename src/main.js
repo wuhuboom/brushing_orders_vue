@@ -43,6 +43,11 @@ import deDE from "vant/es/locale/lang/de-DE";
 import itIT from "vant/es/locale/lang/it-IT";
 import koKR from "vant/es/locale/lang/ko-KR";
 import idID from "vant/es/locale/lang/id-ID";
+import arSA from "vant/es/locale/lang/ar-SA";
+import trTR from "vant/es/locale/lang/tr-TR";
+import esES from "vant/es/locale/lang/es-ES";
+
+
 async function loadConfig() {
   if (!window.g) {
     await new Promise((resolve, reject) => {
@@ -72,6 +77,11 @@ async function bootstrap() {
   Locale.use("ko-KR", koKR);
   Locale.use("id-ID", idID);
   Locale.use("en-US", enUS);
+  Locale.use("ar-SA", arSA);
+  Locale.use("tr-TR", trTR);
+  Locale.use("es-ES", esES);
+  
+  
   // 设置一个全局的图片上传路径import.meta.env.VITE_UPLOAD_URL
   app.config.globalProperties.$uploadUrl = import.meta.env.VITE_UPLOAD_URL;
   app.use(i18n); // 使用 Vue I18n

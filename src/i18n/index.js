@@ -8,6 +8,9 @@ import it from './locales/it.json';
 import fr from './locales/fr.json';
 import de from './locales/de.json';
 import id from './locales/id.json';
+import es from './locales/es.json'; //西班牙
+import tr from './locales/tr.json'; //土耳其语
+import ar from './locales/ar.json'; //阿拉伯
 
 // 定义语言包
 const messages = {
@@ -18,7 +21,10 @@ const messages = {
   ko,
   // ja,
   it,
-  id
+  id,
+  es,
+  tr,
+  ar
 };
 
 // 创建 i18n 实例并导出

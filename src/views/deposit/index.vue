@@ -144,7 +144,7 @@ const loadData = async () => {
 
     list.value.push(...data);
   } catch (error) {
-    console.error("加载失败", error);
+    // console.error("加载失败", error);
     finished.value = true; // 避免无限加载
   }
 };
@@ -153,7 +153,12 @@ const customer = () => {
   if(time) {
      ContactUsRef.value.open();
   } else {
-    showToast(t(`Sorry, the customer support server hours are from ${TradeInfor.value.workTimeStart} AM to ${TradeInfor.value.workTimeEnd} PM.`))
+    showToast(
+        t("supportHours", {
+          start: TradeInfor.value.workTimeStart,
+          end: TradeInfor.value.workTimeEnd
+        })
+      )
 
   }
 };

@@ -79,7 +79,7 @@
     </div>
     <div class="flex justify-center items-center">
       <div class="w-[90px] h-[1px] bg-[#CBD5E1]"></div>
-      <div class="text-[11px] text-[#fff] px-[13px]">Or login with</div>
+      <div class="text-[11px] text-[#fff] px-[13px]">{{$t('或者使用以下方式登录')}}</div>
       <div class="w-[90px] h-[1px] bg-[#CBD5E1]"></div>
     </div>
     
@@ -90,7 +90,7 @@
         </p> -->
 
         <div class="text-sm text-center w-full" @click="toRegister">
-          Don't have an account?<span class="text-[#F97316] text-[14px] pl-[2px]">Sign up</span>
+          {{$t('还没有账号？')}}<span class="text-[#F97316] text-[14px] pl-[2px]">{{$t('去注册')}}</span>
         </div>
     </div>
     <Lang ref="langRef"></Lang>
