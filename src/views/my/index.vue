@@ -125,8 +125,8 @@
         {{ userInfo.commission }}
       </div>
       <div class="text-[#fff] flex justify-between mt-[20px]">
-        <div class="bg-[#000000] w-[138px] h-[44px] flex justify-center items-center" @click="toPage('/deposit')">Deposit</div>
-        <div class="bg-[#B3A369] w-[138px] h-[44px] flex justify-center items-center" @click="toPage('/withdraw')">Withdraw</div>
+        <div class="bg-[#000000] w-[138px] h-[44px] flex justify-center items-center" @click="toPage('/deposit')">{{$t('定金')}}</div>
+        <div class="bg-[#B3A369] w-[138px] h-[44px] flex justify-center items-center" @click="toPage('/withdraw')">{{$t('提取')}}</div>
       </div>
 
 
@@ -362,7 +362,7 @@ const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
 import Footer from "@/components/Footer.vue";
 const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
-import { onMounted,onUnmounted,ref,onDeactivated } from "vue";
+import { onMounted,onUnmounted,ref,onDeactivated,onActivated } from "vue";
 import { useRouter } from "vue-router";
 import { copyContent } from "../../util/utils";
 const userStore = useUserStore();
@@ -459,6 +459,10 @@ onMounted(() => {
   window.addEventListener("updateTrade", updateHandler);
   getUserGetInfo();
   tradeConfig()
+});
+onActivated(() => {
+  // keep-alive 返回时也要重新绑定
+  window.addEventListener("updateTrade", updateHandler);
 });
 onUnmounted(() => {
   window.removeEventListener("updateTrade", updateHandler);

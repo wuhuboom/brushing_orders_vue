@@ -214,6 +214,7 @@
   "或者使用以下方式登录":"Or login with",
   "还没有账号？":"Don't have an account?",
   "创建你的账户":"Create your account",
-  "登录 / 注册，享受最佳的管理体验": "Login / Register to enjoy the best management experience"
+  "登录 / 注册，享受最佳的管理体验": "Login / Register to enjoy the best management experience",
+  "commissionInfo":"Commission rate. {rate} orders per day. {tasks} tasks"
   
 }

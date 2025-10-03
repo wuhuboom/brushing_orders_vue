@@ -210,5 +210,6 @@
   "或者使用以下方式登录":"O iniciar sesión con",
   "还没有账号？":"¿No tienes cuenta?",
   "创建你的账户":"Crea tu cuenta",
-  "登录 / 注册，享受最佳的管理体验": "Inicia sesión / Regístrate, disfruta de la mejor experiencia de gestión"
+  "登录 / 注册，享受最佳的管理体验": "Inicia sesión / Regístrate, disfruta de la mejor experiencia de gestión",
+  "commissionInfo":"Tasa de comisión. {rate} de pedidos por día. {tasks} tareas"
 }

@@ -107,7 +107,8 @@
                 <h3 class="text-[20px] font-bold mb-[21px] pt-[13px]">
                   {{ item.nameEn }}
                 </h3>
-                <div v-html="item.descriptionEn"></div>
+                <!-- <div v-html="item.descriptionEn"></div> -->
+                 <div>{{ t('commissionInfo', { rate: item.rate, tasks: item.tasks }) }}</div>
               </div>
             </div>
           </swiper-slide>
@@ -169,7 +170,7 @@ import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
-import { onMounted, onUnmounted,ref, reactive, nextTick,onActivated,onDeactivated,watch   } from "vue";
+import { onMounted, onUnmounted,ref, reactive, nextTick,onActivated,onDeactivated  } from "vue";
 import { getLevel, getNoticeList, userGetInfo,bannerList,getTradeConfig } from "../api/apis";
 import { useRouter,useRoute } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
@@ -289,7 +290,36 @@ function toVips() {
   router.push("/vips");
    sessionStorage.setItem("fromRoute", '/vips');
 }
-const levelList = ref([]);
+const levelList = ref([
+  {
+    nameEn:'VIP1',
+    rate:'0.50%',
+    tasks:40,
+    // descriptionEn:t('commissionInfo', { rate: '0.50%', tasks: 40 }),
+    bg:new URL("@/static/images/bgImages1.png", import.meta.url).href
+  },
+  {
+    nameEn:'VIP2',
+    rate:'1%',
+    tasks:40,
+    // descriptionEn:t('commissionInfo', { rate: '1%', tasks: 40 }),
+    bg:new URL("@/static/images/bgImages2.png", import.meta.url).href
+  },
+  {
+    nameEn:'VIP3',
+    rate:'1.50%',
+    tasks:40,
+    // descriptionEn:t('commissionInfo', { rate: '1.5%', tasks: 40 }),
+    bg:new URL("@/static/images/bgImages3.png", import.meta.url).href
+  },
+  {
+    nameEn:'VIP4',
+    rate:'2.50%',
+    tasks:40,
+    // descriptionEn:t('commissionInfo', { rate: '2.50%', tasks: 40 }),
+    bg:new URL("@/static/images/bgImages4.png", import.meta.url).href
+  }
+]);
 const onSwiper = (swiper) => {
   swiperInstance.value = swiper;
   setTimeout(() => {
@@ -297,37 +327,37 @@ const onSwiper = (swiper) => {
     swiper.slideToLoop(1, 0); // 修复左侧留白
   }, 50); // 延迟一帧，保证 DOM 尺寸正确
 }
-const ready = ref(false);
-const level = async () => {
-  let res = await getLevel();
-  levelList.value = res.data;
-  levelList.value.forEach((item) => {
-    if (item.descriptionEn) {
-      // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
-      item.descriptionEn = item.descriptionEn.replace(
-        /(●|•|&#8226;|&#9679;)/g,
-        '<span class="small-dot">●</span>'
-      );
-    }
-  });
-  levelList.value = levelList.value.map((item, index) => {
-    return {
-      ...item,
-      bg: bgImages[index % bgImages.length] // 按顺序循环使用
-    };
-  });
-  ready.value = true;
-  // 等数据渲染完
-  await nextTick()
-  // 确保 swiper 已经初始化
-   if (swiperInstance.value) {
-    swiperInstance.value.slideToLoop(1, 0) // 再切换到第一个
-    // setTimeout(() => {
-      swiperInstance.value.slideToLoop(0, 0) // 再切换到第一个
-    // },1000)
+const ready = ref(true);
+// const level = async () => {
+//   let res = await getLevel();
+//   levelList.value = res.data;
+//   levelList.value.forEach((item) => {
+//     if (item.descriptionEn) {
+//       // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
+//       item.descriptionEn = item.descriptionEn.replace(
+//         /(●|•|&#8226;|&#9679;)/g,
+//         '<span class="small-dot">●</span>'
+//       );
+//     }
+//   });
+//   levelList.value = levelList.value.map((item, index) => {
+//     return {
+//       ...item,
+//       bg: bgImages[index % bgImages.length] // 按顺序循环使用
+//     };
+//   });
+//   ready.value = true;
+//   // 等数据渲染完
+//   await nextTick()
+//   // 确保 swiper 已经初始化
+//    if (swiperInstance.value) {
+//     swiperInstance.value.slideToLoop(1, 0) // 再切换到第一个
+//     // setTimeout(() => {
+//       swiperInstance.value.slideToLoop(0, 0) // 再切换到第一个
+//     // },1000)
     
-  }
-};
+//   }
+// };
 const query = reactive({
   pageNum: 1,
   pageSize: 10,
@@ -351,20 +381,6 @@ const getUserGetInfo = () => {
 const STORAGE_KEY = "ListPageScrollY"; // 本地缓存 key
 const scrollTop = ref(0)
 let container;
-// 离开页面时记录滚动位置
-onDeactivated(() => {
-  sessionStorage.setItem(STORAGE_KEY, scrollTop.value);
-});
-
-// 回到页面时恢复滚动位置
-onActivated(() => {
-  const fromRoute = sessionStorage.getItem("fromRoute");
-  sessionStorage.removeItem("fromRoute"); // 用完删除
-  const scrollY = sessionStorage.getItem(STORAGE_KEY);
-  if (scrollY && fromRoute) {
-    container.scrollTo(0, +scrollY); // 容器滚动
-  }
-});
 
 function handleScroll() {
   scrollTop.value = container.scrollTop;
@@ -389,21 +405,34 @@ function handleChangeLang() {
 onMounted(() =>{
   window.addEventListener("updateTrade", updateHandler);
 })
-
+// 回到页面时恢复滚动位置
 onActivated (() => {
+  const fromRoute = sessionStorage.getItem("fromRoute");
+  sessionStorage.removeItem("fromRoute"); // 用完删除
+  const scrollY = sessionStorage.getItem(STORAGE_KEY);
+  window.addEventListener("updateTrade", updateHandler);
+  if (scrollY && fromRoute) {
+    container.scrollTo(0, +scrollY); // 容器滚动
+  }
   container = document.getElementById("router-view");
   if (container) container.addEventListener("scroll", handleScroll);
   getData();
   getUserGetInfo();
   getbannerList()
   tradeConfig();
-  level();
-  
+  // level();
 });
 onUnmounted(() => {
   window.removeEventListener("updateTrade", updateHandler);
   if (container) container.removeEventListener("scroll", handleScroll);
 });
+onDeactivated(() => {
+  // 组件被缓存但离开时
+  window.removeEventListener("updateTrade", updateHandler);
+  // 离开页面时记录滚动位置
+  sessionStorage.setItem(STORAGE_KEY, scrollTop.value);
+});
+
 </script>
 <style>
 .swiper-container {

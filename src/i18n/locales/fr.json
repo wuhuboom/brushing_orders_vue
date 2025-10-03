@@ -168,5 +168,6 @@
   "退出登录失败": "Échec de la déconnexion",
   "登录失败，未知错误": "Échec de connexion, erreur inconnue",
   "创建你的账户":" Créez votre compte",
-  "登录 / 注册，享受最佳的管理体验": "Connectez-vous / Inscrivez-vous pour profiter de la meilleure expérience de gestion"
+  "登录 / 注册，享受最佳的管理体验": "Connectez-vous / Inscrivez-vous pour profiter de la meilleure expérience de gestion",
+  "commissionInfo":"Taux de commission. {rate} de commandes par jour. {tasks} tâches"
 }
