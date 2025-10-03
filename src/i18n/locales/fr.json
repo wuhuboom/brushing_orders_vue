@@ -166,5 +166,7 @@
   "用户不存在或头像为空": "L'utilisateur n'existe pas ou l'avatar est vide",
   "请求头无效": "En-tête de requête invalide",
   "退出登录失败": "Échec de la déconnexion",
-  "登录失败，未知错误": "Échec de connexion, erreur inconnue"
+  "登录失败，未知错误": "Échec de connexion, erreur inconnue",
+  "创建你的账户":" Créez votre compte",
+  "登录 / 注册，享受最佳的管理体验": "Connectez-vous / Inscrivez-vous pour profiter de la meilleure expérience de gestion"
 }

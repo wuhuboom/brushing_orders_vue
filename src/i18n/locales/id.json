@@ -166,5 +166,7 @@
   "用户不存在或头像为空": "Pengguna tidak ada atau avatar kosong",
   "请求头无效": "Header permintaan tidak valid",
   "退出登录失败": "Gagal keluar",
-  "登录失败，未知错误": "Gagal masuk, kesalahan tidak diketahui"
+  "登录失败，未知错误": "Gagal masuk, kesalahan tidak diketahui",
+  "创建你的账户": "Buat akun Anda",
+  "登录 / 注册，享受最佳的管理体验": "Masuk / Daftar, nikmati pengalaman manajemen terbaik"
 }
