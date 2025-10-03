@@ -64,7 +64,6 @@ function handleChangeLang(item) {
   if (commonStore.clientLang === item.code) return;
   commonStore.updateLang(item.code);
   locale.value = item.code;
-  console.log()
   setLocale(locale.value);
   close();
 }
