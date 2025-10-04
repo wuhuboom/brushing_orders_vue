@@ -116,13 +116,13 @@
       <div class="text-[#333] text-[24px] font-bold pt-[10px]">
         {{
               userInfo.totalBalance
-            }}
+            }}USD
       </div>
       <div class="text-[#666] text-[12px] mt-[25px]">
        {{ $t("当日佣金") }}
       </div>
       <div class="text-[#B3A369] font-bold text-[16px]  pt-[5px]">
-        {{ userInfo.commission }}
+        {{ userInfo.commission }}USD
       </div>
       <div class="text-[#fff] flex justify-between mt-[20px]">
         <div class="bg-[#000000] w-[138px] h-[44px] flex justify-center items-center" @click="toPage('/deposit')">{{$t('定金')}}</div>

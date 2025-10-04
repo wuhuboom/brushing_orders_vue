@@ -1,6 +1,6 @@
 {
   "您即将切换为{type}": "You are about to switch to {type}",
-  "supportHours": "Sorry, the customer support service hours are from {start} AM to {end} PM.",
+  "supportHours": "Customer service is currently offline, please pay attention to the online hours.",
   "rechargeLimit":"The minimum recharge amount is {min}, and the maximum recharge amount is {max}.",
   "确认删除这个{name}吗？": "Are you sure you want to delete this {name}?",
   "我们通过数字营销": "We Help Small Businesses",

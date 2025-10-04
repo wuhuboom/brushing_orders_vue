@@ -20,7 +20,8 @@
             @click="toMy"
           />
         </div>
-      </div>
+    </div>
+    
     <div class="h-[333px]">
       <van-swipe class="my-swipe h-[333px]"  :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="item in bannerArr" :key="item.id">
@@ -32,7 +33,17 @@
         </van-swipe-item>
       </van-swipe>
     </div>
-    
+    <div class="w-full ">
+        <van-notice-bar
+          color="#000"
+          background="#fff"
+          :text="pureNoticeContent"
+        >
+          <template #left-icon>
+            <img src="@/static/images/notice.png" class="w-5 h-5" alt="icon" />
+          </template>
+        </van-notice-bar>
+      </div>
     <!-- 菜单列表 -->
     <div class="w-[95%] rounded-xl mt-[21px] mx-auto flex flex-col">
       <!-- <div class="pt-4 pr-4 pl-4 text-sm text-black">
@@ -170,7 +181,7 @@ import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
-import { onMounted, onUnmounted,ref, reactive, nextTick,onActivated,onDeactivated  } from "vue";
+import { onMounted, onUnmounted,ref, reactive, nextTick,onActivated,onDeactivated,computed  } from "vue";
 import { getLevel, getNoticeList, userGetInfo,bannerList,getTradeConfig } from "../api/apis";
 import { useRouter,useRoute } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
@@ -402,6 +413,11 @@ const toMy = ()=>{
 function handleChangeLang() {
   langRef.value.open();
 }
+
+// 计算属性，去除所有HTML标签
+const pureNoticeContent = computed(() => {
+  return noticeContent.value.replace(/<\/?[^>]+(>|$)/g, "");
+});
 onMounted(() =>{
   window.addEventListener("updateTrade", updateHandler);
 })
