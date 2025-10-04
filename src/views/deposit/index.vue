@@ -148,7 +148,7 @@ const customer = () => {
   if(time) {
      ContactUsRef.value.open();
   } else {
-    showToast(t(`Sorry, the customer support server hours are from ${TradeInfor.value.workTimeStart} AM to ${TradeInfor.value.workTimeEnd} PM.`))
+    showToast(t("supportHours"))
 
   }
 };
