@@ -201,5 +201,7 @@
   "用户存在连单，返回新的订单信息": "User has ongoing orders, returning new order information",
   "用户余额不足（联系管理员，常用于冻结金额不足）": "Insufficient user balance (contact administrator, often due to insufficient frozen funds)",
   "我的": "My",
-  "请勾选用户协议":"Please tick and agree to the argeement" 
+  "请勾选用户协议":"Please tick and agree to the argeement",
+  "我们期待在工作时间内为您服务": "We'll be happy to help and get back to you once we're online",
+  "客户服务目前无法提供服务": "Customer service is currently unavailable"
 }
