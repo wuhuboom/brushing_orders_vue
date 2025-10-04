@@ -211,5 +211,7 @@
   "还没有账号？":"Hesabınız yok mu?",
   "创建你的账户": "Hesabınızı oluşturun",
   "登录 / 注册，享受最佳的管理体验": "Giriş / Kayıt olun, en iyi yönetim deneyimini yaşayın",
-  "commissionInfo":"Komisyon oranı. Günde {rate} sipariş. {tasks} görev"
+  "commissionInfo":"Komisyon oranı. Günde {rate} sipariş. {tasks} görev",
+  "我们期待在工作时间内为您服务": "Çalışma saatlerimizde hizmetinizdeyiz",
+  "客户服务目前无法提供服务": "Müşteri hizmetleri şu anda hizmet veremiyor"
 }

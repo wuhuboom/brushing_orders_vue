@@ -211,5 +211,7 @@
   "还没有账号？":"¿No tienes cuenta?",
   "创建你的账户":"Crea tu cuenta",
   "登录 / 注册，享受最佳的管理体验": "Inicia sesión / Regístrate, disfruta de la mejor experiencia de gestión",
-  "commissionInfo":"Tasa de comisión. {rate} de pedidos por día. {tasks} tareas"
+  "commissionInfo":"Tasa de comisión. {rate} de pedidos por día. {tasks} tareas",
+  "我们期待在工作时间内为您服务": "Esperamos poder servirle durante el horario de trabajo",
+  "客户服务目前无法提供服务": "El servicio de atención al cliente no está disponible actualmente"
 }

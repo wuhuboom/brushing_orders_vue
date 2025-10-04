@@ -169,5 +169,7 @@
   "登录失败，未知错误": "Gagal masuk, kesalahan tidak diketahui",
   "创建你的账户": "Buat akun Anda",
   "登录 / 注册，享受最佳的管理体验": "Masuk / Daftar, nikmati pengalaman manajemen terbaik",
-  "commissionInfo":"Tingkat komisi. {rate} pesanan per hari. {tasks} tugas"
+  "commissionInfo":"Tingkat komisi. {rate} pesanan per hari. {tasks} tugas",
+  "我们期待在工作时间内为您服务": "Kami menunggu untuk melayani Anda pada jam kerja",
+  "客户服务目前无法提供服务": "Layanan pelanggan saat ini tidak dapat menyediakan layanan"
 }

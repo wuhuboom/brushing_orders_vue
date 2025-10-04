@@ -169,5 +169,7 @@
   "登录失败，未知错误": "Échec de connexion, erreur inconnue",
   "创建你的账户":" Créez votre compte",
   "登录 / 注册，享受最佳的管理体验": "Connectez-vous / Inscrivez-vous pour profiter de la meilleure expérience de gestion",
-  "commissionInfo":"Taux de commission. {rate} de commandes par jour. {tasks} tâches"
+  "commissionInfo":"Taux de commission. {rate} de commandes par jour. {tasks} tâches",
+  "我们期待在工作时间内为您服务": "Nous sommes à votre disposition pendant les heures de travail",
+  "客户服务目前无法提供服务": "Le service client ne peut actuellement pas fournir de services"
 }
