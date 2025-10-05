@@ -73,7 +73,7 @@
           <div class="text-[#A1FFC1] text-[12px]">
             {{ $t("当日佣金") }}
           </div>
-          <div class="text-[#FFFFFF] text-[14px] pt-[5px]">{{ userInfo.commission }}</div>
+          <div class="text-[#FFFFFF] text-[14px] pt-[5px]">{{ userInfo.commission }}<span class="text-[12px] pl-1">USD</span></div>
         </div>
         <div
          @click="payMethod"

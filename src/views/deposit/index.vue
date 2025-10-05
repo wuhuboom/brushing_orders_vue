@@ -32,8 +32,8 @@
             {{ $t("账户金额") }}
           </div>
           <div class="flex mt-[2px]">
-            <div class="text-[#206645] text-3xl font-bold flex items-center">
-              {{ userInfo.balance }}
+            <div class="text-[#206645] text-3xl font-bold flex items-end">
+              {{ userInfo.balance }} <span class="text-2xl pl-1">USD</span>
             </div>
             <!-- <div
               class="text-[#757575] text-sm font-bold flex items-center ml-2 pt-[12px]"
