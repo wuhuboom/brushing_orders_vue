@@ -60,7 +60,7 @@
     >
       <div class="flex justify-between">
         <div class="text-[#fff] text-[24px]">
-          <div class="pt-[10px] pb-[10px]" style="font-family: Helvetica">${{ userInfo.balance }} <span class="text-[14px]">USD</span> </div>
+          <div class="pt-[10px] pb-[10px]" style="font-family: Helvetica">{{ userInfo.balance }} <span class="text-[14px]">USD</span> </div>
           <div class="text-[#A1FFC1] text-[12px]">{{ $t("钱包余额") }}</div>
         </div>
         <div>
