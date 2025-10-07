@@ -194,7 +194,7 @@ const loadData = async () => {
 };
 const onClickLeft = () => history.back();
 const ruleForm = reactive({
-  amount: "",
+  amount: 0,
   tradePassword: "",
 });
 
@@ -249,7 +249,7 @@ onMounted(() => {
   tradeConfig();
   userGetInfo().then((res) => {
     amount.value = res.data.balance;
-    ruleForm.amount = amount.value;
+    // ruleForm.amount = amount.value;
     userInfo.value = res.data
   });
 });
