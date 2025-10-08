@@ -67,7 +67,6 @@ export function initAPI() {
           loading.close();
           loading = null;
         }
-
         if (response.status === 200) {
           const result = response.data;
           if (result.code === 200 || result.code === 201) {
