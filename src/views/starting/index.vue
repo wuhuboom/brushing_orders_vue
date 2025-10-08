@@ -277,8 +277,8 @@
       round
       :style="{ width: '80%', background: 'transparent' }"
     >
-      <img @click="closeImg" class="w-[100%]" src="../../static/images/super.png" alt="" />
-      <!-- <img @click="closeImg" class="w-[30px] h-[30px] m-auto" src="../../static/images/cloed.png" alt=""> -->
+      <img @click="closeImg" class="w-[100%] mb-5" src="../../static/images/super.png" alt="" />
+      <img @click="closeImg" class="w-[30px] h-[30px] m-auto" src="../../static/images/cloed.png" alt="">
     </van-popup>
   </div>
 </template>
