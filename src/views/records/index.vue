@@ -180,12 +180,14 @@ import {
   showLoadingToast,
   closeToast,
   showFailToast,
+  showToast,
   showSuccessToast,
 } from "vant";
 import { useI18n } from "vue-i18n";
 import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
+import { errorMessages } from "../../api/errorCodeMap";
 const router = useRouter();
 const userStore = useUserStore();
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL ? window.g.VITE_API_IMG_URL :import.meta.env.VITE_API_IMG_URL; // 兜底默认值
@@ -258,7 +260,9 @@ const submitVal = async () => {
       if (err.code == 916) {
         router.push("/deposit");
       } else {
-        ElMessage({ message: err.status, type: "error" });
+        // showFailToast(err.status)
+        showFailToast(t(errorMessages[err.code]));
+        // ElMessage({ message: err.status, type: "error" });
       }
     } finally {
       isSubmitting.value = false;

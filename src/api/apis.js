@@ -74,7 +74,7 @@ export const createOrder = (params) =>
   getApi().get("/order/createOrder", { params, loading: false, showMsg: false });
 
 export const submitOrder = (params) =>
-  getApi().get(`/order/submitOrder/${params}`, { params, loading: false });
+  getApi().get(`/order/submitOrder/${params}`, { params, loading: false,showMsg: true });
 
 export const getTradeConfig = (params) =>
   getApi().get(`/config/getTradeConfig`, { params, loading: false, showMsg: false });

@@ -293,7 +293,6 @@ const doCreateOrder = () => {
       goods.value = res.data;
     })
     .catch((err) => {
-      console.log(errorMessages[err.code]);
       closeToast();
       if (err.code == 906) {
         showToast("Transaction failed");
