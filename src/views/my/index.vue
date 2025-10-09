@@ -65,7 +65,7 @@
         </div>
         <div>
           <img class="w-[34px]" src="@/static/images/vip11.png" alt="" />
-          <span class="text-[#EEBB69]">vip{{userInfo.levelId}}</span>
+          <span class="text-[#EEBB69]">{{userLevel}}</span>
         </div>
       </div>
       <div class="flex justify-between items-end mt-[10px]">
@@ -366,11 +366,13 @@ const tradeConfig = async () => {
   TradeInfor.value = res.data;
 };
 
+const userLevel = ref('')
 
 onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
+    userLevel.value = res.data.userLevel.nameEn
     console.log(userInfo.value);
   });
   tradeConfig();

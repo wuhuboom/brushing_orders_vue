@@ -28,7 +28,7 @@
           <div
             class="text-[#fff] w-[62px] h-[36px] flex justify-center items-center bg-[rgba(255,255,255,0.2)] rounded-[20px]"
           >
-            VIP{{ userInfo.levelId }}
+           {{ userLevel }}
           </div>
         </div>
       </div>
@@ -428,11 +428,13 @@ onUnmounted(() => {
   if (timer) clearTimeout(timer);
 });
 
+const userLevel = ref('')
 const userGetInfoMethods = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     orderCount.value = res.data.userLevel.orderCount;
+    userLevel.value = res.data.userLevel.nameEn
   });
 };
 
