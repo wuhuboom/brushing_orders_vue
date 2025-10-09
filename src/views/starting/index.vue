@@ -1,7 +1,69 @@
 <template>
-  <div>
-    <!-- <HeaderTop></HeaderTop> -->
-    <div class="w-full px-5 mx-auto bg-[#206645] rounded-b-[20px]">
+  <div class="w-full min-h-[100vh] bg-[#f4f4f5]">
+    <HeaderTop></HeaderTop>
+    <div class="flex w-[90%] mx-auto justify-between my-2 items-center">
+      <div class="flex">
+        <div>
+          <!-- 接口还没返回 avatar 字段（请求中） -->
+          <div
+            v-if="userInfo.avatar === undefined"
+            class="w-[35px] h-[35px] rounded-full ml-[5px] bg-gray-200 animate-pulse"
+          ></div>
+
+          <!-- 接口返回 null / 空字符串 → 直接显示默认头像（不会闪） -->
+          <img
+            v-else-if="!userInfo.avatar"
+            :src="userImg"
+            class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
+            alt="默认头像"
+          />
+
+          <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
+          <img
+            v-else
+            :src="userInfo.avatar"
+            class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
+            alt="用户头像"
+            @error="(e) => (e.target.src = userImg)"
+          />
+        </div>
+        <div class="flex items-center ml-[15px]">
+          <div class="text-black font-semibold">
+            Hi, {{ userInfo.username }}
+          </div>
+        </div>
+      </div>
+      <div class="text-black font-semibold">VIP{{ userInfo.levelId }}</div>
+    </div>
+    <div class="w-full grid grid-cols-2 rounded-xl gap-4 p-2 bg-white border-[3px] border-[#f1894c] shadow-sm">
+      <div class="col-span-2 pb-2 border-b-[1px] border-dashed border-[#888] flex flex-col text-center">
+        <img src="@/static/images/icon-25.png" class="w-10 h-10 mx-auto" alt="">
+        <div class="text-sm mt-4 text-[#00bea3]">{{ $t("当日佣金") }}</div>
+        <div class="text-xl font-semibold text-black my-1">{{ userInfo.commission }} USD</div>
+        <div class="text-sm text-[#black]">{{ $t("每日赚取佣金") }}</div>
+      </div>
+      <div class="col-span-1 flex flex-col text-cente px-3 rounded-xl">
+        <div class="w-full">
+          <img src="@/static/images/icon-26.png" class="w-10 h-10 mx-auto" alt="">
+          <div class="w-full text-base text-center font-bold mt-1 text-[#000]">{{ $t("钱包余额") }}</div>
+          <div class="text-base text-center font-semibold text-black my-1">{{ userInfo.balance }} USD</div>
+          <div class="text-sm text-[#000] text-center"> {{ $t("佣金将在此处添加") }}</div>
+        </div>
+
+      </div>
+      <div class="col-span-1 flex flex-col text-cente px-3 rounded-xl">
+        <div class="w-full">
+          <img src="@/static/images/icon-27.png" class="w-10 h-10 mx-auto" alt="">
+          <div class="w-full text-base text-center font-bold mt-1 text-[#000]">{{ $t("持有金额") }}</div>
+          <div class="text-base text-center font-semibold text-black my-1">{{ userInfo.frozenBalance }} USD</div>
+          <div class="text-sm text-[#000] text-center">{{ $t("如有疑问，请联系客服") }}</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- <div class="w-full px-5 mx-auto bg-[#206645] rounded-b-[20px]">
       <div class="w-full pt-6 flex justify-between">
         <div class="text-[#fff]">webworks</div>
         <img
@@ -32,11 +94,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="w-full bg-[#f8f8f8] relative pt-10">
+    <div class="w-full bg-[#f8f8f8] relative pt-[15px]">
       <div class="w-[100%] px-4 mx-auto">
-        <div class="grid grid-cols-1 gap-3">
+        <!-- <div class="grid grid-cols-1 gap-3">
           <div
             class="w-full col-span-1 flex p-3 box-border rounded-xl bg-[#fff] border-[1px] border-[#EDEDEE]"
           >
@@ -118,8 +180,8 @@
               </div>
             </div>
           </div>
-        </div>
-        <!-- <div class="mt-5 flex justify-between text-black font-bold text-base">
+        </div> -->
+        <div class="flex justify-between text-black font-bold text-base">
           <div>Start Optimization</div>
           <div>
             <span class="text-[var(--main-color)]">{{
@@ -127,27 +189,31 @@
             }}</span
             >/<span>{{ orderCount }}</span>
           </div>
-        </div> -->
-        <div
-          class="mt-5 flex flex-col p-4 box-border bg-[linear-gradient(180deg,_#FFFBEB_0%,_#FEF3C7_100%)] rounded-xl"
-        >
-          <div class="flex flex-col box-border rounded-xl">
+        </div>
+        <div class="mt-5 flex flex-col p-4 box-border bg-[#f1f1f1] rounded-xl">
+          <div class="mt-5 flex flex-col box-border bg-[#f1f1f1] rounded-xl">
             <div class="w-full grid grid-cols-3 gap-6">
-              <template v-for="(item, index) in goodsList" :key="index">
-                <!-- <div
+              <template v-for="(item, index) in totalCount" :key="index">
+                <div
                   v-if="index === 4"
                   class="grid-span-1 text-center text-xs font-normal"
                   @click="handleClick"
                 >
                   <div
-                    class="flex items-center justify-center "
+                    class="flex items-center justify-center overflow-hidden rounded-xl bg-cover text-lg text-white font-medium relative"
                   >
-                  <div class="w-[104px] h-[84px] rounded-[10px] text-[#fff] text-[18px]" style="line-height: 84px; background: linear-gradient(180deg, #F97316  0%, #EA580C  100%);">
-                        DRAW
+                    <div class="overflow-hidden">
+                      <img
+                        src="@/static/images/start-button.png"
+                        class="w-[100%] shadow"
+                        alt=""
+                      />
+                      <div class="absolute"></div>
+                    </div>
                   </div>
-                  </div>
-                </div> -->
+                </div>
                 <div
+                v-else
                   class="grid-span-1 text-[#666666] text-center text-xs font-normal"
                 >
                   <div
@@ -169,7 +235,7 @@
                       /> -->
                       <van-image
                         fit="contain"
-                        :src="`${url}${item.coverUrl}`"
+                        :src="`${url}${getImageByIndex(index)}`"
                       />
                     </div>
                   </div>
@@ -179,21 +245,22 @@
           </div>
         </div>
 
-        <div
+        <!-- <div
           class="mt-5 flex justify-center items-center text-black text-base h-[60px] bg-[#FACC15] rounded-[20px]"
           @click="handleClick"
         >
           Start
           <span class="pl-2">({{ userInfo.dealCount }}</span
           >/<span>{{ orderCount }})</span>
-        </div>
+        </div> -->
       </div>
       <div class="w-[90%] mx-auto pt-5">
-        <div class="mt-4 rounded-lg bg-[#FFFFFF]">
+        <div class="mt-4 rounded-lg  bg-[#1f2732]">
           <div class="flex flex-col p-4 box-border relative rounded-[10px]">
-            <div class="mb-1 text-base" style="color: black">Notice</div>
-            <div class="text-[#6B7280] text-[12px]">
-              Online Support Hours {{ TradeInfor?.workTimeStart || '--:--' }} - {{ TradeInfor?.workTimeEnd || '--:--' }} <br />
+            <div class="mb-1 text-base text-[#fff]">Notice</div>
+            <div class="text-[#fff] text-[12px]">
+              Online Support Hours {{ TradeInfor?.workTimeStart || "--:--" }} -
+              {{ TradeInfor?.workTimeEnd || "--:--" }} <br />
               Please contact online support for your assistance!
             </div>
           </div>
@@ -277,8 +344,18 @@
       round
       :style="{ width: '80%', background: 'transparent' }"
     >
-      <img @click="closeImg" class="w-[100%] mb-5" src="../../static/images/super.png" alt="" />
-      <img @click="closeImg" class="w-[30px] h-[30px] m-auto" src="../../static/images/cloed.png" alt="">
+      <img
+        @click="closeImg"
+        class="w-[100%] mb-5"
+        src="../../static/images/super.png"
+        alt=""
+      />
+      <img
+        @click="closeImg"
+        class="w-[30px] h-[30px] m-auto"
+        src="../../static/images/cloed.png"
+        alt=""
+      />
     </van-popup>
   </div>
 </template>
@@ -296,10 +373,10 @@ import {
 import { useI18n } from "vue-i18n";
 import {
   userGetInfo,
-  getGoodsListTwo,
+  getGoodsList,
   createOrder,
   submitOrder,
-  getTradeConfig
+  getTradeConfig,
 } from "../../api/apis";
 const url = window.g.VITE_API_IMG_URL;
 const userStore = useUserStore();
@@ -307,6 +384,7 @@ import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";
+const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
 const router = useRouter();
 const { t } = useI18n();
 const userInfo = ref({});
@@ -322,9 +400,9 @@ const getList = async () => {
   // let res = await getGoodsList();
   // goodsList.value = res.data;
   try {
-    const res = await getGoodsListTwo();
+    const res = await getGoodsList();
     goodsList.value = res.data;
-    // totalCount.value = goodsList.value.length + 1; // 插入一个“开始按钮”
+    totalCount.value = goodsList.value.length + 1; // 插入一个“开始按钮”
   } catch (e) {
     console.error("获取商品列表失败:", e);
   } finally {
@@ -359,9 +437,9 @@ const handleClick = () => {
   doCreateOrder();
 };
 
-const closeImg = () =>{
+const closeImg = () => {
   showImg.value = false;
-}
+};
 
 const doCreateOrder = () => {
   showLoadingToast({
@@ -417,7 +495,7 @@ const submitForm = () => {
 const toMy = () => {
   router.push({ path: "/my" });
 };
-const TradeInfor = ref({})
+const TradeInfor = ref({});
 const tradeConfig = async () => {
   let res = await getTradeConfig();
   TradeInfor.value = res.data;
