@@ -278,29 +278,34 @@ const closeImg = () =>{
   showImg.value = false
 }
 const doCreateOrder = () => {
+  // 立即显示 loading
   showLoadingToast({
     message: t("创建中..."),
     forbidClick: true,
-    duration: 0,
+    duration: 0, // 一直显示直到关闭
   });
 
-  createOrder()
-    .then((res) => {
-      closeToast();
-      showToast(t("创建成功"));
-      showCenter.value = true;
-      userGetInfoMethods();
-      goods.value = res.data;
-    })
-    .catch((err) => {
-      closeToast();
-      if (err.code == 906) {
-        showToast("Transaction failed");
-      } else {
-        showToast(t(errorMessages[err.code] || "创建失败"));
-      }
-    });
+  // 延迟 2 秒再请求接口
+  setTimeout(() => {
+    createOrder()
+      .then((res) => {
+        closeToast();
+        showToast(t("创建成功"));
+        showCenter.value = true;
+        userGetInfoMethods();
+        goods.value = res.data;
+      })
+      .catch((err) => {
+        closeToast();
+        if (err.code == 906) {
+          showToast("Transaction failed");
+        } else {
+          showToast(t(errorMessages[err.code] || "创建失败"));
+        }
+      });
+  }, 2000); // 延迟时间（单位：毫秒）
 };
+
 
 const submitForm = () => {
   submitOrder(goods.value.id)

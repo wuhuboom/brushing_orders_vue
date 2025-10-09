@@ -33,15 +33,15 @@
         :ref="el => sectionRefs[index] = el"
         class="h-[248px]  rounded-[6px] mb-[18px] "
         style="overflow: hidden;"
-        :style="getTabStyle(tab.id)"
+        :style="getTabStyle(index)"
       >
-        <div class="h-[14px]" :style="getBgStyle(tab.id)"></div>
+        <div class="h-[14px]" :style="getBgStyle(index)"></div>
         <div class="flex justify-between px-[13px] pt-[33px]">
-          <div class="text-[20px] text-[#13284B]" style="font-weight: bold;">{{tab.nameEn}} Guest Card</div>
-          <div class="w-[40px] h-[40px] flex justify-center items-center text-[14px]" style="border-radius: 50%;font-weight: bold;" :style="getStyle(tab.id)">{{tab.nameEn}}</div>
+          <div class="text-[20px] text-[#13284B]" style="font-weight: bold;" :class="index==4?'text-[#fff]':''">{{tab.nameEn}} Guest Card</div>
+          <div class="w-[40px] h-[40px] flex justify-center items-center text-[14px]" style="border-radius: 50%;font-weight: bold;"  :style="getStyle(index)">{{tab.nameEn}}</div>
         </div>
-        <div class="text-[16px] text-[#13284B] px-[13px] pt-[15px]" style="font-weight: bold;">Member Beneﬁts</div>
-        <div v-html="tab.descriptionEn" class="text-[#364150] text-[12px] px-[13px] pt-[15px]" style="line-height: 18px;"></div>
+        <div class="text-[16px] text-[#13284B] px-[13px] pt-[15px]" style="font-weight: bold;" :class="index==4?'text-[#fff]':''">Member Beneﬁts</div>
+        <div v-html="tab.descriptionEn" class="text-[#364150] text-[12px] px-[13px] pt-[15px]" :class="index==4?'text-[#fff]':''" style="line-height: 18px;"></div>
       </div>
     </div>
   </div>
@@ -151,29 +151,32 @@ const scrollTo = (index) => {
 };
 // 根据不同 tab.id 返回不同的 style
 const getTabStyle = (id) => {
-    if (id === 1) return { background: "#fff", color: "#000" };
-    if (id === 2) return { background: "#D4d6Dc", color: "#fff" };
-    if (id === 3) return { background: "#EDE2BF", color: "#fff" };
-    if (id === 4) return { background: "linear-gradient( 90deg, #CFD2D8 0%, #9FA5AF 100%)", color: "#fff" };
+  console.log(id)
+    if (id === 0) return { background: "#fff", color: "#000" };
+    if (id === 1) return { background: "#D4d6Dc", color: "#fff" };
+    if (id === 2) return { background: "#EDE2BF", color: "#fff" };
+    if (id === 3) return { background: "linear-gradient( 90deg, #CFD2D8 0%, #9FA5AF 100%)", color: "#fff" };
+    if (id === 4) return { background: "linear-gradient( 99deg, #6A7484 0%, #49556C 100%)", color: "#fff" };
   
   return { backgroundColor: "transparent", color: "#6b7280" };
 };
 
 // 根据不同 tab.id 返回不同的 style
 const getStyle = (id) => {
+    if (id === 0) return { background: "#E4E6EB", color: "#4B5462" };
     if (id === 1) return { background: "#E4E6EB", color: "#4B5462" };
-    if (id === 2) return { background: "#E4E6EB", color: "#4B5462" };
-    if (id === 3) return { background: "#CEB04E", color: "#fff" };
-    if (id === 4) return { background: "#6C727F", color: "#fff" };
+    if (id === 2) return { background: "#CEB04E", color: "#fff" };
+    if (id === 3) return { background: "#6C727F", color: "#fff" };
+    if (id === 4) return { background: "#143C90", color: "#93C5FD" };
   
   return { backgroundColor: "transparent", color: "#6b7280" };
 };
 // 根据不同 tab.id 返回不同的 style
 const getBgStyle = (id) => {
-    if (id === 1) return { background: "#9DA3AE",  };
-    if (id === 2) return { background: "#9DA3AE", };
-    if (id === 3) return { background: "#CEB04E", };
-    if (id === 4) return { background: "#6C727F",  };
+    if (id === 0) return { background: "#9DA3AE",  };
+    if (id === 1) return { background: "#9DA3AE", };
+    if (id === 2) return { background: "#CEB04E", };
+    if (id === 3) return { background: "#6C727F",  };
   
   return { backgroundColor: "transparent", color: "#6b7280" };
 };

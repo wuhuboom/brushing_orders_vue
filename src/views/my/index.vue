@@ -54,7 +54,7 @@
               class="h-[20px] w-[40px] flex justify-center items-center bg-[#FACC15] text-[#000]"
               style="border-radius: 2px"
             >
-              VIP{{userInfo.levelId}}
+              {{userLevel}}
             </div>
             <span class="text-[#B3A369] pl-[5px]">{{$t('欢迎回来')}}!</span>
           </div>
@@ -443,10 +443,12 @@ const updateHandler = () => {
   getUserGetInfo();
 };
 
+const userLevel = ref('')
 const getUserGetInfo = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
+    userLevel.value = res.data.userLevel.nameEn
     console.log(userInfo.value);
   });
 };
