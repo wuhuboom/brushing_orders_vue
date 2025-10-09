@@ -380,11 +380,11 @@ const doCreateOrder = () => {
     })
     .catch((err) => {
       closeToast();
-      if (err.code == 906) {
-        showToast("Transaction failed");
-      } else {
+      // if (err.code == 906) {
+      //   showToast("Transaction failed");
+      // } else {
         showToast(t(errorMessages[err.code] || "创建失败"));
-      }
+      // }
     });
 };
 
@@ -404,6 +404,7 @@ const submitForm = () => {
         router.push("/deposit");
       }
       if (err.code == 906) {
+        console.log(userInfo.value.balance)
         if (userInfo.value.balance <= 0) {
           showToast("Transaction failed");
         } else {
