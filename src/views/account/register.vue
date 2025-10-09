@@ -1,12 +1,19 @@
 <template>
-  <div class="register flex flex-col w-full h-[100vh] bg-[#F5F7FA] p-5">
-    <van-nav-bar
+  <div class="register flex flex-col w-full h-[100vh] bg-[#1f2732] px-[5px]">
+    <!-- <van-nav-bar
         :title="$t('注册')"
         fixed
         left-arrow
         @click-left="toLogin"
+      /> -->
+      <div class="min-h-[200px] lg:min-h-[250px] pt-20">
+      <img
+        src="@/static/images/logo.png"
+        alt=""
+        class="w-[40%] lg:w-[300px] mx-auto"
       />
-    <div class="flex flex-col items-center pt-6 pb-3 mt-5">
+    </div>
+    <div class="flex flex-col items-center pb-3 mt-5">
       <!-- <img
         src="@/static/images/account-lang.png"
         alt=""
@@ -24,15 +31,20 @@
       <div class="text-center text-xs text-white pt-4">
         {{ $t("为旧金山和爱丁堡各地的客户提供服务") }}
       </div> -->
+      <div class="text-5xl text-[#ff497c] font-semibold text-center py-4">
+        Sign In
+      </div>
+      <div class="text-center text-xs text-white">Enter your username and password to access</div>
+      
       <el-form
         ref="ruleFormRef"
         :model="ruleForm"
         status-icon
         :rules="rules"
         label-width="auto"
-        class="w-full bg-[#ffffff] p-5"
+        class="w-full  p-5"
       >
-        <el-form-item :label="$t('用户名')" prop="username" label-position="top">
+        <el-form-item :label="$t('')" prop="username" label-position="top">
           <el-input
             v-model="ruleForm.username"
             :placeholder="$t('用户名')"
@@ -42,7 +54,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('密码')" prop="password" label-position="top">
+        <el-form-item :label="$t('')" prop="password" label-position="top">
           <el-input
             v-model="ruleForm.password"
             :placeholder="$t('密码')"
@@ -52,7 +64,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('确认密码')" prop="agentPassword" label-position="top">
+        <el-form-item :label="$t('')" prop="agentPassword" label-position="top">
           <el-input
             v-model="agentPassword"
             :placeholder="$t('确认密码')"
@@ -62,7 +74,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('电话')" prop="phone" label-position="top">
+        <el-form-item :label="$t('')" prop="phone" label-position="top">
           <el-input
             v-model="ruleForm.phone"
             :placeholder="$t('电话')"
@@ -72,7 +84,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('交易密码')" prop="tradePassword" label-position="top">
+        <el-form-item :label="$t('')" prop="tradePassword" label-position="top">
           <el-input
             v-model="ruleForm.tradePassword"
             :placeholder="$t('交易密码')"
@@ -83,15 +95,15 @@
           </el-input>
         </el-form-item>
         <div
-          class="w-full mb-4 py-3  bg-[#fff] rounded-md"
+          class="w-full mb-4 py-3  bg-[#fff] rounded-md pl-[10px]"
         >
           <div class="text-sm  pb-5 text-[#333]">{{ $t("性别") }}</div>
           <van-radio-group shape="dot" v-model="ruleForm.sex" direction="horizontal">
-            <van-radio :name="1" checked-color="#4070f7">{{ $t("男") }}</van-radio>
-            <van-radio :name="2" checked-color="#4070f7">{{ $t("女") }}</van-radio>
+            <van-radio :name="1" checked-color="#f1894c">{{ $t("男") }}</van-radio>
+            <van-radio :name="2" checked-color="#f1894c">{{ $t("女") }}</van-radio>
           </van-radio-group>
         </div>
-        <el-form-item :label="$t('邀请码')" prop="inviteCode" label-position="top">
+        <el-form-item :label="$t('')" prop="inviteCode" label-position="top">
           <el-input
             v-model="ruleForm.inviteCode"
             :placeholder="$t('邀请码')"
@@ -101,26 +113,26 @@
           >
           </el-input>
         </el-form-item>
-        <van-checkbox checked-color='#4070f7' v-model="checked">
-          <span class='text-[#4B5563]  text-sm'>{{$t('我同意')}}</span>
-          <span class="ml-2 text-[#206645] text-sm underline" @click='jump'>{{$t('条款和条件')}}</span>
+        <van-checkbox checked-color='#f1894c' v-model="checked">
+          <span class='text-[#fff]  text-sm'>{{$t('我同意')}}</span>
+          <span class="ml-2 text-[#fff] text-sm underline" @click='jump'>{{$t('条款和条件')}}</span>
         </van-checkbox>
         <div @click="sendCode" class="w-full" size="large" round>
           <div
-            class="w-full mt-5 text-white text-lg font-semibold mx-auto py-3 rounded-lg flex items-center justify-center bg-[#206645]"
+            class="w-full mt-5 text-white text-lg font-semibold mx-auto py-3 rounded-[30px] flex items-center justify-center bg-[#00bea3]"
           >
             <div>{{ $t("登记") }}</div>
-            <img class="w-[22px] ml-4" src="@/static/images/back1.png" alt="">
+            <!-- <img class="w-[22px] ml-4" src="@/static/images/back1.png" alt=""> -->
           </div>
         </div>
       </el-form>
       <div
-        class="w-full mt-4 text-sm"
+        class="w-full  text-sm"
         @click="toLogin"
       >
         <p class="text-sm text-center w-full pb-2" @click="toRegister">
           <!-- {{ $t("已有账户?")}} -->
-          <span class="text-[#206645]">{{ $t("立即登录") }}</span>
+          <span class="text-[#f1894c]">{{ $t("已经有账号了吗？去登录") }}</span>
         </p>
       </div>
     </div>

@@ -1,40 +1,39 @@
 <template>
-  <div class="login-con flex flex-col w-full h-[100vh] bg bg-cover bg-center p-5">
-    <div class="fixed right-5 h-9 flex items-center justify-center">
-      <!-- <div
-        class="flex items-center ml-2 overflow-hidden bg-[var(--main-color)] px-3 py-2 rounded-full box-border text-white leading-none"
-        style="line-height: 1"
-      > -->
+  <div class="login-con flex flex-col w-full h-[100vh] bg-[#1f2732] p-5">
+    <div class="fixed top-2 right-5 h-9 flex items-center justify-center">
+      <div
+        class="flex ml-2 overflow-hidden bg-[#ff497c] p-2 rounded-full box-border text-white text-sm"
+        @click="handleChangeLang"
+      >
         <img
-          src="@/static/images/cur.png"
+          src="@/static/images/lang-white.png"
           alt=""
-          class="w-[35px] h-[35px] block object-contain"
-          @click="customer"
+          class="w-5 h-5 block object-contain"
         />
-        <!-- <div class="ml-2 uppercase font-bold leading-none" style="margin-top: -2px;">{{lang}}</div> -->
-      <!-- </div> -->
+        <div class="ml-2 uppercase font-bold">en</div>
+      </div>
     </div>
-
-    <div class="flex flex-col items-center pt-10 mt-[150px] pb-3 bg-[#ffffff] rounded-xl">
+    <div class="min-h-[200px] lg:min-h-[250px] pt-20">
       <img
         src="@/static/images/logo.png"
         alt=""
-        class="w-[80%] lg:w-[300px] mx-auto"
+        class="w-[40%] lg:w-[300px] mx-auto"
       />
-      <!-- <div class="text-3xl text-main-bg font-semibold text-center py-4 pt-12">
-        {{ $t("登入") }}
-      </div>
-      <div class="text-center text-sm text-main-bg pb-4">
-        {{ $t("输入您的用户名和密码以访问") }}
-      </div> -->
+    </div>
 
+    <div class="flex flex-col items-center pb-3">
+      <div class="text-5xl text-[#ff497c] font-semibold text-center py-4">
+        Sign In
+      </div>
+      <div class="text-center text-xs text-white">Enter your username and password to access</div>
+  
       <el-form
         ref="ruleFormRef"
         :model="ruleForm"
         status-icon
         :rules="rules"
         label-width="auto"
-        class="w-[80%] mt-4"
+        class="w-[90%] mt-10"
       >
         <el-form-item prop="" label-position="top">
           <el-input
@@ -45,9 +44,9 @@
             size="large"
             class="bg--[#E5E7EB]"
           >
-          <template #prefix>
-            <img class="w-[18px]" src="@/static/images/user.png" alt="">
-          </template>
+            <!-- <template #prefix>
+              <img class="w-[18px]" src="@/static/images/user.png" alt="" />
+            </template> -->
           </el-input>
         </el-form-item>
         <el-form-item class="relative w-full">
@@ -59,12 +58,12 @@
             size="large"
             show-password
           >
-          <template #prefix>
-            <img class="w-[18px]" src="@/static/images/word.png" alt="">
-          </template>
+            <!-- <template #prefix>
+              <img class="w-[18px]" src="@/static/images/word.png" alt="" />
+            </template> -->
           </el-input>
         </el-form-item>
-        <!-- <el-form-item label-position="top" class="relative w-full">
+        <el-form-item label-position="top" class="relative w-full">
           <template class="w-full" #label>
             <div class="flex items-center w-full">
               <div class="ml-auto text-white" @click="customer">
@@ -72,38 +71,43 @@
               </div>
             </div>
           </template>
-        </el-form-item> -->
+        </el-form-item>
       </el-form>
-      <div @click="submitForm(ruleFormRef)" class="w-[80%] pb-[10px]" size="large" round>
+      <div
+        @click="submitForm(ruleFormRef)"
+        class="w-[90%] pb-[10px]"
+        size="large"
+        round
+      >
         <div
-          class="w-full text-white text-lg font-semibold mx-auto py-3 rounded-lg flex items-center justify-center bg-[#206645]"
+          class="w-full text-white text-lg font-semibold mx-auto py-3 rounded-[30px] flex items-center justify-center bg-[#00bea3]"
         >
           <div>{{ $t("登录") }}</div>
         </div>
       </div>
-      <!-- <div class="w-full mt-4 text-sm text-white text-center pt-2">
-        <p class="text-sm text-center w-full pb-2" @click="toRegister">
+      <div class="w-full mt-4 text-sm text-white text-center pt-2">
+        <p class="text-sm text-center w-full pb-2 text-[#f1894c]" @click="toRegister">
           {{ $t("还没有账户?")
-          }}<span class="text-white">{{ $t("立即注册") }}</span>
+          }}<span class="text-[#f1894c]">{{ $t("立即注册") }}</span>
         </p>
 
         <div class="text-sm text-center w-full" @click="customer">
           {{ $t("无法登录?")
           }}<span class="text-white">{{ $t("请联系我们的用户支持") }}</span>
         </div>
-      </div> -->
+      </div>
     </div>
     <div class="w-full mt-4 text-sm text-white text-center pt-2">
-        <p class="text-sm text-center w-full pb-2" @click="toRegister">
-          <!-- {{ $t("还没有账户?")}} -->
-          <span class="text-white underline">{{ $t("立即注册") }}</span>
-        </p>
+      <p class="text-sm text-center w-full pb-2" @click="toRegister">
+        <!-- {{ $t("还没有账户?")}} -->
+        <!-- <span class="text-white underline">{{ $t("立即注册") }}</span> -->
+      </p>
 
-        <!-- <div class="text-sm text-center w-full" @click="customer">
+      <!-- <div class="text-sm text-center w-full" @click="customer">
           {{ $t("无法登录?")
           }}<span class="text-white">{{ $t("请联系我们的用户支持") }}</span>
         </div> -->
-      </div>
+    </div>
     <Lang ref="langRef"></Lang>
     <ContactUs ref="ContactUsRef"></ContactUs>
   </div>
@@ -114,14 +118,20 @@ import Tabs from "@/components/Tabs.vue";
 import { useUserStore } from "@/store/modules/user";
 import ContactUs from "@/components/ContactUs.vue";
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
-import { useCommonStore } from '@/store/modules/common';
+import {
+  showLoadingToast,
+  closeToast,
+  showFailToast,
+  showSuccessToast,
+  showToast,
+} from "vant";
+import { useCommonStore } from "@/store/modules/common";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { setUserRemind } from "../../common/remind";
-import { login,getTradeConfig } from "../../api/apis";
+import { login, getTradeConfig } from "../../api/apis";
 import { areas } from "@/config/area";
-import { checkWorkTimeLocal  } from "../../util/utils";
+import { checkWorkTimeLocal } from "../../util/utils";
 const ContactUsRef = ref(null);
 
 onMounted(() => {
@@ -159,8 +169,8 @@ function toRegister() {
 function submitForm(formEl) {
   // if (!ruleForm.email) return accountType.value === 1 ? ElMessage.error(t("请输入邮箱")) : ElMessage.error(t("请输入手机号"));
   // 统一清除空格
-  if (!ruleForm.username) return showToast(t('请输入用户名/电话'));
-  if (!ruleForm.password) return showToast(t('请输入密码'));
+  if (!ruleForm.username) return showToast(t("请输入用户名/电话"));
+  if (!ruleForm.password) return showToast(t("请输入密码"));
   formEl.validate((valid) => {
     if (valid) {
       let data = {
@@ -184,19 +194,22 @@ function handleChangeLang() {
   langRef.value.open();
 }
 
-const TradeInfor = ref({})
+const TradeInfor = ref({});
 const tradeConfig = async () => {
   let res = await getTradeConfig();
   TradeInfor.value = res.data;
 };
 
 const customer = () => {
-  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);
-  if(time) {
-     ContactUsRef.value.open();
+  const time = checkWorkTimeLocal(
+    TradeInfor.value.workTimeStart,
+    TradeInfor.value.workTimeEnd,
+    userStore.zoneActive.tzName
+  );
+  if (time) {
+    ContactUsRef.value.open();
   } else {
-    showToast(t("supportHours"))
-
+    showToast(t("supportHours"));
   }
 };
 onMounted(() => {

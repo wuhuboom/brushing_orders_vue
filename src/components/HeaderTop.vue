@@ -1,21 +1,21 @@
 <template>
     <van-sticky type="primary">
       <div
-        class="w-full flex justify-between shadow-md items-center p-2  box-border bg-white"
+        class="w-full flex justify-between shadow-md items-center p-2 py-4 box-border bg-[#000]"
       >
-        <div class="w-[var(--header-logo-width)]" @click="jump">
+        <div class="w-[5rem]" @click="jump">
           <img class="w-full" src="@/static/images/logo.png" alt="" />
         </div>
         <div class="flex justify-start items-center">
-          <!-- <div
+          <div
           @click="customer"
             class="text-white bg-[var(--main-color)] mr-2 text-xs px-3 py-1 rounded-full"
           >
             {{ $t("联系") }}
-          </div> -->
+          </div>
           <img
-            src="@/static/images/user2.png"
-            class="w-[24px]"
+            src="@/static/images/me.png"
+            class="w-[2.4rem]"
             alt=""
             @click="toMy"
           />

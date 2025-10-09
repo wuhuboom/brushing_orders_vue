@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderTop></HeaderTop>
-    <div class="w-full h-[400px] relative">
+    <!-- <div class="w-full h-[400px] relative">
       <div class="pb-4 pt-4 absolute top-5 w-full h-[400px]" style="z-index: 2">
         <div class="mx-auto pt-5">
           <div
@@ -24,11 +24,11 @@
         </van-notice-bar>
       </div>
       <video class="w-full h-[400px] object-cover" src="https://videos.pexels.com/video-files/1448735/1448735-uhd_4096_2160_24fps.mp4" autoplay muted loop playsinline></video>
-    </div>
+    </div> -->
     <div class="relative bg-white">
       <!-- 菜单列表 -->
       <div class="w-[95%] rounded-xl mx-auto flex flex-col">
-        <div class="pt-4 pr-4 pl-4 text-sm text-black">
+        <div class="p-4 text-lg font-semibold text-black">
           {{ $t("菜单列表") }}
         </div>
         <div class="w-full p-4 grid grid-cols-4 gap-4">
@@ -48,24 +48,25 @@
         </div>
       </div>
       <!-- 员工等级 -->
-      <div class="w-full mx-auto">
+      <div class="bg-[#e9e9e9] w-full mx-auto">
         <div class="w-[90%] mx-auto">
-          <div class="flex justify-between pt-4 pb-2 text-base text-black">
-            <div class="w-[35%]">{{ $t("员工等级") }}</div>
+          <div
+            class="flex justify-between pt-4 pb-2 text-base text-black font-semibold"
+          >
+            <div class="w-[35%]">{{$t('员工等级')}}</div>
             <div
               @click="toVips"
-              class="w-[65%] font-normal text-xs text-[#000] text-right flex justify-end items-center"
+              class="w-[65%] font-normal text-xs text-[var(--main-color)] text-right flex justify-end items-center"
             >
-              <div class="mr-[3px]">{{ $t("查看更多") }}</div>
-              <van-icon name="arrow" color="#000" />
-              <!-- <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" /> -->
+              <div>{{$t('查看更多')}}</div>
+              <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" />
             </div>
           </div>
         </div>
         <div class="items-con flex overflow-x-scroll p-4">
           <div
             v-for="item in levelList"
-            class="vip-item w-[471px] h-[220px] flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
+            class="vip-item flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
             :style="{
               background: `url(${
                 bgMap[item.nameEn]
@@ -73,21 +74,15 @@
             }"
           >
             <div class="flex justify-between items-start">
-              <div class="font-bold text-lg p1-[14px] pt-[5px] pb-[5px]">
-                <!-- <p class="mt-4 text-[var(--main-color)]">
+              <div class="font-bold text-lg">
+                <p class="mt-4 text-[var(--main-color)]">
                   {{ $t(item.nameZh) }}
-                </p> -->
-                <img class="w-[52px]" :src="bgMapStart[item.nameEn]" alt="" />
+                </p>
               </div>
-
-              <!-- <img class="w-14" :src="bgMapStart[item.nameEn]" alt="" /> -->
+              <img class="w-24" :src="bgMapStart[item.nameEn]" alt="" />
             </div>
-            <div class="w-[260px] text-[10px] text-white pl-[5px]">
-              <p
-                style="font-family: PingFang SC, PingFang SC;line-height: 15px; font-weight: normal;"
-                class="w-[260px] text-[10px] text-white"
-                v-html="item.descriptionEn"
-              ></p>
+            <div class="w-[260px] text-xs mt-2 text-black" >
+              <p class="w-[260px] text-xs mt-2 text-black" v-html="item.descriptionEn"></p>
             </div>
           </div>
         </div>
@@ -99,10 +94,13 @@
         <div class="test-[#333] text-center text-sm p-4 mb-3">Business Partner</div>
         <img class="w-[90%] mx-auto" src="@/static/images/b.png" alt="" /> 
       </div> -->
-      <img class="w-full" src="@/static/images/a.png" alt="" />
+      <!-- <img class="w-full" src="@/static/images/a.png" alt="" /> -->
 
       
       <!-- <img class="w-full" src="@/static/images/b.png" alt="" /> -->
+    </div>
+    <div class="w-full py-14 bg-[#f1894c]">
+
     </div>
 
     <!-- 行情结束 -->
@@ -119,13 +117,6 @@ import { getLevel, getNoticeList } from "../api/apis";
 import { useRouter } from "vue-router";
 const tradePasswordRef = ref(null);
 
-const bgMap = {
-  VIP1: new URL("@/static/images/indexbg1.png", import.meta.url).href,
-  VIP2: new URL("@/static/images/indexbg2.png", import.meta.url).href,
-  VIP3: new URL("@/static/images/indexbg3.png", import.meta.url).href,
-  VIP4: new URL("@/static/images/indexbg4.png", import.meta.url).href,
-  VIP5: new URL("@/static/images/indexbg5.png", import.meta.url).href,
-};
 const borderMap = {
   VIP1: "#FDE68A",
   VIP2: "#93C5FD",
@@ -133,12 +124,20 @@ const borderMap = {
   VIP4: "#6EE7B7",
   VIP5: "#FBCFE8",
 };
+
+const bgMap = {
+  VIP1: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
+  VIP2: new URL("@/static/images/bg_vip2.png", import.meta.url).href,
+  VIP3: new URL("@/static/images/bg_vip3.png", import.meta.url).href,
+  VIP4: new URL("@/static/images/bg_vip4.png", import.meta.url).href,
+  VIP5: new URL("@/static/images/bg_vip5.png", import.meta.url).href,
+};
 const bgMapStart = {
-  VIP1: new URL("@/static/images/bg_vipStart0.png", import.meta.url).href,
-  VIP2: new URL("@/static/images/bg_vipStart1.png", import.meta.url).href,
-  VIP3: new URL("@/static/images/bg_vipStart2.png", import.meta.url).href,
-  VIP4: new URL("@/static/images/bg_vipStart3.png", import.meta.url).href,
-  VIP5: new URL("@/static/images/bg_vipStart4.png", import.meta.url).href,
+  VIP1: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
+  VIP2: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png",
+  VIP3: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png",
+  VIP4: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png",
+  VIP5: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png",
 };
 
 const router = useRouter();
