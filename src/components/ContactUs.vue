@@ -13,8 +13,12 @@
         @click="jump(item.linkUrl)"
         class="flex items-center justify-between p-4 box-border border-b-[1px] border-[#eef2f4]"
       >
-        <div class="flex items-center" >
-          <img :src="VITE_API_IMG_URL+item.iconUrl" alt="" class="w-[40px] h-[40px] mr-3" />
+        <div class="flex items-center">
+          <img
+            :src="item.iconUrl ? VITE_API_IMG_URL + item.iconUrl : defaultImg"
+            alt=""
+            class="w-[40px] h-[40px] mr-3"
+          />
           <div class="flex items-center text-[14px]">{{ item.name }}</div>
         </div>
         <van-icon name="arrow" color="#1658b6" size="16px" />
@@ -42,6 +46,7 @@ import { tr } from "element-plus/es/locales.mjs";
 import { copyContent } from "../util/utils";
 import md5 from "crypto-js/md5"; // 安装 crypto-js: npm install crypto-js
 import { getCustomerService,userGetInfo,getEmailAddress } from '../api/apis';
+const defaultImg = new URL('@/static/images/service.png', import.meta.url).href;
 const showCenter = ref(false);
 const customerList = ref([])
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
