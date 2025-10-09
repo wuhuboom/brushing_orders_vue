@@ -26,7 +26,7 @@
                   <div
                     class="text-[#000] text-[12px] w-[40px] h-[20px] flex justify-center items-center bg-[#FACC15] rounded-[2] mr-[10px]"
                   >
-                    VIP{{ userInfo.levelId }}
+                    {{ userLevel }}
                   </div>
                   <span>{{$t('欢迎回来')}}</span>
                 </div>
@@ -297,11 +297,12 @@ const doCreateOrder = () => {
       })
       .catch((err) => {
         closeToast();
-        if (err.code == 906) {
-          showToast("Transaction failed");
-        } else {
-          showToast(t(errorMessages[err.code] || "创建失败"));
-        }
+        console.log(errorMessages[err.code])
+        // if (err.code == 906) {
+        //   showToast("Transaction failed");
+        // } else {
+        showToast(t(errorMessages[err.code]));
+        // }
       });
   }, 2000); // 延迟时间（单位：毫秒）
 };
@@ -348,11 +349,13 @@ onUnmounted(() => {
   if (timer) clearTimeout(timer);
 });
 
+const userLevel = ref('')
 const userGetInfoMethods = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     orderCount.value = res.data.userLevel.orderCount;
+    userLevel.value = res.data.userLevel.nameEn
   });
 };
 
