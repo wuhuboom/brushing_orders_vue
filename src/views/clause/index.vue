@@ -1,14 +1,15 @@
 <template>
-  <div class="term w-full min-h-[100vh] bg-[#f3f3f3]">
+  <div class="term w-full min-h-[100vh] bg-[#fff]">
     <div class="container w-full min-h-[100vh] ">
       <van-nav-bar
         :title="$t('条款')"
         fixed
         left-arrow
+        class="shadow"
         @click-left="onClickLeft"
       />
       <!-- <div class="w-full mt-10 p-6 box-border flex flex-col font-montserrat text-[#333]"> -->
-        <div class="mt-10" v-html="termsEn"></div>
+        <div class="mt-[85px]" v-html="termsEn"></div>
       <!-- </div> -->
     </div>
   </div>
@@ -42,8 +43,8 @@ const onClickLeft = () => history.back();
   padding: 10px;
 
 }
-.titles {
-  color: #206645;       /* 一级标题的颜色 */
+/* .titles {
+  color: #206645;     
 }
 .block {
   background: #fff;
@@ -56,5 +57,5 @@ const onClickLeft = () => history.back();
 .block p {
   padding: 0 5px 5px; 
   line-height: 25px;
-}
+} */
 </style>

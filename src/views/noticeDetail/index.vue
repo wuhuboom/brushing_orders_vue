@@ -8,7 +8,7 @@
         left-arrow
         @click-left="onClickLeft"
     />
-     <div class="mt-10 w-full box-border flex flex-col  text-[#666]" v-html="incomeGuide.noticeContent"></div>
+     <div class="mt-[65px] w-full box-border flex flex-col  text-[#666]" v-html="incomeGuide.noticeContent"></div>
     </div>
   </div>
 </template>

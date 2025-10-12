@@ -1,11 +1,15 @@
 <template>
-  <div>
+  <div class="bg-[#fff] record">
     <HeaderTop></HeaderTop>
-    <van-tabs color="#007513" @change="swichTab" v-model:active="active">
+    <div class="bg-[#f3f3f4]">
+      <van-tabs color="#ff497c" @change="swichTab" v-model:active="active">
       <van-tab :title="$t('全部')"></van-tab>
       <van-tab :title="$t('待办')"></van-tab>
       <van-tab :title="$t('完成')"></van-tab>
     </van-tabs>
+
+    </div>
+    
     <div class="h-[80vh] overflow-y-scroll">
       <div class="w-full px-2 pt-6 box-border flex flex-col">
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
@@ -17,7 +21,7 @@
           >
             <van-cell v-for="item in list" :key="item" :title="item">
               <div
-                class="w-full flex flex-col mb-6 bg-[#f1f4eb] border-[1px] border-[#eee] p-3 box-border rounded-xl"
+                class="w-full flex flex-col mb-6 bg-[#f3f3f4] border-[1px] border-[#eee] p-3 box-border rounded-xl"
               >
                 <div class="w-full flex">
                   <div class="mr-2 w-[20%]" style="width: 4rem">
@@ -32,7 +36,7 @@
                       </div>
                       <div class="grid grid-cols-4 mt-2">
                         <div class="col-span-2 flex flex-col">
-                          <div class="text-xs text-[#666] font-medium">
+                          <div class="text-xs text-[#666]">
                             {{ $t("总金额") }}
                           </div>
                           <div
@@ -42,7 +46,7 @@
                           </div>
                         </div>
                         <div class="col-span-2 flex flex-col">
-                          <div class="text-xs text-[#666] font-medium">
+                          <div class="text-xs text-[#666]">
                             {{ $t("佣金") }}
                           </div>
                           <div
@@ -60,7 +64,7 @@
                   style="border-bottom: 1px dashed rgb(255, 255, 255)"
                 ></div>
                 <div class="w-full flex justify-between items-center">
-                  <div class="text-[#666] text-sm font-medium">
+                  <div class="text-[#666] text-sm">
                     <!-- {{item.createTime}} -->
                     {{
                       formatWithTimezone(
@@ -285,4 +289,9 @@ onMounted(() => {
   onLoad();
 });
 </script>
-<style scoped></style>
+<style>
+.record .van-tabs__nav {
+  background: #f3f3f4 !important;
+
+}
+</style>

@@ -8,7 +8,7 @@
         @click-left="onClickLeft"
       />
     </van-sticky>
-    <div
+    <!-- <div
       class="bg-white mt-[65px] flex justify-between items-center py-[15px] px-[73px] text-[#6B7280]"
     >
       <div class="tab" :class="{ active: active === 0 }" @click="swichTab(0)">
@@ -17,25 +17,29 @@
       <div class="tab" :class="{ active: active === 1 }" @click="swichTab(1)">
         {{ $t("历史") }}
       </div>
-    </div>
+    </div> -->
+    <van-tabs
+      color="#ff497c"
+      class="mt-[85px]"
+      @change="swichTab"
+      v-model:active="active"
+    >
+      <van-tab :title="$t('提取')"></van-tab>
+      <van-tab :title="$t('历史')"></van-tab>
+    </van-tabs>
     <div v-if="active === 0">
       <div class="p-4 box-border flex flex-col">
         <div
-          class="flex flex-col justify-between p-4 box-border rounded-[15px]"
-          :style="{
-            background: 'linear-gradient( 180deg, #206645 0%, #1A533A 100%)',
-          }"
+          class="flex flex-col justify-between p-4 box-border rounded-[15px] bg-[#ff497c]"
         >
           <div class="text-white opacity-70 text-sm">
             {{ $t("账户金额") }}
           </div>
           <div class="flex mt-4">
-            <div class="text-white text-3xl  flex items-center">
+            <div class="text-white text-3xl flex items-center">
               {{ amount }}
             </div>
-            <div
-              class="text-white text-sm flex items-center ml-2 pt-[12px]"
-            >
+            <div class="text-white text-sm flex items-center ml-2 pt-[12px]">
               {{ $t("美元") }}
             </div>
           </div>
@@ -63,9 +67,32 @@
             :placeholder="$t('提款金额')"
             autocomplete="off"
             size="large"
+          >
+            <template #suffix>
+              <el-button
+                type="primary"
+                style="background: #ff497c; border: 1px solid #ff497c"
+                @click="All"
+                size="default"
+                >{{ $t("全部") }}</el-button
+              >
+            </template>
+          </el-input>
+        </el-form-item>
+        <!-- <el-form-item
+          :label="$t('提款金额')"
+          prop="amount"
+          label-position="top"
+        >
+          <el-input
+            v-model="ruleForm.amount"
+            type="number"
+            :placeholder="$t('提款金额')"
+            autocomplete="off"
+            size="large"
            
           >
-            <template #append>
+            <template #suffix>
               <el-button
                 type="primary"
                 class="router"
@@ -76,7 +103,7 @@
               </el-button>
             </template>
           </el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item :label="$t('交易密码')" label-position="top">
           <el-input
             v-model="ruleForm.tradePassword"
@@ -89,16 +116,25 @@
         </el-form-item>
       </el-form>
       <div class="w-full pl-5 pr-5">
-        <van-button color="#206645" @click="getWithdrawal" class="w-full">{{
-          $t("提取")
-        }}</van-button>
+        <van-button
+          color="#1f2732"
+          round=""
+          @click="getWithdrawal"
+          class="w-full"
+          >{{ $t("提取") }}</van-button
+        >
       </div>
     </div>
-    <div class="w-[90%] mx-auto" v-else>
-      <div class="flex justify-start mb-[16px] mt-[24px]">
+    <div class="mx-auto w-[90%]" v-else>
+      <!-- <div class="flex justify-start mb-[16px] mt-[24px]">
         <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==0?'bg-[#DCFCE7] text-[#166534]':''" @click="changeOrder(0)">{{$t('待审核')}}</div>
         <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==1?'bg-[#DCFCE7] text-[#166534]':''" @click="changeOrder(1)">{{$t('审核成功')}}</div>
         <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==2?'bg-[#DCFCE7] text-[#166534]':''" @click="changeOrder(2)">{{$t('审核拒绝')}}</div>
+      </div> -->
+      <div class="flex justify-start mb-[16px] mt-[24px] bg-[#f4f4f5]  leading-[40px] border text-[16px] border-[#ff497c]">
+        <div class="flex-1 flex items-center justify-center px-[16px] " :class="orderActive==0?'bg-[#ff497c] text-[#fff]':'text-[#ff497c]'" @click="changeOrder(0)">{{$t('待审核')}}</div>
+        <div class="flex-1 flex items-center justify-center px-[16px]  " :class="orderActive==1?'bg-[#ff497c] text-[#fff]':'text-[#ff497c]'" @click="changeOrder(1)">{{$t('审核成功')}}</div>
+        <div class="flex-1 flex items-center justify-center px-[16px] " :class="orderActive==2?'bg-[#ff497c] text-[#fff]':'text-[#ff497c]'" @click="changeOrder(2)">{{$t('审核拒绝')}}</div>
       </div>
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
             <van-list
@@ -108,25 +144,87 @@
               @load="onLoad"
             >
               <van-cell v-for="item in list" :key="item" :title="item">
-                <div class="bg-[#fff] flex justify-between items-center px-[16px] py-[16px] rounded-[10px] " :class="item.status==0?'activetab':item.status==1?'activetab1':item.status==2?'activetab2':''">
-                  <div class="flex flex-col">
-                    <div class="text-[#111827] text-[16px] pb-[4px]">-{{ item.amount }}USD</div>
-                    <div class="text-[#6B7280] text-[12px]"> {{ formatWithTimezone(item.applicationTime,userStore.zoneActive.tzName)  }}</div>
+                <div
+                  class="shadow rounded-xl bg-[#fff] text-[#666]  p-3 box-border flex flex-col m-2"
+                >
+                  <div
+                    class="flex items-center justify-between font-medium pb-2 text-sm"
+                  >
+                    {{ item.code }}
                   </div>
-                  <div :class="item.status==0?'text-[#15803D ]':item.status==1?'text-[#D97706]':'text-[#B91C1C]'">
-                    {{
+                  <div class="w-full h-[1px] bg-[#EBEBEB]"></div>
+                  <div class="flex flex-col text-[14px] mt-2">
+                    <div class="flex mt-1">
+                      <div class="w-[50%] ">{{ $t("姓名") }}</div>
+                      <div class="w-[50%] ">
+                        :{{ item.username }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("钱包地址") }}</div>
+                      <div class="w-[50%] break-words">
+                        :{{ item.withdrawAddress }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("钱包名称") }}</div>
+                      <div class="w-[50%] break-words">
+                        :{{ item.withdrawType }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("提现金额") }}</div>
+                      <div class="w-[50%] break-words">:{{ item.amount }}</div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("到账金额") }}</div>
+                      <div class="w-[50%] break-words">
+                        :{{ item.creditedAmount }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("费率") }}</div>
+                      <div class="w-[50%] break-words">:{{ item.fee }}</div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("手续费") }}</div>
+                      <div class="w-[50%] break-words">
+                        :{{
+                          (
+                            (item.amount * item.withdrawFee) /
+                            100
+                          ).toFixed(2)
+                        }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("状态") }}</div>
+                      <div class="w-[50%] break-words" :class="item.status == 0?' text-green-500 ':item.status == 0?'text-yellow-500':'text-red-500'">
+                        :{{
                           item.status == 0
                             ? $t("通过")
                             : item.status == 1
                             ? $t("待审核")
                             : $t("拒绝")
                         }}
+                      </div>
+                    </div>
+                    <div class="flex mt-1">
+                      <div class="w-[50%]">{{ $t("创建时间") }}</div>
+                      <div class="w-[50%] break-words">
+                        :{{ formatWithTimezone(item.applicationTime,userStore.zoneActive.tzName)  }}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </van-cell>
             </van-list>
-      </van-pull-refresh>
+          </van-pull-refresh>
     </div>
+
+    
+
+
   </div>
 </template>
 <script setup>
@@ -138,12 +236,9 @@ import {
   getTradeConfig,
   userGetInfo,
 } from "../../api/apis";
-import {formatWithTimezone} from "../../util/utils"
+import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
-import {
-  showSuccessToast,
-  showToast
-} from "vant";
+import { showSuccessToast, showToast } from "vant";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -155,7 +250,7 @@ const finished = ref(false);
 const loading = ref(false);
 const amount = ref("");
 const userStore = useUserStore();
-const userInfo = ref({})
+const userInfo = ref({});
 const { t } = useI18n();
 const query = reactive({
   pageNum: 1,
@@ -209,26 +304,30 @@ const swichTab = (value) => {
   }
 };
 const getWithdrawal = () => {
-  if (!ruleForm.amount) return showToast(t('请输入金额'));
-  if (ruleForm.amount<TradeInfor.value.minWithdrawAmount || ruleForm.amount>TradeInfor.value.maxWithdrawAmount) return showToast(
-    t("rechargeLimit", { 
-    min: TradeInfor.value.minWithdrawAmount, 
-    max: TradeInfor.value.maxWithdrawAmount 
-  })
-  );
-  if (!ruleForm.tradePassword) return showToast(t('请输入交易密码'));
-  if(!userInfo.value.withdrawAddress) {
+  if (!ruleForm.amount) return showToast(t("请输入金额"));
+  if (
+    ruleForm.amount < TradeInfor.value.minWithdrawAmount ||
+    ruleForm.amount > TradeInfor.value.maxWithdrawAmount
+  )
+    return showToast(
+      t("rechargeLimit", {
+        min: TradeInfor.value.minWithdrawAmount,
+        max: TradeInfor.value.maxWithdrawAmount,
+      })
+    );
+  if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
+  if (!userInfo.value.withdrawAddress) {
     router.push({ path: "/paymentMethods" });
-    return false
+    return false;
   }
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     // router.push({ path: "/my" });
-    swichTab(1)
+    swichTab(1);
   });
 };
 const changeOrder = (value) => {
-  orderActive.value = value
+  orderActive.value = value;
   if (orderActive.value == 0) {
     query.status = "1";
   } else if (orderActive.value == 1) {
@@ -250,21 +349,21 @@ onMounted(() => {
   userGetInfo().then((res) => {
     amount.value = res.data.balance;
     // ruleForm.amount = amount.value;
-    userInfo.value = res.data
+    userInfo.value = res.data;
   });
 });
 </script>
 <style>
 .withdraw .el-input__wrapper {
-  border: 1px solid #E5E7EB;
+  border: 1px solid #666;
 }
 </style>
 <style scoped>
 .router {
-  border-top-right-radius: 8px;   /* 右上角圆角 */
-border-bottom-right-radius: 8px; /* 右下角圆角 */
-border-top-left-radius: 0;      /* 左上角不圆 */
-border-bottom-left-radius: 0;   /* 左下角不圆 */
+  border-top-right-radius: 8px; /* 右上角圆角 */
+  border-bottom-right-radius: 8px; /* 右下角圆角 */
+  border-top-left-radius: 0; /* 左上角不圆 */
+  border-bottom-left-radius: 0; /* 左下角不圆 */
 }
 .tab {
   position: relative;
@@ -292,10 +391,10 @@ border-bottom-left-radius: 0;   /* 左下角不圆 */
   background-color: #206645; /* 激活状态的下划线颜色 */
 }
 .activetab {
-  box-shadow: 0px 1px 2px 0px #DCFCE7;
+  box-shadow: 0px 1px 2px 0px #dcfce7;
 }
 .activetab1 {
-  box-shadow: 0px 1px 2px 0px #D97706;
+  box-shadow: 0px 1px 2px 0px #d97706;
 }
 .activetab2 {
   box-shadow: 0px 1px 2px 0px #206645;

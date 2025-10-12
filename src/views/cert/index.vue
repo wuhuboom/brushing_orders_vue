@@ -1,13 +1,14 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f4f4f5]">
+  <div class="w-full min-h-[100vh] bg-[#fff]">
     <div class="container w-full min-h-[100vh] bg-white">
       <van-nav-bar
         :title="$t('证书')"
         fixed
+        class="shadow"
         left-arrow
         @click-left="onClickLeft"
       />
-      <div class="w-full p-6 box-border flex flex-col font-montserrat text-[#333] mt-10">
+      <div class="w-full p-6 box-border flex flex-col font-montserrat text-[#333] mt-[85px]">
         <div v-html="certificateEn"></div>
       </div>
     </div>

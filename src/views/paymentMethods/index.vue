@@ -6,14 +6,14 @@
       left-arrow
       @click-left="onClickLeft"
     />
-    <div class="text-xs text-[#333] mb-4 mt-20">
+    <div class="text-xs text-[#333] mb-4 mt-[95px]">
       {{
         $t(
           "尊敬的用户，请填写您的BTC-20/ETH-20地址。请勿输入您的银行账户信息和密码。"
         )
       }}
     </div>
-    <div class="text-[#666] font-semibold mt-10">
+    <div class="text-[#999] font-semibold mt-10">
       {{ $t("钱包") }}
     </div>
     <div class="w-full mt-2 overflow-hidden shadow">
@@ -24,7 +24,7 @@
         label-align="top"
       />
     </div>
-    <div class="text-[#666] font-semibold mt-5">
+    <div class="text-[#999] font-semibold mt-5">
       {{ $t("网络") }}
     </div>
     <div class="w-full mt-2 overflow-hidden shadow">
@@ -35,7 +35,7 @@
         label-align="top"
       />
     </div>
-    <div class="text-[#666] font-semibold mt-5">
+    <div class="text-[#999] font-semibold mt-5">
       {{ $t("地址") }}
     </div>
     <div class="w-full mt-2 overflow-hidden shadow">
@@ -47,7 +47,7 @@
       />
     </div>
     <div class="w-full mt-10">
-      <van-button color="#007513" class="w-full" @click="submitForm">{{
+      <van-button color="#ff497c" class="w-full" @click="submitForm">{{
         $t("更新")
       }}</van-button>
     </div>

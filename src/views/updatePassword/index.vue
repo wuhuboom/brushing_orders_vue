@@ -8,24 +8,25 @@
         @click-left="onClickLeft"
       />
     </van-sticky>
-    <div class="w-full  mt-6  box-border flex flex-col">
-      <div class="w-full mt-12 flex flex-col">
-        <div class="w-full">
+    <div class="w-full pl-6 pr-6  mt-6  box-border flex flex-col">
+      <div class="w-full mt-20 flex flex-col">
+        <div class="w-full mt-2 overflow-hidden border border-[#666] rounded-lg  py-2">
           <van-cell-group inset>
             <van-field
-              label-align="top"
-              label-width="150"
+              label-align="left"
+              label-width="100px"
               type="password"
               v-model="ruleForm.oldPassword"
               :label="$t('旧密码')"
               :placeholder="$t('旧密码')"
+              input-align="right"
             />
           </van-cell-group>
         </div>
-        <div class="w-full">
+        <div class="w-full mt-2 overflow-hidden border border-[#666] rounded-lg  py-2">
           <van-cell-group inset>
             <van-field
-            label-align="top"
+            label-align="left"
               label-width="150"
               v-model="ruleForm.newPassword"
               :label="$t('新密码')"
@@ -34,10 +35,10 @@
             />
           </van-cell-group>
         </div>
-        <div class="w-full ">
+        <div class="w-full mt-2 overflow-hidden border border-[#666] rounded-lg  py-2 ">
           <van-cell-group inset>
             <van-field
-            label-align="top"
+            label-align="left"
               label-width="150"
               v-model="agentNewPassword"
               :label="$t('确认密码')"
@@ -48,8 +49,8 @@
           </van-cell-group>
         </div>
       </div>
-      <div class="w-[85%] mx-auto mt-4">
-        <van-button color="#206645" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
+      <div class="w-[100%] mx-auto mt-4">
+        <van-button color="#1f2732" rounded size="large" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-[#f8f8f8] min-h-[100vh] h-full">
+  <div class="w-full bg-[#f1f1f1] min-h-[100vh] h-full">
     <van-sticky type="primary">
       <van-nav-bar
         :title="$t('定金')"
@@ -9,7 +9,7 @@
       />
     </van-sticky>
 
-    <div
+    <!-- <div
       class="bg-white mt-[65px] flex justify-between items-center text-[#6B7280]"
     >
       <div class="tab" :class="{ active: active === 0 }" @click="swichTab(0)">
@@ -18,33 +18,32 @@
       <div class="tab" :class="{ active: active === 1 }" @click="swichTab(1)">
         {{ $t("历史") }}
       </div>
-    </div>
+    </div> -->
+     <van-tabs color="#ff497c" class="mt-[85px]"  @change="swichTab" v-model:active="active">
+      <van-tab :title="$t('定金')"></van-tab>
+      <van-tab :title="$t('历史')"></van-tab>
+    </van-tabs>
 
     <div v-if="active === 0">
-      <div class="p-4 box-border flex flex-col">
+      <div class="p-4 mt-[10px] box-border flex flex-col">
         <div
-          class="flex flex-col justify-between items-center p-4 box-border rounded-[10px]"
-          :style="{
-            background: `#fff`,
-          }"
+          class="flex flex-col justify-between p-4 box-border rounded-xl bg-[#ff497c] bg-cover shadow"
+          style="
+            background-size: 100% 100%;
+          "
         >
-          <div class="text-[#757575] opacity-70 text-sm font-semibold">
+          <div class="text-[#fff] opacity-70 text-sm font-semibold">
             {{ $t("账户金额") }}
           </div>
-          <div class="flex mt-[2px]">
-            <div class="text-[#206645] text-3xl font-bold flex items-end">
-              {{ userInfo.balance }} <span class="text-2xl pl-1">USD</span>
+          <div class="flex mt-[20px] mb-[5px]">
+            <div class="text-[#fff] text-3xl font-bold flex items-center">
+              {{ userInfo.balance }} <span class="text-white text-sm font-bold flex items-center ml-2 pt-[12px]">USD</span>
             </div>
-            <!-- <div
-              class="text-[#757575] text-sm font-bold flex items-center ml-2 pt-[12px]"
-            >
-              {{ $t("美元") }}
-            </div> -->
           </div>
         </div>
       </div>
       <div class="w-full mt-2 pl-5 pr-5">
-        <van-button color="#206645" class="w-full" @click="customer">{{
+        <van-button color="#000" round  class="w-full" @click="customer">{{
           $t("联系客服")
         }}</van-button>
       </div>
@@ -63,17 +62,17 @@
                 class="w-full mb-4 bg-[#fff] rounded-lg flex flex-col p-3"
               >
                 <div class="flex justify-between">
-                  <div class="text-sm  text-[#757575]">
+                  <div class="text-sm font-semibold text-[#999]">
                     {{ item.code }}
                   </div>
                 </div>
                 <div
-                  class="flex text-base text-[#206645] font-semibold items-center my-[5px] "
+                  class="flex text-base text-[#000] font-semibold items-center my-[15px] "
                 >
-                  {{ item.amout }}{{ $t("美元") }}
+                  <span class="pr-[5px]">{{ $t("美元") }}</span>{{ item.amout }}
                 </div>
                 <div class="flex justify-between">
-                  <div class="text-sm font-normal text-[#757575]">
+                  <div class="text-sm font-normal text-[#999]">
                     {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
                   </div>
                 </div>

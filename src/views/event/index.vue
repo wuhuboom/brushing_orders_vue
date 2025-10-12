@@ -4,9 +4,10 @@
         :title="$t('事件')"
         fixed
         left-arrow
+        class="shadow"
         @click-left="onClickLeft"
     />
-    <div class="w-full mt-10 box-border flex flex-col font-montserrat text-[#333]">
+    <div class="w-full mt-[65px] box-border flex flex-col font-montserrat text-[#333]">
       <div v-html="latestEventEn"></div>
         
     </div>

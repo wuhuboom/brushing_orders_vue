@@ -1,14 +1,15 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f4f4f5]">
+  <div class="w-full min-h-[100vh] bg-[#fff]">
     
     <div class="w-full p-6 box-border flex flex-col font-montserrat text-[#666]">
         <van-nav-bar
         :title="$t('收入指南')"
         fixed
         left-arrow
+        class="shadow"
         @click-left="onClickLeft"
     />
-     <div v-html="incomeGuideEn" class="mt-10"></div>
+     <div v-html="incomeGuideEn" class="mt-[65px]"></div>
     </div>
   </div>
 </template>

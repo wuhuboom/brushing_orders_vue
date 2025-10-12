@@ -6,7 +6,7 @@
       left-arrow
       @click-left="onClickLeft"
     />
-    <div class="mt-10 pt-5">
+    <div class="mt-[85px] pt-5">
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model:loading="loading"
@@ -16,14 +16,14 @@
         >
           <van-cell v-for="item in list" :key="item" :title="item">
             <div
-              class="w-full mb-4 bg-[#fff] flex flex-col p-3  border-l-4 border-[#206645]"
+              class="w-full mb-4 bg-[#fff] flex flex-col p-3  border-l-4 border-[var(--main-color)]"
               @click="goDetail(item)"
             >
               <div class="flex justify-between">
-                <div class="text-base font-semibold text-[#206645]">{{item.noticeTitle}}</div>
+                <div class="text-base font-semibold text-[var(--main-color)]">{{item.noticeTitle}}</div>
               </div>
               <div
-                class="flex text-sm text-[#206645] items-center mt-3"
+                class="flex text-sm text-[var(--main-color)] items-center mt-3"
                 v-html="item.noticeContent"
               >
                

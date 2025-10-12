@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-white">
+  <div class="container w-full min-h-[100vh] bg-[#1f2732]">
     <van-sticky type="primary">
       <van-nav-bar
         :title="$t('修改信息')"
@@ -14,11 +14,12 @@
           <van-uploader v-model="fileList" :after-read="afterRead" reupload max-count="1" />
           <div class="text-[#666] text-sm mt-2 flex items-center">
             <div class="mr-1">{{$t('点击更改')}}</div>
-             <img src="@/static/images/edit.png" class="w-[16px] h-[16px]" alt="">
+            <van-icon name="edit" />
+             <!-- <img src="@/static/images/edit.png" class="w-[16px] h-[16px]" alt=""> -->
           </div>
 
-           <div class="w-[80%] fixed bottom-[30px]  mt-4">
-                <van-button color="#206645" class="w-full" @click="updateAvatarMethods">{{$t('更新')}}</van-button>
+           <div class="w-[100%]  mt-4">
+                <van-button color="#ff497c" size="large" class="w-full" @click="updateAvatarMethods">{{$t('更新')}}</van-button>
             </div>
         </div>
       </div>

@@ -1,13 +1,14 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f4f4f5]">
+  <div class="w-full min-h-[100vh] bg-[#ffff]">
     <div class="container w-full min-h-[100vh] bg-white">
       <van-nav-bar
         :title="$t('常见问题解答')"
         fixed
         left-arrow
+        class="shadow"
         @click-left="onClickLeft"
       />
-      <div class="w-full mt-10 p-6 box-border flex flex-col font-montserrat text-[#333]">
+      <div class="w-full mt-[85px] p-6 box-border flex flex-col font-montserrat text-[#333]">
         <div v-html="faqEn"></div>
       </div>
     </div>

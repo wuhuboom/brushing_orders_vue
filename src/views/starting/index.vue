@@ -15,7 +15,7 @@
             v-else-if="!userInfo.avatar"
             :src="userImg"
             class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
-            alt="默认头像"
+            alt=""
           />
 
           <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
@@ -23,7 +23,7 @@
             v-else
             :src="userInfo.avatar"
             class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
-            alt="用户头像"
+            alt=""
             @error="(e) => (e.target.src = userImg)"
           />
         </div>
@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <div class="text-black font-semibold">VIP{{ userInfo.levelId }}</div>
+      <div class="text-black font-semibold">{{ userLevel }}</div>
     </div>
     <div class="w-full grid grid-cols-2 rounded-xl gap-4 p-2 bg-white border-[3px] border-[#f1894c] shadow-sm">
       <div class="col-span-2 pb-2 border-b-[1px] border-dashed border-[#888] flex flex-col text-center">
@@ -506,11 +506,13 @@ onUnmounted(() => {
   if (timer) clearTimeout(timer);
 });
 
+const userLevel = ref({})
 const userGetInfoMethods = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     orderCount.value = res.data.userLevel.orderCount;
+    userLevel.value = res.data.userLevel.nameEn
   });
 };
 
