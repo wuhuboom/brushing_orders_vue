@@ -1,5 +1,6 @@
 {
   "您即将切换为{type}": "You are about to switch to {type}",
+  "winMessage": "Congratulations on winning {winPrize}$. which has been deposited into your account balance.",
   "rechargeLimit":"The minimum recharge amount is {min}, and the maximum recharge amount is {max}.",
     "supportHours": "Customer service is currently offline, please pay attention to the online hours.",
   "确认删除这个{name}吗？": "Are you sure you want to delete this {name}?",
@@ -204,5 +205,10 @@
   "请勾选用户协议":"Please tick and agree to the argeement",
   "我们期待在工作时间内为您服务": "We'll be happy to help and get back to you once we're online",
   "客户服务目前无法提供服务": "Customer service is currently unavailable",
-  "已经有账号了吗？去登录": "Already have an account? Log in"
+  "已经有账号了吗？去登录": "Already have an account? Log in",
+  "未匹配到奖项": "No matching award found",
+  "未开启抽奖": "Lottery not enabled",
+  "无抽奖次数": "No lottery attempts remaining",
+  "确定": "OK"
+
 }

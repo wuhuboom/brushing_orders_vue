@@ -87,3 +87,13 @@ export const getZoneActive = (params) =>
 
 export const bannerList = (params) =>
   getApi().get(`/config/bannerList`, { params, loading: false, showMsg: false });
+
+export const getUserDraws = (params) =>
+  getApi().get(`/lottery/getUserDraws`, { params, loading: false, showMsg: false });
+
+export const getLotteryConfig = (params) =>
+  getApi().get(`/lottery/getLotteryConfigs`, { params, loading: false, showMsg: false });
+
+export const draw = (params) =>
+  getApi().get(`/lottery/draw`, { params, loading: false, showMsg: false });
+

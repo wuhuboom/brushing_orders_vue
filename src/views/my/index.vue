@@ -48,7 +48,7 @@
                 <p class="text-xs flex justify-center items-center">
                   <span class="">{{ $t("邀请码") }}:</span>
                   <span>{{ userInfo.inviteCode }}</span>
-                  <img class="w-4 h-4 ml-2" src="@/static/images/copy.png" alt="">
+                  <img class="w-4 h-4 ml-2" @click="copyContent(userInfo.inviteCode)" src="@/static/images/copy.png" alt="">
                 </p>
               </div>
             </div>

@@ -87,9 +87,6 @@
           </div>
         </div>
       </div>
-      
-      
-
       <!-- <div class="w-full bg-[#F0F9FF] mb-[30px]">
         <div class="test-[#333] text-center text-sm p-4 mb-3">Business Partner</div>
         <img class="w-[90%] mx-auto" src="@/static/images/b.png" alt="" /> 
@@ -106,17 +103,19 @@
     <!-- 行情结束 -->
     <Footer name="/"></Footer>
     <tradePassword ref="tradePasswordRef"></tradePassword>
+    <wheel ref="wheelRef"></wheel>
   </div>
 </template>
 <script setup>
 import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import tradePassword from "@/components/tradePassword.vue";
+import wheel from "@/components/wheel.vue";
 import { onMounted, ref, reactive, computed } from "vue";
-import { getLevel, getNoticeList } from "../api/apis";
+import { getLevel, getNoticeList,getUserDraws } from "../api/apis";
 import { useRouter } from "vue-router";
 const tradePasswordRef = ref(null);
-
+const wheelRef = ref(null);
 const borderMap = {
   VIP1: "#FDE68A",
   VIP2: "#93C5FD",
@@ -214,6 +213,14 @@ const level = async () => {
   });
 };
 
+const userDraws =async () =>{
+  let res = await getUserDraws();
+  console.log(res)
+  if(res.code ==200) {
+    wheelRef.value.open();
+  }
+}
+
 const query = reactive({
   pageNum: 1,
   pageSize: 10,
@@ -234,6 +241,10 @@ const pureNoticeContent = computed(() => {
 onMounted(() => {
   level();
   getData();
+  userDraws()
+  //  wheelRef.value.open();
+  
+    
 });
 </script>
 <style>
