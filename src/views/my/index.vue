@@ -166,7 +166,8 @@
               <img src="@/static/images/Notifications.png" class="w-6 h-6 mr-3" alt="" />
               <div class="text-[#1a1a1a] text-sm">{{ $t("通知") }}</div>
             </div>
-            <van-icon name="arrow" color="#206645" size="18px" />
+            <img class="w-[22px] h-[22px]" src="@/static/images/more1.png" alt="">
+            <!-- <van-icon name="arrow" color="#206645" size="18px" /> -->
           </div>
           <div
             @click="handleChangeLang"
