@@ -61,7 +61,7 @@ import { showToast } from "vant";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 const router = useRouter();
-const show = ref(false);
+const show = ref(true);
 const showLucky = ref(false);
 const winPrize = ref("");
 // 更符合Vue3习惯的暴露方式
