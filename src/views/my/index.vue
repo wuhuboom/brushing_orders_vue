@@ -25,7 +25,7 @@
                 v-else-if="!userInfo.avatar"
                 :src="userImg"
                 class="w-[6rem] h-[6rem] mx-auto  rounded-full object-cover"
-                alt="默认头像"
+                alt=""
               />
 
               <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
@@ -33,7 +33,7 @@
                 v-else
                 :src="userInfo.avatar"
                 class="w-[6rem] h-[6rem] mx-auto  rounded-full  object-cover"
-                alt="用户头像"
+                alt=""
                 @error="e => e.target.src = userImg"
               />
           </div>
@@ -276,6 +276,8 @@ const logout = () => {
   showConfirmDialog({
     title: t("退出"),
     message: t("确定要退出?"),
+    confirmButtonText: t("确定"), // ✅ 添加翻译
+    cancelButtonText: t("取消"),  // ✅ 添加翻译
     confirmButtonColor: "#007513", // 确认按钮颜色（红色示例）
   })
     .then(() => {

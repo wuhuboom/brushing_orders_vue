@@ -4,24 +4,47 @@
       v-model:show="show"
       :style="{ width: '80%', background: 'transparent' }"
     >
-      <img src="@/static/images/lucky.png" class="w-full" alt="" />
+      <img src="@/static/images/lucky.png" class="w-full pb-[13px]" alt="" />
 
       <!-- 静止转盘 -->
       <div class="wheel">
-        <img src="@/static/images/wheel.png" class="wheel-img" />
+        <img src="@/static/images/wheel.png" alt="wheel" class="wheel-img" />
+
+        <!-- 动态文字 -->
+        <div
+          v-for="(item, index) in prizes"
+          :key="index"
+          class="wheel-text"
+          :style="getTextStyle(index)"
+        >
+          {{ item }}{{ symbol }}
+        </div>
       </div>
 
-      <!-- 旋转箭头 -->
-      <div class="pointer" @click="startDraw">
+      <!-- Start按钮 -->
+      <div
+        ref="startBtn"
+        class="w-[63px] h-[63px] pointer-start"
+        @click="startDraw"
+      >
+        {{$t('开始1')}}
+        <!-- 箭头 -->
         <img
           src="@/static/images/pointer.png"
           class="pointer-img"
-          :style="{
-            transform: `rotate(${rotateDeg}deg)`,
-            transition: transitionStyle,
-          }"
+          :style="pointerStyle"
         />
       </div>
+
+      <div class="text-[#F7F7F7] text-center text-[16px] py-[15px]">
+        {{ $t('24 小时内只能进行一次抽奖') }}
+      </div>
+      <img
+        src="@/static/images/close1.png"
+        @click="close1"
+        class="w-[26px] h-[26px] mx-auto"
+        alt=""
+      />
     </van-popup>
 
     <van-popup
@@ -52,111 +75,191 @@
     </van-popup>
   </div>
 </template>
+
 <script setup>
-import { onMounted, ref, nextTick } from "vue";
+import { onMounted, ref, nextTick, computed } from "vue";
 import { useRouter } from "vue-router";
 import { getLotteryConfig, draw } from "../api/apis";
 import { errorMessages } from "../api/errorCodeMap";
 import { showToast } from "vant";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
-const router = useRouter();
-const show = ref(true);
+
+const show = ref(false);
 const showLucky = ref(false);
 const winPrize = ref("");
-// 更符合Vue3习惯的暴露方式
-const open = async () => {
-  show.value = true;
-};
 
-const close = () => (show.value = false);
+// 转盘文字
+const prizes = ref([]);
+const symbol = ref("");
+const sectorAngle = ref(25);
+const radius = ref(80);
 
+// 动画状态
 const rotateDeg = ref(0);
 const isSpinning = ref(false);
-const transitionStyle = ref(""); // 动态控制过渡样式
+const transitionStyle = ref("");
 
-// 奖项配置（顺时针方向）
-const prizeList = [
-  { label: 80, angle: 270 },
-  { label: 10, angle: 330 },
-  { label: 20, angle: 30 },
-  { label: 30, angle: 90 },
-  { label: 50, angle: 150 },
-  { label: 0, angle: 210 },
-];
+// Start按钮ref
+const startBtn = ref(null);
 
-// 模拟接口返回
-// const fakeApi = () => {
-//   return new Promise((resolve) => {
+// 奖项列表（角度为箭头指向的角度）
+// const prizeList = [
+//   { label: 80, angle: 270 },
+//   { label: 10, angle: 330 },
+//   { label: 20, angle: 30 },
+//   { label: 30, angle: 90 },
+//   { label: 50, angle: 150 },
+//   { label: 0, angle: 210 },
+// ];
+const prizeList = ref([])
+
+// const prizeList = [
+//   { label: 10, angle: 30 },
+//   { label: 20, angle: 90 },
+//   { label: 30, angle: 150 },
+//   { label: 40, angle: 90 },
+//   { label: 50, angle: 150 },
+//   { label: 0, angle: 210 },
+// ];
+
+
+// 模拟接口
+// const fakeApi = () =>
+//   new Promise((resolve) =>
 //     setTimeout(() => {
-//       const prizes = ["80", "10", "20$", "30$", "50$", "0"];
+//       const prizes = [80, 10, 20, 30, 50, 0];
 //       const randomPrize = prizes[Math.floor(Math.random() * prizes.length)];
 //       resolve({ prize: randomPrize });
-//     }, 500);
-//   });
-// };
+//     }, 500)
+//   );
+
+// 文字样式
+const getTextStyle = (index) => {
+  const angle = sectorAngle.value * index + sectorAngle.value / 2;
+  return {
+    transform: `rotate(${angle}deg) translateY(-${radius.value}px)`,
+  };
+};
+
+// 箭头围绕Start按钮旋转
+const radiusArrow = 50; // 箭头离按钮中心距离
+const pointerStyle = computed(() => {
+  return {
+    position: "absolute",
+    left: "27%",
+    top: "31%",
+    transform: `rotate(${rotateDeg.value}deg) translateY(-${radiusArrow}px)`,
+    transition: transitionStyle.value,
+  };
+});
+
+// 获取转盘配置
+const lotteryConfig = async () => {
+  try {
+    const res = await getLotteryConfig();
+    symbol.value = res.symbol || "";
+    prizes.value = res.prizes || [];
+    // if (prizes.value.length > 0) {
+    //   sectorAngle.value = 360 / prizes.value.length;
+    // }
+    if (prizes.value.length > 0) {
+      const sectorAngles = 360 / prizes.value.length;
+
+      // 转换成带角度的 prizeList
+      prizeList.value.splice(0, prizeList.length, 
+        ...prizes.value.map((label, index) => ({
+          label,
+          angle: ( 30+ index * sectorAngles) % 360, // 从上方270°开始
+        }))
+      );
+
+      console.log(prizeList.value)
+
+      sectorAngle.value = sectorAngles;
+      console.log(prizeList)
+      console.log(sectorAngle.value)
+    }
+  } catch (err) {
+    console.error("获取转盘配置失败:", err);
+  }
+};
 
 const startDraw = async () => {
-  if (isSpinning.value) return;
+  if (isSpinning.value) return; // 防止重复点击
   isSpinning.value = true;
 
-  // 1️⃣ 先重置角度和动画（清除上一次状态）
+  // 1️⃣ 清除上一次动画状态
   transitionStyle.value = "";
   rotateDeg.value = 0;
 
-  // 2️⃣ 等待 DOM 更新（下一帧再转动）
+  // 2️⃣ 等待下一帧（确保 DOM 更新完再加动画）
   await nextTick();
 
-  // 模拟请求后端中奖结果
+  // 3️⃣ 设置旋转动画样式
+  transitionStyle.value = "transform 4s cubic-bezier(0.33,1,0.68,1)";
 
   try {
-    const res = await draw();
+    // 4️⃣ 调用接口（模拟请求或真实接口）
+    const res = await draw(); // 你这里换成真实接口
     winPrize.value = res.data;
-    const target = prizeList.find((p) => p.label === winPrize.value);
 
+    // 5️⃣ 找出中奖角度
+    const target = prizeList.value.find((p) => p.label === winPrize.value);
+    console.log(target)
     if (!target) {
-       showToast(t("未匹配到奖项"));
+      showToast(t("未匹配到奖项"));
       isSpinning.value = false;
       return;
     }
 
-    // 算出目标角度（箭头需要旋转的角度）
-    const rounds = 10; // 转6圈
+    // 6️⃣ 计算目标角度（比如转 10 圈）
+    const rounds = 10;
     const targetDeg = 360 * rounds + target.angle;
     rotateDeg.value = targetDeg;
+    console.log(rotateDeg.value)
 
-    // 等动画结束后提示
+    // 7️⃣ 动画结束后处理
     setTimeout(() => {
       show.value = false;
       showLucky.value = true;
-      // alert(`🎉 恭喜抽中 ${winPrize}`);
+      isSpinning.value = false;
     }, 4000);
   } catch (err) {
-     showToast(t(errorMessages[err.code]));
+    // 错误处理
+    showToast(t(errorMessages[err.code] || "抽奖失败，请稍后再试"));
+    isSpinning.value = false;
   }
 };
 
-const closeLucky = () =>{
-    showLucky.value = false;
-}
+const closeLucky = () => {
+  showLucky.value = false;
+};
 
+const close1 = () => {
+  show.value = false;
+};
+
+// 保留你原来的 defineExpose
 defineExpose({
-  open,
-  close, // 新增关闭方法
+  open: async () => {
+    show.value = true;
+  },
+  close: () => {
+    show.value = false;
+  },
+});
+
+onMounted(() => {
+  lotteryConfig();
 });
 </script>
-<style scoped>
-.wheel-container {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 0 auto;
-}
 
+<style scoped>
 .wheel {
+  position: relative;
   width: 100%;
   height: 100%;
-  /* transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1); */
 }
 
 .wheel-img {
@@ -165,19 +268,39 @@ defineExpose({
   display: block;
 }
 
-.pointer {
+.pointer-start {
   position: absolute;
-  top: 43%;
-  left: 51.5%;
+  top: 47%;
+  left: 49.5%;
+  border-radius: 47px;
+  text-align: center;
+  line-height: 63px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #9d6116;
   transform: translate(-50%, -50%);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pointer-img {
-  width: 58px;
-  height: 81px;
-  user-select: none;
-  transform-origin: 50% 63%; /* ✅ 调整旋转中心到下方圆心 */
-  transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+  width: 31px;
+  height: 31px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center; /* 保持围绕按钮中心旋转 */
+}
+
+.wheel-text {
+  position: absolute;
+  top: 43%;
+  left: 46%;
+  transform-origin: center bottom;
+  font-size: 14px;
+  font-weight: bold;
+  color: #d17400;
 }
 </style>

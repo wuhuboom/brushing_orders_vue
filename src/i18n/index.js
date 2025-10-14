@@ -3,11 +3,12 @@ import { createI18n } from 'vue-i18n';
 import en from './locales/en.json';
 import zh from './locales/zh.json';
 import ko from './locales/ko.json';
-// import ja from './locales/ja.json';
+import ja from './locales/ja.json';
 import it from './locales/it.json';
 import fr from './locales/fr.json';
 import de from './locales/de.json';
 import id from './locales/id.json';
+import th from './locales/th.json';
 
 // 定义语言包
 const messages = {
@@ -16,9 +17,10 @@ const messages = {
   de,
   zh,
   ko,
-  // ja,
+  ja,
   it,
-  id
+  id,
+  th
 };
 
 // 创建 i18n 实例并导出

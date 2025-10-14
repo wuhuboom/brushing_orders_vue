@@ -122,6 +122,8 @@
   "客服": "Customer",
   "联系":"CONTACT",
   "开始": "Starting",
+  "开始1":"Start",
+  "24 小时内只能进行一次抽奖":"Only one draw per day",
   "记录": "Records",
   "首页": "Home",
   "查看更多": "View more",
@@ -209,6 +211,8 @@
   "未匹配到奖项": "No matching award found",
   "未开启抽奖": "Lottery not enabled",
   "无抽奖次数": "No lottery attempts remaining",
-  "确定": "OK"
+  "确定": "OK",
+  "取消": "Cancel",
+  "请输入您的用户名和密码以访问":"Enter your username and password to access"
 
 }

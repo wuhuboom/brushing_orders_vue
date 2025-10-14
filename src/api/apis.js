@@ -92,8 +92,7 @@ export const getUserDraws = (params) =>
   getApi().get(`/lottery/getUserDraws`, { params, loading: false, showMsg: false });
 
 export const getLotteryConfig = (params) =>
-  getApi().get(`/lottery/getLotteryConfigs`, { params, loading: false, showMsg: false });
+  getApi().get(`/lottery/getLotteryConfig`, { params, loading: false, showMsg: false });
 
 export const draw = (params) =>
   getApi().get(`/lottery/draw`, { params, loading: false, showMsg: false });
-

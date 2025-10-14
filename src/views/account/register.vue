@@ -32,9 +32,9 @@
         {{ $t("为旧金山和爱丁堡各地的客户提供服务") }}
       </div> -->
       <div class="text-5xl text-[#ff497c] font-semibold text-center py-4">
-        Sign In
+        {{$t('注册')}}
       </div>
-      <div class="text-center text-xs text-white">Enter your username and password to access</div>
+      <div class="text-center text-xs text-white">{{$t('请输入您的用户名和密码以访问')}}</div>
       
       <el-form
         ref="ruleFormRef"
