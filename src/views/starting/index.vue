@@ -266,7 +266,7 @@
           </div>
         </div>
         <div class="w-full mt-4">
-          <van-button color="#007513" class="w-full" @click="submitForm">{{
+          <van-button color="#007513" :loading="isLoading" :disabled="isLoading" class="w-full" @click="submitForm">{{
             $t("提交")
           }}</van-button>
         </div>
@@ -318,6 +318,7 @@ const showCenter = ref(false);
 const showImg = ref(false);
 const goods = ref({});
 const totalCount = ref(0); // 插入一个“开始按钮”
+const isLoading = ref(false)
 const getList = async () => {
   // let res = await getGoodsList();
   // goodsList.value = res.data;
@@ -388,23 +389,27 @@ const doCreateOrder = () => {
     });
 };
 
-const submitForm = () => {
-  submitOrder(goods.value.id)
-    .then((res) => {
+const submitForm = async () => {
+  if (isLoading.value) return; // 防止重复点击
+  isLoading.value = true;
+
+  // 延迟 1.5 秒后再执行请求
+  setTimeout(async () => {
+    try {
+      const res = await submitOrder(goods.value.id);
       showSuccessToast(t("提交成功"));
       userGetInfoMethods();
+
       if (res.code == 201) {
         goods.value = res.data;
       } else {
         showCenter.value = false;
       }
-    })
-    .catch((err) => {
+    } catch (err) {
       if (err.code == 916) {
         router.push("/deposit");
-      }
-      if (err.code == 906) {
-        console.log(userInfo.value.balance)
+      } else if (err.code == 906) {
+        console.log(userInfo.value.balance);
         if (userInfo.value.balance <= 0) {
           showToast("Transaction failed");
         } else {
@@ -413,8 +418,12 @@ const submitForm = () => {
       } else {
         showToast(t(errorMessages[err.code] || "Failed to create"));
       }
-    });
+    } finally {
+      isLoading.value = false; // 请求完成后关闭 loading
+    }
+  }, 1500); // 1.5 秒延迟
 };
+
 const toMy = () => {
   router.push({ path: "/my" });
 };
