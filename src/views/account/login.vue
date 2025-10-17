@@ -17,16 +17,16 @@
       <img
         src="@/static/images/logo.png"
         alt=""
-        class="w-[40%] lg:w-[300px] mx-auto"
+        class="w-[80%] lg:w-[300px] mx-auto"
       />
     </div>
 
     <div class="flex flex-col items-center pb-3">
-      <div class="text-5xl text-[#ff497c] font-semibold text-center py-4">
+      <!-- <div class="text-5xl text-[#ff497c] font-semibold text-center py-4">
         Sign In
-      </div>
-      <div class="text-center text-xs text-white">Enter your username and password to access</div>
-  
+      </div> -->
+      <div class="text-center text-[24px] text-[#FA8B26] pt-[25px]">{{$t('注册即可免费获得 20 美元')}}</div>
+
       <el-form
         ref="ruleFormRef"
         :model="ruleForm"
@@ -80,16 +80,20 @@
         round
       >
         <div
-          class="w-full text-white text-lg font-semibold mx-auto py-3 rounded-[30px] flex items-center justify-center bg-[#00bea3]"
+          class="w-full text-white text-lg font-semibold mx-auto py-3 rounded-[30px] flex items-center justify-center bg-[#FB517C]"
         >
           <div>{{ $t("登录") }}</div>
         </div>
       </div>
       <div class="w-full mt-4 text-sm text-white text-center pt-2">
-        <p class="text-sm text-center w-full pb-2 text-[#f1894c]" @click="toRegister">
+        <p class="text-sm text-center w-full pb-2 text-[#fff]" @click="toRegister">
           {{ $t("还没有账户?")
           }}<span class="text-[#f1894c]">{{ $t("立即注册") }}</span>
         </p>
+        <div style="border: 1px solid #fff;" class="flex justify-center items-center w-[30%] py-[1px] mx-auto my-[10px]" @click="customer">
+          <img src="@/static/images/LiveChat.png" class="w-[29px] h-[29px] mr-[3px]" alt="">
+          Live Chat
+        </div>
 
         <div class="text-sm text-center w-full" @click="customer">
           {{ $t("无法登录?")
