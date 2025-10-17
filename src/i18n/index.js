@@ -9,6 +9,7 @@ import fr from './locales/fr.json';
 import de from './locales/de.json';
 import id from './locales/id.json';
 import th from './locales/th.json';
+import zhTW from './locales/zh-Tw.json';
 
 // 定义语言包
 const messages = {
@@ -20,7 +21,8 @@ const messages = {
   ja,
   it,
   id,
-  th
+  th,
+  zhTW
 };
 
 // 创建 i18n 实例并导出

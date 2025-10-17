@@ -58,6 +58,7 @@ defineExpose({
 });
 
 function handleChangeLang(item) {
+  console.log(item.code)
   if (commonStore.clientLang === item.code) return;
   commonStore.updateLang(item.code);
   locale.value = item.code;

@@ -114,6 +114,8 @@ import wheel from "@/components/wheel.vue";
 import { onMounted, ref, reactive, computed } from "vue";
 import { getLevel, getNoticeList,getUserDraws } from "../api/apis";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/store/modules/user";
+const userStore = useUserStore();
 const tradePasswordRef = ref(null);
 const wheelRef = ref(null);
 const borderMap = {
@@ -242,6 +244,7 @@ onMounted(() => {
   level();
   getData();
   userDraws()
+  userStore.getUserInfo();
   //  wheelRef.value.open();
   
     

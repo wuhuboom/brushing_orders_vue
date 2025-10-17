@@ -1,9 +1,9 @@
 export const LANGS = {
     
-    // zhTW: {
-    //     name: '繁體中文',
-    //     code: 'zhTW'
-    // },
+    zhTW: {
+        name: '繁體中文',
+        code: 'zhTW'
+    },
     en: {
         name: 'English',
         code: 'en'
@@ -28,14 +28,18 @@ export const LANGS = {
         name: 'ไทย',
         code: 'th'
     },
-    ko: {
-        name: '한국어',
-        code: 'ko'
-    },
-    ja: {
-        name: '日本語',
-        code: 'ja'
-    },
+    // ko: {
+    //     name: '한국어',
+    //     code: 'ko'
+    // },
+    // ja: {
+    //     name: '日本語',
+    //     code: 'ja'
+    // },
+    // zh_TW: {
+    //     name: '繁體',
+    //     code: 'zh-TW'
+    // },
     // zh: {
     //     name: '中文简体',
     //     code: 'zh'

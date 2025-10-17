@@ -21,14 +21,14 @@
           /> -->
           <!-- 接口还没返回 avatar 字段（请求中） -->
               <div
-                v-if="userStore.userInfo.avatar === undefined"
+                v-if="userStore.userInfo?.avatar === undefined"
                  @click="toMy"
                 class="w-[32px] h-[32px] mx-auto  rounded-full bg-gray-200 animate-pulse"
               ></div>
 
               <!-- 接口返回 null / 空字符串 → 直接显示默认头像（不会闪） -->
               <img
-                v-else-if="!userStore.userInfo.avatar"
+                v-else-if="!userStore.userInfo?.avatar"
                 :src="userImg"
                  @click="toMy"
                 class="w-[32px] h-[32px] mx-auto  rounded-full object-cover"
@@ -38,7 +38,7 @@
               <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
               <img
                 v-else
-                :src="userStore.userInfo.avatar"
+                :src="userStore.userInfo?.avatar"
                 class="w-[32px] h-[32px] mx-auto  rounded-full  object-cover"
                 alt=""
                  @click="toMy"
@@ -98,6 +98,7 @@ const jump = () => {
 }
 onMounted(() => {
   // userStore.getUserInfo();
+  userStore.getUserInfo();
   console.log(userStore.userInfo)
   tradeConfig()
 })
