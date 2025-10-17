@@ -55,12 +55,38 @@ import { useRouter } from "vue-router";
 import ContactUs from "@/components/ContactUs.vue";
 const ContactUsRef = ref(null);
 import { useUserStore } from "@/store/modules/user";
+import {getTradeConfig } from "../api/apis";
+import { useI18n } from "vue-i18n";
+import { showToast } from "vant";
+const { t } = useI18n();
+import { checkWorkTimeLocal } from "../util/utils";
 const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
 const userStore = useUserStore();
 
 
+// const customer = () => {
+//   ContactUsRef.value.open();
+// };
+
+const TradeInfor = ref({})
+const tradeConfig = async () => {
+  let res = await getTradeConfig();
+  TradeInfor.value = res.data;
+};
+
 const customer = () => {
-  ContactUsRef.value.open();
+  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);
+
+  if(time) {
+     ContactUsRef.value.open();
+  } else {
+    showToast(
+        t("supportHours", {
+          start: TradeInfor.value.workTimeStart,
+          end: TradeInfor.value.workTimeEnd
+        })
+      )
+  }
 };
 const router = useRouter();
 const toMy = ()=>{
@@ -73,5 +99,6 @@ const jump = () => {
 onMounted(() => {
   // userStore.getUserInfo();
   console.log(userStore.userInfo)
+  tradeConfig()
 })
 </script>
