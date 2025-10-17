@@ -112,7 +112,7 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import wheel from "@/components/wheel.vue";
 import { onMounted, ref, reactive, computed } from "vue";
-import { getLevel, getNoticeList,getUserDraws } from "../api/apis";
+import { getLevel, getNoticeList,getUserDraws,getLotteryConfig } from "../api/apis";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
 const userStore = useUserStore();
@@ -239,11 +239,22 @@ const getData = async () => {
 const pureNoticeContent = computed(() => {
   return noticeContent.value.replace(/<\/?[^>]+(>|$)/g, "");
 });
+// 获取转盘配置
+const lotteryConfig = async () => {
+  try {
+    const res = await getLotteryConfig();
+    userDraws()
+  } catch (err) {
+    console.log(9999)
+    console.error("获取转盘配置失败:", err);
+  }
+};
 
 onMounted(() => {
   level();
   getData();
-  userDraws()
+  
+  lotteryConfig()
   userStore.getUserInfo();
   //  wheelRef.value.open();
   

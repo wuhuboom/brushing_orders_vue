@@ -173,14 +173,11 @@ const lotteryConfig = async () => {
           angle: ( 30+ index * sectorAngles) % 360, // 从上方270°开始
         }))
       );
-
-      console.log(prizeList.value)
-
       sectorAngle.value = sectorAngles;
-      console.log(prizeList)
-      console.log(sectorAngle.value)
     }
   } catch (err) {
+    show.value = false;
+    console.log(show.value)
     console.error("获取转盘配置失败:", err);
   }
 };
@@ -251,7 +248,7 @@ defineExpose({
 });
 
 onMounted(() => {
-  lotteryConfig();
+    lotteryConfig();
 });
 </script>
 
