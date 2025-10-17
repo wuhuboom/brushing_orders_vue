@@ -37,7 +37,7 @@
       >
         <el-form-item prop="" label-position="top">
           <el-input
-            v-model="ruleForm.username"
+            v-model.trim="ruleForm.username"
             type="text"
             :placeholder="$t('用户名/电话')"
             autocomplete="off"
