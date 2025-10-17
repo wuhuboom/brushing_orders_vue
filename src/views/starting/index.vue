@@ -350,12 +350,13 @@
         src="../../static/images/super.png"
         alt=""
       />
-      <img
+      <van-button color="#ff497c" round class="w-full" @click="closeImg">OK</van-button>
+      <!-- <img
         @click="closeImg"
         class="w-[30px] h-[30px] m-auto"
         src="../../static/images/cloed.png"
         alt=""
-      />
+      /> -->
     </van-popup>
   </div>
 </template>
