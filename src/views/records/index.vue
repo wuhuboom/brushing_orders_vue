@@ -157,6 +157,10 @@
             </div>
           </div>
         </div>
+        <div class="loading-progress my-[10px]" v-if="showProgress">
+                  <div class="progress" :style="{ width: progress + '%' }"></div>
+                  <span>{{ progress }}%</span>
+          </div>
         <div class="w-full mt-4">
           <van-button
             color="#007513"
@@ -199,6 +203,8 @@ const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
 const goodsData = ref({});
+const progress = ref(0);
+const showProgress = ref(false);
 const query = reactive({
   pageNum: 1,
   pageSize: 10,
@@ -244,6 +250,14 @@ const isSubmitting = ref(false); // 防重提交标志
 const submitVal = async () => {
   if (isSubmitting.value) return;
   isSubmitting.value = true;
+  showProgress.value = true;
+  progress.value = 0;
+  // 模拟进度条加载动画
+  const timer = setInterval(() => {
+    if (progress.value < 90) {
+      progress.value += 5;
+    }
+  }, 100);
 
   // 延迟 2 秒触发请求
   setTimeout(async () => {
@@ -256,7 +270,16 @@ const submitVal = async () => {
       } else {
         show.value = false;
       }
+      progress.value = 100; // 请求完成设为100%
+      clearInterval(timer);
+      // 结束后隐藏进度条
+      setTimeout(() => {
+        showProgress.value = false;
+      }, 400);
     } catch (err) {
+      clearInterval(timer);
+      progress.value = 100;
+      setTimeout(() => (showProgress.value = false), 400);
       if (err.code == 916) {
         router.push("/deposit");
       } else {
@@ -267,7 +290,7 @@ const submitVal = async () => {
     } finally {
       isSubmitting.value = false;
     }
-  }, 2000); // 2000 毫秒 = 2 秒
+  }, 1500); // 2000 毫秒 = 2 秒
 };
 
 const swichTab = () => {
@@ -285,4 +308,21 @@ onMounted(() => {
   onLoad();
 });
 </script>
-<style scoped></style>
+<style scoped>
+.loading-progress {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.loading-progress .progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #007513;
+  transition: width 0.3s ease;
+}
+</style>

@@ -265,10 +265,15 @@
             </div>
           </div>
         </div>
+        <div class="loading-progress my-[10px]" v-if="showProgress">
+                  <div class="progress" :style="{ width: progress + '%' }"></div>
+                  <span>{{ progress }}%</span>
+          </div>
         <div class="w-full mt-4">
-          <van-button color="#007513" :loading="isLoading" :disabled="isLoading" class="w-full" @click="submitForm">{{
-            $t("提交")
-          }}</van-button>
+          <van-button color="#007513" :loading="isLoading" :disabled="isLoading" class="w-full" @click="submitForm">
+             {{$t("提交")}}
+          </van-button>
+          
         </div>
       </div>
     </van-popup>
@@ -319,6 +324,8 @@ const showImg = ref(false);
 const goods = ref({});
 const totalCount = ref(0); // 插入一个“开始按钮”
 const isLoading = ref(false)
+const progress = ref(0);
+const showProgress = ref(false);
 const getList = async () => {
   // let res = await getGoodsList();
   // goodsList.value = res.data;
@@ -392,6 +399,14 @@ const doCreateOrder = () => {
 const submitForm = async () => {
   if (isLoading.value) return; // 防止重复点击
   isLoading.value = true;
+  showProgress.value = true;
+  progress.value = 0;
+  // 模拟进度条加载动画
+  const timer = setInterval(() => {
+    if (progress.value < 90) {
+      progress.value += 5;
+    }
+  }, 100);
 
   // 延迟 1.5 秒后再执行请求
   setTimeout(async () => {
@@ -405,7 +420,16 @@ const submitForm = async () => {
       } else {
         showCenter.value = false;
       }
+      progress.value = 100; // 请求完成设为100%
+      clearInterval(timer);
+      // 结束后隐藏进度条
+      setTimeout(() => {
+        showProgress.value = false;
+      }, 400);
     } catch (err) {
+      clearInterval(timer);
+      progress.value = 100;
+      setTimeout(() => (showProgress.value = false), 400);
       if (err.code == 916) {
         router.push("/deposit");
       } else if (err.code == 906) {
@@ -455,3 +479,21 @@ onMounted(() => {
   tradeConfig();
 });
 </script>
+<style scoped>
+.loading-progress {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.loading-progress .progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #007513;
+  transition: width 0.3s ease;
+}
+</style>
