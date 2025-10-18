@@ -48,7 +48,7 @@
                 <p class="text-xs flex justify-center items-center">
                   <span class="">{{ $t("邀请码") }}:</span>
                   <span>{{ userInfo.inviteCode }}</span>
-                  <img class="w-4 h-4 ml-2" @click="copyContent(userInfo.inviteCode)" src="@/static/images/copy.png" alt="">
+                  <img class="w-4 h-4 ml-2" @click="copyContent(codeUrl)" src="@/static/images/copy.png" alt="">
                 </p>
               </div>
             </div>
@@ -354,6 +354,15 @@ const tradeConfig = async () => {
 };
 
 
+const codeUrl = ref('')
+const getFullDomain = () =>{
+  const fullDomain = window.location.origin +'/#/account/register?code='+userInfo.value.inviteCode;
+  console.log(fullDomain)
+  codeUrl.value = fullDomain
+
+}
+
+
 const userLevel = ref({})
 onMounted(() => {
   userGetInfo().then((res) => {
@@ -361,7 +370,9 @@ onMounted(() => {
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     userLevel.value = res.data.userLevel.nameEn;
     console.log(userInfo.value);
+    getFullDomain()
   });
+  
   tradeConfig();
 });
 </script>

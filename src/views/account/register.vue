@@ -149,9 +149,7 @@ import { register } from "../../api/apis";
 import { areas } from "@/config/area";
 import { formatPhoneNumber } from "../../util/utils";
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
-onMounted(() => {
-  document.getElementById("app").style.background = "#fff";
-});
+
 
 onUnmounted(() => {
   document.getElementById("app").style.background = "transparent";
@@ -199,6 +197,12 @@ function sendCode() {
   });
 }
 
+function getHashParam(key) {
+  const hash = window.location.hash;
+  const queryString = hash.includes('?') ? hash.split('?')[1] : '';
+  const params = new URLSearchParams(queryString);
+  return params.get(key);
+}
 function handleChangeLang() {
   langRef.value.open();
 }
@@ -207,6 +211,11 @@ const jump = () =>{
       path: "/tc",
     });
 }
+onMounted(() => {
+  document.getElementById("app").style.background = "#fff";
+  const code = getHashParam('code');
+  ruleForm.inviteCode = code  
+});
 </script>
 
 <style scoped>
