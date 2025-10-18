@@ -12,8 +12,6 @@ export const useCommonStore = defineStore("common", {
     shareList: [10, 50, 100, 500],
     setting: {},
     kvPairs: [
-      // { key: 'siteName', value: 'My App' },
-      // { key: 'theme', value: 'dark' },
       { en: "en" },
       { zh: "zh" },
       { zhTW: "zh_tw" },
@@ -24,11 +22,8 @@ export const useCommonStore = defineStore("common", {
   }),
   getters: {
     lang: (state) => state.clientLang,
-    // 合并为平面对象（后面的覆盖前面的）
     mergedKV: (state) =>
       state.kvPairs.reduce((acc, obj) => Object.assign(acc, obj), {}),
-
-    // 按 key 查 value（找不到返回 null）
     getValueByKey: (state) => (key) => {
       const v = state.mergedKV[key];
       return typeof v === "undefined" ? null : v;
@@ -41,7 +36,6 @@ export const useCommonStore = defineStore("common", {
     setPath(path) {
       this.path = path;
     },
-    // 设置/更新某个键（如果已存在对应项就更新，否则 push 新项）
     setKV(key, value) {
       const idx = this.kvPairs.findIndex((obj) =>
         Object.prototype.hasOwnProperty.call(obj, key)
@@ -52,16 +46,12 @@ export const useCommonStore = defineStore("common", {
         this.kvPairs.push({ [key]: value });
       }
     },
-
-    // 删除某个键（移除该项）
     removeKV(key) {
       const idx = this.kvPairs.findIndex((obj) =>
         Object.prototype.hasOwnProperty.call(obj, key)
       );
       if (idx >= 0) this.kvPairs.splice(idx, 1);
     },
-
-    // 批量写入：形如 [{ en:'en' }, { zh:'zh' }, ...]
     setManyKV(list = []) {
       list.forEach((obj) => {
         const [k] = Object.keys(obj);
