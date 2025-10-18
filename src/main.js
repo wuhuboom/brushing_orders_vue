@@ -1,4 +1,6 @@
+
 import { createApp } from "vue";
+
 import "./style.css";
 import App from "./App.vue";
 import "./index.css";
@@ -7,6 +9,7 @@ import router from "./router"; // 导入 Vue Router
 import i18n from "./i18n/index";
 import { initAPI, debugConfig } from "@/api";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
+
 import {
   Calendar,
   CountDown,
@@ -54,6 +57,7 @@ async function loadConfig() {
     });
   }
 }
+
 async function bootstrap() {
   await loadConfig(); // ✅ 等待 config.js 加载完成
   document.title = window.g?.VITE_TITLE || "";
