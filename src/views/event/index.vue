@@ -28,7 +28,7 @@ const parLang = computed(() => {
 
 const getGetGlobalConfig = async() =>{
     let res = await getConfigByLang({ lang: parLang.value });
-    latestEventEn.value = res?.data?.latestEventEn ?? '';
+    latestEventEn.value = res?.data?.latestEvent ?? '';
     console.log(latestEventEn.value)
 }
 onMounted(() =>{

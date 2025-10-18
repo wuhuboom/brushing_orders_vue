@@ -34,7 +34,7 @@ const getGetGlobalConfig = async() =>{
   
     // 这里一定要用 .value
     let res = await getConfigByLang({ lang: parLang.value });
-    incomeGuideEn.value = res?.data?.incomeGuideEn ?? '';
+    incomeGuideEn.value = res?.data?.incomeGuide ?? '';
 }
 onMounted(() =>{
     getGetGlobalConfig();

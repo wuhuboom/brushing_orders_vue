@@ -25,8 +25,8 @@ const parLang = computed(() => {
   return mapped ?? commonStore.lang; 
 });
 const getGetGlobalConfig = async() =>{
-    let res = await getConfigByLang({ lang: en });
-    certificateEn.value = res?.data?.certificateEn ?? '';
+    let res = await getConfigByLang({ lang: 'en' });
+    certificateEn.value = res?.data?.certificate?? '';
 }
 onMounted(() =>{
     getGetGlobalConfig();

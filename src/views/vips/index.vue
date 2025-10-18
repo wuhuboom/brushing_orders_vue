@@ -14,12 +14,12 @@
             <div class="flex flex-col flex-1">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
-                      <img :src="bgMapStart[item.nameEn]" class="w-[48px] h-[48px] mr-[6px]" alt="">
-                      <div class="text-base text-[#000] font-semibold mr-2">{{item.nameEn}}</div>
+                      <img :src="bgMapStart[item.name]" class="w-[48px] h-[48px] mr-[6px]" alt="">
+                      <div class="text-base text-[#000] font-semibold mr-2">{{item.name}}</div>
                     </div>
                     <div class="w-[93px] h-[36px] flex justify-center items-center  rounded-md text-white" @click="toUpgrade(item.id)" :class="userStore.userInfo.levelId == item.id?'bg-[#9333EA]':'bg-[#206645]'">{{userStore.userInfo.levelId == item.id?$t('当前等级'):`USD ${item.price}`}}</div>
                 </div>
-                <div class="mt-2 text-xs text-[#000] font-light custom-html" v-html="item.descriptionEn">
+                <div class="mt-2 text-xs text-[#000] font-light custom-html" v-html="item.description">
               
                 </div>
             </div>
@@ -30,11 +30,17 @@
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import { getLevel } from "../../api/apis";
+import { getLevel,getLevelByLang } from "../../api/apis";
 import { useUserStore } from '../../store/modules/user';
 import { showToast } from 'vant';
 import { useI18n } from "vue-i18n";
+import { useCommonStore } from '@/store/modules/common';
 const userStore = useUserStore()
+const commonStore = useCommonStore();
+const parLang = computed(() => {
+  const mapped = commonStore.getValueByKey(commonStore.lang);
+  return mapped ?? commonStore.lang; 
+});
 const { t } = useI18n();
 const more = new URL("@/static/images/more10.png", import.meta.url).href;
 
@@ -47,12 +53,12 @@ const bgMapStart = {
 };
 const levelList = ref([]);
 const level = async () => {
-  let res = await getLevel();
+ let res = await getLevelByLang({ lang: parLang.value });
   levelList.value = res.data;
   levelList.value.forEach(item => {
-     if (item.descriptionEn) {
+     if (item.description) {
       // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
-      item.descriptionEn = item.descriptionEn.replace(/(●|•|&#8226;|&#9679;)/g, `<img src="${more}" class="inline-block w-[11px] h-[11px] mr-2" />`);
+      item.description = item.description.replace(/(●|•|&#8226;|&#9679;)/g, `<img src="${more}" class="inline-block w-[11px] h-[11px] mr-2" />`);
     }
   });
   
