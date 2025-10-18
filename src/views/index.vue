@@ -261,7 +261,7 @@ onMounted(() => {
   level();
   getData();
   
-  lotteryConfig()
+  // lotteryConfig()
   userStore.getUserInfo();
   //  wheelRef.value.open();
   

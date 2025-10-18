@@ -248,7 +248,7 @@ defineExpose({
 });
 
 onMounted(() => {
-    lotteryConfig();
+    // lotteryConfig();
 });
 </script>
 
