@@ -17,13 +17,19 @@
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import {getGlobalConfig} from "../../api/apis"
+import {getConfigByLang} from "../../api/apis"
+import { useCommonStore } from '@/store/modules/common';
 const onClickLeft = () => history.back();
 const registerProtocolEn = ref('');
+const commonStore = useCommonStore();
+const parLang = computed(() => {
+  const mapped = commonStore.getValueByKey(commonStore.lang);
+  return mapped ?? commonStore.lang; 
+});
 const getGetGlobalConfig = async() =>{
-    let res = await getGlobalConfig();
-    registerProtocolEn.value = res.data.registerProtocolEn
-    console.log(res)
+    let res = await getConfigByLang({ lang: parLang.value });
+    registerProtocolEn.value = res?.data?.registerProtocol ?? '';
+    console.log("res",res)
 }
 onMounted(() =>{
     getGetGlobalConfig();

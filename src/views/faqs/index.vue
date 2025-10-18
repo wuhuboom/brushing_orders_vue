@@ -16,11 +16,17 @@
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import {getGlobalConfig} from "../../api/apis"
+import {getConfigByLang} from "../../api/apis"
+import { useCommonStore } from '@/store/modules/common';
 const faqEn = ref('')
+const commonStore = useCommonStore();
+const parLang = computed(() => {
+  const mapped = commonStore.getValueByKey(commonStore.lang);
+  return mapped ?? commonStore.lang; 
+});
 const getGetGlobalConfig = async() =>{
-    let res = await getGlobalConfig();
-    faqEn.value = res.data.faqEn
+    let res = await getConfigByLang({ lang: parLang.value });
+    faqEn.value = res?.data?.faqEn ?? '';
 }
 onMounted(() =>{
     getGetGlobalConfig();

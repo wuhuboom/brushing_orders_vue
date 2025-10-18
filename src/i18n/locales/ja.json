@@ -210,5 +210,10 @@
   "确定": "確認",
   "取消": "キャンセル",
   "请输入您的用户名和密码以访问": "ユーザー名とパスワードを入力してアクセスしてください",
-  "注册即可免费获得 20 美元": "登録するだけで$20ゲット"
+  "注册即可免费获得 20 美元": "登録するだけで$20ゲット",
+  "live.chat.str": "Live Chat1",
+  "start.optimization.str": "Start Optimization11",
+  "start.notice.str": "Notice11",
+  "start.notice.desc1.str": "Online Support Hours11",
+  "start.notice.desc2.str": "Please contact online support for your assistance11!"
 }

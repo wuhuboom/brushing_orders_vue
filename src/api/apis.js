@@ -48,12 +48,15 @@ export const getCustomerService = (params) =>
 
 export const getGlobalConfig = (params) =>
   getApi().get("/config/getGlobalConfig", { params, loading: false, showMsg: false });
+export const getConfigByLang = (params) =>getApi().get("config/getConfigByLang", {params,loading: false,showMsg: false});
 
 export const getNoticeList = (params) =>
   getApi().get("/config/getNoticeList", { params, loading: false, showMsg: false });
 
 export const getLevel = (params) =>
   getApi().get("/config/getLevel", { params, loading: false, showMsg: false });
+export const getLevelByLang = (params) =>
+  getApi().get("/config/getLevelByLang", { params,loading: false,showMsg: false});
 
 export const getDeposit = (params) =>
   getApi().get("/account/getDeposit", { params, loading: false, showMsg: false });

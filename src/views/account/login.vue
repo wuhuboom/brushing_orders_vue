@@ -10,7 +10,7 @@
           alt=""
           class="w-5 h-5 block object-contain"
         />
-        <div class="ml-2 uppercase font-bold">en</div>
+        <div class="ml-2 uppercase font-bold">{{commonStore.lang}}</div>
       </div>
     </div>
     <div class="min-h-[200px] lg:min-h-[250px] pt-20">
@@ -90,9 +90,10 @@
           {{ $t("还没有账户?")
           }}<span class="text-[#f1894c]">{{ $t("立即注册") }}</span>
         </p>
-        <div style="border: 1px solid #fff;" class="flex justify-center items-center w-[30%] py-[1px] mx-auto my-[10px]" @click="customer">
+        <div style="border: 1px solid #fff;" class="flex justify-center items-center w-[40%] py-[1px] mx-auto my-[10px]" @click="customer">
           <img src="@/static/images/LiveChat.png" class="w-[29px] h-[29px] mr-[3px]" alt="">
-          Live Chat
+          
+          {{ $t("live.chat.str") }}
         </div>
 
         <div class="text-sm text-center w-full" @click="customer">

@@ -15,11 +15,26 @@
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import {getGlobalConfig} from "../../api/apis"
+import { useCommonStore } from '@/store/modules/common';
+import {getConfigByLang} from "../../api/apis"
 const incomeGuideEn = ref('')
+const commonStore = useCommonStore();
+
+// 把 store 的 lang（如 'zhTW'）映射成真正传给后端的语言码（如 'zh_tw'）
+const parLang = computed(() => {
+  // 假设你的 store 里实现了 getter：getValueByKey(key) => value|null
+  const mapped = commonStore.getValueByKey(commonStore.lang);
+  return mapped ?? commonStore.lang; // 映射不到就用原值兜底
+});
+
+
+
 const getGetGlobalConfig = async() =>{
-    let res = await getGlobalConfig();
-    incomeGuideEn.value = res.data.incomeGuideEn
+  console.log("parLang",parLang);
+  
+    // 这里一定要用 .value
+    let res = await getConfigByLang({ lang: parLang.value });
+    incomeGuideEn.value = res?.data?.incomeGuideEn ?? '';
 }
 onMounted(() =>{
     getGetGlobalConfig();

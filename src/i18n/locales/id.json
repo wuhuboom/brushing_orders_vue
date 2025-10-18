@@ -144,7 +144,7 @@
   "请输入金额": "Silakan masukkan jumlah",
   "注册": "Daftar",
   "请输入用户名/电话": "Silakan masukkan nama pengguna/telepon",
-   "密码错误": "Kata sandi salah",
+  "密码错误": "Kata sandi salah",
   "密码不能为空": "Kata sandi tidak boleh kosong",
   "交易密码不能为空": "Kata sandi transaksi tidak boleh kosong",
   "手机号不能为空": "Nomor ponsel tidak boleh kosong",
@@ -194,5 +194,10 @@
   "无新的订单，订单提交成功": "Tidak ada pesanan baru, pesanan berhasil dikirim",
   "用户存在连单，返回新的订单信息": "Pengguna memiliki pesanan berkelanjutan, mengembalikan informasi pesanan baru",
   "用户余额不足（联系管理员，常用于冻结金额不足）": "Saldo pengguna tidak cukup (hubungi administrator, sering digunakan saat saldo beku tidak cukup)",
-  "我的": "Saya"
+  "我的": "Saya",
+  "live.chat.str": "Live Chat",
+  "start.optimization.str": "Start Optimization",
+  "start.notice.str": "Notice",
+  "start.notice.desc1.str": "Online Support Hours",
+  "start.notice.desc2.str": "Please contact online support for your assistance!"
 }

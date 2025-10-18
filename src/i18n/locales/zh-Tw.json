@@ -210,5 +210,10 @@
   "确定": "確定",
   "取消": "取消",
   "请输入您的用户名和密码以访问": "請輸入您的用戶名和密碼以登入",
-  "注册即可免费获得 20 美元": "註冊即可免費獲得 20 美元"
+  "注册即可免费获得 20 美元": "註冊即可免費獲得 20 美元",
+  "live.chat.str": "Live Chat",
+  "start.optimization.str": "Start Optimization",
+  "start.notice.str": "Notice",
+  "start.notice.desc1.str": "Online Support Hours",
+  "start.notice.desc2.str": "Please contact online support for your assistance!"
 }

@@ -69,20 +69,20 @@
             class="vip-item flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
             :style="{
               background: `url(${
-                bgMap[item.nameEn]
+                bgMap[item.name]
               }) 0 0 / 100% 100% no-repeat`,
             }"
           >
             <div class="flex justify-between items-start">
               <div class="font-bold text-lg">
                 <p class="mt-4 text-[var(--main-color)]">
-                  {{ $t(item.nameZh) }}
+                  {{ item.name }}
                 </p>
               </div>
-              <img class="w-24" :src="bgMapStart[item.nameEn]" alt="" />
+              <img class="w-24" :src="bgMapStart[item.name]" alt="" />
             </div>
             <div class="w-[260px] text-xs mt-2 text-black" >
-              <p class="w-[260px] text-xs mt-2 text-black" v-html="item.descriptionEn"></p>
+              <p class="w-[260px] text-xs mt-2 text-black" v-html="item.description"></p>
             </div>
           </div>
         </div>
@@ -112,11 +112,17 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import wheel from "@/components/wheel.vue";
 import { onMounted, ref, reactive, computed } from "vue";
-import { getLevel, getNoticeList,getUserDraws,getLotteryConfig } from "../api/apis";
+import { getLevel,getLevelByLang, getNoticeList,getUserDraws,getLotteryConfig } from "../api/apis";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
+import { useCommonStore } from '@/store/modules/common';
 const userStore = useUserStore();
 const tradePasswordRef = ref(null);
+const commonStore = useCommonStore();
+const parLang = computed(() => {
+  const mapped = commonStore.getValueByKey(commonStore.lang);
+  return mapped ?? commonStore.lang; 
+});
 const wheelRef = ref(null);
 const borderMap = {
   VIP1: "#FDE68A",
@@ -202,12 +208,13 @@ function toVips() {
 }
 const levelList = ref([]);
 const level = async () => {
-  let res = await getLevel();
+  let res = await getLevelByLang({ lang: parLang.value });
+  // let res = await getLevel();
   levelList.value = res.data;
   levelList.value.forEach((item) => {
-    if (item.descriptionEn) {
+    if (item.description) {
       // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
-      item.descriptionEn = item.descriptionEn.replace(
+      item.description = item.description.replace(
         /(●|•|&#8226;|&#9679;)/g,
         '<span class="small-dot">●</span>'
       );

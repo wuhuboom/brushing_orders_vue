@@ -16,12 +16,23 @@
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import {getGlobalConfig} from "../../api/apis"
+import { useCommonStore } from '@/store/modules/common';
+import {getConfigByLang} from "../../api/apis"
 const termsEn = ref('')
+const commonStore = useCommonStore();
+
+
+const parLang = computed(() => {
+  const mapped = commonStore.getValueByKey(commonStore.lang);
+  return mapped ?? commonStore.lang; 
+});
+
+
 const getGetGlobalConfig = async() =>{
-    let res = await getGlobalConfig();
+    let res = await getConfigByLang({ lang: parLang.value });
     // termsEn.value = res.data.termsEn
-    let html = res.data.termsEn || ""
+    // let html = res.data.termsEn || ""
+    let html = res?.data?.termsEn ?? '';
     // 1. 分组：把一级标题及其子条目包进 block
     html = html.replace(/(<p>\d+\)[\s\S]*?)(?=<p>\d+\)|$)/g, '<div class="block">$1</div>')
 

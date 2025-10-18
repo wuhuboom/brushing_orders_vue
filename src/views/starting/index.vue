@@ -182,7 +182,7 @@
           </div>
         </div> -->
         <div class="flex justify-between text-black font-bold text-base">
-          <div>Start Optimization</div>
+          <div>{{$t('start.optimization.str')}}</div>
           <div>
             <span class="text-[var(--main-color)]">{{
               userInfo.dealCount
@@ -257,11 +257,11 @@
       <div class="w-[90%] mx-auto pt-5">
         <div class="mt-4 rounded-lg  bg-[#1f2732]">
           <div class="flex flex-col p-4 box-border relative rounded-[10px]">
-            <div class="mb-1 text-base text-[#fff]">Notice</div>
+            <div class="mb-1 text-base text-[#fff]">{{$t('start.notice.str')}}</div>
             <div class="text-[#fff] text-[12px]">
-              Online Support Hours {{ TradeInfor?.workTimeStart || "--:--" }} -
+              {{$t('start.notice.desc1.str')}} {{ TradeInfor?.workTimeStart || "--:--" }} -
               {{ TradeInfor?.workTimeEnd || "--:--" }} <br />
-              Please contact online support for your assistance!
+             {{$t('start.notice.desc2.str')}}
             </div>
           </div>
         </div>
