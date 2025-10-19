@@ -6,7 +6,7 @@
         left-arrow
         @click-left="toLogin"
       /> -->
-      <div class="pl-[20px] pt-[15px] text-[#1E3A8A] text-[14px]">
+      <div class="pl-[20px] pt-[15px] text-[#1E3A8A] text-[14px]" @click="toLogin">
         <van-icon name="arrow-left" />
         Back
       </div>
@@ -77,10 +77,10 @@
             v-model="ruleForm.sex"
             direction="horizontal"
           >
-            <van-radio :name="1" checked-color="#f1894c">{{
+            <van-radio :name="1" checked-color="#1E3A8A">{{
               $t("男")
             }}</van-radio>
-            <van-radio :name="2" checked-color="#f1894c">{{
+            <van-radio :name="2" checked-color="#1E3A8A">{{
               $t("女")
             }}</van-radio>
           </van-radio-group>
@@ -95,7 +95,7 @@
           >
           </el-input>
         </el-form-item>
-        <van-checkbox checked-color="#f1894c" v-model="checked">
+        <van-checkbox checked-color="#1E3A8A" v-model="checked" shape="square">
           <span class="text-[#374151] text-sm">{{ $t("我同意") }}</span>
           <span class="ml-2 text-[#38BDF8] text-sm" @click="jump">{{
             $t("条款和条件")

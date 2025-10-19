@@ -126,7 +126,6 @@ input {
 
 .van-nav-bar .van-icon,.van-nav-bar__title{
   color: #000 !important;
-  font-size: 32px !important;
 }
 .van-ellipsis {
   overflow:unset !important;
@@ -163,11 +162,8 @@ input {
 
 }
  .van-nav-bar__title {
-  height: 80px !important;
-  line-height: 80px !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
+  font-size: 18px !important;
+  color: #002D72 !important;
 }
 /* .updataPass .van-field__value {
   background: #FFFFFF;
@@ -178,15 +174,15 @@ input {
   padding-left: 5px;
 } */
 
-.van-tab--active  {
+/* .van-tab--active  {
   color: #ff497c !important;
 }
 .withdraw-tab .van-tab--active {
   color: #FFF !important;
-}
-.van-tabs__nav {
+} */
+/* .van-tabs__nav {
   background: #f1f1f1 !important;
 }
 .van-nav-bar__content {
   height: 80px !important;
-}
+} */

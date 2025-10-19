@@ -1,39 +1,35 @@
 <template>
   <div>
-    <HeaderTop></HeaderTop>
-    <!-- <div class="w-full h-[400px] relative">
-      <div class="pb-4 pt-4 absolute top-5 w-full h-[400px]" style="z-index: 2">
-        <div class="mx-auto pt-5">
-          <div
-            class="text-center text-2xl lg:text-5xl font-semibold text-white"
-          >
-            {{ $t("我们通过数字营销") }}
-            {{ $t("帮助小型企业盈利") }}
-          </div>
-        </div>
-      </div>
-      <div class="w-full absolute bottom-0 overflow-hidden">
-        <van-notice-bar
-          color="#fff"
-          background="rgba(0,0,0,0.5)"
-          :text="pureNoticeContent"
-        >
-          <template #left-icon>
-            <img src="@/static/images/notice.png" class="w-5 h-5" alt="icon" />
-          </template>
-        </van-notice-bar>
-      </div>
-      <video class="w-full h-[400px] object-cover" src="https://videos.pexels.com/video-files/1448735/1448735-uhd_4096_2160_24fps.mp4" autoplay muted loop playsinline></video>
-    </div> -->
+    <!-- <HeaderTop></HeaderTop> -->
+    <div class="py-[20px]">
+      <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
+    </div>
+    <div
+      class="w-full h-[352px] p-[24px] text-[#fff]"
+      style="
+        background: linear-gradient(to bottom, #002d72, #0a4da2);
+        box-sizing: border-box;
+      "
+    >
+      <p class="flex flex-col text-[36px] font-roboto pt-[20px]">
+        <span class="pb-[26px]">Growth</span>
+        <span class="pb-[26px]">Marketing</span>
+        <span>Accelerated</span>
+      </p>
+      <p class="flex flex-col text-[20px] pt-[70px]">
+        <span class="pb-[20px]">Challenge The old</span>
+        <span>Playbooks</span>
+      </p>
+    </div>
     <div class="relative bg-white">
       <!-- 菜单列表 -->
       <div class="w-[95%] rounded-xl mx-auto flex flex-col">
-        <div class="p-4 text-lg font-semibold text-black">
+        <!-- <div class="p-4 text-lg font-semibold text-black">
           {{ $t("菜单列表") }}
-        </div>
-        <div class="w-full p-4 grid grid-cols-4 gap-4">
+        </div> -->
+        <div class="w-full px-4 py-8 grid grid-cols-4 gap-4">
           <div
-            class="flex flex-col w-full justify-center rounded-lg items-start text-center box-border text-[#000]"
+            class="flex flex-col w-full justify-center rounded-lg items-start text-center box-border text-[#2A2A2A]"
             v-for="(item, index) in items"
             :key="index"
             @click="goTo(item.route)"
@@ -48,18 +44,18 @@
         </div>
       </div>
       <!-- 员工等级 -->
-      <div class="bg-[#e9e9e9] w-full mx-auto">
+      <div class="w-full mx-auto">
         <div class="w-[90%] mx-auto">
           <div
-            class="flex justify-between pt-4 pb-2 text-base text-black font-semibold"
+            class="flex justify-between pt-4 pb-2 text-base text-[#002D72] font-semibold"
           >
-            <div class="w-[35%]">{{$t('员工等级')}}</div>
+            <div class="w-[35%]">{{ $t("员工等级") }}</div>
             <div
               @click="toVips"
-              class="w-[65%] font-normal text-xs text-[var(--main-color)] text-right flex justify-end items-center"
+              class="w-[65%] font-normal text-xs text-[#5F5F5F] text-right flex justify-end items-center"
             >
-              <div>{{$t('查看更多')}}</div>
-              <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" />
+              <div>{{ $t("查看更多") }}</div>
+              <!-- <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" /> -->
             </div>
           </div>
         </div>
@@ -68,37 +64,78 @@
             v-for="item in levelList"
             class="vip-item flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
             :style="{
-              background: `url(${
-                bgMap[item.name]
-              }) 0 0 / 100% 100% no-repeat`,
+              background: `url(${bgMap[item.name]}) 0 0 / 100% 100% no-repeat`,
             }"
           >
-            <div class="flex justify-between items-start">
+            <div class="flex justify-between items-start pt-[13px]">
               <div class="font-bold text-lg">
-                <p class="mt-4 text-[var(--main-color)]">
+                <p
+                  :style="{
+                    color: textMap[item.name],
+                  }"
+                >
                   {{ item.name }}
                 </p>
               </div>
-              <img class="w-24" :src="bgMapStart[item.name]" alt="" />
+              <!-- <img class="w-24" :src="bgMapStart[item.name]" alt="" /> -->
             </div>
-            <div class="w-[260px] text-xs mt-2 text-black" >
+            <div
+              class="w-[260px] text-xs text-black pt-[3px]"
+              style="line-height: 19px"
+            >
+              <p>commission rate. 0.50%</p>
+              <p>commission rate. 0.50% day. 40 tasks</p>
               <p class="w-[260px] text-xs mt-2 text-black" v-html="item.description"></p>
             </div>
           </div>
         </div>
       </div>
-      <!-- <div class="w-full bg-[#F0F9FF] mb-[30px]">
-        <div class="test-[#333] text-center text-sm p-4 mb-3">Business Partner</div>
-        <img class="w-[90%] mx-auto" src="@/static/images/b.png" alt="" /> 
-      </div> -->
-      <!-- <img class="w-full" src="@/static/images/a.png" alt="" /> -->
-
-      
-      <!-- <img class="w-full" src="@/static/images/b.png" alt="" /> -->
     </div>
-    <div class="w-full py-14 bg-[#f1894c]">
-
+    <div class="p-[25px] w-full we">
+      <p class="text-[#002D72] text-[20px] text-base">
+        We Know That HumanIngenuity is the Key to Successfully Leveraging AI
+        Technology
+      </p>
+      <p class="text-[#4B5563] pt-[10px]">
+        Learn how our robust suite of Atools creates a competitiveadvantage,
+        streamlines curoperations, and del vers futureproof solutions to our
+        clients.
+      </p>
+      <img class="w-full mt-[15px]" src="@/static/images/index1bg.png" alt="" />
     </div>
+    <div
+      class="p-[25px] w-full"
+      style="border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb"
+    >
+      <p class="text-[#002D72] text-[20px] text-base">
+        Capture demand in the Al platforms reshaping search and discovery
+      </p>
+      <p class="text-[#4B5563] pt-[10px]">
+        Discover howr our advancedMedia Mix Modeling helos youallocate your
+        marketing buogetsmare effectively, optimizecampaign performance,
+        andmaximize ROI by analyzing thetrue impact of each channelacross your
+        marketing efforts.
+      </p>
+      <img class="w-full mt-[15px]" src="@/static/images/index2bg.png" alt="" />
+    </div>
+    <div class="p-[25px] w-full">
+      <p class="text-[#002D72] text-[20px] text-base">
+        Where Creativity Meets Performance
+      </p>
+      <p class="text-[#4B5563] pt-[10px]">
+        Direct Agents Studio transformsbrands through data drivencreative that
+        captivates andconverts. Our award-winning teamseamlessly blends
+        innovativedesign, compelling storytelling, andperformance marketing
+        expertiseto create meaningful connectionsbetween brands and
+        theiraudiences
+      </p>
+      <img class="w-full mt-[15px]" src="@/static/images/index3bg.png" alt="" />
+    </div>
+    <div class="w-full px-[17px]">
+      <img class="w-full" src="@/static/images/a.png" alt=""></img>
+    </div>
+   <img class="w-full" src="@/static/images/b.png" alt=""></img>
+    
 
     <!-- 行情结束 -->
     <Footer name="/"></Footer>
@@ -112,16 +149,22 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import wheel from "@/components/wheel.vue";
 import { onMounted, ref, reactive, computed } from "vue";
-import { getLevel,getLevelByLang, getNoticeList,getUserDraws,getLotteryConfig } from "../api/apis";
+import {
+  getLevel,
+  getLevelByLang,
+  getNoticeList,
+  getUserDraws,
+  getLotteryConfig,
+} from "../api/apis";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
-import { useCommonStore } from '@/store/modules/common';
+import { useCommonStore } from "@/store/modules/common";
 const userStore = useUserStore();
 const tradePasswordRef = ref(null);
 const commonStore = useCommonStore();
 const parLang = computed(() => {
   const mapped = commonStore.getValueByKey(commonStore.lang);
-  return mapped ?? commonStore.lang; 
+  return mapped ?? commonStore.lang;
 });
 const wheelRef = ref(null);
 const borderMap = {
@@ -138,6 +181,14 @@ const bgMap = {
   VIP3: new URL("@/static/images/bg_vip3.png", import.meta.url).href,
   VIP4: new URL("@/static/images/bg_vip4.png", import.meta.url).href,
   VIP5: new URL("@/static/images/bg_vip5.png", import.meta.url).href,
+};
+
+const textMap = {
+  VIP1: "#3647B4",
+  VIP2: "#B43694",
+  VIP3: "#1061C0",
+  VIP4: "#BC3217",
+  VIP5: "#754705",
 };
 const bgMapStart = {
   VIP1: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
@@ -186,7 +237,7 @@ const items = [
     route: "/faqs",
   },
   {
-    name: "关于",
+    name: "客服",
     icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
     route: "/about",
   },
@@ -195,10 +246,10 @@ const items = [
 function goTo(path) {
   if (path == "/notifications") {
     // tradePasswordRef.value.open(2);
-    router.push('/withdraw');
+    router.push("/withdraw");
   } else if (path == "/profile") {
     // tradePasswordRef.value.open(3);
-    router.push('/deposit');
+    router.push("/deposit");
   } else {
     router.push(path);
   }
@@ -222,13 +273,13 @@ const level = async () => {
   });
 };
 
-const userDraws =async () =>{
+const userDraws = async () => {
   let res = await getUserDraws();
-  console.log(res)
-  if(res.code ==200) {
+  console.log(res);
+  if (res.code == 200) {
     wheelRef.value.open();
   }
-}
+};
 
 const query = reactive({
   pageNum: 1,
@@ -250,9 +301,9 @@ const pureNoticeContent = computed(() => {
 const lotteryConfig = async () => {
   try {
     const res = await getLotteryConfig();
-    userDraws()
+    userDraws();
   } catch (err) {
-    console.log(9999)
+    console.log(9999);
     console.error("获取转盘配置失败:", err);
   }
 };
@@ -260,20 +311,22 @@ const lotteryConfig = async () => {
 onMounted(() => {
   level();
   getData();
-  
+
   // lotteryConfig()
   userStore.getUserInfo();
   //  wheelRef.value.open();
-  
-    
 });
 </script>
-<style>
+<style scoped>
 .small-dot {
   font-size: 8px; /* 调整大小 */
   line-height: 1;
   vertical-align: middle;
   display: inline-block; /* 保证可以控制尺寸/对齐 */
   /* 如需更细微缩放也可用 transform: scale(0.8); */
+}
+.we {
+  background: url("../static/images/indexbg1.png") no-repeat center / 100% 100%;
+  font-family: "Roboto, Bold";
 }
 </style>
