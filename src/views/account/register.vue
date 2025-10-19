@@ -1,50 +1,26 @@
 <template>
-  <div class="register flex flex-col w-full h-[100vh] bg-[#1f2732] px-[5px]">
+  <div class="register flex flex-col w-full h-[100vh] bg-[#fff] px-[5px]">
     <!-- <van-nav-bar
         :title="$t('注册')"
         fixed
         left-arrow
         @click-left="toLogin"
       /> -->
-      <div class="min-h-[200px] lg:min-h-[250px] pt-20">
-      <img
-        src="@/static/images/logo.png"
-        alt=""
-        class="w-[40%] lg:w-[300px] mx-auto"
-      />
-    </div>
-    <div class="flex flex-col items-center pb-3 mt-5">
-      <!-- <img
-        src="@/static/images/account-lang.png"
-        alt=""
-        class="w-5 h-5 self-end mb-4"
-        @click="handleChangeLang"
-      /> -->
-      <!-- <img
-        src="@/static/images/logo.png"
-        alt=""
-        class="w-[50%] lg:w-[300px] mx-auto"
-      />
-      <div class="text-3xl font-semibold mt-6 text-main-bg">
-        {{ $t("报名") }}
+      <div class="pl-[20px] pt-[15px] text-[#1E3A8A] text-[14px]">
+        <van-icon name="arrow-left" />
+        Back
       </div>
-      <div class="text-center text-xs text-white pt-4">
-        {{ $t("为旧金山和爱丁堡各地的客户提供服务") }}
-      </div> -->
-      <div class="text-5xl text-[#ff497c] font-semibold text-center py-4">
-        {{$t('注册')}}
-      </div>
-      <div class="text-center text-xs text-white">{{$t('请输入您的用户名和密码以访问')}}</div>
       
+    <div class="flex flex-col items-center pb-3 mt-5">
       <el-form
         ref="ruleFormRef"
         :model="ruleForm"
         status-icon
         :rules="rules"
         label-width="auto"
-        class="w-full  p-5"
+        class="w-full p-5"
       >
-        <el-form-item :label="$t('')" prop="username" label-position="top">
+        <el-form-item  prop="username" :label="$t('用户名')+'*'" label-position="top">
           <el-input
             v-model="ruleForm.username"
             :placeholder="$t('用户名')"
@@ -54,7 +30,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('')" prop="password" label-position="top">
+        <el-form-item :label="$t('密码')+'*'" prop="password" label-position="top">
           <el-input
             v-model="ruleForm.password"
             :placeholder="$t('密码')"
@@ -64,7 +40,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('')" prop="agentPassword" label-position="top">
+        <el-form-item :label="$t('确认密码')+'*'" prop="agentPassword" label-position="top">
           <el-input
             v-model="agentPassword"
             :placeholder="$t('确认密码')"
@@ -74,7 +50,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('')" prop="phone" label-position="top">
+        <el-form-item :label="$t('电话')+'*'" prop="phone" label-position="top">
           <el-input
             v-model="ruleForm.phone"
             :placeholder="$t('电话')"
@@ -84,7 +60,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('')" prop="tradePassword" label-position="top">
+        <el-form-item :label="$t('交易密码')+'*'" prop="tradePassword" label-position="top">
           <el-input
             v-model="ruleForm.tradePassword"
             :placeholder="$t('交易密码')"
@@ -94,16 +70,22 @@
           >
           </el-input>
         </el-form-item>
-        <div
-          class="w-full mb-4 py-3  bg-[#fff] rounded-md pl-[10px]"
-        >
-          <div class="text-sm  pb-5 text-[#333]">{{ $t("性别") }}</div>
-          <van-radio-group shape="dot" v-model="ruleForm.sex" direction="horizontal">
-            <van-radio :name="1" checked-color="#f1894c">{{ $t("男") }}</van-radio>
-            <van-radio :name="2" checked-color="#f1894c">{{ $t("女") }}</van-radio>
+        <div class="w-full mb-4 py-3 bg-[#fff] rounded-md pl-[10px]">
+          <div class="text-sm pb-5 text-[#333]">{{ $t("性别") }}</div>
+          <van-radio-group
+            shape="dot"
+            v-model="ruleForm.sex"
+            direction="horizontal"
+          >
+            <van-radio :name="1" checked-color="#f1894c">{{
+              $t("男")
+            }}</van-radio>
+            <van-radio :name="2" checked-color="#f1894c">{{
+              $t("女")
+            }}</van-radio>
           </van-radio-group>
         </div>
-        <el-form-item :label="$t('')" prop="inviteCode" label-position="top">
+        <el-form-item :label="$t('邀请码')+'*'" prop="inviteCode" label-position="top">
           <el-input
             v-model="ruleForm.inviteCode"
             :placeholder="$t('邀请码')"
@@ -113,28 +95,27 @@
           >
           </el-input>
         </el-form-item>
-        <van-checkbox checked-color='#f1894c' v-model="checked">
-          <span class='text-[#fff]  text-sm'>{{$t('我同意')}}</span>
-          <span class="ml-2 text-[#fff] text-sm underline" @click='jump'>{{$t('条款和条件')}}</span>
+        <van-checkbox checked-color="#f1894c" v-model="checked">
+          <span class="text-[#374151] text-sm">{{ $t("我同意") }}</span>
+          <span class="ml-2 text-[#38BDF8] text-sm" @click="jump">{{
+            $t("条款和条件")
+          }}</span>
         </van-checkbox>
         <div @click="sendCode" class="w-full" size="large" round>
           <div
-            class="w-full mt-5 text-white text-lg font-semibold mx-auto py-3 rounded-[30px] flex items-center justify-center bg-[#00bea3]"
+            class="w-full mt-5 text-white text-lg font-semibold mx-auto py-3 rounded-[8px] flex items-center justify-center bg-[#1E3A8A]"
           >
             <div>{{ $t("登记") }}</div>
             <!-- <img class="w-[22px] ml-4" src="@/static/images/back1.png" alt=""> -->
           </div>
         </div>
       </el-form>
-      <div
-        class="w-full  text-sm"
-        @click="toLogin"
-      >
+      <!-- <div class="w-full text-sm" @click="toLogin">
         <p class="text-sm text-center w-full pb-2" @click="toRegister">
-          <!-- {{ $t("已有账户?")}} -->
+          {{ $t("已有账户?")}}
           <span class="text-[#f1894c]">{{ $t("已经有账号了吗？去登录") }}</span>
         </p>
-      </div>
+      </div> -->
     </div>
     <Lang ref="langRef"></Lang>
   </div>
@@ -148,8 +129,13 @@ import Tabs from "@/components/Tabs.vue";
 import { register } from "../../api/apis";
 import { areas } from "@/config/area";
 import { formatPhoneNumber } from "../../util/utils";
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
-
+import {
+  showLoadingToast,
+  closeToast,
+  showFailToast,
+  showSuccessToast,
+  showToast,
+} from "vant";
 
 onUnmounted(() => {
   document.getElementById("app").style.background = "transparent";
@@ -160,7 +146,7 @@ const { t } = useI18n();
 const ruleFormRef = ref(null);
 const langRef = ref(null);
 const agentPassword = ref("");
-const checked = ref(true)
+const checked = ref(true);
 const ruleForm = reactive({
   username: "",
   password: "",
@@ -176,8 +162,6 @@ function toLogin() {
   router.replace("/account/login");
 }
 
-
-
 function sendCode() {
   if (!ruleForm.username) return showToast(t("请输入用户名"));
   if (!ruleForm.password) return showToast(t("请输入密码"));
@@ -188,9 +172,9 @@ function sendCode() {
     return showToast(t("请输入正确电话号码"));
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));
-  if(!checked.value) return showToast(t("请勾选用户协议"));
+  if (!checked.value) return showToast(t("请勾选用户协议"));
   register(ruleForm).then((res) => {
-    showToast(t("注册成功"))
+    showToast(t("注册成功"));
     router.push({
       path: "/account/login",
     });
@@ -199,22 +183,22 @@ function sendCode() {
 
 function getHashParam(key) {
   const hash = window.location.hash;
-  const queryString = hash.includes('?') ? hash.split('?')[1] : '';
+  const queryString = hash.includes("?") ? hash.split("?")[1] : "";
   const params = new URLSearchParams(queryString);
   return params.get(key);
 }
 function handleChangeLang() {
   langRef.value.open();
 }
-const jump = () =>{
+const jump = () => {
   router.push({
-      path: "/tc",
-    });
-}
+    path: "/tc",
+  });
+};
 onMounted(() => {
   document.getElementById("app").style.background = "#fff";
-  const code = getHashParam('code');
-  ruleForm.inviteCode = code  
+  const code = getHashParam("code");
+  ruleForm.inviteCode = code;
 });
 </script>
 
