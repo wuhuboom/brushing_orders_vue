@@ -9,7 +9,7 @@
     <div class="text-xs text-[#333] mb-4 mt-[95px]">
       {{
         $t(
-          "尊敬的用户，请填写您的USDT-20/TRC-20地址。请勿输入您的银行账户信息和密码。"
+          "paymentMethods.str"
         )
       }}
     </div>
