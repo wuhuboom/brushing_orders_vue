@@ -183,7 +183,7 @@
   "用户名不能为空": "ユーザー名を空欄にすることはできません",
   "用户不存在": "ユーザーが存在しません",
   "该用户不允许抢单": "このユーザーは注文を受け取ることができません",
-  "余额低于最低交易额度": "取引異常",
+  "余额低于最低交易额度": "残高が最低取引額を下回っています",
   "存在未完成订单": "未完了の注文があります",
   "请稍后再试": "後でもう一度お試しください",
   "今日可接单数已满": "本日のミッションは完了しました。カスタマーサービスにご連絡ください。",
@@ -211,9 +211,9 @@
   "取消": "キャンセル",
   "请输入您的用户名和密码以访问": "ユーザー名とパスワードを入力してアクセスしてください",
   "注册即可免费获得 20 美元": "登録するだけで$20ゲット",
-  "live.chat.str": "Live Chat1",
-  "start.optimization.str": "Start Optimization11",
-  "start.notice.str": "Notice11",
-  "start.notice.desc1.str": "Online Support Hours11",
-  "start.notice.desc2.str": "Please contact online support for your assistance11!"
+  "live.chat.str": "ライブチャット",
+"start.optimization.str": "最適化を開始",
+"start.notice.str": "お知らせ",
+"start.notice.desc1.str": "オンラインサポート対応時間",
+"start.notice.desc2.str": "サポートが必要な場合はオンラインサポートまでご連絡ください！"
 }

@@ -195,9 +195,9 @@
   "用户存在连单，返回新的订单信息": "Pengguna memiliki pesanan berkelanjutan, mengembalikan informasi pesanan baru",
   "用户余额不足（联系管理员，常用于冻结金额不足）": "Saldo pengguna tidak cukup (hubungi administrator, sering digunakan saat saldo beku tidak cukup)",
   "我的": "Saya",
-  "live.chat.str": "Live Chat",
-  "start.optimization.str": "Start Optimization",
-  "start.notice.str": "Notice",
-  "start.notice.desc1.str": "Online Support Hours",
-  "start.notice.desc2.str": "Please contact online support for your assistance!"
+  "live.chat.str": "Live-Chat",
+"start.optimization.str": "Optimierung starten",
+"start.notice.str": "Hinweis",
+"start.notice.desc1.str": "Online-Support-Zeiten",
+"start.notice.desc2.str": "Bitte wenden Sie sich für Unterstützung an den Online-Support!"
 }

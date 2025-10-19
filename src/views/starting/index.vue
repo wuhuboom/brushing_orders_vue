@@ -459,11 +459,11 @@ const doCreateOrder = () => {
     })
     .catch((err) => {
       closeToast();
-      if (err.code == 906) {
-        showToast("Transaction failed");
-      } else {
-        showToast(t(errorMessages[err.code] || "创建失败"));
-      }
+      // if (err.code == 906) {
+      //   showToast("Transaction failed");
+      // } else {
+        showToast(t(errorMessages[err.code]));
+      // }
     });
 };
 

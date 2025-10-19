@@ -183,7 +183,7 @@
   "用户名不能为空": "사용자 이름은 비워둘 수 없습니다",
   "用户不存在": "사용자가 존재하지 않습니다",
   "该用户不允许抢单": "이 사용자는 주문 접수가 허용되지 않습니다",
-  "余额低于最低交易额度": "거래 예외 발생",
+  "余额低于最低交易额度": "잔액이 최소 거래 금액보다 적습니다",
   "存在未完成订单": "미완료된 주문이 있습니다",
   "请稍后再试": "잠시 후 다시 시도하세요",
   "今日可接单数已满": "오늘의 미션이 완료되었습니다. 고객센터에 문의하세요",
@@ -211,9 +211,9 @@
   "取消": "취소",
   "请输入您的用户名和密码以访问": "사용자 이름과 비밀번호를 입력하세요",
   "注册即可免费获得 20 美元": "회원가입 시 $20 무료 지급",
-  "live.chat.str": "Live Chat",
-  "start.optimization.str": "Start Optimization",
-  "start.notice.str": "Notice",
-  "start.notice.desc1.str": "Online Support Hours",
-  "start.notice.desc2.str": "Please contact online support for your assistance!"
+  "live.chat.str": "라이브 채팅",
+"start.optimization.str": "최적화 시작",
+"start.notice.str": "공지",
+"start.notice.desc1.str": "온라인 고객센터 운영시간",
+"start.notice.desc2.str": "도움이 필요하시면 온라인 고객센터로 문의하세요!"
 }

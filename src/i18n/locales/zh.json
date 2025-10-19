@@ -198,9 +198,9 @@
   "用户余额不足（联系管理员，常用于冻结金额不足）": "用户余额不足（联系管理员，常用于冻结金额不足）",
   "我的": "我的",
   "请勾选用户协议": "请勾选用户协议",
-  "live.chat.str": "Live Chat",
-  "start.optimization.str": "Start Optimization",
-  "start.notice.str": "Notice",
-  "start.notice.desc1.str": "Online Support Hours",
-  "start.notice.desc2.str": "Please contact online support for your assistance!"
+  "live.chat.str": "即时客服",
+  "start.optimization.str": "开始优化",
+  "start.notice.str": "公告",
+  "start.notice.desc1.str": "在线客服时间",
+  "start.notice.desc2.str": "如需协助，请联系在线客服！"
 }

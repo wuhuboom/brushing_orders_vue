@@ -183,7 +183,7 @@
   "用户名不能为空": "用戶名不能為空",
   "用户不存在": "用戶不存在",
   "该用户不允许抢单": "該用戶不允許接單",
-  "余额低于最低交易额度": "交易異常",
+  "余额低于最低交易额度": "餘額低於最低交易金額",
   "存在未完成订单": "存在未完成的訂單",
   "请稍后再试": "請稍後再試",
   "今日可接单数已满": "今日任務已完成，請聯繫客服",
@@ -211,9 +211,9 @@
   "取消": "取消",
   "请输入您的用户名和密码以访问": "請輸入您的用戶名和密碼以登入",
   "注册即可免费获得 20 美元": "註冊即可免費獲得 20 美元",
-  "live.chat.str": "Live Chat",
-  "start.optimization.str": "Start Optimization",
-  "start.notice.str": "Notice",
-  "start.notice.desc1.str": "Online Support Hours",
-  "start.notice.desc2.str": "Please contact online support for your assistance!"
+  "live.chat.str": "即時客服",
+  "start.optimization.str": "開始優化",
+  "start.notice.str": "公告",
+  "start.notice.desc1.str": "線上客服時間",
+  "start.notice.desc2.str": "如需協助，請聯繫線上客服！"
 }
