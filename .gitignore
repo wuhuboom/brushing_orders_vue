@@ -4,6 +4,8 @@ dist/
 .temp/
 .cache/
 
+/public/config.js
+
 # IDE相关
 .idea/
 .vscode/
