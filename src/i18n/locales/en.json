@@ -1,7 +1,7 @@
 {
   "您即将切换为{type}": "You are about to switch to {type}",
   "winMessage": "Congratulations on winning {winPrize}$. which has been deposited into your account balance.",
-  "rechargeLimit": "The minimum recharge amount is {min}, and the maximum recharge amount is {max}.",
+  "rechargeLimit": "The minimum withdrawal amount is {min}, and the maximum withdrawal amount is {max}.",
   "supportHours": "Customer service is currently offline, please pay attention to the online hours.",
   "确认删除这个{name}吗？": "Are you sure you want to delete this {name}?",
   "我们通过数字营销": "We Help Small Businesses",
@@ -81,7 +81,7 @@
   "当前等级": "Current",
   "立即升级": "Upgrade now",
   "美元": "USD",
-  "尊敬的用户，请填写您的BTC-20/ETH-20地址。请勿输入您的银行账户信息和密码。": "Dear user, please enter your BTC-20/ETH-20 address. Do not enter your bank account information or password.",
+  "尊敬的用户，请填写您的USDT-20/TRC-20地址。请勿输入您的银行账户信息和密码。": "Dear user, please enter your USDT-20/TRC-20 address. Do not enter your bank account information or password.",
   "钱包": "Wallet",
   "网络": "Network",
   "地址": "Address",

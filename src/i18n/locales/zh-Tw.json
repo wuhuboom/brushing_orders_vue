@@ -1,7 +1,7 @@
 {
   "您即将切换为{type}": "您即將切換為{type}",
   "winMessage": "恭喜您贏得了 {winPrize}$，獎金已存入您的帳戶餘額。",
-  "rechargeLimit": "最低充值金額為 {min}，最高充值金額為 {max}。",
+  "rechargeLimit": "最低提現金額是 {min}，最高提現金額是 {max}。",
   "supportHours": "客服目前離線，請留意上線時間。",
   "确认删除这个{name}吗？": "確定要刪除這個{name}嗎？",
   "我们通过数字营销": "我們幫助中小企業",
