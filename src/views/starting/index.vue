@@ -1,11 +1,37 @@
 <template>
   <div class="w-full min-h-[100vh] starting">
     <!-- <HeaderTop></HeaderTop> -->
-     <div class="startBen h-[483px]"></div>
+    <div class="flex justify-start text-[#FFFFFF]">
+      <div>
+        <!-- 接口还没返回 avatar 字段（请求中） -->
+        <div
+          v-if="userInfo.avatar === undefined"
+          class="w-[35px] h-[35px] rounded-full ml-[5px] bg-gray-200 animate-pulse"
+        ></div>
 
+        <!-- 接口返回 null / 空字符串 → 直接显示默认头像（不会闪） -->
+        <img
+          v-else-if="!userInfo.avatar"
+          :src="userImg"
+          class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
+          alt=""
+        />
 
-
-
+        <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
+        <img
+          v-else
+          :src="userInfo.avatar"
+          class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
+          alt=""
+          @error="(e) => (e.target.src = userImg)"
+        />
+      </div>
+      <div>
+        <div>Hi, {{ userInfo.username }}</div>
+        <div>{{ userLevel }}</div>
+      </div>
+    </div>
+    <!-- <div class="startBen h-[483px]"></div> -->
 
     <div class="flex w-[90%] mx-auto justify-between my-2 items-center">
       <div class="flex">
@@ -41,32 +67,59 @@
       </div>
       <div class="text-black font-semibold">{{ userLevel }}</div>
     </div>
-    <div class="w-full grid grid-cols-2 rounded-xl gap-4 p-2  border-[3px] border-[#f1894c] shadow-sm">
-      <div class="col-span-2 pb-2 border-b-[1px] border-dashed border-[#888] flex flex-col text-center">
-        <img src="@/static/images/icon-25.png" class="w-10 h-10 mx-auto" alt="">
+    <div
+      class="w-full grid grid-cols-2 rounded-xl gap-4 p-2 border-[3px] border-[#f1894c] shadow-sm"
+    >
+      <div
+        class="col-span-2 pb-2 border-b-[1px] border-dashed border-[#888] flex flex-col text-center"
+      >
+        <img
+          src="@/static/images/icon-25.png"
+          class="w-10 h-10 mx-auto"
+          alt=""
+        />
         <div class="text-sm mt-4 text-[#00bea3]">{{ $t("当日佣金") }}</div>
-        <div class="text-xl font-semibold text-black my-1">{{ userInfo.commission }} USD</div>
+        <div class="text-xl font-semibold text-black my-1">
+          {{ userInfo.commission }} USD
+        </div>
         <div class="text-sm text-[#black]">{{ $t("每日赚取佣金") }}</div>
       </div>
       <div class="col-span-1 flex flex-col text-cente px-3 rounded-xl">
         <div class="w-full">
-          <img src="@/static/images/icon-26.png" class="w-10 h-10 mx-auto" alt="">
-          <div class="w-full text-base text-center font-bold mt-1 text-[#000]">{{ $t("钱包余额") }}</div>
-          <div class="text-base text-center font-semibold text-black my-1">{{ userInfo.balance }} USD</div>
-          <div class="text-sm text-[#000] text-center"> {{ $t("佣金将在此处添加") }}</div>
+          <img
+            src="@/static/images/icon-26.png"
+            class="w-10 h-10 mx-auto"
+            alt=""
+          />
+          <div class="w-full text-base text-center font-bold mt-1 text-[#000]">
+            {{ $t("钱包余额") }}
+          </div>
+          <div class="text-base text-center font-semibold text-black my-1">
+            {{ userInfo.balance }} USD
+          </div>
+          <div class="text-sm text-[#000] text-center">
+            {{ $t("佣金将在此处添加") }}
+          </div>
         </div>
-
       </div>
       <div class="col-span-1 flex flex-col text-cente px-3 rounded-xl">
         <div class="w-full">
-          <img src="@/static/images/icon-27.png" class="w-10 h-10 mx-auto" alt="">
-          <div class="w-full text-base text-center font-bold mt-1 text-[#000]">{{ $t("持有金额") }}</div>
-          <div class="text-base text-center font-semibold text-black my-1">{{ userInfo.frozenBalance }} USD</div>
-          <div class="text-sm text-[#000] text-center">{{ $t("如有疑问，请联系客服") }}</div>
+          <img
+            src="@/static/images/icon-27.png"
+            class="w-10 h-10 mx-auto"
+            alt=""
+          />
+          <div class="w-full text-base text-center font-bold mt-1 text-[#000]">
+            {{ $t("持有金额") }}
+          </div>
+          <div class="text-base text-center font-semibold text-black my-1">
+            {{ userInfo.frozenBalance }} USD
+          </div>
+          <div class="text-sm text-[#000] text-center">
+            {{ $t("如有疑问，请联系客服") }}
+          </div>
         </div>
-
       </div>
-
     </div>
 
     <!-- <div class="w-full px-5 mx-auto bg-[#206645] rounded-b-[20px]">
@@ -188,7 +241,7 @@
           </div>
         </div> -->
         <div class="flex justify-between text-black font-bold text-base">
-          <div>{{$t('start.optimization.str')}}</div>
+          <div>{{ $t("start.optimization.str") }}</div>
           <div>
             <span class="text-[var(--main-color)]">{{
               userInfo.dealCount
@@ -219,7 +272,7 @@
                   </div>
                 </div>
                 <div
-                v-else
+                  v-else
                   class="grid-span-1 text-[#666666] text-center text-xs font-normal"
                 >
                   <div
@@ -261,13 +314,16 @@
         </div> -->
       </div>
       <div class="w-[90%] mx-auto pt-5">
-        <div class="mt-4 rounded-lg  bg-[#1f2732]">
+        <div class="mt-4 rounded-lg bg-[#1f2732]">
           <div class="flex flex-col p-4 box-border relative rounded-[10px]">
-            <div class="mb-1 text-base text-[#fff]">{{$t('start.notice.str')}}</div>
+            <div class="mb-1 text-base text-[#fff]">
+              {{ $t("start.notice.str") }}
+            </div>
             <div class="text-[#fff] text-[12px]">
-              {{$t('start.notice.desc1.str')}} {{ TradeInfor?.workTimeStart || "--:--" }} -
+              {{ $t("start.notice.desc1.str") }}
+              {{ TradeInfor?.workTimeStart || "--:--" }} -
               {{ TradeInfor?.workTimeEnd || "--:--" }} <br />
-             {{$t('start.notice.desc2.str')}}
+              {{ $t("start.notice.desc2.str") }}
             </div>
           </div>
         </div>
@@ -356,7 +412,9 @@
         src="../../static/images/super.png"
         alt=""
       />
-      <van-button color="#ff497c" round class="w-full" @click="closeImg">OK</van-button>
+      <van-button color="#ff497c" round class="w-full" @click="closeImg"
+        >OK</van-button
+      >
       <!-- <img
         @click="closeImg"
         class="w-[30px] h-[30px] m-auto"
@@ -468,7 +526,7 @@ const doCreateOrder = () => {
       // if (err.code == 906) {
       //   showToast("Transaction failed");
       // } else {
-        showToast(t(errorMessages[err.code]));
+      showToast(t(errorMessages[err.code]));
       // }
     });
 };
@@ -513,13 +571,13 @@ onUnmounted(() => {
   if (timer) clearTimeout(timer);
 });
 
-const userLevel = ref({})
+const userLevel = ref({});
 const userGetInfoMethods = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     orderCount.value = res.data.userLevel.orderCount;
-    userLevel.value = res.data.userLevel.nameEn
+    userLevel.value = res.data.userLevel.nameEn;
   });
 };
 
