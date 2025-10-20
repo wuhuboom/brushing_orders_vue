@@ -58,7 +58,7 @@
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[#000] font-bold mb-1">
-                  {{ formatNumber(userInfo.balance) }}
+                  {{ userInfo.balance }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
               </div>
@@ -85,7 +85,7 @@
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[#000] font-bold mb-1">
-                  {{ formatNumber(userInfo.frozenBalance) }}
+                  {{ userInfo.frozenBalance }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
               </div>
@@ -112,7 +112,7 @@
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[#000] font-bold mb-1">
-                  {{ formatNumber(userInfo.commission) }}
+                  {{ userInfo.commission }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
               </div>
