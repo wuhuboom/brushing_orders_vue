@@ -172,3 +172,14 @@ export const checkWorkTimeLocal = (workTimeStart, workTimeEnd, tzName) => {
   return nowMinutes >= startMinutes && nowMinutes <= endMinutes;
 };
 
+export function formatNumber(value, decimals = 2) {
+  // 非法参数时直接返回默认值
+  if (value === null || value === undefined || value === '' || isNaN(Number(value))) {
+    return '0.00'
+  }
+
+  const num = parseFloat(value)
+  return num.toFixed(decimals)
+}
+
+

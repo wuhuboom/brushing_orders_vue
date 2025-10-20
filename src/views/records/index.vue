@@ -126,7 +126,7 @@
           >
             <div class="text-[#000] font-semibold">{{ $t("总金额") }}</div>
             <div class="text-xs text-[#000] mt-1">
-              {{ goodsData.price }}{{ $t("美元") }}
+              {{ formatNumber(goodsData.price) }}{{ $t("美元") }}
             </div>
           </div>
           <div
@@ -134,7 +134,7 @@
           >
             <div class="text-[#000] font-semibold">{{ $t("佣金") }}</div>
             <div class="text-xs text-[#000] mt-1">
-              {{ goodsData.commission }}{{ $t("美元") }}
+              {{ formatNumber(goodsData.commission) }}{{ $t("美元") }}
             </div>
           </div>
         </div>
@@ -188,7 +188,7 @@ import {
   showSuccessToast,
 } from "vant";
 import { useI18n } from "vue-i18n";
-import { formatWithTimezone } from "../../util/utils";
+import { formatWithTimezone,formatNumber } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";

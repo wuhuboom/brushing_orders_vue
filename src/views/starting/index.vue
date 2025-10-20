@@ -58,7 +58,7 @@
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[#000] font-bold mb-1">
-                  {{ userInfo.balance }}
+                  {{ formatNumber(userInfo.balance) }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
               </div>
@@ -85,7 +85,7 @@
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[#000] font-bold mb-1">
-                  {{ userInfo.frozenBalance }}
+                  {{ formatNumber(userInfo.frozenBalance) }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
               </div>
@@ -112,7 +112,7 @@
               </div>
               <div class="flex flex-col justify-end text-right">
                 <div class="text-sm text-[#000] font-bold mb-1">
-                  {{ userInfo.commission }}
+                  {{ formatNumber(userInfo.commission) }}
                 </div>
                 <div class="text-[#999] text-xs">USD</div>
               </div>
@@ -227,7 +227,7 @@
             <div class="text-[#000] font-semibold">{{ $t("价格") }}</div>
             <div class="text-xs text-[#000] mt-1">
               <span class="text-sm mr-1 text-[#000] font-semibold">{{
-                goods.price
+               formatNumber(goods.price)
               }}</span>
               USD
             </div>
@@ -238,7 +238,7 @@
             <div class="text-[#000] font-semibold">{{ $t("佣金") }}</div>
             <div class="text-xs text-[#000] mt-1">
               <span class="text-sm mr-1 text-[#000] font-semibold">{{
-                goods.commission
+                formatNumber(goods.commission)
               }}</span>
               USD
             </div>
@@ -308,7 +308,7 @@ import {
 } from "../../api/apis";
 const url = window.g.VITE_API_IMG_URL;
 const userStore = useUserStore();
-import { formatWithTimezone } from "../../util/utils";
+import { formatWithTimezone,formatNumber } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";
