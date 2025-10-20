@@ -1,6 +1,12 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f4f4f5]">
-    <HeaderTop></HeaderTop>
+  <div class="w-full min-h-[100vh] starting">
+    <!-- <HeaderTop></HeaderTop> -->
+     <div class="startBen h-[483px]"></div>
+
+
+
+
+
     <div class="flex w-[90%] mx-auto justify-between my-2 items-center">
       <div class="flex">
         <div>
@@ -35,7 +41,7 @@
       </div>
       <div class="text-black font-semibold">{{ userLevel }}</div>
     </div>
-    <div class="w-full grid grid-cols-2 rounded-xl gap-4 p-2 bg-white border-[3px] border-[#f1894c] shadow-sm">
+    <div class="w-full grid grid-cols-2 rounded-xl gap-4 p-2  border-[3px] border-[#f1894c] shadow-sm">
       <div class="col-span-2 pb-2 border-b-[1px] border-dashed border-[#888] flex flex-col text-center">
         <img src="@/static/images/icon-25.png" class="w-10 h-10 mx-auto" alt="">
         <div class="text-sm mt-4 text-[#00bea3]">{{ $t("当日佣金") }}</div>
@@ -524,3 +530,15 @@ onMounted(() => {
   tradeConfig();
 });
 </script>
+<style scoped>
+.starting {
+  width: 100%;
+  background-image: url(@/static/images/startBg.png);
+  background-size: 100% 100%;
+}
+.startBen {
+  width: 100%;
+  background-image: url(@/static/images/start.png);
+  background-size: 100% 100%;
+}
+</style>
