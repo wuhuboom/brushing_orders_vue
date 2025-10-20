@@ -21,7 +21,7 @@
         <div class="text-[#fff] text-[20px]">{{ userInfo.username }}</div>
         <div class="relative">
           <span
-          style="z-index: 99;"
+            style="z-index: 99"
             class="bg-[#F59E0B] text-white text-[12px] px-2 py-[2px] rounded-full absolute bottom-[-8px] right-[-5px]"
             >{{ userLevel }}</span
           >
@@ -67,10 +67,38 @@
         </div>
       </div>
     </div>
-    <div>11</div>
-
-
-
+    <div
+      class="w-[90%] mx-auto mt-[16px] p-[16px] flex justify-between items-center bg-[#E6F0FF] rounded-[12px]"
+    >
+      <div>
+        <div class="text-[14px] text-[#6B7280]">Wallet Amount</div>
+        <div class="text-[20px] text-[#002D72] font-bold pt-[4px] pb-[8px]">
+          {{ userInfo.balance }} USD
+        </div>
+        <div class="text-[#6B7280] text-[14px]">
+          Today's Commission:
+          <span class="text-[#09499B]">{{ userInfo.commission }} USD</span>
+        </div>
+      </div>
+      <img class="w-[103px]" src="@/static/images/myBg.png" alt="" />
+    </div>
+    <div>
+      <div class="w-full px-4 py-8 grid grid-cols-3 gap-3">
+          <div
+            class="flex flex-col w-full justify-center rounded-lg items-start text-center box-border text-[#2A2A2A]"
+            v-for="(item, index) in items"
+            :key="index"
+            @click="goTo(item.route)"
+          >
+            <div class="w-full">
+              <img class="mx-auto w-[48px] h-[48px]" :src="item.icon" alt="" />
+            </div>
+            <span class="mx-auto text-center text-xs mt-1 whitespace-nowrap">
+              {{ $t(item.name) }}
+            </span>
+          </div>
+        </div>
+    </div>
 
     <div class="w-full h-[100vh] overflow-y-scroll bg-white flex flex-col pb-6">
       <div class="w-full pb-6 pt-2">
@@ -434,6 +462,35 @@ const logout = () => {
       // on cancel
     });
 };
+const items = [
+  {
+    name: "提款",
+    icon: new URL("@/static/images/withdraw.png", import.meta.url).href,
+    route: "/notifications",
+  },
+  {
+    name: "定金",
+    icon: new URL("@/static/images/deposit.png", import.meta.url).href,
+    route: "/profile",
+  },
+  {
+    name: "客服",
+    icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
+    route: "/about",
+  },
+];
+
+function goTo(path) {
+  if (path == "/notifications") {
+    // tradePasswordRef.value.open(2);
+    router.push("/withdraw");
+  } else if (path == "/profile") {
+    // tradePasswordRef.value.open(3);
+    router.push("/deposit");
+  } else {
+    router.push(path);
+  }
+}
 
 const payMethod = () => {
   // show.value = true;
