@@ -1,73 +1,166 @@
 <template>
-  <div class="w-full min-h-[100vh] starting">
-    <!-- <HeaderTop></HeaderTop> -->
-    <div class="flex justify-start text-[#FFFFFF]">
-      <div>
-        <!-- 接口还没返回 avatar 字段（请求中） -->
-        <div
-          v-if="userInfo.avatar === undefined"
-          class="w-[35px] h-[35px] rounded-full ml-[5px] bg-gray-200 animate-pulse"
-        ></div>
+  <div>
+    <div class="h-[40px] bg-[#002d72]"></div>
+    <div class="w-full bg-[#002d72] starting">
+      <!-- <HeaderTop></HeaderTop> -->
 
-        <!-- 接口返回 null / 空字符串 → 直接显示默认头像（不会闪） -->
-        <img
-          v-else-if="!userInfo.avatar"
-          :src="userImg"
-          class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
-          alt=""
-        />
+      <div class="startBen h-[520px] mt-[33px] px-[20px]">
+        <div class="flex justify-start text-[#FFFFFF]">
+          <div>
+            <!-- 接口还没返回 avatar 字段（请求中） -->
+            <div
+              v-if="userInfo.avatar === undefined"
+              class="w-[48px] h-[48px] rounded-full ml-[5px] bg-gray-200 animate-pulse"
+            ></div>
 
-        <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
-        <img
-          v-else
-          :src="userInfo.avatar"
-          class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
-          alt=""
-          @error="(e) => (e.target.src = userImg)"
-        />
-      </div>
-      <div>
-        <div>Hi, {{ userInfo.username }}</div>
-        <div>{{ userLevel }}</div>
-      </div>
-    </div>
-    <!-- <div class="startBen h-[483px]"></div> -->
+            <!-- 接口返回 null / 空字符串 → 直接显示默认头像（不会闪） -->
+            <img
+              v-else-if="!userInfo.avatar"
+              :src="userImg"
+              class="w-[48px] h-[48px] rounded-full ml-[5px] object-cover"
+              alt=""
+            />
 
-    <div class="flex w-[90%] mx-auto justify-between my-2 items-center">
-      <div class="flex">
-        <div>
-          <!-- 接口还没返回 avatar 字段（请求中） -->
-          <div
-            v-if="userInfo.avatar === undefined"
-            class="w-[35px] h-[35px] rounded-full ml-[5px] bg-gray-200 animate-pulse"
-          ></div>
-
-          <!-- 接口返回 null / 空字符串 → 直接显示默认头像（不会闪） -->
-          <img
-            v-else-if="!userInfo.avatar"
-            :src="userImg"
-            class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
-            alt=""
-          />
-
-          <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
-          <img
-            v-else
-            :src="userInfo.avatar"
-            class="w-[35px] h-[35px] rounded-full ml-[5px] object-cover"
-            alt=""
-            @error="(e) => (e.target.src = userImg)"
-          />
+            <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
+            <img
+              v-else
+              :src="userInfo.avatar"
+              class="w-[48px] h-[48px] rounded-full ml-[5px] object-cover"
+              alt=""
+              @error="(e) => (e.target.src = userImg)"
+            />
+          </div>
+          <div class="pl-[16px]">
+            <div class="text-[16px] pb-[5px]">Hi, {{ userInfo.username }}</div>
+            <div
+              class="bg-[#E6EDF8] text-[#002D72] font-bold text-[14px] w-[46px] text-center rounded-[4px]"
+            >
+              {{ userLevel }}
+            </div>
+          </div>
         </div>
-        <div class="flex items-center ml-[15px]">
-          <div class="text-black font-semibold">
-            Hi, {{ userInfo.username }}
+        <!-- 刷单 -->
+        <div class="mt-[160px] flex justify-center text-[#fff]">
+          <span>({{ userInfo.dealCount }}</span
+          >/<span>{{ orderCount }})</span>
+        </div>
+        <div class="flex flex-col p-6 box-border rounded-xl">
+          <div class="flex flex-col box-border rounded-xl">
+            <div
+              class="w-full grid grid-cols-3 gap-x-px gap-y-1 justify-center"
+            >
+              <template v-for="(item, index) in totalCount" :key="index">
+                <div
+                  v-if="index === 4"
+                  class="grid-span-1 text-center text-xs font-normal"
+                  @click="handleClick"
+                >
+                  <div
+                    class="flex items-center justify-center overflow-hidden rounded-xl bg-cover text-lg text-white font-medium relative w-[89px] h-[76px]"
+                  >
+                    <div class="overflow-hidden">
+                      <img
+                        src="@/static/images/start-button.png"
+                        class="w-[100%] shadow"
+                        alt=""
+                      />
+                      <div class="absolute"></div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  v-else
+                  class="grid-span-3 text-[#666666] text-center text-xs font-normal w-[89px] h-[76px]"
+                >
+                  <div
+                    class="overflow-hidden w-[89px] h-[76px]"
+                    style="
+                      background-image: radial-gradient(
+                        circle at 100% 0%,
+                        #3f3d9d 0%,
+                        #6763d3 106%
+                      );
+                      border-radius: 8px;
+                      box-sizing: border-box;
+                    "
+                  >
+                    <div class="overflow-hidden">
+                      <!-- <img
+                        :src="`${url}${getImageByIndex(index)}`"
+                        class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
+                        alt=""
+                      /> -->
+                      <van-image
+                        fit="contain"
+                        :src="`${url}${getImageByIndex(index)}`"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
           </div>
         </div>
       </div>
-      <div class="text-black font-semibold">{{ userLevel }}</div>
-    </div>
-    <div
+      <div class="bg-[#fff] p-[16px] rounded-[8px] mt-[16px] mx-[20px]">
+        <div class="text-[#4B5563] text-[12px] pb-[4px]">
+          {{ $t("钱包余额") }}
+        </div>
+        <div class="flex justify-between">
+          <div class="text-[#000000] text-[16px] font-bold">
+            {{ userInfo.balance }} USD
+          </div>
+          <div class="text-[#6B7280] text-[12px]">
+            {{ $t("佣金将在此处添加") }}
+          </div>
+        </div>
+      </div>
+      <div class="bg-[#fff] p-[16px] rounded-[8px] mt-[16px] mx-[20px]">
+        <div class="text-[#4B5563] text-[12px] pb-[4px]">
+          {{ $t("当日佣金") }}
+        </div>
+        <div class="flex justify-between">
+          <div class="text-[#000000] text-[16px] font-bold">
+            {{ userInfo.commission }} USD
+          </div>
+          <div class="text-[#6B7280] text-[12px]">
+            {{ $t("每日赚取佣金") }}
+          </div>
+        </div>
+      </div>
+      <div class="bg-[#fff] p-[16px] rounded-[8px] mt-[16px] mx-[20px]">
+        <div class="text-[#4B5563] text-[12px] pb-[4px]">
+          {{ $t("持有金额") }}
+        </div>
+        <div class="flex justify-between">
+          <div class="text-[#000000] text-[16px] font-bold">
+            {{ userInfo.frozenBalance }} USD
+          </div>
+          <div class="text-[#6B7280] text-[12px]">
+            {{ $t("如有疑问，请联系客服") }}
+          </div>
+        </div>
+      </div>
+      <div class="w-full bg-[#002d72] relative px-[20px]">
+        <div class="mx-auto pt-[16px]">
+          <div class="rounded-lg bg-[#fff]">
+            <div class="flex flex-col p-4 box-border relative rounded-[10px]">
+              <div class="mb-1 text-base text-[#000000] text-[16px]">
+                {{ $t("start.notice.str") }}
+              </div>
+              <div class="text-[#4B5563] text-[14px]">
+                {{ $t("start.notice.desc1.str") }}
+                {{ TradeInfor?.workTimeStart || "--:--" }} -
+                {{ TradeInfor?.workTimeEnd || "--:--" }} <br />
+                {{ $t("start.notice.desc2.str") }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 pb-4"></div>
+      </div>
+
+      <!-- <div
       class="w-full grid grid-cols-2 rounded-xl gap-4 p-2 border-[3px] border-[#f1894c] shadow-sm"
     >
       <div
@@ -120,308 +213,185 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- <div class="w-full px-5 mx-auto bg-[#206645] rounded-b-[20px]">
-      <div class="w-full pt-6 flex justify-between">
-        <div class="text-[#fff]">webworks</div>
-        <img
-          src="@/static/images/user3.png"
-          class="w-[24px]"
-          alt=""
-          @click="toMy"
-        />
-      </div>
-      <div class="w-full h-full py-5">
-        <div class="flex justify-between mt-4 mb-4 items-center">
-          <div class="flex">
-            <div class="flex items-center pl-2">
-              <div class="text-[#fff]">
-                <div class="text-xl">Hi, {{ userInfo.username }}</div>
-                <div
-                  class="text-[rgba(255,255,255,0.8)] text-sm text-inherits pt-2"
-                >
-                  Welcome back
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="text-[#fff] w-[62px] h-[36px] flex justify-center items-center bg-[rgba(255,255,255,0.2)] rounded-[20px]"
-          >
-            VIP{{ userInfo.levelId }}
-          </div>
-        </div>
-      </div>
     </div> -->
 
-    <div class="w-full bg-[#f8f8f8] relative pt-[15px]">
-      <div class="w-[100%] px-4 mx-auto">
-        <!-- <div class="grid grid-cols-1 gap-3">
-          <div
-            class="w-full col-span-1 flex p-3 box-border rounded-xl bg-[#fff] border-[1px] border-[#EDEDEE]"
-          >
-            <div class="w-full flex justify-between">
-              <div class="flex items-center">
-                <img
-                  class="w-10 h-10 mr-3"
-                  src="@/static/images/icon-21.png"
-                  alt=""
-                />
-                <div class="flex flex-col justify-around">
-                  <div class="text-[#000] text-sm mb-1">
-                    {{ $t("钱包余额") }}
-                  </div>
-                  <div class="text-[#999] text-[10px]">
-                    {{ $t("佣金将在此处添加") }}
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[#000] font-bold mb-1">
-                  {{ userInfo.balance }}
-                </div>
-                <div class="text-[#999] text-xs">USD</div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="w-full col-span-1 flex p-3 box-border rounded-xl bg-[#fff] border-[1px] border-[#EDEDEE]"
-          >
-            <div class="w-full flex justify-between">
-              <div class="flex items-center">
-                <img
-                  class="w-10 h-10 mr-3"
-                  src="@/static/images/icon-22.png"
-                  alt=""
-                />
-                <div class="flex flex-col justify-around">
-                  <div class="text-[#000] text-sm mb-1">
-                    {{ $t("持有金额") }}
-                  </div>
-                  <div class="text-[#999] text-[10px]">
-                    {{ $t("如有疑问，请联系客服") }}
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[#000] font-bold mb-1">
-                  {{ userInfo.frozenBalance }}
-                </div>
-                <div class="text-[#999] text-xs">USD</div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="w-full col-span-1 flex p-3 box-border rounded-xl bg-[#fff] border-[1px] border-[#EDEDEE]"
-          >
-            <div class="w-full flex justify-between">
-              <div class="flex items-center">
-                <img
-                  class="w-10 h-10 mr-3"
-                  src="@/static/images/icon-20.png"
-                  alt=""
-                />
-                <div class="flex flex-col justify-around">
-                  <div class="text-[#000] text-sm mb-1">
-                    {{ $t("当日佣金") }}
-                  </div>
-                  <div class="text-[#999] text-[10px]">
-                    {{ $t("每日赚取佣金") }}
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[#000] font-bold mb-1">
-                  {{ userInfo.commission }}
-                </div>
-                <div class="text-[#999] text-xs">USD</div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <div class="flex justify-between text-black font-bold text-base">
-          <div>{{ $t("start.optimization.str") }}</div>
-          <div>
-            <span class="text-[var(--main-color)]">{{
-              userInfo.dealCount
-            }}</span
-            >/<span>{{ orderCount }}</span>
-          </div>
-        </div>
-        <div class="mt-5 flex flex-col p-4 box-border bg-[#f1f1f1] rounded-xl">
-          <div class="mt-5 flex flex-col box-border bg-[#f1f1f1] rounded-xl">
-            <div class="w-full grid grid-cols-3 gap-6">
-              <template v-for="(item, index) in totalCount" :key="index">
-                <div
-                  v-if="index === 4"
-                  class="grid-span-1 text-center text-xs font-normal"
-                  @click="handleClick"
-                >
-                  <div
-                    class="flex items-center justify-center overflow-hidden rounded-xl bg-cover text-lg text-white font-medium relative"
-                  >
-                    <div class="overflow-hidden">
-                      <img
-                        src="@/static/images/start-button.png"
-                        class="w-[100%] shadow"
-                        alt=""
-                      />
-                      <div class="absolute"></div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  v-else
-                  class="grid-span-1 text-[#666666] text-center text-xs font-normal"
-                >
-                  <div
-                    class="p-2 overflow-hidden"
-                    style="
-                      background-image: radial-gradient(
-                        circle at 100% 0%,
-                        rgb(247, 247, 247) 0%,
-                        rgb(252, 252, 252) 106%
-                      );
-                      border-radius: 8px;
-                    "
-                  >
-                    <div class="overflow-hidden">
-                      <!-- <img
-                        :src="`${url}${getImageByIndex(index)}`"
-                        class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
-                        alt=""
-                      /> -->
-                      <van-image
-                        fit="contain"
-                        :src="`${url}${getImageByIndex(index)}`"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </template>
-            </div>
-          </div>
-        </div>
-
-        <!-- <div
-          class="mt-5 flex justify-center items-center text-black text-base h-[60px] bg-[#FACC15] rounded-[20px]"
-          @click="handleClick"
-        >
-          Start
-          <span class="pl-2">({{ userInfo.dealCount }}</span
-          >/<span>{{ orderCount }})</span>
-        </div> -->
-      </div>
-      <div class="w-[90%] mx-auto pt-5">
-        <div class="mt-4 rounded-lg bg-[#1f2732]">
-          <div class="flex flex-col p-4 box-border relative rounded-[10px]">
-            <div class="mb-1 text-base text-[#fff]">
-              {{ $t("start.notice.str") }}
-            </div>
-            <div class="text-[#fff] text-[12px]">
-              {{ $t("start.notice.desc1.str") }}
-              {{ TradeInfor?.workTimeStart || "--:--" }} -
-              {{ TradeInfor?.workTimeEnd || "--:--" }} <br />
-              {{ $t("start.notice.desc2.str") }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mt-6 pb-4"></div>
-    </div>
-    <Footer name="/starting"></Footer>
-    <van-popup
-      v-model:show="showCenter"
-      round
-      closeable
-      :style="{ width: '80%' }"
-    >
-      <div class="w-[5rem] mx-auto mt-6">
-        <van-image
-          width="6rem"
-          height="6rem"
-          fit="contain"
-          :src="url + goods.coverUrl"
-        />
-      </div>
-      <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
-        <div class="w-[100%] mx-auto text-center text-sm font-semibold">
-          {{ goods.goodsName }}
-        </div>
-        <div class="flex w-full items-center pt-4 pb-4 mt-4">
-          <div
-            class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
-          >
-            <div class="text-[#000] font-semibold">{{ $t("价格") }}</div>
-            <div class="text-xs text-[#000] mt-1">
-              <span class="text-sm mr-1 text-[#000] font-semibold">{{
-                goods.price
-              }}</span>
-              USD
-            </div>
-          </div>
-          <div
-            class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
-          >
-            <div class="text-[#000] font-semibold">{{ $t("佣金") }}</div>
-            <div class="text-xs text-[#000] mt-1">
-              <span class="text-sm mr-1 text-[#000] font-semibold">{{
-                goods.commission
-              }}</span>
-              USD
-            </div>
-          </div>
-        </div>
-        <div class="bg-[#d8d8d8] p-4">
-          <div class="flex justify-between items-center box-border">
-            <div class="text-[#000] text-sm">{{ $t("创建时间") }}</div>
-            <div class="text-[#000] text-sm font-bold">
-              {{
-                formatWithTimezone(
-                  goods.createTime,
-                  userStore.zoneActive.tzName
-                )
-              }}
-            </div>
-          </div>
-          <div class="flex justify-between items-center box-border mt-2">
-            <div class="whitespace-nowrap text-[#000] text-sm">
-              {{ $t("编号") }}
-            </div>
-            <div class="text-[#000] text-xs font-bold">
-              {{ goods.orderNo }}
-            </div>
-          </div>
-        </div>
-        <div class="w-full mt-4">
-          <van-button color="#007513" class="w-full" @click="submitForm">{{
-            $t("提交")
-          }}</van-button>
-        </div>
-      </div>
-    </van-popup>
-    <van-popup
-      v-model:show="showImg"
-      round
-      :style="{ width: '80%', background: 'transparent' }"
-    >
-      <img
-        @click="closeImg"
-        class="w-[100%] mb-5"
-        src="../../static/images/super.png"
-        alt=""
-      />
-      <van-button color="#ff497c" round class="w-full" @click="closeImg"
-        >OK</van-button
+      <Footer name="/starting"></Footer>
+      <!-- <van-popup
+        v-model:show="showCenter"
+        round
+        closeable
+        :style="{ width: '80%' }"
       >
-      <!-- <img
+        <div class="w-[5rem] mx-auto mt-6">
+          <van-image
+            width="6rem"
+            height="6rem"
+            fit="contain"
+            :src="url + goods.coverUrl"
+          />
+        </div>
+        <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
+          <div class="w-[100%] mx-auto text-center text-sm font-semibold">
+            {{ goods.goodsName }}
+          </div>
+          <div class="flex w-full items-center pt-4 pb-4 mt-4">
+            <div
+              class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
+            >
+              <div class="text-[#000] font-semibold">{{ $t("价格") }}</div>
+              <div class="text-xs text-[#000] mt-1">
+                <span class="text-sm mr-1 text-[#000] font-semibold">{{
+                  goods.price
+                }}</span>
+                USD
+              </div>
+            </div>
+            <div
+              class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
+            >
+              <div class="text-[#000] font-semibold">{{ $t("佣金") }}</div>
+              <div class="text-xs text-[#000] mt-1">
+                <span class="text-sm mr-1 text-[#000] font-semibold">{{
+                  goods.commission
+                }}</span>
+                USD
+              </div>
+            </div>
+          </div>
+          <div class="bg-[#d8d8d8] p-4">
+            <div class="flex justify-between items-center box-border">
+              <div class="text-[#000] text-sm">{{ $t("创建时间") }}</div>
+              <div class="text-[#000] text-sm font-bold">
+                {{
+                  formatWithTimezone(
+                    goods.createTime,
+                    userStore.zoneActive.tzName
+                  )
+                }}
+              </div>
+            </div>
+            <div class="flex justify-between items-center box-border mt-2">
+              <div class="whitespace-nowrap text-[#000] text-sm">
+                {{ $t("编号") }}
+              </div>
+              <div class="text-[#000] text-xs font-bold">
+                {{ goods.orderNo }}
+              </div>
+            </div>
+          </div>
+          <div class="w-full mt-4">
+            <van-button color="#007513" class="w-full" @click="submitForm">{{
+              $t("提交")
+            }}</van-button>
+          </div>
+        </div>
+      </van-popup> -->
+      <van-dialog
+        v-model:show="showCenter"
+        closeable
+        :title="''"
+        :style="{ width: '80%', background: '#002d72' }"
+        :show-confirm-button="false"
+      >
+        <div class="w-[60px] h-[125px] mx-auto mt-[24px]" style="width: 60px">
+          <img :src="url + goods.coverUrl" alt="" />
+        </div>
+        <div
+          class="w-full mt-[-3rem] pt-[23px] text-[#fff]"
+          style="border-top: 1px solid #33578e"
+        >
+          <div class="w-[100%] mx-auto text-[18px] font-semibold p-[20px]">
+            {{ goods.goodsName }}
+          </div>
+          <div
+            class="flex justify-start p-[20px]"
+            style="
+              border-top: 1px solid #33578e;
+              border-bottom: 1px solid #33578e;
+            "
+          >
+            <img
+              class="w-[24px] h-[24px]"
+              src="@/static/images/price.png"
+              alt=""
+            />
+            <div class="pl-[12px] w-[100%]">
+              <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
+                <div class="text-[#D1D5DB]">{{ $t("总金额") }}</div>
+                <div class="text-[#fff] font-bold">
+                  {{ goods.price }}{{ $t("美元") }}
+                </div>
+              </div>
+              <div class="flex justify-between w-[100%] text-[16px]">
+                <div class="text-[#D1D5DB]">{{ $t("佣金") }}</div>
+                <div class="text-[#FF9500] font-bold">
+                  {{ goods.commission }}{{ $t("美元") }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex justify-start p-[20px]"
+            style="border-bottom: 1px solid #33578e"
+          >
+            <img
+              class="w-[24px] h-[24px]"
+              src="@/static/images/price.png"
+              alt=""
+            />
+            <div class="pl-[12px] w-[100%]">
+              <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
+                <div class="text-[#D1D5DB]">{{ $t("创建时间") }}</div>
+                <div class="text-[#fff] font-bold text-[14px]">
+                  {{
+                    formatWithTimezone(
+                      goods.createTime,
+                      userStore.zoneActive.tzName
+                    )
+                  }}
+                </div>
+              </div>
+              <div class="flex justify-between w-[100%] text-[16px]">
+                <div class="text-[#D1D5DB]">{{ $t("编号") }}</div>
+                <div class="text-[#fff] text-[14px]">
+                  {{ goods.orderNo }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-[90%] mx-auto mt-4 pb-[20px]">
+            <van-button
+              color="#FF9500"
+              class="w-full"
+              @click.prevent="submitForm"
+              >{{ $t("提交") }}</van-button
+            >
+          </div>
+        </div>
+      </van-dialog>
+      <van-popup
+        v-model:show="showImg"
+        round
+        :style="{ width: '80%', background: 'transparent' }"
+      >
+        <img
+          @click="closeImg"
+          class="w-[100%] mb-5"
+          src="../../static/images/super.png"
+          alt=""
+        />
+        <van-button color="#ff497c" round class="w-full" @click="closeImg"
+          >OK</van-button
+        >
+        <!-- <img
         @click="closeImg"
         class="w-[30px] h-[30px] m-auto"
         src="../../static/images/cloed.png"
         alt=""
       /> -->
-    </van-popup>
+      </van-popup>
+    </div>
   </div>
 </template>
 <script setup>
@@ -591,8 +561,11 @@ onMounted(() => {
 <style scoped>
 .starting {
   width: 100%;
-  background-image: url(@/static/images/startBg.png);
-  background-size: 100% 100%;
+  height: 100vh; /* 高度可以根据需求设置 */
+  background-image: url("@/static/images/startBg.png");
+  background-repeat: no-repeat; /* 不平铺 */
+  background-position: center center; /* 图片居中 */
+  background-size: 100% 100%; /* 使用原始大小展示 */
 }
 .startBen {
   width: 100%;

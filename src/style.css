@@ -116,10 +116,10 @@ input {
   background-color: var(--down) !important;
 }
 
-.el-input__wrapper {
+/* .el-input__wrapper {
   box-shadow: none !important;
 
-}
+} */
 .el-input__inner {
   font-weight: initial;
 }
@@ -161,10 +161,14 @@ input {
   margin: 0 !important;
 
 }
- .van-nav-bar__title {
+.van-field {
+  border: 1px solid #EEEEEE !important;
+  border-radius: 5px;
+}
+ /* .van-nav-bar__title {
   font-size: 18px !important;
   color: #002D72 !important;
-}
+} */
 /* .updataPass .van-field__value {
   background: #FFFFFF;
   border-radius: 8px;

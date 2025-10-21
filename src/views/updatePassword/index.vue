@@ -5,66 +5,94 @@
         :title="$t('更新密码')"
         fixed
         left-arrow
+        class="border"
         @click-left="onClickLeft"
       />
     </van-sticky>
-    <div class="w-full pl-6 pr-6  mt-6  box-border flex flex-col">
+    <div class="w-full pl-6 pr-6  box-border flex flex-col">
       <div class="w-full mt-20 flex flex-col">
-        <div class="w-full mt-2 overflow-hidden border border-[#666] rounded-lg  py-2">
+        <div class="w-full pb-[10px]">
+          <div class="text-[#111827] text-[14px] pb-[10px] text-base">
+            {{ $t("旧密码") }}
+          </div>
           <van-cell-group inset>
             <van-field
-              label-align="left"
+              label-align=""
               label-width="100px"
               type="password"
               v-model="ruleForm.oldPassword"
-              :label="$t('旧密码')"
               :placeholder="$t('旧密码')"
-              input-align="right"
+              input-align="left"
             />
           </van-cell-group>
         </div>
-        <div class="w-full mt-2 overflow-hidden border border-[#666] rounded-lg  py-2">
+        <div class="w-full pb-[10px]">
+          <div class="text-[#111827] text-[14px] pb-[10px] text-base">
+            {{ $t("新密码") }}
+          </div>
           <van-cell-group inset>
             <van-field
-            label-align="left"
               label-width="150"
               v-model="ruleForm.newPassword"
-              :label="$t('新密码')"
               type="password"
               :placeholder="$t('新密码')"
             />
           </van-cell-group>
         </div>
-        <div class="w-full mt-2 overflow-hidden border border-[#666] rounded-lg  py-2 ">
+        <div class="w-full">
+          <div class="text-[#111827] text-[14px] pb-[10px] text-base">
+            {{ $t("确认密码") }}
+          </div>
           <van-cell-group inset>
             <van-field
-            label-align="left"
               label-width="150"
               v-model="agentNewPassword"
-              :label="$t('确认密码')"
               type="password"
               :placeholder="$t('确认密码')"
-
             />
           </van-cell-group>
         </div>
       </div>
-      <div class="w-[100%] mx-auto mt-4">
-        <van-button color="#1f2732" rounded size="large" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
+      <!-- <div class="w-[100%] mx-auto mt-4">
+        <van-button
+          color="#1f2732"
+          rounded
+          size="large"
+          class="w-full"
+          @click="submitForm"
+          >{{ $t("更新") }}</van-button
+        >
+      </div> -->
+      <div class="fixed bottom-4 left-1/2 -translate-x-1/2 w-[90%]">
+        <van-button
+          class="w-full"
+          style="
+            background: linear-gradient(135deg, #002d72, #0a4da2);
+            color: #fff;
+          "
+        @click="submitForm"
+        >
+          {{ $t("更新") }}
+        </van-button>
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { onMounted, ref,reactive } from "vue";
-const onClickLeft = () => router.replace('/profileItem');
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
+import { onMounted, ref, reactive } from "vue";
+const onClickLeft = () => router.replace("/profileItem");
+import {
+  showLoadingToast,
+  closeToast,
+  showFailToast,
+  showSuccessToast,
+} from "vant";
 import { editPassword } from "../../api/apis";
 import { useRouter } from "vue-router";
 const router = useRouter();
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
-const agentNewPassword = ref('');
+const agentNewPassword = ref("");
 const ruleForm = reactive({
   oldPassword: "",
   newPassword: "",

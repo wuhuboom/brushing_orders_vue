@@ -5,12 +5,12 @@
         :title="$t('修改信息')"
         fixed
         left-arrow
-        class="shadow"
+        
         @click-left="onClickLeft"
       />
     </van-sticky>
-    <div class="w-full p-6 box-border flex flex-col mt-[85px]">
-      <div class="flex flex-col bg-white shadow border border-[#ddd] rounded-lg">
+    <div class="w-full p-6 box-border flex flex-col mt-[35px]">
+      <div class="flex flex-col bg-white  border border-[#F3F4F6] shadow-sm rounded-lg">
         <div
           class="flex items-center justify-between py-4 mx-[15px] box-border border-b-[1px]  border-[#EBEBEB]"
           @click="toPage('/profile')"
@@ -23,23 +23,23 @@
         <div
           class="flex items-center justify-between py-4 mx-[15px] box-border border-b-[1px] border-[#EBEBEB]"
         >
-          <div class="flex items-center text-[#666] text-sm">
+          <div class="flex items-center text-[#000000] text-sm">
             {{ $t("用户名") }}
           </div>
-          <div class="text-[#666] text-sm ">{{userStore.userInfo.username}}</div>
+          <div class="text-[#4B5563] text-sm ">{{userStore.userInfo.username}}</div>
         </div>
         <div
-          class="flex items-center justify-between py-4 mx-[15px] box-border border-b-[1px] border-[#EBEBEB]"
+          class="flex items-center justify-between py-4 mx-[15px] box-border"
         >
-          <div class="flex items-center text-[#666] text-sm">
+          <div class="flex items-center text-[#000] text-sm">
             {{ $t("电话") }}
           </div>
-          <div class="text-[#666] text-sm ">{{userStore.userInfo.phone}}</div>
+          <div class="text-[#4B5563] text-sm ">{{userStore.userInfo.phone}}</div>
         </div>
       </div>
-      <div class="mt-4 flex flex-col bg-white shadow border border-[#ddd] rounded-lg">
+      <div class="mt-4 flex flex-col bg-white border border-[#F3F4F6] shadow-sm  rounded-lg" style="">
         <div
-          class="flex items-center justify-between p-4 box-border border-b-[2px] border-[#EBEBEB]"
+          class="flex items-center justify-between p-4 box-border border-b-[1px] border-[#EBEBEB]"
           @click="toPage('/updatePassword')"
         >
           <div class="flex items-center text-black text-sm ">
@@ -48,7 +48,7 @@
           <van-icon name="arrow" color="#666" size="18px" />
         </div>
         <div
-          class="flex items-center justify-between p-4 box-border border-b-[2px] border-[#EBEBEB]"
+          class="flex items-center justify-between p-4 box-border "
           @click="toPage('/updateTransactionPassword')"
           >
           <div class="flex items-center text-black  text-sm">

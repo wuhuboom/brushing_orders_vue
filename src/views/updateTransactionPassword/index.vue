@@ -10,50 +10,59 @@
     </van-sticky>
     <div class="w-full pl-6 pr-6 mt-6  box-border flex flex-col">
       <div class="w-full mt-12 flex flex-col">
-        <div class="w-full mt-2 overflow-hidden border border-[#666] rounded-lg  py-2">
+        <div class="w-full pb-[10px]">
+          <div class="text-[#111827] text-[14px] pb-[10px] text-base">
+            {{ $t("旧密码") }}
+          </div>
           <van-cell-group inset>
             <van-field
-              label-align="left"
-              label-width="150"
               v-model="ruleForm.oldTradePassword"
-              :label="$t('旧密码')"
               type="password"
-              input-align="right"
               :placeholder="$t('旧密码')"
               
             />
           </van-cell-group>
         </div>
-        <div class="w-full mt-2 overflow-hidden border border-[#666] rounded-lg  py-2">
+        <div class="w-full pb-[10px]">
+          <div class="text-[#111827] text-[14px] pb-[10px] text-base">
+            {{ $t("新密码") }}
+          </div>
           <van-cell-group inset>
             <van-field
-              label-align="left"
-              label-width="150"
               type="password"
-              input-align="right"
               v-model="ruleForm.newTradePassword"
-              :label="$t('新密码')"
               :placeholder="$t('新密码')"
               
             />
           </van-cell-group>
         </div>
-        <div class="w-full mt-2 overflow-hidden border border-[#666] rounded-lg  py-2">
+        <div class="w-full">
+          <div class="text-[#111827] text-[14px] pb-[10px] text-base">
+            {{ $t("确认密码") }}
+          </div>
           <van-cell-group inset>
             <van-field
-              label-align="left"
-              label-width="150"
               type="password"
-              input-align="right"
               v-model="agentNewPassword"
-              :label="$t('确认密码')"
               :placeholder="$t('确认密码')"
             />
           </van-cell-group>
         </div>
       </div>
-      <div class="w-[100%] mx-auto mt-4">
+      <!-- <div class="w-[100%] mx-auto mt-4">
         <van-button color="#1f2732" rounded size="large" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
+      </div> -->
+      <div class="fixed bottom-4 left-1/2 -translate-x-1/2 w-[90%]">
+        <van-button
+          class="w-full"
+          style="
+            background: linear-gradient(135deg, #002d72, #0a4da2);
+            color: #fff;
+          "
+        @click="submitForm"
+        >
+          {{ $t("更新") }}
+        </van-button>
       </div>
     </div>
   </div>

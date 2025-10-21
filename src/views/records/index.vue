@@ -1,14 +1,22 @@
 <template>
   <div class="bg-[#fff] record">
-    <HeaderTop></HeaderTop>
-    <div class="bg-[#f3f3f4]">
+    <!-- <HeaderTop></HeaderTop> -->
+     <div class="py-[20px]">
+      <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
+    </div>
+    <div class="flex justify-start ml-[16px]">
+      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==0?'nav-active':'nav'" @click="swichTab(0)">{{$t('全部')}}{{active.value}}</div>
+      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==1?'nav-active':'nav'" @click="swichTab(1)">{{$t('待办')}}</div>
+      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==2?'nav-active':'nav'" @click="swichTab(2)">{{$t('完成')}}</div>
+    </div>
+    <!-- <div class="bg-[#f3f3f4]">
       <van-tabs color="#ff497c" @change="swichTab" v-model:active="active">
       <van-tab :title="$t('全部')"></van-tab>
       <van-tab :title="$t('待办')"></van-tab>
       <van-tab :title="$t('完成')"></van-tab>
     </van-tabs>
 
-    </div>
+    </div> -->
     
     <div class="h-[80vh] overflow-y-scroll">
       <div class="w-full px-2 pt-6 box-border flex flex-col">
@@ -21,66 +29,19 @@
           >
             <van-cell v-for="item in list" :key="item" :title="item">
               <div
-                class="w-full flex flex-col mb-6 bg-[#f3f3f4] border-[1px] border-[#eee] p-3 box-border rounded-xl"
+                class="w-full flex flex-col mb-6 bg-[#F3F4F6] border-[1px] border-[#eee] p-[16px] box-border rounded-xl"
               >
-                <div class="w-full flex">
-                  <div class="mr-2 w-[20%]" style="width: 4rem">
-                    <img :src="VITE_API_IMG_URL + item.coverUrl" alt="" />
-                  </div>
-                  <div class="w-[80%] flex flex-col h-[3rem] justify-between">
-                    <div>
-                      <div
-                        class="text-[#000] text-sm font-semibold whitespace-nowrap text-ellipsis overflow-hidden"
-                      >
-                        {{ item.goodsName }}
-                      </div>
-                      <div class="grid grid-cols-4 mt-2">
-                        <div class="col-span-2 flex flex-col">
-                          <div class="text-xs text-[#666]">
-                            {{ $t("总金额") }}
-                          </div>
-                          <div
-                            class="mt-1 text-sm text-[var(--main-color)] font-semibold"
-                          >
-                            {{ item.price }} {{ $t("美元") }}
-                          </div>
-                        </div>
-                        <div class="col-span-2 flex flex-col">
-                          <div class="text-xs text-[#666]">
-                            {{ $t("佣金") }}
-                          </div>
-                          <div
-                            class="mt-1 text-sm text-[var(--main-color)] font-semibold"
-                          >
-                            {{ item.commission }} {{ $t("美元") }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="w-full h-[1px] my-4"
-                  style="border-bottom: 1px dashed rgb(255, 255, 255)"
-                ></div>
-                <div class="w-full flex justify-between items-center">
-                  <div class="text-[#666] text-sm">
-                    <!-- {{item.createTime}} -->
-                    {{
-                      formatWithTimezone(
-                        item.createTime,
-                        userStore.zoneActive.tzName
-                      )
-                    }}
-                  </div>
-                  <div
-                    class="text-white text-xs p-1 font-medium rounded"
+                <div class="w-full">
+                  <div class="mr-2 w-[100%] flex justify-between">
+                    <img class="w-[60px] h-[60px]" :src="VITE_API_IMG_URL + item.coverUrl" alt="" />
+                    <div
+                    class=" text-xs p-1 font-medium rounded h-[24px]"
                     :class="
                       item.status == '2'
-                        ? 'bg-[var(--main-color)]'
+                        ? 'bg-[#FFEDD5] text-[#EA580C]'
                         : item.status == '1'
-                        ? 'bg-[#F56C6C]'
-                        : 'bg-[var(--main-color)]'
+                        ? 'bg-[#FFEDD5] text-[#EA580C]'
+                        : 'bg-[#DCFCE7] text-[#16A34A]'
                     "
                   >
                     {{
@@ -91,15 +52,62 @@
                         : $t("待提交")
                     }}
                   </div>
+                  </div>
+                  <div class="w-[80%] flex flex-col h-[3rem] justify-between">
+                    <div>
+                      <div
+                        class="text-[#000] text-[14px] pt-[15px] whitespace-nowrap text-ellipsis overflow-hidden"
+                      >
+                        {{ item.goodsName }}
+                      </div>
+                        <div class="flex items-center pt-[10px] pb-[5px]">
+                          <div class="text-[14px] text-[#000] pr-[6px]">
+                            {{ $t("总金额") }}
+                          </div>
+                          <div
+                            class="text-[14px] text-[#002D72] font-semibold"
+                          >
+                            {{ item.price }} {{ $t("美元") }}
+                          </div>
+                        </div>
+                        <div class="flex">
+                          <div class="text-[14px] text-[#000] pr-[6px]">
+                            {{ $t("佣金") }}
+                          </div>
+                          <div
+                            class="text-[14px] text-[#002D72] font-semibold"
+                          >
+                            {{ item.commission }} {{ $t("美元") }}
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="w-full h-[1px] my-4"
+                  style="border-bottom: 1px dashed rgb(255, 255, 255)"
+                ></div>
+                <div class="w-full flex justify-between items-center pt-[15px]">
+                  <div class="text-[#6B7280] text-sm">
+                    <!-- {{item.createTime}} -->
+                    {{
+                      formatWithTimezone(
+                        item.createTime,
+                        userStore.zoneActive.tzName
+                      )
+                    }}
+                  </div>
+                  
                 </div>
                 <div
                   class="flex justify-end items-center mt-2"
                   v-if="item.status == '2'"
                 >
                   <van-button
-                    color="#007513"
+                    color="#FFEDD5"
                     @click="submit(item)"
                     size="small"
+                    style="color: #EA580C;"
                     >{{ $t("提交") }}</van-button
                   >
                 </div>
@@ -115,55 +123,55 @@
       v-model:show="show"
       closeable
       :title="''"
+      :style="{ width: '80%', background: '#002d72' }"
       :show-confirm-button="false"
     >
-      <div class="w-[5rem] mx-auto pt-10" style="width: 6rem; z-index: 999">
+      <div class="w-[60px] h-[125px] mx-auto mt-[24px]" style="width: 60px;">
         <img :src="VITE_API_IMG_URL + goodsData.coverUrl" alt="" />
       </div>
-      <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
-        <div class="w-[100%] mx-auto text-center text-sm font-semibold">
+      <div class="w-full mt-[-3rem] pt-[23px] text-[#fff]  " style="border-top: 1px solid #33578e;" >
+        <div class="w-[100%] mx-auto  text-[18px]  font-semibold p-[20px]">
           {{ goodsData.goodsName }}
         </div>
-        <div class="flex w-full items-center pt-4 pb-4 mt-4">
-          <div
-            class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
-          >
-            <div class="text-[#000] font-semibold">{{ $t("总金额") }}</div>
-            <div class="text-xs text-[#000] mt-1">
-              {{ goodsData.price }}{{ $t("美元") }}
+        <div class="flex justify-start p-[20px]" style="border-top: 1px solid #33578e;border-bottom: 1px solid #33578e;">
+          <img class="w-[24px] h-[24px]" src="@/static/images/price.png" alt="">
+          <div class="pl-[12px] w-[100%]" >
+            <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
+              <div class="text-[#D1D5DB]">{{ $t("总金额") }}</div>
+              <div class="text-[#fff] font-bold">{{ goodsData.price }}{{ $t("美元") }}</div>
             </div>
-          </div>
-          <div
-            class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
-          >
-            <div class="text-[#000] font-semibold">{{ $t("佣金") }}</div>
-            <div class="text-xs text-[#000] mt-1">
-              {{ goodsData.commission }}{{ $t("美元") }}
+            <div class="flex justify-between w-[100%] text-[16px]">
+              <div class="text-[#D1D5DB]">{{ $t("佣金") }}</div>
+              <div class="text-[#FF9500] font-bold">{{ goodsData.commission }}{{ $t("美元") }}</div>
             </div>
+
           </div>
+          
         </div>
-        <div class="bg-[#d8d8d8] p-4">
-          <div class="flex justify-between items-center box-border">
-            <div class="text-[#000] text-sm">{{ $t("创建时间") }}</div>
-            <div class="text-[#000] text-sm font-bold">
-              {{
+         <div class="flex justify-start p-[20px]" style="border-bottom: 1px solid #33578e;">
+          <img class="w-[24px] h-[24px]" src="@/static/images/price.png" alt="">
+          <div class="pl-[12px] w-[100%]" >
+            <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
+              <div class="text-[#D1D5DB]">{{ $t("创建时间") }}</div>
+              <div class="text-[#fff] font-bold text-[14px]">{{
                 formatWithTimezone(
                   goodsData.createTime,
                   userStore.zoneActive.tzName
                 )
-              }}
+              }}</div>
             </div>
-          </div>
-          <div class="flex justify-between items-center box-border">
-            <div class="text-[#000] text-sm">{{ $t("编号") }}</div>
-            <div class="text-[#000] text-sm font-bold">
-              {{ goodsData.orderNo }}
+            <div class="flex justify-between w-[100%] text-[16px]">
+              <div class="text-[#D1D5DB]">{{ $t("编号") }}</div>
+              <div class="text-[#fff] text-[14px]">{{ goodsData.orderNo }}</div>
             </div>
+
           </div>
+          
         </div>
-        <div class="w-full mt-4">
+
+        <div class="w-[90%] mx-auto mt-4 pb-[20px]">
           <van-button
-            color="#007513"
+            color="#FF9500"
             :loading="isSubmitting"
             :disabled="isSubmitting"
             class="w-full"
@@ -274,8 +282,9 @@ const submitVal = async () => {
   }, 1000); // 2000 毫秒 = 2 秒
 };
 
-const swichTab = () => {
+const swichTab = (index) => {
   console.log(active.value);
+  active.value = index
   if (active.value == 0) {
     query.status = "";
   } else if (active.value == 1) {
@@ -289,9 +298,15 @@ onMounted(() => {
   onLoad();
 });
 </script>
-<style>
-.record .van-tabs__nav {
-  background: #f3f3f4 !important;
+<style scoped>
+.nav-active{
+  background: #002D72;
+  color: #fff;
+}
+.nav {
+  background: #F3F4F6;
+  color: #6B7280;
 
 }
+
 </style>
