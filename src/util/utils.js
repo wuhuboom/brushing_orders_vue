@@ -109,6 +109,28 @@ export const formatWithTimezone = (timestamp, tzName) => {
   return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
 };
 
+export const formatWithTimezoneLong = (timestamp, tzName) => {
+  const options = {
+    timeZone: tzName,
+    year: "numeric",
+    month: "long", // 显示完整英文月份名
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true, // 使用 12 小时制并显示 AM/PM
+  };
+
+  try {
+    const date = new Date(timestamp);
+    const formatter = new Intl.DateTimeFormat("en-US", options);
+    return formatter.format(date);
+  } catch (err) {
+    console.warn(`[formatWithTimezone] Invalid timezone: ${tzName}`);
+    return "";
+  }
+};
+
+
 // 客服工作时间
 // export const checkWorkTimeLocal = (workTimeStart, workTimeEnd) => {
 //   const now = new Date();
