@@ -159,7 +159,6 @@ const submitForm = async () => {
   }
   router.push({ path: "/cardList" });
 };
-
 // const onConfirm = ({ selectedValues, selectedOptions }) => {
 //   showPicker.value = false;
 //   pickerValue.value = selectedValues;
@@ -168,7 +167,6 @@ const submitForm = async () => {
 // const selectType = () => {
 //   showPicker.value = true;
 // };
-
 const onClickLeft = () => {
   router.push({ path: "/cardList" });
 };
@@ -177,13 +175,6 @@ const getgetBankWallet = async () => {
   form.name = res.data.name;
   form.bankCode = res.data.bankCode;
   form.bankCard = res.data.bankCard;
-  //   const form = reactive({
-  //   name: "",
-  //   bankCode: "",
-  //   bankCard: "",
-  //   walletType: "",
-  //   walletAddress: "",
-  // });
 };
 onMounted(async () => {
   if (route.query.id) {
