@@ -187,7 +187,7 @@ const selectEmits = (item) => {
   activeValue.value = item.id;
   userStore.setuserWallerType(item);
   if (route.query.type == 1) {
-    router.push({ path: "/my" });
+    // router.push({ path: "/my" });
   } else {
     router.push({ path: "/withdraw", query: item });
   }
