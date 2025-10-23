@@ -180,6 +180,8 @@ const getgetUserBankWallet = async () => {
     !Array.isArray(userStore.userWallerType) &&
     Object.keys(userStore.userWallerType).length > 0
   ) {
+    console.log(1111)
+    console.log(userStore.userWallerType.id)
     activeValue.value = userStore.userWallerType.id;
   } else {
     activeValue.value = res.data.length != 0 ? res.data[0].id : 0;

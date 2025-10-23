@@ -54,6 +54,7 @@ export const useUserStore = defineStore('user', {
             this.token = '';
             this.userInfo = {};
             this.allWallet = [];
+            this.userWallerType = {};
             router.replace({ path: '/account/login' });
         },
         setUserBalance(data) {
