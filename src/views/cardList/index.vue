@@ -57,7 +57,7 @@
               {{ item.bankCard }}
             </div>
             <div
-            style="text-align: right;"
+              style="text-align: right"
               class="text-[12px] text-[#FF3E3E] w-[60px] h-[30px]"
               @click.stop="toDetail(item.id, item.type)"
             >
@@ -73,10 +73,10 @@
             class="text-[14px] text-[#757575] flex justify-between items-start"
           >
             <div class="w-[80%] break-all leading-[20px]">
-             {{ item.walletAddress }}
+              {{ item.walletAddress }}
             </div>
             <div
-             style="text-align: right;"
+              style="text-align: right"
               class="text-[12px] text-[#FF3E3E] flex-shrink-0 cursor-pointer w-[60px] h-[30px]"
               @click.stop="toDetail(item.id, item.type)"
             >
@@ -118,7 +118,7 @@ import { onMounted, ref, reactive } from "vue";
 import { getUserBankWallet } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
-import { useRouter,useRoute } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { showToast } from "vant";
 const userStore = useUserStore();
 const router = useRouter();
@@ -142,12 +142,11 @@ const submitForm = async () => {
 };
 
 const onClickLeft = () => {
-  if(route.query.type == 1){
+  if (route.query.type == 1) {
     router.push({ path: "/my" });
   } else {
     router.push({ path: "/withdraw" });
   }
-  
 };
 const addBank = (type) => {
   if (type == 1) {
@@ -173,26 +172,25 @@ const getgetUserBankWallet = async () => {
     }
   });
 
-  console.log(userStore.userWallerType);
   if (
     userStore.userWallerType &&
     typeof userStore.userWallerType === "object" &&
     !Array.isArray(userStore.userWallerType) &&
     Object.keys(userStore.userWallerType).length > 0
   ) {
-    console.log(1111)
-    console.log(userStore.userWallerType.id)
     activeValue.value = userStore.userWallerType.id;
   } else {
     activeValue.value = res.data.length != 0 ? res.data[0].id : 0;
   }
-
-  
 };
 const selectEmits = (item) => {
   activeValue.value = item.id;
   userStore.setuserWallerType(item);
-  router.push({ path: "/withdraw", query: item });
+  if (route.query.type == 1) {
+    router.push({ path: "/my" });
+  } else {
+    router.push({ path: "/withdraw", query: item });
+  }
 };
 const toDetail = (id, type) => {
   if (type == 1) {
