@@ -318,7 +318,10 @@ const loadData = async () => {
     finished.value = true; // 避免无限加载
   }
 };
-const onClickLeft = () => history.back();
+// const onClickLeft = () => history.back();
+const onClickLeft = () => {
+  router.push({ path: "/my" });
+};
 const ruleForm = reactive({
   amount: "",
   // tradePassword: "",

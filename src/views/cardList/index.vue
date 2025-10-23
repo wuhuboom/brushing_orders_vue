@@ -17,7 +17,7 @@
       :class="activeValue == item.id ? 'active' : ''"
       v-for="(item, index) in bankWallet"
       :key="index"
-      @click="selectEmits(item.id, item.type)"
+      @click="selectEmits(item)"
     >
       <img
         v-if="item.type == 1"
@@ -42,10 +42,8 @@
             class="w-[22px] h-[22px]"
             src="../../static/images/active.png"
             alt=""
-            @click="toWallet(item)"
           />
           <img
-            @click="toWallet(item)"
             v-else
             class="w-[22px] h-[22px]"
             src="../../static/images/active1.png"
@@ -59,8 +57,9 @@
               {{ item.bankCard }}
             </div>
             <div
-              class="text-[12px] text-[#FF3E3E]"
-              @click="toDetail(item.id, item.type)"
+            style="text-align: right;"
+              class="text-[12px] text-[#FF3E3E] w-[60px] h-[30px]"
+              @click.stop="toDetail(item.id, item.type)"
             >
               Edit
             </div>
@@ -77,8 +76,9 @@
              {{ item.walletAddress }}
             </div>
             <div
-              class="text-[12px] text-[#FF3E3E] flex-shrink-0 cursor-pointer"
-              @click="toDetail(item.id, item.type)"
+             style="text-align: right;"
+              class="text-[12px] text-[#FF3E3E] flex-shrink-0 cursor-pointer w-[60px] h-[30px]"
+              @click.stop="toDetail(item.id, item.type)"
             >
               Edit
             </div>
@@ -141,7 +141,7 @@ const submitForm = async () => {
 };
 
 const onClickLeft = () => {
-  router.push({ path: "/my" });
+  router.push({ path: "/withdraw" });
 };
 const addBank = (type) => {
   if (type == 1) {
@@ -150,10 +150,10 @@ const addBank = (type) => {
     router.push({ path: "/addWallet" });
   }
 };
-const toWallet = (item) => {
-  userStore.setuserWallerType(item);
-  router.push({ path: "/withdraw", query: item });
-};
+// const toWallet = (item) => {
+//   userStore.setuserWallerType(item);
+//   router.push({ path: "/withdraw", query: item });
+// };
 const bankWallet = ref([]);
 const getgetUserBankWallet = async () => {
   let res = await getUserBankWallet();
@@ -169,8 +169,10 @@ const getgetUserBankWallet = async () => {
 
   activeValue.value = res.data.length != 0 ? res.data[0].id : 0;
 };
-const selectEmits = (id, type) => {
-  activeValue.value = id;
+const selectEmits = (item) => {
+  activeValue.value = item.id;
+  userStore.setuserWallerType(item);
+  router.push({ path: "/withdraw", query: item });
 };
 const toDetail = (id, type) => {
   if (type == 1) {

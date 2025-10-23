@@ -175,6 +175,7 @@ const getgetBankWallet = async () => {
   form.name = res.data.name;
   form.bankCode = res.data.bankCode;
   form.bankCard = res.data.bankCard;
+  form.bankType = res.data.bankType;
 };
 onMounted(async () => {
   if (route.query.id) {
