@@ -132,7 +132,11 @@ const submitForm = async () => {
   query.bankCode = form.bankCode;
   query.bankCard = form.bankCard;
   let res = await addWalletBank(query);
-  showToast(t("添加成功"));
+  if(Number(route.query.id)) {
+    showToast(t("修改成功"));
+  } else {
+    showToast(t("添加成功"));
+  }
   router.push({ path: "/cardList" });
 };
 

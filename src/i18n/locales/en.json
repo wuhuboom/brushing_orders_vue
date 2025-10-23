@@ -219,6 +219,11 @@
   "我们期待在工作时间内为您服务": "We'll be happy to help and get back to you once we're online",
   "客户服务目前无法提供服务": "Customer service is currently unavailable",
   "表单验证未通过": "Form validation failed",
-  "请勿重复添加": "Please do not add repeatedly"
+  "请勿重复添加": "Please do not add repeatedly",
+  "请输入姓名": "Please enter your name",
+  "请输入钱包类型": "Please enter wallet type",
+  "请输入钱包地址": "Please enter wallet address",
+  "请输入银行编码": "Please enter bank code",
+  "请输入银行卡号":"Please enter bank card number",
   
 }
