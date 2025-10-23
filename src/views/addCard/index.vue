@@ -25,7 +25,7 @@
       />
     </div>
     <div class="text-[#4B5563] font-semibold mt-5 pl-[8px]">
-      {{ $t("Bank Name") }}
+      {{ $t("Name") }}
     </div>
     <div
       class="w-full mt-2 overflow-hidden"
