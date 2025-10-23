@@ -90,3 +90,12 @@ export const bannerList = (params) =>
 
 export const getEmailAddress = (params) =>
   getApi().get(`/config/getEmailAddress`, { params, loading: false, showMsg: false });
+
+export const getUserBankWallet = (params) =>
+  getApi().get(`/account/getUserBankWallet
+`, { params, loading: false, showMsg: false });
+export const addWalletBank = (params) =>
+  getApi().post("/account/addWalletBank", params, { loading: true, showMsg: true });
+export const getBankWallet = (params) =>
+  getApi().get(`/account/getBankWallet/${params.id}`, {  loading: false, showMsg: false });
+
