@@ -415,6 +415,9 @@ const payMethod = () => {
   // tradePasswordRef.value.open(1);
   router.push({
     path: '/cardList',
+    query:{
+      type:1
+    }
   });
 };
 const submitTradePassword = async () => {

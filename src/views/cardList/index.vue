@@ -118,10 +118,11 @@ import { onMounted, ref, reactive } from "vue";
 import { getUserBankWallet } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
+import { useRouter,useRoute } from "vue-router";
 import { showToast } from "vant";
 const userStore = useUserStore();
 const router = useRouter();
+const route = useRoute();
 const { t } = useI18n();
 const activeValue = ref(0);
 const showCardBtn = ref(true);
@@ -141,7 +142,12 @@ const submitForm = async () => {
 };
 
 const onClickLeft = () => {
-  router.push({ path: "/withdraw" });
+  if(route.query.type == 1){
+    router.push({ path: "/my" });
+  } else {
+    router.push({ path: "/withdraw" });
+  }
+  
 };
 const addBank = (type) => {
   if (type == 1) {
@@ -167,7 +173,19 @@ const getgetUserBankWallet = async () => {
     }
   });
 
-  activeValue.value = res.data.length != 0 ? res.data[0].id : 0;
+  console.log(userStore.userWallerType);
+  if (
+    userStore.userWallerType &&
+    typeof userStore.userWallerType === "object" &&
+    !Array.isArray(userStore.userWallerType) &&
+    Object.keys(userStore.userWallerType).length > 0
+  ) {
+    activeValue.value = userStore.userWallerType.id;
+  } else {
+    activeValue.value = res.data.length != 0 ? res.data[0].id : 0;
+  }
+
+  
 };
 const selectEmits = (item) => {
   activeValue.value = item.id;

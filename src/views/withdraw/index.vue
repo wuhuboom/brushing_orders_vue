@@ -118,7 +118,9 @@
             </div>
             <div class="text-[12px] text-[#6B7280] pt-[5px] w-]" v-else>
               {{ bankItem.walletType }}
-              <span class="pl-[5px] w-[80%] break-all">{{ bankItem.walletAddress }}</span>
+              <span class="pl-[5px] w-[80%] break-all">{{
+                bankItem.walletAddress
+              }}</span>
             </div>
           </div>
           <div class="flex items-center" @click="toList">
@@ -347,7 +349,12 @@ const swichTab = (value) => {
   }
 };
 const toList = () => {
-  router.push({ path: "/cardList" });
+  router.push({
+    path: "/cardList",
+    query: {
+      type: 2,
+    },
+  });
 };
 const getWithdrawal = () => {
   console.log(bankItem.id);
