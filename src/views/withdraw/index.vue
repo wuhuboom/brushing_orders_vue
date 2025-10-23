@@ -74,7 +74,7 @@
       </div>
       <div class="px-[14px]">
         <div class="pb-[8px]">Receiving Bank Card</div>
-        <div v-if="bankWallet.length==0">
+        <div v-if="bankWallet.length == 0">
           <div
             @click="addType(1)"
             class="flex items-center border border-[#E5E7EB] p-[17px] rounded-[8px]"
@@ -88,12 +88,12 @@
             </div>
           </div>
           <div
-           @click="addType(2)"
+            @click="addType(2)"
             class="flex items-center border border-[#E5E7EB] p-[17px] rounded-[8px] mt-[8px]"
           >
             <img src="@/static/images/add.png" alt="" />
             <div class="pl-[16px]">
-              <div class="text-[14px] text-[#111827]">E-Wallet</div>
+              <div class="text-[14px] text-[#111827]">Wallet</div>
               <div class="text-[12px] text-[#6B7280] pt-[5px]">
                 No bank card added yet
               </div>
@@ -105,13 +105,20 @@
           v-else
           class="flex items-center justify-between border border-[#E5E7EB] p-[17px] rounded-[8px] mt-[8px]"
         >
-          <div >
-            <div class="text-[14px] text-[#111827]">{{bankItem.name}}</div>
-            <div class="text-[12px] text-[#6B7280] pt-[5px]" v-if="bankItem.type==1">
-              {{bankItem.bankCode}} <span class="pl-[5px]">{{ formatBankCard(bankItem.bankCard) }}</span>
+          <div>
+            <div class="text-[14px] text-[#111827]">{{ bankItem.name }}</div>
+            <div
+              class="text-[12px] text-[#6B7280] pt-[5px]"
+              v-if="bankItem.type == 1"
+            >
+              {{ bankItem.bankCode }}
+              <span class="pl-[5px]">{{
+                formatBankCard(bankItem.bankCard)
+              }}</span>
             </div>
             <div class="text-[12px] text-[#6B7280] pt-[5px]" v-else>
-              {{bankItem.walletType}}{{bankItem.walletAddress}}
+              {{ bankItem.walletType }}
+              <span class="pl-[5px]">{{ bankItem.walletAddress }}</span>
             </div>
           </div>
           <div class="flex items-center" @click="toList">
@@ -318,13 +325,13 @@ const ruleForm = reactive({
 });
 
 const formatBankCard = (card) => {
-  console.log(card)
-  if (!card) return ''
-  const str = String(card).replace(/\s+/g, '') // 去掉空格
-  const prefix = str.slice(0, 4)
-  const suffix = str.slice(-4)
-  return `${prefix} **** **** ${suffix}`
-}
+  console.log(card);
+  if (!card) return "";
+  const str = String(card).replace(/\s+/g, ""); // 去掉空格
+  const prefix = str.slice(0, 4);
+  const suffix = str.slice(-4);
+  return `${prefix} **** **** ${suffix}`;
+};
 
 const All = () => {
   console.log(amount.value);
@@ -340,7 +347,7 @@ const toList = () => {
   router.push({ path: "/cardList" });
 };
 const getWithdrawal = () => {
-  console.log(bankItem.id)
+  console.log(bankItem.id);
   if (!bankItem.value.id) {
     router.push({ path: "/addCard" });
     return false;
@@ -356,10 +363,10 @@ const getWithdrawal = () => {
         max: TradeInfor.value.maxWithdrawAmount,
       })
     );
-    
+
   // if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   let query = ruleForm;
-  query.walletId = bankItem.value.id
+  query.walletId = bankItem.value.id;
 
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
@@ -384,17 +391,23 @@ const tradeConfig = async () => {
   let res = await getTradeConfig();
   TradeInfor.value = res.data;
 };
-const bankItem = ref('');
+const bankItem = ref("");
 const bankWallet = ref([]);
 const getgetUserBankWallet = async () => {
   let res = await getUserBankWallet();
   bankWallet.value = res.data;
-  if(userStore.userWallerType) {
-    bankItem.value = userStore.userWallerType
+  console.log(userStore.userWallerType);
+  if (
+    userStore.userWallerType &&
+    typeof userStore.userWallerType === "object" &&
+    !Array.isArray(userStore.userWallerType) &&
+    Object.keys(userStore.userWallerType).length > 0
+  ) {
+    bankItem.value = userStore.userWallerType;
   } else {
     bankItem.value = res.data[0];
   }
-  console.log(bankItem.value)
+  console.log(bankItem.value);
 };
 
 window.addEventListener("updateTrade", (e) => {
@@ -408,17 +421,17 @@ const userGetInfoMethods = () => {
   });
 };
 
-const addType = (type) =>{
-  if(type ==1) {
+const addType = (type) => {
+  if (type == 1) {
     router.push({
-    path: "/addCard",
-  });
+      path: "/addCard",
+    });
   } else {
     router.push({
-    path: "/addWallet"
-  });
-}
-}
+      path: "/addWallet",
+    });
+  }
+};
 
 onMounted(() => {
   tradeConfig();

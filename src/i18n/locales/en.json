@@ -224,6 +224,7 @@
   "请输入钱包类型": "Please enter wallet type",
   "请输入钱包地址": "Please enter wallet address",
   "请输入银行编码": "Please enter bank code",
-  "请输入银行卡号":"Please enter bank card number"
+  "请输入银行卡号":"Please enter bank card number",
+  "请输入账号类型": "Please enter account type"
   
 }

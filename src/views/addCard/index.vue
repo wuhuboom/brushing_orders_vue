@@ -24,7 +24,7 @@
         size="large"
       />
     </div>
-    <div class="text-[#4B5563]font-semibold mt-5 pl-[8px]">
+    <div class="text-[#4B5563] font-semibold mt-5 pl-[8px]">
       {{ $t("Bank Name") }}
     </div>
     <div
@@ -54,10 +54,22 @@
         size="large"
       />
     </div>
-    <!-- <div class="text-[#4B5563] mt-5 pl-[8px]">
+    <div class="text-[#4B5563] font-semibold mt-5 pl-[8px]">
       {{ $t("Account Type") }}
     </div>
     <div
+      class="w-full mt-2 overflow-hidden"
+      style="border-bottom: 1px solid #e5e7eb"
+    >
+      <van-field
+        v-model="form.bankType"
+        label=""
+        :placeholder="$t('Please enter Account Type')"
+        label-align="top"
+        size="large"
+      />
+    </div>
+    <!-- <div
       class="flex justify-between items-center w-full mt-2 overflow-hidden pb-[20px]"
       style="border-bottom: 1px solid #e5e7eb"
       @click="showPicker = true"
@@ -113,6 +125,7 @@ const form = reactive({
   name: "",
   bankCode: "",
   bankCard: "",
+  bankType: "",
 });
 const pickerValue = ref(["1"]);
 const type = ref(1);
@@ -121,18 +134,25 @@ const type = ref(1);
 //   { text: "钱包", value: "2" },
 // ];
 const submitForm = async () => {
-  let query = {
-    type: 1,
-    name: form.name,
-    id: Number(route.query.id),
-  };
+  // 表单校验
   if (!form.name) return showToast(t("请输入姓名"));
   if (!form.bankCode) return showToast(t("请输入银行编码"));
   if (!form.bankCard) return showToast(t("请输入银行卡号"));
-  query.bankCode = form.bankCode;
-  query.bankCard = form.bankCard;
+  if (!form.bankType) return showToast(t("请输入账户类型"));
+  // 构造请求参数
+  const query = {
+    type: 1,
+    name: form.name,
+    bankCode: form.bankCode,
+    bankCard: form.bankCard,
+    bankType: form.bankType,
+  };
+  // 如果是编辑模式（存在 id）
+  if (route.query.id) {
+    query.id = Number(route.query.id);
+  }
   let res = await addWalletBank(query);
-  if(Number(route.query.id)) {
+  if (Number(route.query.id)) {
     showToast(t("修改成功"));
   } else {
     showToast(t("添加成功"));

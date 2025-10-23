@@ -14,10 +14,10 @@
     </div>
     <div
       class="flex items-center mx-[20px] border border-[#EEEEEE] p-[17px] rounded-[20px] mt-[32px]"
-      :class="activeValue == item.id?'active':''"
+      :class="activeValue == item.id ? 'active' : ''"
       v-for="(item, index) in bankWallet"
       :key="index"
-      @click="selectEmits(item.id,item.type)"
+      @click="selectEmits(item.id, item.type)"
     >
       <img
         v-if="item.type == 1"
@@ -38,14 +38,14 @@
           </div>
           <div class="text-[16px] text-[#212121]" v-else>{{ item.name }}</div>
           <img
-          v-if="activeValue != item.id"
+            v-if="activeValue != item.id"
             class="w-[22px] h-[22px]"
             src="../../static/images/active.png"
             alt=""
             @click="toWallet(item)"
           />
           <img
-           @click="toWallet(item)"
+            @click="toWallet(item)"
             v-else
             class="w-[22px] h-[22px]"
             src="../../static/images/active1.png"
@@ -58,26 +58,49 @@
             <div>
               {{ item.bankCard }}
             </div>
-            <div class="text-[12px] text-[#FF3E3E]" @click="toDetail(item.id,item.type)">Edit</div>
+            <div
+              class="text-[12px] text-[#FF3E3E]"
+              @click="toDetail(item.id, item.type)"
+            >
+              Edit
+            </div>
           </div>
         </div>
         <div v-else>
-          <div class="text-[14px] text-[#757575] py-[5px]">{{ item.walletType }}</div>
-           <div class="text-[14px] text-[#757575] flex justify-between">
-            <div>
-              {{ item.walletAddress }}
+          <div class="text-[14px] text-[#757575] py-[5px]">
+            {{ item.walletType }}
+          </div>
+          <div
+            class="text-[14px] text-[#757575] flex justify-between items-start"
+          >
+            <div class="w-[80%] break-all leading-[20px]">
+             {{ item.walletAddress }}
             </div>
-            <div class="text-[12px] text-[#FF3E3E]" @click="toDetail(item.id,item.type)">Edit</div>
+            <div
+              class="text-[12px] text-[#FF3E3E] flex-shrink-0 cursor-pointer"
+              @click="toDetail(item.id, item.type)"
+            >
+              Edit
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="w-[90%] mt-10 fixed bottom-[37px] left-1/2 -translate-x-1/2">
-      <van-button color="#000000" class="w-full" size="large" @click="addBank(1)">
-        <van-icon name="plus" class="pr-[20px]" />{{ $t("Add Bank Card") }}</van-button
+      <van-button
+        color="#000000"
+        v-if="showCardBtn"
+        class="w-full"
+        size="large"
+        @click="addBank(1)"
+      >
+        <van-icon name="plus" class="pr-[20px]" />{{
+          $t("Add Bank Card")
+        }}</van-button
       >
       <div class="h-[20px]"></div>
       <van-button
+        v-if="showWalletBtn"
         color="#F09F39"
         class="w-full"
         size="large"
@@ -101,6 +124,8 @@ const userStore = useUserStore();
 const router = useRouter();
 const { t } = useI18n();
 const activeValue = ref(0);
+const showCardBtn = ref(true);
+const showWalletBtn = ref(true);
 const form = reactive({
   withdrawName: "",
   withdrawAddress: "",
@@ -119,42 +144,50 @@ const onClickLeft = () => {
   router.push({ path: "/my" });
 };
 const addBank = (type) => {
-  if(type ==1) {
+  if (type == 1) {
     router.push({ path: "/addCard" });
   } else {
     router.push({ path: "/addWallet" });
   }
 };
-const toWallet = (item) =>{
+const toWallet = (item) => {
   userStore.setuserWallerType(item);
-  router.push({ path: "/withdraw",query:item });
-}
+  router.push({ path: "/withdraw", query: item });
+};
 const bankWallet = ref([]);
 const getgetUserBankWallet = async () => {
   let res = await getUserBankWallet();
   bankWallet.value = res.data;
+  bankWallet.value.forEach((item) => {
+    if (item.type == 1) {
+      showCardBtn.value = false;
+    }
+    if (item.type == 2) {
+      showWalletBtn.value = false;
+    }
+  });
+
   activeValue.value = res.data.length != 0 ? res.data[0].id : 0;
 };
-const selectEmits = (id,type) => {
+const selectEmits = (id, type) => {
   activeValue.value = id;
 };
-const toDetail = (id,type) => {
-  if(type ==1) {
+const toDetail = (id, type) => {
+  if (type == 1) {
     router.push({
-    path: "/addCard",
-    query: {
-      id: id,
-    },
-  });
+      path: "/addCard",
+      query: {
+        id: id,
+      },
+    });
   } else {
     router.push({
-    path: "/addWallet",
-    query: {
-      id: id,
-    },
-  });
+      path: "/addWallet",
+      query: {
+        id: id,
+      },
+    });
   }
-  
 };
 
 onMounted(async () => {
@@ -167,7 +200,7 @@ onMounted(async () => {
 </script>
 <style scoped>
 .active {
-  background: linear-gradient(to right, #FFFFFF, #FFF6F0);
-  border: 1px solid #FBDABB;
+  background: linear-gradient(to right, #ffffff, #fff6f0);
+  border: 1px solid #fbdabb;
 }
 </style>

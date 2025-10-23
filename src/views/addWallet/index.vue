@@ -130,8 +130,10 @@ const submitForm = async () => {
   let query = {
     type: 2,
     name: form.name,
-    id: Number(route.query.id),
   };
+  if(route.query.id) {
+    query.id = Number(route.query.id)
+  }
   if (!form.name) return showToast(t("请输入姓名"));
   if (!form.walletType) return showToast(t("请输入钱包类型"));
   if (!form.walletAddress) return showToast(t("请输入钱包地址"));
