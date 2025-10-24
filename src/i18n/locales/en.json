@@ -220,5 +220,20 @@
   "start.notice.str": "Notice",
   "start.notice.desc1.str": "Online Support Hours",
   "start.notice.desc2.str": "Please contact online support for your assistance!",
-  "profile.str": "Upload a photo or choose from library"
+  "profile.str": "Upload a photo or choose from library",
+  "Withdrawal.title": "Withdrawal History",
+  "Withdrawal.History": "History",
+  "添加银行卡": "Add Bank Card",
+  "银行编码": "Bank Code",
+  "银行账号": "Bank Account",
+  "账号类型": "Account Type",
+  "银行卡管理": "Bank Card Management",
+  "请输入银行编码": "Please enter bank code",
+  "请输入银行卡号": "Please enter bank account",
+  "请输入姓名": "Please enter name",
+  "请输入账户类型": "Please enter account type",
+  "卡片管理": "Card Management",
+  "请输入钱包地址": "Please enter Wallet Address",
+  "请输入钱包类型": "Please enter Wallet Type"
+
 }

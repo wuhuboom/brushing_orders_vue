@@ -14,7 +14,8 @@ export const useUserStore = defineStore('user', {
         GlobalConfig:{},
         accountType: 'REAL',
         allWallet: [],
-        assets: {}
+        assets: {},
+        userWallerType:{}
     }),
     getters: {
         wallet() {
@@ -27,6 +28,9 @@ export const useUserStore = defineStore('user', {
         },
         setToken(token) {
             this.token = token;
+        },
+        setuserWallerType(userWallerType) {
+            this.userWallerType = userWallerType
         },
         setUserInfo(userInfo) {
             this.userInfo = userInfo;
@@ -50,6 +54,7 @@ export const useUserStore = defineStore('user', {
             this.token = '';
             this.userInfo = {};
             this.allWallet = [];
+            this.userWallerType = {};
             router.replace({ path: '/account/login' });
         },
         setUserBalance(data) {

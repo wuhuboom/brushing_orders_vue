@@ -35,7 +35,7 @@ import {
   PullRefresh,
   Tag,
   Toast,
-  Swipe, SwipeItem
+  Swipe, SwipeItem,PasswordInput,NumberKeyboard 
 } from "vant";
 // 2. 引入组件样式
 import "vant/lib/index.css";
@@ -106,7 +106,9 @@ async function bootstrap() {
   app.use(Tag);
   app.use(Toast);
   app.use(Swipe);
-app.use(SwipeItem);
+  app.use(SwipeItem);
+  app.use(PasswordInput);
+  app.use(NumberKeyboard);
   // app.use(ElementPlus) // 使用 Element Plus
   app.mount("#app");
 }

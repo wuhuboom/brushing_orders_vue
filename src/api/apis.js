@@ -99,3 +99,10 @@ export const getLotteryConfig = (params) =>
 
 export const draw = (params) =>
   getApi().get(`/lottery/draw`, { params, loading: false, showMsg: false });
+export const getUserBankWallet = (params) =>
+  getApi().get(`/account/getUserBankWallet
+`, { params, loading: false, showMsg: false });
+export const addWalletBank = (params) =>
+  getApi().post("/account/addWalletBank", params, { loading: true, showMsg: true });
+export const getBankWallet = (params) =>
+  getApi().get(`/account/getBankWallet/${params.id}`, {  loading: false, showMsg: false });

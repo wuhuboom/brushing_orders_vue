@@ -161,10 +161,17 @@ input {
   margin: 0 !important;
 
 }
-.van-field {
+.van-password-input__item {
+  border:1px solid #D1D5DB !important;
+  border-radius: 10px;
+}
+.van-password-input {
+  margin: 0 !important;
+}
+/* .van-field {
   border: 1px solid #EEEEEE !important;
   border-radius: 5px;
-}
+} */
  /* .van-nav-bar__title {
   font-size: 18px !important;
   color: #002D72 !important;
