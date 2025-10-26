@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-[100vh] bg-[#fff]">
     <van-nav-bar
-      :title="$t('Bank Card Management')"
+      :title="$t('银行卡管理')"
       fixed
       left-arrow
       @click-left="onClickLeft"
@@ -9,7 +9,7 @@
     <div
       class="mt-[80px] px-[20px] flex justify-between items-center mb-[16px]"
     >
-      <div>My Bank Cards</div>
+      <div>{{$t('我的银行卡')}}</div>
       <!-- <van-icon name="deletes-o" color="#EF4444" size="24px" /> -->
     </div>
     <div
@@ -61,7 +61,7 @@
               class="text-[12px] text-[#FF3E3E] w-[60px] h-[30px]"
               @click.stop="toDetail(item.id, item.type)"
             >
-              Edit
+              {{$t('编辑')}}
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@
               class="text-[12px] text-[#FF3E3E] flex-shrink-0 cursor-pointer w-[60px] h-[30px]"
               @click.stop="toDetail(item.id, item.type)"
             >
-              Edit
+              {{$t('编辑')}}
             </div>
           </div>
         </div>
@@ -95,7 +95,7 @@
         @click="addBank(1)"
       >
         <van-icon name="plus" class="pr-[20px]" />{{
-          $t("Add Bank Card")
+          $t("添加银行卡")
         }}</van-button
       >
       <div class="h-[20px]"></div>
@@ -107,7 +107,7 @@
         @click="addBank(2)"
       >
         <van-icon name="plus" class="pr-[20px]" />{{
-          $t("Add Wallet ")
+          $t("添加钱包")
         }}</van-button
       >
     </div>
@@ -132,14 +132,7 @@ const form = reactive({
   withdrawAddress: "",
   withdrawType: "",
 });
-const submitForm = async () => {
-  if (!form.withdrawName) return showToast(t("请输入钱包名称"));
-  if (!form.withdrawAddress) return showToast(t("请输入网络"));
-  if (!form.withdrawAddress) return showToast(t("请输入地址"));
-  let res = await addWithdrawalMethod(form);
-  showToast(t("添加成功"));
-  router.push({ path: "/my" });
-};
+
 
 const onClickLeft = () => {
   if (route.query.type == 1) {

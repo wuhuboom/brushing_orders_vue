@@ -1,13 +1,70 @@
 <template>
   <div class="w-full bg-[#f1f1f1] min-h-[100vh] h-full">
-    <van-sticky type="primary">
+    <!-- <van-sticky type="primary">
       <van-nav-bar
         :title="$t('定金')"
         fixed
         left-arrow
         @click-left="onClickLeft"
       />
-    </van-sticky>
+    </van-sticky> -->
+    <div
+      class="relative bg-gradient-to-r from-[#002D72] to-[#0A4DA2] flex items-center justify-center h-[56px] px-[16px]"
+    >
+      <div class="absolute left-[16px]">
+        <van-icon
+          name="arrow-left"
+          color="#fff"
+          size="22px"
+          @click="onClickLeft"
+        />
+      </div>
+      <div class="text-base text-[#FFFFFF] font-medium">{{ $t("提取") }}</div>
+      <div class="absolute right-[16px] text-base text-[#fff]" @click="toHistory">{{$t('Withdrawal.History')}}</div>
+    </div>
+    <div
+      class="flex flex-col justify-between p-4 box-border mt-[-2px] bg-gradient-to-r from-[#002D72] to-[#0A4DA2]"
+    >
+      <div class="w-full flex justify-end mb-[10px]" @click="refresh">
+        <img
+          class="w-[24px] h-[24px]"
+          src="../../static/images/shuaxin.png"
+          alt=""
+        />
+      </div>
+      <div class="text-white text-center text-sm">
+        {{ $t("账户金额") }}
+      </div>
+      <div class="flex mt-[8px] mb-[12px] justify-center">
+        <div class="text-white text-3xl flex items-center">
+          {{ userInfo.balance }}
+        </div>
+        <div class="text-white text-sm flex items-center ml-2 pt-[12px]">
+          {{ $t("美元") }}
+        </div>
+      </div>
+    </div>
+    <div class="w-full pl-5 pr-5 mt-[20px]">
+        <!-- <van-button
+          color="#002D72"
+          style="
+            background: linear-gradient(135deg, #002D72, #0a4da2);
+            color: #fff;
+          "
+          @click="getWithdrawal"
+          class="w-full"
+          >{{ $t("提取") }}</van-button
+        > -->
+
+        <van-button color="" style="
+            background: linear-gradient(135deg, #002D72, #0a4da2);
+            color: #fff;
+          "   class="w-full" @click="customer">{{
+          $t("联系客服")
+        }}</van-button>
+
+
+      </div>
 
     <!-- <div
       class="bg-white mt-[65px] flex justify-between items-center text-[#6B7280]"
@@ -19,7 +76,7 @@
         {{ $t("历史") }}
       </div>
     </div> -->
-     <van-tabs color="#ff497c" class="mt-[85px]"  @change="swichTab" v-model:active="active">
+     <!-- <van-tabs color="#ff497c" class="mt-[85px]"  @change="swichTab" v-model:active="active">
       <van-tab :title="$t('定金')"></van-tab>
       <van-tab :title="$t('历史')"></van-tab>
     </van-tabs>
@@ -81,7 +138,7 @@
           </van-list>
         </van-pull-refresh>
       </div>
-    </div>
+    </div> -->
     <ContactUs ref="ContactUsRef"></ContactUs>
   </div>
 </template>
@@ -92,8 +149,10 @@ import { useUserStore } from "@/store/modules/user";
 import { getDeposit, userGetInfo,getTradeConfig } from "../../api/apis";
 import {formatWithTimezone,checkWorkTimeLocal} from "../../util/utils"
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 import { showToast } from "vant";
 const { t } = useI18n();
+const router = useRouter();
 const active = ref(0);
 const refreshing = ref(false);
 const finished = ref(false);
@@ -156,6 +215,10 @@ const tradeConfig = async () => {
   let res = await getTradeConfig();
   TradeInfor.value = res.data;
 };
+
+const toHistory = () =>{
+  router.push({ path: "/depositHistory" });
+}
 onMounted(() => {
   tradeConfig()
   userGetInfo().then((res) => {

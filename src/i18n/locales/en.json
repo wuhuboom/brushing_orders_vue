@@ -224,6 +224,7 @@
   "Withdrawal.title": "Withdrawal History",
   "Withdrawal.History": "History",
   "添加银行卡": "Add Bank Card",
+  "添加钱包": "Add Wallet",
   "银行编码": "Bank Code",
   "银行账号": "Bank Account",
   "账号类型": "Account Type",
@@ -234,6 +235,9 @@
   "请输入账户类型": "Please enter account type",
   "卡片管理": "Card Management",
   "请输入钱包地址": "Please enter Wallet Address",
-  "请输入钱包类型": "Please enter Wallet Type"
+  "请输入钱包类型": "Please enter Wallet Type",
+  "我的银行卡": "My Bank Card",
+  "编辑": "Edit",
+  "deposit.title":"Deposit History"
 
 }

@@ -1,8 +1,6 @@
 <template>
   <div class="w-full bg-[#f9f9f9] min-h-[100vh] h-full withdraw">
-    <div
-      class="relative  flex items-center justify-center h-[56px] px-[16px]"
-    >
+    <div class="relative flex items-center justify-center h-[56px] px-[16px]">
       <div class="absolute left-[16px]">
         <van-icon
           name="arrow-left"
@@ -11,15 +9,41 @@
           @click="onClickLeft"
         />
       </div>
-      <div class="text-base text-[#000000] font-medium">{{ $t("Withdrawal.title") }}</div>
+      <div class="text-base text-[#000000] font-medium">
+        {{ $t("Withdrawal.title") }}
+      </div>
       <!-- <div class="absolute right-[16px] text-base text-[#fff]">History</div> -->
     </div>
     <div class="mx-auto w-[90%]">
       <div class="flex justify-start mb-[16px] mt-[24px]">
-        <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==-1?'bg-[#002D72] text-[#fff]':''" @click="changeOrder(-1)">{{$t('全部')}}</div>
-        <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==0?'bg-[#002D72] text-[#fff]':''" @click="changeOrder(0)">{{$t('待审核')}}</div>
-        <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==1?'bg-[#002D72] text-[#fff]':''" @click="changeOrder(1)">{{$t('审核成功')}}</div>
-        <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==2?'bg-[#002D72] text-[#fff]':''" @click="changeOrder(2)">{{$t('审核拒绝')}}</div>
+        <div
+          class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
+          :class="orderActive == -1 ? 'bg-[#002D72] text-[#fff]' : ''"
+          @click="changeOrder(-1)"
+        >
+          {{ $t("全部") }}
+        </div>
+        <div
+          class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
+          :class="orderActive == 0 ? 'bg-[#002D72] text-[#fff]' : ''"
+          @click="changeOrder(0)"
+        >
+          {{ $t("待审核") }}
+        </div>
+        <div
+          class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
+          :class="orderActive == 1 ? 'bg-[#002D72] text-[#fff]' : ''"
+          @click="changeOrder(1)"
+        >
+          {{ $t("审核成功") }}
+        </div>
+        <div
+          class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
+          :class="orderActive == 2 ? 'bg-[#002D72] text-[#fff]' : ''"
+          @click="changeOrder(2)"
+        >
+          {{ $t("审核拒绝") }}
+        </div>
       </div>
       <!-- <div
         class="flex justify-start mb-[16px] mt-[24px] bg-[#f4f4f5] leading-[40px] border text-[16px] border-[#ff497c]"
@@ -84,10 +108,10 @@
                     )
                   }}
                 </div>
-                <div class="text-[#9CA3AF] text-[12px]">ID:{{item.code}}</div>
+                <div class="text-[#9CA3AF] text-[12px]">ID:{{ item.code }}</div>
               </div>
               <div
-               class="px-[12px] py-[4px] font-bold rounded-[20px] text-[12px]"
+                class="px-[12px] py-[4px] font-bold rounded-[20px] text-[12px]"
                 :class="
                   item.status == 0
                     ? 'text-[#16A34A] bg-[#DCFCE7]'
@@ -119,7 +143,7 @@ import {
   withdrawal,
   getTradeConfig,
   userGetInfo,
-  getUserBankWallet
+  getUserBankWallet,
 } from "../../api/apis";
 import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
@@ -174,9 +198,9 @@ const onClickLeft = () => history.back();
 
 const changeOrder = (value) => {
   orderActive.value = value;
-  if(orderActive.value == -1) {
+  if (orderActive.value == -1) {
     query.status = "";
-  }else if (orderActive.value == 0) {
+  } else if (orderActive.value == 0) {
     query.status = "1";
   } else if (orderActive.value == 1) {
     query.status = "0";
@@ -186,10 +210,8 @@ const changeOrder = (value) => {
   onRefresh();
 };
 
-
-
 onMounted(() => {
-   onRefresh();
+  onRefresh();
 });
 </script>
 <style>
@@ -230,12 +252,12 @@ onMounted(() => {
   background-color: #206645; /* 激活状态的下划线颜色 */
 }
 .activetab {
-  box-shadow: 0px 1px 2px 0px #F3F4F6;
+  box-shadow: 0px 1px 2px 0px #f3f4f6;
 }
 .activetab1 {
-  box-shadow: 0px 1px 2px 0px #F3F4F6;
+  box-shadow: 0px 1px 2px 0px #f3f4f6;
 }
 .activetab2 {
-  box-shadow: 0px 1px 2px 0px #F3F4F6;
+  box-shadow: 0px 1px 2px 0px #f3f4f6;
 }
 </style>
