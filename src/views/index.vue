@@ -5,21 +5,29 @@
       <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
     </div>
     <div
-      class="w-full h-[352px] p-[24px] text-[#fff]"
-      style="
-        background: linear-gradient(to bottom, #002d72, #0a4da2);
-        box-sizing: border-box;
-      "
+      class="w-full h-[352px] text-[#fff] relative"
+
     >
-      <p class="flex flex-col text-[36px] font-roboto pt-[20px]">
-        <span class="pb-[26px]">Growth</span>
-        <span class="pb-[26px]">Marketing</span>
-        <span>Accelerated</span>
+     <video
+        src="https://www.directagents.com/wp-content/uploads/2025/06/Sequence-04_5_compressed_v2.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        class="w-full h-[352px] object-cover"
+      ></video>
+      <div class="absolute top-0 left-0 p-[24px]">
+        <p class="flex flex-col text-[36px] font-roboto pt-[20px]">
+        <span class="pb-[26px]">{{$t('index.str1')}}</span>
+        <span class="pb-[26px]">{{$t('index.str2')}}</span>
+        <span>{{$t('index.str3')}}</span>
       </p>
       <p class="flex flex-col text-[20px] pt-[70px]">
-        <span class="pb-[20px]">Challenge The old</span>
-        <span>Playbooks</span>
+        <span class="pb-[20px]">{{$t('index.str4')}}</span>
+        <span>{{$t('index.str5')}}</span>
       </p>
+      </div>
+      
     </div>
     <div class="relative bg-white">
       <!-- 菜单列表 -->
@@ -93,13 +101,10 @@
     </div>
     <div class="p-[25px] w-full we">
       <p class="text-[#002D72] text-[20px] text-base">
-        We Know That HumanIngenuity is the Key to Successfully Leveraging AI
-        Technology
+        {{$t('index.str6')}}
       </p>
       <p class="text-[#4B5563] pt-[10px]">
-        Learn how our robust suite of Atools creates a competitiveadvantage,
-        streamlines curoperations, and del vers futureproof solutions to our
-        clients.
+        {{$t('index.str7')}}
       </p>
       <img class="w-full mt-[15px]" src="@/static/images/index1bg.png" alt="" />
     </div>
@@ -108,26 +113,19 @@
       style="border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb"
     >
       <p class="text-[#002D72] text-[20px] text-base">
-        Capture demand in the Al platforms reshaping search and discovery
+        {{$t('index.str8')}}
       </p>
       <p class="text-[#4B5563] pt-[10px]">
-        Discover howr our advancedMedia Mix Modeling helos youallocate your
-        marketing buogetsmare effectively, optimizecampaign performance,
-        andmaximize ROI by analyzing thetrue impact of each channelacross your
-        marketing efforts.
+        {{$t('index.str9')}}
       </p>
       <img class="w-full mt-[15px]" src="@/static/images/index2bg.png" alt="" />
     </div>
     <div class="p-[25px] w-full">
       <p class="text-[#002D72] text-[20px] text-base">
-        Where Creativity Meets Performance
+       {{$t('index.str10')}}
       </p>
       <p class="text-[#4B5563] pt-[10px]">
-        Direct Agents Studio transformsbrands through data drivencreative that
-        captivates andconverts. Our award-winning teamseamlessly blends
-        innovativedesign, compelling storytelling, andperformance marketing
-        expertiseto create meaningful connectionsbetween brands and
-        theiraudiences
+        {{$t('index.str11')}}
       </p>
       <img class="w-full mt-[15px]" src="@/static/images/index3bg.png" alt="" />
     </div>

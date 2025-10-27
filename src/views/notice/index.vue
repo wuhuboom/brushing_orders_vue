@@ -1,12 +1,13 @@
 <template>
-  <div class="container w-full bg-[#f5f5f5] min-h-[100vh]">
+  <div class="container w-full bg-[#fff] min-h-[100vh]">
     <van-nav-bar
       :title="$t('通知')"
       fixed
       left-arrow
+      class="shadow"
       @click-left="onClickLeft"
     />
-    <div class="mt-[85px] pt-5">
+    <div class="mt-[45px] pt-5 px-[20px]">
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model:loading="loading"
@@ -16,20 +17,20 @@
         >
           <van-cell v-for="item in list" :key="item" :title="item">
             <div
-              class="w-full mb-4 bg-[#fff] flex flex-col p-3  border-l-4 border-[var(--main-color)]"
+              class="w-full mb-4 bg-[#fff] border border-[#F3F4F6] flex flex-col p-3 "
               @click="goDetail(item)"
             >
               <div class="flex justify-between">
-                <div class="text-base font-semibold text-[var(--main-color)]">{{item.noticeTitle}}</div>
+                <div class="text-base font-semibold text-[#000]">{{item.noticeTitle}}</div>
               </div>
               <div
-                class="flex text-sm text-[var(--main-color)] items-center mt-3"
+                class="flex text-sm text-[#4B5563] items-center mt-3"
                 v-html="item.noticeContent"
               >
                
               </div>
               <div class="flex justify-between mt-3">
-                <div class="text-sm font-normal text-[#333333]">{{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}</div>
+                <div class="text-sm font-normal text-[#9CA3AF]">{{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}</div>
               </div>
             </div>
           </van-cell>

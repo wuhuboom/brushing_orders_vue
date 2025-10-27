@@ -1,14 +1,16 @@
 <template>
-    <div class="w-full relative z-50">
-        <div class="h-[64px]"></div> <!-- 占位 -->
-        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[64px] w-full bg-[#1f2732] " style="bottom: -1px;">
+    <div class="w-full mx-auto relative z-50 bg-transparent" >
+        <div class="h-[60px]"></div> <!-- 占位 -->
+        <div class="bar-shadow flex items-center justify-center fixed bottom-0 left-0 right-0 h-[60px] w-[90%] bg-[#E3F3FAE5] rounded-[30px] mx-auto mb-[7px]" style="bottom: -1px;">
             <div v-for="menu in menus" :key="menu.title"
                 class="flex-1 flex flex-col items-center text-xs gap-1 font-light"  @click="onClickMenu(menu)">
-                <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}_h.png`)"
-                    alt="" class="h-7 w-7" :class="menu.title == $t('开始')?'starting':''">
-                <span  class="leading-normal text-[10px] " :class="name === menu.url?'text-[#fff]':'text-[#fff]',menu.title == $t('开始')?'startingText':''" style="font-size: 12px;">
+                <!-- <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}_h.png`)"
+                    alt="" class="h-7 w-7" :class="menu.title == $t('开始')?'starting':''"> -->
+                    <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}.png`)"
+                    alt="" class="h-[52px] w-[52px]">
+                <!-- <span  class="leading-normal text-[10px] " :class="name === menu.url?'text-[#fff]':'text-[#fff]',menu.title == $t('开始')?'startingText':''" style="font-size: 12px;">
                     {{ menu.title }}
-                </span>
+                </span> -->
             </div>
         </div>
     </div>
@@ -29,7 +31,7 @@ const menus = computed(() => [
     { title: t('首页'), url: '/', icon: 'home' },
     { title: t('开始'), url: '/starting', icon: 'starting' },
      { title: t('记录'), url: '/records', icon: 'records' },
-    // { title: t('我的'), url: '/user', icon: 'user' }
+    { title: t('我的'), url: '/my', icon: 'user' }
 ])
 
 watch(() => props.name, (val) => {

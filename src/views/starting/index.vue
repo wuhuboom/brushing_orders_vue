@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-[#002d72]">
     <div class="h-[40px] bg-[#002d72]"></div>
     <div class="w-full bg-[#002d72] starting">
       <!-- <HeaderTop></HeaderTop> -->
@@ -40,11 +40,11 @@
           </div>
         </div>
         <!-- 刷单 -->
-        <div class="mt-[160px] flex justify-center text-[#fff]">
+        <div class="mt-[167px] flex justify-center text-[#fff]">
           <span>({{ userInfo.dealCount }}</span
           >/<span>{{ orderCount }})</span>
         </div>
-        <div class="flex flex-col p-6 box-border rounded-xl">
+        <div class="flex flex-col px-6 py-5 box-border rounded-xl">
           <div class="flex flex-col box-border rounded-xl">
             <div
               class="w-full grid grid-cols-3 gap-x-px gap-y-1 justify-center"
@@ -85,15 +85,15 @@
                     "
                   >
                     <div class="overflow-hidden">
-                      <!-- <img
+                      <img
                         :src="`${url}${getImageByIndex(index)}`"
                         class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
                         alt=""
-                      /> -->
-                      <van-image
-                        fit="contain"
-                        :src="`${url}${getImageByIndex(index)}`"
                       />
+                      <!-- <van-image
+                        fit="fill"
+                        :src="`${url}${getImageByIndex(index)}`"
+                      /> -->
                     </div>
                   </div>
                 </div>

@@ -19,7 +19,7 @@
     >
       <div class="flex items-center justify-between px-[16px] py-[20px]">
         <div class="text-[#fff] text-[20px]">{{ userInfo.username }}</div>
-        <div class="relative">
+        <div class="relative border border-[2px] border-[#fff] rounded-[50%]">
           <span
             style="z-index: 99"
             class="bg-[#F59E0B] text-white text-[12px] px-2 py-[2px] rounded-full absolute bottom-[-8px] right-[-5px]"
@@ -215,6 +215,7 @@
     <ContactUs ref="ContactUsRef"></ContactUs>
     <tradePassword ref="tradePasswordRef"></tradePassword>
     <Lang ref="langRef"></Lang>
+    <Footer name="/my"></Footer>
     <!-- <van-popup
       v-model:show="show"
       closeable
@@ -370,7 +371,10 @@ const submitTradePassword = async () => {
 };
 
 function handleChangeLang() {
-  langRef.value.open();
+  // langRef.value.open();
+  router.push({
+    path: "/language",
+  });
 }
 
 const onClickLeft = () => {
