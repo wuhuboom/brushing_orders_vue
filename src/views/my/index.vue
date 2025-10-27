@@ -9,7 +9,7 @@
     <div class="flex justify-between px-[17px] mb-[5px] mt-[45px]">
       <div>
         <div class="text-[#000] text-[14px] pb-[3px]">hi,{{ userInfo.username }}</div>
-        <div class="text-[#6A7187] text-[12px]">
+        <div class="text-[#6A7187] text-[12px]" @click="copyContent(userInfo.inviteCode)">
           <span>{{ $t("邀请码") }}:</span>{{ userInfo.inviteCode }}
         </div>
       </div>
