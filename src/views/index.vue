@@ -149,8 +149,10 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import wheel from "@/components/wheel.vue";
 import { onMounted, ref, reactive, computed } from "vue";
+import { checkWorkTimeLocal } from "../util/utils";
 import {
   getLevel,
+  getTradeConfig,
   getLevelByLang,
   getNoticeList,
   getUserDraws,
@@ -190,12 +192,24 @@ const textMap = {
   VIP4: "#BC3217",
   VIP5: "#754705",
 };
-const bgMapStart = {
-  VIP1: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
-  VIP2: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png",
-  VIP3: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png",
-  VIP4: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png",
-  VIP5: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png",
+const customer = () => {
+  const time = checkWorkTimeLocal(
+    TradeInfor.value.workTimeStart,
+    TradeInfor.value.workTimeEnd,
+    userStore.zoneActive.tzName
+  );
+  if (time) {
+    router.push('/customer');
+    // ContactUsRef.value.open();
+  } else {
+    showToast(t("supportHours"));
+  }
+};
+
+const TradeInfor = ref({});
+const tradeConfig = async () => {
+  let res = await getTradeConfig();
+  TradeInfor.value = res.data;
 };
 
 const router = useRouter();
@@ -239,7 +253,7 @@ const items = [
   {
     name: "客服",
     icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
-    route: "/about",
+    route: "/customer",
   },
 ];
 
@@ -250,7 +264,10 @@ function goTo(path) {
   } else if (path == "/profile") {
     // tradePasswordRef.value.open(3);
     router.push("/deposit");
-  } else {
+  } else if('/customer'){
+    customer()
+  }
+   else {
     router.push(path);
   }
 }
@@ -311,6 +328,7 @@ const lotteryConfig = async () => {
 onMounted(() => {
   level();
   getData();
+  tradeConfig()
 
   // lotteryConfig()
   userStore.getUserInfo();

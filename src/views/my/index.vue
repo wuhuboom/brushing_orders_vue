@@ -295,7 +295,8 @@ const customer = () => {
     userStore.zoneActive.tzName
   );
   if (time) {
-    ContactUsRef.value.open();
+    router.push('/customer');
+    // ContactUsRef.value.open();
   } else {
     showToast(t("supportHours"));
   }
@@ -329,7 +330,7 @@ const items = [
   {
     name: "客服",
     icon: new URL("@/static/images/service.png", import.meta.url).href,
-    route: "/about",
+    route: "/customer",
   },
 ];
 
@@ -340,8 +341,9 @@ function goTo(path) {
   } else if (path == "/profile") {
     // tradePasswordRef.value.open(3);
     router.push("/deposit");
-  } else {
-    router.push(path);
+  } else if(path == "/customer") {
+    customer()
+    // router.push(path);
   }
 }
 

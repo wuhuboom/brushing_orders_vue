@@ -238,6 +238,14 @@
   "请输入钱包类型": "Please enter Wallet Type",
   "我的银行卡": "My Bank Card",
   "编辑": "Edit",
-  "deposit.title":"Deposit History"
+  "deposit.title":"Deposit History",
+  "customer.str":"Contact Customer Service Center",
+  "customer.str1":"We provide professional support anytime",
+  "customer.str2":"Online Customer Service",
+  "customer.str3":"Solve problems in real-time with customer service representatives",
+  "customer.str4":"Consult Now",
+  "customer.str5":"Copy email",
+  "customer.str6":"Email Feedback",
+  "customer.str7":"Send email to"
 
 }
