@@ -259,14 +259,14 @@ const getWithdrawal = () => {
   const levelNumber = level.match(/\d+/)?.[0];   // 提取出 "3"
   if (levelNumber < 3) {
     if (
-      ruleForm.amount < TradeInfor.value.minWithdrawAmount ||
-      ruleForm.amount > TradeInfor.value.maxWithdrawAmount
+      ruleForm.amount < userInfo.value.userLevel.minWithdrawAmount ||
+      ruleForm.amount > userInfo.value.userLevel.maxWithdrawAmount
     )
       return showToast(
         t("rechargeLimit", {
           vip: userInfo.value.userLevel.nameEn,
-          min: TradeInfor.value.minWithdrawAmount,
-          max: TradeInfor.value.maxWithdrawAmount,
+          min: userInfo.value.userLevel.minWithdrawAmount,
+          max: userInfo.value.userLevel.maxWithdrawAmount,
         })
       );
   }
