@@ -397,10 +397,12 @@ const doCreateOrder = () => {
 };
 
 const submitForm = async () => {
-  if (isLoading.value) return; // 防止重复点击
+  if (isLoading.value) return;
+  
   isLoading.value = true;
-  showProgress.value = true;
   progress.value = 0;
+  showProgress.value = true; // 确保每次点击都重新显示
+
   // 模拟进度条加载动画
   const timer = setInterval(() => {
     if (progress.value < 90) {
@@ -408,45 +410,36 @@ const submitForm = async () => {
     }
   }, 100);
 
-  // 延迟 1.5 秒后再执行请求
   setTimeout(async () => {
     try {
       const res = await submitOrder(goods.value.id);
+      progress.value = 100;
       showSuccessToast(t("提交成功"));
       userGetInfoMethods();
 
-      if (res.code == 201) {
-        goods.value = res.data;
-      } else {
-        showCenter.value = false;
-      }
-      progress.value = 100; // 请求完成设为100%
-      clearInterval(timer);
-      // 结束后隐藏进度条
-      setTimeout(() => {
-        showProgress.value = false;
-      }, 400);
+      if (res.code == 201) goods.value = res.data;
+      else showCenter.value = false;
     } catch (err) {
-      clearInterval(timer);
       progress.value = 100;
-      setTimeout(() => (showProgress.value = false), 400);
       if (err.code == 916) {
         router.push("/deposit");
       } else if (err.code == 906) {
-        console.log(userInfo.value.balance);
-        if (userInfo.value.balance <= 0) {
-          showToast("Transaction failed");
-        } else {
-          showToast(t(errorMessages[err.code] || "Failed to create"));
-        }
+        if (userInfo.value.balance <= 0) showToast("Transaction failed");
+        else showToast(t(errorMessages[err.code] || "Failed to create"));
       } else {
         showToast(t(errorMessages[err.code] || "Failed to create"));
       }
     } finally {
-      isLoading.value = false; // 请求完成后关闭 loading
+      clearInterval(timer);
+      // 延迟关闭，防止 UI 一闪而过
+      setTimeout(() => {
+        showProgress.value = false;
+        isLoading.value = false;
+      }, 500);
     }
-  }, 1500); // 1.5 秒延迟
+  }, 1500);
 };
+
 
 const toMy = () => {
   router.push({ path: "/my" });
