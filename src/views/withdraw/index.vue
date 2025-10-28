@@ -30,12 +30,10 @@
             {{ $t("账户金额") }}
           </div>
           <div class="flex mt-4">
-            <div class="text-white text-3xl  flex items-center">
+            <div class="text-white text-3xl flex items-center">
               {{ amount }}
             </div>
-            <div
-              class="text-white text-sm flex items-center ml-2 pt-[12px]"
-            >
+            <div class="text-white text-sm flex items-center ml-2 pt-[12px]">
               {{ $t("美元") }}
             </div>
           </div>
@@ -63,13 +61,17 @@
             :placeholder="$t('提款金额')"
             autocomplete="off"
             size="large"
-           
           >
             <template #append>
               <el-button
                 type="primary"
                 class="router"
-                style="background: #206645; border-color: #005713;height: 100%;color: #fff;"
+                style="
+                  background: #206645;
+                  border-color: #005713;
+                  height: 100%;
+                  color: #fff;
+                "
                 @click="All"
               >
                 {{ $t("全部") }}
@@ -96,35 +98,81 @@
     </div>
     <div class="w-[90%] mx-auto" v-else>
       <div class="flex justify-start mb-[16px] mt-[24px]">
-        <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==0?'bg-[#DCFCE7] text-[#166534]':''" @click="changeOrder(0)">{{$t('待审核')}}</div>
-        <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==1?'bg-[#DCFCE7] text-[#166534]':''" @click="changeOrder(1)">{{$t('审核成功')}}</div>
-        <div class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]" :class="orderActive==2?'bg-[#DCFCE7] text-[#166534]':''" @click="changeOrder(2)">{{$t('审核拒绝')}}</div>
+        <div
+          class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
+          :class="orderActive == 0 ? 'bg-[#DCFCE7] text-[#166534]' : ''"
+          @click="changeOrder(0)"
+        >
+          {{ $t("待审核") }}
+        </div>
+        <div
+          class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
+          :class="orderActive == 1 ? 'bg-[#DCFCE7] text-[#166534]' : ''"
+          @click="changeOrder(1)"
+        >
+          {{ $t("审核成功") }}
+        </div>
+        <div
+          class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
+          :class="orderActive == 2 ? 'bg-[#DCFCE7] text-[#166534]' : ''"
+          @click="changeOrder(2)"
+        >
+          {{ $t("审核拒绝") }}
+        </div>
       </div>
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-            <van-list
-              v-model:loading="loading"
-              :finished="finished"
-              :finished-text="$t('没有更多了')"
-              @load="onLoad"
+        <van-list
+          v-model:loading="loading"
+          :finished="finished"
+          :finished-text="$t('没有更多了')"
+          @load="onLoad"
+        >
+          <van-cell v-for="item in list" :key="item" :title="item">
+            <div
+              class="bg-[#fff] flex justify-between items-center px-[16px] py-[16px] rounded-[10px]"
+              :class="
+                item.status == 0
+                  ? 'activetab'
+                  : item.status == 1
+                  ? 'activetab1'
+                  : item.status == 2
+                  ? 'activetab2'
+                  : ''
+              "
             >
-              <van-cell v-for="item in list" :key="item" :title="item">
-                <div class="bg-[#fff] flex justify-between items-center px-[16px] py-[16px] rounded-[10px] " :class="item.status==0?'activetab':item.status==1?'activetab1':item.status==2?'activetab2':''">
-                  <div class="flex flex-col">
-                    <div class="text-[#111827] text-[16px] pb-[4px]">-{{ item.amount }}USD</div>
-                    <div class="text-[#6B7280] text-[12px]"> {{ formatWithTimezone(item.applicationTime,userStore.zoneActive.tzName)  }}</div>
-                  </div>
-                  <div :class="item.status==0?'text-[#15803D ]':item.status==1?'text-[#D97706]':'text-[#B91C1C]'">
-                    {{
-                          item.status == 0
-                            ? $t("通过")
-                            : item.status == 1
-                            ? $t("待审核")
-                            : $t("拒绝")
-                        }}
-                  </div>
+              <div class="flex flex-col">
+                <div class="text-[#111827] text-[16px] pb-[4px]">
+                  -{{ item.amount }}USD
                 </div>
-              </van-cell>
-            </van-list>
+                <div class="text-[#6B7280] text-[12px]">
+                  {{
+                    formatWithTimezone(
+                      item.applicationTime,
+                      userStore.zoneActive.tzName
+                    )
+                  }}
+                </div>
+              </div>
+              <div
+                :class="
+                  item.status == 0
+                    ? 'text-[#15803D ]'
+                    : item.status == 1
+                    ? 'text-[#D97706]'
+                    : 'text-[#B91C1C]'
+                "
+              >
+                {{
+                  item.status == 0
+                    ? $t("通过")
+                    : item.status == 1
+                    ? $t("待审核")
+                    : $t("拒绝")
+                }}
+              </div>
+            </div>
+          </van-cell>
+        </van-list>
       </van-pull-refresh>
     </div>
   </div>
@@ -138,12 +186,9 @@ import {
   getTradeConfig,
   userGetInfo,
 } from "../../api/apis";
-import {formatWithTimezone} from "../../util/utils"
+import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
-import {
-  showSuccessToast,
-  showToast
-} from "vant";
+import { showSuccessToast, showToast } from "vant";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -155,7 +200,7 @@ const finished = ref(false);
 const loading = ref(false);
 const amount = ref("");
 const userStore = useUserStore();
-const userInfo = ref({})
+const userInfo = ref({});
 const { t } = useI18n();
 const query = reactive({
   pageNum: 1,
@@ -209,26 +254,36 @@ const swichTab = (value) => {
   }
 };
 const getWithdrawal = () => {
-  if (!ruleForm.amount) return showToast(t('请输入金额'));
-  if (ruleForm.amount<TradeInfor.value.minWithdrawAmount || ruleForm.amount>TradeInfor.value.maxWithdrawAmount) return showToast(
-    t("rechargeLimit", { 
-    min: TradeInfor.value.minWithdrawAmount, 
-    max: TradeInfor.value.maxWithdrawAmount 
-  })
-  );
-  if (!ruleForm.tradePassword) return showToast(t('请输入交易密码'));
-  if(!userInfo.value.withdrawAddress) {
+  if (!ruleForm.amount) return showToast(t("请输入金额"));
+  const level = userInfo.value.userLevel.nameEn; // "VIP3"
+  const levelNumber = level.match(/\d+/)?.[0];   // 提取出 "3"
+  if (levelNumber < 3) {
+    if (
+      ruleForm.amount < TradeInfor.value.minWithdrawAmount ||
+      ruleForm.amount > TradeInfor.value.maxWithdrawAmount
+    )
+      return showToast(
+        t("rechargeLimit", {
+          vip: userInfo.value.userLevel.nameEn,
+          min: TradeInfor.value.minWithdrawAmount,
+          max: TradeInfor.value.maxWithdrawAmount,
+        })
+      );
+  }
+
+  if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
+  if (!userInfo.value.withdrawAddress) {
     router.push({ path: "/paymentMethods" });
-    return false
+    return false;
   }
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     // router.push({ path: "/my" });
-    swichTab(1)
+    swichTab(1);
   });
 };
 const changeOrder = (value) => {
-  orderActive.value = value
+  orderActive.value = value;
   if (orderActive.value == 0) {
     query.status = "1";
   } else if (orderActive.value == 1) {
@@ -250,21 +305,21 @@ onMounted(() => {
   userGetInfo().then((res) => {
     amount.value = res.data.balance;
     // ruleForm.amount = amount.value;
-    userInfo.value = res.data
+    userInfo.value = res.data;
   });
 });
 </script>
 <style>
 .withdraw .el-input__wrapper {
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e5e7eb;
 }
 </style>
 <style scoped>
 .router {
-  border-top-right-radius: 8px;   /* 右上角圆角 */
-border-bottom-right-radius: 8px; /* 右下角圆角 */
-border-top-left-radius: 0;      /* 左上角不圆 */
-border-bottom-left-radius: 0;   /* 左下角不圆 */
+  border-top-right-radius: 8px; /* 右上角圆角 */
+  border-bottom-right-radius: 8px; /* 右下角圆角 */
+  border-top-left-radius: 0; /* 左上角不圆 */
+  border-bottom-left-radius: 0; /* 左下角不圆 */
 }
 .tab {
   position: relative;
@@ -292,10 +347,10 @@ border-bottom-left-radius: 0;   /* 左下角不圆 */
   background-color: #206645; /* 激活状态的下划线颜色 */
 }
 .activetab {
-  box-shadow: 0px 1px 2px 0px #DCFCE7;
+  box-shadow: 0px 1px 2px 0px #dcfce7;
 }
 .activetab1 {
-  box-shadow: 0px 1px 2px 0px #D97706;
+  box-shadow: 0px 1px 2px 0px #d97706;
 }
 .activetab2 {
   box-shadow: 0px 1px 2px 0px #206645;

@@ -1,7 +1,7 @@
 {
   "您即将切换为{type}": "You are about to switch to {type}",
-  "rechargeLimit":"The minimum withdrawal amount cannot be less than ${min}",
-    "supportHours": "Customer service is currently offline, please pay attention to the online hours.",
+  "rechargeLimit":"{vip} minimum withdrawal amount is ${min}, and the maximum withdrawal amount is ${max}",
+  "supportHours": "Customer service is currently offline, please pay attention to the online hours.",
   "确认删除这个{name}吗？": "Are you sure you want to delete this {name}?",
   "我们通过数字营销": "We Help Small Businesses",
   "帮助小型企业盈利": "Profit with Digital Marketing",
