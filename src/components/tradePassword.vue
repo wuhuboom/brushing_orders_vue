@@ -55,6 +55,7 @@ const submitTradePassword = async () => {
   router.push({
     path: path,
   });
+  localStorage.setItem('tradePwdShown', 'true');
 };
 const close = () => (show.value = false);
 

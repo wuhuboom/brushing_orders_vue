@@ -299,6 +299,7 @@ const logout = () => {
   })
     .then(() => {
       userStore.logout();
+      localStorage.removeItem('tradePwdShown');
     })
     .catch(() => {
       // on cancel
@@ -307,7 +308,16 @@ const logout = () => {
 
 const payMethod = () => {
   // show.value = true;
-  tradePasswordRef.value.open(1);
+  // 检查本地是否已经显示过
+  const hasShown = localStorage.getItem('tradePwdShown');
+  if (hasShown) {
+    // 已经显示过就不再执行
+    router.push({
+      path: "/paymentMethods"
+    })
+  } else {
+    tradePasswordRef.value.open(1);
+  }
 };
 const submitTradePassword = async () => {
   if (!tradePassword.value) return showToast(t("请输入交易密码"));
