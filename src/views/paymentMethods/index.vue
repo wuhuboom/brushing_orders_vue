@@ -31,8 +31,11 @@
       <van-field
         v-model="form.withdrawType"
         label=""
-        :placeholder='$t("网络")'
+        readonly
+        :placeholder="$t('网络')"
         label-align="top"
+        is-link
+        @click="showPicker = true"
       />
     </div>
     <div class="text-[#666] font-semibold mt-5">
@@ -42,7 +45,7 @@
       <van-field
         v-model="form.withdrawAddress"
         label=""
-        :placeholder='$t("地址")'
+        :placeholder="$t('地址')"
         label-align="top"
       />
     </div>
@@ -51,6 +54,19 @@
         $t("更新")
       }}</van-button>
     </div>
+    <van-popup
+      v-model:show="showPicker"
+      destroy-on-close
+      round
+      position="bottom"
+    >
+      <van-picker
+        :model-value="pickerValue"
+        :columns="columns"
+        @cancel="showPicker = false"
+        @confirm="onConfirm"
+      />
+    </van-popup>
   </div>
 </template>
 <script setup>
@@ -59,23 +75,43 @@ import { addWithdrawalMethod } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
-import {
-  showToast
-} from "vant";
+import { showToast } from "vant";
+const showPicker = ref(false);
+const pickerValue = ref([]);
 const userStore = useUserStore();
 const router = useRouter();
 const { t } = useI18n();
+const columns = [
+  { text: "BTC", value: "BTC" },
+  { text: "ETH", value: "ETH" },
+];
+
+
 const form = reactive({
   withdrawName: "",
   withdrawAddress: "",
   withdrawType: "",
 });
+const onConfirm = ({ selectedValues, selectedOptions }) => {
+  showPicker.value = false;
+  pickerValue.value = selectedValues;
+  form.withdrawType = selectedOptions[0].text;
+};
 const submitForm = async () => {
   if (!form.withdrawName) return showToast(t("请输入钱包名称"));
-  if (!form.withdrawAddress) return showToast(t("请输入网络"));
+  const nameReg = /^[A-Za-z]+$/;
+  if (!nameReg.test(form.withdrawName)) {
+    return showToast(t("钱包名称只能包含英文字母"));
+  }
+  if (!form.withdrawType) return showToast(t("请输入网络"));
   if (!form.withdrawAddress) return showToast(t("请输入地址"));
+  // 必须是英文+数字，且长度 ≥ 10
+  const addressReg = /^[A-Za-z0-9]{10,}$/;
+  if (!addressReg.test(form.withdrawAddress)) {
+    return showToast(t("地址需为10位以上的英文和数字组合"));
+  }
   let res = await addWithdrawalMethod(form);
-  showToast(t("添加成功"))
+  showToast(t("添加成功"));
   router.push({ path: "/my" });
 };
 

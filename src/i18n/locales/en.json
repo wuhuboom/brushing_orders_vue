@@ -205,5 +205,7 @@
   "我们期待在工作时间内为您服务": "We'll be happy to help and get back to you once we're online",
   "客户服务目前无法提供服务": "Customer service is currently unavailable",
   "提现金额达到当日最大额度": "Withdrawal amount has reached the daily limit",
-  "提现次数达到当日最大": "Withdrawal count has reached the daily limit"
+  "提现次数达到当日最大": "Withdrawal count has reached the daily limit",
+  "地址需为10位以上的英文和数字组合": "Address must be a combination of 10 or more English letters and numbers",
+  "钱包名称只能包含英文字母": "Wallet name can only contain English letters"
 }

@@ -254,6 +254,10 @@ const swichTab = (value) => {
   }
 };
 const getWithdrawal = () => {
+   if (!userInfo.value.withdrawAddress) {
+    router.push({ path: "/paymentMethods" });
+    return false;
+  }
   if (!ruleForm.amount) return showToast(t("请输入金额"));
   const level = userInfo.value.userLevel.nameEn; // "VIP3"
   const levelNumber = level.match(/\d+/)?.[0];   // 提取出 "3"
@@ -272,10 +276,7 @@ const getWithdrawal = () => {
   }
 
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
-  if (!userInfo.value.withdrawAddress) {
-    router.push({ path: "/paymentMethods" });
-    return false;
-  }
+ 
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     // router.push({ path: "/my" });
