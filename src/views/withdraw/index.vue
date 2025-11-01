@@ -86,6 +86,7 @@
             type="password"
             autocomplete="off"
             size="large"
+            @input="ruleForm.tradePassword = ruleForm.tradePassword.replace(/\s+/g, '')"
             show-password
           />
         </el-form-item>
@@ -277,6 +278,7 @@ const getWithdrawal = () => {
 
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
  
+  console.log(ruleForm)
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     // router.push({ path: "/my" });
