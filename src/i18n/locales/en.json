@@ -207,5 +207,6 @@
   "提现金额达到当日最大额度": "Withdrawal amount has reached the daily limit",
   "提现次数达到当日最大": "Withdrawal count has reached the daily limit",
   "地址需为10位以上的英文和数字组合": "Address must be a combination of 10 or more English letters and numbers",
-  "钱包名称只能包含英文字母": "Wallet name can only contain English letters"
+  "钱包名称只能包含英文字母": "Wallet name can only contain English letters",
+  "钱包名称不能包含特殊字符": "Wallet name cannot contain special characters"
 }

@@ -99,6 +99,9 @@ const onConfirm = ({ selectedValues, selectedOptions }) => {
 };
 const submitForm = async () => {
   if (!form.withdrawName) return showToast(t("请输入钱包名称"));
+  if (!/^[A-Za-z\u4e00-\u9fa5\s]+$/.test(form.withdrawName)) {
+  return showToast(t("钱包名称不能包含特殊字符"));
+}
   const nameReg = /^[A-Za-z]+$/;
   if (!nameReg.test(form.withdrawName)) {
     return showToast(t("钱包名称只能包含英文字母"));
