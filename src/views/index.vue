@@ -339,36 +339,39 @@ const onSwiper = (swiper) => {
   }, 50); // 延迟一帧，保证 DOM 尺寸正确
 }
 const ready = ref(true);
-// const level = async () => {
-//   let res = await getLevel();
-//   levelList.value = res.data;
-//   levelList.value.forEach((item) => {
-//     if (item.descriptionEn) {
-//       // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
-//       item.descriptionEn = item.descriptionEn.replace(
-//         /(●|•|&#8226;|&#9679;)/g,
-//         '<span class="small-dot">●</span>'
-//       );
-//     }
-//   });
-//   levelList.value = levelList.value.map((item, index) => {
-//     return {
-//       ...item,
-//       bg: bgImages[index % bgImages.length] // 按顺序循环使用
-//     };
-//   });
-//   ready.value = true;
-//   // 等数据渲染完
-//   await nextTick()
-//   // 确保 swiper 已经初始化
-//    if (swiperInstance.value) {
-//     swiperInstance.value.slideToLoop(1, 0) // 再切换到第一个
-//     // setTimeout(() => {
-//       swiperInstance.value.slideToLoop(0, 0) // 再切换到第一个
-//     // },1000)
+const level = async () => {
+  let res = await getLevel();
+  // levelList.value = res.data;
+  console.log(res)
+  levelList.value = levelList.value.map(item => {
+    const match = res.data.find(d => d.nameEn === item.nameEn);
+    return {
+      ...item,
+      tasks: match ? match.orderCount : 0,
+      rate:match ? match.commissionRatio+'%' : '0%',
+    };
+  });
+  // res.data.forEach((item) => {
+  //   item.tasks = item.orderCount
+  // });
+  // levelList.value = levelList.value.map((item, index) => {
+  //   return {
+  //     ...item,
+  //     bg: bgImages[index % bgImages.length] // 按顺序循环使用
+  //   };
+  // });
+  // ready.value = true;
+  // 等数据渲染完
+  // await nextTick()
+  // // 确保 swiper 已经初始化
+  //  if (swiperInstance.value) {
+  //   swiperInstance.value.slideToLoop(1, 0) // 再切换到第一个
+  //   // setTimeout(() => {
+  //     swiperInstance.value.slideToLoop(0, 0) // 再切换到第一个
+  //   // },1000)
     
-//   }
-// };
+  // }
+};
 const query = reactive({
   pageNum: 1,
   pageSize: 10,
@@ -436,7 +439,7 @@ onActivated (() => {
   getUserGetInfo();
   getbannerList()
   tradeConfig();
-  // level();
+  level();
 });
 onUnmounted(() => {
   window.removeEventListener("updateTrade", updateHandler);
