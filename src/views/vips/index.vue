@@ -41,7 +41,8 @@
           <div class="w-[40px] h-[40px] flex justify-center items-center text-[14px]" style="border-radius: 50%;font-weight: bold;"  :style="getStyle(index)">{{tab.nameEn}}</div>
         </div>
         <div class="text-[16px] text-[#13284B] px-[13px] pt-[15px]" style="font-weight: bold;" :class="index==4?'text-[#fff]':''">Member Beneﬁts</div>
-        <div v-html="tab.descriptionEn" class="text-[#364150] text-[12px] px-[13px] pt-[15px]" :class="index==4?'text-[#fff]':''" style="line-height: 18px;"></div>
+        <div class="text-[#364150] text-[12px] px-[13px] pt-[15px]" :class="index==4?'text-[#fff]':''" style="line-height: 18px;">{{ t('commissionInfo', { rate: tab.commissionRatio+'%', tasks: tab.orderCount }) }}</div>
+        <!-- <div v-html="tab.descriptionEn" class="text-[#364150] text-[12px] px-[13px] pt-[15px]" :class="index==4?'text-[#fff]':''" style="line-height: 18px;"></div> -->
       </div>
     </div>
   </div>
