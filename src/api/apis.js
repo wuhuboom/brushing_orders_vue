@@ -98,4 +98,7 @@ export const addWalletBank = (params) =>
   getApi().post("/account/addWalletBank", params, { loading: true, showMsg: true });
 export const getBankWallet = (params) =>
   getApi().get(`/account/getBankWallet/${params.id}`, {  loading: false, showMsg: false });
+export const getShopList = (params) =>
+  getApi().get(`/account/getShopList`, { params, loading: false, showMsg: false });
+
 

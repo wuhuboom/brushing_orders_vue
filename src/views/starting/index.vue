@@ -3,9 +3,9 @@
     <!-- <HeaderTop></HeaderTop> -->
     <div class="flex items-center relative  bg-[#000] ">
       <!-- 左侧箭头 -->
-      <!-- <div class="absolute left-3" @click="toLogin">
+      <div class="absolute left-3" @click="toLogin">
         <van-icon name="arrow-left" color="#fff" size="24px" />
-      </div> -->
+      </div>
       <!-- 中间标题 -->
       <div class="mx-auto text-white text-[22px] py-[24px] ">{{$t('开始')}}</div>
     </div>
@@ -116,7 +116,7 @@
       <div class="mt-6 pb-4"></div>
     </div>
     </div>
-    <Footer name="/starting"></Footer>
+    <!-- <Footer name="/starting"></Footer> -->
     <van-popup
       v-model:show="showCenter"
       round
@@ -337,6 +337,10 @@ const submitForm = () => {
 const toMy = () => {
   router.push({ path: "/my" });
 };
+
+const toLogin = () =>{
+  router.push({ path: "/projectspage" });
+}
 
 const TradeInfor = ref({})
 const tradeConfig = async () => {
