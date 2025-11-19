@@ -6,11 +6,14 @@
         <van-icon name="arrow-left" color="#fff" size="24px" />
       </div> -->
       <!-- 中间标题 -->
-      <div class="mx-auto text-white text-[22px] py-[24px]">
-         Menu
-      </div>
+      <div class="mx-auto text-white text-[22px] py-[24px]">Menu</div>
     </div>
-    <van-tabs color="#007513" v-if="shopListArr.length>0" @change="swichTab" v-model:active="active">
+    <van-tabs
+      color="#007513"
+      v-if="shopListArr.length > 0"
+      @change="swichTab"
+      v-model:active="active"
+    >
       <van-tab :title="$t('全部')"></van-tab>
       <van-tab
         v-for="item in shopListArr"
@@ -35,13 +38,12 @@
             {{ item.name }}
             <span
               class="bg-gradient-to-r from-[#fecb2e] to-[#fca322] text-[#fff] text-[12px] w-[35px] h-[20px] flex justify-center items-top rounded-[10px] ml-[10px]"
-              >vip{{item.vipLevel}}</span
+              >vip{{ item.vipLevel }}</span
             >
           </div>
           <div class="text-[12px] text-[#666]">
             Available balance:
-            <span v-if="item.maxMoney==0">≥{{ item.minMoney }} USDT
-            </span>
+            <span v-if="item.maxMoney == 0">≥{{ item.minMoney }} USDT </span>
             <span v-else>{{ item.minMoney }}USDT-{{ item.maxMoney }}USDT</span>
           </div>
           <div class="text-[12px] text-[#8aabd2]">
@@ -59,8 +61,8 @@
 <script setup>
 import HeaderTop from "@/components/HeaderTop.vue";
 import { onMounted, ref, reactive } from "vue";
-import { getShopList } from "../../api/apis";
-import { showSuccessToast } from "vant";
+import { getShopList, getShopListVipLevel } from "../../api/apis";
+import { showSuccessToast,showFailToast} from "vant";
 import { useI18n } from "vue-i18n";
 import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
@@ -77,7 +79,7 @@ const active = ref(0);
 const getShopArr = async () => {
   let res = await getShopList();
   shopListArr.value = res.data; // 保存原始数据
-  shopList.value = res.data;    // 默认显示全部
+  shopList.value = res.data; // 默认显示全部
 };
 
 const swichTab = () => {
@@ -89,11 +91,20 @@ const swichTab = () => {
   // 如果有结果 → 用过滤结果，否则 → 显示全部
   shopList.value = list.length ? list : shopListArr.value;
 };
-const goToDetail = () =>{
-  router.push({
-    path:"/starting"
-  })
-}
+const goToDetail = (item) => {
+  let qurey = {
+    vipLevel: item.vipLevel,
+  };
+  getShopListVipLevel(qurey).then((res) => {
+    if (res.data) {
+      router.push({
+        path: "/starting",
+      });
+    } else {
+      showFailToast('You do not have permission')
+    }
+  });
+};
 onMounted(() => {
   getShopArr();
 });
