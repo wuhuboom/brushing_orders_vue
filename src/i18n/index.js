@@ -10,6 +10,7 @@ import de from './locales/de.json';
 import id from './locales/id.json';
 import th from './locales/th.json';
 import zhTW from './locales/zh-Tw.json';
+import pt from './locales/pt.json';
 
 // 定义语言包
 const messages = {
@@ -22,7 +23,8 @@ const messages = {
   it,
   id,
   th,
-  zhTW
+  zhTW,
+  pt
 };
 
 // 创建 i18n 实例并导出

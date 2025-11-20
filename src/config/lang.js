@@ -36,6 +36,10 @@ export const LANGS = {
         name: '日本語',
         code: 'ja'
     },
+    pt: {
+        name: 'Português',
+        code: 'pt'
+    }
     // zh_TW: {
     //     name: '繁體',
     //     code: 'zh-TW'
