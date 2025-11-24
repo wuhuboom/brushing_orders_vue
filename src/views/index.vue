@@ -343,12 +343,16 @@ const level = async () => {
   let res = await getLevel();
   // levelList.value = res.data;
   console.log(res)
-  levelList.value = levelList.value.map(item => {
-    const match = res.data.find(d => d.nameEn === item.nameEn);
+  // 用后端的数据进行 map，这样长度永远跟后端一致
+  levelList.value = res.data.map(d => {
+    // 尝试从原 levelList 找是否有同名项（为了保留 bg、样式等）
+    const match = levelList.value.find(item => item.nameEn === d.nameEn);
+
     return {
-      ...item,
-      tasks: match ? match.orderCount : 0,
-      rate:match ? match.commissionRatio+'%' : '0%',
+      ...(match ?? {}),   // 有就保留前端的 UI 信息，没有也不报错
+      nameEn: d.nameEn,
+      tasks: d.orderCount ?? 0,
+      rate: d.commissionRatio ? d.commissionRatio + '%' : '0%',
     };
   });
   // res.data.forEach((item) => {
