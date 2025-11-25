@@ -109,7 +109,9 @@ const levelList = ref([]);
 const level = async () => {
   let res = await getLevel();
   levelList.value = res.data;
+
   levelList.value.forEach((item) => {
+    tabs.value.push(item.nameEn)
     if (item.descriptionEn) {
       // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
       item.descriptionEn = item.descriptionEn.replace(
@@ -127,7 +129,7 @@ const toUpgrade = (id) => {
   // showToast(t('联系客服'));
   ContactUsRef.value.open();
 };
-const tabs = ["VIP1", "VIP2", "VIP3", "VIP4"];
+const tabs = ref([]);
 const activeTab = ref(0);
 const sectionRefs = ref([]);
 
