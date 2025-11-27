@@ -33,7 +33,7 @@
               >
                 <div class="w-full">
                   <div class="mr-2 w-[100%] flex justify-between">
-                    <img class="w-[60px] h-[60px]" :src="VITE_API_IMG_URL + item.coverUrl" alt="" />
+                    <img class="w-[60px] h-[60px]" :src="VITE_API_IMG_URL + item.productImage" alt="" />
                     <div
                     class=" text-xs p-1 font-medium rounded h-[24px]"
                     :class="

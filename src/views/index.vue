@@ -296,22 +296,22 @@ const userDraws = async () => {
   }
 };
 
-const query = reactive({
-  pageNum: 1,
-  pageSize: 10,
-});
-const noticeContent = ref("");
+// const query = reactive({
+//   pageNum: 1,
+//   pageSize: 10,
+// });
+// const noticeContent = ref("");
 
-const getData = async () => {
-  const res = await getNoticeList(query); // 你自己的接口
-  console.log(res);
-  noticeContent.value = res.rows.length > 0 ? res.rows[0].noticeContent : "";
-};
+// const getData = async () => {
+//   const res = await getNoticeList(query); // 你自己的接口
+//   console.log(res);
+//   noticeContent.value = res.rows.length > 0 ? res.rows[0].noticeContent : "";
+// };
 
-// 计算属性，去除所有HTML标签
-const pureNoticeContent = computed(() => {
-  return noticeContent.value.replace(/<\/?[^>]+(>|$)/g, "");
-});
+// // 计算属性，去除所有HTML标签
+// const pureNoticeContent = computed(() => {
+//   return noticeContent.value.replace(/<\/?[^>]+(>|$)/g, "");
+// });
 // 获取转盘配置
 const lotteryConfig = async () => {
   try {
@@ -325,7 +325,7 @@ const lotteryConfig = async () => {
 
 onMounted(() => {
   level();
-  getData();
+  // getData();
   tradeConfig()
 
   // lotteryConfig()
