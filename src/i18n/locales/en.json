@@ -177,6 +177,9 @@
   "提现未开启": "Withdrawal is not enabled",
   "提现方式未设置": "Withdrawal method not set",
   "当前不可提现": "Withdrawal is not available at the moment",
+  "提现金额达到当日最大额度": "Withdrawal amount has reached the daily maximum limit",
+  "提现次数达到当日最大":" Withdrawal count has reached the daily maximum",
+  "用户信用分不足以提现": "User credit score is insufficient for withdrawal",
 
   "暂无数据": "No data available",
   "上传失败": "Upload failed",

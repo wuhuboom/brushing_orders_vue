@@ -168,6 +168,9 @@
   "提现未开启": "Auszahlung ist nicht aktiviert",
   "提现方式未设置": "Auszahlungsmethode nicht eingestellt",
   "当前不可提现": "Derzeit keine Auszahlung möglich",
+  "提现金额达到当日最大额度": "Der Auszahlungsbetrag hat das tägliche Maximum erreicht",
+  "提现次数达到当日最大": "Die Anzahl der Auszahlungen hat das tägliche Maximum erreicht",
+  "用户信用分不足以提现": "Der Benutzer hat nicht genügend Kreditpunkte, um auszahlen zu können",
 
   "暂无数据": "Keine Daten verfügbar",
   "上传失败": "Hochladen fehlgeschlagen",

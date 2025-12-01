@@ -168,6 +168,9 @@
   "提现未开启": "Penarikan belum dibuka",
   "提现方式未设置": "Metode penarikan belum disetel",
   "当前不可提现": "Tidak dapat menarik sekarang",
+  "提现金额达到当日最大额度": "Jumlah penarikan mencapai batas maksimum harian",
+  "提现次数达到当日最大": "Jumlah penarikan mencapai batas maksimum harian",
+  "用户信用分不足以提现": "Nilai kredit pengguna tidak cukup untuk menarik",
 
   "暂无数据": "Tidak ada data",
   "上传失败": "Unggahan gagal",

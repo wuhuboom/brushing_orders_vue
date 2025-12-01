@@ -168,6 +168,9 @@
   "提现未开启": "Le retrait n'est pas activé",
   "提现方式未设置": "La méthode de retrait n'est pas définie",
   "当前不可提现": "Retrait actuellement indisponible",
+  "提现金额达到当日最大额度": "Le montant du retrait atteint le plafond journalier",
+  "提现次数达到当日最大": "Le nombre de retraits atteint le plafond journalier",
+  "用户信用分不足以提现": "Le score de crédit de l'utilisateur est insuffisant pour retirer des fonds",
 
   "暂无数据": "Aucune donnée disponible",
   "上传失败": "Échec du téléchargement",
