@@ -5,7 +5,7 @@
       <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
     </div>
     <div class="flex justify-start ml-[16px]">
-      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==0?'nav-active':'nav'" @click="swichTab(0)">{{$t('全部')}}{{active.value}}</div>
+      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==0?'nav-active':'nav'" @click="swichTab(0)">{{$t('全部')}}</div>
       <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==1?'nav-active':'nav'" @click="swichTab(1)">{{$t('待办')}}</div>
       <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==2?'nav-active':'nav'" @click="swichTab(2)">{{$t('完成')}}</div>
     </div>
@@ -48,8 +48,8 @@
                       item.status == "0"
                         ? $t("已完成")
                         : item.status == "1"
-                        ? $t("冻结")
-                        : $t("待提交")
+                        ? $t("待提交")
+                        : $t("冻结")
                     }}
                   </div>
                   </div>
@@ -101,7 +101,7 @@
                 </div>
                 <div
                   class="flex justify-end items-center mt-2"
-                  v-if="item.status == '2'"
+                  v-if="item.status == '1'"
                 >
                   <van-button
                     color="#FFEDD5"
@@ -127,22 +127,22 @@
       :show-confirm-button="false"
     >
       <div class="w-[60px] h-[125px] mx-auto mt-[24px]" style="width: 60px;">
-        <img :src="VITE_API_IMG_URL + goodsData.coverUrl" alt="" />
+        <img :src="VITE_API_IMG_URL + goodsData.productImage" alt="" />
       </div>
       <div class="w-full mt-[-3rem] pt-[23px] text-[#fff]  " style="border-top: 1px solid #33578e;" >
         <div class="w-[100%] mx-auto  text-[18px]  font-semibold p-[20px]">
-          {{ goodsData.goodsName }}
+          {{ goodsData.productTitle }}
         </div>
         <div class="flex justify-start p-[20px]" style="border-top: 1px solid #33578e;border-bottom: 1px solid #33578e;">
           <img class="w-[24px] h-[24px]" src="@/static/images/price.png" alt="">
           <div class="pl-[12px] w-[100%]" >
             <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
               <div class="text-[#D1D5DB]">{{ $t("总金额") }}</div>
-              <div class="text-[#fff] font-bold">{{ goodsData.price }}{{ $t("美元") }}</div>
+              <div class="text-[#fff] font-bold">{{ goodsData.amount }}{{ $t("美元") }}</div>
             </div>
             <div class="flex justify-between w-[100%] text-[16px]">
               <div class="text-[#D1D5DB]">{{ $t("佣金") }}</div>
-              <div class="text-[#FF9500] font-bold">{{ goodsData.commission }}{{ $t("美元") }}</div>
+              <div class="text-[#FF9500] font-bold">{{ goodsData.rebate }}{{ $t("美元") }}</div>
             </div>
 
           </div>
@@ -162,7 +162,7 @@
             </div>
             <div class="flex justify-between w-[100%] text-[16px]">
               <div class="text-[#D1D5DB]">{{ $t("编号") }}</div>
-              <div class="text-[#fff] text-[14px]">{{ goodsData.orderNo }}</div>
+              <div class="text-[#fff] text-[14px]">{{ goodsData.orderNumber }}</div>
             </div>
 
           </div>
@@ -286,11 +286,11 @@ const swichTab = (index) => {
   console.log(active.value);
   active.value = index
   if (active.value == 0) {
-    query.status = "";
-  } else if (active.value == 1) {
-    query.status = 2;
-  } else {
     query.status = 0;
+  } else if (active.value == 1) {
+    query.status = 1;
+  } else {
+    query.status = 2;
   }
   onRefresh();
 };

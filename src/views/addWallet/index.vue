@@ -17,37 +17,37 @@
       </div>
     </div> -->
     <div class="text-[#4B5563] font-semibold mt-20 pl-[8px]">
-      {{ $t("钱包") }}
+      {{ $t("账户名称") }}
     </div>
     <div
       class="w-full mt-2 overflow-hidden"
       style="border-bottom: 1px solid #e5e7eb"
     >
       <van-field
-        v-model="form.name"
+        v-model="form.accountName"
         label=""
-        :placeholder="$t('请输入钱包地址')"
+        :placeholder="$t('请输入账户名称')"
         label-align="top"
         size="large"
       />
     </div>
     <div class="text-[#4B5563]font-semibold mt-5 pl-[8px]">
-      {{ $t("网络") }}
+      {{ $t("钱包名称") }}
     </div>
     <div
       class="w-full mt-2 overflow-hidden"
       style="border-bottom: 1px solid #e5e7eb"
     >
       <van-field
-        v-model="form.walletType"
+        v-model="form.walletName"
         label=""
-        :placeholder="$t('Please enter the network')"
+        :placeholder="$t('请输入钱包名称')"
         label-align="top"
         size="large"
       />
     </div>
     <div class="text-[#4B5563] font-semibold mt-5 pl-[8px]">
-      {{ $t("地址") }}
+      {{ $t("钱包地址") }}
     </div>
     <div
       class="w-full mt-2 overflow-hidden"
@@ -56,7 +56,7 @@
       <van-field
         v-model="form.walletAddress"
         label=""
-        :placeholder="$t('请输入地址')"
+        :placeholder="$t('请输入钱包地址')"
         label-align="top"
         size="large"
       />
@@ -121,8 +121,8 @@ const route = useRoute();
 const { t } = useI18n();
 const showPicker = ref(false);
 const form = reactive({
-  name: "",
-  walletType: "",
+  accountName: "",
+  walletName: "",
   walletAddress: "",
 });
 const pickerValue = ref(["1"]);
@@ -133,16 +133,17 @@ const columns = [
 ];
 const submitForm = async () => {
   let query = {
-    type: 2,
-    name: form.name,
+    type: 1,
+    withdrawalTypeId:1,
   };
   if(route.query.id) {
     query.id = Number(route.query.id)
   }
-  if (!form.name) return showToast(t("请输入姓名"));
-  if (!form.walletType) return showToast(t("请输入钱包类型"));
+  if (!form.accountName) return showToast(t("请输入账户名称"));
+  if (!form.walletName) return showToast(t("请输入钱包名称"));
   if (!form.walletAddress) return showToast(t("请输入钱包地址"));
-  query.walletType = form.walletType;
+  query.accountName = form.accountName;
+  query.walletName = form.walletName;
   query.walletAddress = form.walletAddress;
 
   let res = await addWalletBank(query);
@@ -169,9 +170,9 @@ const onClickLeft = () => {
 };
 const getgetBankWallet = async () => {
   let res = await getBankWallet({ id: route.query.id });
-  form.name = res.data.name;
+  form.accountName = res.data.accountName;
+  form.walletName = res.data.walletName;
   form.walletAddress = res.data.walletAddress;
-  form.walletType = res.data.walletType;
   //   const form = reactive({
   //   name: "",
   //   bankCode: "",

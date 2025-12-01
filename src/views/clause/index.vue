@@ -32,7 +32,7 @@ const getGetGlobalConfig = async() =>{
     let res = await getConfigByLang({ lang: parLang.value });
     // termsEn.value = res.data.termsEn
     // let html = res.data.termsEn || ""
-    let html = res?.data?.terms ?? '';
+    let html = res?.data?.termsContent ?? '';
     // 1. 分组：把一级标题及其子条目包进 block
     html = html.replace(/(<p>\d+\)[\s\S]*?)(?=<p>\d+\)|$)/g, '<div class="block">$1</div>')
 

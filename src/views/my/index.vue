@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="text-[#8CE563]">
-          {{ $t("信用评分") }}:{{ userInfo.creditScore }}%
+          {{ $t("信用评分") }}:{{ userInfo.reputationScore }}%
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@
         </div>
         <div class="text-[#6B7280] text-[14px]">
           Today's Commission:
-          <span class="text-[#09499B]">{{ userInfo.commission }} USD</span>
+          <span class="text-[#09499B]">{{ userInfo.todayCommission }} USD</span>
         </div>
       </div>
       <img class="w-[103px]" src="@/static/images/myBg.png" alt="" />
@@ -432,8 +432,8 @@ const userLevel = ref({});
 onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
-    avatarUrl.value = `${url}${res.data.userLevel.icon}`;
-    userLevel.value = res.data.userLevel.nameEn;
+    avatarUrl.value = `${url}${res.data.memberLevel.icon}`;
+    userLevel.value = res.data.memberLevel.name;
     console.log(userInfo.value);
     getFullDomain();
   });

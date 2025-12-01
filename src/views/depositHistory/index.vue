@@ -38,7 +38,7 @@
               >
                 <div class="flex justify-between">
                   <div class="text-sm font-semibold text-[#999]">
-                    {{ item.code }}
+                    {{ item.orderNumber }}
                   </div>
                 </div>
                 <div

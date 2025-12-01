@@ -41,7 +41,7 @@
         </div>
         <!-- 刷单 -->
         <div class="mt-[167px] flex justify-center text-[#fff]">
-          <span>({{ userInfo.dealCount }}</span
+          <span>({{ userInfo.taskProgress }}</span
           >/<span>{{ orderCount }})</span>
         </div>
         <div class="flex flex-col px-6 py-5 box-border rounded-xl">
@@ -85,15 +85,15 @@
                     "
                   >
                     <div class="overflow-hidden">
-                      <img
+                      <!-- <img
                         :src="`${url}${getImageByIndex(index)}`"
                         class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
                         alt=""
-                      />
-                      <!-- <van-image
+                      /> -->
+                      <van-image
                         fit="fill"
                         :src="`${url}${getImageByIndex(index)}`"
-                      /> -->
+                      />
                     </div>
                   </div>
                 </div>
@@ -121,7 +121,7 @@
         </div>
         <div class="flex justify-between">
           <div class="text-[#000000] text-[16px] font-bold">
-            {{ userInfo.commission }} USD
+            {{ userInfo.todayCommission }} USD
           </div>
           <div class="text-[#6B7280] text-[12px]">
             {{ $t("每日赚取佣金") }}
@@ -150,8 +150,8 @@
               </div>
               <div class="text-[#4B5563] text-[14px]">
                 {{ $t("start.notice.desc1.str") }}
-                {{ TradeInfor?.workTimeStart || "--:--" }} -
-                {{ TradeInfor?.workTimeEnd || "--:--" }} <br />
+                {{ TradeInfor?.tradeTimeRange?.[0] ?? "--:--" }} -
+                {{ TradeInfor?.tradeTimeRange?.[1] ?? "--:--" }} <br />
                 {{ $t("start.notice.desc2.str") }}
               </div>
             </div>
@@ -294,14 +294,14 @@
         :show-confirm-button="false"
       >
         <div class="w-[60px] h-[125px] mx-auto mt-[24px]" style="width: 60px">
-          <img :src="url + goods.coverUrl" alt="" />
+          <img :src="url + goods.productImage" alt="" />
         </div>
         <div
           class="w-full mt-[-3rem] pt-[23px] text-[#fff]"
           style="border-top: 1px solid #33578e"
         >
           <div class="w-[100%] mx-auto text-[18px] font-semibold p-[20px]">
-            {{ goods.goodsName }}
+            {{ goods.productTitle }}
           </div>
           <div
             class="flex justify-start p-[20px]"
@@ -319,13 +319,13 @@
               <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
                 <div class="text-[#D1D5DB]">{{ $t("总金额") }}</div>
                 <div class="text-[#fff] font-bold">
-                  {{ goods.price }}{{ $t("美元") }}
+                  {{ goods.amount }}{{ $t("美元") }}
                 </div>
               </div>
               <div class="flex justify-between w-[100%] text-[16px]">
                 <div class="text-[#D1D5DB]">{{ $t("佣金") }}</div>
                 <div class="text-[#FF9500] font-bold">
-                  {{ goods.commission }}{{ $t("美元") }}
+                  {{ goods.rebate }}{{ $t("美元") }}
                 </div>
               </div>
             </div>
@@ -354,7 +354,7 @@
               <div class="flex justify-between w-[100%] text-[16px]">
                 <div class="text-[#D1D5DB]">{{ $t("编号") }}</div>
                 <div class="text-[#fff] text-[14px]">
-                  {{ goods.orderNo }}
+                  {{ goods.orderNumber }}
                 </div>
               </div>
             </div>
@@ -449,25 +449,25 @@ const getList = async () => {
 const getImageByIndex = (i) => {
   if (i === 4) return null; // 第 5 项是“开始按钮”，不用图
   const realIndex = i < 5 ? i : i - 1;
-  console.log(goodsList.value[realIndex]?.coverUrl);
-  return goodsList.value[realIndex]?.coverUrl || "";
+  console.log(goodsList.value[realIndex]?.image);
+  return goodsList.value[realIndex]?.image || "";
 };
 
 // 抢单
 const handleClick = () => {
-  if (
-    userInfo.value.cardNumber == userInfo.value.dealCount &&
-    userInfo.value.dealCount != 0
-  ) {
-    showImg.value = true;
-    // 2. 延时 2 秒后关闭图片，并继续创建订单
-    // setTimeout(() => {
-    //   showImg.value = false;
-    //   doCreateOrder();
-    // }, 2000);
+  // if (
+  //   userInfo.value.cardNumber == userInfo.value.dealCount &&
+  //   userInfo.value.dealCount != 0
+  // ) {
+  //   showImg.value = true;
+  //   // 2. 延时 2 秒后关闭图片，并继续创建订单
+  //   // setTimeout(() => {
+  //   //   showImg.value = false;
+  //   //   doCreateOrder();
+  //   // }, 2000);
 
-    return;
-  }
+  //   return;
+  // }
   // 不满足条件时，直接创建订单
   doCreateOrder();
 };
@@ -545,9 +545,9 @@ const userLevel = ref({});
 const userGetInfoMethods = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
-    avatarUrl.value = `${url}${res.data.userLevel.icon}`;
-    orderCount.value = res.data.userLevel.orderCount;
-    userLevel.value = res.data.userLevel.nameEn;
+    avatarUrl.value = `${url}${res.data.memberLevel.icon}`;
+    orderCount.value = res.data.memberLevel.orderCountPerDay;
+    userLevel.value = res.data.memberLevel.name;
   });
 };
 

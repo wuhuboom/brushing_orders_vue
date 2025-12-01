@@ -151,7 +151,6 @@ import { checkWorkTimeLocal } from "../util/utils";
 import {
   getLevel,
   getTradeConfig,
-  getLevelByLang,
   getNoticeList,
   getUserDraws,
   getLotteryConfig,
@@ -274,7 +273,8 @@ function toVips() {
 }
 const levelList = ref([]);
 const level = async () => {
-  let res = await getLevelByLang({ lang: parLang.value });
+  // { lang: parLang.value }
+  let res = await getLevel();
   // let res = await getLevel();
   levelList.value = res.data;
   levelList.value.forEach((item) => {

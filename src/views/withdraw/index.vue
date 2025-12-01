@@ -94,11 +94,11 @@
             <div class="text-[14px] text-[#111827]">{{ bankItem.name }}</div>
             <div
               class="text-[12px] text-[#6B7280] pt-[5px]"
-              v-if="bankItem.type == 1"
+              v-if="bankItem.type == 0"
             >
-              {{ bankItem.bankCode }}
+              {{ bankItem.accountHolder }}
               <span class="pl-[5px]">{{
-                formatBankCard(bankItem.bankCard)
+                formatBankCard(bankItem.bankAccount)
               }}</span>
             </div>
             <div class="text-[12px] text-[#6B7280] pt-[5px] w-]" v-else>
@@ -185,6 +185,7 @@ const onClickLeft = () => history.back();
 const ruleForm = reactive({
   amount: 0,
   tradePassword: "",
+  walletId:""
 });
 const addType = (type) => {
   if (type == 1) {
@@ -223,6 +224,8 @@ const getWithdrawal = () => {
   //   router.push({ path: "/paymentMethods" });
   //   return false;
   // }
+ ruleForm.walletId =Number(bankItem.value.withdrawalTypeId)
+  
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     // router.push({ path: "/my" });

@@ -19,7 +19,7 @@
           @click="onClickLeft"
         />
       </div>
-      <div class="text-base text-[#FFFFFF] font-medium">{{ $t("提取") }}</div>
+      <div class="text-base text-[#FFFFFF] font-medium">{{ $t("定金") }}</div>
       <div class="absolute right-[16px] text-base text-[#fff]" @click="toHistory">{{$t('Withdrawal.History')}}</div>
     </div>
     <div

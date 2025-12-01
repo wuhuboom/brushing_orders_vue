@@ -60,7 +60,8 @@ const bgMapStart = {
 };
 const levelList = ref([]);
 const level = async () => {
- let res = await getLevelByLang({ lang: parLang.value });
+  // { lang: parLang.value }
+ let res = await getLevel();
   levelList.value = res.data;
   levelList.value.forEach(item => {
      if (item.description) {
