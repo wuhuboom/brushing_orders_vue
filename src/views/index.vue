@@ -65,7 +65,7 @@
         <div class="items-con flex overflow-x-scroll p-4">
           <div
             v-for="item in levelList"
-            class="vip-item w-[471px] h-[220px] flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
+            class="vip-item w-[471px] h-[235px] flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
             :style="{
               background: `url(${
                 bgMap[item.nameEn]
