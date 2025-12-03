@@ -181,7 +181,11 @@ const formatBankCard = (card) => {
   return `${prefix} **** **** ${suffix}`;
 };
 
-const onClickLeft = () => history.back();
+const onClickLeft = ()=>{
+  router.replace({
+    path:"/my"
+  })
+};
 const ruleForm = reactive({
   amount: 0,
   tradePassword: "",

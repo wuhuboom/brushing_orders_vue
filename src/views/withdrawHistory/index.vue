@@ -108,7 +108,7 @@
                     )
                   }}
                 </div>
-                <div class="text-[#9CA3AF] text-[12px]">ID:{{ item.code }}</div>
+                <div class="text-[#9CA3AF] text-[12px]">ID:{{ item.orderNumber }}</div>
               </div>
               <div
                 class="px-[12px] py-[4px] font-bold rounded-[20px] text-[12px]"

@@ -179,6 +179,7 @@ const getgetUserBankWallet = async () => {
 const selectEmits = (item) => {
   activeValue.value = item.id;
   userStore.setuserWallerType(item);
+  // console.log(item)
   if (route.query.type == 1) {
     // router.push({ path: "/my" });
   } else {
