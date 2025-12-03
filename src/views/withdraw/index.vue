@@ -228,7 +228,7 @@ const getWithdrawal = () => {
   //   router.push({ path: "/paymentMethods" });
   //   return false;
   // }
- ruleForm.walletId =Number(bankItem.value.withdrawalTypeId)
+ ruleForm.walletId =Number(bankItem.value.id)
   
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
