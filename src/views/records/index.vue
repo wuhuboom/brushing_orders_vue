@@ -306,6 +306,7 @@ const swichTab = () => {
 };
 onMounted(() => {
   onLoad();
+  showFailToast("Customer service is currently offline, please pay attention to the online hours.");
 });
 </script>
 <style scoped>

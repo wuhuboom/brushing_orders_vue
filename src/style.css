@@ -161,3 +161,10 @@ input {
   line-height: 44px;
   padding-left: 5px;
 }
+
+/* 防止英文单词被拆开换行 */
+.van-toast__text {
+  word-break: normal !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important; /* 在空格处换行 */
+}
