@@ -40,7 +40,7 @@
           <el-input
             v-model="ruleForm.username"
             type="text"
-            :placeholder="$t('用户名/电话')"
+            :placeholder="$t('用户名')"
             autocomplete="off"
             size="large"
             class="bg--[#E5E7EB]"

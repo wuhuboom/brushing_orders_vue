@@ -8,7 +8,7 @@
       />
     <div class="flex justify-between px-[17px] mb-[5px] mt-[45px]">
       <div>
-        <div class="text-[#000] text-[14px] pb-[3px]">hi,{{ userInfo.username }}</div>
+        <div class="text-[#000] text-[14px] pb-[3px]">Hi,{{ userInfo.username }}</div>
         <div class="text-[#6A7187] text-[12px] flex items-center" @click="copyContent(userInfo.inviteCode)">
           <span>{{ $t("邀请码") }}:</span>{{ userInfo.inviteCode }}
           <img class="w-[13px] h-[13px] ml-[5px]" src="../../static/images/copy.png" alt="">
