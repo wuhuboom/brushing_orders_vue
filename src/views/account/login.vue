@@ -35,11 +35,11 @@
         label-width="auto"
         class="w-[90%] mt-10"
       >
-        <el-form-item prop="" :label="$t('用户名/电话')+'*'"  label-position="top">
+        <el-form-item prop="" :label="$t('用户名')+'*'"  label-position="top">
           <el-input
             v-model.trim="ruleForm.username"
             type="text"
-            :placeholder="$t('用户名/电话')"
+            :placeholder="$t('用户名')"
             autocomplete="off"
             size="large"
           >

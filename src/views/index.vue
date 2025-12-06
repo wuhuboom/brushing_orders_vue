@@ -255,16 +255,16 @@ const items = [
 ];
 
 function goTo(path) {
+  console.log(path)
   if (path == "/notifications") {
     // tradePasswordRef.value.open(2);
     router.push("/withdraw");
   } else if (path == "/profile") {
     // tradePasswordRef.value.open(3);
     router.push("/deposit");
-  } else if('/customer'){
+  } else if(path == '/customer'){
     customer()
-  }
-   else {
+  } else {
     router.push(path);
   }
 }
