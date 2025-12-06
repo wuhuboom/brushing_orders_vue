@@ -167,6 +167,7 @@
   "请求头无效": "Invalid request header",
   "退出登录失败": "Logout failed",
   "登录失败，未知错误": "Login failed, unknown error",
+  "电话号码已经被注册": "Phone number has been registered",
 
   "不在允许的提现时间范围内": "Not within the allowed withdrawal time frame",
   "提现金额小于最低限额": "Withdrawal amount is below the minimum limit",

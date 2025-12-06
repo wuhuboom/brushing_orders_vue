@@ -167,6 +167,7 @@
   "请求头无效": "Intestazione richiesta non valida",
   "退出登录失败": "Logout fallito",
   "登录失败，未知错误": "Login fallito, errore sconosciuto",
+  "电话号码已经被注册": "Numero di telefono già registrato",
   "创建你的账户": "Crea il tuo account",
   "登录 / 注册，享受最佳的管理体验": "Accedi / Registrati per godere della migliore esperienza di gestione"
 }

@@ -167,6 +167,7 @@
   "请求头无效": "Geçersiz istek başlığı",
   "退出登录失败": "Çıkış yapılamadı",
   "登录失败，未知错误": "Giriş başarısız, bilinmeyen hata",
+  "电话号码已经被注册": "Telefon numarası zaten kayıtlı",
   "不在允许的提现时间范围内": "İzin verilen para çekme saatleri dışında",
   "提现金额小于最低限额": "Çekilecek miktar minimum limitin altında",
   "提现金额超过最大限额": "Çekilecek miktar maksimum limiti aşıyor",

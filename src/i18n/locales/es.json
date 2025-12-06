@@ -167,6 +167,7 @@
   "请求头无效": "Encabezado de solicitud inválido",
   "退出登录失败": "Fallo al cerrar sesión",
   "登录失败，未知错误": "Fallo al iniciar sesión, error desconocido",
+  "电话号码已经被注册": "El número de teléfono ya ha sido registrado",
   "不在允许的提现时间范围内": "No está dentro del horario permitido para retirar",
   "提现金额小于最低限额": "El monto de retiro es menor al mínimo permitido",
   "提现金额超过最大限额": "El monto de retiro excede el límite máximo",
