@@ -166,6 +166,7 @@
   "请求头无效": "Cabeçalho de requisição inválido",
   "退出登录失败": "Falha ao sair",
   "登录失败，未知错误": "Falha no login, erro desconhecido",
+  "电话号码已经被注册": "O número de telefone já foi registrado",
   "不在允许的提现时间范围内": "Fora do horário permitido de saque",
   "提现金额小于最低限额": "O valor do saque é inferior ao mínimo",
   "提现金额超过最大限额": "O valor do saque excede o máximo permitido",
