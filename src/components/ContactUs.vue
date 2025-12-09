@@ -26,10 +26,12 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { tr } from "element-plus/es/locales.mjs";
+import { useUserStore } from '@/store/modules/user';
 import md5 from "crypto-js/md5"; // 安装 crypto-js: npm install crypto-js
 import { getCustomerService,userGetInfo } from '../api/apis';
 const showCenter = ref(false);
 const customerList = ref([])
+const userStore = useUserStore();
 // 更符合Vue3习惯的暴露方式
 const open = async() =>{
   showCenter.value = true
@@ -51,9 +53,12 @@ function buildKefuUrl(baseUrl, username) {
   const visitorId = crypto.randomUUID(); // 每次都不同！
 
   const url = new URL(baseUrl);
-  url.searchParams.set("visitor_id", visitorId);
-  url.searchParams.set("visitor_name", username);
-  console.log(visitorId)
+  if (userStore.token){
+    url.searchParams.set("visitor_id", visitorId);
+    url.searchParams.set("visitor_name", username);
+    console.log(visitorId)
+  } 
+  
 
   return url.toString();
 }
