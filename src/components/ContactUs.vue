@@ -48,16 +48,16 @@ const jump = (url) =>{
 
 
 function buildKefuUrl(baseUrl, username) {
-  // 生成 visitor_id (用户名的 MD5)
-  const visitorId = md5(username).toString();
+  const visitorId = crypto.randomUUID(); // 每次都不同！
 
-  // 使用 URL 对象方便拼接参数
   const url = new URL(baseUrl);
   url.searchParams.set("visitor_id", visitorId);
   url.searchParams.set("visitor_name", username);
+  console.log(visitorId)
 
   return url.toString();
 }
+
 
 const userInfo = ref({})
 const getUserGetInfo = () => {
