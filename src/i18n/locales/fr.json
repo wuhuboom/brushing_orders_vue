@@ -157,6 +157,7 @@
   "请求头无效": "En-tête de requête invalide",
   "退出登录失败": "Échec de la déconnexion",
   "登录失败，未知错误": "Échec de la connexion, erreur inconnue",
+  "电话号码已经被注册": "Le numéro de téléphone a déjà été enregistré",
 
   "不在允许的提现时间范围内": "En dehors de la période autorisée pour les retraits",
   "提现金额小于最低限额": "Le montant du retrait est inférieur au minimum requis",

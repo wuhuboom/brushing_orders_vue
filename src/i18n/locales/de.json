@@ -157,6 +157,7 @@
   "请求头无效": "Ungültiger Anfrage-Header",
   "退出登录失败": "Abmeldung fehlgeschlagen",
   "登录失败，未知错误": "Anmeldung fehlgeschlagen, unbekannter Fehler",
+  "电话号码已经被注册": "Telefonnummer wurde bereits registriert",
 
   "不在允许的提现时间范围内": "Nicht innerhalb des erlaubten Auszahlungszeitraums",
   "提现金额小于最低限额": "Der Auszahlungsbetrag liegt unter dem Mindestbetrag",

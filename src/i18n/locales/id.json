@@ -157,6 +157,7 @@
   "请求头无效": "Header permintaan tidak valid",
   "退出登录失败": "Gagal keluar",
   "登录失败，未知错误": "Gagal masuk, kesalahan tidak diketahui",
+  "电话号码已经被注册": "Nomor telepon sudah terdaftar",
 
   "不在允许的提现时间范围内": "Tidak dalam rentang waktu penarikan yang diizinkan",
   "提现金额小于最低限额": "Jumlah penarikan di bawah batas minimum",
