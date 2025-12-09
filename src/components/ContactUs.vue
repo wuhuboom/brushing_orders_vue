@@ -44,12 +44,14 @@
 import { onMounted, ref } from "vue";
 import { tr } from "element-plus/es/locales.mjs";
 import { copyContent } from "../util/utils";
+import { useUserStore } from '@/store/modules/user';
 import md5 from "crypto-js/md5"; // 安装 crypto-js: npm install crypto-js
 import { getCustomerService,userGetInfo,getEmailAddress } from '../api/apis';
 const defaultImg = new URL('@/static/images/service.png', import.meta.url).href;
 const showCenter = ref(false);
 const customerList = ref([])
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
+const userStore = useUserStore();
 // 更符合Vue3习惯的暴露方式
 const open = async() =>{
   showCenter.value = true
