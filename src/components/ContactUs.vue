@@ -87,7 +87,7 @@ const jump = (url) =>{
 }
 
 function buildKefuUrl(baseUrl, username) {
-  const visitorId = crypto.randomUUID(); // 每次都不同！
+  const visitorId = md5(username).toString();
 
   const url = new URL(baseUrl);
   if (userStore.token){
