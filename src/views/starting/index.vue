@@ -493,11 +493,15 @@ const doCreateOrder = () => {
     })
     .catch((err) => {
       closeToast();
-      // if (err.code == 906) {
-      //   showToast("Transaction failed");
-      // } else {
-      showToast(t(errorMessages[err.code]));
-      // }
+      if (err.code == 2000) {
+         showImg.value = true;
+        // 2. 延时 2 秒后关闭图片，并继续创建订单
+        setTimeout(() => {
+          showImg.value = false;
+        }, 2000);
+      } else {
+        showToast(t(errorMessages[err.code]));
+      }
     });
 };
 
