@@ -67,7 +67,7 @@
                           <div
                             class="text-[14px] text-[#002D72] font-semibold"
                           >
-                            {{ item.price }} {{ $t("美元") }}
+                            {{ item.amount }} {{ $t("美元") }}
                           </div>
                         </div>
                         <div class="flex">
@@ -77,7 +77,7 @@
                           <div
                             class="text-[14px] text-[#002D72] font-semibold"
                           >
-                            {{ item.commission }} {{ $t("美元") }}
+                            {{ item.rebate }} {{ $t("美元") }}
                           </div>
                         </div>
                     </div>
