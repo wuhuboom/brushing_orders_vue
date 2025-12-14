@@ -27,7 +27,7 @@
       <div
         class="bg-gradient-to-b text-[#fff] from-[#3F3D9D] to-[#6763D3] rounded-[12px] p-[20px] mt-[24px]"
         v-for="item in customerList"
-        @click="jump(item.linkUrl)"
+        @click="jump(item.link)"
       >
         <img
           class="w-[40px] h-[40px] mb-[6px]"

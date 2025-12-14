@@ -191,8 +191,8 @@ const textMap = {
 };
 const customer = () => {
   const time = checkWorkTimeLocal(
-    TradeInfor.value.workTimeStart,
-    TradeInfor.value.workTimeEnd,
+    TradeInfor.value.serviceTimeRange[0],
+    TradeInfor.value.serviceTimeRange[1],
     userStore.zoneActive.tzName
   );
   if (time) {
