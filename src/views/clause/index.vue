@@ -2,7 +2,7 @@
   <div class="term w-full min-h-[100vh] bg-[#fff]">
     <div class="container w-full min-h-[100vh] ">
       <van-nav-bar
-        :title="$t('条款')"
+        :title="$t('条款及细则')"
         fixed
         left-arrow
         class="shadow"

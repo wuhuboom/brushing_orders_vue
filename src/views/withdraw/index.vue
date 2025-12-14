@@ -58,7 +58,7 @@
       </div>
       <div class="mt-[4px] text-[12px] text-[#71757C]">{{ $t("您将在一小时内收到提款") }}</div>
       <div class="mt-[10px]">
-        <div class="pb-[8px] text-[14px] mt-[30px] mb-[10px] font-semibold">Receiving Bank Card</div>
+        <div class="pb-[8px] text-[14px] mt-[30px] mb-[10px] font-semibold">{{$t('收款银行卡')}}</div>
         <div v-if="bankWallet.length == 0">
           <div
             @click="addType(1)"
@@ -109,7 +109,7 @@
             </div>
           </div>
           <div class="flex items-center" @click="toList">
-            <div class="text-[#2563EB] text-[12px] mr-[8px]">Manage</div>
+            <div class="text-[#2563EB] text-[12px] mr-[8px]">{{$t('管理')}}</div>
             <van-icon name="arrow" color="#9CA3AF" size="16px" />
           </div>
         </div>

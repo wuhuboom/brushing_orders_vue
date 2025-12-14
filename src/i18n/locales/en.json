@@ -14,7 +14,7 @@
   "事件": "Event",
   "提款": "Withdrawal",
   "定金": "Deposit",
-  "条款及细则": "T & C",
+  "条款及细则": "Terms & Conditions",
   "证书": "Certificate",
   "常见问题解答": "FAQs",
   "关于": "About",
@@ -260,6 +260,8 @@
   "index.str8":"Capture demand in the Al platforms reshaping search and discovery",
   "index.str9":"Discover howr our advancedMedia Mix Modeling helos youallocate your marketing buogetsmare effectively, optimizecampaign performance, andmaximize ROI by analyzing thetrue impact of each channelacross your marketing efforts.",
   "index.str10":"Where Creativity Meets Performance",
-  "index.str11":"Direct Agents Studio transformsbrands through data drivencreative that captivates andconverts. Our award-winning teamseamlessly blends innovativedesign, compelling storytelling, andperformance marketing expertiseto create meaningful connectionsbetween brands and theiraudiences"
+  "index.str11":"Direct Agents Studio transformsbrands through data drivencreative that captivates andconverts. Our award-winning teamseamlessly blends innovativedesign, compelling storytelling, andperformance marketing expertiseto create meaningful connectionsbetween brands and theiraudiences",
+  "收款银行卡":"Receiving Bank Card",
+  "管理":"Manage"
 
 }
