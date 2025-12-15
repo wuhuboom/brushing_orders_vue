@@ -350,19 +350,19 @@ const getImageByIndex = (i) => {
 
 // 抢单
 const handleClick = () => {
-  if (
-    userInfo.value.cardNumber == userInfo.value.dealCount &&
-    userInfo.value.dealCount != 0
-  ) {
-    showImg.value = true;
-    // 2. 延时 2 秒后关闭图片，并继续创建订单
-    // setTimeout(() => {
-    //   showImg.value = false;
-    //   doCreateOrder();
-    // }, 2000);
+  // if (
+  //   userInfo.value.cardNumber == userInfo.value.dealCount &&
+  //   userInfo.value.dealCount != 0
+  // ) {
+  //   showImg.value = true;
+  //   // 2. 延时 2 秒后关闭图片，并继续创建订单
+  //   // setTimeout(() => {
+  //   //   showImg.value = false;
+  //   //   doCreateOrder();
+  //   // }, 2000);
 
-    return;
-  }
+  //   return;
+  // }
   // 不满足条件时，直接创建订单
   doCreateOrder();
 };
@@ -388,10 +388,15 @@ const doCreateOrder = () => {
     })
     .catch((err) => {
       closeToast();
+      if(err.code == 2000) {
+        showImg.value = true;
+      }else {
+        showToast(t(errorMessages[err.code] || "创建失败"));
+      }
       // if (err.code == 906) {
       //   showToast("Transaction failed");
       // } else {
-        showToast(t(errorMessages[err.code] || "创建失败"));
+        
       // }
     });
 };
