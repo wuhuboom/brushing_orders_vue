@@ -390,7 +390,10 @@ const doCreateOrder = () => {
       closeToast();
       if(err.code == 2000) {
         showImg.value = true;
-      }else {
+      } else if(err.code == 2001){
+        showToast( `User has filled in ${orderCount.value} pieces of data. please contact Customer Service to apply for resetting account`);
+      }
+      else {
         showToast(t(errorMessages[err.code] || "创建失败"));
       }
       // if (err.code == 906) {
