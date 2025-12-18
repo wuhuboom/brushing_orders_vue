@@ -1,5 +1,10 @@
 <template>
-  <div class="login-con flex flex-col w-full h-[100vh] bg-[#fff] p-5">
+  <div class="login-con flex flex-col w-full h-[100vh] bg-[#fff]">
+    <img
+        src="@/static/images/loginBg.png"
+        alt=""
+      />
+    <div class="h-[30px] rounded-tl-[20px] rounded-tr-[20px] mt-[-30px] bg-[#fff]"></div>
     <!-- <div class="fixed top-2 right-5 h-9 flex items-center justify-center">
       <div
         class="flex ml-2 overflow-hidden bg-[#ff497c] p-2 rounded-full box-border text-white text-sm"
@@ -13,13 +18,6 @@
         <div class="ml-2 uppercase font-bold">{{commonStore.lang}}</div>
       </div>
     </div> -->
-    <div class=" pt-20">
-      <img
-        src="@/static/images/logo.png"
-        alt=""
-        class="w-[80%] lg:w-[300px] mx-auto"
-      />
-    </div>
 
     <div class="flex flex-col items-center pb-3">
       <!-- <div class="text-5xl text-[#ff497c] font-semibold text-center py-4">

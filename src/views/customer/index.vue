@@ -27,7 +27,7 @@
       <div
         class="bg-gradient-to-b text-[#fff] from-[#3F3D9D] to-[#6763D3] rounded-[12px] p-[20px] mt-[24px]"
         v-for="item in customerList"
-        @click="jump(item.link)"
+        @click="jump(item.linkUrl)"
       >
         <img
           class="w-[40px] h-[40px] mb-[6px]"
@@ -133,8 +133,11 @@ function buildKefuUrl(baseUrl, username) {
 
   // 使用 URL 对象方便拼接参数
   const url = new URL(baseUrl);
-  url.searchParams.set("visitor_id", visitorId);
-  url.searchParams.set("visitor_name", username);
+  if (userStore.token){
+    url.searchParams.set("visitor_id", visitorId);
+    url.searchParams.set("visitor_name", username);
+    console.log(visitorId)
+  } 
 
   return url.toString();
 }
