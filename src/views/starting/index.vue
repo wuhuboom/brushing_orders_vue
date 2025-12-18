@@ -41,7 +41,7 @@
         </div>
         <!-- 刷单 -->
         <div class="mt-[167px] flex justify-center text-[#fff]">
-          <span>({{ userInfo.taskProgress }}</span
+          <span>({{ userInfo.dealCount }}</span
           >/<span>{{ orderCount }})</span>
         </div>
         <div class="flex flex-col px-6 py-5 box-border rounded-xl">
@@ -121,7 +121,7 @@
         </div>
         <div class="flex justify-between">
           <div class="text-[#000000] text-[16px] font-bold">
-            {{ userInfo.todayCommission }} USD
+            {{ userInfo.commission }} USD
           </div>
           <div class="text-[#6B7280] text-[12px]">
             {{ $t("每日赚取佣金") }}
@@ -150,8 +150,8 @@
               </div>
               <div class="text-[#4B5563] text-[14px]">
                 {{ $t("start.notice.desc1.str") }}
-                {{ TradeInfor?.tradeTimeRange?.[0] ?? "--:--" }} -
-                {{ TradeInfor?.tradeTimeRange?.[1] ?? "--:--" }} <br />
+                {{ TradeInfor?.workTimeStart || "--:--" }} -
+                {{ TradeInfor?.workTimeEnd || "--:--" }} <br />
                 {{ $t("start.notice.desc2.str") }}
               </div>
             </div>
@@ -294,14 +294,14 @@
         :show-confirm-button="false"
       >
         <div class="w-[60px] h-[125px] mx-auto mt-[24px]" style="width: 60px">
-          <img :src="url + goods.productImage" alt="" />
+          <img :src="url + goods.coverUrl" alt="" />
         </div>
         <div
           class="w-full mt-[-3rem] pt-[23px] text-[#fff]"
           style="border-top: 1px solid #33578e"
         >
           <div class="w-[100%] mx-auto text-[18px] font-semibold p-[20px]">
-            {{ goods.productTitle }}
+            {{ goods.goodsName }}
           </div>
           <div
             class="flex justify-start p-[20px]"
@@ -325,7 +325,7 @@
               <div class="flex justify-between w-[100%] text-[16px]">
                 <div class="text-[#D1D5DB]">{{ $t("佣金") }}</div>
                 <div class="text-[#FF9500] font-bold">
-                  {{ goods.rebate }}{{ $t("美元") }}
+                  {{ goods.commission }}{{ $t("美元") }}
                 </div>
               </div>
             </div>
@@ -354,7 +354,7 @@
               <div class="flex justify-between w-[100%] text-[16px]">
                 <div class="text-[#D1D5DB]">{{ $t("编号") }}</div>
                 <div class="text-[#fff] text-[14px]">
-                  {{ goods.orderNumber }}
+                  {{ goods.orderNo }}
                 </div>
               </div>
             </div>
@@ -449,8 +449,8 @@ const getList = async () => {
 const getImageByIndex = (i) => {
   if (i === 4) return null; // 第 5 项是“开始按钮”，不用图
   const realIndex = i < 5 ? i : i - 1;
-  console.log(goodsList.value[realIndex]?.image);
-  return goodsList.value[realIndex]?.image || "";
+  console.log(goodsList.value[realIndex]?.coverUrl);
+  return goodsList.value[realIndex]?.coverUrl || "";
 };
 
 // 抢单
@@ -499,6 +499,8 @@ const doCreateOrder = () => {
         setTimeout(() => {
           showImg.value = false;
         }, 2000);
+      }else if(err.code == 909){
+        showToast( `User has filled in ${err.data} pieces of data. please contact Customer Service to apply for resetting account`);
       } else {
         showToast(t(errorMessages[err.code]));
       }
@@ -545,13 +547,13 @@ onUnmounted(() => {
   if (timer) clearTimeout(timer);
 });
 
-const userLevel = ref({});
+const userLevel = ref('')
 const userGetInfoMethods = () => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
-    avatarUrl.value = `${url}${res.data.memberLevel.icon}`;
-    orderCount.value = res.data.memberLevel.orderCountPerDay;
-    userLevel.value = res.data.memberLevel.name;
+    avatarUrl.value = `${url}${res.data.userLevel.icon}`;
+    orderCount.value = res.data.userLevel.orderCount;
+    userLevel.value = res.data.userLevel.nameEn
   });
 };
 

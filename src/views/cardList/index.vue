@@ -20,7 +20,7 @@
       @click="selectEmits(item)"
     >
       <img
-        v-if="item.type == '0'"
+        v-if="item.type == 1"
         class="w-[40px] h-[40px] items-center mr-[12px]"
         src="../../static/images/card1.png"
         alt=""
@@ -33,10 +33,10 @@
       />
       <div class="w-full">
         <div class="w-full flex justify-between">
-          <div class="text-[16px] text-[#212121]" v-if="item.type == 0">
-            {{ item.accountHolder }}
+          <div class="text-[16px] text-[#212121]" v-if="item.type == 1">
+            {{ item.bankCode }}
           </div>
-          <div class="text-[16px] text-[#212121]" v-else>{{ item.accountName }}</div>
+          <div class="text-[16px] text-[#212121]" v-else>{{ item.name }}</div>
           <img
             v-if="activeValue != item.id"
             class="w-[22px] h-[22px]"
@@ -50,11 +50,11 @@
             alt=""
           />
         </div>
-        <div v-if="item.type == '0'">
+        <div v-if="item.type == 1">
           <div class="text-[14px] text-[#757575] py-[5px]">{{ item.name }}</div>
           <div class="text-[14px] text-[#757575] flex justify-between">
             <div>
-              {{ item.bankAccount }}
+              {{ item.bankCard }}
             </div>
             <div
               style="text-align: right"
@@ -67,7 +67,7 @@
         </div>
         <div v-else>
           <div class="text-[14px] text-[#757575] py-[5px]">
-            {{ item.accountName }}
+            {{ item.walletType }}
           </div>
           <div
             class="text-[14px] text-[#757575] flex justify-between items-start"
@@ -157,10 +157,10 @@ const getgetUserBankWallet = async () => {
   let res = await getUserBankWallet();
   bankWallet.value = res.data;
   bankWallet.value.forEach((item) => {
-    if (item.type == 0) {
+    if (item.type == 1) {
       showCardBtn.value = false;
     }
-    if (item.type == 1) {
+    if (item.type == 2) {
       showWalletBtn.value = false;
     }
   });
@@ -187,7 +187,7 @@ const selectEmits = (item) => {
   }
 };
 const toDetail = (id, type) => {
-  if (type == 0) {
+  if (type == 1) {
     router.push({
       path: "/addCard",
       query: {

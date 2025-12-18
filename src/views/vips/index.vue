@@ -21,8 +21,8 @@
             <div class="flex flex-col flex-1">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center pl-[15px]">
-                      <img :src="bgMapStart[item.name]" class="w-[48px] h-[48px] mr-[6px]" alt="">
-                      <div class="text-base text-[20px] text-[#1F2937] font-semibold mr-2">{{item.name}}Guest Card</div>
+                      <img :src="bgMapStart[item.nameEn]" class="w-[48px] h-[48px] mr-[6px]" alt="">
+                      <div class="text-base text-[20px] text-[#1F2937] font-semibold mr-2">{{item.nameEn}}Guest Card</div>
                     </div>
                     <!-- <div class="w-[93px] h-[36px] flex justify-center items-center  rounded-md text-white" @click="toUpgrade(item.id)" :class="userStore.userInfo.levelId == item.id?'bg-[#9333EA]':'bg-[#206645]'">{{userStore.userInfo.levelId == item.id?$t('当前等级'):`USD ${item.price}`}}</div> -->
                 </div>
@@ -60,8 +60,8 @@ const bgMapStart = {
 };
 const levelList = ref([]);
 const level = async () => {
-  // { lang: parLang.value }
- let res = await getLevel();
+  
+ let res = await getLevel({ lang: parLang.value });
   levelList.value = res.data;
   levelList.value.forEach(item => {
      if (item.description) {

@@ -26,7 +26,7 @@ const parLang = computed(() => {
 });
 const getGetGlobalConfig = async() =>{
     let res = await getConfigByLang({ lang: 'en' });
-    certificateEn.value = res?.data?.certificateContent?? '';
+    certificateEn.value = res?.data?.certificate?? '';
 }
 onMounted(() =>{
     getGetGlobalConfig();

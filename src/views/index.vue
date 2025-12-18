@@ -72,17 +72,17 @@
             v-for="item in levelList"
             class="flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
             :style="{
-              background: `url(${bgMap[item.name]}) 0 0 / 100% 100% no-repeat`,
+              background: `url(${bgMap[item.nameEn]}) 0 0 / 100% 100% no-repeat`,
             }"
           >
             <div class="flex justify-between items-start pt-[13px]">
               <div class="font-bold text-lg">
                 <p
                   :style="{
-                    color: textMap[item.name],
+                    color: textMap[item.nameEn],
                   }"
                 >
-                  {{ item.name }}
+                  {{ item.nameEn }}
                 </p>
               </div>
               <!-- <img class="w-24" :src="bgMapStart[item.name]" alt="" /> -->
@@ -91,8 +91,8 @@
               class="w-[260px] text-xs text-black pt-[3px]"
               style="line-height: 19px"
             >
-              <p>commission rate. 0.50%</p>
-              <p>commission rate. 0.50% day. 40 tasks</p>
+              <p>commission rate. {{item.commissionRatio}}%</p>
+              <p>commission rate. {{item.commissionRatio}}% day. {{item.orderCount}} tasks</p>
               <p class="w-[260px] text-xs mt-2 text-black" v-html="item.description"></p>
             </div>
           </div>

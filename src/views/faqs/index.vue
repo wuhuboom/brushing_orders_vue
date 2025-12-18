@@ -26,7 +26,7 @@ const parLang = computed(() => {
 });
 const getGetGlobalConfig = async() =>{
     let res = await getConfigByLang({ lang: parLang.value });
-    faqEn.value = res?.data?.helpContent ?? '';
+    faqEn.value = res?.data?.faq ?? '';
 }
 onMounted(() =>{
     getGetGlobalConfig();

@@ -50,9 +50,9 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('电话')+'*'" prop="phoneNumber" label-position="top">
+        <el-form-item :label="$t('电话')+'*'" prop="phone" label-position="top">
           <el-input
-            v-model="ruleForm.phoneNumber"
+            v-model="ruleForm.phone"
             :placeholder="$t('电话')"
             type="text"
             autocomplete="off"
@@ -74,7 +74,7 @@
           <div class="text-sm pb-5 text-[#333]">{{ $t("性别") }}</div>
           <van-radio-group
             shape="dot"
-            v-model="ruleForm.gender"
+            v-model="ruleForm.sex"
             direction="horizontal"
           >
             <van-radio :name="1" checked-color="#1E3A8A">{{
@@ -151,8 +151,8 @@ const ruleForm = reactive({
   username: "",
   password: "",
   tradePassword: "",
-  phoneNumber: "",
-  gender: 1,
+  phone: "",
+  sex: 1,
   inviteCode: "",
 });
 const rules = computed(() => {
@@ -168,7 +168,7 @@ function sendCode() {
   if (!agentPassword.value) return showToast(t("请输入确认密码"));
   if (agentPassword.value != ruleForm.password)
     return showToast(t("两次密码不一致"));
-  if (!/^[0-9]*$/.test(ruleForm.phoneNumber))
+  if (!/^[0-9]*$/.test(ruleForm.phone))
     return showToast(t("请输入正确电话号码"));
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));

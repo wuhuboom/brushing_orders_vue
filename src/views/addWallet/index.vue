@@ -24,7 +24,7 @@
       style="border-bottom: 1px solid #e5e7eb"
     >
       <van-field
-        v-model="form.accountName"
+        v-model="form.name"
         label=""
         :placeholder="$t('请输入账户名称')"
         label-align="top"
@@ -39,7 +39,7 @@
       style="border-bottom: 1px solid #e5e7eb"
     >
       <van-field
-        v-model="form.walletName"
+        v-model="form.walletType"
         label=""
         :placeholder="$t('请输入钱包名称')"
         label-align="top"
@@ -121,8 +121,8 @@ const route = useRoute();
 const { t } = useI18n();
 const showPicker = ref(false);
 const form = reactive({
-  accountName: "",
-  walletName: "",
+  name: "",
+  walletType: "",
   walletAddress: "",
 });
 const pickerValue = ref(["1"]);
@@ -133,17 +133,16 @@ const columns = [
 ];
 const submitForm = async () => {
   let query = {
-    type: 1,
-    withdrawalTypeId:1,
+    type: 2,
+    name: form.name,
   };
   if(route.query.id) {
     query.id = Number(route.query.id)
   }
-  if (!form.accountName) return showToast(t("请输入账户名称"));
-  if (!form.walletName) return showToast(t("请输入钱包名称"));
+  if (!form.name) return showToast(t("请输入姓名"));
+  if (!form.walletType) return showToast(t("请输入钱包类型"));
   if (!form.walletAddress) return showToast(t("请输入钱包地址"));
-  query.accountName = form.accountName;
-  query.walletName = form.walletName;
+  query.walletType = form.walletType;
   query.walletAddress = form.walletAddress;
 
   let res = await addWalletBank(query);
@@ -170,9 +169,9 @@ const onClickLeft = () => {
 };
 const getgetBankWallet = async () => {
   let res = await getBankWallet({ id: route.query.id });
-  form.accountName = res.data.accountName;
-  form.walletName = res.data.walletName;
+  form.name = res.data.name;
   form.walletAddress = res.data.walletAddress;
+  form.walletType = res.data.walletType;
   //   const form = reactive({
   //   name: "",
   //   bankCode: "",

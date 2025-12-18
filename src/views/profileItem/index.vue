@@ -34,7 +34,7 @@
           <div class="flex items-center text-[#000] text-sm">
             {{ $t("电话") }}
           </div>
-          <div class="text-[#4B5563] text-sm ">{{userStore.userInfo.phoneNumber}}</div>
+          <div class="text-[#4B5563] text-sm ">{{userStore.userInfo.phone}}</div>
         </div>
       </div>
       <div class="mt-4 flex flex-col bg-white border border-[#F3F4F6] shadow-sm  rounded-lg" style="">

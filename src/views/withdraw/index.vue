@@ -94,11 +94,11 @@
             <div class="text-[14px] text-[#111827]">{{ bankItem.name }}</div>
             <div
               class="text-[12px] text-[#6B7280] pt-[5px]"
-              v-if="bankItem.type == 0"
+              v-if="bankItem.type == 1"
             >
-              {{ bankItem.accountHolder }}
+              {{ bankItem.bankCode }}
               <span class="pl-[5px]">{{
-                formatBankCard(bankItem.bankAccount)
+                formatBankCard(bankItem.bankCard)
               }}</span>
             </div>
             <div class="text-[12px] text-[#6B7280] pt-[5px] w-]" v-else>

@@ -19,7 +19,7 @@
     >
       <div class="flex items-center justify-between px-[16px] py-[20px]">
         <div class="text-[#fff] text-[20px]">{{ userInfo.username }}</div>
-        <div class="relative border border-[2px] border-[#fff] rounded-[50%]">
+        <div class="relative  border-[2px] border-[#fff] rounded-[50%]">
           <span
             style="z-index: 99"
             class="bg-[#F59E0B] text-white text-[12px] px-2 py-[2px] rounded-full absolute bottom-[-8px] right-[-5px]"
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="text-[#8CE563]">
-          {{ $t("信用评分") }}:{{ userInfo.reputationScore }}%
+          {{ $t("信用评分") }}:{{ userInfo.creditScore }}%
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@
         </div>
         <div class="text-[#6B7280] text-[14px]">
           Today's Commission:
-          <span class="text-[#09499B]">{{ userInfo.todayCommission }} USD</span>
+          <span class="text-[#09499B]">{{ userInfo.commission }} USD</span>
         </div>
       </div>
       <img class="w-[103px]" src="@/static/images/myBg.png" alt="" />
@@ -432,9 +432,8 @@ const userLevel = ref({});
 onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
-    avatarUrl.value = `${url}${res.data.memberLevel.icon}`;
-    userLevel.value = res.data.memberLevel.name;
-    console.log(userInfo.value);
+    avatarUrl.value = `${url}${res.data.userLevel.icon}`;
+    userLevel.value = res.data.userLevel.nameEn
     getFullDomain();
   });
 

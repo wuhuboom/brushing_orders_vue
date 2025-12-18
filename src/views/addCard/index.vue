@@ -18,7 +18,7 @@
     >
       <img class="w-[20px] h-[20px] ml-[17px]" src="../../static/images/code.png" alt="">
       <van-field
-        v-model="form.bankName"
+        v-model="form.bankCode"
         label=""
         :placeholder="$t('请输入银行名称')"
         label-align="top"
@@ -34,7 +34,7 @@
     >
      <img class="w-[20px] h-[20px] ml-[17px]" src="../../static/images/name.png" alt="">
       <van-field
-        v-model="form.accountHolder"
+        v-model="form.name"
         label=""
         :placeholder="$t('请输入姓名')"
         label-align="top"
@@ -50,14 +50,14 @@
     >
       <img class="w-[20px] h-[20px] ml-[17px]" src="../../static/images/accout.png" alt="">
       <van-field
-        v-model="form.bankAccount"
+        v-model="form.bankCard"
         label=""
         :placeholder="$t('请输入银行卡号')"
         label-align="top"
         size="large"
       />
     </div>
-    <!-- <div class="text-[#4B5563] font-semibold mt-5 pl-[8px]">
+    <div class="text-[#4B5563] font-semibold mt-5 pl-[8px]">
       {{ $t("账号类型") }}
     </div>
     <div
@@ -71,7 +71,7 @@
         label-align="top"
         size="large"
       />
-    </div> -->
+    </div>
     <!-- <div
       class="flex justify-between items-center w-full mt-2 overflow-hidden pb-[20px]"
       style="border-bottom: 1px solid #e5e7eb"
@@ -117,7 +117,7 @@
 </template>
 <script setup>
 import { onMounted, ref, reactive } from "vue";
-import { addWalletBank, getBankWallet,withdrawalType } from "../../api/apis";
+import { addWalletBank, getBankWallet } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { useRouter, useRoute } from "vue-router";
@@ -129,9 +129,10 @@ const route = useRoute();
 const { t } = useI18n();
 const showPicker = ref(false);
 const form = reactive({
-  accountHolder: "",
-  bankName: "",
-  bankAccount: "",
+  name: "",
+  bankCode: "",
+  bankCard: "",
+  bankType: "",
 });
 const pickerValue = ref(["1"]);
 const type = ref(1);
@@ -141,18 +142,17 @@ const type = ref(1);
 // ];
 const submitForm = async () => {
   // 表单校验
-  if (!form.accountHolder) return showToast(t("请输入姓名"));
-  if (!form.bankName) return showToast(t("请输入银行名称"));
-  if (!form.bankAccount) return showToast(t("请输入银行卡号"));
-  // if (!form.bankType) return showToast(t("请输入账户类型"));
+  if (!form.name) return showToast(t("请输入姓名"));
+  if (!form.bankCode) return showToast(t("请输入银行编码"));
+  if (!form.bankCard) return showToast(t("请输入银行卡号"));
+  if (!form.bankType) return showToast(t("请输入账户类型"));
   // 构造请求参数
   const query = {
-    type: 0,
-    accountHolder: form.accountHolder,
-    bankName: form.bankName,
-    bankAccount: form.bankAccount,
-    withdrawalTypeId:2,
-    // bankType: form.bankType,
+    type: 1,
+    name: form.name,
+    bankCode: form.bankCode,
+    bankCard: form.bankCard,
+    bankType: form.bankType,
   };
   // 如果是编辑模式（存在 id）
   if (route.query.id) {
@@ -179,24 +179,16 @@ const onClickLeft = () => {
 };
 const getgetBankWallet = async () => {
   let res = await getBankWallet({ id: route.query.id });
-  form.bankName = res.data.bankName;
-  form.bankAccount = res.data.bankAccount;
-  form.accountHolder = res.data.accountHolder;
-  // form.bankType = res.data.bankType;
+  form.name = res.data.name;
+  form.bankCode = res.data.bankCode;
+  form.bankCard = res.data.bankCard;
+  form.bankType = res.data.bankType;
 };
-
-const getWithdrawalType = async () =>{
-   let res = await withdrawalType();
-   res.data.forEach(item => {
-    
-   });
-}
 onMounted(async () => {
   if (route.query.id) {
     getgetBankWallet();
   }
   await userStore.getUserInfo();
-  getWithdrawalType()
   form.withdrawName = userStore.userInfo.withdrawName;
   form.withdrawAddress = userStore.userInfo.withdrawAddress;
   form.withdrawType = userStore.userInfo.withdrawType;
