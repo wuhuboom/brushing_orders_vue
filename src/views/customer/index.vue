@@ -103,8 +103,10 @@ import { onMounted, ref } from "vue";
 import { tr } from "element-plus/es/locales.mjs";
 import { getCustomerService,getEmailAddress,userGetInfo } from "@/api/apis";
 const showCenter = ref(false);
+import { useUserStore } from '@/store/modules/user';
 import md5 from "crypto-js/md5"; // 安装 crypto-js: npm install crypto-js
 import { copyContent } from "@/util/utils";
+const userStore = useUserStore();
 const customerList = ref([]);
 // 更符合Vue3习惯的暴露方式
 const open = async () => {

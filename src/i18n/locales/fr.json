@@ -242,5 +242,14 @@
   "收款银行卡":"Carte bancaire de réception",
   "管理": "Gestion",
   "账户名称": "Titulaire",
-  "请输入账户名称": "Saisir le titulaire"
+  "请输入账户名称": "Saisir le titulaire",
+  "index.str12": "Taux de commission",
+  "index.str13": "Jour",
+  "index.str14": "Tâches",
+  "vips.str1": "Carte invité VIP",
+  "vips.str2": "Avantages des membres",
+  "vips.str3": "Carte invité",
+  "withdraw.str1": "Aucune carte bancaire ajoutée",
+  "my.str1": "Montant du portefeuille",
+  "my.str2": "Commission d'aujourd'hui"
 }

@@ -242,5 +242,14 @@
   "收款银行卡":"Kartu Bank Penerima",
   "管理": "Manajemen",
   "账户名称": "Pemilik Akun",
-  "请输入账户名称": "Masukkan Pemilik"
+  "请输入账户名称": "Masukkan Pemilik",
+  "index.str12": "Tingkat komisi",
+  "index.str13": "Hari",
+  "index.str14": "Tugas",
+  "vips.str1": "Kartu Tamu VIP",
+  "vips.str2": "Manfaat Keanggotaan",
+  "vips.str3": "Kartu Tamu",
+  "withdraw.str1": "Belum ada kartu bank yang ditambahkan",
+  "my.str1": "Saldo Dompet",
+  "my.str2": "Komisi Hari Ini"
 }

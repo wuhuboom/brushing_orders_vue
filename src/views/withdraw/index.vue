@@ -78,9 +78,9 @@
           >
             <img src="@/static/images/add.png" alt="" />
             <div class="pl-[16px]">
-              <div class="text-[14px] text-[#111827]">Wallet</div>
+              <div class="text-[14px] text-[#111827]">{{$t('钱包')}}</div>
               <div class="text-[12px] text-[#6B7280] pt-[5px]">
-                No bank card added yet
+                {{$t('withdraw.str1')}}
               </div>
             </div>
           </div>

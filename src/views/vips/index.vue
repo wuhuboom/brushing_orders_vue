@@ -13,8 +13,8 @@
         background: linear-gradient(to right, #002d72, #0a4da2);
         box-sizing: border-box;
       ">
-        <p class="pb-[20px]">VIP Guest Card </p>
-        <p>Membership Benefits</p>
+        <p class="pb-[20px]">{{$t('vips.str1')}} </p>
+        <p>{{$t('vips.str2')}}</p>
       </div>
       <div class="w-full py-6 box-border flex flex-col">
         <div class="w-full mb-4 p-4 rounded-lg bg-[#fff] flex items-center shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),_0px_0px_0px_0px_rgba(0,0,0,0),_0px_0px_0px_0px_rgba(0,0,0,0)]" v-for="item in levelList">
@@ -22,7 +22,7 @@
                 <div class="flex items-center justify-between">
                     <div class="flex items-center pl-[15px]">
                       <img :src="bgMapStart[item.nameEn]" class="w-[48px] h-[48px] mr-[6px]" alt="">
-                      <div class="text-base text-[20px] text-[#1F2937] font-semibold mr-2">{{item.nameEn}}Guest Card</div>
+                      <div class="text-base text-[20px] text-[#1F2937] font-semibold mr-2">{{item.nameEn}}{{$t('vips.str3')}}</div>
                     </div>
                     <!-- <div class="w-[93px] h-[36px] flex justify-center items-center  rounded-md text-white" @click="toUpgrade(item.id)" :class="userStore.userInfo.levelId == item.id?'bg-[#9333EA]':'bg-[#206645]'">{{userStore.userInfo.levelId == item.id?$t('当前等级'):`USD ${item.price}`}}</div> -->
                 </div>

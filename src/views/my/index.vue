@@ -71,12 +71,12 @@
       class="w-[90%] mx-auto mt-[16px] p-[16px] flex justify-between items-center bg-[#E6F0FF] rounded-[12px]"
     >
       <div>
-        <div class="text-[14px] text-[#6B7280]">Wallet Amount</div>
+        <div class="text-[14px] text-[#6B7280]">{{$t('my.str1')}}</div>
         <div class="text-[20px] text-[#002D72] font-bold pt-[4px] pb-[8px]">
           {{ userInfo.balance }} USD
         </div>
         <div class="text-[#6B7280] text-[14px]">
-          Today's Commission:
+          {{$t('my.str2')}}:
           <span class="text-[#09499B]">{{ userInfo.commission }} USD</span>
         </div>
       </div>

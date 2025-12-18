@@ -18,6 +18,7 @@
             <van-field
               v-model="ruleForm.oldTradePassword"
               type="password"
+              maxlength="6"
               :placeholder="$t('旧密码')"
               
             />
@@ -30,6 +31,7 @@
           <van-cell-group inset>
             <van-field
               type="password"
+              maxlength="6"
               v-model="ruleForm.newTradePassword"
               :placeholder="$t('新密码')"
               
@@ -43,6 +45,7 @@
           <van-cell-group inset>
             <van-field
               type="password"
+              maxlength="6"
               v-model="agentNewPassword"
               :placeholder="$t('确认密码')"
             />

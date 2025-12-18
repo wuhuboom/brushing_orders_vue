@@ -91,8 +91,8 @@
               class="w-[260px] text-xs text-black pt-[3px]"
               style="line-height: 19px"
             >
-              <p>commission rate. {{item.commissionRatio}}%</p>
-              <p>commission rate. {{item.commissionRatio}}% day. {{item.orderCount}} tasks</p>
+              <p>{{$t('index.str12')}} .{{item.commissionRatio}}%</p>
+              <p>{{$t('index.str12')}} . {{item.commissionRatio}}% {{$t('index.str13')}}. {{item.orderCount}} {{$t('index.str14')}}</p>
               <p class="w-[260px] text-xs mt-2 text-black" v-html="item.description"></p>
             </div>
           </div>
