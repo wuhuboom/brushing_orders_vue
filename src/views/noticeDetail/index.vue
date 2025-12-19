@@ -14,18 +14,28 @@
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import {getNotice} from "../../api/apis"
+import {getNotice,getNoticeByLang} from "../../api/apis"
 import { useRouter ,useRoute } from "vue-router";
+import { useCommonStore } from '@/store/modules/common';
+const commonStore = useCommonStore();
+
 const router = useRouter();
 const route = useRoute();
+// 把 store 的 lang（如 'zhTW'）映射成真正传给后端的语言码（如 'zh_tw'）
+const parLang = computed(() => {
+  // 假设你的 store 里实现了 getter：getValueByKey(key) => value|null
+  const mapped = commonStore.getValueByKey(commonStore.lang);
+  return mapped ?? commonStore.lang; // 映射不到就用原值兜底
+});
 
 console.log(route)
 const incomeGuide = ref({})
 const getGetGlobalConfig = async() =>{
     let params = {
-        id:route.query.id
+        id:route.query.id,
+        lang: parLang.value
     }
-    let res = await getNotice(params);
+    let res = await getNoticeByLang(params);
     incomeGuide.value = res.data
 }
 onMounted(() =>{

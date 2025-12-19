@@ -88,6 +88,9 @@ export const getTradeConfig = (params) =>
 export const getNotice = (params) =>
   getApi().get(`/config/getNotice/${params.id}`, { params, loading: false, showMsg: false });
 
+export const getNoticeByLang = (params) =>
+  getApi().get(`/config/getNoticeByLang/${params.id}`, { params, loading: false, showMsg: false });
+
 export const getZoneActive = (params) =>
   getApi().get(`/config/getZoneActive`, { params, loading: false, showMsg: false });
 
