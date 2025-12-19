@@ -250,6 +250,7 @@
   "vips.str2": "Manfaat Keanggotaan",
   "vips.str3": "Kartu Tamu",
   "withdraw.str1": "Belum ada kartu bank yang ditambahkan",
+  "withdraw.str2": "Tambahkan kartu bank",
   "my.str1": "Saldo Dompet",
   "my.str2": "Komisi Hari Ini"
 }

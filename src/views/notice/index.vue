@@ -41,7 +41,7 @@
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import { getNoticeList } from "../../api/apis";
+import { getNoticeList,getNoticeListByLang } from "../../api/apis";
 import { useRouter } from "vue-router";
 import {formatWithTimezone} from "../../util/utils"
 import { useUserStore } from '@/store/modules/user';
@@ -51,9 +51,19 @@ const list = ref([]);
 const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
+import { useCommonStore } from '@/store/modules/common';
+const commonStore = useCommonStore();
+
+// 把 store 的 lang（如 'zhTW'）映射成真正传给后端的语言码（如 'zh_tw'）
+const parLang = computed(() => {
+  // 假设你的 store 里实现了 getter：getValueByKey(key) => value|null
+  const mapped = commonStore.getValueByKey(commonStore.lang);
+  return mapped ?? commonStore.lang; // 映射不到就用原值兜底
+});
 const query = reactive({
   pageNum: 1,
   pageSize: 10,
+  lang: parLang.value
 });
 const onRefresh = async () => {
   refreshing.value = true;
@@ -72,7 +82,7 @@ const onLoad = async () => {
 };
 const loadData = async () => {
   try {
-    const res = await getNoticeList(query); // 你自己的接口
+    const res = await getNoticeListByLang(query); // 你自己的接口
     console.log(res);
     const data = res.rows;
     if (data.length < query.pageSize) {

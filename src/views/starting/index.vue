@@ -319,7 +319,7 @@
               <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
                 <div class="text-[#D1D5DB]">{{ $t("总金额") }}</div>
                 <div class="text-[#fff] font-bold">
-                  {{ goods.amount }}{{ $t("美元") }}
+                  {{ goods.price }}{{ $t("美元") }}
                 </div>
               </div>
               <div class="flex justify-between w-[100%] text-[16px]">

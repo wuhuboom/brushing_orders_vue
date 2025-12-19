@@ -250,6 +250,7 @@
   "vips.str2": "会员权益",
   "vips.str3": "访客卡",
   "withdraw.str1": "尚未添加银行卡",
+  "withdraw.str2": "添加银行卡",
   "my.str1": "钱包金额",
   "my.str2": "今日佣金"
 }

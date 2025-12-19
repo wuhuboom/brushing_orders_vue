@@ -65,6 +65,7 @@
             v-model="ruleForm.tradePassword"
             :placeholder="$t('交易密码')"
             type="text"
+            maxlength="6"
             autocomplete="off"
             size="large"
           >

@@ -53,6 +53,9 @@ export const getConfigByLang = (params) =>getApi().get("/config/getConfigByLang"
 export const getNoticeList = (params) =>
   getApi().get("/config/getNoticeList", { params, loading: false, showMsg: false });
 
+export const getNoticeListByLang = (params) =>
+  getApi().get("/config/getNoticeListByLang", { params, loading: false, showMsg: false });
+
 export const getLevel = (params) =>
   getApi().get("/config/getLevel", { params, loading: false, showMsg: false });
 export const getLevelByLang = (params) =>
