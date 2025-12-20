@@ -20,6 +20,8 @@
               type="password"
               maxlength="6"
               :placeholder="$t('旧密码')"
+              :formatter="onlyNumber"
+              format-trigger="onChange"
               
             />
           </van-cell-group>
@@ -34,6 +36,8 @@
               maxlength="6"
               v-model="ruleForm.newTradePassword"
               :placeholder="$t('新密码')"
+              :formatter="onlyNumber"
+              format-trigger="onChange"
               
             />
           </van-cell-group>
@@ -47,6 +51,8 @@
               type="password"
               maxlength="6"
               v-model="agentNewPassword"
+              :formatter="onlyNumber"
+              format-trigger="onChange"
               :placeholder="$t('确认密码')"
             />
           </van-cell-group>
@@ -83,6 +89,7 @@ const ruleForm = reactive({
   oldTradePassword: "",
   newTradePassword: "",
 });
+const onlyNumber = (value) => value.replace(/\D/g, '')
 const onClickLeft = () => router.replace('/profileItem');
 const submitForm = async () => {
   if (!ruleForm.oldTradePassword) return showFailToast(t("请输入旧密码"));

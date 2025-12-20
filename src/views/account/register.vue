@@ -68,6 +68,7 @@
             maxlength="6"
             autocomplete="off"
             size="large"
+            @input="ruleForm.tradePassword = ruleForm.tradePassword.replace(/\D/g, '')"
           >
           </el-input>
         </el-form-item>
