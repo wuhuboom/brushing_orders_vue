@@ -60,7 +60,7 @@
       <div class="mt-[10px]">
         <div class="pb-[8px] text-[14px] mt-[30px] mb-[10px] font-semibold">{{$t('收款银行卡')}}</div>
         <div v-if="bankWallet.length == 0">
-          <div
+          <!-- <div
             @click="addType(1)"
             class="flex items-center border border-[#E5E7EB] p-[17px] rounded-[8px]"
           >
@@ -71,7 +71,7 @@
                 {{$t('withdraw.str1')}}
               </div>
             </div>
-          </div>
+          </div> -->
           <div
             @click="addType(2)"
             class="flex items-center border border-[#E5E7EB] p-[17px] rounded-[8px] mt-[8px]"

@@ -87,7 +87,7 @@
       </div>
     </div>
     <div class="w-[90%] mt-10 fixed bottom-[37px] left-1/2 -translate-x-1/2">
-      <van-button
+      <!-- <van-button
         color="#000000"
         v-if="showCardBtn"
         class="w-full"
@@ -97,7 +97,7 @@
         <van-icon name="plus" class="pr-[20px]" />{{
           $t("添加银行卡")
         }}</van-button
-      >
+      > -->
       <div class="h-[20px]"></div>
       <van-button
         v-if="showWalletBtn"

@@ -252,5 +252,7 @@
   "withdraw.str1": "Aucune carte bancaire ajoutée",
   "withdraw.str2": "Ajouter une carte",
   "my.str1": "Montant du portefeuille",
-  "my.str2": "Commission d'aujourd'hui"
+  "my.str2": "Commission d'aujourd'hui",
+  "账户禁用": "Compte désactivé",
+  "信誉分不足": "Points de crédit insuffisants"
 }

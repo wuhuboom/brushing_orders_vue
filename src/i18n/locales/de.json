@@ -252,6 +252,8 @@
   "withdraw.str1": "Noch keine Bankkarte hinzugefügt",
   "withdraw.str2": "Bankkarte hinzufügen",
   "my.str1": "Wallet-Guthaben",
-  "my.str2": "Heutige Provision"
+  "my.str2": "Heutige Provision",
+  "账户禁用": "Konto deaktiviert",
+  "信誉分不足": "Nicht genügend Kreditwürdigkeit"
 
 }

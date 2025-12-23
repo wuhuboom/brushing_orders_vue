@@ -252,5 +252,7 @@
   "withdraw.str1": "Belum ada kartu bank yang ditambahkan",
   "withdraw.str2": "Tambahkan kartu bank",
   "my.str1": "Saldo Dompet",
-  "my.str2": "Komisi Hari Ini"
+  "my.str2": "Komisi Hari Ini",
+  "账户禁用": "Akun dinonaktifkan",
+  "信誉分不足": "Poin reputasi tidak mencukupi"
 }
