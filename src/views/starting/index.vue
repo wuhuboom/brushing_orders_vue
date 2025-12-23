@@ -381,7 +381,7 @@
           src="../../static/images/super.png"
           alt=""
         />
-        <van-button color="#ff497c" round class="w-full" @click="closeImg"
+        <van-button color="rgb(10, 77, 162)" round class="w-full" @click="closeImg"
           >OK</van-button
         >
         <!-- <img
