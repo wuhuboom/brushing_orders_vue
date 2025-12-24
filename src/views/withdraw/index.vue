@@ -58,7 +58,7 @@
       </div>
       <div class="mt-[4px] text-[12px] text-[#71757C]">{{ $t("您将在一小时内收到提款") }}</div>
       <div class="mt-[10px]">
-        <div class="pb-[8px] text-[14px] mt-[30px] mb-[10px] font-semibold">{{$t('收款银行卡')}}</div>
+        <div class="pb-[8px] text-[14px] mt-[30px] mb-[10px] font-semibold">{{$t('添加钱包')}}</div>
         <div v-if="bankWallet.length == 0">
           <!-- <div
             @click="addType(1)"
