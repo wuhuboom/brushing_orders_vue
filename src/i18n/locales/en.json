@@ -274,11 +274,7 @@
   "my.str1":"Wallet Amount",
   "my.str2":"Today's Commission",
   "账户禁用":"Account Disabled",
-  "信誉分不足":"Insufficient Credit Score"
-
-
-
-
-
-
+  "信誉分不足":"Insufficient Credit Score",
+  "交易所":"Exchange",
+  "我的交易所":"My Exchange"
 }

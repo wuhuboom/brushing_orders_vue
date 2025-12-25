@@ -254,6 +254,8 @@
   "my.str1": "Wallet-Guthaben",
   "my.str2": "Heutige Provision",
   "账户禁用": "Konto deaktiviert",
-  "信誉分不足": "Nicht genügend Kreditwürdigkeit"
+  "信誉分不足": "Nicht genügend Kreditwürdigkeit",
+  "交易所": "Börse",
+  "我的交易所": "Meine Börse"
 
 }

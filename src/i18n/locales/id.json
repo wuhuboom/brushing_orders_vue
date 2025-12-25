@@ -254,5 +254,7 @@
   "my.str1": "Saldo Dompet",
   "my.str2": "Komisi Hari Ini",
   "账户禁用": "Akun dinonaktifkan",
-  "信誉分不足": "Poin reputasi tidak mencukupi"
+  "信誉分不足": "Poin reputasi tidak mencukupi",
+  "交易所": "Bursa",
+  "我的交易所": "Bursa Saya"
 }

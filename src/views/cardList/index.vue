@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-[100vh] bg-[#fff]">
     <van-nav-bar
-      :title="$t('银行卡管理')"
+      :title="$t('交易所')"
       fixed
       left-arrow
       @click-left="onClickLeft"
@@ -9,7 +9,7 @@
     <div
       class="mt-[80px] px-[20px] flex justify-between items-center mb-[16px]"
     >
-      <div>{{$t('我的银行卡')}}</div>
+      <div>{{$t('我的交易所')}}</div>
       <!-- <van-icon name="deletes-o" color="#EF4444" size="24px" /> -->
     </div>
     <div
