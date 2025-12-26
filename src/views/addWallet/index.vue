@@ -1,7 +1,7 @@
 <template>
   <div class="w-full bg-[#fff] pl-4 pr-4">
     <van-nav-bar
-      :title="$t('卡片管理')"
+      :title="$t('钱包管理')"
       fixed
       left-arrow
       class="shadow"
@@ -17,7 +17,7 @@
       </div>
     </div> -->
     <div class="text-[#4B5563] font-semibold mt-20 pl-[8px]">
-      {{ $t("账户名称") }}
+      {{ $t("钱包名称") }}
     </div>
     <div
       class="w-full mt-2 overflow-hidden"
@@ -26,13 +26,13 @@
       <van-field
         v-model="form.name"
         label=""
-        :placeholder="$t('请输入账户名称')"
+        :placeholder="$t('请输入钱包名称')"
         label-align="top"
         size="large"
       />
     </div>
     <div class="text-[#4B5563]font-semibold mt-5 pl-[8px]">
-      {{ $t("钱包名称") }}
+      {{ $t("网络") }}
     </div>
     <div
       class="w-full mt-2 overflow-hidden"
@@ -41,7 +41,7 @@
       <van-field
         v-model="form.walletType"
         label=""
-        :placeholder="$t('请输入钱包名称')"
+        :placeholder="$t('请输入网络')"
         label-align="top"
         size="large"
       />
@@ -139,8 +139,8 @@ const submitForm = async () => {
   if(route.query.id) {
     query.id = Number(route.query.id)
   }
-  if (!form.name) return showToast(t("请输入姓名"));
-  if (!form.walletType) return showToast(t("请输入钱包类型"));
+  if (!form.name) return showToast(t("请输入钱包名称"));
+  if (!form.walletType) return showToast(t("请输入网络"));
   if (!form.walletAddress) return showToast(t("请输入钱包地址"));
   query.walletType = form.walletType;
   query.walletAddress = form.walletAddress;

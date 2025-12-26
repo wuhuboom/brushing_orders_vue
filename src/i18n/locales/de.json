@@ -249,13 +249,14 @@
   "vips.str1": "VIP-Gästekarte",
   "vips.str2": "Mitgliedervorteile",
   "vips.str3": "Gästekarte",
-  "withdraw.str1": "Noch keine Bankkarte hinzugefügt",
+  "withdraw.str1": "Noch keine Wallet-Adresse hinzugefügt",
   "withdraw.str2": "Bankkarte hinzufügen",
   "my.str1": "Wallet-Guthaben",
   "my.str2": "Heutige Provision",
   "账户禁用": "Konto deaktiviert",
   "信誉分不足": "Nicht genügend Kreditwürdigkeit",
   "交易所": "Börse",
-  "我的交易所": "Meine Börse"
+  "我的交易所": "Meine Börse",
+  "钱包管理":"Wallet-Verwaltung"
 
 }

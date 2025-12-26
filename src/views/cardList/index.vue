@@ -19,7 +19,7 @@
       :key="index"
       @click="selectEmits(item)"
     >
-      <img
+      <!-- <img
         v-if="item.type == 1"
         class="w-[40px] h-[40px] items-center mr-[12px]"
         src="../../static/images/card1.png"
@@ -30,7 +30,7 @@
         class="w-[40px] h-[40px] items-center mr-[12px]"
         src="../../static/images/walletCard.png"
         alt=""
-      />
+      /> -->
       <div class="w-full">
         <div class="w-full flex justify-between">
           <div class="text-[16px] text-[#212121]" v-if="item.type == 1">
