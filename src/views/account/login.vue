@@ -87,16 +87,16 @@
           {{ $t("还没有账户?")
           }}<span class="text-[#38BDF8]">{{ $t("立即注册") }}</span>
         </p>
-        <div style="border: 1px solid #fff;" class="flex justify-center items-center w-[40%] py-[1px] mx-auto my-[10px]" @click="customer">
+        <!-- <div style="border: 1px solid #fff;" class="flex justify-center items-center w-[40%] py-[1px] mx-auto my-[10px]" @click="customer">
           <img src="@/static/images/LiveChat.png" class="w-[29px] h-[29px] mr-[3px]" alt="">
           
           {{ $t("live.chat.str") }}
-        </div>
-
-        <!-- <div class="text-sm text-center w-full" @click="customer">
-          {{ $t("无法登录?")
-          }}<span class="text-white">{{ $t("请联系我们的用户支持") }}</span>
         </div> -->
+
+        <div class="text-sm text-center w-full text-[#9CA3AF]" @click="customer">
+          {{ $t("无法登录?")
+          }}<span class="text-[#38BDF8]">{{ $t("请联系我们的用户支持") }}</span>
+        </div>
       </div>
     </div>
     <div class="w-full mt-4 text-sm text-white text-center pt-2">
