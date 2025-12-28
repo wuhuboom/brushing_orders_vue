@@ -149,6 +149,8 @@ import wheel from "@/components/wheel.vue";
 import { onMounted, ref, reactive, computed } from "vue";
 import { checkWorkTimeLocal } from "../util/utils";
 import { showSuccessToast, showToast } from "vant";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 import {
   getLevel,
   getTradeConfig,
@@ -328,7 +330,6 @@ onMounted(() => {
   level();
   // getData();
   tradeConfig()
-
   // lotteryConfig()
   userStore.getUserInfo();
   //  wheelRef.value.open();
