@@ -56,7 +56,7 @@
             <span>{{ userInfo.inviteCode }}</span>
             <img
               class="w-[16px] h-[16px] ml-2"
-              @click="copyContent(codeUrl)"
+              @click="copyContent(userInfo.inviteCode)"
               src="@/static/images/copy.png"
               alt=""
             />
