@@ -49,7 +49,7 @@
           />
         </div>
       </div>
-      <div
+      <!-- <div
         class="bg-gradient-to-b text-[#fff] from-[#1E8C5F] to-[#4DB380] rounded-[12px] p-[20px] mt-[24px]"
         @click="copyContent(emailAddressInfo)"
       >
@@ -68,7 +68,7 @@
           {{ $t("customer.str5") }}
           <img class="w-[16px] h-[16px] ml-[4px]" src="../../static/images/copy.png" alt="">
         </div>
-      </div>
+      </div> -->
     </div>
 
     <van-dialog
