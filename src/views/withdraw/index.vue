@@ -75,7 +75,7 @@
       <div class="px-[14px]">
         <div class="pb-[8px]">Receiving Bank Card</div>
         <div v-if="bankWallet.length == 0">
-          <div
+          <!-- <div
             @click="addType(1)"
             class="flex items-center border border-[#E5E7EB] p-[17px] rounded-[8px]"
           >
@@ -86,7 +86,7 @@
                 No bank card added yet
               </div>
             </div>
-          </div>
+          </div> -->
           <div
             @click="addType(2)"
             class="flex items-center border border-[#E5E7EB] p-[17px] rounded-[8px] mt-[8px]"
@@ -95,7 +95,7 @@
             <div class="pl-[16px]">
               <div class="text-[14px] text-[#111827]">Wallet</div>
               <div class="text-[12px] text-[#6B7280] pt-[5px]">
-                No bank card added yet
+                No wallet address added yet
               </div>
             </div>
           </div>
