@@ -166,13 +166,17 @@ function toLogin() {
 
 function sendCode() {
   if (!ruleForm.username) return showToast(t("请输入用户名"));
-  if (!ruleForm.password) return showToast(t("请输入密码"));
+  if (!/^\d{6}$/.test(ruleForm.password)) {
+    return showToast(t("请输入6位数字密码"));
+  }
   if (!agentPassword.value) return showToast(t("请输入确认密码"));
   if (agentPassword.value != ruleForm.password)
     return showToast(t("两次密码不一致"));
   if (!/^[0-9]*$/.test(ruleForm.phone))
     return showToast(t("请输入正确电话号码"));
-  if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
+  if (!/^\d{6}$/.test(ruleForm.tradePassword)) {
+    return showToast(t("请输入6位数字的交易密码"));
+  }
   if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));
   if (!checked.value) return showToast(t("请勾选用户协议"));
   register(ruleForm).then((res) => {

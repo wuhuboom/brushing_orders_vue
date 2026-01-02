@@ -257,6 +257,9 @@
   "信誉分不足": "Nicht genügend Kreditwürdigkeit",
   "交易所": "Börse",
   "我的交易所": "Meine Börse",
-  "钱包管理":"Wallet-Verwaltung"
+  "钱包管理":"Wallet-Verwaltung",
+  "请输入6位数字密码": "Bitte geben Sie ein 6-stelliges Passwort ein",
+  "请输入6位数字的交易密码": "Bitte geben Sie ein 6-stelliges Transaktionspasswort ein"
+
 
 }

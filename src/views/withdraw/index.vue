@@ -122,10 +122,19 @@
       > 
         <van-password-input
           :value="ruleForm.tradePassword"
-          :mask="false"
           :gutter="10"
+          v-if="isMobile"
           :focused="showKeyboard"
-          @focus="showKeyboard = true"
+          @focus="handleFocus"
+
+        />
+        <van-field
+          v-model="ruleForm.tradePassword"
+          type="password"
+          v-else
+          maxlength="6"
+          :placeholder="$t('交易密码')"
+          @focus="handleFocus"
         />
       </div>
     </div>
@@ -171,6 +180,7 @@ const amount = ref("");
 const userStore = useUserStore();
 const userInfo = ref({});
 const { t } = useI18n();
+ const isMobile = ref(false);
 
 const formatBankCard = (card) => {
   console.log(card);
@@ -180,6 +190,28 @@ const formatBankCard = (card) => {
   const suffix = str.slice(-4);
   return `${prefix} **** **** ${suffix}`;
 };
+// function isMobile() {
+//   return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+// }
+function handleFocus() {
+  // 只在移动端弹出自定义数字键盘
+  console.log(isMobile.value)
+  if (isMobile.value) {
+    showKeyboard.value = true;
+  }
+}
+
+ const update = () => {
+  console.log(11)
+    const smallScreen = window.matchMedia('(max-width: 768px)').matches;
+    const hasTouch =
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+      
+    isMobile.value = smallScreen && hasTouch;
+    console.log(isMobile.value)
+  };
+
 
 const onClickLeft = ()=>{
   router.replace({
@@ -285,6 +317,12 @@ onMounted(() => {
     // ruleForm.amount = amount.value;
     userInfo.value = res.data;
   });
+  update();
+  window.addEventListener('resize', update);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', update);
 });
 </script>
 <style>

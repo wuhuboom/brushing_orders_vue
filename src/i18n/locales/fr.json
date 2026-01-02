@@ -257,5 +257,7 @@
   "信誉分不足": "Points de crédit insuffisants",
   "交易所": "Bourse",
   "我的交易所": "Ma Bourse",
-  "钱包管理":"Gestion du portefeuille"
+  "钱包管理":"Gestion du portefeuille",
+  "请输入6位数字密码": "Veuillez saisir un mot de passe à 6 chiffres",
+  "请输入6位数字的交易密码": "Veuillez saisir un mot de passe de transaction à 6 chiffres"
 }

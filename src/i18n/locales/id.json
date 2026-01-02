@@ -257,5 +257,7 @@
   "信誉分不足": "Poin reputasi tidak mencukupi",
   "交易所": "Bursa",
   "我的交易所": "Bursa Saya",
-  "钱包管理":"Manajemen Dompet"
+  "钱包管理":"Manajemen Dompet",
+  "请输入6位数字密码": "Silakan masukkan kata sandi 6 digit",
+  "请输入6位数字的交易密码": "Silakan masukkan kata sandi transaksi 6 digit"
 }

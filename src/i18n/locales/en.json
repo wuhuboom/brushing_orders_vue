@@ -278,8 +278,6 @@
   "交易所":"Exchange",
   "我的交易所":"My Exchange",
   "钱包管理":"Wallet Management",
-  "钱包名称":"Wallet Name",
-  "请输入钱包名称":"Please enter wallet name",
-  "网络":"Network",
-  "请输入网络":"Please enter network"
+  "请输入6位数字密码":"Please enter a 6-digit password",
+  "请输入6位数字的交易密码":"Please enter a 6-digit transaction password"
 }
