@@ -20,7 +20,7 @@
         label-width="auto"
         class="w-full p-5"
       >
-        <el-form-item  prop="username" :label="$t('用户名')+'*'" label-position="top">
+        <el-form-item  prop="username"  label-position="top">
           <el-input
             v-model="ruleForm.username"
             :placeholder="$t('用户名')"
@@ -30,7 +30,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('密码')+'*'" prop="password" label-position="top">
+        <el-form-item prop="password" label-position="top">
           <el-input
             v-model="ruleForm.password"
             :placeholder="$t('密码')"
@@ -40,7 +40,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('确认密码')+'*'" prop="agentPassword" label-position="top">
+        <el-form-item  prop="agentPassword" label-position="top">
           <el-input
             v-model="agentPassword"
             :placeholder="$t('确认密码')"
@@ -50,7 +50,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('电话')+'*'" prop="phone" label-position="top">
+        <el-form-item  prop="phone" label-position="top">
           <el-input
             v-model="ruleForm.phone"
             :placeholder="$t('电话')"
@@ -60,7 +60,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item :label="$t('交易密码')+'*'" prop="tradePassword" label-position="top">
+        <el-form-item  prop="tradePassword" label-position="top">
           <el-input
             v-model="ruleForm.tradePassword"
             :placeholder="$t('交易密码')"
@@ -79,15 +79,15 @@
             v-model="ruleForm.sex"
             direction="horizontal"
           >
-            <van-radio :name="1" checked-color="#1E3A8A">{{
+            <van-radio :name="1" checked-color="#6a4d52">{{
               $t("男")
             }}</van-radio>
-            <van-radio :name="2" checked-color="#1E3A8A">{{
+            <van-radio :name="2" checked-color="#6a4d52">{{
               $t("女")
             }}</van-radio>
           </van-radio-group>
         </div>
-        <el-form-item :label="$t('邀请码')+'*'" prop="inviteCode" label-position="top">
+        <el-form-item  prop="inviteCode" label-position="top">
           <el-input
             v-model="ruleForm.inviteCode"
             :placeholder="$t('邀请码')"
@@ -97,15 +97,15 @@
           >
           </el-input>
         </el-form-item>
-        <van-checkbox checked-color="#1E3A8A" v-model="checked" shape="square">
-          <span class="text-[#374151] text-sm">{{ $t("我同意") }}</span>
-          <span class="ml-2 text-[#38BDF8] text-sm" @click="jump">{{
+        <van-checkbox checked-color="#6a4d52" v-model="checked" shape="square">
+          <span class="text-[#6a4d52] text-sm">{{ $t("我同意") }}</span>
+          <span class="ml-2 text-[#6a4d52] text-sm" @click="jump">{{
             $t("条款和条件")
           }}</span>
         </van-checkbox>
         <div @click="sendCode" class="w-full" size="large" round>
           <div
-            class="w-full mt-5 text-white text-lg font-semibold mx-auto py-3 rounded-[8px] flex items-center justify-center bg-[#1E3A8A]"
+            class="w-full mt-5 text-white text-lg font-semibold mx-auto py-3 rounded-[8px] flex items-center justify-center bg-[#6a4d52]"
           >
             <div>{{ $t("登记") }}</div>
             <!-- <img class="w-[22px] ml-4" src="@/static/images/back1.png" alt=""> -->

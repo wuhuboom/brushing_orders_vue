@@ -22,7 +22,8 @@
 }
 
 .el-input__wrapper {
-  box-shadow: 0 0 0 2px #3d3d3d !important;
+  border: .02667rem solid #c7c7cc;
+  box-shadow: none !important;
 }
 
 html {
@@ -140,7 +141,7 @@ input {
 
 .el-input__wrapper {
   /* background:  #F9FAFB !important; */
-  border: 1px solid #D1D5DB;
+  /* border: 1px solid #D1D5DB; */
   height: 48px !important;
   line-height: 48px !important;
 }
@@ -150,9 +151,9 @@ input {
 .login-con .el-form-item--label-top .el-form-item__label,.register .el-form-item--label-top .el-form-item__label {
   color: #38BDF8 !important;
 }
-.login-con  .el-input__wrapper,.register .el-input__wrapper {
+/* .login-con  .el-input__wrapper,.register .el-input__wrapper {
   border-radius: 0 !important;
-}
+} */
 .van-hairline--bottom:after {
   border-bottom-width:0 !important;
 }
