@@ -1,24 +1,25 @@
 <template>
   <van-popup
     v-model:show="dialogVisible"
-    closeable
-    position="right"
-    :style="{ width: '50%', height: '100%',background: 'black' }"
+    round
+    position="bottom"
+    :style="{ height: '30%' }"
   >
-    <template #header>
+    <!-- <template #header> -->
       <div>
         <div
-          class="bg-gray w-8 h-8 flex items-center justify-center rounded-2.5"
+          class="popup-header"
           @click="close"
         >
-          <el-icon>
+          <el-icon size="30px" style="margin-left: auto;">
             <Close />
           </el-icon>
         </div>
-        <p class="text-[25px] mt-5 text-black">{{ $t("选择语言") }}</p>
+        <!-- <p class="text-[25px] mt-5 text-black">{{ $t("选择语言") }}</p> -->
       </div>
-    </template>
-    <div class="flex flex-col gap-4 mt-20">
+    <!-- </template> -->
+     <div class="popup-body">
+      <div class="flex flex-col gap-4 mt-[5px]">
       <div
         v-for="item in LANGS"
         :key="item.code"
@@ -26,10 +27,13 @@
         @click="handleChangeLang(item)"
       >
         <div class="w-full h-full flex flex-col  box-border">
-          <div class="w-full h-16 flex items-center justify-center text-white text-lg uppercase">{{item.name}}</div>
+          <div class="w-full h-16 flex items-center justify-center text-[#000] text-lg uppercase">{{item.name}}</div>
         </div>
       </div>
     </div>
+
+     </div>
+    
   </van-popup>
 </template>
 
@@ -71,6 +75,21 @@ function handleChangeLang(item) {
 :deep(.el-drawer.btt) {
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
+}
+.popup-header {
+  position: sticky; /* 关键 */
+  top: 0;
+  right:10px;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #fff;
+}
+.popup-body {
+  height: calc(100% - 48px); /* 减去 header 高度 */
+  overflow-y: auto;
 }
 </style>
 <style>

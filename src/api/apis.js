@@ -118,4 +118,9 @@ export const getBankWallet = (params) =>
 
 export const withdrawalType = (params) =>
   getApi().get(`/account/withdrawalType`, { params, loading: false, showMsg: false });
+export const getShopList = (params) =>
+  getApi().get(`/account/getShopList`, { params, loading: false, showMsg: false });
+export const getShopListVipLevel = (params) =>
+  getApi().get(`/account/getShopList/${params.vipLevel}`, {  loading: false, showMsg: false });
+
 

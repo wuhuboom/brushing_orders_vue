@@ -1,13 +1,26 @@
 <template>
   <div class="bg-[#fff] record">
     <!-- <HeaderTop></HeaderTop> -->
-     <div class="py-[20px]">
+     <!-- <div class="py-[20px]">
       <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
+    </div> -->
+    <div class="relative flex items-center justify-center h-[56px] px-[16px] bg-[#fff]">
+      <!-- <div class="absolute left-[16px]">
+        <van-icon
+          name="arrow-left"
+          color="#000"
+          size="22px"
+          @click="onClickLeft"
+        />
+      </div> -->
+      <div class="text-base text-[#000000] font-medium">
+        {{ $t("记录") }}
+      </div>
     </div>
     <div class="flex justify-start ml-[16px]">
-      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==0?'nav-active':'nav'" @click="swichTab(0)">{{$t('全部')}}</div>
-      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==1?'nav-active':'nav'" @click="swichTab(1)">{{$t('待办')}}</div>
-      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==2?'nav-active':'nav'" @click="swichTab(2)">{{$t('完成')}}</div>
+      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==0?'nav-active':'nav'" @click="swichTab(0)">{{$t('全部')}}</div>
+      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==1?'nav-active':'nav'" @click="swichTab(1)">{{$t('待办')}}</div>
+      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==2?'nav-active':'nav'" @click="swichTab(2)">{{$t('完成')}}</div>
     </div>
     <!-- <div class="bg-[#f3f3f4]">
       <van-tabs color="#ff497c" @change="swichTab" v-model:active="active">
@@ -38,9 +51,9 @@
                     class=" text-xs p-1 font-medium rounded h-[24px]"
                     :class="
                       item.status == '2'
-                        ? 'bg-[#FFEDD5] text-[#EA580C]'
+                        ? 'bg-[#FFEDD5] text-[#6a4d52]'
                         : item.status == '1'
-                        ? 'bg-[#FFEDD5] text-[#EA580C]'
+                        ? 'bg-[#FFEDD5] text-[#6a4d52]'
                         : 'bg-[#DCFCE7] text-[#16A34A]'
                     "
                   >
@@ -65,7 +78,7 @@
                             {{ $t("总金额") }}
                           </div>
                           <div
-                            class="text-[14px] text-[#002D72] font-semibold"
+                            class="text-[14px] text-[#6a4d52] font-semibold"
                           >
                             {{ item.price }} {{ $t("美元") }}
                           </div>
@@ -75,7 +88,7 @@
                             {{ $t("佣金") }}
                           </div>
                           <div
-                            class="text-[14px] text-[#002D72] font-semibold"
+                            class="text-[14px] text-[#6a4d52] font-semibold"
                           >
                             {{ item.commission }} {{ $t("美元") }}
                           </div>
@@ -300,12 +313,13 @@ onMounted(() => {
 </script>
 <style scoped>
 .nav-active{
-  background: #002D72;
-  color: #fff;
+  /* background: #002D72; */
+  color: #6a4d52;
+  border-bottom: 3px solid #6a4d52;
 }
 .nav {
-  background: #F3F4F6;
-  color: #6B7280;
+  /* background: #F3F4F6; */
+  color: #6a4d52;
 
 }
 
