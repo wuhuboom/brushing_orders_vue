@@ -1,9 +1,24 @@
 <template>
   <div class="my-bor w-full flex flex-col pb-6 bg-[#fff]">
+    <!-- <van-nav-bar
+      :title="$t('我的')"
+      fixed
+      left-arrow
+      @click-left="onClickLeft"
+    /> -->
+    <div class="flex items-center relative bg-[#000]">
+      <!-- 左侧箭头 -->
+      <!-- <div class="absolute left-3" @click="onClickLeft">
+        <van-icon name="arrow-left" color="#fff" size="24px" />
+      </div> -->
+      <!-- 中间标题 -->
+      <div class="mx-auto text-white text-[22px] py-[24px]">{{$t('我的')}}</div>
+    </div>
+
     <div
-      class="w-full mx-auto p-4 box-border flex flex-col relative bg-gradient-to-r from-[#a04149] to-[#6a4d52]"
+      class="w-full mx-auto p-4 box-border flex flex-col relative bg-[#E6EDF6]"
     >
-      <div class="flex pl-1 pr-1 pt-[30px]">
+      <div class="flex pl-1 pr-1">
         <!-- 接口还没返回 avatar 字段（请求中） -->
         <div
           v-if="userInfo.avatar === undefined"
@@ -26,65 +41,46 @@
           :alt="$t('用户头像')"
           @error="e => e.target.src = userImg"
         />
-        <div class="flex flex-col justify-start ml-[10px] mt-[5px]">
+
+
+        <div class="flex flex-col justify-start ml-[10px]">
           <div class="flex items-center">
-            <div class="text-[#fff] font-semibold text-[18px]">
-              {{ userInfo.username }}
+            <div class="text-[#333333] font-semibold text-[20px]">
+              Hi,{{ userInfo.username }}
             </div>
+          </div>
+          <div class="flex mt-[16px]">
             <div
-              class="h-[15px] w-[35px] flex justify-center items-center bg-[#FACC15] text-[#fff] text-[12px] ml-[3px] mt-[3px]"
+              class="h-[20px] w-[40px] flex justify-center items-center bg-[#FACC15] text-[#000]"
               style="border-radius: 2px"
             >
               {{userLevel}}
             </div>
-          </div>
-          <div class="flex mt-[10px] text-[#fff] text-[12px]" @click="copyContent(userInfo.inviteCode)">
-            {{$t('邀请码')}}
-            {{ userInfo.inviteCode }}
-          
+            <span class="text-[#B3A369] pl-[5px]">{{$t('欢迎回来')}}!</span>
           </div>
         </div>
       </div>
-      <div class='text-[#fff] flex justify-between items-center mt-[10px]'>
-        <div>
-          <div class='font-medium mb-[10px]'>My Account</div>
-          <div class='text-[14px]'>USD <span class='font-medium'>{{ userInfo.totalBalance }}</span></div>
-        </div>
-        <div class="flex mr-[20px]">
-          <div @click="toPage('/deposit')">
-            <img class='w-[45px] h-[45px]' src="@/static/images/cunkuan_app.png" alt="">
-            <p class='text-[10px]'>{{$t('定金')}}</p>
-          </div>
-          <div class='ml-[30px]' @click="toPage('/withdraw')">
-            <img class='w-[45px] h-[45px] ' src="@/static/images/cunkuan.png" alt="">
-            <p class='text-[10px]'>{{$t('提取')}}</p>
-          </div>
 
+      <div class="mt-3 w-full flex flex-col items-center pl-1 pr-1">
+        <div class="w-full mt-2">
+          <van-progress
+            color="#B3A369"
+            :percentage="userInfo.creditScore"
+            :show-pivot="false"
+            stroke-width="10"
+          />
+        </div>
+         <div class="w-full flex justify-between pt-[12px]">
+          <div class="text-[#fff] text-xs whitespace-nowrap">
+              <span class=" text-[#333333] text-[14px]"> {{ $t("信用评分") }}: </span>
+            </div>
+            <div class="ml-2 text-[#666] text-[12px]">
+              {{ userInfo.creditScore }}%
+            </div>
         </div>
       </div>
     </div>
-    <div class="w-[95%] rounded-xl mt-[21px] mx-auto flex flex-col">
-      <!-- <div class="pt-4 pr-4 pl-4 text-sm text-black">
-          {{ $t("菜单列表") }}
-        </div> -->
-      <div class="w-full p-4 grid grid-cols-4 gap-4">
-        <div
-          class="flex flex-col w-full justify-center rounded-lg items-start text-center box-border text-[#000]"
-          v-for="(item, index) in items"
-          :key="index"
-          @click="goTo(item.route)"
-        >
-          <div class="w-full">
-            <img class="mx-auto w-12 h-12" :src="item.icon" alt="" />
-          </div>
-          <span class="mx-auto text-center text-xs mt-1 whitespace-nowrap">
-            {{ $t(item.name) }}
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <!-- <div
+    <div
       class="pb-[20px] w-[90%] mx-auto px-[22px] pt-[13px] mt-[18px]"
       style="
         box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.16);
@@ -105,9 +101,9 @@
         <img src="@/static/images/Copy.png" class="w-[19px] h-[19px]" alt="" />
         {{$t('复制邀请码')}}
       </div>
-    </div> -->
+    </div>
 
-    <!-- <div
+    <div
       class="pb-[20px] w-[90%] mx-auto px-[22px] pt-[13px] mt-[18px]"
       style="
         box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.16);
@@ -134,7 +130,7 @@
       </div>
 
 
-    </div> -->
+    </div>
 
     <!-- <div
       class="w-[90%] mt-[90px] mx-auto flex flex-col rounded-xl bg-[url(@/static/images/profile_bg2.png)] bg-cover"
@@ -260,10 +256,10 @@
           <div class="flex items-center">
             <img
               src="@/static/images/EditPersonal.png"
-              class="w-4 h-4 mr-2"
+              class="w-6 h-6 mr-3"
               alt=""
             />
-            <div class="text-[#333]  text-[12px]">{{ $t("个人信息") }}</div>
+            <div class="text-[#1a1a1a] text-sm">{{ $t("个人信息") }}</div>
           </div>
           <van-icon name="arrow" color="#999" size="18px" />
         </div>
@@ -274,10 +270,10 @@
           <div class="flex items-center">
             <img
               src="@/static/images/Withdrawal2.png"
-              class="w-4 h-4 mr-2"
+              class="w-6 h-6 mr-3"
               alt=""
             />
-            <div class="text-[#333]  text-[12px]">{{ $t("付款方式") }}</div>
+            <div class="text-[#1a1a1a] text-sm">{{ $t("付款方式") }}</div>
           </div>
           <van-icon name="arrow" color="#999" size="18px" />
         </div>
@@ -293,7 +289,7 @@
           <div class="flex items-center">
             <img
               src="@/static/images/Notifications.png"
-              class="w-4 h-4 mr-2"
+              class="w-6 h-6 mr-3"
               alt=""
             />
             <div class="text-[#1a1a1a] text-sm">{{ $t("联系我们") }}</div>
@@ -464,33 +460,6 @@ const tradeConfig = async () => {
   let res = await getTradeConfig();
   TradeInfor.value = res.data;
 };
-
-const items = [
-  {
-    name: "客服", // 用于 $t('收入指南')
-    icon: new URL("@/static/images/service1.png", import.meta.url).href,
-    icon_bg: new URL("@/static/images/icon_bg1.png", import.meta.url).href,
-    route: "/server",
-  },
-  {
-    name: "事件",
-    icon: new URL("@/static/images/record.png", import.meta.url).href,
-    icon_bg: new URL("@/static/images/record.png", import.meta.url).href,
-    route: "/event",
-  },
-  {
-    name: "提款",
-    icon: new URL("@/static/images/wallet11.png", import.meta.url).href,
-    icon_bg: new URL("@/static/images/icon_bg3.png", import.meta.url).href,
-    route: "/notifications",
-  },
-  {
-    name: "定金",
-    icon: new URL("@/static/images/fried.png", import.meta.url).href,
-    icon_bg: new URL("@/static/images/icon_bg4.png", import.meta.url).href,
-    route: "/profile",
-  }
-];
 onMounted(() => {
   window.addEventListener("updateTrade", updateHandler);
   getUserGetInfo();
