@@ -1,56 +1,14 @@
 <template>
-  <div class="bg-[#002d72]">
-    <div class="h-[40px] bg-[#002d72]"></div>
-    <div class="w-full bg-[#002d72] starting">
-      <!-- <HeaderTop></HeaderTop> -->
-
-      <div class="startBen h-[520px] mt-[33px] px-[20px]">
-        <div class="flex justify-start text-[#FFFFFF]">
-          <div>
-            <!-- 接口还没返回 avatar 字段（请求中） -->
-            <div
-              v-if="userInfo.avatar === undefined"
-              class="w-[48px] h-[48px] rounded-full ml-[5px] bg-gray-200 animate-pulse"
-            ></div>
-
-            <!-- 接口返回 null / 空字符串 → 直接显示默认头像（不会闪） -->
-            <img
-              v-else-if="!userInfo.avatar"
-              :src="userImg"
-              class="w-[48px] h-[48px] rounded-full ml-[5px] object-cover"
-              alt=""
-            />
-
-            <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
-            <img
-              v-else
-              :src="userInfo.avatar"
-              class="w-[48px] h-[48px] rounded-full ml-[5px] object-cover"
-              alt=""
-              @error="(e) => (e.target.src = userImg)"
-            />
-          </div>
-          <div class="pl-[16px]">
-            <div class="text-[16px] pb-[5px]">Hi, {{ userInfo.username }}</div>
-            <div
-              class="bg-[#E6EDF8] text-[#002D72] font-bold text-[14px] w-[46px] text-center rounded-[4px]"
-            >
-              {{ userLevel }}
-            </div>
-          </div>
-        </div>
-        <!-- 刷单 -->
-        <div class="mt-[167px] flex justify-center text-[#fff]">
-          <span>({{ userInfo.dealCount }}</span
-          >/<span>{{ orderCount }})</span>
-        </div>
+  <div class="startBg">
+    <div class="w-full">
+      <div class="startBen h-[315px] mt-[33px] px-[20px]">
         <div class="flex flex-col px-6 py-5 box-border rounded-xl">
           <div class="flex flex-col box-border rounded-xl">
             <div
               class="w-full grid grid-cols-3 gap-x-px gap-y-1 justify-center"
             >
-              <template v-for="(item, index) in totalCount" :key="index">
-                <div
+              <template v-for="(item, index) in goodsList" :key="index">
+                <!-- <div
                   v-if="index === 4"
                   class="grid-span-1 text-center text-xs font-normal"
                   @click="handleClick"
@@ -67,10 +25,9 @@
                       <div class="absolute"></div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div
-                  v-else
-                  class="grid-span-3 text-[#666666] text-center text-xs font-normal w-[89px] h-[76px]"
+                  class="grid-span-3 text-[#666666] text-center text-xs font-normal w-[92px] h-[86px]"
                 >
                   <div
                     class="overflow-hidden w-[89px] h-[76px]"
@@ -90,9 +47,15 @@
                         class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
                         alt=""
                       /> -->
-                      <van-image
+                      <!-- <van-image
                         fit="fill"
                         :src="`${url}${getImageByIndex(index)}`"
+                      /> -->
+                      <img
+                        :src="`${url}${item.coverUrl}`"
+                        class="w-[103px] h-[103px]"
+                        style="border-radius: 8px"
+                        alt=""
                       />
                     </div>
                   </div>
@@ -141,7 +104,7 @@
           </div>
         </div>
       </div>
-      <div class="w-full bg-[#002d72] relative px-[20px]">
+      <div class="w-full relative px-[20px]">
         <div class="mx-auto pt-[16px]">
           <div class="rounded-lg bg-[#fff]">
             <div class="flex flex-col p-4 box-border relative rounded-[10px]">
@@ -409,6 +372,7 @@ import { useI18n } from "vue-i18n";
 import {
   userGetInfo,
   getGoodsList,
+  getGoodsListTwo,
   createOrder,
   submitOrder,
   getTradeConfig,
@@ -435,9 +399,9 @@ const getList = async () => {
   // let res = await getGoodsList();
   // goodsList.value = res.data;
   try {
-    const res = await getGoodsList();
+    const res = await getGoodsListTwo();
     goodsList.value = res.data;
-    totalCount.value = goodsList.value.length + 1; // 插入一个“开始按钮”
+    // totalCount.value = goodsList.value.length + 1; // 插入一个“开始按钮”
   } catch (e) {
     console.error("获取商品列表失败:", e);
   } finally {
@@ -565,9 +529,9 @@ onMounted(() => {
 });
 </script>
 <style scoped>
-.starting {
+.startBg {
   width: 100%;
-  height: 100vh; /* 高度可以根据需求设置 */
+  height: 100%; /* 高度可以根据需求设置 */
   background-image: url("@/static/images/startBg.png");
   background-repeat: no-repeat; /* 不平铺 */
   background-position: center center; /* 图片居中 */

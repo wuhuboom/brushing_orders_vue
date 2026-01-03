@@ -1,16 +1,15 @@
 <template>
-    <div class="w-full mx-auto relative z-50 bg-transparent" >
-        <div class="h-[60px]"></div> <!-- 占位 -->
-        <div class="bar-shadow flex items-center justify-center fixed bottom-0 left-0 right-0 h-[60px] w-[90%] bg-[#E3F3FAE5] rounded-[30px] mx-auto mb-[7px]" style="bottom: -1px;">
+    <div class="w-full relative z-50">
+        <div class="h-[68px]"></div> <!-- 占位 -->
+        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[68px] w-full bg-[#fff]" style="bottom: -1px;">
             <div v-for="menu in menus" :key="menu.title"
-                class="flex-1 flex flex-col items-center text-xs gap-1 font-light"  @click="onClickMenu(menu)">
-                <!-- <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}_h.png`)"
-                    alt="" class="h-7 w-7" :class="menu.title == $t('开始')?'starting':''"> -->
-                    <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}.png`)"
-                    alt="" class="h-[52px] w-[52px]">
-                <!-- <span  class="leading-normal text-[10px] " :class="name === menu.url?'text-[#fff]':'text-[#fff]',menu.title == $t('开始')?'startingText':''" style="font-size: 12px;">
+                class="flex-1 flex flex-col items-center text-xs gap-1"  @click="onClickMenu(menu)">
+                <!-- <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}.png`) : getStaticImageUrl(`${menu.icon}.png`)"
+                    alt="" class="h-7 w-7"> -->
+                <van-icon :name="menu.icon" color="#646566" size="22px" />
+                <span  class="leading-normal text-[10px] " :class="name === menu.url?'text-[#707070]':'text-[#707070]',menu.title == $t('开始')?'startingText':''" style="font-size: 12px;">
                     {{ menu.title }}
-                </span> -->
+                </span>
             </div>
         </div>
     </div>
@@ -28,10 +27,11 @@ const props = defineProps({
 const { t } = useI18n()
 const active = ref(props.name)
 const menus = computed(() => [
-    { title: t('首页'), url: '/', icon: 'home' },
-    { title: t('开始'), url: '/starting', icon: 'starting' },
-     { title: t('记录'), url: '/records', icon: 'records' },
-    { title: t('我的'), url: '/my', icon: 'user' }
+    { title: t('首页'), url: '/', icon: 'wap-home-o' },
+    { title: t('客服'), url: '/service', icon: 'service-o' },
+    { title: t('开始'), url: '/projectspage', icon: 'bag-o' },
+    { title: t('记录'), url: '/records', icon: 'notes-o' },
+    { title: t('我的'), url: '/my', icon: 'contact-o' }
 ])
 
 watch(() => props.name, (val) => {
@@ -51,12 +51,11 @@ function onClickMenu(menu) {
     box-shadow: 0px -1px 4px 0px #0000000D;
 }
 .starting {
-    /* margin-top: -3rem;
-    width: 5.5rem;
-    height: 5.5rem; */
-    margin-top: -2.7rem; width: 4rem; height: 4rem;
+    margin-top: -2rem;
+    width: 3.5rem;
+    height: 3.5rem;
 }
-.startingText {
-    /* margin-top: -1rem; */
-}
+/* .startingText {
+    margin-top: -1rem;
+} */
 </style>

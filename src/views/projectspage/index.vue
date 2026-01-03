@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="flex items-center relative bg-[#000]">
+    <div class="flex items-center relative bg-[#fff]">
       <!-- 左侧箭头 -->
       <!-- <div class="absolute left-3" @click="onClickLeft">
         <van-icon name="arrow-left" color="#fff" size="24px" />
       </div> -->
       <!-- 中间标题 -->
-      <div class="mx-auto text-white text-[22px] py-[24px]">Menu</div>
+      <div class="mx-auto text-[#000] text-[22px] py-[12px]">Menu</div>
     </div>
     <van-tabs
       color="#007513"

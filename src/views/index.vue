@@ -133,8 +133,6 @@
       <img class="w-full" src="@/static/images/a.png" alt=""></img>
     </div>
    <img class="w-full" src="@/static/images/b.png" alt=""></img>
-    
-
     <!-- 行情结束 -->
     <Footer name="/"></Footer>
     <tradePassword ref="tradePasswordRef"></tradePassword>

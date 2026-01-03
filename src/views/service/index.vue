@@ -20,10 +20,12 @@
       </div>
     </div>
     <ContactUs ref="ContactUsRef"></ContactUs>
+    <Footer name="/"></Footer>
   </div>
 </template>
 <script setup>
 import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
 import Lang from "@/components/Lang.vue";
 import ContactUs from "@/components/ContactUs.vue";
 import { getStaticImageUrl } from "@/util/utils.js";
