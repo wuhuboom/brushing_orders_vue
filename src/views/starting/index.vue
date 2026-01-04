@@ -1,36 +1,48 @@
 <template>
   <div class="startBg">
-    <div class="w-full">
-      <div class="startBen h-[315px] mt-[33px] px-[20px]">
-        <div class="flex flex-col px-6 py-5 box-border rounded-xl">
+    <div class="flex items-center relative ">
+      <!-- 左侧箭头 -->
+      <div class="absolute left-3" @click="toLogin">
+        <van-icon name="arrow-left" color="#fff" size="24px" />
+      </div>
+      <!-- 中间标题 -->
+      <div class="mx-auto text-white text-[22px] py-[24px] ">{{$t('开始')}}</div>
+    </div>
+    <div class="w-full px-[20px]">
+      <div class="bg-[#fff] rounded-[20px] overflow-hidden mt-[20px]">
+        <div class="flex bg-[#6B4D51] h-[36px] items-center">
+          <div class="flex-1 text-center text-[#fff]">任务总计</div>
+          <div class="flex-1 text-center text-[#fff]">任务完成</div>
+        </div>
+        <div class="flex h-[36px] items-center font-bold border-b border-[#E6E6E6] ">
+          <div class="flex-1 text-center text-[#000] ">{{ orderCount }}</div>
+          <div class="flex-1 text-center text-[#000]">{{ userInfo.dealCount }}</div>
+        </div>
+        <div class="flex h-[36px] items-center px-[20px] border-b border-[#E6E6E6]">
+          <div class="flex-1 text-[#6B4D51] ">{{ $t("钱包余额") }}</div>
+          <div class="flex-1 text-right text-[#6B4D51]">{{ userInfo.balance }} USD</div>
+        </div>
+        <div class="flex h-[36px] items-center px-[20px] border-b border-[#E6E6E6]">
+          <div class="flex-1  text-[#6B4D51] ">{{ $t("当日佣金") }}</div>
+          <div class="flex-1  text-right text-[#000]">{{ userInfo.commission }} USD</div>
+        </div>
+        <div class="flex h-[36px] items-center px-[20px]">
+          <div class="flex-1  text-[#6B4D51] ">{{ $t("持有金额") }}</div>
+          <div class="flex-1  text-right text-[#6B4D51]">{{ userInfo.frozenBalance }} USD</div>
+        </div>
+      </div>
+      <div class="startBen h-[315px] mt-[20px] px-[10px]">
+        <div class="flex flex-col px-5 py-5 box-border rounded-xl">
           <div class="flex flex-col box-border rounded-xl">
             <div
               class="w-full grid grid-cols-3 gap-x-px gap-y-1 justify-center"
             >
               <template v-for="(item, index) in goodsList" :key="index">
-                <!-- <div
-                  v-if="index === 4"
-                  class="grid-span-1 text-center text-xs font-normal"
-                  @click="handleClick"
-                >
-                  <div
-                    class="flex items-center justify-center overflow-hidden rounded-xl bg-cover text-lg text-white font-medium relative w-[89px] h-[76px]"
-                  >
-                    <div class="overflow-hidden">
-                      <img
-                        src="@/static/images/start-button.png"
-                        class="w-[100%] shadow"
-                        alt=""
-                      />
-                      <div class="absolute"></div>
-                    </div>
-                  </div>
-                </div> -->
                 <div
                   class="grid-span-3 text-[#666666] text-center text-xs font-normal w-[92px] h-[86px]"
                 >
                   <div
-                    class="overflow-hidden w-[89px] h-[76px]"
+                    class="overflow-hidden w-[92px] h-[86px]"
                     style="
                       background-image: radial-gradient(
                         circle at 100% 0%,
@@ -65,7 +77,15 @@
           </div>
         </div>
       </div>
-      <div class="bg-[#fff] p-[16px] rounded-[8px] mt-[16px] mx-[20px]">
+      <div
+          class="mt-5 flex justify-center items-center text-[#fff] text-base h-[49px] bg-[linear-gradient(102deg,#90474B_0%,#694D51_100%)] rounded-[20px]"
+          @click="handleClick"
+        >
+         <img class="w-[24px] h-[24px] mr-[15px]" src="../../static/images/start1.png" alt="">
+          {{$t('开始')}}
+          
+        </div>
+      <!-- <div class="bg-[#fff] p-[16px] rounded-[8px] mt-[16px] mx-[20px]">
         <div class="text-[#4B5563] text-[12px] pb-[4px]">
           {{ $t("钱包余额") }}
         </div>
@@ -103,15 +123,15 @@
             {{ $t("如有疑问，请联系客服") }}
           </div>
         </div>
-      </div>
-      <div class="w-full relative px-[20px]">
+      </div> -->
+      <div class="w-full relative">
         <div class="mx-auto pt-[16px]">
-          <div class="rounded-lg bg-[#fff]">
+          <div class="">
             <div class="flex flex-col p-4 box-border relative rounded-[10px]">
-              <div class="mb-1 text-base text-[#000000] text-[16px]">
+              <div class="mb-1 text-base text-[#fff] text-[16px]">
                 {{ $t("start.notice.str") }}
               </div>
-              <div class="text-[#4B5563] text-[14px]">
+              <div class="text-[#fff] text-[14px]">
                 {{ $t("start.notice.desc1.str") }}
                 {{ TradeInfor?.workTimeStart || "--:--" }} -
                 {{ TradeInfor?.workTimeEnd || "--:--" }} <br />
@@ -178,7 +198,7 @@
       </div>
     </div> -->
 
-      <Footer name="/starting"></Footer>
+      <!-- <Footer name="/starting"></Footer> -->
       <!-- <van-popup
         v-model:show="showCenter"
         round
@@ -410,6 +430,10 @@ const getList = async () => {
   }
 };
 
+const toLogin = () =>{
+  router.replace({ path: "/projectspage" });
+}
+
 const getImageByIndex = (i) => {
   if (i === 4) return null; // 第 5 项是“开始按钮”，不用图
   const realIndex = i < 5 ? i : i - 1;
@@ -541,5 +565,6 @@ onMounted(() => {
   width: 100%;
   background-image: url(@/static/images/start.png);
   background-size: 100% 100%;
+  /* margin: 0 20px 0 20px; */
 }
 </style>

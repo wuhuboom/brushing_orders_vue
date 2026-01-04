@@ -235,7 +235,7 @@
               class="w-4 h-4 mr-2"
               alt=""
             />
-            <div class="text-[#333]  text-[12px]">{{ $t("设置") }}</div>
+            <div class="text-[#333]  text-[12px]">{{ $t("Set") }}</div>
           </div>
           <van-icon name="arrow" color="#999" size="18px" />
         </div>

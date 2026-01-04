@@ -1,34 +1,9 @@
 <template>
   <div>
     <!-- <HeaderTop></HeaderTop> -->
-    <div class="py-[20px]">
-      <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
-    </div>
-    <div
-      class="w-full h-[352px] text-[#fff] relative"
-
-    >
-     <video
-        src="https://www.directagents.com/wp-content/uploads/2025/06/Sequence-04_5_compressed_v2.mp4"
-        autoplay
-        muted
-        loop
-        playsinline
-        class="w-full h-[352px] object-cover"
-      ></video>
-      <div class="absolute top-0 left-0 p-[24px]">
-        <p class="flex flex-col text-[36px] font-roboto pt-[20px]">
-        <span class="pb-[26px]">{{$t('index.str1')}}</span>
-        <span class="pb-[26px]">{{$t('index.str2')}}</span>
-        <span>{{$t('index.str3')}}</span>
-      </p>
-      <p class="flex flex-col text-[20px] pt-[70px]">
-        <span class="pb-[20px]">{{$t('index.str4')}}</span>
-        <span>{{$t('index.str5')}}</span>
-      </p>
-      </div>
-      
-    </div>
+     <div class="w-[100%] h-[40px] border bottom-1 px-[10px] py-[3px] shadow-[3px_3px_6px_rgba(68,93,158,0.11)]">
+      <img class="w-[34px] h-[30px]" src="@/static/images/logos.jpg" alt="">
+     </div>
     <div class="relative bg-white">
       <!-- 菜单列表 -->
       <div class="w-[95%] rounded-xl mx-auto flex flex-col">
@@ -55,84 +30,26 @@
       <div class="w-full mx-auto">
         <div class="w-[90%] mx-auto">
           <div
-            class="flex justify-between pt-4 pb-2 text-base text-[#002D72] font-semibold"
+            class="flex justify-between pt-4 pb-2 text-base text-[#000] font-semibold"
           >
-            <div class="w-[35%]">{{ $t("员工等级") }}</div>
-            <div
+            <div class="w-[100%]">{{ $t("Platform introduction") }}</div>
+            <!-- <div
               @click="toVips"
               class="w-[65%] font-normal text-xs text-[#5F5F5F] text-right flex justify-end items-center"
             >
               <div>{{ $t("查看更多") }}</div>
-              <!-- <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" /> -->
-            </div>
+            </div> -->
           </div>
         </div>
-        <div class="flex overflow-x-scroll p-4">
-          <div
-            v-for="item in levelList"
-            class="flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
-            :style="{
-              background: `url(${bgMap[item.nameEn]}) 0 0 / 100% 100% no-repeat`,
-            }"
-          >
-            <div class="flex justify-between items-start pt-[13px]">
-              <div class="font-bold text-lg">
-                <p
-                  :style="{
-                    color: textMap[item.nameEn],
-                  }"
-                >
-                  {{ item.nameEn }}
-                </p>
-              </div>
-              <!-- <img class="w-24" :src="bgMapStart[item.name]" alt="" /> -->
-            </div>
-            <div
-              class="w-[260px] text-xs text-black pt-[3px]"
-              style="line-height: 19px"
-            >
-              <p>{{$t('index.str12')}} .{{item.commissionRatio}}%</p>
-              <p>{{$t('index.str12')}} . {{item.commissionRatio}}% {{$t('index.str13')}}. {{item.orderCount}} {{$t('index.str14')}}</p>
-              <p class="w-[260px] text-xs mt-2 text-black" v-html="item.description"></p>
-            </div>
+        <div class="grid grid-cols-2 gap-2 px-[10px]">
+          <div v-for="(item, index) in itemsArr"  @click="goTo(item.route)" :key="index">
+            <img class="w-[180px] h-[140px]" :src="item.icon" alt="">
+            <div class="text-[14px] text-[#333] pt-[5px] mb-[10px]">{{$t(item.name)}}</div>
+            <!-- <div class="text-[12px] text-[#999]">Platform profile</div> -->
           </div>
         </div>
       </div>
     </div>
-    <div class="p-[25px] w-full we">
-      <p class="text-[#002D72] text-[20px] text-base">
-        {{$t('index.str6')}}
-      </p>
-      <p class="text-[#4B5563] pt-[10px]">
-        {{$t('index.str7')}}
-      </p>
-      <img class="w-full mt-[15px]" src="@/static/images/index1bg.png" alt="" />
-    </div>
-    <div
-      class="p-[25px] w-full"
-      style="border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb"
-    >
-      <p class="text-[#002D72] text-[20px] text-base">
-        {{$t('index.str8')}}
-      </p>
-      <p class="text-[#4B5563] pt-[10px]">
-        {{$t('index.str9')}}
-      </p>
-      <img class="w-full mt-[15px]" src="@/static/images/index2bg.png" alt="" />
-    </div>
-    <div class="p-[25px] w-full">
-      <p class="text-[#002D72] text-[20px] text-base">
-       {{$t('index.str10')}}
-      </p>
-      <p class="text-[#4B5563] pt-[10px]">
-        {{$t('index.str11')}}
-      </p>
-      <img class="w-full mt-[15px]" src="@/static/images/index3bg.png" alt="" />
-    </div>
-    <div class="w-full px-[17px]">
-      <img class="w-full" src="@/static/images/a.png" alt=""></img>
-    </div>
-   <img class="w-full" src="@/static/images/b.png" alt=""></img>
     <!-- 行情结束 -->
     <Footer name="/"></Footer>
     <tradePassword ref="tradePasswordRef"></tradePassword>
@@ -213,16 +130,12 @@ const tradeConfig = async () => {
 const router = useRouter();
 
 const items = [
-  {
-    name: "收入指南", // 用于 $t('收入指南')
-    icon: new URL("@/static/images/icon-0.png", import.meta.url).href,
-    route: "/guide",
-  },
-  {
-    name: "事件",
-    icon: new URL("@/static/images/icon-3.png", import.meta.url).href,
-    route: "/event",
-  },
+  
+  // {
+  //   name: "事件",
+  //   icon: new URL("@/static/images/icon-3.png", import.meta.url).href,
+  //   route: "/event",
+  // },
   {
     name: "提款",
     icon: new URL("@/static/images/icon-5.png", import.meta.url).href,
@@ -233,26 +146,75 @@ const items = [
     icon: new URL("@/static/images/icon-7.png", import.meta.url).href,
     route: "/profile",
   },
-  {
-    name: "条款及细则", // 用于 $t('收入指南')
-    icon: new URL("@/static/images/icon-2.png", import.meta.url).href,
-    route: "/clause",
-  },
-  {
-    name: "证书",
-    icon: new URL("@/static/images/icon-4.png", import.meta.url).href,
-    route: "/cert",
-  },
-  {
-    name: "常见问题解答",
-    icon: new URL("@/static/images/icon-6.png", import.meta.url).href,
-    route: "/faqs",
-  },
+  // {
+  //   name: "条款及细则", // 用于 $t('收入指南')
+  //   icon: new URL("@/static/images/icon-2.png", import.meta.url).href,
+  //   route: "/clause",
+  // },
+  // {
+  //   name: "证书",
+  //   icon: new URL("@/static/images/icon-4.png", import.meta.url).href,
+  //   route: "/cert",
+  // },
+  // {
+  //   name: "常见问题解答",
+  //   icon: new URL("@/static/images/icon-6.png", import.meta.url).href,
+  //   route: "/faqs",
+  // },
   {
     name: "客服",
     icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
     route: "/customer",
   },
+  {
+    name: "vips", // 用于 $t('收入指南')
+    icon: new URL("@/static/images/icon-0.png", import.meta.url).href,
+    route: "/vips",
+  },
+];
+
+const itemsArr = [
+  
+  {
+    name: "事件",
+    icon: new URL("@/static/images/pro1.png", import.meta.url).href,
+    route: "/event",
+  },
+  // {
+  //   name: "提款",
+  //   icon: new URL("@/static/images/icon-5.png", import.meta.url).href,
+  //   route: "/notifications",
+  // },
+  // {
+  //   name: "定金",
+  //   icon: new URL("@/static/images/icon-7.png", import.meta.url).href,
+  //   route: "/profile",
+  // },
+  {
+    name: "条款及细则", // 用于 $t('收入指南')
+    icon: new URL("@/static/images/pro2.png", import.meta.url).href,
+    route: "/clause",
+  },
+  {
+    name: "证书",
+    icon: new URL("@/static/images/pro3.png", import.meta.url).href,
+    route: "/cert",
+  },
+  {
+    name: "常见问题解答",
+    icon: new URL("@/static/images/pro4.png", import.meta.url).href,
+    route: "/faqs",
+  },
+  // {
+  //   name: "客服",
+  //   icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
+  //   route: "/customer",
+  // },
+  // {
+  //   name: "Invitation", // 用于 $t('收入指南')
+  //   icon: new URL("@/static/images/icon-0.png", import.meta.url).href,
+  //   route: "/guide",
+  // },
 ];
 
 function goTo(path) {
