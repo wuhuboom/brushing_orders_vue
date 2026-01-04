@@ -378,7 +378,7 @@
         <img
           @click="closeImg"
           class="w-[100%] mb-5"
-          src="../../static/images/super.png"
+          src="../../static/images/super.jpg"
           alt=""
         />
         <van-button color="rgb(10, 77, 162)" round class="w-full" @click="closeImg"
