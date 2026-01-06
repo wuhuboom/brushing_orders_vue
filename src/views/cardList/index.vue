@@ -101,7 +101,7 @@
       <div class="h-[20px]"></div>
       <van-button
         v-if="showWalletBtn"
-        color="#F09F39"
+        color="#6a4d52"
         class="w-full"
         size="large"
         @click="addBank(2)"

@@ -1,7 +1,7 @@
 <template>
   <div class="w-full bg-[#f9f9f9] min-h-[100vh] h-full withdraw">
     <div
-      class="relative bg-gradient-to-r from-[#002D72] to-[#0A4DA2] flex items-center justify-center h-[56px] px-[16px]"
+      class="relative bg-gradient-to-r from-[#a04149]  to-[#6a4d52] flex items-center justify-center h-[56px] px-[16px]"
     >
       <div class="absolute left-[16px]">
         <van-icon
@@ -15,7 +15,7 @@
       <div class="absolute right-[16px] text-base text-[#fff]" @click="toHistory">{{$t('Withdrawal.History')}}</div>
     </div>
     <div
-      class="flex flex-col justify-between p-4 box-border mt-[-2px] bg-gradient-to-r from-[#002D72] to-[#0A4DA2]"
+      class="flex flex-col justify-between p-4 box-border mt-[-2px] bg-gradient-to-r from-[#a04149]  to-[#6a4d52]"
     >
       <div class="w-full flex justify-end mb-[10px]" @click="refresh">
         <img
@@ -54,7 +54,7 @@
           label-align="top"
           size="large"
         />
-        <div class="absolute right-0 top-[13px] text-[12px] text-[#2563EB]"  @click="All">{{ $t("全部") }}</div>
+        <div class="absolute right-0 top-[13px] text-[12px] text-[#6a4d52]"  @click="All">{{ $t("全部") }}</div>
       </div>
       <div class="mt-[4px] text-[12px] text-[#71757C]">{{ $t("您将在一小时内收到提款") }}</div>
       <div class="mt-[10px]">
@@ -109,7 +109,7 @@
             </div>
           </div>
           <div class="flex items-center" @click="toList">
-            <div class="text-[#2563EB] text-[12px] mr-[8px]">{{$t('管理')}}</div>
+            <div class="text-[#6a4d52] text-[12px] mr-[8px]">{{$t('管理')}}</div>
             <van-icon name="arrow" color="#9CA3AF" size="16px" />
           </div>
         </div>
@@ -142,7 +142,7 @@
         <van-button
           color="#002D72"
           style="
-            background: linear-gradient(135deg, #002D72, #0a4da2);
+            background: #6a4d52;
             color: #fff;
           "
           @click="getWithdrawal"

@@ -405,7 +405,7 @@ const tradeConfig = async () => {
 const items = [
   {
     name: "联系我们", // 用于 $t('收入指南')
-    icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
+    icon: new URL("@/static/images/icon-134.png", import.meta.url).href,
     icon_bg: new URL("@/static/images/icon_bg1.png", import.meta.url).href,
     route: "/customer",
   },

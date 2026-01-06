@@ -42,7 +42,7 @@
                   </div>
                 </div>
                 <div
-                  class="flex text-[16px] text-[#002D72] font-semibold items-center my-[15px] "
+                  class="flex text-[16px] text-[#6a4d52] font-semibold items-center my-[15px] "
                 >
                   <span class="pr-[5px]">{{ $t("美元") }}</span>{{ item.amout }}
                 </div>
