@@ -35,6 +35,7 @@ import {
   PullRefresh,
   Tag,
   Toast,
+  Picker,
   Swipe, SwipeItem,PasswordInput,NumberKeyboard 
 } from "vant";
 // 2. 引入组件样式
@@ -109,6 +110,7 @@ async function bootstrap() {
   app.use(SwipeItem);
   app.use(PasswordInput);
   app.use(NumberKeyboard);
+  app.use(Picker);
   // app.use(ElementPlus) // 使用 Element Plus
   app.mount("#app");
 }

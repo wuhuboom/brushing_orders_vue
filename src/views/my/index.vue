@@ -50,7 +50,7 @@
       </div>
       <div class='text-[#fff] flex justify-between items-center mt-[10px]'>
         <div>
-          <div class='font-medium mb-[10px]'>My Account</div>
+          <div class='font-medium mb-[10px]'>{{$t('我的账户')}}</div>
           <div class='text-[14px]'>USD <span class='font-medium'>{{ userInfo.totalBalance }}</span></div>
         </div>
         <div class="flex mr-[20px]">
@@ -202,7 +202,7 @@
               class="w-4 h-4 mr-2"
               alt=""
             />
-            <div class="text-[#333]  text-[12px]">{{ $t("Deposit records") }}</div>
+            <div class="text-[#333]  text-[12px]">{{ $t("充值记录") }}</div>
           </div>
           <van-icon name="arrow" color="#999" size="18px" />
         </div>
@@ -216,7 +216,7 @@
               class="w-4 h-4 mr-2"
               alt=""
             />
-            <div class="text-[#333]  text-[12px]">{{ $t("Withdrawal records") }}</div>
+            <div class="text-[#333]  text-[12px]">{{ $t("提现记录") }}</div>
           </div>
           <van-icon name="arrow" color="#999" size="18px" />
         </div>
@@ -235,7 +235,7 @@
               class="w-4 h-4 mr-2"
               alt=""
             />
-            <div class="text-[#333]  text-[12px]">{{ $t("Set") }}</div>
+            <div class="text-[#333]  text-[12px]">{{ $t("设置") }}</div>
           </div>
           <van-icon name="arrow" color="#999" size="18px" />
         </div>

@@ -2,17 +2,17 @@
   <div class="startBg">
     <div class="flex items-center relative ">
       <!-- 左侧箭头 -->
-      <div class="absolute left-3" @click="toLogin">
+      <!-- <div class="absolute left-3" @click="toLogin">
         <van-icon name="arrow-left" color="#fff" size="24px" />
-      </div>
+      </div> -->
       <!-- 中间标题 -->
       <div class="mx-auto text-white text-[22px] py-[24px] ">{{$t('开始')}}</div>
     </div>
     <div class="w-full px-[20px]">
       <div class="bg-[#fff] rounded-[20px] overflow-hidden mt-[20px]">
         <div class="flex bg-[#6B4D51] h-[36px] items-center">
-          <div class="flex-1 text-center text-[#fff]">任务总计</div>
-          <div class="flex-1 text-center text-[#fff]">任务完成</div>
+          <div class="flex-1 text-center text-[#fff]">{{$t('任务总计')}}</div>
+          <div class="flex-1 text-center text-[#fff]">{{$t('任务完成')}}</div>
         </div>
         <div class="flex h-[36px] items-center font-bold border-b border-[#E6E6E6] ">
           <div class="flex-1 text-center text-[#000] ">{{ orderCount }}</div>
@@ -198,7 +198,7 @@
       </div>
     </div> -->
 
-      <!-- <Footer name="/starting"></Footer> -->
+      <Footer name="/starting"></Footer>
       <!-- <van-popup
         v-model:show="showCenter"
         round
@@ -271,61 +271,46 @@
       </van-popup> -->
       <van-dialog
         v-model:show="showCenter"
-        closeable
         :title="''"
-        :style="{ width: '80%', background: '#002d72' }"
+        closeable
+        :style="{ width: '80%', background: '#fff' }"
         :show-confirm-button="false"
       >
-        <div class="w-[60px] h-[125px] mx-auto mt-[24px]" style="width: 60px">
-          <img :src="url + goods.coverUrl" alt="" />
+
+        <div class="w-[100%] mx-auto text-[18px] font-semibold text-center p-[20px] pt-[60px]">
+              {{ goods.goodsName }}
+        </div>
+        <div class="w-[60px]  mx-auto pb-[20px]">
+          <img class="w-[56px] h-[56px]" :src="url + goods.coverUrl" alt="" />
         </div>
         <div
           class="w-full mt-[-3rem] pt-[23px] text-[#fff]"
-          style="border-top: 1px solid #33578e"
         >
-          <div class="w-[100%] mx-auto text-[18px] font-semibold p-[20px]">
-            {{ goods.goodsName }}
-          </div>
           <div
-            class="flex justify-start p-[20px]"
-            style="
-              border-top: 1px solid #33578e;
-              border-bottom: 1px solid #33578e;
-            "
+            class="flex justify-start pb-[23px]"
           >
-            <img
-              class="w-[24px] h-[24px]"
-              src="@/static/images/price.png"
-              alt=""
-            />
-            <div class="pl-[12px] w-[100%]">
-              <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
-                <div class="text-[#D1D5DB]">{{ $t("总金额") }}</div>
-                <div class="text-[#fff] font-bold">
+            <div class=" w-[100%]">
+              <div class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
+                <div class="text-[#000] text-[12px]">{{ $t("总金额") }}</div>
+                <div class="text-[#000] text-[14px] font-bold">
                   {{ goods.price }}{{ $t("美元") }}
                 </div>
               </div>
-              <div class="flex justify-between w-[100%] text-[16px]">
-                <div class="text-[#D1D5DB]">{{ $t("佣金") }}</div>
-                <div class="text-[#FF9500] font-bold">
+              <div class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
+                <div class="text-[#D1D5DB] text-[12px]">{{ $t("佣金") }}</div>
+                <div class="text-[#FF9500] text-[14px] font-bold">
                   {{ goods.commission }}{{ $t("美元") }}
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="flex justify-start p-[20px]"
-            style="border-bottom: 1px solid #33578e"
+            class="flex justify-start pb-[23px]"
           >
-            <img
-              class="w-[24px] h-[24px]"
-              src="@/static/images/price.png"
-              alt=""
-            />
-            <div class="pl-[12px] w-[100%]">
-              <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
-                <div class="text-[#D1D5DB]">{{ $t("创建时间") }}</div>
-                <div class="text-[#fff] font-bold text-[14px]">
+            <div class="w-[100%]">
+              <div class="flex justify-between w-[100%] text-[16px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
+                <div class="text-[#000] text-[12px]">{{ $t("创建时间") }}</div>
+                <div class="text-[#968E9C]  font-bold text-[12px]">
                   {{
                     formatWithTimezone(
                       goods.createTime,
@@ -334,19 +319,20 @@
                   }}
                 </div>
               </div>
-              <div class="flex justify-between w-[100%] text-[16px]">
-                <div class="text-[#D1D5DB]">{{ $t("编号") }}</div>
-                <div class="text-[#fff] text-[14px]">
+              <div class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
+                <div class="text-[#000] text-[12px]">{{ $t("编号") }}</div>
+                <div class="text-[#968E9C] text-[12px]">
                   {{ goods.orderNo }}
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="w-[90%] mx-auto mt-4 pb-[20px]">
+          <div class="w-[70%] mx-auto mt-4 pb-[20px]">
             <van-button
-              color="#FF9500"
+              color="#6F4D50"
               class="w-full"
+              round
               @click.prevent="submitForm"
               >{{ $t("提交") }}</van-button
             >

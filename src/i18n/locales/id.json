@@ -259,5 +259,22 @@
   "我的交易所": "Bursa Saya",
   "钱包管理":"Manajemen Dompet",
   "请输入6位数字密码": "Silakan masukkan kata sandi 6 digit",
-  "请输入6位数字的交易密码": "Silakan masukkan kata sandi transaksi 6 digit"
+  "请输入6位数字的交易密码": "Silakan masukkan kata sandi transaksi 6 digit",
+   "帮助": "Bantuan",
+  "设置": "Pengaturan",
+  "vips": "VIP",
+  "平台介绍": "Pengenalan Platform",
+  "客户服务中心": "Pusat Layanan Pelanggan",
+  "在线客服时间": "Jam Layanan Pelanggan Online",
+  "任务总计": "Total Tugas",
+  "任务完成": "Tugas Selesai",
+  "我的账户": "Akun Saya",
+  "提现记录": "Riwayat Penarikan",
+  "充值记录": "Riwayat Isi Ulang",
+  "index.intro3": "Kerja Sama Saling Menguntungkan",
+  "index.introText3": "MALL menjalankan kerja sama saling menguntungkan bagi pengguna di seluruh dunia, meningkatkan interaksi antara pengguna dan pedagang, membantu pengguna mendapatkan penghasilan serta membantu pedagang memperoleh keuntungan.",
+  "index.intro1": "Profil Platform",
+  "index.introText1": "MALL adalah pusat pencocokan pesanan global berbasis cloud yang cerdas dan menjalin kerja sama strategis dengan berbagai platform e-commerce besar.",
+  "index.intro2": "Aturan Platform",
+  "index.introText2": "Metode isi ulang dapat berubah sewaktu-waktu. Penarikan minimum adalah 20 USDT dan akan diproses dalam 24 jam."
 }

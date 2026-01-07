@@ -29,7 +29,7 @@ const active = ref(props.name)
 const menus = computed(() => [
     { title: t('首页'), url: '/', icon: 'wap-home-o' },
     { title: t('客服'), url: '/service', icon: 'service-o' },
-    { title: t('开始'), url: '/projectspage', icon: 'bag-o' },
+    { title: t('开始'), url: '/starting', icon: 'bag-o' },
     { title: t('记录'), url: '/records', icon: 'notes-o' },
     { title: t('我的'), url: '/my', icon: 'contact-o' }
 ])

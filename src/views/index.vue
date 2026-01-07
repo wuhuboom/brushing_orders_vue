@@ -1,38 +1,59 @@
 <template>
-  <div>
+  <div class="bg-[#f8f8f8] h-[100vh]">
     <!-- <HeaderTop></HeaderTop> -->
      <div class="w-[100%] h-[40px] border bottom-1 px-[10px] py-[3px] shadow-[3px_3px_6px_rgba(68,93,158,0.11)]">
       <img class="w-[34px] h-[30px]" src="@/static/images/logos.jpg" alt="">
      </div>
-    <div class="relative bg-white">
+    
+    <div class="relative">
       <!-- 菜单列表 -->
-      <div class="w-[95%] rounded-xl mx-auto flex flex-col">
+      <div class="w-[95%] rounded-xl bg-[#fff] mt-[2px] mx-auto flex flex-col">
         <!-- <div class="p-4 text-lg font-semibold text-black">
           {{ $t("菜单列表") }}
         </div> -->
-        <div class="w-full px-4 py-8 grid grid-cols-4 gap-4">
+        <div class="w-full px-4 py-4 grid grid-cols-4 gap-4">
           <div
-            class="flex flex-col w-full rounded-lg items-start text-center box-border text-[#2A2A2A]"
+            class="flex flex-col w-full rounded-lg items-start text-center box-border text-[#333]"
             v-for="(item, index) in items"
             :key="index"
             @click="goTo(item.route)"
           >
             <div class="w-full">
-              <img class="mx-auto w-12 h-12" :src="item.icon" alt="" />
+              <img class="mx-auto w-[37px] h-[37px]" :src="item.icon" alt="" />
             </div>
-            <span class="mx-auto text-center text-xs mt-1">
+            <span class="mx-auto text-center text-xs">
               {{ $t(item.name) }}
             </span>
           </div>
         </div>
       </div>
+       <div class="bg-[#fff] px-[20px] py-[10px] mt-[10px]">
+      <van-swipe style="height: 65px;" :show-indicators="false" autoplay="3000" vertical>
+        <van-swipe-item v-for="item in swiperData">
+          <div class="h-[100%] bg-[#f8f8f8] flex items-center justify-between px-[10px]">
+            <div class="flex items-center">
+              <img class="w-[30px] pr-[10px]" src="@/static/images/tou.png" alt="">
+              <div>
+                <div class="text-[#6a4d52]">{{item.name}}</div>
+                <div class="text-[#999]">successful</div>
+              </div>
+            </div>
+            <div class="text-[#999]">
+              <span>{{item.num}}</span>
+              USDT
+            </div>
+          </div>
+
+        </van-swipe-item>
+      </van-swipe>
+     </div>
       <!-- 员工等级 -->
-      <div class="w-full mx-auto">
-        <div class="w-[90%] mx-auto">
+      <div class="w-full mx-auto ">
+        <div class="w-[90%] mx-auto pb-[10px] bg-[#fff]">
           <div
             class="flex justify-between pt-4 pb-2 text-base text-[#000] font-semibold"
           >
-            <div class="w-[100%]">{{ $t("Platform introduction") }}</div>
+            <div class="w-[100%]">{{ $t("平台介绍") }}</div>
             <!-- <div
               @click="toVips"
               class="w-[65%] font-normal text-xs text-[#5F5F5F] text-right flex justify-end items-center"
@@ -42,10 +63,10 @@
           </div>
         </div>
         <div class="grid grid-cols-2 gap-2 px-[10px]">
-          <div v-for="(item, index) in itemsArr"  @click="goTo(item.route)" :key="index">
+          <div v-for="(item, index) in intro" class="bg-[#fff] px-[5px]"  @click="goTo(item)" :key="index">
             <img class="w-[180px] h-[140px]" :src="item.icon" alt="">
-            <div class="text-[14px] text-[#333] pt-[5px] mb-[10px]">{{$t(item.name)}}</div>
-            <!-- <div class="text-[12px] text-[#999]">Platform profile</div> -->
+            <div class="text-[14px] text-[#333] pt-[5px] mb-[2px]">{{$t(item.name)}}</div>
+            <div class="text-[12px] text-[#999] line-clamp-2 pb-[3px]">{{$t(item.text)}}</div>
           </div>
         </div>
       </div>
@@ -120,6 +141,37 @@ const customer = () => {
     showToast(t("supportHours"));
   }
 };
+
+const swiperData = [
+  {
+    name:'0*******8',
+    num:18.46
+  },
+  {
+    name:'A*******5',
+    num:259.56
+  },
+  {
+    name:'f*******5',
+    num:25.35
+  },
+  {
+    name:'y*******5',
+    num:8
+  },
+  {
+    name:'h*******2',
+    num:4.78
+  },
+  {
+    name:'7*******2',
+    num:41.78
+  },
+  {
+    name:'6*******2',
+    num:44.78
+  },
+]
 
 const TradeInfor = ref({});
 const tradeConfig = async () => {
@@ -217,19 +269,18 @@ const itemsArr = [
   // },
 ];
 
-function goTo(path) {
-  console.log(path)
-  if (path == "/notifications") {
-    // tradePasswordRef.value.open(2);
-    router.push("/withdraw");
-  } else if (path == "/profile") {
-    // tradePasswordRef.value.open(3);
-    router.push("/deposit");
-  } else if(path == '/customer'){
-    customer()
-  } else {
-    router.push(path);
-  }
+function goTo(item) {
+  if (item.route == "/faqs") {
+    router.push("/faqs");
+  } else{
+    router.push({
+      path: "/productmsg",
+      query: {
+        id: t(item.name),
+        name: t(item.text)
+      }
+    });
+  } 
 }
 function toVips() {
   router.push("/vips");
@@ -285,6 +336,30 @@ const lotteryConfig = async () => {
     console.error("获取转盘配置失败:", err);
   }
 };
+
+const intro = [
+  {
+    name:'index.intro1',
+    text:'index.introText1',
+    icon: new URL("@/static/images/pro1.png", import.meta.url).href,
+  },
+  {
+    name:'index.intro2',
+    text:'index.introText2',
+    icon: new URL("@/static/images/pro2.png", import.meta.url).href,
+  },
+  {
+    name:'index.intro3',
+    text:'index.introText3',
+    icon: new URL("@/static/images/pro3.png", import.meta.url).href,
+  },
+  {
+    name:'条款及细则',
+    text:'条款及细则',
+    icon: new URL("@/static/images/pro4.png", import.meta.url).href,
+    route: "/faqs",
+  }
+]
 
 onMounted(() => {
   level();

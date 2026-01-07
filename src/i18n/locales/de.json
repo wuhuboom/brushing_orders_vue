@@ -259,7 +259,24 @@
   "我的交易所": "Meine Börse",
   "钱包管理":"Wallet-Verwaltung",
   "请输入6位数字密码": "Bitte geben Sie ein 6-stelliges Passwort ein",
-  "请输入6位数字的交易密码": "Bitte geben Sie ein 6-stelliges Transaktionspasswort ein"
+  "请输入6位数字的交易密码": "Bitte geben Sie ein 6-stelliges Transaktionspasswort ein",
+  "帮助": "Hilfe",
+  "设置": "Einstellungen",
+  "vips": "VIPs",
+  "平台介绍": "Plattformvorstellung",
+  "客户服务中心": "Kundendienstzentrum",
+  "在线客服时间": "Online-Kundendienstzeiten",
+  "任务总计": "Gesamtaufgaben",
+  "任务完成": "Abgeschlossene Aufgaben",
+  "我的账户": "Mein Konto",
+  "提现记录": "Auszahlungsverlauf",
+  "充值记录": "Einzahlungsverlauf",
+  "index.intro3": "Win-Win-Zusammenarbeit",
+  "index.introText3": "Bei MALL verfolgen wir eine Win-Win-Zusammenarbeit für alle Nutzer weltweit, fördern die Interaktion zwischen Nutzern und Händlern, helfen Nutzern Geld zu verdienen und unterstützen Händler dabei, Gewinne zu erzielen. Wir halten uns an Regeln und verpflichten uns zum Aufbau eines bekannten kooperativen E-Commerce-Unternehmens. Durch eigene Technologie fördern wir die Entwicklung der E-Commerce-Branche und streben danach, Branchenstandards zu setzen. Dies ist unsere Vision. Wir danken allen Partnern und Nutzern von MALL für ihre Unterstützung und wertvolle Zeit. Lassen Sie uns gemeinsam hart arbeiten, um eine Win-Win-Zusammenarbeit zu erreichen und große Vorteile zu erzielen!",
+  "index.intro1": "Plattformprofil",
+  "index.introText1": "MALL ist ein intelligentes Cloud-basiertes globales Auftragsabgleichszentrum mit einer klaren Mission und spielt eine wichtige Rolle auf großen E-Commerce-Plattformen weltweit. Derzeit unterhält MALL enge strategische Partnerschaften mit Amazon, Alibaba, AliExpress, Souq, Jumia, Maxfashion und Daraz. Durch intelligente Algorithmen werden Käufer und Händler präzise zusammengeführt, um Transaktionen automatisch abzuwickeln. MALL ist keine einfache Einkaufsplattform, sondern ermöglicht es Nutzern, durch Teilen Provisionen zu verdienen.",
+  "index.intro2": "Plattformregeln",
+  "index.introText2": "Zur Einzahlung: Die Plattform ändert die Einzahlungsmethoden von Zeit zu Zeit. Bitte überprüfen Sie vor jeder Einzahlung die neueste Methode. Zur Auszahlung: Der Mindestbetrag beträgt 20 USDT, die Mindesteinzahlung 10 USDT. Auszahlungen werden innerhalb von 24 Stunden bearbeitet. Bei Problemen wenden Sie sich bitte rechtzeitig an den Kundenservice."
 
 
 }

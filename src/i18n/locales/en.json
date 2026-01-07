@@ -279,5 +279,23 @@
   "我的交易所":"My Exchange",
   "钱包管理":"Wallet Management",
   "请输入6位数字密码":"Please enter a 6-digit password",
-  "请输入6位数字的交易密码":"Please enter a 6-digit transaction password"
+  "请输入6位数字的交易密码":"Please enter a 6-digit transaction password",
+  "帮助":"Help",
+  "设置":"Setting",
+  "vips":"vips",
+  "平台介绍":"Platform introduction",
+  "客户服务中心":"Customer Service Center",
+  "在线客服时间":"Online Customer Service Time",
+  "任务总计":"Total Tasks",
+  "任务完成":"Completed Tasks",
+  "我的账户":"My Account",
+  "提现记录":"Withdrawal Record",
+  "充值记录":"Recharge Record",
+  "index.intro3":"Win-win cooperation",
+  "index.introText3":"At MALL, we carry out win-win cooperation for all users around the world, increase the interaction between users and merchants, help users make money, and help merchants make profits. We retain company results. We abide by the rules and are committed to building a well-known cooperative e-commerce company. Through its own technology to guide the development of e-commerce industry, we are committed to becoming the creator of industry standards. This is our constant pursuit and corporate vision. We also thank all MALL partners and users for their support and valuable time.  Let us work hard to achieve win-win cooperation and gain huge benefits!",
+  "index.intro1":"Platform profile",
+  "index.introText1":"MALL is an intelligent cloud global order matching center with a sense of mission, which plays an important role in major e-commerce platforms around the world. Currently, MALL maintains close strategic partnership with Amazon, Alibaba, AliExpress, souq, jumia, maxfashion and Daraz. Cooperation, Blocking traffic through online vacuuming, updating layered product information through digital product reconstruction, enabling scenarios and enhancing competitiveness. MALL uses an intelligent cloud algorithm engine to accurately match buyers and users with established merchants and automatically match transactions, allowing many established merchants to stand out in the fierce business competition. MALL is not a single cloud shopping platform. Its greatest value lies in allowing consumers to earn commissions through free sharing while shopping normally. Merchants will have a promoter at the same time they pick up the order. With its leading 5G intelligent cloud matching technology, MALL has helped countless merchants and consumers.",
+  "index.intro2":"Platform rules",
+  "index.introText2":"About recharge: [The platform will change the recharge method from time to time] Each user should click the recharge interface to check the latest recharge method before recharging, so as to avoid recharge failure on the old account due to recharge. If your recharge request has not been completed, please contact the recharge customer service for consultation in time.  About withdrawal: The minimum withdrawal amount of MALL is 20USDT, and the minimum deposit amount is 10USDT. When you request a withdrawal, we will process it immediately and arrive within 24 hours. Due to the large number of users on the platform, in order to ensure that each user has a good experience and normal withdrawal, please wait patiently for the withdrawal process to complete. Please understand that,  If you do not receive the money on the withdrawal slip within 24 hours, please contact customer service in time! About freezing the order: If the order is not delivered within 10 minutes after the user places the order, or the user returns to the page after receiving the order, the order will be frozen. Just click [Home] - [Order] to send immediately. Only one account with the correct mobile number is allowed to register with MALL per identical username.If the system monitors you to register multiple accounts and IPs, you will be suspected of illegal money laundering, which will affect normal withdrawals and cause the account to be frozen."
+
 }

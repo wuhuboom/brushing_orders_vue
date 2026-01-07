@@ -2,19 +2,30 @@
   <div class="bg-[#f8f8f8] h-[100vh]">
     <div class="relative">
       <div class="topfpnts">
-        <div class="titles">Customer Service Center</div>
-        <div class="casftr">Online customer service time 07:00-23:00（UK）</div>
+        <div class="titles">{{$t('客户服务中心')}}</div>
+        <div class="casftr">{{$t('在线客服时间')}}: {{ TradeInfor?.workTimeStart || "--:--" }} -
+                {{ TradeInfor?.workTimeEnd || "--:--" }} <br /></div>
       </div>
       <img src="@/static/images/servicebg.png" alt="" />
     </div>
-    <div class="flex flex-col rounded bg-[#fff] mt-[10px]">
+    <div class="flex flex-col rounded mt-[10px]">
       <div
         @click="customer"
-        class="flex items-center justify-between p-4 box-border border-b-[1px] border-[#F0F0F0]"
+        class="flex items-center justify-between p-4 box-border bg-[#fff]"
       >
         <div class="flex items-center">
           <!-- <img src="@/static/images/setting.png" class="w-4 h-4 mr-2" alt="" /> -->
-          <div class="text-[#333] text-[12px]">{{ $t("customer.str2") }}</div>
+          <div class="text-[#333] text-[14px]">{{ $t("customer.str2") }}</div>
+        </div>
+        <van-icon name="arrow" color="#999" size="18px" />
+      </div>
+      <div
+        @click="help"
+        class="flex items-center justify-between p-4 box-border mt-[10px] bg-[#fff]"
+      >
+        <div class="flex items-center">
+          <!-- <img src="@/static/images/setting.png" class="w-4 h-4 mr-2" alt="" /> -->
+          <div class="text-[#333] text-[14px]">{{ $t("帮助") }}</div>
         </div>
         <van-icon name="arrow" color="#999" size="18px" />
       </div>
@@ -58,6 +69,10 @@ const customer = () => {
     showToast(t("supportHours"));
   }
 };
+
+const help = () =>{
+  router.push("/faqs");
+}
 
 onMounted(() => {
   tradeConfig();
