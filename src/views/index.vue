@@ -16,7 +16,7 @@
             class="flex flex-col w-full rounded-lg items-start text-center box-border text-[#333]"
             v-for="(item, index) in items"
             :key="index"
-            @click="goTo(item.route)"
+            @click="goTo1(item.route)"
           >
             <div class="w-full">
               <img class="mx-auto w-[37px] h-[37px]" :src="item.icon" alt="" />
@@ -281,6 +281,20 @@ function goTo(item) {
       }
     });
   } 
+}
+
+function goTo1(path) {
+  if (path == "/notifications") {
+    // tradePasswordRef.value.open(2);
+    router.push("/withdraw");
+  } else if (path == "/profile") {
+    // tradePasswordRef.value.open(3);
+    router.push("/deposit");
+  } else if(path == '/customer'){
+    customer()
+  } else {
+    router.push(path);
+  }
 }
 function toVips() {
   router.push("/vips");

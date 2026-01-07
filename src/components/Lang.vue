@@ -81,6 +81,8 @@ const langIndex = computed(() => {
 //     ];
     const onConfirm = ({ selectedValues }) => {
       dialogVisible.value = false
+      handleChangeLang(selectedValues)
+
       // showToast(`当前值: ${selectedValues.join(',')}`);
     };
     const onChange = ({ selectedValues }) => {
