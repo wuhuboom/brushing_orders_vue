@@ -78,7 +78,7 @@
           @click="goTo(item.route)"
         >
           <div class="w-full">
-            <img class="mx-auto w-12 h-12" :src="item.icon" alt="" />
+            <img class="w-[31px] h-[31px] mx-auto" :src="item.icon" alt="" />
           </div>
           <span class="mx-auto text-center text-xs mt-1 whitespace-nowrap">
             {{ $t(item.name) }}
@@ -404,12 +404,6 @@ const tradeConfig = async () => {
 
 const items = [
   {
-    name: "联系我们", // 用于 $t('收入指南')
-    icon: new URL("@/static/images/icon-134.png", import.meta.url).href,
-    icon_bg: new URL("@/static/images/icon_bg1.png", import.meta.url).href,
-    route: "/customer",
-  },
-  {
     name: "事件",
     icon: new URL("@/static/images/record.png", import.meta.url).href,
     icon_bg: new URL("@/static/images/record.png", import.meta.url).href,
@@ -426,7 +420,13 @@ const items = [
     icon: new URL("@/static/images/fried.png", import.meta.url).href,
     icon_bg: new URL("@/static/images/icon_bg4.png", import.meta.url).href,
     route: "/profile",
-  }
+  },
+  {
+    name: "邀请好友", // 用于 $t('收入指南')
+    icon: new URL("@/static/images/icon-134.png", import.meta.url).href,
+    icon_bg: new URL("@/static/images/icon_bg1.png", import.meta.url).href,
+    route: "/invite_friends",
+  },
 ];
 function goTo(path) {
   console.log(path)
@@ -436,8 +436,14 @@ function goTo(path) {
   } else if (path == "/profile") {
     // tradePasswordRef.value.open(3);
     router.push("/deposit");
-  } else if(path == '/customer'){
-    customer()
+  } else if(path == '/invite_friends'){
+    // customer()
+    router.push({
+      path: '/invite_friends',
+      query: {
+        code: userInfo.value.inviteCode,
+      }
+    });
   } else {
     router.push(path);
   }
