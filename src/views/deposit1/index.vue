@@ -1,8 +1,8 @@
 <template>
   <div class="w-full min-h-[100vh] bg-[#f8f8f8]">
-    <div class="container w-full mb-[100px] bg-white">
+    <div class="container w-full mb-[60px] bg-white">
       <van-nav-bar
-        :title="$t('充值')"
+        :title="$t('定金')"
         fixed
         left-arrow
         class="shadow"
@@ -10,7 +10,7 @@
       />
     </div>
     <div class="px-[15px] bg-[#fff] pb-[10px] my-[10px]">
-        <div class="text-[15px] text-[#333] font-bold py-[10px] mb-[10px]" style="border-bottom: 1px solid #eee;">付款方式</div>
+        <div class="text-[15px] text-[#333] font-bold py-[10px] mb-[10px]" style="border-bottom: 1px solid #eee;">{{$t('付款方式')}}</div>
         <div class="relative flex flex-col items-center border h-[62px] w-[75px] border-[#eee] rounded-[10px] pb-[10px]">
             <div>
                 <img class="w-[31px] h-[31px]" src="@/static/images/deposit3.png" alt="">
@@ -24,7 +24,7 @@
 
     </div>
     <div class="px-[15px] bg-[#fff] pb-[10px] my-[10px]">
-        <div class="text-[15px] text-[#333] font-bold py-[10px] mb-[10px]" style="border-bottom: 1px solid #eee;">付款方式</div>
+        <div class="text-[15px] text-[#333] font-bold py-[10px] mb-[10px]" style="border-bottom: 1px solid #eee;">{{$t('选择要使用的协议')}}</div>
         <div class="relative flex justify-center items-center border h-[41px] w-[68px] border-[#eee] rounded-[10px]">
             <!-- <div>
                 <img class="w-[31px] h-[31px]" src="@/static/images/deposit3.png" alt="">
@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="px-[15px] bg-[#fff] pb-[10px] my-[10px]">
-        <div class="text-[15px] text-[#333] font-bold py-[10px] mb-[10px]" style="border-bottom: 1px solid #eee;">付款方式</div>
+        <div class="text-[15px] text-[#333] font-bold py-[10px] mb-[10px]" style="border-bottom: 1px solid #eee;">{{$t('选择币种')}}</div>
         <div class="relative flex justify-center items-center border h-[41px] w-[47px] border-[#eee] rounded-[10px]">
             <div class="text-[12px] text-[#6a4d52]">ALL</div>
             <div>
@@ -45,7 +45,7 @@
         </div>
     </div>
     <div class="px-[15px] bg-[#fff] pb-[10px] my-[10px]">
-        <div class="text-[15px] text-[#333] font-bold py-[10px] mb-[10px]" style="border-bottom: 1px solid #eee;">付款方式</div>
+        <div class="text-[15px] text-[#333] font-bold py-[10px] mb-[10px]" style="border-bottom: 1px solid #eee;">{{$t('充值金额')}}</div>
         <div
         class="w-full mt-2 overflow-hidden flex items-center"
         style="border-bottom: 1px dashed #D1D5DB"
@@ -63,15 +63,16 @@
       </div>
     </div>
     <div class="px-[16px]" style="border-bottom: 2px solid #eee; padding-bottom: 10px;">
-        <div class="text-[#333] text-[12px] pb-[10px]">预计付款金额:USDT</div>
-        <div class="text-[#333] text-[12px]">参考汇率：1 USDT ≈ 1 USDT</div>
-        <div class="text-[#999] text-[12px] ">付款金额和汇率以实际付款情况为准。</div>
+        <div class="text-[#333] text-[12px] pb-[10px]">{{$t('预计付款金额')}}:{{amount}}USDT</div>
+        <div class="text-[#333] text-[12px]">{{$t('参考汇率')}}：1 USDT ≈ 1 USDT</div>
+        <div class="text-[#999] text-[12px] ">{{$t('付款金额和汇率以实际付款情况为准')}}.</div>
     </div>
     <div class="w-full pl-5 pr-5 mt-[20px]">
         <van-button
           color="#002D72"
-          :style="{ background: value === 1 ? '#6a4d52' : '', color: '#fff' }"
+          :style="{ background: amount ? '#6a4d52' : '#b1a2a5', color: '#fff' }"
           class="w-full"
+          @click="deposit"
           >{{ $t("立即存款") }}</van-button
         >
       </div>
@@ -81,14 +82,25 @@
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import {getConfigByLang} from "../../api/apis"
 import { useCommonStore } from '@/store/modules/common';
+import { useRouter } from "vue-router";
 const faqEn = ref('')
 const amount = ref('')
+const router = useRouter();
 const commonStore = useCommonStore();
 const parLang = computed(() => {
   const mapped = commonStore.getValueByKey(commonStore.lang);
   return mapped ?? commonStore.lang; 
 });
-const value = ref(1)
+const deposit = () =>{
+  if(amount.value){
+    router.push({
+      path:'/address',
+      query:{
+       amount:amount.value
+      }
+    })
+  }
+}
 onMounted(() =>{
 })
 

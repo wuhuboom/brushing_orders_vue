@@ -252,7 +252,7 @@ function goTo1(path) {
     });
   } else if (path == "/profile") {
     // tradePasswordRef.value.open(3);
-    router.push("/deposit");
+    router.push("/deposit1");
   } else if(path == '/customer'){
     customer()
   } else {

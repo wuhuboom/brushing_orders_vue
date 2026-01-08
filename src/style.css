@@ -198,3 +198,6 @@ input {
 .van-nav-bar__content {
   height: 80px !important;
 } */
+.van-button--normal {
+  border: none !important;
+}
