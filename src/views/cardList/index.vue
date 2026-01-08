@@ -138,7 +138,9 @@ const onClickLeft = () => {
   if (route.query.type == 1) {
     router.push({ path: "/my" });
   } else {
-    router.push({ path: "/withdraw" });
+    router.push({ path: "/withdraw",query:{
+      type:route.query.fromType
+    } });
   }
 };
 const addBank = (type) => {

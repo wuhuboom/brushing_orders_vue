@@ -65,7 +65,7 @@
         <van-button
           class="w-full"
           style="
-            background: linear-gradient(135deg, #002d72, #0a4da2);
+            background: #6a4d52;
             color: #fff;
           "
         @click="submitForm"

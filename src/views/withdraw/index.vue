@@ -29,7 +29,7 @@
       </div>
       <div class="flex mt-[8px] mb-[12px] justify-center">
         <div class="text-white text-3xl flex items-center">
-         {{ userInfo.totalBalance }}
+         {{ userInfo.balance }}
         </div>
         <div class="text-white text-sm flex items-center ml-2 pt-[12px]">
           {{ $t("美元") }}
@@ -214,12 +214,18 @@ function handleFocus() {
   };
 
 
-// const onClickLeft = ()=>{
-//   router.replace({
-//     path:"/my"
-//   })
-// };
-const onClickLeft = () => history.back();
+const onClickLeft = ()=>{
+  if(route.query.type ==1) {
+    router.replace({
+      path:"/"
+    })
+  } else {
+   router.replace({
+      path:"/my"
+    })
+  }
+};
+// const onClickLeft = () => history.back();
 const ruleForm = reactive({
   amount: 0,
   tradePassword: "",
@@ -307,6 +313,7 @@ const toList = () => {
     path: "/cardList",
     query: {
       type: 2,
+      fromType:route.query.type
     },
   });
 };

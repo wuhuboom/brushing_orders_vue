@@ -19,8 +19,8 @@
     </div>
     <div class="flex justify-start ml-[16px]">
       <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==-1?'nav-active':'nav'" @click="swichTab(-1)">{{$t('全部')}}</div>
-      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==0?'nav-active':'nav'" @click="swichTab(0)">{{$t('待办')}}</div>
-      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==2?'nav-active':'nav'" @click="swichTab(2)">{{$t('完成')}}</div>
+      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==2?'nav-active':'nav'" @click="swichTab(2)">{{$t('待办')}}</div>
+      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==0?'nav-active':'nav'" @click="swichTab(0)">{{$t('完成')}}</div>
     </div>
     <!-- <div class="bg-[#f3f3f4]">
       <van-tabs color="#ff497c" @change="swichTab" v-model:active="active">
@@ -369,12 +369,16 @@ const submitVal = async () => {
 };
 
 const swichTab = (index) => {
-  console.log(active.value);
-  active.value = index
+  
+  active.value = index;
+  // console.log(active.value);
   if (active.value == -1) {
+    console.log(active.value)
     query.status = '';
-  } 
-  query.status = index
+  } else {
+    query.status = index
+  }
+  
   // else if (active.value == 2) {
   //   query.status = 1;
   // } else {

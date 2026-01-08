@@ -51,7 +51,7 @@
       <div class='text-[#fff] flex justify-between items-center mt-[10px]'>
         <div>
           <div class='font-medium mb-[10px]'>{{$t('我的账户')}}</div>
-          <div class='text-[14px]'>USD <span class='font-medium'>{{ userInfo.totalBalance }}</span></div>
+          <div class='text-[14px]'>USD <span class='font-medium'>{{ userInfo.balance }}</span></div>
         </div>
         <div class="flex mr-[20px]">
           <div @click="toPage('/deposit')">
@@ -59,8 +59,8 @@
             <p class='text-[10px]'>{{$t('定金')}}</p>
           </div>
           <div class='ml-[30px]' @click="toPage('/withdraw')">
-            <img class='w-[45px] h-[45px] ' src="@/static/images/cunkuan.png" alt="">
-            <p class='text-[10px]'>{{$t('提取')}}</p>
+            <img class='w-[45px] h-[45px] text-center' src="@/static/images/cunkuan.png" alt="">
+            <p class='text-[10px] text-center'>{{$t('提取')}}</p>
           </div>
 
         </div>
