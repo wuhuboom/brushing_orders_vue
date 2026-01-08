@@ -225,49 +225,6 @@ const items = [
   },
 ];
 
-const itemsArr = [
-  
-  {
-    name: "事件",
-    icon: new URL("@/static/images/pro1.png", import.meta.url).href,
-    route: "/event",
-  },
-  // {
-  //   name: "提款",
-  //   icon: new URL("@/static/images/icon-5.png", import.meta.url).href,
-  //   route: "/notifications",
-  // },
-  // {
-  //   name: "定金",
-  //   icon: new URL("@/static/images/icon-7.png", import.meta.url).href,
-  //   route: "/profile",
-  // },
-  {
-    name: "条款及细则", // 用于 $t('收入指南')
-    icon: new URL("@/static/images/pro2.png", import.meta.url).href,
-    route: "/clause",
-  },
-  {
-    name: "证书",
-    icon: new URL("@/static/images/pro3.png", import.meta.url).href,
-    route: "/cert",
-  },
-  {
-    name: "常见问题解答",
-    icon: new URL("@/static/images/pro4.png", import.meta.url).href,
-    route: "/faqs",
-  },
-  // {
-  //   name: "客服",
-  //   icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
-  //   route: "/customer",
-  // },
-  // {
-  //   name: "Invitation", // 用于 $t('收入指南')
-  //   icon: new URL("@/static/images/icon-0.png", import.meta.url).href,
-  //   route: "/guide",
-  // },
-];
 
 function goTo(item) {
   if (item.route == "/faqs") {

@@ -29,7 +29,7 @@
       </div>
       <div class="flex mt-[8px] mb-[12px] justify-center">
         <div class="text-white text-3xl flex items-center">
-          {{ amount }}
+         {{ userInfo.totalBalance }}
         </div>
         <div class="text-white text-sm flex items-center ml-2 pt-[12px]">
           {{ $t("美元") }}
@@ -173,9 +173,10 @@ import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
 import { showSuccessToast, showToast } from "vant";
 import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
+import { useRouter,useRoute } from "vue-router";
 const showKeyboard = ref(false)
 const router = useRouter();
+const route = useRoute();
 const amount = ref("");
 const userStore = useUserStore();
 const userInfo = ref({});
@@ -213,11 +214,12 @@ function handleFocus() {
   };
 
 
-const onClickLeft = ()=>{
-  router.replace({
-    path:"/my"
-  })
-};
+// const onClickLeft = ()=>{
+//   router.replace({
+//     path:"/my"
+//   })
+// };
+const onClickLeft = () => history.back();
 const ruleForm = reactive({
   amount: 0,
   tradePassword: "",

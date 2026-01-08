@@ -19,27 +19,31 @@
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
           :class="orderActive == -1 ? 'bg-[#6a4d52] text-[#fff]' : ''"
+          :style="{background:orderActive == -1?'#6a4d52':'#F3F4F6'}"
           @click="changeOrder(-1)"
         >
           {{ $t("全部") }}
         </div>
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
-          :class="orderActive == 0 ? 'bg-[#6a4d52] text-[#fff]' : ''"
+          :class="orderActive == 0 ? ' text-[#fff]' : ''"
+          :style="{background:orderActive == 0?'#6a4d52':'#F3F4F6'}"
           @click="changeOrder(0)"
         >
           {{ $t("待审核") }}
         </div>
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
-          :class="orderActive == 1 ? 'bg-[#6a4d52] text-[#fff]' : ''"
+          :class="orderActive == 1 ? 'text-[#fff]' : ''"
+          :style="{background:orderActive == 1?'#6a4d52':'#F3F4F6'}"
           @click="changeOrder(1)"
         >
           {{ $t("审核成功") }}
         </div>
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
-          :class="orderActive == 2 ? 'bg-[#6a4d52] text-[#fff]' : ''"
+          :class="orderActive == 2 ? ' text-[#fff]' : ''"
+          :style="{background:orderActive == 2?'#6a4d52':'#F3F4F6'}"
           @click="changeOrder(2)"
         >
           {{ $t("审核拒绝") }}

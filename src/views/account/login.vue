@@ -20,9 +20,9 @@
       </div>
     </div>
     <div class="pt-[70px] pl-[30px]">
-      <div class="text-[20px] text-left text-[#6a4d52] py-4">Hello,Welcome!</div>
+      <div class="text-[20px] text-left text-[#6a4d52] py-4">{{$t('你好，欢迎！')}}</div>
       <div class="text-[20px] text-left text-[#6a4d52] pt-[15px]">
-        {{ $t("Login") }}
+        {{ $t("登入") }}
       </div>
     </div>
     <div class="flex flex-col items-center pb-3">

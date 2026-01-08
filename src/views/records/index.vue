@@ -18,8 +18,8 @@
       </div>
     </div>
     <div class="flex justify-start ml-[16px]">
-      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==0?'nav-active':'nav'" @click="swichTab(0)">{{$t('全部')}}</div>
-      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==1?'nav-active':'nav'" @click="swichTab(1)">{{$t('待办')}}</div>
+      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==-1?'nav-active':'nav'" @click="swichTab(-1)">{{$t('全部')}}</div>
+      <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==0?'nav-active':'nav'" @click="swichTab(0)">{{$t('待办')}}</div>
       <div class="text-[14px]  px-[16px] py-[6px]  mr-[12px]" :class="active==2?'nav-active':'nav'" @click="swichTab(2)">{{$t('完成')}}</div>
     </div>
     <!-- <div class="bg-[#f3f3f4]">
@@ -290,7 +290,7 @@ const router = useRouter();
 const userStore = useUserStore();
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 const { t } = useI18n();
-const active = ref(0);
+const active = ref(-1);
 const list = ref([]);
 const show = ref(false);
 const refreshing = ref(false);
@@ -371,13 +371,15 @@ const submitVal = async () => {
 const swichTab = (index) => {
   console.log(active.value);
   active.value = index
-  if (active.value == 0) {
-    query.status = 0;
-  } else if (active.value == 1) {
-    query.status = 1;
-  } else {
-    query.status = 2;
-  }
+  if (active.value == -1) {
+    query.status = '';
+  } 
+  query.status = index
+  // else if (active.value == 2) {
+  //   query.status = 1;
+  // } else {
+  //   query.status = 2;
+  // }
   onRefresh();
 };
 onMounted(() => {

@@ -50,7 +50,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item  prop="phone" label-position="top">
+        <!-- <el-form-item  prop="phone" label-position="top">
           <el-input
             v-model="ruleForm.phone"
             :placeholder="$t('电话')"
@@ -59,7 +59,7 @@
             size="large"
           >
           </el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item  prop="tradePassword" label-position="top">
           <el-input
             v-model="ruleForm.tradePassword"
@@ -166,14 +166,14 @@ function toLogin() {
 
 function sendCode() {
   if (!ruleForm.username) return showToast(t("请输入用户名"));
-  if (!/^\d{6}$/.test(ruleForm.password)) {
+  if (!ruleForm.password) {
     return showToast(t("请输入6位数字密码"));
   }
   if (!agentPassword.value) return showToast(t("请输入确认密码"));
   if (agentPassword.value != ruleForm.password)
     return showToast(t("两次密码不一致"));
-  if (!/^[0-9]*$/.test(ruleForm.phone))
-    return showToast(t("请输入正确电话号码"));
+  // if (!/^[0-9]*$/.test(ruleForm.phone))
+  //   return showToast(t("请输入正确电话号码"));
   if (!/^\d{6}$/.test(ruleForm.tradePassword)) {
     return showToast(t("请输入6位数字的交易密码"));
   }
