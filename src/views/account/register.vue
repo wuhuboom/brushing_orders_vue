@@ -8,7 +8,7 @@
       /> -->
       <div class="pl-[20px] pt-[15px] text-[#1E3A8A] text-[14px]" @click="toLogin">
         <van-icon name="arrow-left" />
-        Back
+      {{$t('返回')}}
       </div>
       
     <div class="flex flex-col items-center pb-3 mt-5">

@@ -297,7 +297,7 @@
                 </div>
               </div>
               <div class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
-                <div class="text-[#D1D5DB] text-[12px]">{{ $t("佣金") }}</div>
+                <div class="text-[#000] text-[12px]">{{ $t("佣金") }}</div>
                 <div class="text-[#FF9500] text-[14px] font-bold">
                   {{ goods.commission }}{{ $t("美元") }}
                 </div>
