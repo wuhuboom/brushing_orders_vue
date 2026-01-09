@@ -214,9 +214,9 @@ const items = [
   //   route: "/faqs",
   // },
   {
-    name: "客服",
-    icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
-    route: "/customer",
+    name: "团队",
+    icon: new URL("@/static/images/Teams.png", import.meta.url).href,
+    route: "/Teams",
   },
   {
     name: "vips", // 用于 $t('收入指南')

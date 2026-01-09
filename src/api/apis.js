@@ -126,4 +126,7 @@ export const getShopListVipLevel = (params) =>
 export const getRechargeAddress = (params) =>
   getApi().get(`/config/getRechargeAddress`, { params, loading: false, showMsg: false });
 
+export const getTeamInfo = (params) =>
+  getApi().get(`/account/getTeamInfo`, { params, loading: false, showMsg: false });
+
 

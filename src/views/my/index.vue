@@ -403,11 +403,16 @@ const tradeConfig = async () => {
 };
 
 const items = [
+  // {
+  //   name: "事件",
+  //   icon: new URL("@/static/images/record.png", import.meta.url).href,
+  //   icon_bg: new URL("@/static/images/record.png", import.meta.url).href,
+  //   route: "/event",
+  // },
   {
-    name: "事件",
-    icon: new URL("@/static/images/record.png", import.meta.url).href,
-    icon_bg: new URL("@/static/images/record.png", import.meta.url).href,
-    route: "/event",
+    name: "团队",
+    icon: new URL("@/static/images/teams1.png", import.meta.url).href,
+    route: "/Teams",
   },
   {
     name: "提款",
