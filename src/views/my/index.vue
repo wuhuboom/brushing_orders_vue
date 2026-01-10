@@ -440,7 +440,7 @@ function goTo(path) {
     router.push("/withdraw");
   } else if (path == "/profile") {
     // tradePasswordRef.value.open(3);
-    router.push("/deposit1");
+    router.push("/deposit");
   } else if(path == '/invite_friends'){
     // customer()
     router.push({
