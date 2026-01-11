@@ -27,6 +27,7 @@
             type="text"
             autocomplete="off"
             size="large"
+            @input="onUsernameInput"
           >
           </el-input>
         </el-form-item>
@@ -36,6 +37,7 @@
             :placeholder="$t('密码')"
             type="password"
             autocomplete="off"
+             @input="onUserPasswordInput"
             size="large"
           >
           </el-input>
@@ -142,6 +144,13 @@ import {
 onUnmounted(() => {
   document.getElementById("app").style.background = "transparent";
 });
+
+const onUsernameInput = (val) => {
+  ruleForm.username = val.replace(/[^a-zA-Z0-9]/g, '')
+}
+const onUserPasswordInput = (val) => {
+  ruleForm.password = val.replace(/[^a-zA-Z0-9]/g, '')
+}
 
 const router = useRouter();
 const { t } = useI18n();
