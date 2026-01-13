@@ -1,22 +1,54 @@
 <template>
   <div class="w-full">
-    <!-- <HeaderTop></HeaderTop> -->
-    <!-- <van-nav-bar
-        :title="$t('我的')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
-      /> -->
-    <div class="py-[20px]">
-      <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
+    <div class="py-[20px] bg-[#000]">
+      <img class="w-[124px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
     </div>
     <div
       style="
-        background: linear-gradient(to bottom, #002d72, #0a4da2);
+        background: linear-gradient(to right, #ED3C47, #FF9061);
         box-sizing: border-box;
       "
-      class="pb-[24px]"
-    >
+      class="pb-[24px] px-[16px]"
+    > 
+    <div class="flex justify-between pt-[19px]">
+      <div class="flex">
+      <!-- 接口还没返回 avatar 字段（请求中） -->
+          <div
+            v-if="userInfo.avatar === undefined"
+            class="w-[52px] h-[52px] mx-auto rounded-full bg-gray-200 animate-pulse"
+          ></div>
+          <!-- 接口返回 null / 空字符串 → 直接显示默认头像（不会闪） -->
+          <img
+            v-else-if="!userInfo.avatar"
+            :src="userImg"
+            class="w-[52px] h-[52px] mx-auto rounded-full object-cover"
+            alt=""
+          />
+          <!-- 接口返回头像 URL → 直接渲染用户头像；加载失败再回退到默认头像 -->
+          <img
+            v-else
+            :src="userInfo.avatar"
+            class="w-[52px] h-[52px] mx-auto rounded-full object-cover"
+            alt=""
+            @error="(e) => (e.target.src = userImg)"
+          />
+          <div class="ml-[11px]">
+            <div class="text-[#fff] text-[20px]">{{ userInfo.username }}</div>
+            <div class="userLevelBg">
+              {{ userLevel }}
+            </div>
+          </div>
+      </div>
+      <div class="text-[#fff] text-[14px]">
+          {{ $t("信用评分") }}:{{ userInfo.creditScore }}%
+      </div>
+    </div>
+    <div>
+      <div>
+        <div>{{$t('my.str1')}}</div>
+      </div>
+    </div>
+     
       <div class="flex items-center justify-between px-[16px] py-[20px]">
         <div class="text-[#fff] text-[20px]">{{ userInfo.username }}</div>
         <div class="relative  border-[2px] border-[#fff] rounded-[50%]">
@@ -440,3 +472,17 @@ onMounted(() => {
   tradeConfig();
 });
 </script>
+<style scoped>
+  .userLevelBg {
+    width: 55px;
+    height: 28px;
+    background-image: url(@/static/images/userLevelBg.png);
+    background-size: 100% 100%;
+    font-size: 11px;
+    color: #333333;
+    padding-left: 23px;
+    line-height: 28px;
+    font-weight: bold;
+    margin-top: 4px;
+  }
+</style>

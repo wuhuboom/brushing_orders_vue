@@ -1,28 +1,28 @@
 <template>
-  <div class="bg-[#fff] record">
+  <div class="bg-[#f7f7f7] record">
     <!-- <HeaderTop></HeaderTop> -->
-    <div class="py-[20px]">
-      <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
+    <div class="py-[20px] bg-[#000] mb-[20px]">
+      <img class="w-[124px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
     </div>
     <div class="flex justify-start ml-[16px]">
       <div
         class="text-[14px] px-[16px] py-[6px] rounded-[30px] mr-[12px]"
-        :class="active == 0 ? 'nav-active' : 'nav'"
-        @click="swichTab(0)"
+        :class="active == -1 ? 'nav-active' : 'nav'"
+        @click="swichTab(-1)"
       >
         {{ $t("全部") }}
       </div>
       <div
         class="text-[14px] px-[16px] py-[6px] rounded-[30px] mr-[12px]"
-        :class="active == 1 ? 'nav-active' : 'nav'"
-        @click="swichTab(1)"
+        :class="active == 2 ? 'nav-active' : 'nav'"
+        @click="swichTab(2)"
       >
         {{ $t("待办") }}
       </div>
       <div
         class="text-[14px] px-[16px] py-[6px] rounded-[30px] mr-[12px]"
-        :class="active == 2 ? 'nav-active' : 'nav'"
-        @click="swichTab(2)"
+        :class="active == 0 ? 'nav-active' : 'nav'"
+        @click="swichTab(0)"
       >
         {{ $t("完成") }}
       </div>
@@ -47,7 +47,7 @@
           >
             <van-cell v-for="item in list" :key="item" :title="item">
               <div
-                class="w-full flex flex-col mb-6 bg-[#F3F4F6] border-[1px] border-[#eee] p-[16px] box-border rounded-xl"
+                class="w-full flex flex-col mb-6 bg-[#fff] shadow-[0px_1px_2px_1px_rgba(0,0,0,0.05)] p-[16px] box-border rounded-xl"
               >
                 <div class="w-full">
                   <div class="mr-2 w-[100%] flex justify-between">
@@ -56,7 +56,7 @@
                       :src="VITE_API_IMG_URL + item.coverUrl"
                       alt=""
                     />
-                    <div
+                    <!-- <div
                       class="text-xs p-1 font-medium rounded h-[24px]"
                       :class="
                         item.status == '2'
@@ -73,7 +73,7 @@
                           ? $t("冻结")
                           : $t("待提交")
                       }}
-                    </div>
+                    </div> -->
                   </div>
                   <div class="w-[80%] flex flex-col h-[3rem] justify-between">
                     <div>
@@ -121,12 +121,37 @@
                   v-if="item.status == '2'"
                 >
                   <van-button
-                    color="#FFEDD5"
+                    color="#fff"
                     @click="submit(item)"
                     size="small"
-                    style="color: #ea580c"
+                    style="
+                      color: #ff7d01;
+                      border: 1px solid #ff7d01;
+                      width: 88px;
+                      height: 24px;
+                    "
                     >{{ $t("提交") }}</van-button
                   >
+                </div>
+                <div v-else class="flex justify-end items-center mt-2">
+                  <div
+                    class="text-xs p-1 font-medium text-center rounded h-[24px] w-[88px]"
+                    :class="
+                      item.status == '2'
+                        ? 'bg-[#FFEDD5] text-[#EA580C]'
+                        : item.status == '1'
+                        ? 'bg-[#FFEDD5] text-[#EA580C]'
+                        : 'bg-[#10B981] text-[#fff]'
+                    "
+                  >
+                    {{
+                      item.status == "0"
+                        ? $t("已完成")
+                        : item.status == "1"
+                        ? $t("冻结")
+                        : $t("待提交")
+                    }}
+                  </div>
                 </div>
               </div>
             </van-cell>
@@ -139,11 +164,11 @@
       v-model:show="show"
       :title="''"
       close-on-click-overlay
-      :style="{ background: 'rgba(0, 0, 0, 0)',width:'95%' }"
+      :style="{ background: 'rgba(0, 0, 0, 0)', width: '95%' }"
       :show-confirm-button="false"
-    >  
-    <!-- <img class="fixed top-[-200px] z-[-1]" src="@/static/images/dialogBg1.png" alt="" /> -->
-      
+    >
+      <!-- <img class="fixed top-[-200px] z-[-1]" src="@/static/images/dialogBg1.png" alt="" /> -->
+
       <div class="dialog-bg">
         <div
           class="w-[100%] mx-auto text-[18px] font-semibold text-center px-[40px] pt-[140px]"
@@ -154,7 +179,7 @@
           <!-- <img class="w-[56px] h-[56px]" :src="url + goodsData.coverUrl" alt="" /> -->
           <img :src="VITE_API_IMG_URL + goodsData.coverUrl" alt="" />
         </div>
-        <div class="w-full mt-[-3rem] pt-[23px] text-[#fff]  px-[20px]">
+        <div class="w-full mt-[-3rem] pt-[23px] text-[#fff] px-[20px]">
           <div class="flex justify-start pb-[23px]">
             <div class="w-[100%]">
               <div
@@ -242,7 +267,7 @@ const router = useRouter();
 const userStore = useUserStore();
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 const { t } = useI18n();
-const active = ref(0);
+const active = ref(-1);
 const list = ref([]);
 const show = ref(false);
 const refreshing = ref(false);
@@ -321,14 +346,14 @@ const submitVal = async () => {
 };
 
 const swichTab = (index) => {
-  console.log(active.value);
+  
   active.value = index;
-  if (active.value == 0) {
-    query.status = 0;
-  } else if (active.value == 1) {
-    query.status = 1;
+  // console.log(active.value);
+  if (active.value == -1) {
+    console.log(active.value)
+    query.status = '';
   } else {
-    query.status = 2;
+    query.status = index
   }
   onRefresh();
 };
@@ -338,12 +363,13 @@ onMounted(() => {
 </script>
 <style scoped>
 .nav-active {
-  background: #002d72;
+  background: #ff7d01;
   color: #fff;
 }
 .nav {
-  background: #f3f4f6;
+  background: #f7f7f7;
   color: #6b7280;
+  border: 1px solid #e8e8e8;
 }
 </style>
 <style>
