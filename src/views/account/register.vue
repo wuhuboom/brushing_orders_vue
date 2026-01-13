@@ -1,17 +1,17 @@
 <template>
-  <div class="register flex flex-col w-full h-[100vh] bg-[#fff] px-[5px]">
+  <div class="register flex flex-col w-full h-[100vh] bg-[#F7F7F7] px-[5px]">
     <!-- <van-nav-bar
         :title="$t('注册')"
         fixed
         left-arrow
         @click-left="toLogin"
       /> -->
-      <div class="pl-[20px] pt-[15px] text-[#1E3A8A] text-[14px]" @click="toLogin">
+      <!-- <div class="pl-[20px] pt-[15px] text-[#1E3A8A] text-[14px]" @click="toLogin">
         <van-icon name="arrow-left" />
         Back
-      </div>
+      </div> -->
       
-    <div class="flex flex-col items-center pb-3 mt-5">
+    <div class="flex flex-col items-center pb-3">
       <el-form
         ref="ruleFormRef"
         :model="ruleForm"
@@ -79,10 +79,10 @@
             v-model="ruleForm.sex"
             direction="horizontal"
           >
-            <van-radio :name="1" checked-color="#1E3A8A">{{
+            <van-radio :name="1" checked-color="#FF7A00">{{
               $t("男")
             }}</van-radio>
-            <van-radio :name="2" checked-color="#1E3A8A">{{
+            <van-radio :name="2" checked-color="#FF7A00">{{
               $t("女")
             }}</van-radio>
           </van-radio-group>
@@ -97,15 +97,15 @@
           >
           </el-input>
         </el-form-item>
-        <van-checkbox checked-color="#1E3A8A" v-model="checked" shape="square">
+        <van-checkbox checked-color="#FF7A00" v-model="checked" shape="square">
           <span class="text-[#374151] text-sm">{{ $t("我同意") }}</span>
-          <span class="ml-2 text-[#38BDF8] text-sm" @click="jump">{{
+          <span class="ml-2 text-[#FF7A00] text-sm" @click="jump">{{
             $t("条款和条件")
           }}</span>
         </van-checkbox>
-        <div @click="sendCode" class="w-full" size="large" round>
+        <div @click="sendCode" class="w-full" size="" round>
           <div
-            class="w-full mt-5 text-white text-lg font-semibold mx-auto py-3 rounded-[8px] flex items-center justify-center bg-[#1E3A8A]"
+            class="w-full mt-5 text-white text-lg font-semibold mx-auto py-3 rounded-[8px] flex items-center justify-center bg-gradient-to-r from-[#FF9500] to-[#FF7A00]"
           >
             <div>{{ $t("登记") }}</div>
             <!-- <img class="w-[22px] ml-4" src="@/static/images/back1.png" alt=""> -->

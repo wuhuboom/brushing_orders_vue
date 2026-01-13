@@ -1,35 +1,47 @@
 <template>
   <div>
     <!-- <HeaderTop></HeaderTop> -->
-    <div class="py-[20px]">
+    <!-- <div class="py-[20px]">
       <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
-    </div>
+    </div> -->
     <div
-      class="w-full h-[352px] text-[#fff] relative"
+      class="w-full  text-[#fff] relative bg-gradient-to-b from-[#4A2C1A] to-[#2D1810]"
 
     >
-     <video
+     <!-- <video
         src="https://www.directagents.com/wp-content/uploads/2025/06/Sequence-04_5_compressed_v2.mp4"
         autoplay
         muted
         loop
         playsinline
         class="w-full h-[352px] object-cover"
-      ></video>
-      <div class="absolute top-0 left-0 p-[24px]">
-        <p class="flex flex-col text-[36px] font-roboto pt-[20px]">
-        <span class="pb-[26px]">{{$t('index.str1')}}</span>
-        <span class="pb-[26px]">{{$t('index.str2')}}</span>
-        <span>{{$t('index.str3')}}</span>
-      </p>
-      <p class="flex flex-col text-[20px] pt-[70px]">
-        <span class="pb-[20px]">{{$t('index.str4')}}</span>
-        <span>{{$t('index.str5')}}</span>
-      </p>
+      ></video> -->
+      <img class="w-[200px] pl-[16px] pt-[29px]" src="@/static/images/logo1.png" alt="" />
+      <div class="p-[24px] w-[200px]">
+        <p class="flex flex-col text-[30px] font-roboto pt-[20px] leading-[40px]">
+          <span class="">{{$t('index.str1')}}</span>
+          <span class="text-[#FF9500] font-bold">{{$t('index.str2')}}</span>
+        </p>
+      </div>
+      <p class="text-[#fff] text-[14px] px-[16px]  leading-[25px]">{{$t('index.str3')}}</p>
+      <div class="flex justify-between px-[20px] pt-[43px] pb-[52px]">
+        <div class="bg-[#1A1410] p-[17px] rounded-[8px] w-[166px]">
+          <div class="text-[#FF9500] text-[24px] pb-[14px]">25%</div>
+          <div class="text-[#fff] text-[12px]">{{$t('index.str4')}}</div>
+        </div>
+        <div class="bg-[#1A1410] p-[17px] rounded-[8px] w-[166px]">
+          <div class="text-[#FF9500] text-[24px] pb-[14px]">35%</div>
+          <div class="text-[#fff] text-[12px]">{{$t('index.str5')}}</div>
+        </div>
       </div>
       
+      <!-- <p class="flex flex-col text-[20px] pt-[70px]">
+        <span class="pb-[20px]">{{$t('index.str4')}}</span>
+        <span>{{$t('index.str5')}}</span>
+      </p> -->
+      
     </div>
-    <div class="relative bg-white">
+    <div class="relative bg-[#F7F7F7]">
       <!-- 菜单列表 -->
       <div class="w-[95%] rounded-xl mx-auto flex flex-col">
         <!-- <div class="p-4 text-lg font-semibold text-black">
@@ -51,21 +63,12 @@
           </div>
         </div>
       </div>
-      <!-- 员工等级 -->
-      <div class="w-full mx-auto">
-        <div class="w-[90%] mx-auto">
-          <div
-            class="flex justify-between pt-4 pb-2 text-base text-[#002D72] font-semibold"
-          >
-            <div class="w-[35%]">{{ $t("员工等级") }}</div>
-            <div
-              @click="toVips"
-              class="w-[65%] font-normal text-xs text-[#5F5F5F] text-right flex justify-end items-center"
-            >
-              <div>{{ $t("查看更多") }}</div>
-              <!-- <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" /> -->
-            </div>
-          </div>
+    </div>
+     <!-- 员工等级 -->
+      <div class="w-full mx-auto bg-gradient-to-b from-[#FFF8F0] to-[#FFFFFF]">
+        <div class="text-center">
+          <div class="text-[26px] text-[#2D1810] font-bold pb-[8px] pt-[29px]">{{$t('VIP 会员')}}</div>
+          <div class="text-[#666666] text-[14px]">{{$t('解锁专属权益和高级服务')}}</div>
         </div>
         <div class="flex overflow-x-scroll p-4">
           <div
@@ -75,7 +78,7 @@
               background: `url(${bgMap[item.nameEn]}) 0 0 / 100% 100% no-repeat`,
             }"
           >
-            <div class="flex justify-between items-start pt-[13px]">
+            <div class="flex justify-between items-start pb-[15px] pl-[8px]">
               <div class="font-bold text-lg">
                 <p
                   :style="{
@@ -88,39 +91,56 @@
               <!-- <img class="w-24" :src="bgMapStart[item.name]" alt="" /> -->
             </div>
             <div
-              class="w-[260px] text-xs text-black pt-[3px]"
+              class="w-[260px] text-xs text-[#fff] pt-[3px] pl-[8px]"
               style="line-height: 19px"
             >
-              <p>{{$t('index.str12')}} .{{item.commissionRatio}}%</p>
+              <p class="pb-[12px] pt-[13px]">{{$t('index.str12')}} .{{item.commissionRatio}}%</p>
               <p>{{$t('index.str12')}} . {{item.commissionRatio}}% {{$t('index.str13')}}. {{item.orderCount}} {{$t('index.str14')}}</p>
               <p class="w-[260px] text-xs mt-2 text-black" v-html="item.description"></p>
             </div>
           </div>
         </div>
+        <div
+            @click="toVips"
+            class="w-[90%] mt-[20px] text-white text-lg font-semibold mx-auto py-3 rounded-[8px] flex items-center justify-center bg-gradient-to-r from-[#FF9500] to-[#FF7A00]"
+          >
+            <div>{{ $t("升级会员") }}</div>
+          </div>
       </div>
-    </div>
     <div class="p-[25px] w-full we">
-      <p class="text-[#002D72] text-[20px] text-base">
+      <p class="text-[#2D1810] text-[26px] text-base text-center font-bold w-[150px] m-auto leading-[30px]">
         {{$t('index.str6')}}
       </p>
-      <p class="text-[#4B5563] pt-[10px]">
+      <p class="text-[#666666] text-center pt-[10px]">
         {{$t('index.str7')}}
       </p>
       <img class="w-full mt-[15px]" src="@/static/images/index1bg.png" alt="" />
     </div>
     <div
-      class="p-[25px] w-full"
+      class="p-[25px] w-full bg-gradient-to-r from-[#000] to-[#1C1C1C]"
       style="border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb"
     >
-      <p class="text-[#002D72] text-[20px] text-base">
+      <p class="text-[#fff] text-center text-[26px] text-base pb-[43px] pt-[20px]">
         {{$t('index.str8')}}
       </p>
-      <p class="text-[#4B5563] pt-[10px]">
+      <p class="text-[#fff] text-center pt-[10px]">
         {{$t('index.str9')}}
       </p>
       <img class="w-full mt-[15px]" src="@/static/images/index2bg.png" alt="" />
     </div>
-    <div class="p-[25px] w-full">
+    <!-- <div class="bg-[#000] pt-[76px]">
+      <div class="flex justify-center">
+        <img class="w-[40px] h-[40px] ml-[16px]" src="@/static/images/down1bg.png" alt="">
+        <img class="w-[40px] h-[40px] ml-[16px]" src="@/static/images/down2bg.png" alt="">
+        <img class="w-[40px] h-[40px] ml-[16px]" src="@/static/images/down3bg.png" alt="">
+        <img class="w-[40px] h-[40px] ml-[16px]" src="@/static/images/down4bg.png" alt="">
+      </div>
+      <div>
+        <img class="w-[16px] h-[16px]" src="@/static/images/address.png" alt="">
+
+      </div>
+    </div> -->
+    <!-- <div class="p-[25px] w-full">
       <p class="text-[#002D72] text-[20px] text-base">
        {{$t('index.str10')}}
       </p>
@@ -128,11 +148,11 @@
         {{$t('index.str11')}}
       </p>
       <img class="w-full mt-[15px]" src="@/static/images/index3bg.png" alt="" />
-    </div>
-    <div class="w-full px-[17px]">
+    </div> -->
+    <!-- <div class="w-full px-[17px]">
       <img class="w-full" src="@/static/images/a.png" alt=""></img>
-    </div>
-   <img class="w-full" src="@/static/images/b.png" alt=""></img>
+    </div> -->
+   <!-- <img class="w-full" src="@/static/images/b.png" alt=""></img> -->
     
 
     <!-- 行情结束 -->
@@ -186,11 +206,11 @@ const bgMap = {
 };
 
 const textMap = {
-  VIP1: "#3647B4",
-  VIP2: "#B43694",
-  VIP3: "#1061C0",
-  VIP4: "#BC3217",
-  VIP5: "#754705",
+  VIP1: "#fff",
+  VIP2: "#2D1810",
+  VIP3: "#8B6914",
+  VIP4: "#0077B6",
+  VIP5: "#FFFFFF",
 };
 const customer = () => {
   const time = checkWorkTimeLocal(

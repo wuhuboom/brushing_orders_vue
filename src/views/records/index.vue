@@ -1,13 +1,31 @@
 <template>
   <div class="bg-[#fff] record">
     <!-- <HeaderTop></HeaderTop> -->
-     <div class="py-[20px]">
+    <div class="py-[20px]">
       <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
     </div>
     <div class="flex justify-start ml-[16px]">
-      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==0?'nav-active':'nav'" @click="swichTab(0)">{{$t('全部')}}</div>
-      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==1?'nav-active':'nav'" @click="swichTab(1)">{{$t('待办')}}</div>
-      <div class="text-[14px]  px-[16px] py-[6px] rounded-[30px] mr-[12px]" :class="active==2?'nav-active':'nav'" @click="swichTab(2)">{{$t('完成')}}</div>
+      <div
+        class="text-[14px] px-[16px] py-[6px] rounded-[30px] mr-[12px]"
+        :class="active == 0 ? 'nav-active' : 'nav'"
+        @click="swichTab(0)"
+      >
+        {{ $t("全部") }}
+      </div>
+      <div
+        class="text-[14px] px-[16px] py-[6px] rounded-[30px] mr-[12px]"
+        :class="active == 1 ? 'nav-active' : 'nav'"
+        @click="swichTab(1)"
+      >
+        {{ $t("待办") }}
+      </div>
+      <div
+        class="text-[14px] px-[16px] py-[6px] rounded-[30px] mr-[12px]"
+        :class="active == 2 ? 'nav-active' : 'nav'"
+        @click="swichTab(2)"
+      >
+        {{ $t("完成") }}
+      </div>
     </div>
     <!-- <div class="bg-[#f3f3f4]">
       <van-tabs color="#ff497c" @change="swichTab" v-model:active="active">
@@ -17,7 +35,7 @@
     </van-tabs>
 
     </div> -->
-    
+
     <div class="h-[80vh] overflow-y-scroll">
       <div class="w-full px-2 pt-6 box-border flex flex-col">
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
@@ -33,25 +51,29 @@
               >
                 <div class="w-full">
                   <div class="mr-2 w-[100%] flex justify-between">
-                    <img class="w-[60px] h-[60px]" :src="VITE_API_IMG_URL + item.coverUrl" alt="" />
+                    <img
+                      class="w-[60px] h-[60px]"
+                      :src="VITE_API_IMG_URL + item.coverUrl"
+                      alt=""
+                    />
                     <div
-                    class=" text-xs p-1 font-medium rounded h-[24px]"
-                    :class="
-                      item.status == '2'
-                        ? 'bg-[#FFEDD5] text-[#EA580C]'
-                        : item.status == '1'
-                        ? 'bg-[#FFEDD5] text-[#EA580C]'
-                        : 'bg-[#DCFCE7] text-[#16A34A]'
-                    "
-                  >
-                    {{
-                      item.status == "0"
-                        ? $t("已完成")
-                        : item.status == "1"
-                        ? $t("冻结")
-                        : $t("待提交")
-                    }}
-                  </div>
+                      class="text-xs p-1 font-medium rounded h-[24px]"
+                      :class="
+                        item.status == '2'
+                          ? 'bg-[#FFEDD5] text-[#EA580C]'
+                          : item.status == '1'
+                          ? 'bg-[#FFEDD5] text-[#EA580C]'
+                          : 'bg-[#DCFCE7] text-[#16A34A]'
+                      "
+                    >
+                      {{
+                        item.status == "0"
+                          ? $t("已完成")
+                          : item.status == "1"
+                          ? $t("冻结")
+                          : $t("待提交")
+                      }}
+                    </div>
                   </div>
                   <div class="w-[80%] flex flex-col h-[3rem] justify-between">
                     <div>
@@ -60,26 +82,22 @@
                       >
                         {{ item.goodsName }}
                       </div>
-                        <div class="flex items-center pt-[10px] pb-[5px]">
-                          <div class="text-[14px] text-[#000] pr-[6px]">
-                            {{ $t("总金额") }}
-                          </div>
-                          <div
-                            class="text-[14px] text-[#002D72] font-semibold"
-                          >
-                            {{ item.price }} {{ $t("美元") }}
-                          </div>
+                      <div class="flex items-center pt-[10px] pb-[5px]">
+                        <div class="text-[14px] text-[#000] pr-[6px]">
+                          {{ $t("总金额") }}
                         </div>
-                        <div class="flex">
-                          <div class="text-[14px] text-[#000] pr-[6px]">
-                            {{ $t("佣金") }}
-                          </div>
-                          <div
-                            class="text-[14px] text-[#002D72] font-semibold"
-                          >
-                            {{ item.commission }} {{ $t("美元") }}
-                          </div>
+                        <div class="text-[14px] text-[#002D72] font-semibold">
+                          {{ item.price }} {{ $t("美元") }}
                         </div>
+                      </div>
+                      <div class="flex">
+                        <div class="text-[14px] text-[#000] pr-[6px]">
+                          {{ $t("佣金") }}
+                        </div>
+                        <div class="text-[14px] text-[#002D72] font-semibold">
+                          {{ item.commission }} {{ $t("美元") }}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -97,7 +115,6 @@
                       )
                     }}
                   </div>
-                  
                 </div>
                 <div
                   class="flex justify-end items-center mt-2"
@@ -107,7 +124,7 @@
                     color="#FFEDD5"
                     @click="submit(item)"
                     size="small"
-                    style="color: #EA580C;"
+                    style="color: #ea580c"
                     >{{ $t("提交") }}</van-button
                   >
                 </div>
@@ -118,66 +135,87 @@
       </div>
     </div>
     <Footer name="/records"></Footer>
-
     <van-dialog
       v-model:show="show"
-      closeable
       :title="''"
-      :style="{ width: '80%', background: '#002d72' }"
+      close-on-click-overlay
+      :style="{ background: 'rgba(0, 0, 0, 0)',width:'95%' }"
       :show-confirm-button="false"
-    >
-      <div class="w-[60px] h-[125px] mx-auto mt-[24px]" style="width: 60px;">
-        <img :src="VITE_API_IMG_URL + goodsData.coverUrl" alt="" />
-      </div>
-      <div class="w-full mt-[-3rem] pt-[23px] text-[#fff]  " style="border-top: 1px solid #33578e;" >
-        <div class="w-[100%] mx-auto  text-[18px]  font-semibold p-[20px]">
+    >  
+    <!-- <img class="fixed top-[-200px] z-[-1]" src="@/static/images/dialogBg1.png" alt="" /> -->
+      
+      <div class="dialog-bg">
+        <div
+          class="w-[100%] mx-auto text-[18px] font-semibold text-center px-[40px] pt-[140px]"
+        >
           {{ goodsData.goodsName }}
         </div>
-        <div class="flex justify-start p-[20px]" style="border-top: 1px solid #33578e;border-bottom: 1px solid #33578e;">
-          <img class="w-[24px] h-[24px]" src="@/static/images/price.png" alt="">
-          <div class="pl-[12px] w-[100%]" >
-            <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
-              <div class="text-[#D1D5DB]">{{ $t("总金额") }}</div>
-              <div class="text-[#fff] font-bold">{{ goodsData.price }}{{ $t("美元") }}</div>
-            </div>
-            <div class="flex justify-between w-[100%] text-[16px]">
-              <div class="text-[#D1D5DB]">{{ $t("佣金") }}</div>
-              <div class="text-[#FF9500] font-bold">{{ goodsData.commission }}{{ $t("美元") }}</div>
-            </div>
-
-          </div>
-          
+        <div class="w-[60px] mx-auto pb-[20px] pt-[20px]">
+          <!-- <img class="w-[56px] h-[56px]" :src="url + goodsData.coverUrl" alt="" /> -->
+          <img :src="VITE_API_IMG_URL + goodsData.coverUrl" alt="" />
         </div>
-         <div class="flex justify-start p-[20px]" style="border-bottom: 1px solid #33578e;">
-          <img class="w-[24px] h-[24px]" src="@/static/images/price.png" alt="">
-          <div class="pl-[12px] w-[100%]" >
-            <div class="flex justify-between w-[100%] text-[16px] pb-[8px]">
-              <div class="text-[#D1D5DB]">{{ $t("创建时间") }}</div>
-              <div class="text-[#fff] font-bold text-[14px]">{{
-                formatWithTimezone(
-                  goodsData.createTime,
-                  userStore.zoneActive.tzName
-                )
-              }}</div>
+        <div class="w-full mt-[-3rem] pt-[23px] text-[#fff]  px-[20px]">
+          <div class="flex justify-start pb-[23px]">
+            <div class="w-[100%]">
+              <div
+                class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]"
+                style="border-bottom: 1px solid rgba(156, 163, 175, 0.2)"
+              >
+                <div class="text-[#000] text-[12px]">{{ $t("总金额") }}</div>
+                <div class="text-[#000] text-[14px] font-bold">
+                  {{ goodsData.price }}{{ $t("美元") }}
+                </div>
+              </div>
+              <div
+                class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]"
+                style="border-bottom: 1px solid rgba(156, 163, 175, 0.2)"
+              >
+                <div class="text-[#000] text-[12px]">{{ $t("佣金") }}</div>
+                <div class="text-[#FF9500] text-[14px] font-bold">
+                  {{ goodsData.commission }}{{ $t("美元") }}
+                </div>
+              </div>
             </div>
-            <div class="flex justify-between w-[100%] text-[16px]">
-              <div class="text-[#D1D5DB]">{{ $t("编号") }}</div>
-              <div class="text-[#fff] text-[14px]">{{ goodsData.orderNo }}</div>
-            </div>
-
           </div>
-          
-        </div>
+          <div class="flex justify-start pb-[23px]">
+            <div class="w-[100%]">
+              <div
+                class="flex justify-between w-[100%] text-[16px] pb-[10px] px-[18px]"
+                style="border-bottom: 1px solid rgba(156, 163, 175, 0.2)"
+              >
+                <div class="text-[#000] text-[12px]">{{ $t("创建时间") }}</div>
+                <div class="text-[#968E9C] font-bold text-[12px]">
+                  {{
+                    formatWithTimezone(
+                      goodsData.createTime,
+                      userStore.zoneActive.tzName
+                    )
+                  }}
+                </div>
+              </div>
+              <div
+                class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]"
+                style="border-bottom: 1px solid rgba(156, 163, 175, 0.2)"
+              >
+                <div class="text-[#000] text-[12px]">{{ $t("编号") }}</div>
+                <div class="text-[#968E9C] text-[12px]">
+                  {{ goodsData.orderNo }}
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="w-[90%] mx-auto mt-4 pb-[20px]">
-          <van-button
-            color="#FF9500"
-            :loading="isSubmitting"
-            :disabled="isSubmitting"
-            class="w-full"
-            @click.prevent="submitVal"
-            >{{ $t("提交") }}</van-button
-          >
+          <div class="w-[70%] mx-auto mt-4 pb-[60px]">
+            <van-button
+              color="#FF7D01"
+              :loading="isSubmitting"
+              :disabled="isSubmitting"
+              class="w-full"
+              round
+              @click.prevent="submitVal"
+              >{{ $t("提交") }}</van-button
+            >
+          </div>
         </div>
       </div>
     </van-dialog>
@@ -284,7 +322,7 @@ const submitVal = async () => {
 
 const swichTab = (index) => {
   console.log(active.value);
-  active.value = index
+  active.value = index;
   if (active.value == 0) {
     query.status = 0;
   } else if (active.value == 1) {
@@ -299,14 +337,22 @@ onMounted(() => {
 });
 </script>
 <style scoped>
-.nav-active{
-  background: #002D72;
+.nav-active {
+  background: #002d72;
   color: #fff;
 }
 .nav {
-  background: #F3F4F6;
-  color: #6B7280;
-
+  background: #f3f4f6;
+  color: #6b7280;
 }
-
+</style>
+<style>
+.dialog-bg {
+  width: 100%;
+  min-height: 300px; /* 必须有高度 */
+  background: url("@/static/images/dialogBg.png") no-repeat center center;
+  background-size: 100% 100%;
+  /* position: relative;
+  position: fixed; */
+}
 </style>

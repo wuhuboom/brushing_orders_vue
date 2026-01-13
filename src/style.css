@@ -21,9 +21,9 @@
   font-size: 15px !important;
 }
 
-.el-input__wrapper {
+/* .el-input__wrapper {
   box-shadow: 0 0 0 2px #3d3d3d !important;
-}
+} */
 
 html {
   overflow: hidden;
@@ -140,7 +140,7 @@ input {
 
 .el-input__wrapper {
   /* background:  #F9FAFB !important; */
-  border: 1px solid #D1D5DB;
+  border: 1px solid #fff !important;
   height: 48px !important;
   line-height: 48px !important;
 }
@@ -148,10 +148,13 @@ input {
   background:  #F9FAFB !important;
 } */
 .login-con .el-form-item--label-top .el-form-item__label,.register .el-form-item--label-top .el-form-item__label {
-  color: #38BDF8 !important;
+  color: #374151 !important;
+  font-size: 14px !important;
 }
 .login-con  .el-input__wrapper,.register .el-input__wrapper {
-  border-radius: 0 !important;
+  /* border-radius: 0 !important; */
+  border: none !important;
+  box-shadow: none !important;
 }
 .van-hairline--bottom:after {
   border-bottom-width:0 !important;
