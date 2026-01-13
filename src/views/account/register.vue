@@ -27,7 +27,6 @@
             type="text"
             autocomplete="off"
             size="large"
-            @input="onUsernameInput"
           >
           </el-input>
         </el-form-item>
@@ -37,7 +36,6 @@
             :placeholder="$t('密码')"
             type="password"
             autocomplete="off"
-             @input="onUserPasswordInput"
             size="large"
           >
           </el-input>
@@ -148,9 +146,6 @@ onUnmounted(() => {
 const onUsernameInput = (val) => {
   ruleForm.username = val.replace(/[^a-zA-Z0-9]/g, '')
 }
-const onUserPasswordInput = (val) => {
-  ruleForm.password = val.replace(/[^a-zA-Z0-9]/g, '')
-}
 
 const router = useRouter();
 const { t } = useI18n();
@@ -175,6 +170,10 @@ function toLogin() {
 
 function sendCode() {
   if (!ruleForm.username) return showToast(t("请输入用户名"));
+  const reg = /^[A-Za-z0-9]+$/;
+  if (!reg.test(ruleForm.username)) {
+    return showToast(t("用户名输入空格或特殊符号"));
+  }
   if (!ruleForm.password) {
     return showToast(t("请输入6位数字密码"));
   }
