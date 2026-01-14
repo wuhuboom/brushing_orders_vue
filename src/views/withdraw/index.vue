@@ -16,7 +16,7 @@
     </div>
     <div class="p-4 box-border flex flex-col">
         <div
-          class="flex flex-col justify-between p-4 box-border rounded-xl bg-[url(@/static/images/bg3.png)] bg-cover shadow mb-4"
+          class="flex flex-col justify-between p-4 box-border rounded-xl bg-[url(@/static/images/bg3.png)] bg-cover shadow"
           style="background-size: 100% 100%"
         >
           <div class="text-white text-sm pt-[10px]">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="px-[20px]">
-      <div class="text-[#4B5563] font-semibold mt-5 pl-[5px]">
+      <div class="text-[#4B5563] font-semibold pl-[5px]">
         {{ $t('提款金额') }}
       </div>
       <div
@@ -62,7 +62,7 @@
       <div class="mt-[4px] text-[12px] text-[#71757C]">{{ $t("您将在一小时内收到提款") }}</div>
       <div class="mt-[10px]">
         <div class="pb-[8px] text-[14px] mt-[30px] mb-[10px] text-[#374151]">{{$t('添加钱包')}}</div>
-        <div v-if="bankWallet.length == 2">
+        <div v-if="bankWallet.length == 0">
           <!-- <div
             @click="addType(1)"
             class="flex items-center border border-[#E5E7EB] p-[17px] rounded-[8px]"
@@ -79,7 +79,7 @@
             @click="addType(2)"
             class="flex items-center bg-[#fff] border border-[#E5E7EB] p-[17px] rounded-[8px] mt-[8px]"
           >
-            <img src="@/static/images/add.png" alt="" />
+            <img class="w-[40px] h-[40px]" src="@/static/images/add.png" alt="" />
             <div class="pl-[16px]">
               <div class="text-[14px] text-[#111827]">{{$t('钱包')}}</div>
               <div class="text-[12px] text-[#6B7280] pt-[5px]">
@@ -94,7 +94,7 @@
           class="flex items-center justify-between bg-[#fff] border border-[#E5E7EB] p-[17px] rounded-[8px] mt-[8px]"
         >
           <div>
-            <div class="text-[14px] text-[#111827]">{{ bankItem.name }}</div>
+            <div class="text-[14px] text-[#374151]">{{ bankItem.name }}</div>
             <div
               class="text-[12px] text-[#1F2937] pt-[5px]"
               v-if="bankItem.type == 1"
@@ -117,35 +117,39 @@
           </div>
         </div>
       </div>
-      <div class="text-[#4B5563] font-semibold mt-5 pl-[5px]">
+      <div class="text-[#374151]  mt-5 pl-[5px]">
         {{ $t('交易密码') }}
       </div>
       <div
-        class="w-full mt-[20px] overflow-hidden relative"
+        class="w-full mt-[10px] overflow-hidden relative"
       > 
-        <van-password-input
+        <!-- <van-password-input
           :value="ruleForm.tradePassword"
           :gutter="10"
           v-if="isMobile"
           :focused="showKeyboard"
           @focus="handleFocus"
 
-        />
-        <van-field
+        /> -->
+        <div class="w-full mt-2 overflow-hidden relative bg-[#fff] rounded-[5px] px-[6px]"
+        style="border: 1px dashed #E0E0E0;">
+          <van-field
           v-model="ruleForm.tradePassword"
           type="password"
-          v-else
           maxlength="6"
           :placeholder="$t('交易密码')"
           @focus="handleFocus"
         />
+
+        </div>
+        
       </div>
     </div>
     <div class="w-full pl-5 pr-5 mt-[20px]">
         <van-button
-          color="#002D72"
+          color="#FB7139"
           style="
-            background: linear-gradient(135deg, #002D72, #0a4da2);
+            background: #FB7139;
             color: #fff;
           "
           @click="getWithdrawal"
