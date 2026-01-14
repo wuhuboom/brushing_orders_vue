@@ -24,8 +24,8 @@
     </div>
     <div class="mt-[20px]">
         <div class="flex justify-between">
-            <div class="text-[#333] text-[16px]">{{AddressInfor.url}}</div>
-            <div class="text-center" @click="copyContent(AddressInfor.url)">⧉</div>
+            <div class="text-[#333] text-[16px] text-center flex-1">{{AddressInfor.url}}</div>
+            <div class="text-center w-[40px]" @click="copyContent(AddressInfor.url)">⧉</div>
         </div>
         <div class="bg-[#f6f6f6] h-[52px] flex items-center justify-center pl-[5px] text-[20px] mt-[15px]">
             {{$t('等待支付...')}}
@@ -66,7 +66,6 @@ const AddressInfor = ref({})
 const getGetRechargeAddress = async () =>{
     let res = await getRechargeAddress()
     AddressInfor.value = res.data[0]
-
 }
 watchEffect(async () => {
   if (!address.value) return

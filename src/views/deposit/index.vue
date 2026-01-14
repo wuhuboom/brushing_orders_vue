@@ -146,7 +146,7 @@
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { onMounted, reactive, ref } from "vue";
 import { useUserStore } from "@/store/modules/user";
-import { getDeposit, userGetInfo,getTradeConfig } from "../../api/apis";
+import { getDeposit, userGetInfo,getTradeConfig,getRechargeAddress } from "../../api/apis";
 import {formatWithTimezone,checkWorkTimeLocal} from "../../util/utils"
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -202,14 +202,19 @@ const loadData = async () => {
   }
 };
 const customer = () => {
-  // const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);;
-  // if(time) {
-  //    ContactUsRef.value.open();
-  // } else {
-  //   showToast(t("supportHours"))
-
-  // }
-  router.push({ path: "/address" });
+  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);;
+  
+  console.log(AddressInfor.value)
+  if(Object.keys(AddressInfor.value).length > 0) {
+     router.push({ path: "/address" });
+  } else {
+    if(time) {
+      ContactUsRef.value.open();
+    } else {
+      showToast(t("supportHours"))
+    }
+  }
+ 
 };
 const TradeInfor = ref({})
 const tradeConfig = async () => {
@@ -220,8 +225,15 @@ const tradeConfig = async () => {
 const toHistory = () =>{
   router.push({ path: "/depositHistory" });
 }
+
+const AddressInfor = ref({})
+const getGetRechargeAddress = async () =>{
+    let res = await getRechargeAddress()
+    AddressInfor.value = res.data[0]
+}
 onMounted(() => {
   tradeConfig()
+  getGetRechargeAddress()
   userGetInfo().then((res) => {
     userInfo.value = res.data;
   });

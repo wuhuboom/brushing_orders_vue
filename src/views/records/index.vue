@@ -311,10 +311,16 @@ const onRefresh = async () => {
   refreshing.value = false;
 };
 const onLoad = async () => {
-  if (finished.value || loading.value) return;
+  console.log(11111)
+  console.log(finished.value)
+  console.log(loading.value)
+  if (finished.value) return;
   loading.value = true;
+  console.log(11111)
   await loadData();
   loading.value = false;
+   console.log(333)
+   console.log(loading.value)
 };
 const loadData = async () => {
   try {
