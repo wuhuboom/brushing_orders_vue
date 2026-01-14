@@ -10,7 +10,7 @@
       />
     </div>
     <div class="flex flex-col items-center mt-[80px]">
-        <div class="text-[#000] text-[24px] font-bold">{{100}}</div>
+        <!-- <div class="text-[#000] text-[24px] font-bold">{{100}}</div> -->
         <div class="text-[14px] font-bold mt-[10px] my-[10px]">{{$t('网络')}} - TRON(TRC-20)</div>
         <div class="bg-[#ffeeee] text-[red] rounded-[5px] py-[10px] px-[5px]">
             ⚠️{{$t('你有一个尚未付款的订单')}}

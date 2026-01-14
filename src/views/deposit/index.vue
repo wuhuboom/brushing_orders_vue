@@ -202,13 +202,14 @@ const loadData = async () => {
   }
 };
 const customer = () => {
-  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);;
-  if(time) {
-     ContactUsRef.value.open();
-  } else {
-    showToast(t("supportHours"))
+  // const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);;
+  // if(time) {
+  //    ContactUsRef.value.open();
+  // } else {
+  //   showToast(t("supportHours"))
 
-  }
+  // }
+  router.push({ path: "/address" });
 };
 const TradeInfor = ref({})
 const tradeConfig = async () => {

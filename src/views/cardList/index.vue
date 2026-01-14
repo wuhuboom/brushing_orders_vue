@@ -59,8 +59,9 @@
             <div
               style="text-align: right"
               class="text-[12px] text-[#FF3E3E] w-[60px] h-[30px]"
-              @click.stop="toDetail(item.id, item.type)"
+              @click.stop="customer"
             >
+            <!-- @click.stop="toDetail(item.id, item.type)" -->
               {{$t('编辑')}}
             </div>
           </div>
@@ -78,8 +79,10 @@
             <div
               style="text-align: right"
               class="text-[12px] text-[#FF3E3E] flex-shrink-0 cursor-pointer w-[60px] h-[30px]"
-              @click.stop="toDetail(item.id, item.type)"
+              @click.stop="customer"
+              
             >
+            <!-- @click.stop="toDetail(item.id, item.type)" -->
               {{$t('编辑')}}
             </div>
           </div>
@@ -111,15 +114,18 @@
         }}</van-button
       >
     </div>
+    <ContactUs ref="ContactUsRef"></ContactUs>
   </div>
 </template>
 <script setup>
 import { onMounted, ref, reactive } from "vue";
-import { getUserBankWallet } from "../../api/apis";
+import { getUserBankWallet,getTradeConfig } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { useRouter, useRoute } from "vue-router";
 import { showToast } from "vant";
+import {formatWithTimezone,checkWorkTimeLocal} from "../../util/utils"
+const ContactUsRef = ref(null);
 const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
@@ -132,6 +138,22 @@ const form = reactive({
   withdrawAddress: "",
   withdrawType: "",
 });
+
+const TradeInfor = ref({})
+const tradeConfig = async () => {
+  let res = await getTradeConfig();
+  TradeInfor.value = res.data;
+}; 
+const customer = () => {
+  console.log(222)
+  // const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);;
+  // if(time) {
+  //    ContactUsRef.value.open();
+  // } else {
+  //   showToast(t("supportHours"))
+  // }
+  ContactUsRef.value.open();
+};
 
 
 const onClickLeft = () => {
@@ -208,6 +230,7 @@ const toDetail = (id, type) => {
 
 onMounted(async () => {
   getgetUserBankWallet();
+  tradeConfig();
   await userStore.getUserInfo();
   form.withdrawName = userStore.userInfo.withdrawName;
   form.withdrawAddress = userStore.userInfo.withdrawAddress;
