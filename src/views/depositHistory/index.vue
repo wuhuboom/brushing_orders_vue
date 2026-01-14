@@ -66,6 +66,7 @@ import { onMounted, reactive, ref } from "vue";
 import { useUserStore } from "@/store/modules/user";
 import { getDeposit, userGetInfo,getTradeConfig } from "../../api/apis";
 import {formatWithTimezone,checkWorkTimeLocal} from "../../util/utils"
+import ContactUs from "@/components/ContactUs.vue";
 import { useI18n } from "vue-i18n";
 import { showToast } from "vant";
 const { t } = useI18n();
