@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full bg-[#f9f9f9] min-h-[100vh] h-full withdraw">
+  <div class="w-full bg-[#F7F7F7] min-h-[100vh] h-full withdraw">
     <div
-      class="relative bg-gradient-to-r from-[#002D72] to-[#0A4DA2] flex items-center justify-center h-[56px] px-[16px]"
+      class="relative bg-[#000] flex items-center justify-center h-[56px] px-[16px]"
     >
       <div class="absolute left-[16px]">
         <van-icon
@@ -11,30 +11,33 @@
           @click="onClickLeft"
         />
       </div>
-      <div class="text-base text-[#FFFFFF] font-medium">{{ $t("提取") }}</div>
-      <div class="absolute right-[16px] text-base text-[#fff]" @click="toHistory">{{$t('Withdrawal.History')}}</div>
+      <div class="text-[18px] text-[#FFFFFF] font-medium">{{ $t("提取") }}</div>
+      <div class="absolute right-[16px]  text-[#fff] text-[14px]" @click="toHistory">{{$t('Withdrawal.History')}}</div>
     </div>
-    <div
-      class="flex flex-col justify-between p-4 box-border mt-[-2px] bg-gradient-to-r from-[#002D72] to-[#0A4DA2]"
-    >
-      <div class="w-full flex justify-end mb-[10px]" @click="refresh">
-        <img
-          class="w-[24px] h-[24px]"
-          src="../../static/images/shuaxin.png"
-          alt=""
-        />
-      </div>
-      <div class="text-white text-center text-sm">
-        {{ $t("账户金额") }}
-      </div>
-      <div class="flex mt-[8px] mb-[12px] justify-center">
-        <div class="text-white text-3xl flex items-center">
-          {{ amount }}
+    <div class="p-4 box-border flex flex-col">
+        <div
+          class="flex flex-col justify-between p-4 box-border rounded-xl bg-[url(@/static/images/bg3.png)] bg-cover shadow mb-4"
+          style="background-size: 100% 100%"
+        >
+          <div class="text-white text-sm pt-[10px]">
+            {{ $t("账户金额") }}USD
+          </div>
+          <div class="flex mt-[27px] mb-[30px]">
+            <div
+              class="text-white font-bold text-[34px] text-bold flex items-center"
+            >
+              {{ amount }}
+            </div>
+            <!-- <div
+              class="text-white font-bold text-sm flex items-center ml-1 pt-[12px]"
+            >
+              {{ $t("美元") }}
+            </div> -->
+          </div>
+          <!-- <div class="text-white text-[14px] pt-4">
+            {{ $t("您将在一小时内收到提款") }}
+          </div> -->
         </div>
-        <div class="text-white text-sm flex items-center ml-2 pt-[12px]">
-          {{ $t("美元") }}
-        </div>
-      </div>
     </div>
 
     <div class="px-[20px]">
@@ -42,8 +45,8 @@
         {{ $t('提款金额') }}
       </div>
       <div
-        class="w-full mt-2 overflow-hidden relative"
-        style="border-bottom: 1px dashed #D1D5DB"
+        class="w-full mt-2 overflow-hidden relative bg-[#fff] rounded-[5px] px-[11px]"
+        style="border: 1px dashed #E0E0E0;"
       > 
         <div class="absolute top-[12px] text-[20px]">$</div>
         <van-field
@@ -54,12 +57,12 @@
           label-align="top"
           size="large"
         />
-        <div class="absolute right-0 top-[13px] text-[12px] text-[#2563EB]"  @click="All">{{ $t("全部") }}</div>
+        <div class="absolute  top-[8px] right-[11px] text-[#fff] text-[16px] text-center bg-[#FF6B2C] w-[47px] h-[29px] leading-[29px] rounded-[5px]" @click="All">{{ $t("全部") }}</div>
       </div>
       <div class="mt-[4px] text-[12px] text-[#71757C]">{{ $t("您将在一小时内收到提款") }}</div>
       <div class="mt-[10px]">
-        <div class="pb-[8px] text-[14px] mt-[30px] mb-[10px] font-semibold">{{$t('添加钱包')}}</div>
-        <div v-if="bankWallet.length == 0">
+        <div class="pb-[8px] text-[14px] mt-[30px] mb-[10px] text-[#374151]">{{$t('添加钱包')}}</div>
+        <div v-if="bankWallet.length == 2">
           <!-- <div
             @click="addType(1)"
             class="flex items-center border border-[#E5E7EB] p-[17px] rounded-[8px]"
@@ -74,7 +77,7 @@
           </div> -->
           <div
             @click="addType(2)"
-            class="flex items-center border border-[#E5E7EB] p-[17px] rounded-[8px] mt-[8px]"
+            class="flex items-center bg-[#fff] border border-[#E5E7EB] p-[17px] rounded-[8px] mt-[8px]"
           >
             <img src="@/static/images/add.png" alt="" />
             <div class="pl-[16px]">
@@ -88,12 +91,12 @@
         <!-- 有卡号的情况 -->
         <div
           v-else
-          class="flex items-center justify-between border border-[#E5E7EB] p-[17px] rounded-[8px] mt-[8px]"
+          class="flex items-center justify-between bg-[#fff] border border-[#E5E7EB] p-[17px] rounded-[8px] mt-[8px]"
         >
           <div>
             <div class="text-[14px] text-[#111827]">{{ bankItem.name }}</div>
             <div
-              class="text-[12px] text-[#6B7280] pt-[5px]"
+              class="text-[12px] text-[#1F2937] pt-[5px]"
               v-if="bankItem.type == 1"
             >
               {{ bankItem.bankCode }}
@@ -109,8 +112,8 @@
             </div>
           </div>
           <div class="flex items-center" @click="toList">
-            <div class="text-[#2563EB] text-[12px] mr-[8px]">{{$t('管理')}}</div>
-            <van-icon name="arrow" color="#9CA3AF" size="16px" />
+            <div class="text-[#EB2525] text-[12px] mr-[8px]">{{$t('管理')}}</div>
+            <!-- <van-icon name="arrow" color="#9CA3AF" size="16px" /> -->
           </div>
         </div>
       </div>
