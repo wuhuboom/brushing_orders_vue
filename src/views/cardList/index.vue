@@ -126,6 +126,7 @@ import { useRouter, useRoute } from "vue-router";
 import { showToast } from "vant";
 import {formatWithTimezone,checkWorkTimeLocal} from "../../util/utils"
 const ContactUsRef = ref(null);
+import ContactUs from "@/components/ContactUs.vue";
 const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
