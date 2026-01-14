@@ -25,18 +25,18 @@
     <div class="mt-[20px]">
         <div class="flex justify-between">
             <div class="text-[#333] text-[16px] text-center flex-1">{{AddressInfor.url}}</div>
-            <div class="text-center w-[40px]" @click="copyContent(AddressInfor.url)">⧉</div>
+            <div class="text-center w-[30px]" @click="copyContent(AddressInfor.url)">⧉</div>
         </div>
-        <div class="bg-[#f6f6f6] h-[52px] flex items-center justify-center pl-[5px] text-[20px] mt-[15px]">
+        <!-- <div class="bg-[#f6f6f6] h-[52px] flex items-center justify-center pl-[5px] text-[20px] mt-[15px]">
             {{$t('等待支付...')}}
-        </div>
+        </div> -->
     </div>
-    <div class="text-[14px] text-[#000]">
+    <!-- <div class="text-[14px] text-[#000]">
         <div class="text-[#000] text-[16px] font-bold pb-[10px]">{{$t('提示')}}:</div>
         <div class="pb-[10px]">1.{{$t('充值地址为')}}<span class="text-[#ff0000] font-bold">{{$t('一次性地址')}}</span>，{{$t('请勿重复填写或转移')}}。</div>
         <div class="pb-[10px]">2.{{$t('最低充值金额以实际转账金额为准，不低于')}} <span class="text-[#ff0000] font-bold">10 USDT</span>。</div>
         <div class="pb-[10px]">3.{{$t('充值成功后，大约需要')}}<span class="text-[#ff0000] font-bold">{{$t('1到2分钟')}}</span> {{$t('才能确认付款，请耐心等待')}}。</div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup>
