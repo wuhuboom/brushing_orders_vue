@@ -2,7 +2,7 @@
   <div class="bg-[#f8f8f8] h-[100vh]">
     <!-- <HeaderTop></HeaderTop> -->
      <div class="w-[100%] h-[40px] border bottom-1 px-[10px] py-[3px] shadow-[3px_3px_6px_rgba(68,93,158,0.11)]">
-      <img class="w-[34px] h-[30px]" src="@/static/images/logos.jpg" alt="">
+      <img class="w-[48px]" src="@/static/images/logos.png" alt="">
      </div>
     
     <div class="relative">

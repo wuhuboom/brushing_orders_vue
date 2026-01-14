@@ -1,7 +1,7 @@
 <template>
   <div class="my-bor w-full flex flex-col pb-6 bg-[#fff]">
     <div
-      class="w-full mx-auto p-4 box-border flex flex-col relative bg-gradient-to-r from-[#a04149] to-[#6a4d52]"
+      class="w-full mx-auto p-4 box-border flex flex-col relative bg-gradient-to-r from-[#F2F1ED] to-[#FAF9F6] "
     >
       <div class="flex justify-end  pt-[30px]" >
         <img class="w-[21px] h-[21px]" @click="toPage('/notice')" src="@/static/images/notic.png" alt="">
@@ -31,7 +31,7 @@
         />
         <div class="flex flex-col justify-start ml-[10px] mt-[5px]">
           <div class="flex items-center">
-            <div class="text-[#fff] font-semibold text-[18px]">
+            <div class="text-[#6B7280] font-semibold text-[18px]">
               {{ userInfo.username }}
             </div>
             <div
@@ -41,14 +41,14 @@
               {{userLevel}}
             </div>
           </div>
-          <div class="flex mt-[10px] text-[#fff] text-[12px]" @click="copyContent(userInfo.inviteCode)">
+          <div class="flex mt-[10px] text-[#6B7280] text-[12px]" @click="copyContent(userInfo.inviteCode)">
             {{$t('邀请码')}}
             {{ userInfo.inviteCode }}
           
           </div>
         </div>
       </div>
-      <div class='text-[#fff] flex justify-between items-center mt-[10px]'>
+      <div class='text-[#6B7280] flex justify-between items-center mt-[10px]'>
         <div>
           <div class='font-medium mb-[10px]'>{{$t('我的账户')}}</div>
           <div class='text-[14px]'>USD <span class='font-medium'>{{ userInfo.balance }}</span></div>
