@@ -1,4 +1,5 @@
 {
+  "请联系客服开启任务": "Please contact customer service to enable the task",
   "您即将切换为{type}": "You are about to switch to {type}",
   "winMessage": "Congratulations on winning {winPrize}$. which has been deposited into your account balance.",
   "rechargeLimit": "The minimum recharge amount is {min}, and the maximum recharge amount is {max}.",
