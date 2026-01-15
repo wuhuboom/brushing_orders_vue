@@ -279,5 +279,10 @@
   "我的交易所":"My Exchange",
   "钱包管理":"Wallet Management",
   "请输入6位数字密码":"Please enter a 6-digit password",
-  "请输入6位数字的交易密码":"Please enter a 6-digit transaction password"
+  "请输入6位数字的交易密码":"Please enter a 6-digit transaction password",
+  "VIP 会员":"VIP Member",
+  "解锁专属权益和高级服务":"Unlock exclusive rights and advanced services",
+  "升级会员":"Upgrade Membership",
+  "任务总计":"Total Tasks",
+  "任务完成":"Completed Tasks"
 }

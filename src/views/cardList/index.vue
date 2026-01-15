@@ -14,7 +14,7 @@
     </div>
     <div
       class="flex items-center mx-[20px] border border-[#EEEEEE] p-[17px] rounded-[20px] mt-[32px]"
-      :class="activeValue == item.id ? 'active' : ''"
+      :class="activeValue == item.id ? 'active' : 'active1'"
       v-for="(item, index) in bankWallet"
       :key="index"
       @click="selectEmits(item)"
@@ -33,10 +33,10 @@
       /> -->
       <div class="w-full">
         <div class="w-full flex justify-between">
-          <div class="text-[16px] text-[#212121]" v-if="item.type == 1">
+          <div class="text-[16px]" v-if="item.type == 1">
             {{ item.bankCode }}
           </div>
-          <div class="text-[16px] text-[#212121]" v-else>{{ item.name }}</div>
+          <div class="text-[16px]" v-else>{{ item.name }}</div>
           <img
             v-if="activeValue != item.id"
             class="w-[22px] h-[22px]"
@@ -51,8 +51,8 @@
           />
         </div>
         <div v-if="item.type == 1">
-          <div class="text-[14px] text-[#757575] py-[5px]">{{ item.name }}</div>
-          <div class="text-[14px] text-[#757575] flex justify-between">
+          <div class="text-[14px] py-[5px]">{{ item.name }}</div>
+          <div class="text-[14px] flex justify-between">
             <div>
               {{ item.bankCard }}
             </div>
@@ -66,11 +66,11 @@
           </div>
         </div>
         <div v-else>
-          <div class="text-[14px] text-[#757575] py-[5px]">
+          <div class="text-[14px] py-[5px]">
             {{ item.walletType }}
           </div>
           <div
-            class="text-[14px] text-[#757575] flex justify-between items-start"
+            class="text-[14px]  flex justify-between items-start"
           >
             <div class="w-[80%] break-all leading-[20px]">
               {{ item.walletAddress }}
@@ -101,7 +101,7 @@
       <div class="h-[20px]"></div>
       <van-button
         v-if="showWalletBtn"
-        color="#F09F39"
+        color="#FB7139"
         class="w-full"
         size="large"
         @click="addBank(2)"
@@ -214,7 +214,9 @@ onMounted(async () => {
 </script>
 <style scoped>
 .active {
-  background: linear-gradient(to right, #ffffff, #fff6f0);
-  border: 1px solid #fbdabb;
+  background-image: url(@/static/images/walletBg.png);
+  background-size: 100% 100%;
+  color: #fff;
+  /* border: 1px solid #fbdabb; */
 }
 </style>

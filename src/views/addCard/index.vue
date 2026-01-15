@@ -86,7 +86,7 @@
         class="w-full"
         size="large"
         style="
-            background: linear-gradient(135deg, #002D72, #0a4da2);
+            background: #FB7139;
             color: #fff;
           "
         @click="submitForm"

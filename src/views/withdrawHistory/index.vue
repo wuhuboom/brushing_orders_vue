@@ -1,15 +1,15 @@
 <template>
-  <div class="w-full bg-[#f9f9f9] min-h-[100vh] h-full withdraw">
-    <div class="relative flex items-center justify-center h-[56px] px-[16px]">
+  <div class="w-full bg-[#f7f7f7] min-h-[100vh] h-full withdraw">
+    <div class="relative flex items-center justify-center h-[56px] px-[16px] bg-[#000]">
       <div class="absolute left-[16px]">
         <van-icon
           name="arrow-left"
-          color="#000"
+          color="#fff"
           size="22px"
           @click="onClickLeft"
         />
       </div>
-      <div class="text-base text-[#000000] font-medium">
+      <div class="text-base text-[#fff] font-medium">
         {{ $t("Withdrawal.title") }}
       </div>
       <!-- <div class="absolute right-[16px] text-base text-[#fff]">History</div> -->
@@ -18,28 +18,29 @@
       <div class="flex justify-start mb-[16px] mt-[24px]">
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
-          :class="orderActive == -1 ? 'bg-[#002D72] text-[#fff]' : ''"
+          style="border: 1px solid #E8E8E8;"
+          :class="orderActive == -1 ? 'bg-[#EC6F01] text-[#fff]' : ''"
           @click="changeOrder(-1)"
         >
           {{ $t("全部") }}
         </div>
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
-          :class="orderActive == 0 ? 'bg-[#002D72] text-[#fff]' : ''"
+          :class="orderActive == 0 ? 'bg-[#EC6F01] text-[#fff]' : ''"
           @click="changeOrder(0)"
         >
           {{ $t("待审核") }}
         </div>
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
-          :class="orderActive == 1 ? 'bg-[#002D72] text-[#fff]' : ''"
+          :class="orderActive == 1 ? 'bg-[#EC6F01] text-[#fff]' : ''"
           @click="changeOrder(1)"
         >
           {{ $t("审核成功") }}
         </div>
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
-          :class="orderActive == 2 ? 'bg-[#002D72] text-[#fff]' : ''"
+          :class="orderActive == 2 ? 'bg-[#EC6F01] text-[#fff]' : ''"
           @click="changeOrder(2)"
         >
           {{ $t("审核拒绝") }}
@@ -85,7 +86,7 @@
         >
           <van-cell v-for="item in list" :key="item" :title="item">
             <div
-              class="bg-[#fff] flex justify-between items-center px-[16px] py-[16px] rounded-[10px]"
+              class="bg-[#fff] flex justify-between items-center px-[16px] py-[16px] rounded-[10px] shadow-[0px_1px_2px_1px_rgba(0,0,0,0.05)] mb-[10px]"
               :class="
                 item.status == 0
                   ? 'activetab'
@@ -111,7 +112,7 @@
                 <div class="text-[#9CA3AF] text-[12px]">ID:{{ item.orderNumber }}</div>
               </div>
               <div
-                class="px-[12px] py-[4px] font-bold rounded-[20px] text-[12px]"
+                class="px-[12px] py-[4px] font-bold rounded-[20px] text-[12px] mr-[20px]"
                 :class="
                   item.status == 0
                     ? 'text-[#16A34A] bg-[#DCFCE7]'

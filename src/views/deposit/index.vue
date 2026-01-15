@@ -9,7 +9,7 @@
       />
     </van-sticky> -->
     <div
-      class="relative bg-gradient-to-r from-[#002D72] to-[#0A4DA2] flex items-center justify-center h-[56px] px-[16px]"
+      class="relative bg-[#000] flex items-center justify-center h-[56px] px-[16px]"
     >
       <div class="absolute left-[16px]">
         <van-icon
@@ -22,42 +22,27 @@
       <div class="text-base text-[#FFFFFF] font-medium">{{ $t("定金") }}</div>
       <div class="absolute right-[16px] text-base text-[#fff]" @click="toHistory">{{$t('Withdrawal.History')}}</div>
     </div>
-    <div
-      class="flex flex-col justify-between p-4 box-border mt-[-2px] bg-gradient-to-r from-[#002D72] to-[#0A4DA2]"
-    >
-      <div class="w-full flex justify-end mb-[10px]" @click="refresh">
-        <img
-          class="w-[24px] h-[24px]"
-          src="../../static/images/shuaxin.png"
-          alt=""
-        />
-      </div>
-      <div class="text-white text-center text-sm">
-        {{ $t("账户金额") }}
-      </div>
-      <div class="flex mt-[8px] mb-[12px] justify-center">
-        <div class="text-white text-3xl flex items-center">
-          {{ userInfo.balance }}
-        </div>
-        <div class="text-white text-sm flex items-center ml-2 pt-[12px]">
-          {{ $t("美元") }}
-        </div>
-      </div>
-    </div>
-    <div class="w-full pl-5 pr-5 mt-[20px]">
-        <!-- <van-button
-          color="#002D72"
+    <div class="p-4 mt-[10px] box-border flex flex-col">
+        <div
+          class="flex flex-col justify-between p-4 box-border rounded-xl bg-[url(@/static/images/bg4.png)]  bg-cover shadow"
           style="
-            background: linear-gradient(135deg, #002D72, #0a4da2);
-            color: #fff;
+            background-size: 100% 100%;
           "
-          @click="getWithdrawal"
-          class="w-full"
-          >{{ $t("提取") }}</van-button
-        > -->
+        >
+          <div class="text-[#fff]  text-sm ">
+            {{ $t("账户金额") }}
+          </div>
+          <div class="flex mt-[20px] mb-[5px]">
+            <div class="text-[#fff] text-3xl font-bold flex items-center">
+              {{ userInfo.balance }} <span class="text-white text-sm font-bold flex items-center ml-2 pt-[12px]">USD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="w-full pl-5 pr-5 mt-[20px]">
 
         <van-button color="" style="
-            background: linear-gradient(135deg, #002D72, #0a4da2);
+            background: #FB7139;
             color: #fff;
           "   class="w-full" @click="customer">{{
           $t("联系客服")

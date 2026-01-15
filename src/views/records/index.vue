@@ -288,7 +288,7 @@ const onRefresh = async () => {
   refreshing.value = false;
 };
 const onLoad = async () => {
-  if (finished.value || loading.value) return;
+  if (finished.value) return;
   loading.value = true;
   await loadData();
   loading.value = false;

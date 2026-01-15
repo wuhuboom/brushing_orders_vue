@@ -5,35 +5,36 @@
       <img class="w-[278px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
     </div> -->
     <div
-      class="w-full  text-[#fff] relative bg-gradient-to-b from-[#4A2C1A] to-[#2D1810]"
-
+      class="w-full  text-[#fff] relative "
     >
-     <!-- <video
-        src="https://www.directagents.com/wp-content/uploads/2025/06/Sequence-04_5_compressed_v2.mp4"
+     <video
+        src="https://onlinesalesadvisors.com/wp-content/uploads/2023/07/shutterstock_7847272.mp4"
         autoplay
         muted
         loop
         playsinline
-        class="w-full h-[352px] object-cover"
-      ></video> -->
-      <img class="w-[200px] pl-[16px] pt-[29px]" src="@/static/images/logo1.png" alt="" />
-      <div class="p-[24px] w-[200px]">
-        <p class="flex flex-col text-[30px] font-roboto pt-[20px] leading-[40px]">
-          <span class="">{{$t('index.str1')}}</span>
-          <span class="text-[#FF9500] font-bold">{{$t('index.str2')}}</span>
-        </p>
-      </div>
-      <p class="text-[#fff] text-[14px] px-[16px]  leading-[25px]">{{$t('index.str3')}}</p>
-      <div class="flex justify-between px-[20px] pt-[43px] pb-[52px]">
-        <div class="bg-[#1A1410] p-[17px] rounded-[8px] w-[166px]">
-          <div class="text-[#FF9500] text-[24px] pb-[14px]">25%</div>
-          <div class="text-[#fff] text-[12px]">{{$t('index.str4')}}</div>
+        class="w-full h-[800px] object-cover"
+      ></video>
+      <div class="absolute top-0 left-0 p-[24px] h-[100%] elementor-background-overlay" >
+        <img class="w-[200px] pl-[16px] pt-[29px]" src="@/static/images/logo1.png" alt="" />
+        <div class="p-[24px] w-[200px]">
+          <p class="flex flex-col text-[30px] font-roboto pt-[20px] leading-[40px]">
+            <span class="">{{$t('index.str1')}}</span>
+            <span class="text-[#FF9500] font-bold">{{$t('index.str2')}}</span>
+          </p>
         </div>
-        <div class="bg-[#1A1410] p-[17px] rounded-[8px] w-[166px]">
-          <div class="text-[#FF9500] text-[24px] pb-[14px]">35%</div>
-          <div class="text-[#fff] text-[12px]">{{$t('index.str5')}}</div>
+        <p class="text-[#fff] text-[14px] px-[16px]  leading-[25px]">{{$t('index.str3')}}</p>
+        <div class="flex justify-between px-[20px] pt-[43px] pb-[52px]">
+          <div class="bg-[#1A1410] p-[17px] rounded-[8px] w-[166px]">
+            <div class="text-[#FF9500] text-[24px] pb-[14px]">25%</div>
+            <div class="text-[#fff] text-[12px]">{{$t('index.str4')}}</div>
+          </div>
+          <div class="bg-[#1A1410] p-[17px] rounded-[8px] w-[166px]">
+            <div class="text-[#FF9500] text-[24px] pb-[14px]">35%</div>
+            <div class="text-[#fff] text-[12px]">{{$t('index.str5')}}</div>
+          </div>
         </div>
-      </div>
+        </div>
       
       <!-- <p class="flex flex-col text-[20px] pt-[70px]">
         <span class="pb-[20px]">{{$t('index.str4')}}</span>
@@ -114,7 +115,19 @@
       <p class="text-[#666666] text-center pt-[10px]">
         {{$t('index.str7')}}
       </p>
-      <img class="w-full mt-[15px]" src="@/static/images/index1bg.png" alt="" />
+      <div class="elementor-wrapper">
+        <video
+          src="https://onlinesalesadvisors.com/wp-content/uploads/2023/07/IMG_0-1.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          class="w-full h-[240px] object-cover"
+        ></video>
+
+      </div>
+      
+      <!-- <img class="w-full mt-[15px]" src="@/static/images/index1bg.png" alt="" /> -->
     </div>
     <div
       class="p-[25px] w-full bg-gradient-to-r from-[#000] to-[#1C1C1C]"
@@ -128,32 +141,20 @@
       </p>
       <img class="w-full mt-[15px]" src="@/static/images/index2bg.png" alt="" />
     </div>
-    <!-- <div class="bg-[#000] pt-[76px]">
+    <div class="bg-[#000] mt-[-1px] pt-[76px] text-[#fff]">
       <div class="flex justify-center">
         <img class="w-[40px] h-[40px] ml-[16px]" src="@/static/images/down1bg.png" alt="">
         <img class="w-[40px] h-[40px] ml-[16px]" src="@/static/images/down2bg.png" alt="">
         <img class="w-[40px] h-[40px] ml-[16px]" src="@/static/images/down3bg.png" alt="">
         <img class="w-[40px] h-[40px] ml-[16px]" src="@/static/images/down4bg.png" alt="">
       </div>
-      <div>
-        <img class="w-[16px] h-[16px]" src="@/static/images/address.png" alt="">
-
+      <div class="flex justify-center mt-[19px]">
+        <img class="w-[16px] h-[16px] mt-[2px]" src="@/static/images/address.png" alt="">
+        <span>Phoenix AZ</span>
       </div>
-    </div> -->
-    <!-- <div class="p-[25px] w-full">
-      <p class="text-[#002D72] text-[20px] text-base">
-       {{$t('index.str10')}}
-      </p>
-      <p class="text-[#4B5563] pt-[10px]">
-        {{$t('index.str11')}}
-      </p>
-      <img class="w-full mt-[15px]" src="@/static/images/index3bg.png" alt="" />
-    </div> -->
-    <!-- <div class="w-full px-[17px]">
-      <img class="w-full" src="@/static/images/a.png" alt=""></img>
-    </div> -->
-   <!-- <img class="w-full" src="@/static/images/b.png" alt=""></img> -->
-    
+      <div class="mt-[22px] text-[#666666] text-center">Powered by WebionAuze</div>
+      <div class="mt-[22px] text-[#666666] text-center pb-[58px]">All rights Reserved - <span>OSA 2023 </span></div>
+    </div>
 
     <!-- 行情结束 -->
     <Footer name="/"></Footer>
@@ -366,5 +367,20 @@ onMounted(() => {
 .we {
   background: url("../static/images/indexbg1.png") no-repeat center / 100% 100%;
   font-family: "Roboto, Bold";
+}
+.elementor-background-overlay {
+    background-color: transparent;
+    background-image: linear-gradient(215deg, #000000 15%, #252525 80%);
+    opacity: 0.84;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+}
+.elementor-wrapper video {
+    background-color: #000;
+    border: none;
+    display: flex;
+    height: 100%;
+    width: 90%;
+    margin: 20px auto;
+    
 }
 </style>

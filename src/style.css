@@ -125,7 +125,7 @@ input {
 }
 
 .van-nav-bar .van-icon,.van-nav-bar__title{
-  color: #000 !important;
+  color: #fff !important;
 }
 .van-ellipsis {
   overflow:unset !important;
@@ -200,3 +200,7 @@ input {
 .van-nav-bar__content {
   height: 80px !important;
 } */
+.van-nav-bar {
+  background: #000 !important;
+  color: #fff !important;
+}
