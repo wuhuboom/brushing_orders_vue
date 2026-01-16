@@ -7,10 +7,10 @@
         class="shadow"
         @click-left="onClickLeft"
     />
-    <div class="w-full mt-[65px] box-border flex flex-col font-montserrat text-[#333]">
-      <div v-html="latestEventEn"></div>
-        
-    </div>
+    <div class="mt-[45px] w-full text-center flex flex-col items-center justify-center text-[24px] text-[#2D1810] vipsBg font-bold" >
+        <p class="pb-[20px]">{{$t('vips.str1')}} </p>
+        <p>{{$t('vips.str2')}}</p>
+      </div>
   </div>
 </template>
 <script setup>
@@ -37,3 +37,10 @@ onMounted(() =>{
 
 const onClickLeft = () => history.back();
 </script>
+<style scoped>
+  .vipsBg {
+   background: url(../../static/images/vipBg.png) no-repeat center;
+  background-size: cover;
+  height: 130px;
+}
+</style>

@@ -9,8 +9,28 @@
         left-arrow
         @click-left="onClickLeft"
       />
-      <div class="mt-10" v-html="registerProtocolEn">
-
+      <div class="mt-[30px] text-[#333333] text-[14px] leading-[30px]">
+        <p class="mt-[13px]">{{$t('tc.title1')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title2')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title3')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title4')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title5')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title6')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title7')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title8')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title9')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title10')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title11')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title12')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title13')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title14')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title15')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title16')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title17')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title18')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title19')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title20')}}</p>
+        <p class="mt-[13px]">{{$t('tc.title21')}}</p>
       </div>
     </div>
   </div>

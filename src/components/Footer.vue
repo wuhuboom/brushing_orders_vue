@@ -1,7 +1,7 @@
 <template>
     <div class="w-full mx-auto relative z-50 bg-transparent" >
         <div class="h-[60px]"></div> <!-- 占位 -->
-        <div class="bar-shadow flex items-center justify-center fixed bottom-0 left-0 right-0 h-[60px] w-[100%] bg-[#fff] mx-auto mb-[7px]" style="bottom: -1px;">
+        <div class="bar-shadow flex items-center justify-center fixed bottom-0 left-0 right-0 h-[60px] w-[100%] bg-[#fff] mx-auto" style="bottom: -1px;">
             <div v-for="menu in menus" :key="menu.title"
                 class="flex-1 flex flex-col items-center text-xs gap-1 font-light"  @click="onClickMenu(menu)">
                 <!-- <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}_h.png`)"

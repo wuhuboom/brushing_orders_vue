@@ -335,10 +335,10 @@ const submitTradePassword = async () => {
 };
 
 function handleChangeLang() {
-  // langRef.value.open();
-  router.push({
-    path: "/language",
-  });
+  langRef.value.open();
+  // router.push({
+  //   path: "/language",
+  // });
 }
 
 const onClickLeft = () => {

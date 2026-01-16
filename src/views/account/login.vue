@@ -1,7 +1,7 @@
 <template>
   <div class="login-con flex flex-col w-full h-[100vh] bg-[#F7F7F7]">
     <div class="flex justify-end bg-[#000] text-[#fff] py-[12px] px-[16px]">
-      <div class="flex">
+      <div class="flex" @click="handleChangeLang">
         <img class="w-[20px] h-[20px]" src="@/static/images/lang-white.png" alt="">
         <div class="pl-[5px]">US(EN)</div>
       </div>
@@ -122,6 +122,9 @@ const tab = (index) =>{
   ruleForm.username = '';
   ruleForm.password = '';
 }
+function handleChangeLang() {
+  langRef.value.open();
+}
 
 
 onMounted(() => {
@@ -180,9 +183,6 @@ function submitForm(formEl) {
   });
 }
 
-function handleChangeLang() {
-  langRef.value.open();
-}
 
 const TradeInfor = ref({});
 const tradeConfig = async () => {
