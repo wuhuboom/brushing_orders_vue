@@ -248,8 +248,14 @@ const All = () => {
   ruleForm.amount = amount.value;
 };
 const getWithdrawal = () => {
-  if (!bankItem.value.id) {
-    router.push({ path: "/addCard" });
+  if (!bankItem.value?.id) {
+    router.push({
+    path: "/cardList",
+    query: {
+      type: 2,
+      fromType:route.query.type
+    },
+  });
     return false;
   }
   if (!ruleForm.amount) return showToast(t("请输入金额"));

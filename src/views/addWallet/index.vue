@@ -151,7 +151,12 @@ const submitForm = async () => {
     showToast(t("添加成功"));
   }
   
-  router.push({ path: "/cardList" });
+  router.push({ path: "/cardList",
+    query:{
+        type:route.query.type,
+        fromType:route.query.fromType
+      }
+   });
 };
 
 const onConfirm = ({ selectedValues, selectedOptions }) => {
@@ -164,7 +169,13 @@ const selectType = () => {
 };
 
 const onClickLeft = () => {
-  router.push({ path: "/cardList" });
+  router.push({ 
+    path: "/cardList",
+    query:{
+        type:route.query.type,
+        fromType:route.query.fromType
+      }
+  });
 };
 const getgetBankWallet = async () => {
   let res = await getBankWallet({ id: route.query.id });

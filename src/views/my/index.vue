@@ -51,7 +51,7 @@
       <div class='text-[#6B7280] flex justify-between items-center mt-[10px]'>
         <div>
           <div class='font-medium mb-[10px]'>{{$t('我的账户')}}</div>
-          <div class='text-[14px]'>USD <span class='font-medium'>{{ userInfo.balance }}</span></div>
+          <div class='text-[14px]'>USD <span class='font-medium'>{{ Number(userInfo?.balance || 0) + Number(userInfo?.frozenBalance || 0) }}</span></div>
         </div>
         <div class="flex mr-[20px]">
           <div @click="toPage('/deposit')">
