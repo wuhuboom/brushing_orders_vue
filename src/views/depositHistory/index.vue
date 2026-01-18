@@ -64,6 +64,7 @@
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { onMounted, reactive, ref } from "vue";
 import { useUserStore } from "@/store/modules/user";
+import ContactUs from "@/components/ContactUs.vue";
 import { getDeposit, userGetInfo,getTradeConfig } from "../../api/apis";
 import {formatWithTimezone,checkWorkTimeLocal} from "../../util/utils"
 import { useI18n } from "vue-i18n";

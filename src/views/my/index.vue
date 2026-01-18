@@ -217,6 +217,7 @@ import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { showConfirmDialog, showToast } from "vant";
 import { checkWorkTimeLocal } from "../../util/utils";
+import Footer from "@/components/Footer.vue";
 const langRef = ref(null);
 const { t } = useI18n();
 const ContactUsRef = ref(null);

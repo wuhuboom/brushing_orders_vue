@@ -1,5 +1,13 @@
 <template>
-  <router-view class="text-white font-normal dark:text-[#303133] text-sm w-full hide-scroll overflow-scroll" id="router-view" />
+  <router-view v-slot="{ Component }">
+  <keep-alive include="ListPage">
+    <component
+      :is="Component"
+      class="text-white font-normal dark:text-[#303133] text-sm w-full hide-scroll overflow-scroll"
+      id="router-view"
+    />
+  </keep-alive>
+</router-view>
 </template>
 
 <script setup>

@@ -181,8 +181,10 @@ import { useUserStore } from "@/store/modules/user";
 import { showSuccessToast, showToast } from "vant";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
+import { useRoute} from "vue-router";
 const showKeyboard = ref(false)
 const router = useRouter();
+const route = useRoute();
 const amount = ref("");
 const userStore = useUserStore();
 const userInfo = ref({});
@@ -221,9 +223,15 @@ function handleFocus() {
 
 
 const onClickLeft = ()=>{
-  router.replace({
-    path:"/my"
-  })
+  if(route.query.type ==1) {
+    router.replace({
+      path:"/"
+    })
+  } else {
+   router.replace({
+      path:"/my"
+    })
+  }
 };
 const ruleForm = reactive({
   amount: 0,
@@ -312,6 +320,7 @@ const toList = () => {
     path: "/cardList",
     query: {
       type: 2,
+      fromType:route.query.type
     },
   });
 };

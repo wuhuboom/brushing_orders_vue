@@ -69,7 +69,7 @@
   "请输入用户名": "Please enter your username",
   "请输入密码": "Please enter your password",
   "请输入确认密码": "Please confirm your password",
-  "两次密码不一致": "Passwords do not match",
+  "两次密码不一致": "Passwords do not match. Please confirm again.",
   "请输入正确电话号码": "Please enter a valid phone number",
   "请输入邀请码": "Please enter an invitation code",
   "注册成功": "Registration Successful",

@@ -167,7 +167,7 @@ import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import wheel from "@/components/wheel.vue";
-import { onMounted, ref, reactive, computed } from "vue";
+import { onMounted, ref, reactive, computed,onActivated,onDeactivated,onUnmounted,defineOptions } from "vue";
 import { checkWorkTimeLocal } from "../util/utils";
 import { showSuccessToast, showToast } from "vant";
 import { useI18n } from "vue-i18n";
@@ -189,6 +189,9 @@ const parLang = computed(() => {
   const mapped = commonStore.getValueByKey(commonStore.lang);
   return mapped ?? commonStore.lang;
 });
+defineOptions({
+  name: "ListPage"
+})
 const wheelRef = ref(null);
 const borderMap = {
   VIP1: "#FDE68A",
@@ -259,7 +262,7 @@ const items = [
   {
     name: "条款及细则", // 用于 $t('收入指南')
     icon: new URL("@/static/images/icon-2.png", import.meta.url).href,
-    route: "/clause",
+    route: "/tc",
   },
   {
     name: "证书",
@@ -282,18 +285,25 @@ function goTo(path) {
   console.log(path)
   if (path == "/notifications") {
     // tradePasswordRef.value.open(2);
-    router.push("/withdraw");
+    router.push({
+      path:'/withdraw',
+      query:{
+        type:1
+      }
+    });
+    sessionStorage.setItem("fromRoute", '/withdraw');
   } else if (path == "/profile") {
     // tradePasswordRef.value.open(3);
     router.push("/deposit");
-  } else if(path == '/customer'){
-    customer()
-  } else {
+    sessionStorage.setItem("fromRoute", '/deposit');
+  }  else {
     router.push(path);
+    sessionStorage.setItem("fromRoute", path);
   }
 }
 function toVips() {
   router.push("/vips");
+  sessionStorage.setItem("fromRoute", '/vips');
 }
 const levelList = ref([]);
 const level = async () => {
@@ -347,6 +357,15 @@ const lotteryConfig = async () => {
   }
 };
 
+const STORAGE_KEY = "ListPageScrollY"; // 本地缓存 key
+const scrollTop = ref(0)
+let container;
+
+function handleScroll() {
+  scrollTop.value = container.scrollTop;
+  console.log(scrollTop.value)
+}
+
 onMounted(() => {
   level();
   // getData();
@@ -354,6 +373,25 @@ onMounted(() => {
   // lotteryConfig()
   userStore.getUserInfo();
   //  wheelRef.value.open();
+});
+// 回到页面时恢复滚动位置
+onActivated (() => {
+  const fromRoute = sessionStorage.getItem("fromRoute");
+  console.log(fromRoute)
+  sessionStorage.removeItem("fromRoute"); // 用完删除
+  const scrollY = sessionStorage.getItem(STORAGE_KEY);
+  if (scrollY && fromRoute) {
+    container.scrollTo(0, +scrollY); // 容器滚动
+  }
+  container = document.getElementById("router-view");
+  if (container) container.addEventListener("scroll", handleScroll);
+});
+onUnmounted(() => {
+  if (container) container.removeEventListener("scroll", handleScroll);
+});
+onDeactivated(() => {
+  // 离开页面时记录滚动位置
+  sessionStorage.setItem(STORAGE_KEY, scrollTop.value);
 });
 </script>
 <style scoped>

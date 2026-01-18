@@ -250,6 +250,7 @@
 <script setup>
 import HeaderTop from "@/components/HeaderTop.vue";
 import { onMounted, ref, reactive } from "vue";
+import Footer from "@/components/Footer.vue";
 import { getOrderInfos, submitOrder } from "../../api/apis";
 import {
   showLoadingToast,

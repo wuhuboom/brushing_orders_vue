@@ -27,6 +27,7 @@
             type="text"
             autocomplete="off"
             size="large"
+            @input="onUsernameInput"
           >
           </el-input>
         </el-form-item>
@@ -57,6 +58,7 @@
             type="text"
             autocomplete="off"
             size="large"
+             @input="onPhoneInput"
           >
           </el-input>
         </el-form-item>
@@ -157,6 +159,13 @@ const ruleForm = reactive({
   sex: 1,
   inviteCode: "",
 });
+const onUsernameInput = (val) => {
+  // 移除所有中文
+  ruleForm.username = val.replace(/[\u4e00-\u9fa5]/g, '')
+}
+const onPhoneInput = (val) => {
+  ruleForm.phone = val.replace(/\D/g, '')
+}
 const rules = computed(() => {
   return {};
 });
