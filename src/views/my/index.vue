@@ -39,9 +39,9 @@
             </div>
           </div>
       </div>
-      <div class="text-[#fff] text-[14px]">
+      <!-- <div class="text-[#fff] text-[14px]">
           {{ $t("信用评分") }}:{{ userInfo.creditScore }}%
-      </div>
+      </div> -->
     </div>
     <div class="flex justify-between mt-[20px]">
       <div class="flex-1 bg-gradient-to-b from-[#FFF4E3] to-[#FFFFFF] p-[13px] rounded-[8px]">

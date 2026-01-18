@@ -46,6 +46,9 @@ export const userGetInfo = (params) =>
 export const getCustomerService = (params) =>
   getApi().get("/config/getCustomerService", { params, loading: false, showMsg: false });
 
+export const getCustomerServiceByLang = (params) =>
+  getApi().get("/config/getCustomerServiceByLang", { params, loading: false, showMsg: false });
+
 export const getGlobalConfig = (params) =>
   getApi().get("/config/getGlobalConfig", { params, loading: false, showMsg: false });
 export const getConfigByLang = (params) =>getApi().get("/config/getConfigByLang", {params,loading: false,showMsg: false});

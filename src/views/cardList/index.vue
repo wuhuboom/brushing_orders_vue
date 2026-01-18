@@ -147,7 +147,13 @@ const addBank = (type) => {
   if (type == 1) {
     router.push({ path: "/addCard" });
   } else {
-    router.push({ path: "/addWallet" });
+    router.push({ 
+      path: "/addWallet",
+      query:{
+        type:route.query.type,
+        fromType:route.query.fromType
+      }
+     });
   }
 };
 // const toWallet = (item) => {

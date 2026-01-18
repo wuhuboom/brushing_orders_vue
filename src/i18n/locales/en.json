@@ -122,7 +122,7 @@
   "姓名": "Name",
   "历史": "History",
 
-  "待审核": "Under Review",
+  "待审核": "Reviewing",
   "审核成功": "Approved",
   "审核拒绝": "Rejected",
 
@@ -329,6 +329,8 @@
   "升级会员": "Upgrade Membership",
   "任务总计": "Total Tasks",
   "任务完成": "Completed Tasks",
+  "Customer.str":"Online Customer Service",
+  "Customer.str1":"HOURS",
   "tc":{
     "title1":"Term & Condition",
     "title2":"1) To optimize and reset your account, you must first complete all ratings with a minimum amount of 50USD and a minimum account reset amount of 100USD.",

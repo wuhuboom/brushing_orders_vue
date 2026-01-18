@@ -255,21 +255,30 @@ const All = () => {
   ruleForm.amount = amount.value;
 };
 const getWithdrawal = () => {
-  if (!bankItem.value.id) {
-    router.push({ path: "/addCard" });
+  if (!bankItem.value?.id) {
+    router.push({
+    path: "/cardList",
+    query: {
+      type: 2,
+      fromType:route.query.type
+    },
+  });
     return false;
   }
   if (!ruleForm.amount) return showToast(t("请输入金额"));
-  if (
-    ruleForm.amount < TradeInfor.value.minWithdrawAmount ||
-    ruleForm.amount > TradeInfor.value.maxWithdrawAmount
-  )
+  const min = userInfo.value?.userLevel?.minWithdrawAmount
+  const max = userInfo.value?.userLevel?.maxWithdrawAmount
+  if (min == null || max == null) {
+    // 数据还没回来，直接跳出
+    return
+  }
+  if (ruleForm.amount < min || ruleForm.amount > max)
     return showToast(
       t("rechargeLimit", {
-        min: TradeInfor.value.minWithdrawAmount,
-        max: TradeInfor.value.maxWithdrawAmount,
+        min: userInfo.value.userLevel.minWithdrawAmount,
+        max: userInfo.value.userLevel.maxWithdrawAmount,
       })
-    );
+  );
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   // if (!userInfo.value.withdrawAddress) {
   //   router.push({ path: "/paymentMethods" });

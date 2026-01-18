@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-[100vh] bg-gradient-to-r from-[#002D72] to-[#0A4DA2]">
+  <div class="min-h-[100vh] bg-[#f7f7f7]">
     <div
       class="relative bg-[#fff] flex items-center justify-center h-[56px] px-[16px]"
     >
@@ -17,37 +17,47 @@
 
       <!-- <div class="absolute right-[16px] text-base text-[#fff]">History</div> -->
     </div>
-    <div class="px-[24px] pt-[24px]">
-      <div class="text-[20px] text-[#fff] pb-[8px] font-bold">
+    <div class="px-[16px] pt-[24px]">
+      <!-- <div class="text-[20px] text-[#fff] pb-[8px] font-bold">
         {{ $t("customer.str") }}
       </div>
       <div class="text-[14px text-[#fff]">
         {{ $t("customer.str1") }}
+      </div> -->
+      <div class="vipsBg">
+        <div class="flex pt-[50px] pb-[3px]">
+          <img class="w-[21px] h-[14px] mr-[6px]" src="@/static/images/24.png" alt="">
+          <span class="hours"> {{$t('Customer.str1')}}</span>
+        </div>
+        <div class="text-[10px] text-[#333333]">{{$t('Customer.str')}}</div>
+
       </div>
       <div
-        class="bg-gradient-to-b text-[#fff] from-[#3F3D9D] to-[#6763D3] rounded-[12px] p-[20px] mt-[24px]"
+        class="bg-[#fff] text-[#fff] rounded-[12px] p-[20px] mt-[24px] flex items-center justify-center"
         v-for="item in customerList"
         @click="jump(item.linkUrl)"
       >
         <img
-          class="w-[40px] h-[40px] mb-[6px]"
-          src="../../static/images/customer.png"
+          class="w-[40px] h-[40px] mr-[23px]"
+          :src="VITE_API_IMG_URL+item.iconUrl"
           alt=""
         />
-        <div class="text-[16px] font-bold mt-[2px]">
-          {{ item.name }}
+        <div>
+          <div class="text-[16px] text-[#333333] mt-[2px] mb-[5px]">
+            {{ item.name }}
+          </div>
+          <div class="text-[12px] text-[#999999]">
+            {{ $t("customer.str3") }}
+          </div>
         </div>
-        <div class="text-[12px]">
-          {{ $t("customer.str3") }}
-        </div>
-        <div class="flex items-center text-[14px] justify-end text-right">
+        <!-- <div class="flex items-center text-[14px] justify-end text-right">
           {{ $t("customer.str4") }}
           <van-icon
             name="arrow"
             color="#fff"
             size="16px"
           />
-        </div>
+        </div> -->
       </div>
       <!-- <div
         class="bg-gradient-to-b text-[#fff] from-[#1E8C5F] to-[#4DB380] rounded-[12px] p-[20px] mt-[24px]"
@@ -99,19 +109,24 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref,computed } from "vue";
 import { tr } from "element-plus/es/locales.mjs";
-import { getCustomerService,getEmailAddress,userGetInfo } from "@/api/apis";
+import { getCustomerService,getEmailAddress,userGetInfo,getCustomerServiceByLang } from "@/api/apis";
 const showCenter = ref(false);
 import { useUserStore } from '@/store/modules/user';
+// import { useCommonStore } from "@/store/modules/common";
 import md5 from "crypto-js/md5"; // 安装 crypto-js: npm install crypto-js
-import { copyContent } from "@/util/utils";
+const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 const userStore = useUserStore();
+const parLang = computed(() => {
+  const mapped = commonStore.getValueByKey(commonStore.lang);
+  return mapped ?? commonStore.lang;
+});
 const customerList = ref([]);
 // 更符合Vue3习惯的暴露方式
 const open = async () => {
   showCenter.value = true;
-  let res = await getCustomerService();
+  let res = await getCustomerServiceByLang( { lang: parLang.value });
   customerList.value = res.data;
   console.log(customerList.value);
 };
@@ -163,3 +178,21 @@ defineExpose({
   close, // 新增关闭方法
 });
 </script>
+<style scoped>
+  .vipsBg {
+   background: url(../../static/images/customerBg.png) no-repeat center;
+  background-size: cover;
+  height: 130px;
+  padding-left: 39px;
+}
+.hours {
+  font-family: Gilroy, Gilroy;
+  font-weight: 800;
+  font-size: 20px;
+  color: #000000;
+  line-height: 14px;
+  text-align: center;
+  font-style: normal;
+  text-transform: none;
+}
+</style>
