@@ -13,7 +13,7 @@
         <div class="w-full flex flex-col items-center justify-center mt-20">
           <van-uploader  v-model="fileList" :after-read="afterRead" reupload max-count="1" />
           <div class="text-[#666] text-sm mt-2 flex items-center">
-            <div class="mr-1 text-[#1677FF]">{{$t('点击更改')}}</div>
+            <div class="mr-1 text-[#FF9500]">{{$t('点击更改')}}</div>
             
             <van-icon name="edit" />
              <!-- <img src="@/static/images/edit.png" class="w-[16px] h-[16px]" alt=""> -->
@@ -24,7 +24,7 @@
                 <van-button color="#ff497c" size="large" class="w-full" @click="updateAvatarMethods">{{$t('更新')}}</van-button>
             </div> -->
             <div class="fixed bottom-4 left-1/2 -translate-x-1/2 w-[90%]">
-            <van-button  class="w-full" style="background: linear-gradient(135deg, #002D72, #0A4DA2);color: #fff;" @click="updateAvatarMethods">
+            <van-button  class="w-full" style="background: #FF9500;color: #fff;" @click="updateAvatarMethods">
               {{ $t("更新") }}
             </van-button>
           </div>
