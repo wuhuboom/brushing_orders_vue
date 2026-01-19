@@ -245,6 +245,8 @@
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
+import Lang from "@/components/Lang.vue";
+import Footer from "@/components/Footer.vue";
 import {
   userGetInfo,
   checkTradePassword,

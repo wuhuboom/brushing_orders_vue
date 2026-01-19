@@ -261,7 +261,12 @@ function goTo(path) {
   console.log(path)
   if (path == "/notifications") {
     // tradePasswordRef.value.open(2);
-    router.push("/withdraw");
+    router.push({
+      path:'/withdraw',
+      query:{
+        type:1
+      }
+    });
   } else if (path == "/profile") {
     // tradePasswordRef.value.open(3);
     router.push("/deposit");

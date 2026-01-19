@@ -174,8 +174,10 @@ import { useUserStore } from "@/store/modules/user";
 import { showSuccessToast, showToast } from "vant";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 const showKeyboard = ref(false)
 const router = useRouter();
+const route = useRoute();
 const amount = ref("");
 const userStore = useUserStore();
 const userInfo = ref({});
@@ -214,9 +216,15 @@ function handleFocus() {
 
 
 const onClickLeft = ()=>{
-  router.replace({
-    path:"/my"
-  })
+  if(route.query.type ==1) {
+    router.replace({
+      path:"/"
+    })
+  } else {
+   router.replace({
+      path:"/my"
+    })
+  }
 };
 const ruleForm = reactive({
   amount: 0,
@@ -240,21 +248,30 @@ const All = () => {
   ruleForm.amount = amount.value;
 };
 const getWithdrawal = () => {
-  if (!bankItem.value.id) {
-    router.push({ path: "/addCard" });
+  if (!bankItem.value?.id) {
+    router.push({
+      path: "/cardList",
+      query: {
+        type: 2,
+        fromType:route.query.type
+      },
+    });
     return false;
   }
   if (!ruleForm.amount) return showToast(t("请输入金额"));
-  if (
-    ruleForm.amount < TradeInfor.value.minWithdrawAmount ||
-    ruleForm.amount > TradeInfor.value.maxWithdrawAmount
-  )
+  const min = userInfo.value?.userLevel?.minWithdrawAmount
+  const max = userInfo.value?.userLevel?.maxWithdrawAmount
+  if (min == null || max == null) {
+    // 数据还没回来，直接跳出
+    return
+  }
+  if (ruleForm.amount < min || ruleForm.amount > max)
     return showToast(
       t("rechargeLimit", {
-        min: TradeInfor.value.minWithdrawAmount,
-        max: TradeInfor.value.maxWithdrawAmount,
+        min: userInfo.value.userLevel.minWithdrawAmount,
+        max: userInfo.value.userLevel.maxWithdrawAmount,
       })
-    );
+  );
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   // if (!userInfo.value.withdrawAddress) {
   //   router.push({ path: "/paymentMethods" });
@@ -305,6 +322,7 @@ const toList = () => {
     path: "/cardList",
     query: {
       type: 2,
+      fromType:route.query.type
     },
   });
 };

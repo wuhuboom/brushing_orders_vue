@@ -207,6 +207,7 @@ const { t } = useI18n();
 const active = ref(0);
 const list = ref([]);
 const show = ref(false);
+const isRefreshing = ref(false);
 const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
@@ -217,15 +218,20 @@ const query = reactive({
   status: "",
 });
 const onRefresh = async () => {
+  isRefreshing.value = true;
   refreshing.value = true;
   finished.value = false;
   query.pageNum = 1;
   list.value = [];
   await loadData();
   refreshing.value = false;
+  isRefreshing.value = false;
 };
 const onLoad = async () => {
-  if (finished.value || loading.value) return;
+  if (finished.value || isRefreshing.value) {
+    loading.value = false;   // 👈 关键
+    return;
+  }
   loading.value = true;
   await loadData();
   loading.value = false;
