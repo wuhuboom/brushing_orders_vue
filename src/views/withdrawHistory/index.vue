@@ -26,7 +26,7 @@
         </div>
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
-          :class="orderActive == 0 ? 'bg-[#EC6F01] text-[#fff]' : ''"
+          :class="{ active: orderActive === 0 }"
           @click="changeOrder(0)"
         >
           {{ $t("待审核") }}
@@ -221,6 +221,10 @@ onMounted(() => {
 }
 </style>
 <style scoped>
+  .active {
+  background-color: #EC6F01;
+  color: #fff;
+}
 .router {
   border-top-right-radius: 8px; /* 右上角圆角 */
   border-bottom-right-radius: 8px; /* 右下角圆角 */

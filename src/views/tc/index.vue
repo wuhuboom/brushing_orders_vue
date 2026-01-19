@@ -39,9 +39,13 @@
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import {getConfigByLang} from "../../api/apis"
 import { useCommonStore } from '@/store/modules/common';
-const onClickLeft = () => history.back();
+import { useRouter,useRoute } from "vue-router";
+// const onClickLeft = () => history.back();
+
 const registerProtocolEn = ref('');
 const commonStore = useCommonStore();
+const router = useRouter();
+const route = useRoute();
 const parLang = computed(() => {
   const mapped = commonStore.getValueByKey(commonStore.lang);
   return mapped ?? commonStore.lang; 
@@ -50,6 +54,20 @@ const getGetGlobalConfig = async() =>{
     let res = await getConfigByLang({ lang: parLang.value });
     registerProtocolEn.value = res?.data?.registerProtocol ?? '';
     console.log("res",res)
+}
+
+const onClickLeft = () =>{
+  console.log(route.query.type)
+  if(route.query.type == 2){
+    router.replace({
+      path: "/account/login",
+      query:{
+        type:2
+      }
+    });
+  } else {
+    history.back();
+  }
 }
 onMounted(() =>{
     getGetGlobalConfig();

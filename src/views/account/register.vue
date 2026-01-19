@@ -126,7 +126,7 @@
 </template>
 <script setup>
 import Lang from "@/components/Lang.vue";
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
+import { computed, onMounted, onUnmounted, reactive, ref,defineProps } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import Tabs from "@/components/Tabs.vue";
@@ -140,6 +140,8 @@ import {
   showSuccessToast,
   showToast,
 } from "vant";
+
+
 
 onUnmounted(() => {
   document.getElementById("app").style.background = "transparent";
@@ -169,9 +171,6 @@ const onPhoneInput = (val) => {
 const rules = computed(() => {
   return {};
 });
-function toLogin() {
-  router.replace("/account/login");
-}
 
 function sendCode() {
   if (!ruleForm.username) return showToast(t("请输入用户名"));
@@ -191,9 +190,10 @@ function sendCode() {
   if (!checked.value) return showToast(t("请勾选用户协议"));
   register(ruleForm).then((res) => {
     showToast(t("注册成功"));
-    router.push({
-      path: "/account/login",
-    });
+    // router.push({
+    //   path: "/account/login",
+    // });
+    emit('update:modelValue', 1);
   });
 }
 
@@ -203,14 +203,23 @@ function getHashParam(key) {
   const params = new URLSearchParams(queryString);
   return params.get(key);
 }
-function handleChangeLang() {
-  langRef.value.open();
-}
 const jump = () => {
   router.push({
     path: "/tc",
+    query:{
+      type:2
+    }
   });
 };
+
+const props = defineProps({
+  modelValue: Number
+});
+const emit = defineEmits(['update:modelValue']);
+
+// const change = () => {
+//   emit('update:modelValue', 2);
+// };
 onMounted(() => {
   document.getElementById("app").style.background = "#fff";
   const code = getHashParam("code");

@@ -189,6 +189,7 @@ const parLang = computed(() => {
   const mapped = commonStore.getValueByKey(commonStore.lang);
   return mapped ?? commonStore.lang;
 });
+console.log(parLang.value)
 defineOptions({
   name: "ListPage"
 })

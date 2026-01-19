@@ -3,7 +3,7 @@
     <div class="flex justify-end bg-[#000] text-[#fff] py-[12px] px-[16px]">
       <div class="flex" @click="handleChangeLang">
         <img class="w-[20px] h-[20px]" src="@/static/images/lang-white.png" alt="">
-        <div class="pl-[5px]">US(EN)</div>
+        <div class="pl-[5px]">{{locale.toUpperCase()}}({{locale.toUpperCase()}})</div>
       </div>
     </div>
     <img
@@ -91,7 +91,7 @@
       </div>
     </div>
     <div v-else>
-      <register></register>
+      <register v-model="type" ></register>
     </div>
     <Lang ref="langRef"></Lang>
     <ContactUs ref="ContactUsRef"></ContactUs>
@@ -103,13 +103,14 @@ import Tabs from "@/components/Tabs.vue";
 import { useUserStore } from "@/store/modules/user";
 import ContactUs from "@/components/ContactUs.vue";
 import register from "./register.vue";
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import {
   showToast,
 } from "vant";
 import { useCommonStore } from "@/store/modules/common";
-import { useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
+import { useRouter,useRoute } from "vue-router";
 import { setUserRemind } from "../../common/remind";
 import { login, getTradeConfig } from "../../api/apis";
 import { areas } from "@/config/area";
@@ -136,6 +137,7 @@ onUnmounted(() => {
 });
 
 const router = useRouter();
+const route = useRoute();
 const { t } = useI18n();
 const ruleFormRef = ref(null);
 const userStore = useUserStore();
@@ -156,7 +158,8 @@ function toForget() {
 }
 
 function toRegister() {
-  router.push({ path: "/account/register" });
+  // router.push({ path: "/account/register" });
+  type.value = 2
 }
 
 function submitForm(formEl) {
@@ -203,6 +206,9 @@ const customer = () => {
   }
 };
 onMounted(() => {
+  if(route.query.type ==2) {
+    type.value = 2
+  }
   tradeConfig();
 });
 </script>

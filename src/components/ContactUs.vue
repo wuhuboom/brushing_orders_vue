@@ -24,15 +24,21 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref,computed } from "vue";
 import { tr } from "element-plus/es/locales.mjs";
-import { getCustomerService } from '../api/apis';
+import { getCustomerService,getCustomerServiceByLang } from '../api/apis';
+import { useCommonStore } from "@/store/modules/common";
+const commonStore = useCommonStore();
 const showCenter = ref(false);
 const customerList = ref([])
+const parLang = computed(() => {
+  const mapped = commonStore.getValueByKey(commonStore.lang);
+  return mapped ?? commonStore.lang;
+});
 // 更符合Vue3习惯的暴露方式
 const open = async() =>{
   showCenter.value = true
-  let res = await getCustomerService();
+  let res = await getCustomerServiceByLang({ lang: parLang.value });
   customerList.value = res.data
   console.log(customerList.value)
 }

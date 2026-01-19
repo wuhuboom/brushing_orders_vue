@@ -208,6 +208,7 @@
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
+import Lang from "@/components/Lang.vue";
 import {
   userGetInfo,
   checkTradePassword,
