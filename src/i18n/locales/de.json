@@ -196,5 +196,6 @@
   "用户存在连单，返回新的订单信息": "Der Benutzer hat eine laufende Bestellung, neue Bestellinformationen werden zurückgegeben",
   "用户余额不足（联系管理员，常用于冻结金额不足）": "Unzureichendes Benutzer-Guthaben (bitte Administrator kontaktieren, häufig bei unzureichendem eingefrorenem Betrag)",
   "我的": "Meine",
-  "commissionInfo":"Provisionssatz. {rate} Bestellungen pro Tag. {tasks} Aufgaben"
+  "commissionInfo":"Provisionssatz. {rate} Bestellungen pro Tag. {tasks} Aufgaben",
+  "请联系客服开启任务": "Bitte kontaktieren Sie den Kundenservice, um die Aufgabe zu aktivieren"
 }
