@@ -19,7 +19,7 @@
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
           style="border: 1px solid #E8E8E8;"
-          :class="orderActive == -1 ? 'bg-[#EC6F01] text-[#fff]' : ''"
+          :class="{ active: orderActive === -1 }"
           @click="changeOrder(-1)"
         >
           {{ $t("全部") }}
@@ -33,14 +33,14 @@
         </div>
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
-          :class="orderActive == 1 ? 'bg-[#EC6F01] text-[#fff]' : ''"
+          :class="{ active: orderActive === 1 }"
           @click="changeOrder(1)"
         >
           {{ $t("审核成功") }}
         </div>
         <div
           class="bg-[#F3F4F6] px-[16px] py-[6px] rounded-[15px] mr-[10px]"
-          :class="orderActive == 2 ? 'bg-[#EC6F01] text-[#fff]' : ''"
+          :class="{ active: orderActive === 2 }"
           @click="changeOrder(2)"
         >
           {{ $t("审核拒绝") }}
