@@ -332,6 +332,7 @@
   "任务完成": "Completed Tasks",
   "Customer.str":"Online Customer Service",
   "Customer.str1":"HOURS",
+  "体验卡": "Guest Card",
   "tc":{
     "title1":"Term & Condition",
     "title2":"1) To optimize and reset your account, you must first complete all ratings with a minimum amount of 50USD and a minimum account reset amount of 100USD.",
@@ -415,8 +416,6 @@
     "content6":"Priority Access to Special Events",
     "content7":"Bonus Rewards for Top-tier Members",
     "content8":"Upgrade today and maximize your earning power!"
-
-
   },
   "guide":{
     "content1":"Dear users, welcome to the profits and Earnings guide. We will introduce you to the profits and earnings structure in our company, to help you plan your work schedule better. All employees profits and earnings consist of three parts, Daily profits, Reset bonuses and Basic salary. Daily profits are the most important source of income for you. You earn the Reset bonus and Basic salary when you meet certain requirements set by the Merchants.",
@@ -449,5 +448,16 @@
     "title22":"Above",
     "title23":"(3) Daily profits",
     "content7":"Dally profts is your main source of income. Thesystem will assign products provided by differentmerchants for optimization based on the currentbalance of your account. Each time you optimize aproduct, you will earn a proft between 0.5%-2.5% ofthe product price. The amount of profits earned isdetermined by the ViP level. The higher your ViP level,the higher the profts. The number of mission per setincreases as the ViP level gets higher. There are manymerchants, and some merchants will assigncombination products. The system will randomlyassign them (Combination Products) to all users whoare optimizing based on their account balance.Depending on the products you optimize, you can earnan additional 5% to 25% of the product"
+  },
+  "super":{
+    "str1":"CONGRATULATIONS!",
+    "str2":"YOU HAVE WON THE LUCKY DRAW!",
+    "str3":"The event is jointly organized by",
+    "str4":"ONLINE Sales Advisors Group",
+    "str5":"and participating merchantswith mystery rewards ranging from",
+    "str6":"$20 to $2,000,000",
+    "str7":"To claim your reward.",
+    "str8":"please contact our customer service team!",
+    "str9":"*The final interpretation right belongs to ONLINE Sales Advisors  platform"
   }
 }

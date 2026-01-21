@@ -431,17 +431,30 @@
       <van-popup
         v-model:show="showImg"
         round
-        :style="{ width: '80%', background: 'transparent' }"
+        :style="{ width: '100%', background: 'transparent' }"
       >
-        <img
+        <!-- <img
           @click="closeImg"
           class="w-[100%] mb-5"
           src="../../static/images/super.png"
           alt=""
-        />
-        <van-button color="rgb(10, 77, 162)" round class="w-full" @click="closeImg"
+        /> -->
+        <div class="superBg flex flex-col items-center justify-center">
+          <img class="w-[145px] h-[38px] mx-auto" src="@/static/images/logo3.png" alt="">
+          <img class="w-[260px] mx-auto" src="@/static/images/super1.png" alt="">
+          <div class="superStr">{{$t('super.str1')}}</div>
+          <div class="superStr1 py-[5px]">{{$t('super.str2')}}</div>
+          <div class="superStr2 text-[#333333] text-center w-[80%] "> {{$t('super.str3')}}<span class="text-[#FF8C00] font-bold">{{$t('super.str4')}}</span> {{$t('super.str5')}}<span class="text-[#FF8C00]">{{$t('super.str6')}}</span></div>
+          <div class="text-[12px] text-[#fff] superBtn my-[15px] py-[3px]">
+            <div>{{$t('super.str7')}}</div>
+            <div>{{$t('super.str8')}}</div>
+          </div>
+          <div class="text-[#666] text-[10px] text-center">{{$t('super.str9')}}</div>
+ 
+        </div>
+        <!-- <van-button color="rgb(10, 77, 162)" round class="w-full" @click="closeImg"
           >OK</van-button
-        >
+        > -->
         <!-- <img
         @click="closeImg"
         class="w-[30px] h-[30px] m-auto"
@@ -487,7 +500,7 @@ const avatarUrl = ref("");
 let timer = null;
 const goodsList = ref([]);
 const showCenter = ref(false);
-const showImg = ref(false);
+const showImg = ref(true);
 const goods = ref({});
 const totalCount = ref(0); // 插入一个“开始按钮”
 const getList = async () => {
@@ -642,5 +655,38 @@ onMounted(() => {
   background-image: url(@/static/images/startBg.gif);
   background-size: 100% 100%;
   /* margin: 0 20px 0 20px; */
+}
+.superBg {
+  width: 100%;
+  height: 496px;
+  background-image: url(@/static/images/super.png);
+  background-size: 100% 100%;
+}
+.superStr {
+  font-family: Alimama ShuHeiTi, Alimama ShuHeiTi;
+  font-weight: bold;
+  font-size: 30px;
+  color: #FF7D01;
+  line-height: 36px;
+  text-align: center;
+  font-style: normal;
+  text-transform: none;
+}
+.superStr1 {
+  font-family: SourceHanSansSC-Bold, SourceHanSansSC-Bold;
+  font-weight: normal;
+  font-size: 18px;
+  color: #FF5500;
+  line-height: 28px;
+  text-align: center;
+  font-style: normal;
+  text-transform: none;
+}
+.superBtn {
+  background: linear-gradient( 90deg, #FF8C00 0%, #FF6B00 100%);
+  box-shadow: 0px 4px 16px 1px rgba(255,140,0,0.3);
+  border-radius: 8px 8px 8px 8px;
+  text-align: center;
+  width: 85%;
 }
 </style>
