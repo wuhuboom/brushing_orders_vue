@@ -122,6 +122,7 @@ const tab = (index) =>{
   type.value = index;
   ruleForm.username = '';
   ruleForm.password = '';
+  localStorage.removeItem("register")
 }
 function handleChangeLang() {
   langRef.value.open();
@@ -159,7 +160,8 @@ function toForget() {
 
 function toRegister() {
   // router.push({ path: "/account/register" });
-  type.value = 2
+  type.value = 2;
+  localStorage.removeItem("register")
 }
 
 function submitForm(formEl) {

@@ -210,6 +210,7 @@ const jump = () => {
       type:2
     }
   });
+  localStorage.setItem("register", JSON.stringify(ruleForm));
 };
 
 const props = defineProps({
@@ -222,8 +223,14 @@ const emit = defineEmits(['update:modelValue']);
 // };
 onMounted(() => {
   document.getElementById("app").style.background = "#fff";
-  const code = getHashParam("code");
-  ruleForm.inviteCode = code;
+  // const code = getHashParam("code");
+  // ruleForm.inviteCode = code;
+  
+  const cache = localStorage.getItem("register")
+  if (cache) {
+    Object.assign(ruleForm, JSON.parse(cache))
+  }
+  console.log(JSON.parse(localStorage.getItem("register")))
 });
 </script>
 
