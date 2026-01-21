@@ -180,7 +180,7 @@ function sendCode() {
   if (!agentPassword.value) return showToast(t("请输入确认密码"));
   if (agentPassword.value != ruleForm.password)
     return showToast(t("两次密码不一致"));
-  if (!/^[0-9]*$/.test(ruleForm.phone))
+  if (!ruleForm.phone || !/^[0-9]+$/.test(ruleForm.phone))
     return showToast(t("请输入正确电话号码"));
   if (!/^\d{6}$/.test(ruleForm.tradePassword)) {
   console.log(ruleForm.tradePassword)

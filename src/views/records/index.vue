@@ -4,7 +4,7 @@
     <div class="py-[20px] bg-[#000] mb-[20px]">
       <img class="w-[124px] pl-[16px]" src="@/static/images/logo1.png" alt="" />
     </div>
-    <div class="flex justify-start ml-[16px]">
+    <div class="flex justify-start ml-[16px] pb-[12px]">
       <div
         class="text-[14px] px-[16px] py-[6px] rounded-[30px] mr-[12px]"
         :class="active == -1 ? 'nav-active' : 'nav'"

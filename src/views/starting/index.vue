@@ -500,7 +500,7 @@ const avatarUrl = ref("");
 let timer = null;
 const goodsList = ref([]);
 const showCenter = ref(false);
-const showImg = ref(true);
+const showImg = ref(false);
 const goods = ref({});
 const totalCount = ref(0); // 插入一个“开始按钮”
 const getList = async () => {
