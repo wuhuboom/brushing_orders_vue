@@ -211,6 +211,8 @@ const jump = () => {
     }
   });
   localStorage.setItem("register", JSON.stringify(ruleForm));
+  localStorage.setItem("agentPassword", agentPassword.value);
+  
 };
 
 const props = defineProps({
@@ -230,6 +232,7 @@ onMounted(() => {
   if (cache) {
     Object.assign(ruleForm, JSON.parse(cache))
   }
+  agentPassword.value = localStorage.getItem("agentPassword")
   console.log(JSON.parse(localStorage.getItem("register")))
 });
 </script>
