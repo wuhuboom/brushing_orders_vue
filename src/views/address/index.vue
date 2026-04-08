@@ -1,82 +1,188 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f8f8f8] px-[20px]">
-    <div class="container w-full mb-[100px] bg-white">
-      <van-nav-bar
-        :title="$t('定金')"
-        fixed
-        left-arrow
-        class="shadow"
-        @click-left="onClickLeft"
-      />
-    </div>
-    <div class="flex flex-col items-center mt-[80px]">
-        <!-- <div class="text-[#000] text-[24px] font-bold">{{100}}</div> -->
-        <div class="text-[14px] font-bold mt-[10px] my-[10px]">{{$t('网络')}} - TRON(TRC-20)</div>
-        <div class="bg-[#ffeeee] text-[red] rounded-[5px] py-[10px] px-[5px]">
-            ⚠️{{$t('你有一个尚未付款的订单')}}
+    <div class="min-h-[100vh] bg-[#f6f6f6]">
+        <div
+            class="relative flex items-center justify-center h-[56px] bg-white px-[16px]"
+        >
+            <div class="absolute left-[16px]">
+                <van-icon
+                    name="arrow-left"
+                    color="#222"
+                    size="22px"
+                    @click="onClickLeft"
+                />
+            </div>
+            <div class="text-[18px] font-medium text-[#111]">
+                {{ $t("定金") }}
+            </div>
         </div>
-        <div class="text-[14px] text-[#ff6600] mb-[15px] mt-[10px]">{{$t('一次性地址')}}:</div>
-           <img
-            :src="url+AddressInfor.qrCode"
-            width="200"
-            height="200"
-        />
-    </div>
-    <div class="mt-[20px]">
-        <div class="flex justify-between">
-            <div class="text-[#333] text-[16px] text-center flex-1">{{AddressInfor.url}}</div>
-            <div class="text-center w-[30px]" @click="copyContent(AddressInfor.url)">⧉</div>
-        </div>
-        <!-- <div class="bg-[#f6f6f6] h-[52px] flex items-center justify-center pl-[5px] text-[20px] mt-[15px]">
-            {{$t('等待支付...')}}
-        </div> -->
-    </div>
-    <!-- <div class="text-[14px] text-[#000]">
-        <div class="text-[#000] text-[16px] font-bold pb-[10px]">{{$t('提示')}}:</div>
-        <div class="pb-[10px]">1.{{$t('充值地址为')}}<span class="text-[#ff0000] font-bold">{{$t('一次性地址')}}</span>，{{$t('请勿重复填写或转移')}}。</div>
-        <div class="pb-[10px]">2.{{$t('最低充值金额以实际转账金额为准，不低于')}} <span class="text-[#ff0000] font-bold">10 USDT</span>。</div>
-        <div class="pb-[10px]">3.{{$t('充值成功后，大约需要')}}<span class="text-[#ff0000] font-bold">{{$t('1到2分钟')}}</span> {{$t('才能确认付款，请耐心等待')}}。</div>
-    </div> -->
-  </div>
-</template>
-<script setup>
-import { computed, onMounted, onUnmounted, reactive, ref,watchEffect } from "vue";
-import {getRechargeAddress} from "../../api/apis"
-// import VueQrcode from "@chenfengyuan/vue-qrcode"; // 新增导入
-import QRCode from 'qrcode'
-import { useRoute } from "vue-router";
-import { useCommonStore } from '@/store/modules/common';
-import { copyContent } from "../../util/utils";
-const route = useRoute();
-const commonStore = useCommonStore();
-const url = window.g.VITE_API_IMG_URL;
-const qrImg = ref('')
-onMounted(() =>{
-    getFullDomain()
-    getGetRechargeAddress()
-})
-const address = ref('')
-const getFullDomain = () =>{
-  console.log(route.query.code)
-  const fullDomain = window.location.origin +'/#/account/register?code='+route.query.code;
-  address.value = fullDomain
-  console.log(address.value)
-}
-const AddressInfor = ref({})
-const getGetRechargeAddress = async () =>{
-    let res = await getRechargeAddress()
-    AddressInfor.value = res.data[0]
-}
-watchEffect(async () => {
-  if (!address.value) return
 
-  qrImg.value = await QRCode.toDataURL(address.value, {
-    width: 124,
-    margin: 0,
-    errorCorrectionLevel: 'H',
-  })
-  console.log(qrImg.value )
-})
+        <div class="px-[18px] pt-[18px] pb-[28px]">
+            <div class="text-center text-[16px] text-[#444] mb-[16px]">
+                {{ $t("网络") }} - {{ orderInfo.network || "TRON(TRC-20)" }}
+            </div>
+
+            <div
+                class="flex items-center rounded-[12px] bg-[#fff3e8] text-[#ff6a21] px-[14px] py-[12px] text-[14px]"
+            >
+                <img
+                    src="@/static/images/address-warning.png"
+                    alt=""
+                    class="mr-[8px] h-[18px] w-[18px] shrink-0"
+                />
+                <span>{{ $t("你有一个尚未付款的订单") }}</span>
+            </div>
+
+            <div
+                class="mt-[14px] rounded-[20px] bg-white px-[20px] py-[24px] shadow-sm"
+            >
+                <div class="text-center text-[18px] text-[#333]">
+                    {{ $t("充值金额") }}
+                </div>
+                <div class="flex items-end justify-center mt-[10px]">
+                    <div
+                        class="text-[26px] font-medium text-[#ff6a21] leading-none"
+                    >
+                        {{ formatAmount(orderInfo.amout) }}
+                    </div>
+                    <div class="text-[14px] text-[#666] ml-[6px] mb-[2px]">
+                        {{ orderInfo.payMethod || "USDT" }}
+                    </div>
+                </div>
+
+                <div class="mt-[18px] flex justify-center">
+                    <div class="qr-panel">
+                        <img
+                            v-if="qrImg"
+                            :src="qrImg"
+                            alt="deposit qrcode"
+                            class="w-[180px] h-[180px] rounded-[12px] bg-white"
+                        />
+                        <div
+                            class="mt-[14px] text-center text-[16px] text-white"
+                        >
+                            {{ $t("等待支付...") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-[20px] text-[15px] text-[#555]">
+                {{ $t("一次性地址") }}:
+            </div>
+            <div
+                class="mt-[10px] flex items-center rounded-[14px] bg-white px-[16px] py-[14px] shadow-sm"
+            >
+                <div
+                    class="flex-1 break-all text-[15px] text-[#222] leading-[22px]"
+                >
+                    {{ orderInfo.address || "-" }}
+                </div>
+                <img
+                    src="@/static/images/address-copy.png"
+                    alt=""
+                    class="ml-[12px] h-[40px] w-[40px] shrink-0"
+                    @click="copyAddress"
+                />
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { onMounted, ref, watch } from "vue";
+import { showToast } from "vant";
+import { useI18n } from "vue-i18n";
+import QRCode from "qrcode";
+import { copyContent } from "../../util/utils";
+
+const { t } = useI18n();
+
+const qrImg = ref("");
+const orderInfo = ref({
+    amount: "",
+    payMethod: "USDT",
+    address: "",
+    network: "TRON(TRC-20)",
+});
+
+const readStoredOrder = () => {
+    const raw = sessionStorage.getItem("depositOrderInfo");
+    if (!raw) {
+        return;
+    }
+
+    try {
+        const parsed = JSON.parse(raw);
+        orderInfo.value = {
+            ...orderInfo.value,
+            ...parsed,
+        };
+    } catch (error) {
+        console.error("Failed to parse deposit order info", error);
+    }
+};
+
+const generateQrCode = async () => {
+    if (!orderInfo.value.address) {
+        qrImg.value = "";
+        return;
+    }
+
+    qrImg.value = await QRCode.toDataURL(orderInfo.value.address, {
+        width: 180,
+        margin: 1,
+        errorCorrectionLevel: "H",
+    });
+};
+
+const formatAmount = (value) => {
+    if (value === undefined || value === null || value === "") {
+        return "0.00";
+    }
+
+    const amount = Number(value);
+    if (Number.isNaN(amount)) {
+        return value;
+    }
+
+    return amount.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    });
+};
+
+const copyAddress = () => {
+    if (!orderInfo.value.address) {
+        showToast(t("网络错误"));
+        return;
+    }
+
+    copyContent(orderInfo.value.address);
+};
 
 const onClickLeft = () => history.back();
+
+watch(
+    () => orderInfo.value.address,
+    () => {
+        generateQrCode();
+    },
+    { immediate: true },
+);
+
+onMounted(() => {
+    readStoredOrder();
+});
 </script>
+
+<style scoped>
+.qr-panel {
+    width: 212px;
+    padding: 16px 16px 18px;
+    border-radius: 20px;
+    background: #050505;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+</style>

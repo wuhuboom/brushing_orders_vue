@@ -1,264 +1,216 @@
 <template>
-  <div class="w-full bg-[#f1f1f1] min-h-[100vh] h-full">
-    <!-- <van-sticky type="primary">
-      <van-nav-bar
-        :title="$t('定金')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
-      />
-    </van-sticky> -->
-    <div
-      class="relative bg-gradient-to-r from-[#a04149]  to-[#6a4d52] flex items-center justify-center h-[56px] px-[16px]"
-    >
-      <div class="absolute left-[16px]">
-        <van-icon
-          name="arrow-left"
-          color="#fff"
-          size="22px"
-          @click="onClickLeft"
-        />
-      </div>
-      <div class="text-base text-[#FFFFFF] font-medium">{{ $t("定金") }}</div>
-      <div class="absolute right-[16px] text-base text-[#fff]" @click="toHistory">{{$t('Withdrawal.History')}}</div>
-    </div>
-    <div
-      class="flex flex-col justify-between p-4 box-border mt-[-2px] bg-gradient-to-r from-[#a04149]  to-[#6a4d52]"
-    >
-      <div class="w-full flex justify-end mb-[10px]" @click="refresh">
-        <img
-          class="w-[24px] h-[24px]"
-          src="../../static/images/shuaxin.png"
-          alt=""
-        />
-      </div>
-      <div class="text-white text-center text-sm">
-        {{ $t("账户金额") }}
-      </div>
-      <div class="flex mt-[8px] mb-[12px] justify-center">
-        <div class="text-white text-3xl flex items-center">
-          {{ userInfo.balance }}
-        </div>
-        <div class="text-white text-sm flex items-center ml-2 pt-[12px]">
-          {{ $t("美元") }}
-        </div>
-      </div>
-    </div>
-    <div class="w-full pl-5 pr-5 mt-[20px]">
-        <!-- <van-button
-          color="#002D72"
-          style="
-            background: linear-gradient(135deg, #002D72, #0a4da2);
-            color: #fff;
-          "
-          @click="getWithdrawal"
-          class="w-full"
-          >{{ $t("提取") }}</van-button
-        > -->
-
-        <van-button color="" style="
-            background: linear-gradient(135deg, #a04149, #6a4d52);
-            color: #fff;
-          "   class="w-full" @click="customer">{{
-          $t("联系客服")
-        }}</van-button>
-
-
-      </div>
-
-    <!-- <div
-      class="bg-white mt-[65px] flex justify-between items-center text-[#6B7280]"
-    >
-      <div class="tab" :class="{ active: active === 0 }" @click="swichTab(0)">
-        {{ $t("定金") }}
-      </div>
-      <div class="tab" :class="{ active: active === 1 }" @click="swichTab(1)">
-        {{ $t("历史") }}
-      </div>
-    </div> -->
-     <!-- <van-tabs color="#ff497c" class="mt-[85px]"  @change="swichTab" v-model:active="active">
-      <van-tab :title="$t('定金')"></van-tab>
-      <van-tab :title="$t('历史')"></van-tab>
-    </van-tabs>
-
-    <div v-if="active === 0">
-      <div class="p-4 mt-[10px] box-border flex flex-col">
+    <div class="min-h-[100vh] bg-[#f6f6f6]">
         <div
-          class="flex flex-col justify-between p-4 box-border rounded-xl bg-[#ff497c] bg-cover shadow"
-          style="
-            background-size: 100% 100%;
-          "
+            class="relative bg-gradient-to-r from-[#a04149] to-[#6a4d52] px-[16px] pt-[14px] pb-[30px]"
         >
-          <div class="text-[#fff] opacity-70 text-sm font-semibold">
-            {{ $t("账户金额") }}
-          </div>
-          <div class="flex mt-[20px] mb-[5px]">
-            <div class="text-[#fff] text-3xl font-bold flex items-center">
-              {{ userInfo.balance }} <span class="text-white text-sm font-bold flex items-center ml-2 pt-[12px]">USD</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="w-full mt-2 pl-5 pr-5">
-        <van-button color="#000" round  class="w-full" @click="customer">{{
-          $t("联系客服")
-        }}</van-button>
-      </div>
-    </div>
-    <div v-else>
-      <div class="w-full  pt-6 box-border flex flex-col">
-        <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-          <van-list
-            v-model:loading="loading"
-            :finished="finished"
-            :finished-text="$t('没有更多了')"
-            @load="onLoad"
-          >
-            <van-cell v-for="item in list" :key="item" :title="item">
-              <div
-                class="w-full mb-4 bg-[#fff] rounded-lg flex flex-col p-3"
-              >
-                <div class="flex justify-between">
-                  <div class="text-sm font-semibold text-[#999]">
-                    {{ item.code }}
-                  </div>
+            <div class="relative flex items-center justify-center h-[42px]">
+                <div class="absolute left-0">
+                    <van-icon
+                        name="arrow-left"
+                        color="#fff"
+                        size="22px"
+                        @click="onClickLeft"
+                    />
+                </div>
+                <div class="text-[18px] text-white font-medium">
+                    {{ $t("定金") }}
                 </div>
                 <div
-                  class="flex text-base text-[#000] font-semibold items-center my-[15px] "
+                    class="absolute right-0 text-[16px] text-white"
+                    @click="toHistory"
                 >
-                  <span class="pr-[5px]">{{ $t("美元") }}</span>{{ item.amout }}
+                    {{ $t("Withdrawal.History") }}
                 </div>
-                <div class="flex justify-between">
-                  <div class="text-sm font-normal text-[#999]">
-                    {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
-                  </div>
+            </div>
+
+            <div
+                class="flex justify-end mt-[8px] mb-[28px]"
+                @click="refreshPage"
+            >
+                <img
+                    class="w-[24px] h-[24px]"
+                    src="../../static/images/shuaxin.png"
+                    alt=""
+                />
+            </div>
+
+            <div class="text-center text-white text-[15px]">
+                {{ $t("账户金额") }}
+            </div>
+            <div class="flex items-end justify-center mt-[12px]">
+                <div class="text-white text-[40px] leading-none">
+                    {{ userInfo.balance || 0 }}
                 </div>
-              </div>
-            </van-cell>
-          </van-list>
-        </van-pull-refresh>
-      </div>
-    </div> -->
-    <ContactUs ref="ContactUsRef"></ContactUs>
-  </div>
+                <div
+                    class="ml-[6px] mb-[4px] text-white text-[18px] leading-none"
+                >
+                    USD
+                </div>
+            </div>
+        </div>
+
+        <div class="px-[26px] pt-[18px] pb-[24px]">
+            <div class="deposit-input-wrap">
+                <van-field
+                    v-model="amount"
+                    type="number"
+                    input-align="left"
+                    maxlength="12"
+                    :border="false"
+                    :placeholder="$t('请输入金额')"
+                    class="deposit-field"
+                />
+            </div>
+
+            <van-button
+                block
+                class="deposit-btn mt-[18px]"
+                @click="submitDeposit"
+            >
+                {{ $t("联系客服") }}
+            </van-button>
+        </div>
+
+        <ContactUs ref="ContactUsRef" />
+    </div>
 </template>
+
 <script setup>
-const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
-import { onMounted, reactive, ref } from "vue";
-import { useUserStore } from "@/store/modules/user";
-import { getDeposit, userGetInfo,getTradeConfig,getRechargeAddress } from "../../api/apis";
-import {formatWithTimezone,checkWorkTimeLocal} from "../../util/utils"
-import ContactUs from "@/components/ContactUs.vue";
-import { useI18n } from "vue-i18n";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { showToast } from "vant";
-const { t } = useI18n();
+import { useI18n } from "vue-i18n";
+import { useUserStore } from "@/store/modules/user";
+import ContactUs from "@/components/ContactUs.vue";
+import {
+    getRechargeAddress,
+    getTradeConfig,
+    topUp,
+    userGetInfo,
+} from "../../api/apis";
+import { checkWorkTimeLocal } from "../../util/utils";
+
 const router = useRouter();
-const active = ref(0);
-const refreshing = ref(false);
-const finished = ref(false);
-const loading = ref(false);
+const { t } = useI18n();
 const userStore = useUserStore();
+
 const ContactUsRef = ref(null);
 const userInfo = ref({});
-const swichTab = (value) => {
-  active.value = value;
-  if (active.value == 1) {
-    onRefresh();
-  }
+const tradeInfo = ref({});
+const rechargeAddressInfo = ref({});
+const amount = ref("");
+
+const loadUserInfo = async () => {
+    const res = await userGetInfo();
+    userInfo.value = res.data || {};
 };
-const list = ref([]);
-const query = reactive({
-  pageNum: 1,
-  pageSize: 10,
-});
-const onRefresh = async () => {
-  refreshing.value = true;
-  finished.value = false;
-  query.pageNum = 1;
-  list.value = [];
-  await loadData();
-  refreshing.value = false;
+
+const loadTradeConfig = async () => {
+    const res = await getTradeConfig();
+    tradeInfo.value = res.data || {};
 };
-const onLoad = async () => {
-  if (finished.value || loading.value) return;
-  loading.value = true;
-  await loadData();
-  loading.value = false;
+
+const loadRechargeAddress = async () => {
+    const res = await getRechargeAddress();
+    rechargeAddressInfo.value = res?.data?.[0] || {};
 };
-const loadData = async () => {
-  try {
-    let res = await getDeposit(query);
-    const data = res.rows;
-    if (data.length < query.pageSize) {
-      finished.value = true;
-    } else {
-      query.pageNum++;
+
+const refreshPage = async () => {
+    await Promise.all([
+        loadUserInfo(),
+        loadTradeConfig(),
+        loadRechargeAddress(),
+    ]);
+};
+
+const submitDeposit = async () => {
+    const currentAmount = String(amount.value || "").trim();
+    if (!currentAmount) {
+        showToast(t("请输入金额"));
+        return;
     }
 
-    list.value.push(...data);
-  } catch (error) {
-    console.error("加载失败", error);
-    finished.value = true; // 避免无限加载
-  }
-};
-const customer = () => {
-  const time = checkWorkTimeLocal(TradeInfor.value.workTimeStart, TradeInfor.value.workTimeEnd,userStore.zoneActive.tzName);;
-  
-  console.log(AddressInfor.value)
-  if(Object.keys(AddressInfor.value).length > 0) {
-     router.push({ path: "/address" });
-  } else {
-    if(time) {
-      ContactUsRef.value.open();
-    } else {
-      showToast(t("supportHours"))
+    const rechargeUrl = rechargeAddressInfo.value?.url;
+    if (!rechargeUrl) {
+        const time = checkWorkTimeLocal(
+            tradeInfo.value.workTimeStart,
+            tradeInfo.value.workTimeEnd,
+            userStore.zoneActive.tzName,
+        );
+
+        if (time) {
+            ContactUsRef.value?.open();
+        } else {
+            showToast(t("supportHours"));
+        }
+        return;
     }
-  }
- 
-};
-const TradeInfor = ref({})
-const tradeConfig = async () => {
-  let res = await getTradeConfig();
-  TradeInfor.value = res.data;
+
+    const payload = {
+        amout: Number(currentAmount),
+        payMethod: "USDT",
+        address: rechargeUrl,
+    };
+
+    const res = await topUp(payload);
+    const orderInfo = {
+        ...(res?.data || {}),
+        amout: currentAmount,
+        payMethod: payload.payMethod,
+        address: rechargeUrl,
+        network: rechargeAddressInfo.value?.network || "TRON(TRC-20)",
+    };
+
+    sessionStorage.setItem("depositOrderInfo", JSON.stringify(orderInfo));
+    router.push({ path: "/address" });
 };
 
-const toHistory = () =>{
-  router.push({ path: "/depositHistory" });
-}
+const toHistory = () => {
+    router.push({ path: "/depositHistory" });
+};
 
-const AddressInfor = ref({})
-const getGetRechargeAddress = async () =>{
-    let res = await getRechargeAddress()
-    AddressInfor.value = res.data[0]
-}
-onMounted(() => {
-  tradeConfig()
-  getGetRechargeAddress()
-  userGetInfo().then((res) => {
-    userInfo.value = res.data;
-  });
-});
 const onClickLeft = () => history.back();
+
+onMounted(() => {
+    refreshPage();
+});
 </script>
+
 <style scoped>
-.tab {
-  position: relative;
-  padding-bottom: 5px; /* 给伪元素留点空间 */
-  cursor: pointer;
-  width: 50%;
-  height: 100%;
-  padding: 15px 0;
-  text-align: center;
-  /* padding-bottom: 10px; */
+.deposit-input-wrap {
+    border: 1px solid #e9e4e4;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
 }
 
-.tab.active {
-  color: #206645;
-  border-bottom: 2px solid #206645;
+:deep(.deposit-field) {
+    padding: 8px 16px;
 }
 
-.tab.active::after {
-  background-color: #206645; /* 激活状态的下划线颜色 */
+:deep(.deposit-field .van-field__body) {
+    min-height: 38px;
+}
+
+:deep(.deposit-field .van-field__control) {
+    min-height: 38px;
+    padding: 0;
+    font-size: 16px;
+    color: #333333;
+}
+
+:deep(.deposit-field .van-field__control::placeholder) {
+    color: #bebebe;
+    font-size: 15px;
+}
+
+.deposit-btn {
+    margin-top: 20px;
+    height: 54px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #a04149 0%, #765760 100%);
+    color: #ffffff;
+    font-size: 16px;
 }
 </style>
