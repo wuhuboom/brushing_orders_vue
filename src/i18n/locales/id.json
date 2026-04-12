@@ -239,7 +239,7 @@
   "index.str9": "Temukan bagaimana Media Mix Modeling canggih kami membantu Anda mengalokasikan anggaran pemasaran lebih efektif, mengoptimalkan kinerja kampanye, dan memaksimalkan ROI dengan menganalisis dampak sebenarnya dari setiap saluran.",
   "index.str10": "Di mana Kreativitas Bertemu Kinerja",
   "index.str11": "Direct Agents Studio mengubah merek melalui kreativitas berbasis data yang memikat dan mengonversi. Tim pemenang penghargaan kami menggabungkan desain inovatif, storytelling yang menarik, dan keahlian pemasaran kinerja untuk menciptakan koneksi bermakna antara merek dan audiens mereka.",
-  "收款银行卡":"Tambahkan kartu bank",
+  "收款银行卡": "Tambahkan kartu bank",
   "管理": "Manajemen",
   "账户名称": "Pemilik Akun",
   "请输入账户名称": "Masukkan Pemilik",
@@ -257,10 +257,10 @@
   "信誉分不足": "Poin reputasi tidak mencukupi",
   "交易所": "Bursa",
   "我的交易所": "Bursa Saya",
-  "钱包管理":"Manajemen Dompet",
+  "钱包管理": "Manajemen Dompet",
   "请输入6位数字密码": "Silakan masukkan kata sandi 6 digit",
   "请输入6位数字的交易密码": "Silakan masukkan kata sandi transaksi 6 digit",
-   "帮助": "Bantuan",
+  "帮助": "Bantuan",
   "设置": "Pengaturan",
   "vips": "VIP",
   "平台介绍": "Pengenalan Platform",
@@ -276,5 +276,6 @@
   "index.intro1": "Profil Platform",
   "index.introText1": "MALL adalah pusat pencocokan pesanan global berbasis cloud yang cerdas dan menjalin kerja sama strategis dengan berbagai platform e-commerce besar.",
   "index.intro2": "Aturan Platform",
-  "index.introText2": "Metode isi ulang dapat berubah sewaktu-waktu. Penarikan minimum adalah 20 USDT dan akan diproses dalam 24 jam."
+  "index.introText2": "Metode isi ulang dapat berubah sewaktu-waktu. Penarikan minimum adalah 20 USDT dan akan diproses dalam 24 jam.",
+  "deposit.btn.submit.money.text": "Submitted order amount"
 }

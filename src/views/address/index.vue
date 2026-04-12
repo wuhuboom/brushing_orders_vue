@@ -22,11 +22,12 @@
             </div>
 
             <div
-                class="flex items-center rounded-[12px] bg-[#fff3e8] text-[#ff6a21] px-[14px] py-[12px] text-[14px]"
+                class="warning-banner flex items-center rounded-[12px] bg-[#fff3e8] text-[#ff6a21] px-[14px] py-[12px] text-[14px]"
             >
                 <img
                     src="@/static/images/address-warning.png"
                     alt=""
+                    draggable="false"
                     class="mr-[8px] h-[18px] w-[18px] shrink-0"
                 />
                 <span>{{ $t("你有一个尚未付款的订单") }}</span>
@@ -77,12 +78,20 @@
                 >
                     {{ orderInfo.address || "-" }}
                 </div>
-                <img
-                    src="@/static/images/address-copy.png"
-                    alt=""
-                    class="ml-[12px] h-[40px] w-[40px] shrink-0"
+                <button
+                    type="button"
+                    class="copy-icon-btn ml-[12px] h-[40px] w-[40px] shrink-0"
+                    @mousedown.prevent
+                    @touchstart.prevent
                     @click="copyAddress"
-                />
+                >
+                    <img
+                        src="@/static/images/address-copy.png"
+                        alt=""
+                        draggable="false"
+                        class="h-[40px] w-[40px]"
+                    />
+                </button>
             </div>
         </div>
     </div>
@@ -184,5 +193,20 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.warning-banner,
+.copy-icon-btn {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.copy-icon-btn {
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
 }
 </style>

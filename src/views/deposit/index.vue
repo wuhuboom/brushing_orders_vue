@@ -67,7 +67,7 @@
                 class="deposit-btn mt-[18px]"
                 @click="submitDeposit"
             >
-                {{ $t("联系客服") }}
+                {{ $t("deposit.btn.submit.money.text") }}
             </van-button>
         </div>
 

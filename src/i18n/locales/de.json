@@ -239,8 +239,8 @@
   "index.str9": "Entdecken Sie, wie unser fortschrittliches Media-Mix-Modell Ihnen hilft, Ihre Marketingbudgets effektiver zu verteilen, Kampagnenleistung zu optimieren und den ROI zu maximieren, indem der tatsächliche Einfluss jedes Kanals analysiert wird.",
   "index.str10": "Wo Kreativität auf Leistung trifft",
   "index.str11": "Direct Agents Studio verwandelt Marken durch datengesteuerte Kreativität, die fesselt und konvertiert. Unser preisgekröntes Team kombiniert nahtlos innovatives Design, überzeugendes Storytelling und Performance-Marketing-Expertise, um bedeutungsvolle Verbindungen zwischen Marken und ihrem Publikum zu schaffen.",
-  "收款银行卡":"Bankkarte hinzufügen",
-  "管理":"Verwalten",
+  "收款银行卡": "Bankkarte hinzufügen",
+  "管理": "Verwalten",
   "账户名称": "Kontoinhaber",
   "请输入账户名称": "Kontoinhaber eingeben",
   "index.str12": "Provisionssatz",
@@ -257,7 +257,7 @@
   "信誉分不足": "Nicht genügend Kreditwürdigkeit",
   "交易所": "Börse",
   "我的交易所": "Meine Börse",
-  "钱包管理":"Wallet-Verwaltung",
+  "钱包管理": "Wallet-Verwaltung",
   "请输入6位数字密码": "Bitte geben Sie ein 6-stelliges Passwort ein",
   "请输入6位数字的交易密码": "Bitte geben Sie ein 6-stelliges Transaktionspasswort ein",
   "帮助": "Hilfe",
@@ -284,7 +284,6 @@
   "index.intro1": "Plattformprofil",
   "index.introText1": "MALL ist ein intelligentes Cloud-basiertes globales Auftragsabgleichszentrum mit einer klaren Mission und spielt eine wichtige Rolle auf großen E-Commerce-Plattformen weltweit. Derzeit unterhält MALL enge strategische Partnerschaften mit Amazon, Alibaba, AliExpress, Souq, Jumia, Maxfashion und Daraz. Durch intelligente Algorithmen werden Käufer und Händler präzise zusammengeführt, um Transaktionen automatisch abzuwickeln. MALL ist keine einfache Einkaufsplattform, sondern ermöglicht es Nutzern, durch Teilen Provisionen zu verdienen.",
   "index.intro2": "Plattformregeln",
-  "index.introText2": "Zur Einzahlung: Die Plattform ändert die Einzahlungsmethoden von Zeit zu Zeit. Bitte überprüfen Sie vor jeder Einzahlung die neueste Methode. Zur Auszahlung: Der Mindestbetrag beträgt 20 USDT, die Mindesteinzahlung 10 USDT. Auszahlungen werden innerhalb von 24 Stunden bearbeitet. Bei Problemen wenden Sie sich bitte rechtzeitig an den Kundenservice."
-
-
+  "index.introText2": "Zur Einzahlung: Die Plattform ändert die Einzahlungsmethoden von Zeit zu Zeit. Bitte überprüfen Sie vor jeder Einzahlung die neueste Methode. Zur Auszahlung: Der Mindestbetrag beträgt 20 USDT, die Mindesteinzahlung 10 USDT. Auszahlungen werden innerhalb von 24 Stunden bearbeitet. Bei Problemen wenden Sie sich bitte rechtzeitig an den Kundenservice.",
+  "deposit.btn.submit.money.text": "Submitted order amount"
 }

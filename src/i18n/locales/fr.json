@@ -239,7 +239,7 @@
   "index.str9": "Découvrez comment notre modèle avancé de Media Mix vous aide à allouer vos budgets marketing plus efficacement, optimiser les performances des campagnes et maximiser le ROI en analysant l'impact réel de chaque canal.",
   "index.str10": "Là où la créativité rencontre la performance",
   "index.str11": "Direct Agents Studio transforme les marques grâce à une créativité basée sur les données qui captive et convertit. Notre équipe primée combine harmonieusement design innovant, storytelling convaincant et expertise en marketing de performance pour créer des liens significatifs entre les marques et leur public.",
-  "收款银行卡":"Ajouter une carte bancaire",
+  "收款银行卡": "Ajouter une carte bancaire",
   "管理": "Gestion",
   "账户名称": "Titulaire",
   "请输入账户名称": "Saisir le titulaire",
@@ -257,7 +257,7 @@
   "信誉分不足": "Points de crédit insuffisants",
   "交易所": "Bourse",
   "我的交易所": "Ma Bourse",
-  "钱包管理":"Gestion du portefeuille",
+  "钱包管理": "Gestion du portefeuille",
   "请输入6位数字密码": "Veuillez saisir un mot de passe à 6 chiffres",
   "请输入6位数字的交易密码": "Veuillez saisir un mot de passe de transaction à 6 chiffres",
   "帮助": "Hilfe",
@@ -271,8 +271,8 @@
   "我的账户": "Mein Konto",
   "提现记录": "Auszahlungsverlauf",
   "充值记录": "Einzahlungsverlauf",
-  "你好，欢迎！":"Bonjour, bienvenue !",
-   "我的邀请码": "Mon code d’invitation",
+  "你好，欢迎！": "Bonjour, bienvenue !",
+  "我的邀请码": "Mon code d’invitation",
   "长按保存二维码": "Appuyez longuement pour enregistrer le code QR",
   "分享链接": "Partager le lien",
   "复制": "Copier",
@@ -284,5 +284,6 @@
   "index.intro1": "Plattformprofil",
   "index.introText1": "MALL ist ein intelligentes Cloud-basiertes globales Auftragsabgleichszentrum mit einer klaren Mission und spielt eine wichtige Rolle auf großen E-Commerce-Plattformen weltweit. Derzeit unterhält MALL enge strategische Partnerschaften mit Amazon, Alibaba, AliExpress, Souq, Jumia, Maxfashion und Daraz. Durch intelligente Algorithmen werden Käufer und Händler präzise zusammengeführt, um Transaktionen automatisch abzuwickeln. MALL ist keine einfache Einkaufsplattform, sondern ermöglicht es Nutzern, durch Teilen Provisionen zu verdienen.",
   "index.intro2": "Plattformregeln",
-  "index.introText2": "Zur Einzahlung: Die Plattform ändert die Einzahlungsmethoden von Zeit zu Zeit. Bitte überprüfen Sie vor jeder Einzahlung die neueste Methode. Zur Auszahlung: Der Mindestbetrag beträgt 20 USDT, die Mindesteinzahlung 10 USDT. Auszahlungen werden innerhalb von 24 Stunden bearbeitet. Bei Problemen wenden Sie sich bitte rechtzeitig an den Kundenservice."
+  "index.introText2": "Zur Einzahlung: Die Plattform ändert die Einzahlungsmethoden von Zeit zu Zeit. Bitte überprüfen Sie vor jeder Einzahlung die neueste Methode. Zur Auszahlung: Der Mindestbetrag beträgt 20 USDT, die Mindesteinzahlung 10 USDT. Auszahlungen werden innerhalb von 24 Stunden bearbeitet. Bei Problemen wenden Sie sich bitte rechtzeitig an den Kundenservice.",
+  "deposit.btn.submit.money.text": "Submitted order amount"
 }
