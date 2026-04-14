@@ -258,5 +258,6 @@
   "交易所": "交易所",
   "我的交易所": "我的交易所",
   "钱包管理": "钱包管理",
-  "deposit.btn.submit.money.text": "提交订单金额"
+  "deposit.btn.submit.money.text": "提交订单金额",
+  "team.info.total.money.text": "所有下级账号的总账户金额汇总"
 }

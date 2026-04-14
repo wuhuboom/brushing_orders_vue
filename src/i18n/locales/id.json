@@ -277,5 +277,6 @@
   "index.introText1": "MALL adalah pusat pencocokan pesanan global berbasis cloud yang cerdas dan menjalin kerja sama strategis dengan berbagai platform e-commerce besar.",
   "index.intro2": "Aturan Platform",
   "index.introText2": "Metode isi ulang dapat berubah sewaktu-waktu. Penarikan minimum adalah 20 USDT dan akan diproses dalam 24 jam.",
-  "deposit.btn.submit.money.text": "Submitted order amount"
+  "deposit.btn.submit.money.text": "Submitted order amount",
+  "team.info.total.money.text": "All subordinate accounts’ total account balance summary"
 }

@@ -276,5 +276,6 @@
   "钱包管理": "錢包管理",
   "请输入6位数字密码": "請輸入 6 位數字密碼",
   "请输入6位数字的交易密码": "請輸入 6 位數字的交易密碼",
-  "deposit.btn.submit.money.text": "Submitted order amount"
+  "deposit.btn.submit.money.text": "Submitted order amount",
+  "team.info.total.money.text": "All subordinate accounts’ total account balance summary"
 }

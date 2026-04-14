@@ -293,5 +293,6 @@
   "index.introText1": "MALLはクラウド型のグローバル注文マッチングセンターです。",
   "index.intro2": "プラットフォーム規則",
   "index.introText2": "入金方法は随時変更される場合があります。最低出金額は20USDTです。",
-  "deposit.btn.submit.money.text": "Submitted order amount"
+  "deposit.btn.submit.money.text": "Submitted order amount",
+  "team.info.total.money.text": "All subordinate accounts’ total account balance summary"
 }

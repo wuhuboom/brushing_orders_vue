@@ -285,5 +285,6 @@
   "index.introText1": "MALL ist ein intelligentes Cloud-basiertes globales Auftragsabgleichszentrum mit einer klaren Mission und spielt eine wichtige Rolle auf großen E-Commerce-Plattformen weltweit. Derzeit unterhält MALL enge strategische Partnerschaften mit Amazon, Alibaba, AliExpress, Souq, Jumia, Maxfashion und Daraz. Durch intelligente Algorithmen werden Käufer und Händler präzise zusammengeführt, um Transaktionen automatisch abzuwickeln. MALL ist keine einfache Einkaufsplattform, sondern ermöglicht es Nutzern, durch Teilen Provisionen zu verdienen.",
   "index.intro2": "Plattformregeln",
   "index.introText2": "Zur Einzahlung: Die Plattform ändert die Einzahlungsmethoden von Zeit zu Zeit. Bitte überprüfen Sie vor jeder Einzahlung die neueste Methode. Zur Auszahlung: Der Mindestbetrag beträgt 20 USDT, die Mindesteinzahlung 10 USDT. Auszahlungen werden innerhalb von 24 Stunden bearbeitet. Bei Problemen wenden Sie sich bitte rechtzeitig an den Kundenservice.",
-  "deposit.btn.submit.money.text": "Submitted order amount"
+  "deposit.btn.submit.money.text": "Submitted order amount",
+  "team.info.total.money.text": "All subordinate accounts’ total account balance summary"
 }
