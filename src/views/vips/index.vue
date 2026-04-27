@@ -263,7 +263,7 @@
                     >
                         <div class="flex items-center justify-center">
                             <span
-                                v-if="index === 0"
+                                v-if="isCurrentLevel(item, index)"
                                 class="inline-flex min-w-[34px] items-center justify-center rounded-full bg-[#159947] px-[7px] py-[2px] text-center text-[8px] font-bold text-white"
                             >
                                 {{ normalizeLevelName(item, index) }}
