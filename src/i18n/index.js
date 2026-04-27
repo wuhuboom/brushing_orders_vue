@@ -1,0 +1,40 @@
+// src/i18n.js
+import { createI18n } from 'vue-i18n';
+import en from './locales/en.json';
+import zh from './locales/zh.json';
+import ko from './locales/ko.json';
+import ja from './locales/ja.json';
+import it from './locales/it.json';
+import fr from './locales/fr.json';
+import de from './locales/de.json';
+import id from './locales/id.json';
+import th from './locales/th.json';
+import zhTW from './locales/zh-Tw.json';
+
+// 定义语言包
+const withEnglishFallback = (localeMessages) => ({
+  ...en,
+  ...localeMessages,
+});
+
+const messages = {
+  en,
+  fr: withEnglishFallback(fr),
+  de: withEnglishFallback(de),
+  zh: withEnglishFallback(zh),
+  ko: withEnglishFallback(ko),
+  ja: withEnglishFallback(ja),
+  it: withEnglishFallback(it),
+  id: withEnglishFallback(id),
+  th: withEnglishFallback(th),
+  zhTW: withEnglishFallback(zhTW)
+};
+
+// 创建 i18n 实例并导出
+const i18n = createI18n({
+  locale: 'en', // setting默认语言
+  fallbackLocale: 'en', // setting备用语言
+  messages, // setting语言包
+});
+
+export default i18n;

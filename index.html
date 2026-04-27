@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" class="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/logos.png" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <!-- <title>%window.VITE_TITLE%</title> -->
+        <title></title>
+        <style>
+            html,
+            body {
+                margin: 0;
+                min-height: 100%;
+                background: #f5faf6;
+            }
+
+            html {
+                overflow-y: scroll;
+                scrollbar-gutter: stable;
+            }
+
+            #boot-splash {
+                position: fixed;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #ffffff;
+                z-index: 9999;
+                transition: opacity 0.18s ease;
+            }
+
+            @media (min-width: 768px) {
+                #boot-splash {
+                    width: min(100%, var(--app-pc-max-width, 375px));
+                    height: 100dvh;
+                    left: 50%;
+                    right: auto;
+                    bottom: auto;
+                    transform: translateX(-50%);
+                }
+            }
+
+            #boot-splash.is-hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .boot-splash__panel {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .boot-splash__dot {
+                position: relative;
+                width: 28px;
+                height: 28px;
+                animation: boot-spin 0.88s linear infinite;
+            }
+
+            .boot-splash__ring,
+            .boot-splash__tail {
+                position: absolute;
+                display: block;
+            }
+
+            .boot-splash__ring {
+                inset: 0;
+                border-radius: 50%;
+                background: conic-gradient(
+                    from 214deg,
+                    rgba(255, 255, 255, 0) 0deg 148deg,
+                    rgba(170, 237, 191, 0.12) 148deg 160deg,
+                    rgba(98, 208, 129, 0.7) 168deg,
+                    #35c766 192deg,
+                    #1fad4f 228deg,
+                    #169741 264deg,
+                    rgba(137, 224, 163, 0.6) 298deg,
+                    rgba(255, 255, 255, 0) 322deg 360deg
+                );
+                -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.1px));
+                mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.1px));
+                filter: blur(0.25px);
+            }
+
+            .boot-splash__tail {
+                top: 12px;
+                right: 1px;
+                width: 5px;
+                height: 2px;
+                border-radius: 999px;
+                background: linear-gradient(90deg, rgba(199, 244, 213, 0.08), rgba(84, 204, 116, 0.92));
+                transform: rotate(24deg);
+                filter: blur(0.15px);
+            }
+
+            .boot-splash__text {
+                display: none;
+            }
+
+            @keyframes boot-spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="boot-splash">
+            <div class="boot-splash__panel">
+                <div class="boot-splash__dot">
+                    <span class="boot-splash__ring"></span>
+                    <span class="boot-splash__tail"></span>
+                </div>
+            </div>
+        </div>
+        <div id="app"></div>
+        <script type="module" src="/src/main.js"></script>
+    </body>
+    <!-- <script src="/config.js?t=123456"></script>
+  <script>
+    document.title = window.g.VITE_TITLE || 'defaultTitle';
+  </script> -->
+</html>
