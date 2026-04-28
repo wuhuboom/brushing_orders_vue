@@ -134,7 +134,15 @@
         </section>
 
         <section class="skye-reviews-section">
-            <div class="skye-review-viewport" @touchstart.passive="handleReviewTouchStart" @touchmove.passive="handleReviewTouchMove" @touchend="handleReviewTouchEnd">
+            <div
+                class="skye-review-viewport"
+                :class="{ 'is-dragging': reviewMouseDragging }"
+                @touchstart.passive="handleReviewTouchStart"
+                @touchmove.passive="handleReviewTouchMove"
+                @touchend="handleReviewTouchEnd"
+                @mousedown="handleReviewMouseStart"
+                @dragstart.prevent
+            >
                 <div
                     class="skye-review-track"
                     :class="{ 'is-no-transition': !reviewTransitionEnabled }"
@@ -230,7 +238,7 @@
 </template>
 
 <script setup>
-import { computed, nextTick, ref } from "vue";
+import { computed, nextTick, onBeforeUnmount, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
@@ -239,9 +247,9 @@ const logo = new URL("@/static/images/skye-home/SO-logo-black.svg", import.meta.
 const whiteLogo = new URL("@/static/images/skye-home/SO-logo-outlines-white.svg", import.meta.url).href;
 const heroImage = new URL("@/static/images/skye-home/tqaguwpax5k.jpg", import.meta.url).href;
 const expertImage = new URL("@/static/images/skye-home/t6fdn60bmwy.jpg", import.meta.url).href;
-const insightImageOne = new URL("@/static/images/skye-home/tqaguwpax5k.jpg", import.meta.url).href;
-const insightImageTwo = new URL("@/static/images/skye-home/t6fdn60bmwy.jpg", import.meta.url).href;
-const insightImageThree = new URL("@/static/images/skye-home/tqaguwpax5k.jpg", import.meta.url).href;
+const insightImageOne = new URL("@/static/images/skye-home/featured-34753.jpg", import.meta.url).href;
+const insightImageTwo = new URL("@/static/images/skye-home/featured-34754.jpg", import.meta.url).href;
+const insightImageThree = new URL("@/static/images/skye-home/featured-34755.jpg", import.meta.url).href;
 const webDesignIcon = new URL("@/static/images/skye-home/sos-web-design-and-dev-final.svg", import.meta.url).href;
 const brandingIcon = new URL("@/static/images/skye-home/sos-branding-and-design-final.svg", import.meta.url).href;
 const hostingIcon = new URL("@/static/images/skye-home/sos-web-hosting-final.svg", import.meta.url).href;
@@ -386,6 +394,9 @@ const reviewTransitionEnabled = ref(true);
 const isReviewSliding = ref(false);
 const reviewTouchStartX = ref(0);
 const reviewTouchCurrentX = ref(0);
+const reviewMouseDragging = ref(false);
+const reviewMouseStartX = ref(0);
+const reviewMouseCurrentX = ref(0);
 const reviewCarouselItems = computed(() => reviews.length ? [reviews[reviews.length - 1], ...reviews, reviews[0]] : []);
 const getReviewItemKey = (review, reviewIndex) => `${reviewIndex}-${review.name}-${review.timeKey}`;
 const reviewProgressLeft = computed(() => reviews.length <= 1 ? "0%" : `${(activeReviewIndex.value / (reviews.length - 1)) * 88}%`);
@@ -433,6 +444,47 @@ const handleReviewTouchEnd = () => {
     if (Math.abs(diffX) < 40) return;
     diffX > 0 ? handleReviewPrev() : handleReviewNext();
 };
+
+const isReviewMouseDragEnabled = () => {
+    if (typeof window === "undefined") return false;
+    if (!window.matchMedia) return true;
+    return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+};
+const removeReviewMouseListeners = () => {
+    if (typeof window === "undefined") return;
+    window.removeEventListener("mousemove", handleReviewMouseMove);
+    window.removeEventListener("mouseup", handleReviewMouseEnd);
+};
+const handleReviewMouseStart = (event) => {
+    if (!isReviewMouseDragEnabled() || isReviewSliding.value || event.button !== 0) return;
+    if (event.target instanceof Element && event.target.closest("button, a")) return;
+    reviewMouseDragging.value = true;
+    reviewMouseStartX.value = event.clientX;
+    reviewMouseCurrentX.value = event.clientX;
+    window.addEventListener("mousemove", handleReviewMouseMove, { passive: false });
+    window.addEventListener("mouseup", handleReviewMouseEnd);
+    event.preventDefault();
+};
+const handleReviewMouseMove = (event) => {
+    if (!reviewMouseDragging.value || isReviewSliding.value) return;
+    reviewMouseCurrentX.value = event.clientX;
+    event.preventDefault();
+};
+const handleReviewMouseEnd = () => {
+    if (!reviewMouseDragging.value) return;
+    removeReviewMouseListeners();
+    reviewMouseDragging.value = false;
+    if (isReviewSliding.value) return;
+    const diffX = reviewMouseCurrentX.value - reviewMouseStartX.value;
+    reviewMouseStartX.value = 0;
+    reviewMouseCurrentX.value = 0;
+    if (Math.abs(diffX) < 40) return;
+    diffX > 0 ? handleReviewPrev() : handleReviewNext();
+};
+
+onBeforeUnmount(() => {
+    removeReviewMouseListeners();
+});
 </script>
 
 <style scoped>
@@ -932,11 +984,11 @@ const handleReviewTouchEnd = () => {
 }
 .skye-service-arrow {
     position:absolute;
-    top:128px;
+    top:168px;
     z-index:5;
     display:flex;
-    width:22px;
-    height:32px;
+    width:30px;
+    height:30px;
     align-items:center;
     justify-content:center;
     border:0;
@@ -961,6 +1013,15 @@ const handleReviewTouchEnd = () => {
     width:100%;
     overflow:hidden;
     touch-action:pan-y
+}
+@media (min-width:768px) {
+    .skye-review-viewport {
+        cursor:grab;
+        user-select:none
+    }
+    .skye-review-viewport.is-dragging {
+        cursor:grabbing
+    }
 }
 .skye-review-track {
     display:flex;

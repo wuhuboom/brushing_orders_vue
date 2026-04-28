@@ -107,6 +107,15 @@ const isMainTabPage = computed(() => isMainTabRoute(route.path));
 function isMainTabRoute(path) {
     return mainTabPaths.includes(path);
 }
+
+function syncHomeScrollbarMode(path = route.path) {
+    if (typeof document === "undefined") return;
+    const isHome = path === "/";
+    document.documentElement.classList.toggle("app-home-scroll-lock", isHome);
+    if (document.body) {
+        document.body.classList.toggle("app-home-scroll-lock", isHome);
+    }
+}
 function finishPendingTransition() {
     if (!pendingTransitionResolve) return;
     const resolve = pendingTransitionResolve;
@@ -407,6 +416,7 @@ function scrollRouteContainersToTop(behavior = "auto") {
 watch(
     () => route.path,
     () => {
+        syncHomeScrollbarMode(route.path);
         if (isAuthPage.value) return;
 
         if (!shouldSkipZoneActive(route)) {
@@ -539,6 +549,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+    syncHomeScrollbarMode("");
     restoreRouterPush?.();
     restoreRouterReplace?.();
     restoreHistoryBack?.();
@@ -610,6 +621,11 @@ onBeforeUnmount(() => {
     width: 100%;
 }
 
+.app-route-view.home-scrollbar {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
 .app-route-view--with-footer {
     box-sizing: border-box;
     padding-bottom: 88px;
@@ -675,6 +691,31 @@ onBeforeUnmount(() => {
         max-width: var(--app-pc-max-width, 375px);
         margin: 0 auto;
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    html.app-home-scroll-lock,
+    body.app-home-scroll-lock {
+        height: 100%;
+        overflow: hidden !important;
+    }
+
+    body.app-home-scroll-lock #app {
+        height: 100dvh;
+        overflow: hidden !important;
+    }
+
+    body.app-home-scroll-lock .app-frame {
+        height: 100dvh;
+        min-height: 100dvh;
+        overflow: hidden !important;
+    }
+
+    body.app-home-scroll-lock .app-route-view.home-scrollbar {
+        height: 100dvh;
+        min-height: 0;
+        box-sizing: border-box;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
     }
 }
 </style>

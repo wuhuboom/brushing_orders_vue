@@ -130,3 +130,42 @@ body::-webkit-scrollbar-thumb:hover,
 .skye-home-embed::-webkit-scrollbar-thumb:hover {
   background: var(--theme-primary) !important;
 }
+
+@media (min-width: 768px) {
+  html.app-home-scroll-lock,
+  body.app-home-scroll-lock,
+  body.app-home-scroll-lock #app,
+  body.app-home-scroll-lock .app-frame {
+    scrollbar-width: none;
+  }
+
+  html.app-home-scroll-lock::-webkit-scrollbar,
+  body.app-home-scroll-lock::-webkit-scrollbar,
+  body.app-home-scroll-lock #app::-webkit-scrollbar,
+  body.app-home-scroll-lock .app-frame::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  body.app-home-scroll-lock .app-route-view.home-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--theme-home-scrollbar-thumb) var(--theme-home-scrollbar-track);
+  }
+
+  body.app-home-scroll-lock .app-route-view.home-scrollbar::-webkit-scrollbar {
+    display: block !important;
+    width: 6px;
+    height: 6px;
+  }
+
+  body.app-home-scroll-lock .app-route-view.home-scrollbar::-webkit-scrollbar-track {
+    background: var(--theme-home-scrollbar-track) !important;
+    border-radius: 999px;
+  }
+
+  body.app-home-scroll-lock .app-route-view.home-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--theme-home-scrollbar-thumb) !important;
+    border-radius: 999px;
+  }
+}
