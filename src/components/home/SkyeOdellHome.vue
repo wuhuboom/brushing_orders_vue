@@ -59,17 +59,15 @@
                     <h2 class="skye-expert-title">
                         <span>{{ t('sk_expert_1') }}</span>
                         <span>{{ t('sk_expert_2') }}</span>
-                        <span>{{ t('sk_expert_3') }} {{ t('sk_expert_4') }}</span>
-                        <span>{{ t('sk_expert_5') }}</span>
-                        <span>{{ t('sk_expert_6') }}</span>
+                        <span>{{ t('sk_expert_3') }}</span>
+                        <span>{{ t('sk_expert_4') }}</span>
+                        <span>Support,</span>
+                        <span>SEO, Social</span>
+                        <span>Media</span>
                         <span>{{ t('sk_expert_7') }}</span>
                     </h2>
                     <p class="skye-expert-copy">
-                        <span>{{ t('sk_expert_p1') }} {{ t('sk_expert_p2') }}</span>
-                        <span>{{ t('sk_expert_p3') }}</span>
-                        <span>{{ t('sk_expert_p4') }}</span>
-                        <span>{{ t('sk_expert_p5') }}</span>
-                        <span>{{ t('sk_expert_p6') }}</span>
+                        {{ t('sk_expert_p1') }} {{ t('sk_expert_p2') }} {{ t('sk_expert_p3') }} {{ t('sk_expert_p4') }} {{ t('sk_expert_p5') }} {{ t('sk_expert_p6') }}
                     </p>
                     <button type="button">{{ t('sk_start') }}</button>
                 </div>
@@ -619,71 +617,71 @@ const handleReviewTouchEnd = () => {
     font-size:18px
 }
 .skye-expert-section {
-    background:var(--skye-pale);
-    padding:26px 12px 74px
+    background:#fff;
+    padding:8px 0 100px
 }
 .skye-expert-stage {
     position:relative;
-    width:398px;
+    width:376px;
     max-width:100%;
-    min-height:452px;
+    min-height:667px;
     margin:0 auto;
     overflow:visible;
     background-position:center;
     background-size:cover;
-    background-repeat:no-repeat;
-    box-shadow:0 14px 22px rgba(0, 0, 0, .10)
+    background-repeat:no-repeat
 }
 .skye-expert-stage:after {
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(0,0,0,.02) 42%, rgba(0,0,0,.22) 100%);
+    background:linear-gradient(180deg, rgba(255,255,255,.12) 0%, rgba(0,0,0,.03) 34%, rgba(0,0,0,.18) 100%);
     pointer-events:none
 }
 .skye-expert-card {
     position:absolute;
     left:30px;
     right:30px;
-    top:36px;
-    bottom:-34px;
+    top:74px;
+    bottom:-64px;
     z-index:1;
     display:flex;
     flex-direction:column;
-    overflow:hidden;
-    border-radius:0 0 14px 14px;
-    background:linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(0,0,0,.18) 24%, rgba(0,0,0,.84) 70%, rgba(0,0,0,.96) 100%);
+    overflow:visible;
+    border-radius:0 0 10px 10px;
+    background:linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(0,0,0,.34) 26%, rgba(0,0,0,.88) 70%, #000 100%);
     padding:28px 30px 30px;
     color:#fff;
-    box-shadow:0 16px 28px rgba(0, 0, 0, .28)
+    box-shadow:0 10px 14px rgba(0, 0, 0, .25)
 }
 .skye-expert-card:before {
     content:"";
     position:absolute;
-    inset:18px;
-    border:1px solid rgba(255,255,255,.08);
+    inset:0;
+    border-right:1px solid rgba(255,255,255,.10);
+    border-left:1px solid rgba(255,255,255,.10);
     pointer-events:none
 }
 .skye-expert-title {
     margin:0;
     color:#f5f3ee;
     font-family:Georgia, "Times New Roman", serif;
-    font-size:34px;
+    font-size:37px;
     font-weight:800;
-    line-height:.94
+    line-height:1;
+    text-shadow:0 1px 0 rgba(0,0,0,.35)
 }
 .skye-expert-title span,
-.skye-expert-copy span,
 .skye-team-line {
     display:block
 }
 .skye-expert-copy {
-    margin:26px 0 0;
-    font-size:17px;
-    line-height:1.55
-}
-.skye-expert-copy span + span {
-    margin-top:4px
+    margin:29px 0 0;
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
+    line-height:1.72;
+    text-shadow:0 1px 0 rgba(0,0,0,.28)
 }
 .skye-expert-card button,
 .skye-split-content button {
@@ -698,10 +696,10 @@ const handleReviewTouchEnd = () => {
 }
 .skye-expert-card button {
     width:100%;
-    min-height:52px;
+    min-height:57px;
     margin-top:auto;
-    border-radius:14px;
-    font-size:15px
+    border-radius:11px;
+    font-size:14px
 }
 .skye-team-section {
     background:#fff;
@@ -1529,24 +1527,26 @@ const handleReviewTouchEnd = () => {
         padding-left:24px
     }
     .skye-expert-section {
-        padding:24px 12px 70px
+        padding:8px 0 96px
     }
     .skye-expert-stage {
         width:100%;
-        min-height:430px
+        min-height:650px
     }
     .skye-expert-card {
-        left:22px;
-        right:22px;
-        top:28px;
-        bottom:-30px;
-        padding:24px 22px 24px
+        left:30px;
+        right:30px;
+        top:72px;
+        bottom:-60px;
+        padding:27px 30px 30px
     }
     .skye-expert-title {
-        font-size:27px
+        font-size:34px;
+        line-height:1
     }
     .skye-expert-copy {
-        font-size:14px
+        font-size:17px;
+        line-height:1.64
     }
     .skye-team-section {
         padding-right:16px;
