@@ -203,7 +203,7 @@
                 <span class="skye-talk-art__text skye-talk-art__text--talk">{{ t('sk_talk') }}</span>
             </div>
             <a class="skye-talk-phone" href="tel:7152550036">{{ t('sk_phone') }}</a>
-            <a class="skye-talk-button" href="mailto:">{{ t('sk_email') }}</a>
+            <!-- <a class="skye-talk-button" href="mailto:">{{ t('sk_email') }}</a> -->
         </section>
 
         <footer class="skye-footer">
