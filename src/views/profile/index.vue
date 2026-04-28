@@ -7,12 +7,12 @@
         <div class="w-full flex flex-col items-center justify-center mt-20">
           <van-uploader v-model="fileList" :after-read="afterRead" reupload max-count="1" />
           <div class="text-[#666] text-sm mt-2 flex items-center">
-            <div class="mr-1 text-[#6a4d52]">{{ $t("click_to_change") }}</div>
+            <div class="mr-1 text-[var(--theme-primary)]">{{ $t("click_to_change") }}</div>
             <van-icon name="edit" />
           </div>
           <div class="text-[#666666] text-[14px] pt-[15px]">{{ $t("profile.str") }}</div>
           <div class="pc-fixed-bottom fixed bottom-4 left-1/2 -translate-x-1/2 w-[90%]">
-            <van-button class="w-full" style="background: #6a4d52; color: #fff" @click="updateAvatarMethods">
+            <van-button class="w-full" style="background: var(--theme-button-gradient); color: #fff" @click="updateAvatarMethods">
               {{ $t("update") }}
             </van-button>
           </div>

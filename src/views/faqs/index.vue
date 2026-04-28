@@ -103,7 +103,7 @@ const onClickLeft = () => {
     gap: 12px;
     border-radius: 18px;
     padding: 14px 14px;
-    background: linear-gradient(135deg, #22984b 0%, #1f8440 100%);
+    background: var(--theme-button-gradient);
     color: #fff;
     box-shadow: 0 16px 28px rgba(31, 132, 64, 0.16);
 }

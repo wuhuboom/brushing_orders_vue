@@ -322,8 +322,8 @@ const submitForm = async () => {
 }
 
 .submit-btn--active {
-    background: linear-gradient(135deg, #34c263 0%, #169741 100%);
+    background: var(--theme-primary);
     color: #ffffff;
-    box-shadow: 0 10px 24px rgba(35, 164, 85, 0.16);
+    box-shadow: 0 10px 24px var(--theme-button-shadow);
 }
 </style>

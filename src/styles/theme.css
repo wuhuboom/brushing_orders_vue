@@ -1,0 +1,132 @@
+:root {
+  /* 公共主题色：所有主按钮、选中态和 loading 默认都从这里取色 */
+  --theme-primary: #D37703;
+  --theme-green-defalut: #22A050;
+  --theme-primary-bg-green:  linear-gradient(135.00deg, rgba(52, 190, 100, 1),rgba(20, 140, 65, 1) 100%);
+  --theme-primary-hover: #1e9644;
+  --theme-primary-active: #169741;
+  --theme-primary-start: #34c263;
+  --theme-primary-end: #169741;
+  --theme-primary-deep: #159c42;
+  --theme-primary-soft: #e9f5ec;
+  --theme-primary-weak: #edf7f0;
+  --theme-primary-border: #cfe3d3;
+  --theme-primary-text: #176d35;
+  --theme-button-disabled: rgba(220, 140, 30, 0.1);
+  --theme-button-shadow: rgba(211, 119, 3, 0.3);
+  --theme-button-shadow-strong: rgba(34, 160, 80, 0.3);
+  --theme-button-gradient: #64756B;
+  --theme-button-gradient-horizontal: linear-gradient(90deg, var(--theme-primary-start) 0%, var(--theme-primary-end) 100%);
+  --theme-button-gradient-vertical: #D37703;
+  --theme-button-gradient-background: linear-gradient(152.39deg, rgba(51, 60, 55, 1) 0%,rgba(74, 101, 101, 1) 100%);
+  --theme-home-scrollbar-thumb: #D37703;
+  --theme-home-scrollbar-track: rgba(211, 119, 3, 0.14);
+  --theme-home-topic-bg: #C9D2D2;
+
+  --theme-loading-color-1: rgba(211, 119, 3, 0.12);
+  --theme-loading-color-2: rgba(211, 119, 3, 0.32);
+  --theme-loading-color-3: rgba(211, 119, 3, 0.58);
+  --theme-loading-color-4: rgba(211, 119, 3, 0.82);
+  --theme-loading-color-5: var(--theme-primary);
+  --theme-loading-color-6: rgba(211, 119, 3, 0.46);
+  --theme-loading-tail-start: rgba(211, 119, 3, 0.08);
+  --theme-loading-tail-end: var(--theme-primary);
+  --theme-loading-pulse: rgba(211, 119, 3, 0.18);
+
+  --main-color: var(--theme-primary);
+  --van-primary-color: var(--theme-primary);
+  --van-button-primary-background: var(--theme-primary);
+  --van-button-primary-border-color: var(--theme-primary);
+  --van-loading-spinner-color: var(--theme-primary);
+  --van-checkbox-checked-icon-color: var(--theme-primary);
+  --el-color-primary: var(--theme-primary) !important;
+  --el-color-primary-light-3: var(--theme-primary-start) !important;
+  --el-color-primary-dark-2: var(--theme-primary-end) !important;
+}
+
+.van-button--primary,
+.el-button--primary,
+.ant-btn-primary,
+.theme-primary-button {
+  border-color: var(--theme-primary) !important;
+  background: var(--theme-button-gradient) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px var(--theme-button-shadow);
+}
+
+.van-button--disabled,
+.van-button:disabled,
+.el-button.is-disabled,
+.ant-btn[disabled] {
+  border-color: var(--theme-button-disabled) !important;
+  background: var(--theme-button-disabled) !important;
+}
+
+.van-loading,
+.van-loading__spinner,
+.el-loading-spinner .el-loading-text,
+.ant-message .anticon-loading {
+  color: var(--theme-primary) !important;
+}
+
+.el-loading-spinner .path {
+  stroke: var(--theme-primary) !important;
+}
+
+
+/* 首页滚动条主题色
+   注意：App.vue 里首页不能再带 hide-scroll，否则 ::-webkit-scrollbar 会被隐藏。 */
+html,
+body,
+#app,
+.app-frame,
+.app-route-view.home-scrollbar,
+.home-page,
+.skye-home-embed {
+  scrollbar-width: thin;
+  scrollbar-color: var(--theme-home-scrollbar-thumb) var(--theme-home-scrollbar-track);
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#app::-webkit-scrollbar,
+.app-frame::-webkit-scrollbar,
+.app-route-view.home-scrollbar::-webkit-scrollbar,
+.home-page::-webkit-scrollbar,
+.skye-home-embed::-webkit-scrollbar {
+  display: block !important;
+  width: 6px;
+  height: 6px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+#app::-webkit-scrollbar-track,
+.app-frame::-webkit-scrollbar-track,
+.app-route-view.home-scrollbar::-webkit-scrollbar-track,
+.home-page::-webkit-scrollbar-track,
+.skye-home-embed::-webkit-scrollbar-track {
+  background: var(--theme-home-scrollbar-track) !important;
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+#app::-webkit-scrollbar-thumb,
+.app-frame::-webkit-scrollbar-thumb,
+.app-route-view.home-scrollbar::-webkit-scrollbar-thumb,
+.home-page::-webkit-scrollbar-thumb,
+.skye-home-embed::-webkit-scrollbar-thumb {
+  background: var(--theme-home-scrollbar-thumb) !important;
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+#app::-webkit-scrollbar-thumb:hover,
+.app-frame::-webkit-scrollbar-thumb:hover,
+.app-route-view.home-scrollbar::-webkit-scrollbar-thumb:hover,
+.home-page::-webkit-scrollbar-thumb:hover,
+.skye-home-embed::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-primary) !important;
+}

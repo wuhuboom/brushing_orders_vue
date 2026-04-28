@@ -9,7 +9,7 @@
       <div class="mx-auto text-[#000] text-[22px] py-[12px]">{{ $t("menu") }}</div>
     </div>
     <van-tabs
-      color="#007513"
+      color="var(--theme-primary)"
       v-if="shopListArr.length > 0"
       @change="swichTab"
       v-model:active="active"

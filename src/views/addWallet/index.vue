@@ -217,7 +217,7 @@ onMounted(() => {
 }
 
 .payment-method-page :deep(.van-nav-bar .van-icon) {
-    color: #23a455;
+    color: var(--theme-primary);
 }
 
 .payment-method-page :deep(.van-nav-bar::after) {
@@ -225,7 +225,7 @@ onMounted(() => {
 }
 
 .hero-card {
-    background: linear-gradient(135deg, #1f9d48 0%, #188d3f 100%);
+    background: var(--theme-button-gradient-background);
     padding: 28px 22px 22px;
     display: flex;
     gap: 16px;
@@ -320,7 +320,7 @@ onMounted(() => {
     height: 56px;
     border: none;
     border-radius: 16px;
-    background: #cfe8d5;
+    background: var(--theme-button-disabled);
     color: #5c9369;
     font-size: 16px;
     font-weight: 500;
@@ -328,8 +328,8 @@ onMounted(() => {
 }
 
 .submit-btn--active {
-    background: linear-gradient(135deg, #34c263 0%, #169741 100%);
+    background: var(--theme-primary);
     color: #ffffff;
-    box-shadow: 0 10px 24px rgba(35, 164, 85, 0.18);
+    box-shadow: 0 10px 24px var(--theme-button-shadow);
 }
 </style>

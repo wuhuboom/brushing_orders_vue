@@ -65,7 +65,7 @@
           {{ $t("winMessage", { winPrize }) }}
         </div>
         <van-button
-          color="#6F1708"
+          color="var(--theme-primary)"
           round
           class="w-[80%] mx-auto"
           @click="closeLucky"

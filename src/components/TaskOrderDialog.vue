@@ -16,7 +16,7 @@
                     class="task-order-dialog__back"
                     @click="emit('back')"
                 >
-                    <van-icon name="arrow-left" size="18" color="#24a54b" />
+                    <van-icon name="arrow-left" size="18" color="var(--theme-primary)" />
                 </button>
                 <div class="task-order-dialog__title">{{ title }}</div>
             </div>
@@ -324,7 +324,8 @@ const isActiveStep = (stepIndex) =>
 
 .task-order-step--active .task-order-step__circle,
 .task-order-step--done .task-order-step__circle {
-    background: #21a149;
+    /*background: var(--theme-primary);*/
+    background:var(--theme-primary-bg-green);
     color: #fff;
 }
 
@@ -472,8 +473,8 @@ const isActiveStep = (stepIndex) =>
     gap: 10px;
     border: 0;
     border-radius: 16px;
-    background: linear-gradient(180deg, #2fc867 0%, #159c42 100%);
-    box-shadow: 0 12px 24px rgba(33, 150, 72, 0.18);
+    background: var(--theme-button-gradient-vertical);
+    box-shadow: 0 12px 24px var(--theme-button-shadow);
     color: #fff;
     font-size: 18px;
     font-weight: 600;

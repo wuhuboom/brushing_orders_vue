@@ -196,7 +196,7 @@ const onClickLeft = () => {
     position: relative;
     overflow: hidden;
     border-radius: 20px;
-    background: linear-gradient(135deg, #20994c 0%, #1e8b43 100%);
+    background: var(--theme-button-gradient);
     color: #fff;
     padding: 18px 16px 16px;
     box-shadow: 0 14px 30px rgba(31, 139, 67, 0.16);

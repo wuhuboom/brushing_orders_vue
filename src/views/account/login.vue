@@ -87,6 +87,8 @@
 
             <div
                 class="auth-submit mt-[20px] mb-[22px]"
+                :class="{ 'auth-submit--disabled': !isLoginReady || isSubmitting }"
+                :aria-disabled="!isLoginReady || isSubmitting"
                 @click="submitForm(ruleFormRef)"
             >
                 {{ $t("log_in") }}
@@ -148,6 +150,7 @@ const rules = computed(() => {
     return {};
 });
 const currentLang = computed(() => LANGS[commonStore.lang] || LANGS.en);
+const isLoginReady = computed(() => Boolean(ruleForm.username && ruleForm.password));
 
 function toRegister() {
     if (switchLeaving.value) return;
@@ -158,9 +161,7 @@ function toRegister() {
 }
 
 function submitForm(formEl) {
-    if (isSubmitting.value) return;
-    if (!ruleForm.username) return showToast(t("username_phone_is_request"));
-    if (!ruleForm.password) return showToast(t("please_enter_password"));
+    if (isSubmitting.value || !isLoginReady.value) return;
     formEl.validate((valid) => {
         if (valid) {
             const data = {
@@ -372,8 +373,8 @@ onMounted(() => {
     width: calc(50% - 4px);
     height: 41px;
     border-radius: 11px;
-    background: linear-gradient(135deg, #34be64 0%, #148c41 100%);
-    box-shadow: 0 3px 8px rgba(34, 160, 80, 0.25);
+    background: var(--theme-primary);
+    box-shadow: 0 3px 8px var(--theme-button-shadow);
     transition:
         transform 0.22s ease,
         box-shadow 0.22s ease;
@@ -516,7 +517,7 @@ onMounted(() => {
 
 .auth-meta__link,
 .auth-footer__link {
-    color: #22a050;
+    color: var(--theme-primary);
 }
 
 .auth-submit {
@@ -525,11 +526,20 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #34be64 0%, #148c41 100%);
-    box-shadow: 0 4px 16px rgba(34, 160, 80, 0.3);
+    background: var(--theme-primary);
+    /*box-shadow: 0 4px 16px var(--theme-button-shadow-strong);*/
     color: #fff;
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 0.5px;
+}
+
+.auth-submit--disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    background: var(--theme-button-disabled);
+    box-shadow: none;
+    color: var(--theme-primary);
+    opacity: 1;
 }
 </style>

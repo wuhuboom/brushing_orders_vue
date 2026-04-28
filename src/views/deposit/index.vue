@@ -330,7 +330,7 @@ onMounted(() => {
     justify-content: space-between;
     padding: 24px 24px 22px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #1f9a47 0%, #1e9644 100%);
+    background: var(--theme-button-gradient-background);
     box-shadow: 0 10px 22px rgba(33, 154, 72, 0.18);
 }
 
@@ -378,7 +378,7 @@ onMounted(() => {
 
 .amount-prefix {
     flex-shrink: 0;
-    color: #23a455;
+    color: var(--theme-primary);
     font-size: 22px;
     line-height: 1;
     font-weight: 500;
@@ -470,14 +470,14 @@ onMounted(() => {
 }
 
 .service-radio.active {
-    border-color: #23a455;
+    border-color: var(--theme-primary);
 }
 
 .service-radio__dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #23a455;
+    background: var(--theme-primary);
 }
 
 .contact-btn {
@@ -485,8 +485,8 @@ onMounted(() => {
     height: 56px;
     border: none;
     border-radius: 18px;
-    background: linear-gradient(90deg, #37c767 0%, #1c9b45 100%);
-    box-shadow: 0 10px 20px rgba(33, 154, 72, 0.2);
+    background: var(--theme-primary);
+    box-shadow: 0 10px 20px var(--theme-button-shadow);
     color: #ffffff;
     font-size: 18px;
     font-weight: 500;

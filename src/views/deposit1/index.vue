@@ -63,8 +63,8 @@
     </div>
     <div class="w-full pl-5 pr-5 mt-[20px]">
         <van-button
-          color="#002D72"
-          :style="{ background: amount ? '#6a4d52' : '#b1a2a5', color: '#fff' }"
+          color="var(--theme-primary)"
+          :style="{ background: amount ? 'var(--theme-button-gradient)' : 'var(--theme-button-disabled)', color: '#fff' }"
           class="w-full"
           @click="deposit"
           >{{ $t("deposit_now") }}</van-button

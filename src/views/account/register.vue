@@ -273,7 +273,7 @@
                 <div class="auth-agreement">
                     <van-checkbox
                         v-model="checked"
-                        checked-color="#22a050"
+                        checked-color="var(--theme-primary)"
                         shape="square"
                         icon-size="20px"
                     >
@@ -288,7 +288,8 @@
 
                 <div
                     class="auth-submit"
-                    :class="{ 'auth-submit--disabled': !checked }"
+                    :class="{ 'auth-submit--disabled': !isRegisterReady || isSubmitting }"
+                    :aria-disabled="!isRegisterReady || isSubmitting"
                     @click="sendCode"
                 >
                     {{ $t("register") }}
@@ -369,6 +370,18 @@ const genderEmoji = computed(() => {
     return "🧑";
 });
 
+const isRegisterReady = computed(() => {
+    return Boolean(
+        checked.value &&
+            ruleForm.username &&
+            ruleForm.password &&
+            ruleForm.sex &&
+            agentPassword.value &&
+            ruleForm.tradePassword &&
+            ruleForm.inviteCode,
+    );
+});
+
 function toLogin() {
     if (switchLeaving.value) return;
     switchLeaving.value = true;
@@ -391,7 +404,7 @@ function handleChangeLang() {
 }
 
 function sendCode() {
-    if (isSubmitting.value) return;
+    if (isSubmitting.value || !isRegisterReady.value) return;
     if (!checked.value)
         return showToast(t("please_tick_and_agree_to_the_argeement"));
     if (!ruleForm.username) return showToast(t("please_enter_username"));
@@ -603,7 +616,7 @@ onMounted(() => {
     position: relative;
     padding: 4px;
     border-radius: 14px;
-    background: #ebf8ee;
+    background: #fff;
     margin-bottom: 22px;
     overflow: hidden;
 }
@@ -615,8 +628,8 @@ onMounted(() => {
     width: calc(50% - 4px);
     height: 41px;
     border-radius: 11px;
-    background: linear-gradient(135deg, #34be64 0%, #148c41 100%);
-    box-shadow: 0 3px 8px rgba(34, 160, 80, 0.25);
+    background: var( --theme-primary);
+    box-shadow: 0 3px 8px var(--theme-button-shadow);
     transform: translateX(calc(100% + 4px));
     transition:
         transform 0.22s ease,
@@ -901,8 +914,8 @@ onMounted(() => {
 }
 
 .auth-agreement :deep(.van-checkbox__icon--checked .van-icon) {
-    border-color: #22a050;
-    background: #22a050;
+    border-color: var(--theme-primary);
+    background: var(--theme-primary);
     color: #fff;
 }
 
@@ -930,8 +943,8 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #34be64 0%, #148c41 100%);
-    box-shadow: 0 4px 16px rgba(34, 160, 80, 0.3);
+    background: var(--theme-primary);
+    /*box-shadow: 0 4px 16px var(--theme-button-shadow-strong);*/
     color: #fff;
     font-size: 16px;
     font-weight: 600;
@@ -944,9 +957,12 @@ onMounted(() => {
 }
 
 .auth-submit--disabled {
-    background: #c5dbce;
+    pointer-events: none;
+    cursor: not-allowed;
+    background: var(--theme-button-disabled);
     box-shadow: none;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--theme-primary);
+    opacity: 1;
 }
 
 .auth-footer,
@@ -975,6 +991,6 @@ onMounted(() => {
 
 .auth-footer__link,
 .auth-help__link {
-    color: #22a050;
+    color: var(--theme-primary);
 }
 </style>

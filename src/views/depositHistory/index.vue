@@ -183,7 +183,7 @@ onMounted(() => {
     width: 12px;
     height: 12px;
     border-radius: 999px;
-    background: #1aa24e;
+    background: var(--theme-primary);
 }
 
 .data-list-loading__dot::before,
@@ -195,12 +195,12 @@ onMounted(() => {
 }
 
 .data-list-loading__dot::before {
-    background: rgba(26, 162, 78, 0.78);
+    background: var(--theme-loading-pulse);
     animation: data-list-loading-pulse 1.05s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 }
 
 .data-list-loading__dot::after {
-    background: #1aa24e;
+    background: var(--theme-primary);
     transform: scale(0.62);
     animation: data-list-loading-core 1.05s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 }
@@ -303,7 +303,7 @@ onMounted(() => {
 }
 
 .record-amount {
-    color: #23a455;
+    color: var(--theme-primary);
     font-size: 14px;
     line-height: 26px;
     font-weight: 600;
@@ -313,7 +313,7 @@ onMounted(() => {
     padding: 4px 12px;
     border-radius: 999px;
     background: #e8f3eb;
-    color: #23a455;
+    color: var(--theme-primary);
     font-size: 11px;
     line-height: 20px;
 }

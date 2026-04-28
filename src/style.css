@@ -4,7 +4,7 @@
   background-color: #dfeee2;
   --app-pc-max-width: 375px;
   --app-message-top: calc(env(safe-area-inset-top, 0px) + 72px);
-  --el-color-primary: #3d3d3d !important;
+  --el-color-primary: var(--theme-primary) !important;
   --el-bg-color-overlay: #F6F6F7 !important;
   --el-border-radius-base: 10px !important;
   --el-component-size-large: 45px !important;
@@ -13,7 +13,7 @@
   --down: #f05150;
   --van-font-size-md: 24px;
   --header-me-width: 50px;
-  --main-color: #ff497c;
+  --main-color: var(--theme-primary);
   --header-logo-width: 150px;
 }
 
@@ -84,12 +84,12 @@ body {
   background: conic-gradient(
     from 214deg,
     rgba(255, 255, 255, 0) 0deg 148deg,
-    rgba(170, 237, 191, 0.12) 148deg 160deg,
-    rgba(98, 208, 129, 0.7) 168deg,
-    #35c766 192deg,
-    #1fad4f 228deg,
-    #169741 264deg,
-    rgba(137, 224, 163, 0.6) 298deg,
+    var(--theme-loading-color-1) 148deg 160deg,
+    var(--theme-loading-color-2) 168deg,
+    var(--theme-loading-color-3) 192deg,
+    var(--theme-loading-color-4) 228deg,
+    var(--theme-loading-color-5) 264deg,
+    var(--theme-loading-color-6) 298deg,
     rgba(255, 255, 255, 0) 322deg 360deg
   );
   -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.1px));
@@ -103,7 +103,7 @@ body {
   width: 5px;
   height: 2px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(199, 244, 213, 0.08), rgba(84, 204, 116, 0.92));
+  background: linear-gradient(90deg, var(--theme-loading-tail-start), var(--theme-loading-tail-end));
   transform: rotate(24deg);
   filter: blur(0.15px);
 }
@@ -161,7 +161,7 @@ input {
   background-color: #0065ff !important;
 }
 .bg-green {
-  background-color: #007513 !important;
+  background-color: var(--theme-primary) !important;
 }
 
 .bg-gray {
@@ -283,7 +283,7 @@ input {
 }
 
 .text-main-bg {
-  color: #007513;
+  color: var(--theme-primary);
 }
 
 .text-up {

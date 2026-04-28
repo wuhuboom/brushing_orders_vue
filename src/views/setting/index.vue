@@ -77,7 +77,7 @@ const logout = () => {
   showConfirmDialog({
     title: t("exit"),
     message: t("are_you_sure_you_want_to_logout"),
-    confirmButtonColor: "#ff9663", // 确认按钮颜色（红色示例）
+    confirmButtonColor: "var(--theme-primary)", // 确认按钮颜色使用公共主题色
   })
     .then(() => {
       userStore.logout();

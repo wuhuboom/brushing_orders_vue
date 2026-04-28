@@ -237,9 +237,8 @@ defineExpose({
     align-items: center;
     border-radius: 24px;
     padding: 22px 20px;
-    background: linear-gradient(135deg, #1e9b49 0%, #228a44 100%);
+    background: var(--theme-button-gradient);
     color: #fff;
-    box-shadow: 0 16px 34px rgba(30, 155, 73, 0.18);
 }
 
 .customer-hero__icon {

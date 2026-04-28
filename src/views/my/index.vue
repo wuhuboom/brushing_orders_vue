@@ -4,7 +4,7 @@
 
         <main class="px-[16px] pt-[85px] pb-[16px]">
             <section
-                class="profile-hero relative overflow-hidden rounded-[18px] bg-gradient-to-br from-[#2fc866] to-[#087f30] px-[20px] py-[24px] text-white"
+                class="profile-hero relative overflow-hidden rounded-[18px] bg-gradient-to-br from-[#333C37] to-[#4A6565] px-[20px] py-[24px] text-white"
             >
                 <div class="hero-bubble hero-bubble--top"></div>
                 <div class="hero-bubble hero-bubble--bottom"></div>
@@ -264,7 +264,7 @@ import { useUserStore } from "@/store/modules/user";
 const router = useRouter();
 const userStore = useUserStore();
 const { t } = useI18n();
-const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
+const userImg = new URL("@/static/images/userImg2.png", import.meta.url).href;
 
 const langRef = ref(null);
 const ContactUsRef = ref(null);
@@ -279,7 +279,7 @@ const myIcons = {
     user: new URL("@/static/images/user-mine.png", import.meta.url).href,
     copy: new URL("@/static/images/copy.png", import.meta.url).href,
     topy: new URL("@/static/images/topy.png", import.meta.url).href,
-    profile: new URL("@/static/images/user-mine.png", import.meta.url).href,
+    profile: new URL("@/static/images/user-mine2.png", import.meta.url).href,
     wallet: new URL("@/static/images/user-wallet.png", import.meta.url).href,
     message: new URL("@/static/images/user-message.png", import.meta.url).href,
     card: new URL("@/static/images/LinkCard.png", import.meta.url).href,
@@ -496,7 +496,7 @@ onDeactivated(() => {
     align-items: center;
     justify-content: center;
     border-radius: 7px;
-    background: #1ba04d;
+    background: var(--theme-green-defalut);
     color: #fff;
     font-size: 12px;
     font-weight: 500;
@@ -517,14 +517,14 @@ onDeactivated(() => {
     align-items: center;
     justify-content: center;
     border-radius: 7px;
-    background: #e9f5ec;
-    color: #176d35;
+    background: var(--theme-primary-soft);
+    color: var(--theme-primary-text);
     font-size: 12px;
     font-weight: 500;
 }
 
 .wallet-btn--primary {
-    background: #169847;
+    background: var(--theme-green-defalut);
     color: #fff;
 }
 
@@ -650,7 +650,7 @@ onDeactivated(() => {
 
 .logout-sheet__confirm {
     margin-top: 26px;
-    background: #df3d3d;
+    background:var(--theme-primary);
     color: #ffffff;
 }
 
@@ -663,8 +663,10 @@ onDeactivated(() => {
 
 .logout-sheet__cancel {
     margin-top: 18px;
-    background: #e9f7ed;
-    color: #159947;
+    color: #D37703;
+    border: 1px solid rgba(211, 119, 3, 1);
+    border-radius: 14px;
+    background: rgba(211, 119, 3, 0.12);
 }
 
 .logout-desktop-layer {

@@ -137,7 +137,7 @@ const onClickLeft = () => history.back();
     position: relative;
     overflow: hidden;
     border-radius: 24px;
-    background: linear-gradient(135deg, #23984b 0%, #218643 100%);
+    background: var(--theme-button-gradient);
     color: #fff;
     padding: 18px 16px 20px;
     box-shadow: 0 16px 30px rgba(31, 130, 66, 0.16);

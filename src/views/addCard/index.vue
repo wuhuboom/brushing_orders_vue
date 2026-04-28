@@ -80,7 +80,7 @@
         color=""
         class="w-full"
         style="
-            background: #6a4d52;
+            background: var(--theme-button-gradient);
             color: #fff;
           "
         @click="submitForm"

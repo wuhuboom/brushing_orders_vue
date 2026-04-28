@@ -281,7 +281,7 @@ const onClickLeft = () => {
     overflow: hidden;
     border-radius: 22px;
     padding: 18px 18px 20px;
-    background: linear-gradient(135deg, #209a4c 0%, #1f8e43 100%);
+    background: var(--theme-button-gradient);
     color: #fff;
     box-shadow: 0 16px 30px rgba(31, 142, 67, 0.16);
 }
@@ -383,10 +383,10 @@ const onClickLeft = () => {
 }
 
 .event-tab--active {
-    background: #28a34d;
-    border-color: #28a34d;
+    background: var(--theme-primary);
+    border-color: var(--theme-primary);
     color: #fff;
-    box-shadow: 0 8px 18px rgba(40, 163, 77, 0.2);
+    box-shadow: 0 8px 18px var(--theme-button-shadow);
     transform: translateY(-1px);
 }
 
@@ -528,7 +528,7 @@ const onClickLeft = () => {
     display: block;
     height: 100%;
     border-radius: inherit;
-    background: #21a651;
+    background: var(--theme-primary);
 }
 
 .event-card__info-row {
@@ -547,7 +547,7 @@ const onClickLeft = () => {
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #22a050;
+    color: var(--theme-primary);
     font-size: 14px;
     line-height: 22px;
 }
@@ -578,7 +578,7 @@ const onClickLeft = () => {
     height: 36px;
     border: none;
     border-radius: 10px;
-    background: #24a956;
+    background: var(--theme-primary);
     color: #fff;
     font-size: 14px;
     line-height: 20px;
@@ -601,7 +601,7 @@ const onClickLeft = () => {
 }
 
 .theme-green .event-card__banner {
-    background: linear-gradient(135deg, #209a4c 0%, #1d8f43 100%);
+    background: var(--theme-button-gradient);
 }
 
 .theme-blue .event-card__banner {

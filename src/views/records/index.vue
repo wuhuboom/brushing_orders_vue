@@ -512,7 +512,7 @@ onUnmounted(() => {
     width: 12px;
     height: 12px;
     border-radius: 999px;
-    background: #1aa24e;
+    background: var(--theme-primary);
 }
 
 .records-list-loading__dot::before,
@@ -524,13 +524,13 @@ onUnmounted(() => {
 }
 
 .records-list-loading__dot::before {
-    background: rgba(26, 162, 78, 0.78);
+    background: var(--theme-loading-pulse);
     animation: records-loading-pulse 1.05s cubic-bezier(0.25, 0.1, 0.25, 1)
         infinite;
 }
 
 .records-list-loading__dot::after {
-    background: #1aa24e;
+    background: var(--theme-primary);
     transform: scale(0.62);
     animation: records-loading-core 1.05s cubic-bezier(0.25, 0.1, 0.25, 1)
         infinite;
@@ -583,8 +583,8 @@ onUnmounted(() => {
 }
 
 .record-tab--active {
-    border-color: #1aa24e;
-    background: #1aa24e;
+    border-color: var(--theme-green-defalut);
+    background: var(--theme-green-defalut);
     color: #fff;
 }
 
@@ -623,7 +623,7 @@ onUnmounted(() => {
 }
 
 .status-dot--done {
-    background: #19a653;
+    background: var(--theme-primary);
 }
 
 .status-dot--pending {
@@ -641,11 +641,11 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     border-radius: 7px;
-    background: #1aa24e;
+    background: var(--theme-primary);
     color: #fff;
     font-size: 13px;
     font-weight: 600;
-    box-shadow: 0 8px 16px rgba(26, 162, 78, 0.2);
+    box-shadow: 0 8px 16px var(--theme-button-shadow);
 }
 
 .record-task-dialog {
@@ -723,7 +723,7 @@ onUnmounted(() => {
 
 .record-step--active .record-step__circle,
 .record-step--done .record-step__circle {
-    background: #21a149;
+    background: var(--theme-primary);
     color: #fff;
 }
 
@@ -910,8 +910,8 @@ onUnmounted(() => {
     height: 62px;
     border: 0;
     border-radius: 16px;
-    background: linear-gradient(180deg, #2fc867 0%, #159c42 100%);
-    box-shadow: 0 12px 24px rgba(33, 150, 72, 0.18);
+    background: var(--theme-button-gradient-vertical);
+    box-shadow: 0 12px 24px var(--theme-button-shadow);
     color: #fff;
     font-size: 18px;
     font-weight: 600;

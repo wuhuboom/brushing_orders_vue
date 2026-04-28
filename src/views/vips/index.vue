@@ -2,7 +2,7 @@
     <div class="vip-page min-h-[100vh] bg-[#f5faf6] text-[#14351f]">
         <main class="pb-[18px] pt-0">
             <section
-                class="vip-hero relative overflow-hidden bg-gradient-to-br from-[#28bd60] to-[#0a8431] px-[22px] py-[34px] text-center text-white"
+                class="vip-hero relative overflow-hidden bg-gradient-to-br from-[#333C37] to-[#4A6565] px-[22px] py-[34px] text-center text-white"
             >
                 <div class="vip-bubble vip-bubble--top"></div>
                 <div class="vip-bubble vip-bubble--bottom"></div>
@@ -476,28 +476,28 @@ const themes = [
         borderClass: "border-[#159947]",
         statColor: "#19a653",
         statTextClass: "text-[#159947]",
-        buttonClass: "bg-[#159947]",
+        buttonClass: "vip-level-button--theme",
     },
     {
         headClass: "bg-gradient-to-br from-[#62bbea] to-[#2787d7]",
         borderClass: "border-[#2787d7]",
         statColor: "#349be0",
         statTextClass: "text-[#349be0]",
-        buttonClass: "bg-[#2b8fde]",
+        buttonClass: "vip-level-button--theme",
     },
     {
         headClass: "bg-gradient-to-br from-[#ff6656] to-[#dd3426]",
         borderClass: "border-[#dd3426]",
         statColor: "#ef4b3d",
         statTextClass: "text-[#ef4b3d]",
-        buttonClass: "bg-[#e03a2b]",
+        buttonClass: "vip-level-button--theme",
     },
     {
         headClass: "bg-gradient-to-br from-[#f4bb2e] to-[#d68d0f]",
         borderClass: "border-[#d68d0f]",
         statColor: "#e39a18",
         statTextClass: "text-[#e39a18]",
-        buttonClass: "bg-[#d99114]",
+        buttonClass: "vip-level-button--theme",
     },
 ];
 
@@ -678,7 +678,7 @@ function isLevelButtonDisabled(item, index) {
 
 function levelButtonClass(item, index) {
     if (isCurrentLevel(item, index)) {
-        return "bg-[#edf7f0] !text-[#159947] border border-[#b7dec1]";
+        return "vip-level-button--current";
     }
 
     if (isLevelButtonDisabled(item, index)) {
@@ -970,14 +970,24 @@ onMounted(() => {
     object-fit: contain;
 }
 
+.vip-level-button--current {
+    border: 1px solid var(--theme-primary-border);
+    background: var(--theme-primary-weak) !important;
+    color: var(--theme-primary) !important;
+}
+
+.vip-level-button--theme {
+    background: var(--theme-primary);
+}
+
 .vip-level-button:disabled {
     cursor: not-allowed;
     pointer-events: none;
 }
 
 .vip-level-button--disabled {
-    border: 1px solid #cfe3d3;
-    background: #edf7f0 !important;
+    border: 1px solid var(--theme-primary-border);
+    background: var(--theme-primary-weak) !important;
     color: #7b9682 !important;
     opacity: 0.72;
 }

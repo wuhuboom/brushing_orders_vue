@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="action-btn" @click.stop="editAccount(item)">
-                        <van-icon name="edit" size="20" color="#23A455" />
+                        <van-icon name="edit" size="20" color="var(--theme-primary)" />
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="action-btn" @click.stop="editAccount(item)">
-                        <van-icon name="edit" size="20" color="#23A455" />
+                        <van-icon name="edit" size="20" color="var(--theme-primary)" />
                     </div>
                 </div>
             </div>
@@ -353,7 +353,7 @@ onMounted(async () => {
 }
 
 .card-list-page :deep(.van-nav-bar .van-icon) {
-    color: #23a455;
+    color: var(--theme-primary);
 }
 
 .card-list-page :deep(.van-nav-bar::after) {
@@ -379,11 +379,7 @@ onMounted(async () => {
     padding: 20px 22px;
     border-radius: 16px;
     box-shadow: 0px 4px 16px 0px rgba(34, 160, 80, 0.22);
-    background: linear-gradient(
-        164.83deg,
-        rgba(34, 160, 80, 1) 0%,
-        rgba(20, 130, 60, 1) 100%
-    );
+    background: var(--theme-button-gradient-background);
 }
 
 .summary-left {
@@ -436,7 +432,7 @@ onMounted(async () => {
 }
 
 .section-icon {
-    color: #23a455;
+    color: var(--theme-primary);
     display: flex;
     align-items: center;
 }
@@ -506,7 +502,7 @@ onMounted(async () => {
 }
 
 .icon-green {
-    background: #23a455;
+    background: var(--theme-primary);
 }
 
 .icon-red {
@@ -578,15 +574,15 @@ onMounted(async () => {
     height: 58px;
     border: none;
     border-radius: 16px;
-    background: linear-gradient(135deg, #34c263 0%, #169741 100%);
+    background: var(--theme-button-gradient);
     color: #ffffff;
     font-size: 16px;
-    box-shadow: 0 10px 24px rgba(35, 164, 85, 0.18);
+    box-shadow: 0 10px 24px var(--theme-button-shadow);
 }
 
 .action-button--secondary {
-    background: #d9efe0;
-    color: #1e9c48;
+    background: var(--theme-primary);
+    color: #fff;
     box-shadow: none;
 }
 

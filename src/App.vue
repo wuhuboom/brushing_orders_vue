@@ -1,10 +1,12 @@
 <template>
     <div ref="appFrameRef" class="app-frame">
         <router-view
-            class="app-route-view text-white font-normal dark:text-[#303133] text-sm w-full hide-scroll overflow-scroll"
+            class="app-route-view text-white font-normal dark:text-[#303133] text-sm w-full overflow-scroll"
             :class="{
                 'app-route-view--stacking': stackAnimating,
                 'app-route-view--with-footer': isMainTabPage,
+                'home-scrollbar': route.path === '/',
+                'hide-scroll': route.path !== '/',
             }"
             id="router-view"
         />

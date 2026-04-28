@@ -136,7 +136,7 @@ onMounted(async () => {
 }
 
 .payment-method-page :deep(.van-nav-bar .van-icon) {
-  color: #23a455;
+  color: var(--theme-primary);
 }
 
 .payment-method-page :deep(.van-nav-bar::after) {
@@ -240,8 +240,8 @@ onMounted(async () => {
 }
 
 .submit-btn--active {
-  background: linear-gradient(180deg, #2fc867 0%, #159c42 100%);
-  box-shadow: 0 14px 24px rgba(33, 150, 72, 0.2);
+  background: var(--theme-button-gradient-vertical);
+  box-shadow: 0 14px 24px var(--theme-button-shadow);
   color: #ffffff;
 }
 </style>

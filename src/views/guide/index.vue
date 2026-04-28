@@ -202,7 +202,7 @@ const onClickLeft = () => {
     overflow: hidden;
     border-radius: 22px;
     padding: 18px 16px 20px;
-    background: linear-gradient(135deg, #28b95d 0%, #1f9e4f 100%);
+    background: var(--theme-button-gradient);
     color: #fff;
     box-shadow: 0 14px 30px rgba(38, 166, 91, 0.18);
 }
@@ -436,7 +436,7 @@ const onClickLeft = () => {
 }
 
 :deep(.guide-nav .van-icon-arrow-left) {
-    color: #25a14d;
+    color: var(--theme-primary);
     font-size: 22px;
 }
 

@@ -17,7 +17,6 @@
                         @click="toNotice"
                     >
                         <img src="@/static/images/home/alert1.png" />
-                        <!-- <span class="top-icon-btn__badge"></span> -->
                     </button>
                     <button
                         type="button"
@@ -55,17 +54,17 @@
                                 {{ $t("hi") }},{{ displayName }}
                             </div>
                             <div class="hero-card__tags">
-                                <span class="hero-tag hero-tag--vip"
-                                    ><img
+                                <span class="hero-tag hero-tag--vip">
+                                    <img
                                         src="@/static/images/home/hggg.png"
                                         class="h-[16px] w-[16px] mr-[5px]"
                                     />
                                     <span>{{ userLevel || "VIP1" }}</span>
                                 </span>
-                                <span class="hero-tag"
-                                    >{{ orderCount || 0 }}
-                                    {{ $t("tasks") }}</span
-                                >
+                                <span class="hero-tag">
+                                    {{ orderCount || 0 }}
+                                    {{ $t("tasks") }}
+                                </span>
                             </div>
                         </div>
 
@@ -132,10 +131,6 @@
                         </div>
                         <div class="blind-box-panel__actions">
                             <span class="today-pill">{{ $t("today") }}</span>
-                            <!-- <button type="button" class="reset-btn">
-                                <van-icon name="replay" size="14" />
-                                <span>{{ $t("reset") }}</span>
-                            </button> -->
                         </div>
                     </div>
 
@@ -148,26 +143,10 @@
                         }}
                     </div>
 
-                    <!-- <div class="blind-box-tags">
-                        <span class="blind-box-tag blind-box-tag--common"
-                            >ommon</span
-                        >
-                        <span class="blind-box-tag blind-box-tag--rare"
-                            >Rare</span
-                        >
-                        <span class="blind-box-tag blind-box-tag--epic"
-                            >Epic</span
-                        >
-                        <span class="blind-box-tag blind-box-tag--legendary"
-                            >Legendary</span
-                        >
-                    </div> -->
-
                     <div class="blind-box-grid">
-                        <button
+                        <div
                             v-for="(item, index) in visibleGoods"
                             :key="getBlindBoxItemKey(item, index)"
-                            type="button"
                             class="blind-box-item"
                             :class="[
                                 blindBoxAnimationClass,
@@ -177,8 +156,6 @@
                                 },
                             ]"
                             :style="{ '--blind-box-index': index }"
-                            :disabled="!item.coverUrl || !isBlindBoxReady"
-                            @click="handleClick"
                         >
                             <div class="blind-box-item__corner"></div>
                             <div class="blind-box-item__icon">
@@ -196,11 +173,20 @@
                                     color="#22a447"
                                 />
                             </div>
-                            <div class="blind-box-item__text">
+                            <!-- <div class="blind-box-item__text">
                                 {{ $t("tap_to_open") }}
-                            </div>
-                        </button>
+                            </div> -->
+                        </div>
                     </div>
+
+                    <button
+                        type="button"
+                        class="blind-box-start-btn"
+                        :disabled="!isBlindBoxReady"
+                        @click="handleClick"
+                    >
+                        Start
+                    </button>
                 </section>
 
                 <section class="support-card">
@@ -320,9 +306,15 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import { computed, onMounted, ref, onUnmounted } from "vue";
-import { showLoadingToast, closeToast, showToast, showSuccessToast } from "@/util/message";
+import {
+    showLoadingToast,
+    closeToast,
+    showToast,
+    showSuccessToast,
+} from "@/util/message";
 import { useI18n } from "vue-i18n";
 import TaskOrderDialog from "@/components/TaskOrderDialog.vue";
 import {
@@ -332,18 +324,20 @@ import {
     submitOrder,
     getTradeConfig,
 } from "../../api/apis";
-const url = window.g.VITE_API_IMG_URL;
 import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";
+
+const url = window.g.VITE_API_IMG_URL;
 const userStore = useUserStore();
 const router = useRouter();
 const { t } = useI18n();
+
 const userInfo = ref({});
 const avatarUrl = ref("");
-
 let timer = null;
+
 const goodsList = ref([]);
 const visibleGoodsSource = ref([]);
 const showCenter = ref(false);
@@ -359,6 +353,7 @@ const taskStepLabels = computed(() => [
     t("place_order"),
     t("submit_proof"),
 ]);
+
 const blindBoxAnimationClass = ref("blind-box-item--anim-rise");
 const blindBoxRenderSeed = ref(0);
 const blindBoxAnimationClasses = [
@@ -488,7 +483,6 @@ const preloadBlindBoxImages = async (list) => {
     const normalizedList = normalizeBlindBoxList(list);
     const nextGoodsKey = getBlindBoxGoodsKey(normalizedList);
 
-    // 轮询接口返回同一批商品时不再重复赋值，避免九宫格每 10 秒重新动画/重刷。
     if (isBlindBoxReady.value && nextGoodsKey === lastBlindBoxGoodsKey) {
         return;
     }
@@ -671,6 +665,8 @@ onUnmounted(() => {
 });
 
 const userLevel = ref("");
+const orderCount = ref(0);
+
 const userGetInfoMethods = () => {
     userGetInfo().then((res) => {
         userInfo.value = res.data;
@@ -680,13 +676,13 @@ const userGetInfoMethods = () => {
     });
 };
 
-const orderCount = ref(0);
 onMounted(() => {
     getList();
     userGetInfoMethods();
     tradeConfig();
 });
 </script>
+
 <style scoped>
 .starting-page {
     min-height: 100vh;
@@ -800,9 +796,7 @@ onMounted(() => {
     overflow: hidden;
     margin-top: 0;
     padding: 18px 18px 0;
-    /*border-radius: 0 0 18px 18px;*/
-    background: linear-gradient(135deg, #2bc35b 0%, #18a046 100%);
-    box-shadow: 0 12px 28px rgba(33, 150, 72, 0.18);
+    background: var(--theme-button-gradient-background);
 }
 
 .hero-card__bubble {
@@ -906,7 +900,7 @@ onMounted(() => {
     height: 28px;
     padding: 0 11px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 215, 97, 0.26);
     color: #eaf8ee;
     font-size: 12px;
     line-height: 1;
@@ -937,7 +931,7 @@ onMounted(() => {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin-top: 18px;
-    background: rgba(20, 126, 57, 0.3);
+    background: rgba(255, 255, 255, 0.08);
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
     overflow: hidden;
@@ -1120,10 +1114,6 @@ onMounted(() => {
     will-change: transform, opacity;
 }
 
-.blind-box-item:disabled {
-    cursor: default;
-}
-
 .blind-box-item--placeholder {
     opacity: 1;
     transform: none;
@@ -1170,10 +1160,6 @@ onMounted(() => {
     animation-name: blindBoxRevealBlur;
 }
 
-.blind-box-item:active {
-    transform: translateY(0) scale(0.98);
-}
-
 .blind-box-item__corner {
     position: absolute;
     top: 0;
@@ -1207,6 +1193,28 @@ onMounted(() => {
     font-size: 14px;
     line-height: 1.25;
     text-align: center;
+}
+
+.blind-box-start-btn {
+    width: 100%;
+    height:56px;
+    margin-top: 18px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--theme-primary, #d87c00);
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    box-shadow: 0 8px 18px rgba(216, 124, 0, 0.18);
+}
+
+.blind-box-start-btn:active {
+    transform: translateY(1px);
+}
+
+.blind-box-start-btn:disabled {
+    opacity: 0.65;
+    cursor: default;
 }
 
 @keyframes blindBoxRevealRise {
@@ -1474,7 +1482,7 @@ onMounted(() => {
 
 .task-step--active .task-step__circle,
 .task-step--done .task-step__circle {
-    background: #21a149;
+    background: var(--theme-primary);
     color: #ffffff;
 }
 
@@ -1715,8 +1723,8 @@ onMounted(() => {
     height: 62px;
     border: 0;
     border-radius: 16px;
-    background: linear-gradient(180deg, #2fc867 0%, #159c42 100%);
-    box-shadow: 0 12px 24px rgba(33, 150, 72, 0.18);
+    background: var(--theme-button-gradient-vertical);
+    box-shadow: 0 12px 24px var(--theme-button-shadow);
     color: #ffffff;
     font-size: 18px;
     font-weight: 600;
@@ -1808,6 +1816,12 @@ onMounted(() => {
     .blind-box-item {
         min-height: 138px;
         border-radius: 16px;
+    }
+
+    .blind-box-start-btn {
+        height: 56px;
+        margin-top: 16px;
+        font-size: 18px;
     }
 
     .task-step {

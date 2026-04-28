@@ -38,7 +38,7 @@
                 @click="addType(2)"
             >
                 <div class="empty-account-icon">
-                    <van-icon name="plus" size="20" color="#23A455" />
+                    <van-icon name="plus" size="20" color="var(--theme-primary)" />
                 </div>
                 <div>
                     <div class="empty-account-title">
@@ -77,7 +77,7 @@
                         <!-- <van-icon
                             :name="item.type == 1 ? 'balance-o' : 'coupon-o'"
                             size="22"
-                            color="#23A455"
+                            color="var(--theme-primary)"
                         />
                          -->
                         <img src="@/static/images/bank1.png" alt="" />
@@ -105,10 +105,10 @@
             </div>
 
             <div class="manage-link" @click="toList">
-                <!-- <van-icon name="balance-o" size="18" color="#23A455" /> -->
+                <!-- <van-icon name="balance-o" size="18" color="var(--theme-primary)" /> -->
                 <img src="@/static/images/bank1.png" alt="" />
                 <span>{{ $t("manage_bound_accounts") }}</span>
-                <van-icon name="arrow" size="18" color="#23A455" />
+                <van-icon name="arrow" size="18" color="var(--theme-primary)" />
             </div>
 
             <div class="section-title mt-[20px]">
@@ -131,7 +131,7 @@
             <div class="tip-card tip-card--password">
                 <div class="tip-card__icon tip-card__icon--lock">
                     <img src="@/static/images/lockp.png" alt="" />
-                    <!-- <van-icon name="lock" size="16" color="#25A456" /> -->
+                    <!-- <van-icon name="lock" size="16" color="var(--theme-primary)" /> -->
                 </div>
                 <span
                     >A withdrawal password is required to confirm the
@@ -149,7 +149,7 @@
             <div v-if="false" class="withdraw-password-card mt-[20px]">
                 <div class="withdraw-password-header">
                     <div class="withdraw-password-icon">
-                        <van-icon name="lock" size="22" color="#23A455" />
+                        <van-icon name="lock" size="22" color="var(--theme-green-defalut)" />
 
                         <img src="@/static/images/locks.png" alt="" />
                     </div>
@@ -229,7 +229,7 @@
 
                 <div class="withdraw-password-header">
                     <div class="withdraw-password-icon">
-                        <van-icon name="lock" size="22" color="#23A455" />
+                        <van-icon name="lock" size="22" color="var(--theme-green-defalut)" />
                     </div>
                     <div class="min-w-0 flex-1">
                         <div class="withdraw-password-title">
@@ -256,7 +256,7 @@
                     </div>
                 </div>
 
-                <!-- 旧版交易密码控件保留参考：<van-password-input :value="ruleForm.tradePassword" :gutter="10" /> -->
+                <!-- ：<van-password-input :value="ruleForm.tradePassword" :gutter="10" /> -->
                 <div class="password-input-row">
                     <van-field
                         :model-value="tradePasswordInputValue"
@@ -572,7 +572,7 @@ onUnmounted(() => {
 }
 
 .withdraw-page :deep(.van-nav-bar .van-icon) {
-    color: #23a455;
+    color: var(--theme-primary);
 }
 
 .withdraw-page :deep(.van-nav-bar::after) {
@@ -592,8 +592,8 @@ onUnmounted(() => {
     gap: 12px;
     padding: 18px 22px 20px;
     border-radius: 18px;
-    background: linear-gradient(135deg, #24aa4d 0%, #169741 100%);
-    box-shadow: 0 10px 24px rgba(35, 164, 85, 0.14);
+    background: var(--theme-button-gradient-background);
+    /*box-shadow: 0 10px 24px var(--theme-button-shadow);*/
 }
 
 .balance-label {
@@ -707,14 +707,14 @@ onUnmounted(() => {
 }
 
 .radio-circle.active {
-    border-color: #23a455;
+    border-color: var(--theme-green-defalut);
 }
 
 .radio-dot {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: #23a455;
+    background: var(--theme-green-defalut);
 }
 
 .account-row-icon {
@@ -760,7 +760,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #23a455;
+    color: var(--theme-green-defalut);
     font-size: 15px;
     font-weight: 500;
 }
@@ -786,7 +786,7 @@ onUnmounted(() => {
     left: 18px;
     top: 50%;
     transform: translateY(-50%);
-    color: #23a455;
+    color: var(--theme-green-defalut);
     font-size: 28px;
     font-weight: 700;
     line-height: 1;
@@ -824,7 +824,7 @@ onUnmounted(() => {
     right: 18px;
     top: 50%;
     transform: translateY(-50%);
-    color: #23a455;
+    color: var(--theme-green-defalut);
     font-size: 15px;
     font-weight: 500;
 }
@@ -1021,7 +1021,7 @@ onUnmounted(() => {
     height: 56px;
     border: none;
     border-radius: 14px;
-    background: linear-gradient(135deg, #32c767 0%, #118d37 100%);
+    background: var(--theme-primary);
     color: #ffffff;
     font-size: 16px;
     font-weight: 700;
@@ -1049,11 +1049,11 @@ onUnmounted(() => {
     height: 52px;
     border: none;
     border-radius: 14px;
-    background: linear-gradient(135deg, #32c767 0%, #118d37 100%);
+    background: var(--theme-primary);
     color: #ffffff;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: 0 10px 24px rgba(35, 164, 85, 0.18);
+    box-shadow: 0 10px 24px var(--theme-button-shadow);
 }
 
 .submit-btn__inner {

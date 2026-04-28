@@ -222,7 +222,7 @@ onMounted(() => {
 }
 
 .profile-item-page :deep(.van-nav-bar .van-icon) {
-    color: #23a455;
+    color: var(--theme-primary);
     font-size: 20px;
 }
 
@@ -235,7 +235,7 @@ onMounted(() => {
     height: 86px;
     border-radius: 50%;
     border: 3px solid #d6efe0;
-    background: #23a455;
+    background: var(--theme-primary);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -256,7 +256,7 @@ onMounted(() => {
     width: 24px;
     height: 24px;
     /*border-radius: 50%;
-    background: #23a455;
+    background: var(--theme-primary);
     border: 2px solid #ffffff;
     box-shadow: 0 2px 8px rgba(35, 164, 85, 0.2);*/
     display: flex;
@@ -297,7 +297,7 @@ onMounted(() => {
     min-height: 62px;
     padding: 0 16px;
     border-radius: 16px;
-    background: linear-gradient(135deg, #35c766 0%, #179249 100%);
+    background: var(--theme-button-gradient);
 }
 
 .security-icon {
