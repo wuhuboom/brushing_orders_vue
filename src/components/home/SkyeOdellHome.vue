@@ -1,6 +1,6 @@
 <template>
     <section class="skye-home-embed">
-        <div class="skye-social-bar" :aria-label="t('sk_social_label')">
+        <!-- <div class="skye-social-bar" :aria-label="t('sk_social_label')">
             <span
                 v-for="item in socialItems"
                 :key="item.key"
@@ -8,7 +8,7 @@
             >
                 <img :src="item.icon" :alt="item.label" />
             </span>
-        </div>
+        </div> -->
 
         <header class="skye-site-header">
             <img class="skye-logo" :src="logo" :alt="t('sk_logo_alt')" />
@@ -203,7 +203,7 @@
             </div>
         </section>
 
-        <section class="skye-reviews-section">
+        <!-- <section class="skye-reviews-section">
             <div
                 class="skye-review-viewport"
                 :class="{ 'is-dragging': reviewMouseDragging }"
@@ -291,10 +291,10 @@
                 {{ t("sk_score_of") }} 5,<br />{{ t("sk_based_on") }}
                 <a href="javascript:void(0)">{{ t("sk_reviews_total") }}</a>
             </div>
-            <!-- <div class="skye-review-badge">
+             <div class="skye-review-badge">
                 {{ t("sk_verified") }} <span>ⓘ</span>
-            </div> -->
-        </section>
+            </div>
+        </section> -->
 
         <section class="skye-insights-section">
             <div class="skye-insights-bg"></div>
@@ -344,7 +344,7 @@
             </div>
         </section>
 
-        <section class="skye-talk-section">
+        <!-- <section class="skye-talk-section">
             <div class="skye-talk-art" :aria-label="t('sk_talk_label')">
                 <span class="skye-talk-art__text skye-talk-art__text--lets">{{
                     t("sk_lets")
@@ -356,8 +356,8 @@
             <a class="skye-talk-phone" href="tel:7152550036">{{
                 t("sk_phone")
             }}</a>
-            <!-- <a class="skye-talk-button" href="mailto:">{{ t('sk_email') }}</a> -->
-        </section>
+             <a class="skye-talk-button" href="mailto:">{{ t('sk_email') }}</a>
+        </section> -->
 
         <footer class="skye-footer">
             <img
@@ -370,7 +370,7 @@
 
             <p class="skye-footer__desc">{{ t("sk_footer_desc") }}</p>
 
-            <div
+            <!-- <div
                 class="skye-footer__social"
                 :aria-label="t('sk_footer_social')"
             >
@@ -381,7 +381,7 @@
                 >
                     <img :src="item.icon" :alt="item.label" />
                 </span>
-            </div>
+            </div> -->
             <!--
             <button class="skye-footer__button" type="button">
                 {{ t("sk_footer_btn") }}
@@ -2017,7 +2017,7 @@ onBeforeUnmount(() => {
     max-width: 335px;
     margin: 75px auto 0;
     color: #fff;
-    font-size: 15px;
+    font-size: 10px;
     font-weight: 700;
     line-height: 1.62;
 }
