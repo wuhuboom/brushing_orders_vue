@@ -447,7 +447,7 @@
   "configure_recharge_withdrawal": "Configure recharge & withdrawal channels",
   "message_center": "Message Center",
   "system_notifications_announcements": "System notifications & announcements",
-  "link_your_bank_card": "Link Your Bank Card",
+  "link_your_bank_card": "Payment method",
   "bind_bank_card_for_withdrawals": "Bind bank card for withdrawals",
   "get_help_resolve_issues": "Get help & resolve issues",
   "confirm_log_out": "Confirm Log Out",
@@ -616,18 +616,162 @@
   "income_guide_sections": [
     {
       "title": "1) Basic Salary",
-      "image": "{basicSalaryImage}",
-      "content": "<p>The company employs a cumulative sign-in mechanism as part of its salary distribution structure, designed to encourage users to complete their daily missions consistently. Although the basic salary amount is fixed, it is <strong>not</strong> paid as a lump sum. Instead, the salary is released after a designated number of working days—such as 2 days, 4 days, or 7 days—to promote continuous mission completion. Once users fulfill the required number of working days, the company will issue the basic salary accordingly.</p>"
+      "image": "",
+      "content": "<p>The company employs a cumulative sign-in mechanism as part of its salary distribution structure, designed to encourage users to complete their daily missions consistently. Although the basic salary amount is fixed, it is <strong>not</strong> paid as a lump sum. Instead, the salary is released after a designated number of working days, such as 2 days, 4 days, or 10 days, to encourage consistent daily mission completion. Once users complete the required number of working days, the company will pay them accordingly.</p>",
+      "salaryScheme": {
+        "title": "Salary Scheme",
+        "subtitle": "Sign In . Show Up . Get Paid",
+        "rows": [
+          {
+            "name": "Sign in",
+            "days": "2working days",
+            "amount": "USD130"
+          },
+          {
+            "name": "Sign in",
+            "days": "4working days",
+            "amount": "USD1,200"
+          },
+          {
+            "name": "Sign in",
+            "days": "7working days",
+            "amount": "USD1,500"
+          },
+          {
+            "name": "Sign in",
+            "days": "15working days",
+            "amount": "USD1,800"
+          },
+          {
+            "name": "Sign in",
+            "days": "30working days",
+            "amount": "USD2,370"
+          }
+        ],
+        "howTitle": "How It Works:",
+        "howText": "For monthly pay, sign in and maintain your profit, you can gain guaranteed income!",
+        "earnText": "The more you active up, the more you earn. Invite to Start!",
+        "tip": "Perfect attendance will earn you up to USD 7,000 per month."
+      }
     },
     {
       "title": "2) Reset Bonus",
-      "image": "{resetBonusImage}",
-      "content": "<p>The Reset Bonus serves as one of the most significant sources of income when you first begin working with us. Each user may complete <strong>two sets of missions per day</strong>, and merchants provide additional Reset Bonuses to encourage consistent mission completion.</p><p>Under the reset incentive structure:</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>You will receive an <strong>additional 10 USD bonus</strong> each time you reset your account to begin the first mission with <strong>100 USD</strong>.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>When your <strong>total reset amount exceeds 1,500 USD in a single day</strong>, you will receive <strong>an extra 4% bonus</strong> based on the cumulative reset amount for the two sets completed that day.</li></ol>"
+      "image": "",
+      "content": "<p>The Reset Bonus serves as one of the most significant sources of income when you first begin working with us. Each user may complete <strong>two sets of missions per day</strong>, and merchants provide additional Reset Bonuses to encourage consistent mission completion.</p><p>Under the reset incentive structure:</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>You will receive an <strong>additional 10 USD bonus</strong> each time you reset your account to begin the first mission with <strong>100 USD</strong>.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>When your <strong>total reset amount exceeds 1,500 USD in a single day</strong>, you will receive <strong>an extra 4% bonus</strong> based on the cumulative reset amount for the two sets completed that day.</li></ol>",
+      "resetBonusScheme": {
+        "title": "Salary Scheme",
+        "subtitle": "Sign In . Show Up . Get Paid",
+        "plans": [
+          {
+            "name": "Standard",
+            "amountLabel": "AMOUNT",
+            "amount": "USD 100",
+            "extraLabel": "GET EXTRA",
+            "extra": "USD 10"
+          },
+          {
+            "name": "Hot Pick",
+            "amountLabel": "AMOUNT",
+            "amount": "USD 500",
+            "extraLabel": "GET EXTRA",
+            "extra": "USD 60"
+          },
+          {
+            "name": "Premium",
+            "amountLabel": "AMOUNT",
+            "amount": "USD 1000",
+            "extraLabel": "GET EXTRA",
+            "extra": "USD 120"
+          },
+          {
+            "name": "Elite",
+            "amountLabel": "AMOUNT",
+            "amount": "USD 1600",
+            "extraLabel": "GET EXTRA",
+            "extra": "USD 200"
+          },
+          {
+            "name": "Recommended",
+            "amountLabel": "AMOUNT",
+            "amount": "USD 5500",
+            "extraLabel": "GET EXTRA",
+            "extra": "USD 1200"
+          },
+          {
+            "name": "Elite Plus",
+            "amountLabel": "AMOUNT",
+            "amount": "USD 10000",
+            "extraLabel": "GET EXTRA",
+            "extra": "USD 2400"
+          }
+        ],
+        "advanceTitle": "=Accumulated Advance Rewards For The Day",
+        "advanceRows": [
+          {
+            "title": "ADVANCES ON DAY(USD)",
+            "range": "1,500-9,999",
+            "desc": "WILL GET(USD)",
+            "bonus": "4%",
+            "suffix": "Advance Bonus"
+          },
+          {
+            "title": "ADVANCES ON DAY(USD)",
+            "range": "10,000-19,999",
+            "desc": "WILL GET(USD)",
+            "bonus": "8%",
+            "suffix": "Advance Bonus"
+          },
+          {
+            "title": "ADVANCES ON DAY(USD)",
+            "range": "20,000-49,999",
+            "desc": "WILL GET(USD)",
+            "bonus": "4%",
+            "suffix": "Advance Bonus"
+          },
+          {
+            "title": "ADVANCES ON DAY(USD)",
+            "range": "50,000-Above",
+            "desc": "WILL GET(USD)",
+            "bonus": "4%",
+            "suffix": "Advance Bonus"
+          }
+        ]
+      }
     },
     {
       "title": "3) Daily Profits",
       "image": "",
-      "content": "<p>Daily profits represent your main income stream. The system assigns products from various merchants for Enhancement based on your current account balance. For each product you optimize, you will earn <strong>0.5% to 2.5%</strong> of the product price as profit.</p><p>Profit levels are determined by your <strong>VIP tier</strong>—the higher your VIP level, the higher your profit rate. Additionally, the number of missions per set increases as your VIP level advances.</p><p>Some merchants also provide <strong>combination products</strong>. The system may randomly assign these combination products to users according to their account balance. Depending on the product types you optimize, you may earn <strong>an additional 5% to 25%</strong> in profit.</p>"
+      "content": "<p>Daily profits represent your main income stream. The system assigns products from various merchants for Enhancement based on your current account balance. For each product you optimize, you will earn <strong>0.5% to 2.5%</strong> of the product price as profit.</p><p>Profit levels are determined by your <strong>VIP tier</strong>—the higher your VIP level, the higher your profit rate. Additionally, the number of missions per set increases as your VIP level advances.</p><p>Some merchants also provide <strong>combination products</strong>. The system may randomly assign these combination products to users according to their account balance. Depending on the product types you optimize, you may earn <strong>an additional 5% to 25%</strong> in profit.</p>",
+      "vipProfitRates": {
+        "rows": [
+          {
+            "level": "VIP 1",
+            "rate": "0.5%",
+            "progress": "20%"
+          },
+          {
+            "level": "VIP 2",
+            "rate": "1%",
+            "progress": "40%"
+          },
+          {
+            "level": "VIP 3",
+            "rate": "1.5%",
+            "progress": "60%"
+          },
+          {
+            "level": "VIP 4",
+            "rate": "2%",
+            "progress": "80%"
+          },
+          {
+            "level": "VIP 5",
+            "rate": "2.5%",
+            "progress": "100%"
+          }
+        ],
+        "button": "Upgrade VIP to Earn More →"
+      }
     }
   ],
   "clause_sections": [
@@ -927,5 +1071,8 @@
   "sk_team_l3": "who believe in harnessing",
   "sk_team_l4": "the power of creativity to",
   "sk_team_l5_soft": "transform brands &",
-  "sk_team_l6": "captivate people."
+  "sk_team_l6": "captivate people.",
+  "record_status_completed": "Completed",
+  "record_status_frozen": "Frozen",
+  "record_status_to_submit": "To Submit"
 }

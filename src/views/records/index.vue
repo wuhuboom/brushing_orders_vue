@@ -96,10 +96,12 @@
 
                         <button
                             class="grab-btn"
+                            :class="statusMeta(item.status).buttonClass"
+                            :disabled="!isOrderSubmittable(item.status)"
                             type="button"
                             @click="handleOrderAction(item)"
                         >
-                            {{ $t("home_grab_order") }}
+                            {{ statusMeta(item.status).label }}
                         </button>
                     </article>
 
@@ -188,7 +190,7 @@
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { showFailToast, showSuccessToast, showToast } from "@/util/message";
+import { showFailToast, showSuccessToast } from "@/util/message";
 import { useI18n } from "vue-i18n";
 
 import PageTopBar from "@/components/PageTopBar.vue";
@@ -263,11 +265,28 @@ function formatMoney(value) {
 
 function statusMeta(status) {
     const value = String(status);
-    if (value === "0")
-        return { label: t("completed_2"), dotClass: "status-dot--done" };
-    if (value === "1")
-        return { label: t("frozen"), dotClass: "status-dot--frozen" };
-    return { label: t("pending"), dotClass: "status-dot--pending" };
+
+    if (value === "0") {
+        return {
+            label: t("record_status_completed"),
+            dotClass: "status-dot--done",
+            buttonClass: "grab-btn--completed",
+        };
+    }
+
+    if (value === "1") {
+        return {
+            label: t("record_status_frozen"),
+            dotClass: "status-dot--frozen",
+            buttonClass: "grab-btn--frozen",
+        };
+    }
+
+    return {
+        label: t("record_status_to_submit"),
+        dotClass: "status-dot--pending",
+        buttonClass: "grab-btn--pending",
+    };
 }
 
 async function resetAndLoad() {
@@ -400,12 +419,14 @@ function submit(item) {
     show.value = true;
 }
 
+function isOrderSubmittable(status) {
+    return String(status) === "2";
+}
+
 function handleOrderAction(item) {
-    if (String(item.status) === "2") {
-        submit(item);
-        return;
-    }
-    showToast(statusMeta(item.status).label);
+    if (!isOrderSubmittable(item.status)) return;
+
+    submit(item);
 }
 
 async function submitVal() {
@@ -623,15 +644,15 @@ onUnmounted(() => {
 }
 
 .status-dot--done {
-    background: var(--theme-primary);
+    background: var(--records-status-completed-dot);
 }
 
 .status-dot--pending {
-    background: #78c9ff;
+    background: var(--records-status-pending-dot);
 }
 
 .status-dot--frozen {
-    background: #e7a9ef;
+    background: var(--records-status-frozen-dot);
 }
 
 .grab-btn {
@@ -641,11 +662,30 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     border-radius: 7px;
-    background: var(--theme-primary);
     color: #fff;
     font-size: 13px;
     font-weight: 600;
-    box-shadow: 0 8px 16px var(--theme-button-shadow);
+}
+
+.grab-btn:disabled {
+    cursor: default;
+    pointer-events: none;
+    opacity: 1;
+}
+
+.grab-btn--pending {
+    background: var(--records-status-pending-bg);
+    box-shadow: 0 8px 16px var(--records-status-pending-shadow);
+}
+
+.grab-btn--completed {
+    background: var(--records-status-completed-bg);
+    box-shadow: 0 8px 16px var(--records-status-completed-shadow);
+}
+
+.grab-btn--frozen {
+    background: var(--records-status-frozen-bg);
+    box-shadow: 0 8px 16px var(--records-status-frozen-shadow);
 }
 
 .record-task-dialog {

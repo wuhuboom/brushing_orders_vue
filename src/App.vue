@@ -5,8 +5,7 @@
             :class="{
                 'app-route-view--stacking': stackAnimating,
                 'app-route-view--with-footer': isMainTabPage,
-                'home-scrollbar': route.path === '/',
-                'hide-scroll': route.path !== '/',
+                'home-scrollbar': true,
             }"
             id="router-view"
         />
@@ -110,10 +109,16 @@ function isMainTabRoute(path) {
 
 function syncHomeScrollbarMode(path = route.path) {
     if (typeof document === "undefined") return;
-    const isHome = path === "/";
-    document.documentElement.classList.toggle("app-home-scroll-lock", isHome);
+    const shouldUseSingleRouteScrollbar = Boolean(path);
+    document.documentElement.classList.toggle(
+        "app-home-scroll-lock",
+        shouldUseSingleRouteScrollbar,
+    );
     if (document.body) {
-        document.body.classList.toggle("app-home-scroll-lock", isHome);
+        document.body.classList.toggle(
+            "app-home-scroll-lock",
+            shouldUseSingleRouteScrollbar,
+        );
     }
 }
 function finishPendingTransition() {

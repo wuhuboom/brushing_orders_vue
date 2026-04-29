@@ -93,10 +93,11 @@
                         :key="item.id || item.nameEn || index"
                         class="vip-card overflow-hidden border bg-white"
                         :class="vipCardBorderClass(item, index)"
+                        :style="cardThemeStyle(item, index)"
                     >
                         <div
                             class="vip-card-head relative overflow-hidden px-[14px] py-[17px] text-white"
-                            :class="cardTheme(index).headClass"
+                            :class="cardTheme(item, index).headClass"
                         >
                             <div class="vip-card-bubble"></div>
                             <div
@@ -141,7 +142,7 @@
                                 v-for="stat in levelStats(item, index)"
                                 :key="stat.label"
                                 class="vip-stat"
-                                :class="cardTheme(index).statTextClass"
+                                :class="cardTheme(item, index).statTextClass"
                             >
                                 <img
                                     :src="stat.icon"
@@ -398,6 +399,10 @@ const vipIcons = {
     vip32: new URL("@/static/images/design/vip32.png", import.meta.url).href,
     vip33: new URL("@/static/images/design/vip33.png", import.meta.url).href,
     vip34: new URL("@/static/images/design/vip34.png", import.meta.url).href,
+    vipLevel4: new URL(
+        "@/static/images/design/vip-level-4.png",
+        import.meta.url,
+    ).href,
 };
 
 const benefitCards = computed(() => [
@@ -474,30 +479,57 @@ const themes = [
     {
         headClass: "bg-gradient-to-br from-[#2ec363] to-[#0a8934]",
         borderClass: "border-[#159947]",
+        headFrom: "#2ec363",
+        headTo: "#0a8934",
+        borderColor: "#159947",
         statColor: "#19a653",
         statTextClass: "text-[#159947]",
         buttonClass: "vip-level-button--theme",
+        iconFilter: "none",
     },
     {
         headClass: "bg-gradient-to-br from-[#62bbea] to-[#2787d7]",
         borderClass: "border-[#2787d7]",
+        headFrom: "#62bbea",
+        headTo: "#2787d7",
+        borderColor: "#2787d7",
         statColor: "#349be0",
         statTextClass: "text-[#349be0]",
         buttonClass: "vip-level-button--theme",
+        iconFilter: "none",
+    },
+    {
+        headClass: "bg-gradient-to-br from-[#2dbb61] to-[#148a3c]",
+        borderClass: "border-[#159947]",
+        headFrom: "#2dbb61",
+        headTo: "#148a3c",
+        borderColor: "#159947",
+        statColor: "#1f9c47",
+        statTextClass: "text-[#1f9c47]",
+        buttonClass: "vip-level-button--theme",
+        iconFilter: "none",
     },
     {
         headClass: "bg-gradient-to-br from-[#ff6656] to-[#dd3426]",
         borderClass: "border-[#dd3426]",
+        headFrom: "#ff6656",
+        headTo: "#dd3426",
+        borderColor: "#dd3426",
         statColor: "#ef4b3d",
         statTextClass: "text-[#ef4b3d]",
         buttonClass: "vip-level-button--theme",
+        iconFilter: "none",
     },
     {
-        headClass: "bg-gradient-to-br from-[#f4bb2e] to-[#d68d0f]",
-        borderClass: "border-[#d68d0f]",
-        statColor: "#e39a18",
-        statTextClass: "text-[#e39a18]",
+        headClass: "bg-gradient-to-br from-[#ffc145] to-[#d98c05]",
+        borderClass: "border-[#d98c05]",
+        headFrom: "#ffc145",
+        headTo: "#d98c05",
+        borderColor: "#d98c05",
+        statColor: "#f0a017",
+        statTextClass: "text-[#f0a017]",
         buttonClass: "vip-level-button--theme",
+        iconFilter: "hue-rotate(34deg) saturate(1.25) brightness(1.05)",
     },
 ];
 
@@ -651,6 +683,16 @@ const vipLevelIconSets = [
     },
     {
         medal: vipIcons.level1,
+        stats: [vipIcons.vip12, vipIcons.vip13, vipIcons.vip14],
+        check: vipIcons.vip11,
+    },
+    {
+        medal: vipIcons.vipLevel4,
+        stats: [vipIcons.vip32, vipIcons.vip33, vipIcons.vip34],
+        check: vipIcons.vip31,
+    },
+    {
+        medal: vipIcons.crownLarge,
         stats: [vipIcons.vip32, vipIcons.vip33, vipIcons.vip34],
         check: vipIcons.vip31,
     },
@@ -685,7 +727,7 @@ function levelButtonClass(item, index) {
         return "vip-level-button--disabled";
     }
 
-    return cardTheme(index).buttonClass;
+    return cardTheme(item, index).buttonClass;
 }
 
 function handleLevelButtonClick(item, index) {
@@ -738,13 +780,31 @@ function formatDeposit(item, index) {
     return item?.price ?? item?.minDeposit ?? levelFallbacks[index]?.price ?? 0;
 }
 
-function cardTheme(index) {
+function cardTheme(item, index) {
+    const levelNumber = getLevelNumericValue(normalizeLevelName(item, index));
+
+    if (levelNumber > 0 && themes[levelNumber - 1]) {
+        return themes[levelNumber - 1];
+    }
+
     return themes[index] || themes[themes.length - 1];
+}
+
+function cardThemeStyle(item, index) {
+    const theme = cardTheme(item, index);
+
+    return {
+        "--vip-head-from": theme.headFrom,
+        "--vip-head-to": theme.headTo,
+        "--vip-card-border": theme.borderColor,
+        "--vip-card-accent": theme.statColor,
+        "--vip-card-icon-filter": theme.iconFilter || "none",
+    };
 }
 
 function vipCardBorderClass(item, index) {
     return [
-        cardTheme(index).borderClass,
+        cardTheme(item, index).borderClass,
         isCurrentLevel(item, index) ? "vip-card--current" : "",
     ];
 }
@@ -889,6 +949,7 @@ onMounted(() => {
 .vip-card {
     border-width: 1px;
     border-radius: 12px;
+    border-color: var(--vip-card-border, #159947);
 }
 
 .vip-card--current {
@@ -897,6 +958,11 @@ onMounted(() => {
 
 .vip-card-head {
     min-height: 77px;
+    background: linear-gradient(
+        135deg,
+        var(--vip-head-from, #2ec363),
+        var(--vip-head-to, #0a8934)
+    ) !important;
 }
 
 .vip-card-bubble {
@@ -938,6 +1004,7 @@ onMounted(() => {
     border-right: 1px solid #d9eadf;
     padding: 14px 4px 11px;
     text-align: center;
+    color: var(--vip-card-accent, #159947) !important;
 }
 
 .vip-stat:last-child {
@@ -954,6 +1021,7 @@ onMounted(() => {
     height: 34px;
     object-fit: contain;
     display: block;
+    filter: var(--vip-card-icon-filter, none);
 }
 
 .vip-stat-icon {
@@ -962,12 +1030,14 @@ onMounted(() => {
     object-fit: contain;
     display: inline-block;
     vertical-align: middle;
+    filter: var(--vip-card-icon-filter, none);
 }
 
 .vip-feature-icon {
     width: 14px;
     height: 14px;
     object-fit: contain;
+    filter: var(--vip-card-icon-filter, none);
 }
 
 .vip-level-button--current {
@@ -977,7 +1047,11 @@ onMounted(() => {
 }
 
 .vip-level-button--theme {
-    background: var(--theme-primary);
+    background: linear-gradient(
+        135deg,
+        var(--vip-head-from, var(--theme-primary)),
+        var(--vip-head-to, var(--theme-primary))
+    );
 }
 
 .vip-level-button:disabled {

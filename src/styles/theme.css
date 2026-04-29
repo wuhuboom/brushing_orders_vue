@@ -23,6 +23,17 @@
   --theme-home-scrollbar-track: rgba(211, 119, 3, 0.14);
   --theme-home-topic-bg: #C9D2D2;
 
+  /* records 页面订单状态按钮/角标颜色 */
+  --records-status-pending-bg: var(--theme-primary);
+  --records-status-pending-dot: var(--theme-primary);
+  --records-status-pending-shadow: var(--theme-button-shadow);
+  --records-status-completed-bg: #1FAA53;
+  --records-status-completed-dot: #1FAA53;
+  --records-status-completed-shadow: rgba(31, 170, 83, 0.22);
+  --records-status-frozen-bg: #EB4B40;
+  --records-status-frozen-dot: #EB4B40;
+  --records-status-frozen-shadow: rgba(235, 75, 64, 0.22);
+
   --theme-loading-color-1: rgba(211, 119, 3, 0.12);
   --theme-loading-color-2: rgba(211, 119, 3, 0.32);
   --theme-loading-color-3: rgba(211, 119, 3, 0.58);

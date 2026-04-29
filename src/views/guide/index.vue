@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <div class="guide-page">
         <PageTopBar
             :title="$t('income_guide')"
@@ -9,9 +9,8 @@
         <div class="guide-body">
             <section class="guide-hero">
                 <div class="guide-hero__eyebrow">
-                    <img src="@/static/images/ansi.png" /><span>
-                        {{ $t("sug_profit_earnings_guide") }}</span
-                    >
+                    <img src="@/static/images/ansi.png" alt="" />
+                    <span>{{ $t("sug_profit_earnings_guide") }}</span>
                 </div>
 
                 <h1 class="guide-hero__title">
@@ -23,8 +22,12 @@
                 </p>
 
                 <div class="guide-hero__actions">
-                    <button class="guide-chip guide-chip--solid" type="button" @click="goStarting">
-                        <img src="@/static/images/flash.png" />
+                    <button
+                        class="guide-chip guide-chip--solid"
+                        type="button"
+                        @click="goStarting"
+                    >
+                        <img src="@/static/images/flash.png" alt="" />
                         <span>{{ $t("start_earning") }}</span>
                     </button>
 
@@ -67,19 +70,159 @@
                                     <div class="guide-section__title">
                                         {{ formatGuideTitle(section, index) }}
                                     </div>
-
-                                    <!-- <div class="guide-section__subtitle">
-                                        {{
-                                            sectionSubtitles[index] ||
-                                            $t("detailed_explanation_rules")
-                                        }}
-                                    </div> -->
                                 </div>
                             </div>
                         </template>
 
                         <div class="guide-section__content rich-content">
                             <div v-html="section.content"></div>
+
+                            <div
+                                v-if="section.salaryScheme"
+                                class="guide-salary-scheme"
+                            >
+                                <div class="guide-scheme-header">
+                                    <div>{{ section.salaryScheme.title }}</div>
+                                    <span>{{
+                                        section.salaryScheme.subtitle
+                                    }}</span>
+                                </div>
+
+                                <div class="guide-salary-table">
+                                    <div
+                                        v-for="(row, rowIndex) in section
+                                            .salaryScheme.rows"
+                                        :key="`salary-row-${rowIndex}`"
+                                        class="guide-salary-row"
+                                    >
+                                        <div class="guide-salary-row__name">
+                                            {{ row.name }}
+                                        </div>
+                                        <div class="guide-salary-row__days">
+                                            {{ row.days }}
+                                        </div>
+                                        <div class="guide-salary-row__amount">
+                                            {{ row.amount }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="guide-salary-how">
+                                    <h4>{{ section.salaryScheme.howTitle }}</h4>
+                                    <p>{{ section.salaryScheme.howText }}</p>
+                                    <p>{{ section.salaryScheme.earnText }}</p>
+                                    <strong>{{
+                                        section.salaryScheme.tip
+                                    }}</strong>
+                                </div>
+                            </div>
+
+                            <div
+                                v-if="section.resetBonusScheme"
+                                class="guide-reset-scheme"
+                            >
+                                <div class="guide-scheme-header">
+                                    <div>
+                                        {{ section.resetBonusScheme.title }}
+                                    </div>
+                                    <span>{{
+                                        section.resetBonusScheme.subtitle
+                                    }}</span>
+                                </div>
+
+                                <div class="guide-reset-plans">
+                                    <div
+                                        v-for="(plan, planIndex) in section
+                                            .resetBonusScheme.plans"
+                                        :key="`reset-plan-${planIndex}`"
+                                        class="guide-reset-plan"
+                                    >
+                                        <div class="guide-reset-plan__name">
+                                            {{ plan.name }}
+                                        </div>
+                                        <div class="guide-reset-plan__label">
+                                            {{ plan.amountLabel }}
+                                        </div>
+                                        <div class="guide-reset-plan__amount">
+                                            {{ plan.amount }}
+                                        </div>
+                                        <div class="guide-reset-plan__label">
+                                            {{ plan.extraLabel }}
+                                        </div>
+                                        <div class="guide-reset-plan__extra">
+                                            {{ plan.extra }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="guide-reset-advance-title">
+                                    {{ section.resetBonusScheme.advanceTitle }}
+                                </div>
+
+                                <div class="guide-reset-advance-grid">
+                                    <div
+                                        v-for="(item, itemIndex) in section
+                                            .resetBonusScheme.advanceRows"
+                                        :key="`reset-advance-${itemIndex}`"
+                                        class="guide-reset-advance-card"
+                                    >
+                                        <div
+                                            class="guide-reset-advance-card__title"
+                                        >
+                                            {{ item.title }}
+                                        </div>
+                                        <div
+                                            class="guide-reset-advance-card__range"
+                                        >
+                                            {{ item.range }}
+                                        </div>
+                                        <div
+                                            class="guide-reset-advance-card__desc"
+                                        >
+                                            {{ item.desc }}
+                                        </div>
+                                        <div
+                                            class="guide-reset-advance-card__bonus"
+                                        >
+                                            {{ item.bonus }} {{ item.suffix }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                v-if="section.vipProfitRates"
+                                class="guide-vip-profit"
+                            >
+                                <div
+                                    v-for="(row, rowIndex) in section
+                                        .vipProfitRates.rows"
+                                    :key="`vip-profit-${rowIndex}`"
+                                    class="guide-vip-profit__row"
+                                >
+                                    <span class="guide-vip-profit__level">
+                                        {{ row.level }}
+                                    </span>
+                                    <span class="guide-vip-profit__bar">
+                                        <i
+                                            :style="{
+                                                width: row.progress || '0%',
+                                            }"
+                                        ></i>
+                                    </span>
+                                    <span class="guide-vip-profit__rate">
+                                        {{ row.rate }}
+                                    </span>
+                                </div>
+
+                                <button
+                                    class="guide-vip-profit__button"
+                                    type="button"
+                                    @click="goVips"
+                                >
+                                    {{ section.vipProfitRates.button }}
+                                </button>
+                            </div>
 
                             <img
                                 v-if="section.image"
@@ -121,14 +264,6 @@ const incomeGuideVars = {
         "https://api-shuadan.pigk.xyz/profile/upload/2026/04/19/ksnip_20260419-232600_20260419152644A007.png",
 };
 
-const sectionSubtitles = computed(() => [
-    t("guide_subtitle_salary_structure"),
-    t("guide_subtitle_rewards_bonuses"),
-    t("guide_subtitle_member_rewards"),
-    t("guide_subtitle_daily_rules"),
-    t("guide_subtitle_account_support"),
-]);
-
 const replaceI18nVars = (value = "") => {
     if (!value || typeof value !== "string") {
         return value;
@@ -152,6 +287,9 @@ const guideSections = computed(() => {
             title: replaceI18nVars(item.title),
             content: replaceI18nVars(item.content),
             image: replaceI18nVars(item.image),
+            salaryScheme: item.salaryScheme || null,
+            resetBonusScheme: item.resetBonusScheme || null,
+            vipProfitRates: item.vipProfitRates || null,
         };
     });
 });
@@ -179,7 +317,7 @@ const goStarting = () => {
 };
 
 const goVips = () => {
-    router.push({ path: "/vips" });
+    router.push({ path: "/deposit" });
 };
 
 const onClickLeft = () => {
@@ -208,14 +346,16 @@ const onClickLeft = () => {
 }
 
 .guide-hero__eyebrow {
+    display: flex;
+    align-items: center;
     font-size: 11px;
     line-height: 16px;
     letter-spacing: 0.08em;
     opacity: 0.88;
-    display: flex;
-    img {
-        margin-right: 8px;
-    }
+}
+
+.guide-hero__eyebrow img {
+    margin-right: 8px;
 }
 
 .guide-hero__title {
@@ -252,9 +392,10 @@ const onClickLeft = () => {
     line-height: 18px;
     display: flex;
     align-items: center;
-    img {
-        margin-right: 6px;
-    }
+}
+
+.guide-chip img {
+    margin-right: 6px;
 }
 
 .guide-chip--solid {
@@ -339,13 +480,6 @@ const onClickLeft = () => {
     font-weight: 600;
 }
 
-.guide-section__subtitle {
-    margin-top: 2px;
-    color: #8aa08e;
-    font-size: 11px;
-    line-height: 16px;
-}
-
 .guide-section__content {
     padding-top: 4px;
 }
@@ -380,41 +514,245 @@ const onClickLeft = () => {
     margin: 0 0 10px;
 }
 
-.rich-content :deep(table) {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 10px;
-}
-
-.rich-content :deep(tr) {
-    background: #eef6ef;
-}
-
-.rich-content :deep(td),
-.rich-content :deep(th) {
-    padding: 12px 14px;
-    font-size: 13px;
-    line-height: 20px;
-    color: #263626;
-}
-
-.rich-content :deep(td:first-child),
-.rich-content :deep(th:first-child) {
-    border-radius: 12px 0 0 12px;
-}
-
-.rich-content :deep(td:last-child),
-.rich-content :deep(th:last-child) {
-    border-radius: 0 12px 12px 0;
-    text-align: right;
-    color: #1fa24f;
-    font-weight: 600;
-}
-
 .rich-content :deep(strong),
 .rich-content :deep(b) {
     color: #1e2a1f;
     font-weight: 600;
+}
+
+.guide-salary-scheme,
+.guide-reset-scheme {
+    overflow: hidden;
+    width: 100%;
+    margin: 12px auto 2px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.guide-scheme-header {
+    padding: 9px 8px 8px;
+    background: var(--theme-button-gradient);
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+}
+
+.guide-scheme-header span {
+    display: block;
+}
+
+.guide-salary-table {
+    background: #fff;
+}
+
+.guide-salary-row {
+    display: grid;
+    grid-template-columns: 32% 33% 35%;
+    min-height: 56px;
+    border-bottom: 1px solid #d9d9d9;
+    color: #000;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.guide-salary-row > div {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+}
+
+.guide-salary-row__days {
+    justify-content: center;
+    text-align: center;
+}
+
+.guide-salary-row__amount {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.guide-salary-how {
+    padding: 8px 10px 12px;
+    background: #fff;
+}
+
+.guide-salary-how h4 {
+    margin: 0 0 6px;
+    color: #000;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 18px;
+}
+
+.guide-salary-how p {
+    margin: 0 0 8px;
+    color: #395f6a;
+    font-size: 10px;
+    line-height: 16px;
+}
+
+.guide-salary-how strong {
+    display: block;
+    color: #ff6a00;
+    font-size: 10px;
+    line-height: 16px;
+}
+
+.guide-reset-scheme {
+    padding-bottom: 8px;
+    background:
+        linear-gradient(rgba(34, 45, 50, 0.64), rgba(34, 45, 50, 0.64)),
+        linear-gradient(135deg, #64756b 0%, #293b42 100%);
+}
+
+.guide-reset-plans {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    padding: 12px 10px 10px;
+}
+
+.guide-reset-plan {
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.95);
+    text-align: center;
+    color: #000;
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.guide-reset-plan__name {
+    padding: 4px 2px;
+    background: #321a10;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 14px;
+}
+
+.guide-reset-plan__label {
+    padding-top: 6px;
+}
+
+.guide-reset-plan__amount,
+.guide-reset-plan__extra {
+    padding: 5px 2px 7px;
+    color: #ff6a00;
+    font-size: 10px;
+    line-height: 14px;
+}
+
+.guide-reset-advance-title {
+    margin-top: 4px;
+    padding: 10px 8px;
+    background: #ff6a00;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 18px;
+}
+
+.guide-reset-advance-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    padding: 8px;
+}
+
+.guide-reset-advance-card {
+    min-height: 92px;
+    padding: 8px 4px;
+    background: #fff;
+    text-align: center;
+    color: #000;
+}
+
+.guide-reset-advance-card__title {
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 14px;
+}
+
+.guide-reset-advance-card__range {
+    margin-top: 8px;
+    color: #ff6a00;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+}
+
+.guide-reset-advance-card__desc {
+    margin-top: 8px;
+    font-size: 10px;
+    line-height: 14px;
+}
+
+.guide-reset-advance-card__bonus {
+    margin-top: 8px;
+    color: #ff6a00;
+    font-size: 9px;
+    line-height: 13px;
+}
+
+.guide-vip-profit {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 14px 0 4px;
+}
+
+.guide-vip-profit__row {
+    display: grid;
+    grid-template-columns: 74px 1fr 58px;
+    align-items: center;
+    min-height: 56px;
+    padding: 0 16px;
+    border: 1px solid #cfead7;
+    border-radius: 12px;
+    background: #eaf7ee;
+    color: #1b3020;
+}
+
+.guide-vip-profit__level {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.guide-vip-profit__bar {
+    position: relative;
+    display: block;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #cfecd8;
+}
+
+.guide-vip-profit__bar i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #1ca052;
+}
+
+.guide-vip-profit__rate {
+    text-align: right;
+    color: #1ca052;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.guide-vip-profit__button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #36c96f 0%, #178e41 100%);
+    color: #fff;
+    font-size: 15px;
+    line-height: 20px;
 }
 
 .guide-fallback {
