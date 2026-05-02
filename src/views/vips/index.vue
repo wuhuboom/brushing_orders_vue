@@ -379,9 +379,9 @@ const vipIcons = {
     user: new URL("@/static/images/design/vip-user.png", import.meta.url).href,
     level1: new URL("@/static/images/design/vip-level-1.png", import.meta.url)
         .href,
-    level2: new URL("@/static/images/design/vip-level-2.png", import.meta.url)
+    level2: new URL("@/static/images/design/vip-level-3.png", import.meta.url)
         .href,
-    level3: new URL("@/static/images/design/vip-level-3.png", import.meta.url)
+    level3: new URL("@/static/images/design/vip-level-2.png", import.meta.url)
         .href,
     currentLevel: new URL(
         "@/static/images/design/vip-current-level-icon.png",

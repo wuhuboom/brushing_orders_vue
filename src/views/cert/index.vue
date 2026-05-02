@@ -67,7 +67,11 @@
 
                     <div class="cert-overview-card">
                         <div class="cert-overview-card__icon is-orange">
-                            <img src="@/static/images/cert4.png" />
+                            <img
+                                class="cert-preview-trigger"
+                                src="@/static/images/cert4.png"
+                                @click="openCertPreview"
+                            />
                         </div>
                         <div class="cert-overview-card__text">
                             {{ $t("compliance_records") }}
@@ -79,31 +83,60 @@
             <section class="cert-content-card">
                 <div class="cert-section-title">{{ $t("certificates") }}</div>
                 <div class="cert-content rich-content">
-                    <img src="@/static/images/certprod2.png" />
+                    <img
+                        src="@/static/images/certprod2.png"
+                        class="cert-content__preview-image"
+                        @click="openContentPreview"
+                    />
                 </div>
             </section>
         </div>
+
+        <van-image-preview
+            v-model:show="showCertPreview"
+            :images="activePreviewImages"
+            :start-position="0"
+            closeable
+            close-icon="cross"
+        />
     </div>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import { getConfigByLang } from "../../api/apis";
 import { useCommonStore } from "@/store/modules/common";
+import cert4Image from "@/static/images/cert4.png";
+import certProductImage from "@/static/images/certprod2.png";
 
 const certificateEn = ref("");
 const commonStore = useCommonStore();
+
+const showCertPreview = ref(false);
+const certPreviewImages = [cert4Image];
+const certContentPreviewImages = [certProductImage];
+const activePreviewImages = ref(certPreviewImages);
 
 const parLang = computed(() => {
     const mapped = commonStore.getValueByKey(commonStore.lang);
     return mapped ?? commonStore.lang;
 });
 
+const openCertPreview = () => {
+    activePreviewImages.value = certPreviewImages;
+    showCertPreview.value = true;
+};
+
+const openContentPreview = () => {
+    activePreviewImages.value = certContentPreviewImages;
+    showCertPreview.value = true;
+};
+
 // const certStats = computed(() => {
 //     const html = certificateEn.value || "";
 //     const imageCount = (html.match(/<img/gi) || []).length;
 //     const sectionCount = (html.match(/<(h1|h2|h3)/gi) || []).length;
-
+//
 //     return {
 //         documents: Math.max(sectionCount || imageCount, 1),
 //         images: Math.max(imageCount, 1),
@@ -186,7 +219,6 @@ const onClickLeft = () => history.back();
 .cert-hero__desc {
     margin-top: 8px;
     font-size: 12px;
-    /*line-height: 26px;*/
     color: rgba(255, 255, 255, 0.92);
 }
 
@@ -283,6 +315,10 @@ const onClickLeft = () => history.back();
     color: #e4a243;
 }
 
+.cert-preview-trigger {
+    cursor: pointer;
+}
+
 .cert-overview-card__text {
     color: #293328;
     font-size: 11px;
@@ -292,7 +328,6 @@ const onClickLeft = () => history.back();
 
 .cert-content-card {
     border-radius: 20px;
-    /*border: 1px solid #d7e9da;*/
     background: transparent;
 }
 
@@ -313,23 +348,18 @@ const onClickLeft = () => history.back();
 }
 
 .rich-content :deep(img) {
-    /*display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 0;
-    border: 4px solid #b98310;
-    background: #fff;
-    box-shadow: 0 12px 28px rgba(25, 78, 43, 0.08);*/
-
     display: block;
     max-width: 100%;
     width: auto;
     height: auto;
     margin: 0 auto;
     border-radius: 0;
-    border: 4px solid #b98310;
     background: #fff;
     box-shadow: 0 12px 28px rgba(25, 78, 43, 0.08);
+}
+
+.cert-content__preview-image {
+    cursor: pointer;
 }
 
 .rich-content :deep(figure),
@@ -344,14 +374,6 @@ const onClickLeft = () => history.back();
 .rich-content :deep(td),
 .rich-content :deep(th) {
     padding: 0;
-}
-
-.cert-content-card :deep(.cert-section-title) {
-    /*padding: 16px 16px 0;*/
-}
-
-.cert-content-card .rich-content {
-    padding: 0 16px 16px;
 }
 
 :deep(.cert-nav .van-nav-bar) {

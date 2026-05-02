@@ -83,9 +83,9 @@
                             >
                                 <div class="guide-scheme-header">
                                     <div>{{ section.salaryScheme.title }}</div>
-                                    <span>{{
-                                        section.salaryScheme.subtitle
-                                    }}</span>
+                                    <span>
+                                        {{ section.salaryScheme.subtitle }}
+                                    </span>
                                 </div>
 
                                 <div class="guide-salary-table">
@@ -111,9 +111,9 @@
                                     <h4>{{ section.salaryScheme.howTitle }}</h4>
                                     <p>{{ section.salaryScheme.howText }}</p>
                                     <p>{{ section.salaryScheme.earnText }}</p>
-                                    <strong>{{
-                                        section.salaryScheme.tip
-                                    }}</strong>
+                                    <strong>
+                                        {{ section.salaryScheme.tip }}
+                                    </strong>
                                 </div>
                             </div>
 
@@ -125,9 +125,9 @@
                                     <div>
                                         {{ section.resetBonusScheme.title }}
                                     </div>
-                                    <span>{{
-                                        section.resetBonusScheme.subtitle
-                                    }}</span>
+                                    <span>
+                                        {{ section.resetBonusScheme.subtitle }}
+                                    </span>
                                 </div>
 
                                 <div class="guide-reset-plans">
@@ -225,7 +225,11 @@
                             </div>
 
                             <img
-                                v-if="section.image"
+                                v-if="
+                                    section.image &&
+                                    !section.salaryScheme &&
+                                    !section.resetBonusScheme
+                                "
                                 class="guide-section__image"
                                 :src="section.image"
                                 alt=""
@@ -264,6 +268,126 @@ const incomeGuideVars = {
         "https://api-shuadan.pigk.xyz/profile/upload/2026/04/19/ksnip_20260419-232600_20260419152644A007.png",
 };
 
+const defaultSalaryScheme = computed(() => {
+    return {
+        title: t("guide_salary_scheme_title"),
+        subtitle: t("guide_salary_scheme_subtitle"),
+        rows: [
+            {
+                name: t("guide_salary_sign_in"),
+                days: t("guide_salary_2_days"),
+                amount: t("guide_salary_amount_130"),
+            },
+            {
+                name: t("guide_salary_sign_in"),
+                days: t("guide_salary_4_days"),
+                amount: t("guide_salary_amount_1200"),
+            },
+            {
+                name: t("guide_salary_sign_in"),
+                days: t("guide_salary_7_days"),
+                amount: t("guide_salary_amount_1500"),
+            },
+            {
+                name: t("guide_salary_sign_in"),
+                days: t("guide_salary_15_days"),
+                amount: t("guide_salary_amount_1800"),
+            },
+            {
+                name: t("guide_salary_sign_in"),
+                days: t("guide_salary_30_days"),
+                amount: t("guide_salary_amount_2370"),
+            },
+        ],
+        howTitle: t("guide_salary_how_title"),
+        howText: t("guide_salary_how_text"),
+        earnText: t("guide_salary_earn_text"),
+        tip: t("guide_salary_tip"),
+    };
+});
+
+const defaultResetBonusScheme = computed(() => {
+    return {
+        title: t("guide_reset_scheme_title"),
+        subtitle: t("guide_reset_scheme_subtitle"),
+        plans: [
+            {
+                name: t("guide_reset_plan_1_name"),
+                amountLabel: t("guide_reset_amount_label"),
+                amount: t("guide_reset_plan_1_amount"),
+                extraLabel: t("guide_reset_extra_label"),
+                extra: t("guide_reset_plan_1_extra"),
+            },
+            {
+                name: t("guide_reset_plan_2_name"),
+                amountLabel: t("guide_reset_amount_label"),
+                amount: t("guide_reset_plan_2_amount"),
+                extraLabel: t("guide_reset_extra_label"),
+                extra: t("guide_reset_plan_2_extra"),
+            },
+            {
+                name: t("guide_reset_plan_3_name"),
+                amountLabel: t("guide_reset_amount_label"),
+                amount: t("guide_reset_plan_3_amount"),
+                extraLabel: t("guide_reset_extra_label"),
+                extra: t("guide_reset_plan_3_extra"),
+            },
+            {
+                name: t("guide_reset_plan_4_name"),
+                amountLabel: t("guide_reset_amount_label"),
+                amount: t("guide_reset_plan_4_amount"),
+                extraLabel: t("guide_reset_extra_label"),
+                extra: t("guide_reset_plan_4_extra"),
+            },
+            {
+                name: t("guide_reset_plan_5_name"),
+                amountLabel: t("guide_reset_amount_label"),
+                amount: t("guide_reset_plan_5_amount"),
+                extraLabel: t("guide_reset_extra_label"),
+                extra: t("guide_reset_plan_5_extra"),
+            },
+            {
+                name: t("guide_reset_plan_6_name"),
+                amountLabel: t("guide_reset_amount_label"),
+                amount: t("guide_reset_plan_6_amount"),
+                extraLabel: t("guide_reset_extra_label"),
+                extra: t("guide_reset_plan_6_extra"),
+            },
+        ],
+        advanceTitle: t("guide_reset_advance_title"),
+        advanceRows: [
+            {
+                title: t("guide_reset_advance_day_title"),
+                range: t("guide_reset_range_1500_9999"),
+                desc: t("guide_reset_will_get"),
+                bonus: t("guide_reset_bonus_4"),
+                suffix: t("guide_reset_advance_bonus"),
+            },
+            {
+                title: t("guide_reset_advance_day_title"),
+                range: t("guide_reset_range_10000_19999"),
+                desc: t("guide_reset_will_get"),
+                bonus: t("guide_reset_bonus_8"),
+                suffix: t("guide_reset_advance_bonus"),
+            },
+            {
+                title: t("guide_reset_advance_day_title"),
+                range: t("guide_reset_range_20000_49999"),
+                desc: t("guide_reset_will_get"),
+                bonus: t("guide_reset_bonus_4"),
+                suffix: t("guide_reset_advance_bonus"),
+            },
+            {
+                title: t("guide_reset_advance_day_title"),
+                range: t("guide_reset_range_50000_above"),
+                desc: t("guide_reset_will_get"),
+                bonus: t("guide_reset_bonus_4"),
+                suffix: t("guide_reset_advance_bonus"),
+            },
+        ],
+    };
+});
+
 const replaceI18nVars = (value = "") => {
     if (!value || typeof value !== "string") {
         return value;
@@ -274,6 +398,88 @@ const replaceI18nVars = (value = "") => {
     });
 };
 
+const normalizeSalaryScheme = (salaryScheme) => {
+    if (!salaryScheme) {
+        return null;
+    }
+
+    return {
+        title: replaceI18nVars(salaryScheme.title),
+        subtitle: replaceI18nVars(salaryScheme.subtitle),
+        rows: Array.isArray(salaryScheme.rows)
+            ? salaryScheme.rows.map((row) => {
+                  return {
+                      name: replaceI18nVars(row.name),
+                      days: replaceI18nVars(row.days),
+                      amount: replaceI18nVars(row.amount),
+                  };
+              })
+            : [],
+        howTitle: replaceI18nVars(salaryScheme.howTitle),
+        howText: replaceI18nVars(salaryScheme.howText),
+        earnText: replaceI18nVars(salaryScheme.earnText),
+        tip: replaceI18nVars(salaryScheme.tip),
+    };
+};
+
+const normalizeResetBonusScheme = (resetBonusScheme) => {
+    if (!resetBonusScheme) {
+        return null;
+    }
+
+    return {
+        title: replaceI18nVars(resetBonusScheme.title),
+        subtitle: replaceI18nVars(resetBonusScheme.subtitle),
+        plans: Array.isArray(resetBonusScheme.plans)
+            ? resetBonusScheme.plans.map((plan) => {
+                  return {
+                      name: replaceI18nVars(plan.name),
+                      amountLabel: replaceI18nVars(plan.amountLabel),
+                      amount: replaceI18nVars(plan.amount),
+                      extraLabel: replaceI18nVars(plan.extraLabel),
+                      extra: replaceI18nVars(plan.extra),
+                  };
+              })
+            : [],
+        advanceTitle: replaceI18nVars(resetBonusScheme.advanceTitle),
+        advanceRows: Array.isArray(resetBonusScheme.advanceRows)
+            ? resetBonusScheme.advanceRows.map((item) => {
+                  return {
+                      title: replaceI18nVars(item.title),
+                      range: replaceI18nVars(item.range),
+                      desc: replaceI18nVars(item.desc),
+                      bonus: replaceI18nVars(item.bonus),
+                      suffix: replaceI18nVars(item.suffix),
+                  };
+              })
+            : [],
+    };
+};
+
+const getSalaryScheme = (item, index) => {
+    if (index === 0) {
+        return defaultSalaryScheme.value;
+    }
+
+    if (item.salaryScheme) {
+        return normalizeSalaryScheme(item.salaryScheme);
+    }
+
+    return null;
+};
+
+const getResetBonusScheme = (item, index) => {
+    if (index === 1) {
+        return defaultResetBonusScheme.value;
+    }
+
+    if (item.resetBonusScheme) {
+        return normalizeResetBonusScheme(item.resetBonusScheme);
+    }
+
+    return null;
+};
+
 const guideSections = computed(() => {
     const sections = tm("income_guide_sections");
 
@@ -281,14 +487,20 @@ const guideSections = computed(() => {
         return [];
     }
 
-    return sections.map((item) => {
+    return sections.map((item, index) => {
+        const salaryScheme = getSalaryScheme(item, index);
+        const resetBonusScheme = getResetBonusScheme(item, index);
+
         return {
             ...item,
             title: replaceI18nVars(item.title),
             content: replaceI18nVars(item.content),
-            image: replaceI18nVars(item.image),
-            salaryScheme: item.salaryScheme || null,
-            resetBonusScheme: item.resetBonusScheme || null,
+            image:
+                salaryScheme || resetBonusScheme
+                    ? ""
+                    : replaceI18nVars(item.image),
+            salaryScheme,
+            resetBonusScheme,
             vipProfitRates: item.vipProfitRates || null,
         };
     });
@@ -567,6 +779,8 @@ const onClickLeft = () => {
 .guide-salary-row__days {
     justify-content: center;
     text-align: center;
+    white-space: nowrap;
+    word-break: keep-all;
 }
 
 .guide-salary-row__amount {
@@ -653,6 +867,7 @@ const onClickLeft = () => {
     font-size: 13px;
     font-weight: 700;
     line-height: 18px;
+    text-align: center;
 }
 
 .guide-reset-advance-grid {

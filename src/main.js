@@ -18,6 +18,7 @@ import {
   NoticeBar,
   NavBar,
   Image as VanImage,
+  ImagePreview,
   List,
   Tab,
   Tabs,
@@ -120,6 +121,7 @@ async function bootstrap() {
   app.use(NoticeBar);
   app.use(NavBar);
   app.use(VanImage);
+  app.use(ImagePreview);
   app.use(List);
   app.use(Tab);
   app.use(Tabs);

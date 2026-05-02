@@ -67,6 +67,24 @@
                         </div>
                     </el-form-item>
 
+                    <el-form-item v-if="isNeedPhone" prop="phone">
+                        <div class="auth-input">
+                            <img
+                                class="auth-input__icon"
+                                src="@/static/images/auth/phonein.png"
+                                alt=""
+                            />
+                            <el-input
+                                v-model="ruleForm.phone"
+                                :placeholder="$t('phone_number')"
+                                type="text"
+                                autocomplete="off"
+                                size="large"
+                                @input="onPhoneInput"
+                            />
+                        </div>
+                    </el-form-item>
+
                     <div class="auth-gender-select">
                         <button
                             type="button"
@@ -288,7 +306,10 @@
 
                 <div
                     class="auth-submit"
-                    :class="{ 'auth-submit--disabled': !isRegisterReady || isSubmitting }"
+                    :class="{
+                        'auth-submit--disabled':
+                            !isRegisterReady || isSubmitting,
+                    }"
                     :aria-disabled="!isRegisterReady || isSubmitting"
                     @click="sendCode"
                 >
@@ -304,13 +325,6 @@
                     </span>
                 </div>
             </el-form>
-
-            <!-- <div class="auth-help">
-                <span class="auth-help__muted">{{ $t("need_help") }}</span>
-                <span class="auth-help__link" @click="jumpToService">
-                    {{ $t("contact_customer_service") }}
-                </span>
-            </div> -->
         </div>
 
         <Lang ref="langRef"></Lang>
@@ -325,13 +339,17 @@ import { Hide, View } from "@element-plus/icons-vue";
 import { computed, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { register } from "../../api/apis";
+import { register, reqBeedPhone } from "../../api/apis";
 import { showToast } from "@/util/message";
 import { useCommonStore } from "@/store/modules/common";
 import { LANGS } from "@/config/lang";
 
 const onUsernameInput = (val) => {
     ruleForm.username = val.replace(/[^a-zA-Z0-9]/g, "");
+};
+
+const onPhoneInput = (val) => {
+    ruleForm.phone = val.replace(/\D/g, "");
 };
 
 const router = useRouter();
@@ -347,22 +365,32 @@ const genderMenuOpen = ref(false);
 const showTradePassword = ref(false);
 const showPassword = ref(false);
 const showConfirmPassword = ref(false);
+
+const needPhone = ref(1);
+
 const ruleForm = reactive({
     username: "",
+    phone: "",
     password: "",
     tradePassword: "",
     sex: null,
     inviteCode: "",
 });
+
 const rules = computed(() => {
     return {};
 });
+
 const currentLang = computed(() => LANGS[commonStore.lang] || LANGS.en);
+
+const isNeedPhone = computed(() => {
+    return Number(needPhone.value) === 0;
+});
 
 const genderLabel = computed(() => {
     if (ruleForm.sex === 1) return t("male");
     if (ruleForm.sex === 2) return t("female");
-    return "Select Gender";
+    return t("Gender_fomt");
 });
 
 const genderEmoji = computed(() => {
@@ -373,14 +401,42 @@ const genderEmoji = computed(() => {
 const isRegisterReady = computed(() => {
     return Boolean(
         checked.value &&
-            ruleForm.username &&
-            ruleForm.password &&
-            ruleForm.sex &&
-            agentPassword.value &&
-            ruleForm.tradePassword &&
-            ruleForm.inviteCode,
+        ruleForm.username &&
+        (!isNeedPhone.value || ruleForm.phone) &&
+        ruleForm.password &&
+        ruleForm.sex &&
+        agentPassword.value &&
+        ruleForm.tradePassword &&
+        ruleForm.inviteCode,
     );
 });
+
+function getNeedPhoneValue(res) {
+    const value =
+        res?.data?.needPhone ??
+        res?.data?.need_phone ??
+        res?.data?.value ??
+        res?.data ??
+        res?.needPhone ??
+        res?.need_phone ??
+        1;
+
+    return Number(value) === 0 ? 0 : 1;
+}
+
+async function getNeedPhoneConfig() {
+    try {
+        const res = await reqBeedPhone();
+        needPhone.value = getNeedPhoneValue(res);
+
+        if (!isNeedPhone.value) {
+            ruleForm.phone = "";
+        }
+    } catch (error) {
+        needPhone.value = 1;
+        ruleForm.phone = "";
+    }
+}
 
 function toLogin() {
     if (switchLeaving.value) return;
@@ -405,29 +461,58 @@ function handleChangeLang() {
 
 function sendCode() {
     if (isSubmitting.value || !isRegisterReady.value) return;
-    if (!checked.value)
+
+    if (!checked.value) {
         return showToast(t("please_tick_and_agree_to_the_argeement"));
-    if (!ruleForm.username) return showToast(t("please_enter_username"));
+    }
+
+    if (!ruleForm.username) {
+        return showToast(t("please_enter_username"));
+    }
+
     const reg = /^[A-Za-z0-9]+$/;
     if (!reg.test(ruleForm.username)) {
         return showToast(t("user_name_input_space_or_special_symbol"));
     }
+
+    if (isNeedPhone.value && !ruleForm.phone) {
+        return showToast(t("please_enter_phone_number"));
+    }
+
     if (!ruleForm.password) {
         return showToast(t("please_enter_a_6_digit_password"));
     }
-    if (!ruleForm.sex) return showToast(t("gender_cannot_be_empty"));
-    if (!agentPassword.value)
+
+    if (!ruleForm.sex) {
+        return showToast(t("gender_cannot_be_empty"));
+    }
+
+    if (!agentPassword.value) {
         return showToast(t("please_enter_confirm_password"));
+    }
+
     if (agentPassword.value != ruleForm.password) {
         return showToast(t("passwords_do_not_match"));
     }
+
     if (!/^\d{6}$/.test(ruleForm.tradePassword)) {
         return showToast(t("please_enter_a_6_digit_transaction_password"));
     }
-    if (!ruleForm.inviteCode)
+
+    if (!ruleForm.inviteCode) {
         return showToast(t("please_enter_invitation_code"));
+    }
+
+    const submitForm = {
+        ...ruleForm,
+    };
+
+    if (!isNeedPhone.value) {
+        delete submitForm.phone;
+    }
+
     isSubmitting.value = true;
-    register(ruleForm)
+    register(submitForm)
         .then(() => {
             showToast(t("registration_successful"));
             return router.push({
@@ -462,6 +547,7 @@ const jumpToService = () => {
 onMounted(() => {
     const code = getHashParam("code");
     ruleForm.inviteCode = code;
+    getNeedPhoneConfig();
 });
 </script>
 
@@ -628,7 +714,7 @@ onMounted(() => {
     width: calc(50% - 4px);
     height: 41px;
     border-radius: 11px;
-    background: var( --theme-primary);
+    background: var(--theme-primary);
     box-shadow: 0 3px 8px var(--theme-button-shadow);
     transform: translateX(calc(100% + 4px));
     transition:
@@ -725,6 +811,18 @@ onMounted(() => {
     width: 16px;
     height: 16px;
     flex: 0 0 16px;
+}
+
+.auth-input__phone-icon {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-primary);
+    font-size: 14px;
+    line-height: 1;
 }
 
 .auth-input :deep(.el-input) {
@@ -944,7 +1042,6 @@ onMounted(() => {
     align-items: center;
     justify-content: center;
     background: var(--theme-primary);
-    /*box-shadow: 0 4px 16px var(--theme-button-shadow-strong);*/
     color: #fff;
     font-size: 16px;
     font-weight: 600;

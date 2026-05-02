@@ -18,14 +18,14 @@
                         ${{ formatMoney(userInfo.balance) }}
                     </div>
                 </div>
-                <div
+                <!-- <div
                     class="min-tag"
                     v-if="userInfo?.userLevel?.minWithdrawAmount != null"
                 >
                     {{ $t("min_amount") }} ${{
                         userInfo.userLevel.minWithdrawAmount
                     }}
-                </div>
+                </div> -->
             </div>
 
             <div class="section-title mt-[24px]">
@@ -38,7 +38,11 @@
                 @click="addType(2)"
             >
                 <div class="empty-account-icon">
-                    <van-icon name="plus" size="20" color="var(--theme-primary)" />
+                    <van-icon
+                        name="plus"
+                        size="20"
+                        color="var(--theme-primary)"
+                    />
                 </div>
                 <div>
                     <div class="empty-account-title">
@@ -149,7 +153,11 @@
             <div v-if="false" class="withdraw-password-card mt-[20px]">
                 <div class="withdraw-password-header">
                     <div class="withdraw-password-icon">
-                        <van-icon name="lock" size="22" color="var(--theme-green-defalut)" />
+                        <van-icon
+                            name="lock"
+                            size="22"
+                            color="var(--theme-green-defalut)"
+                        />
 
                         <img src="@/static/images/locks.png" alt="" />
                     </div>
@@ -229,7 +237,11 @@
 
                 <div class="withdraw-password-header">
                     <div class="withdraw-password-icon">
-                        <van-icon name="lock" size="22" color="var(--theme-green-defalut)" />
+                        <van-icon
+                            name="lock"
+                            size="22"
+                            color="var(--theme-green-defalut)"
+                        />
                     </div>
                     <div class="min-w-0 flex-1">
                         <div class="withdraw-password-title">
@@ -456,7 +468,10 @@ const confirmWithdrawal = async () => {
         }
 
         if (!bankItem.value?.id) {
-            showToast(t("please_select_withdrawal_account") || t("withdrawal_account"));
+            showToast(
+                t("please_select_withdrawal_account") ||
+                    t("withdrawal_account"),
+            );
             return;
         }
 
@@ -488,7 +503,6 @@ const handleConfirmWithdrawal = () => {
         }
     });
 };
-
 
 const toHistory = () => {
     router.push({ path: "/withdrawHistory" });

@@ -52,11 +52,17 @@ export const topUp = (params) =>
   getApi().post(`/account/topUp`, params, { loading: true, showMsg: true });
 
 export const updateAvatar = (params) =>
-  getApi().post(`/user/updateAvatar`, params, { loading: false, showMsg: true });
+  getApi().post(`/user/updateAvatar`, params, {
+    loading: false,
+    showMsg: true,
+  });
 
 // ------------GET请求------------
 export const userGetInfo = (params) =>
   getApi().get("/user/getInfo", { params, loading: false, showMsg: false });
+
+export const reqBeedPhone = (params) =>
+  getApi().get("/config/needPhone", { params, loading: false, showMsg: false });
 
 export const getCustomerService = (params) =>
   getApi().get("/config/getCustomerService", {

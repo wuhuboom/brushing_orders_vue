@@ -98,12 +98,12 @@
                 {{ $t("terms_and_conditions") }}
             </div>
 
-            <div class="clause-alert">
+            <!-- <div class="clause-alert">
                 <img src="@/static/images/tgcellwar.png" />
                 <span>
                     {{ $t("terms_update_alert") }}
                 </span>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>

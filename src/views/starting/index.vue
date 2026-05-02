@@ -287,21 +287,41 @@
             <van-popup
                 v-model:show="showImg"
                 round
-                :style="{ width: '80%', background: 'transparent' }"
+                :style="{ background: 'transparent' }"
             >
-                <img
-                    @click="closeImg"
-                    class="w-[100%] mb-5"
-                    src="../../static/images/super.png"
-                    alt=""
-                />
+                <div class="lucky-draw-popup">
+                    <!-- width: '86%',<div class="lucky-draw-popup__emoji">🎉</div> -->
+
+                    <img
+                        @click="closeImg"
+                        class="block mx-auto w-[65px] h-[65px] object-contain"
+                        src="../../static/images/superConf.png"
+                        alt=""
+                    />
+                    <div class="lucky-draw-popup__title">
+                        {{ $t("lucky_draw_title") }}
+                    </div>
+
+                    <div class="lucky-draw-popup__desc">
+                        {{ $t("lucky_draw_desc_before") }}
+                        <span class="lucky-draw-popup__amount">
+                            {{ $t("lucky_draw_amount") }}
+                        </span>
+                    </div>
+
+                    <div class="lucky-draw-popup__claim">
+                        {{ $t("lucky_draw_claim_text") }}
+                    </div>
+                </div>
+
                 <van-button
-                    color="rgb(10, 77, 162)"
+                    color="var(--theme-primary)"
                     round
-                    class="w-full"
+                    class="w-full lucky-draw-popup__ok"
                     @click="closeImg"
-                    >{{ $t("ok") }}</van-button
                 >
+                    {{ $t("ok") }}
+                </van-button>
             </van-popup>
         </div>
     </div>
@@ -1197,7 +1217,7 @@ onMounted(() => {
 
 .blind-box-start-btn {
     width: 100%;
-    height:56px;
+    height: 56px;
     margin-top: 18px;
     border: 0;
     border-radius: 10px;
@@ -1745,6 +1765,56 @@ onMounted(() => {
     margin: 0 auto;
 }
 
+.lucky-draw-popup {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px 22px 30px;
+    border: 2px solid #a7dfbd;
+    border-radius: 26px;
+    background: #eef8f0;
+    text-align: center;
+    color: #173421;
+}
+
+.lucky-draw-popup__emoji {
+    width: 65px;
+    height: 65px;
+    /*font-size: 48px;
+    line-height: 1;
+    margin-bottom: 34px;*/
+}
+
+.lucky-draw-popup__title {
+    color: #142a1b;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: 0.3px;
+}
+
+.lucky-draw-popup__desc {
+    margin-top: 24px;
+    color: #4e4e4e;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.lucky-draw-popup__amount {
+    color: #169b4c;
+    white-space: nowrap;
+}
+
+.lucky-draw-popup__claim {
+    margin-top: 46px;
+    color: #4d4d4d;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+.lucky-draw-popup__ok {
+    margin-top: 16px;
+}
+
 :deep(.van-dialog__content) {
     height: 100%;
     overflow: hidden;
@@ -1831,6 +1901,30 @@ onMounted(() => {
     .task-product-card__thumb {
         width: 82px;
         height: 82px;
+    }
+
+    .lucky-draw-popup {
+        padding: 32px 18px 28px;
+        border-radius: 24px;
+    }
+
+    .lucky-draw-popup__emoji {
+        font-size: 44px;
+        margin-bottom: 28px;
+    }
+
+    .lucky-draw-popup__title {
+        font-size: 20px;
+    }
+
+    .lucky-draw-popup__desc {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+
+    .lucky-draw-popup__claim {
+        margin-top: 36px;
+        font-size: 14px;
     }
 }
 </style>

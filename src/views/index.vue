@@ -1,6 +1,6 @@
 <template>
     <div class="home-page min-h-screen bg-white">
-        <div class="mx-auto flex w-full flex-col ">
+        <div class="mx-auto flex w-full flex-col">
             <SkyeOdellHome>
                 <template #reward>
                     <HomeWalletCard
@@ -20,11 +20,20 @@
                             <img :src="noticeVolumeIcon" alt="" />
                         </div>
                         <div class="home-ticker__content">
-                            <div class="home-ticker__marquee" v-if="noticeMarqueeText">
-                            <span class="home-ticker__marquee-text">{{ noticeMarqueeText }}</span>
-                            <span class="home-ticker__marquee-text" aria-hidden="true">{{ noticeMarqueeText }}</span>
-                        </div>
-                        <div class="home-ticker__marquee" v-else></div>
+                            <div
+                                class="home-ticker__marquee"
+                                v-if="noticeMarqueeText"
+                            >
+                                <span class="home-ticker__marquee-text">{{
+                                    noticeMarqueeText
+                                }}</span>
+                                <span
+                                    class="home-ticker__marquee-text"
+                                    aria-hidden="true"
+                                    >{{ noticeMarqueeText }}</span
+                                >
+                            </div>
+                            <div class="home-ticker__marquee" v-else></div>
                         </div>
                     </section>
 
@@ -56,14 +65,20 @@ import { useRouter } from "vue-router";
 
 import HomeWalletCard from "@/components/home/HomeWalletCard.vue";
 import SkyeOdellHome from "@/components/home/SkyeOdellHome.vue";
-import { getNoticeList, getTradeConfig } from "../api/apis";
+import {
+    getNoticeList,
+    getTradeConfig,
+    getNoticeListByLang,
+} from "../api/apis";
 import { useUserStore } from "@/store/modules/user";
+import { useCommonStore } from "@/store/modules/common";
 
 const router = useRouter();
 const userStore = useUserStore();
 
 const tradeInfo = ref({});
 const notices = ref([]);
+const commonStore = useCommonStore();
 
 const quickIconIncome = new URL(
     "@/static/images/home-quick-income.png",
@@ -152,7 +167,10 @@ const quickLinks = [
         icon: quickIconFaqs,
     },
 ];
-
+const parLang = computed(() => {
+    const mapped = commonStore.getValueByKey(commonStore.lang);
+    return mapped ?? commonStore.lang;
+});
 const vipLabel = computed(
     () =>
         userStore.userInfo?.userLevel?.nameEn ||
@@ -206,7 +224,11 @@ async function getTradeInfo() {
 
 async function getHomeNotices() {
     try {
-        const res = await getNoticeList({ pageNum: 1, pageSize: 10 });
+        const res = await getNoticeListByLang({
+            pageNum: 1,
+            pageSize: 10,
+            lang: parLang.value,
+        });
         notices.value = Array.isArray(res?.rows)
             ? res.rows.filter((item) => item.noticeContent)
             : [];

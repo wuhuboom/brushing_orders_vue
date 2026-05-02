@@ -217,7 +217,7 @@ const loadData = async () => {
         }
         list.value.push(...data);
     } catch (error) {
-        console.error("鍔犺浇澶辫触", error);
+        console.error("noticeErr", error);
         finished.value = true;
     }
 };

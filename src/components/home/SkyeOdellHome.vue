@@ -12,13 +12,9 @@
 
         <header class="skye-site-header">
             <img class="skye-logo" :src="logo" :alt="t('sk_logo_alt')" />
-            <button
-                class="skye-menu-button"
-                type="button"
-                :aria-label="t('sk_menu')"
-            >
-                <span></span><span></span><span></span>
-            </button>
+            <!-- <button class="skye-menu-button" type="button" :aria-label="t('sk_menu')">
+        <span></span><span></span><span></span>
+      </button> -->
         </header>
 
         <!-- <div class="skye-contact-panel">
@@ -103,7 +99,11 @@
 
         <section class="skye-team-section">
             <h2 class="skye-team-title">
-                <span class="skye-team-line">
+                <!-- <span class="skye-team-line">
+                    <span class="mr-[10px]">{{ t("sk_team_l1_pre") }}</span>
+                    <em>{{ t("sk_team_l1_em") }}</em>
+                </span> -->
+                <span class="skye-team-line skye-team-line--inline">
                     <span>{{ t("sk_team_l1_pre") }}</span>
                     <em>{{ t("sk_team_l1_em") }}</em>
                 </span>
@@ -1213,6 +1213,20 @@ onBeforeUnmount(() => {
 }
 .skye-team-line {
     display: block;
+}
+
+.skye-team-line--inline {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+    white-space: nowrap;
+    font-size: clamp(22px, 6.4vw, 31px);
+}
+
+.skye-team-line--inline span,
+.skye-team-line--inline em {
+    flex-shrink: 0;
 }
 .skye-team-line + .skye-team-line {
     margin-top: 2px;
