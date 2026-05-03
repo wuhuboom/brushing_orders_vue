@@ -125,7 +125,7 @@
   "my_financial": "Le mie finanze",
   "my_detail": "I miei dettagli",
   "other": "Altro",
-  "service": "Servizio",
+  "service": "Supporto",
   "contact_2": "CONTATTO",
   "starting": "Inizio",
   "start": "Avvia",
@@ -703,7 +703,7 @@
       "tag": "ATTIVO",
       "icon": "⚡",
       "title": "3° Anniversario - Ringraziamento e Feedback",
-      "summary": "Agenti DIRETTI - Attività di anticipo avanzato - Premi bonus di reset.",
+      "summary": "Evento promozionale Skye Odell – Ricompense bonus di reset",
       "reward": "USD 10 - USD 2.400 Premi extra",
       "progress": "",
       "time": "Attività anniversario a tempo limitato",
@@ -726,8 +726,8 @@
       "content": "<div class=\"event-section-block\"><h4>Premi anticipati cumulativi giornalieri</h4><div class=\"event-bonus-grid\"><div><strong>1.500 - 9.999</strong><span>Riceverai</span><b>Bonus anticipo 4%</b></div><div><strong>10.000 - 19.999</strong><span>Riceverai</span><b>Bonus anticipo 8%</b></div><div><strong>20.000 - 49.999</strong><span>Riceverai</span><b>Bonus anticipo 12%</b></div><div><strong>50.000 e oltre</strong><span>Riceverai</span><b>Bonus anticipo 20%</b></div></div></div>"
     }
   ],
-  "event_footer_line1": "Il diritto di interpretazione finale è riservato a DIRECT AGENTS.",
-  "event_footer_line2": "Copyright © 2022 DIRECT AGENTS",
+  "event_footer_line1": "Skye Odell si riserva il diritto di interpretazione finale.",
+  "event_footer_line2": "© 2022 Skye Odell. Tutti i diritti riservati.",
   "tc_page_title": "Termini e Condizioni",
   "tc_hero_title": "Accordo di Registrazione dell'Utente",
   "tc_hero_intro": [
@@ -745,28 +745,28 @@
       "title": "Protezione delle informazioni personali",
       "items": [
         {
-          "no": "1.1",
-          "content": "<p>La protezione delle informazioni personali degli utenti è un principio fondamentale di Main Street ROI Agency. Utilizziamo tecnologie di crittografia professionali, archiviazione sicura e metodi di trasmissione protetti per salvaguardare i dati degli utenti.</p>"
+        "no": "1.1",
+        "content": "<p>La protezione delle informazioni personali degli utenti è un principio fondamentale di Main Street ROI Agency. Utilizziamo tecnologie di crittografia professionali, archiviazione sicura e metodi di trasmissione protetti per salvaguardare i dati degli utenti.</p>"
         },
         {
-          "no": "1.2",
-          "content": "<p>Per accedere a determinati Servizi, come la registrazione dell'account, gli utenti sono tenuti a fornire informazioni necessarie e accurate, inclusi ma non limitati a un numero di telefono cellulare, e devono accettare il presente Accordo. La mancata fornitura di informazioni complete o accurate può comportare restrizioni all'accesso ai Servizi.</p>"
+        "no": "1.2",
+        "content": "<p>Per accedere a determinati Servizi, come la registrazione dell'account, gli utenti sono tenuti a fornire informazioni necessarie e accurate, inclusi ma non limitati a un numero di telefono cellulare, e devono accettare il presente Accordo. La mancata fornitura di informazioni complete o accurate può comportare restrizioni all'accesso ai Servizi.</p>"
         },
         {
-          "no": "1.3",
-          "content": "<p>Gli utenti possono aggiornare alcune informazioni personali dopo la registrazione. Tuttavia, per motivi di sicurezza, inclusi il recupero dell'account e la prevenzione delle frodi, alcune informazioni potrebbero non essere modificabili una volta verificate.</p>"
+        "no": "1.3",
+        "content": "<p>Gli utenti possono aggiornare alcune informazioni personali dopo la registrazione. Tuttavia, per motivi di sicurezza, inclusi il recupero dell'account e la prevenzione delle frodi, alcune informazioni potrebbero non essere modificabili una volta verificate.</p>"
         },
         {
-          "no": "1.4",
-          "content": "<p>Main Street ROI Agency mantiene rigorosi controlli interni e sistemi di gestione per prevenire accessi, utilizzi o divulgazioni non autorizzate delle informazioni personali. Qualsiasi utilizzo non autorizzato sarà gestito in conformità alle leggi applicabili. Una volta registrato, il numero di telefono principale associato all'account non può essere modificato senza verifica.</p>"
+        "no": "1.4",
+        "content": "<p>Main Street ROI Agency mantiene rigorosi controlli interni e sistemi di gestione per prevenire accessi, utilizzi o divulgazioni non autorizzate delle informazioni personali. Qualsiasi utilizzo non autorizzato sarà gestito in conformità alle leggi applicabili. Una volta registrato, il numero di telefono principale associato all'account non può essere modificato senza verifica.</p>"
         },
         {
-          "no": "1.5",
-          "content": "<p>Main Street ROI Agency non divulgherà, venderà o condividerà le informazioni personali degli utenti con terze parti senza il consenso esplicito dell'utente, salvo quanto richiesto dalla legge.</p>"
+        "no": "1.5",
+        "content": "<p>Main Street ROI Agency non divulgherà, venderà o condividerà le informazioni personali degli utenti con terze parti senza il consenso esplicito dell'utente, salvo quanto richiesto dalla legge.</p>"
         },
         {
-          "no": "1.6",
-          "content": "<p>Gli utenti di età inferiore ai 18 anni non sono autorizzati a utilizzare i Servizi. Se è necessario l'accesso, deve essere fornito preventivamente il consenso scritto di un tutore legale.</p>"
+        "no": "1.6",
+        "content": "<p>Gli utenti di età inferiore ai 18 anni non sono autorizzati a utilizzare i Servizi. Se è necessario l'accesso, deve essere fornito preventivamente il consenso scritto di un tutore legale.</p>"
         }
       ]
     },
@@ -774,24 +774,24 @@
       "title": "Responsabilità dell'utente",
       "items": [
         {
-          "no": "2.1",
-          "content": "<p>Gli utenti devono completare tutte le attività giornaliere assegnate prima di richiedere un prelievo.</p>"
+        "no": "2.1",
+        "content": "<p>Gli utenti devono completare tutte le attività giornaliere assegnate prima di richiedere un prelievo.</p>"
         },
         {
-          "no": "2.2",
-          "content": "<p>I prelievi non sono consentiti mentre è in corso un processo di ottimizzazione o di attività.</p>"
+        "no": "2.2",
+        "content": "<p>I prelievi non sono consentiti mentre è in corso un processo di ottimizzazione o di attività.</p>"
         },
         {
-          "no": "2.3",
-          "content": "<p>Gli utenti non possono annullare, saltare o abbandonare le attività assegnate una volta che sono state accettate.</p>"
+        "no": "2.3",
+        "content": "<p>Gli utenti non possono annullare, saltare o abbandonare le attività assegnate una volta che sono state accettate.</p>"
         },
         {
-          "no": "2.4",
-          "content": "<p>I prelievi superiori a <strong>30.000 USD</strong> sono soggetti a una <strong>commissione di elaborazione del 20%</strong>, che verrà rimborsata all'utente una volta che il prelievo sarà completato con successo.</p>"
+        "no": "2.4",
+        "content": "<p>I prelievi superiori a <strong>30.000 USD</strong> sono soggetti a una <strong>commissione di elaborazione del 20%</strong>, che verrà rimborsata all'utente una volta che il prelievo sarà completato con successo.</p>"
         },
         {
-          "no": "2.5",
-          "content": "<p>Qualsiasi violazione di questi termini può comportare una riduzione del punteggio di credito dell'utente. Alcune funzionalità dell'account potrebbero essere limitate fino al ripristino del punteggio di credito.</p>"
+        "no": "2.5",
+        "content": "<p>Qualsiasi violazione di questi termini può comportare una riduzione del punteggio di credito dell'utente. Alcune funzionalità dell'account potrebbero essere limitate fino al ripristino del punteggio di credito.</p>"
         }
       ]
     },
@@ -799,20 +799,20 @@
       "title": "Termini e Condizioni",
       "items": [
         {
-          "no": "3.1",
-          "content": "<p>Il presente Accordo costituisce un contratto legalmente vincolante tra l'utente e Main Street ROI Agency. Gli utenti devono fornire informazioni accurate e conformi alla legge come richiesto per accedere ai Servizi.</p>"
+        "no": "3.1",
+        "content": "<p>Il presente Accordo costituisce un contratto legalmente vincolante tra l'utente e Main Street ROI Agency. Gli utenti devono fornire informazioni accurate e conformi alla legge come richiesto per accedere ai Servizi.</p>"
         },
         {
-          "no": "3.2",
-          "content": "<p>Questi termini si applicano a tutti gli utenti dei Servizi. In caso di domande, feedback o dubbi, si prega di contattare il reparto di supporto appropriato.</p>"
+        "no": "3.2",
+        "content": "<p>Questi termini si applicano a tutti gli utenti dei Servizi. In caso di domande, feedback o dubbi, si prega di contattare il reparto di supporto appropriato.</p>"
         },
         {
-          "no": "3.3",
-          "content": "<p>Questi termini sono regolati e tutelati dalle leggi e normative commerciali applicabili. Main Street ROI Agency si riserva il diritto di intraprendere azioni legali contro qualsiasi utente che violi il presente Accordo in malafede.</p>"
+        "no": "3.3",
+        "content": "<p>Questi termini sono regolati e tutelati dalle leggi e normative commerciali applicabili. Main Street ROI Agency si riserva il diritto di intraprendere azioni legali contro qualsiasi utente che violi il presente Accordo in malafede.</p>"
         },
         {
-          "no": "3.4",
-          "content": "<p>Main Street ROI Agency si riserva il diritto di modificare o aggiornare il presente Accordo in qualsiasi momento. Fa fede la versione più recente pubblicata sul sito web e Main Street ROI Agency mantiene il diritto finale di interpretazione.</p>"
+        "no": "3.4",
+        "content": "<p>Main Street ROI Agency si riserva il diritto di modificare o aggiornare il presente Accordo in qualsiasi momento. Fa fede la versione più recente pubblicata sul sito web e Main Street ROI Agency mantiene il diritto finale di interpretazione.</p>"
         }
       ]
     }
@@ -927,60 +927,5 @@
   "sk_team_l3": "che credono nello sfruttare",
   "sk_team_l4": "il potere della creatività per",
   "sk_team_l5_soft": "trasformare i brand e",
-  "sk_team_l6": "affascinare le persone.",
-  "phone_number": "Telefono",
-  "Gender_fomt": "Seleziona sesso",
-  "lucky_draw_title": "HAI VINTO L'ESTRAZIONE FORTUNATA!",
-  "lucky_draw_desc_before": "Questo evento è organizzato congiuntamente da Web Works Marketing e dai commercianti partecipanti, con una ricompensa misteriosa compresa tra",
-  "lucky_draw_amount": "20 $ e 2.000.000 $",
-  "lucky_draw_claim_text": "Per richiedere la tua ricompensa, contatta il nostro team di assistenza clienti.",
-  "guide_salary_scheme_title": "Piano stipendio",
-  "guide_salary_scheme_subtitle": "Accedi . Partecipa . Ricevi il pagamento",
-  "guide_salary_sign_in": "Accedi",
-  "guide_salary_2_days": "2 giorni lavorativi",
-  "guide_salary_4_days": "4 giorni lavorativi",
-  "guide_salary_7_days": "7 giorni lavorativi",
-  "guide_salary_15_days": "15 giorni lavorativi",
-  "guide_salary_30_days": "30 giorni lavorativi",
-  "guide_salary_amount_130": "USD130",
-  "guide_salary_amount_1200": "USD1,200",
-  "guide_salary_amount_1500": "USD1,500",
-  "guide_salary_amount_1800": "USD1,800",
-  "guide_salary_amount_2370": "USD2,370",
-  "guide_salary_how_title": "Come funziona:",
-  "guide_salary_how_text": "Per il pagamento mensile, accedi e mantieni il tuo profitto: potrai ottenere un reddito garantito!",
-  "guide_salary_earn_text": "Più sei attivo, più guadagni. Invita per iniziare!",
-  "guide_salary_tip": "La presenza perfetta può farti guadagnare fino a USD 7,000 al mese!",
-  "guide_reset_scheme_title": "Schema bonus reset",
-  "guide_reset_scheme_subtitle": "Ricarica . Reimposta . Guadagna di più",
-  "guide_reset_plan_1_name": "Standard",
-  "guide_reset_plan_2_name": "Scelta popolare",
-  "guide_reset_plan_3_name": "Premium",
-  "guide_reset_plan_4_name": "Elite",
-  "guide_reset_plan_5_name": "Consigliato",
-  "guide_reset_plan_6_name": "Elite Plus",
-  "guide_reset_amount_label": "Importo",
-  "guide_reset_extra_label": "Bonus extra",
-  "guide_reset_plan_1_amount": "USD100",
-  "guide_reset_plan_2_amount": "USD500",
-  "guide_reset_plan_3_amount": "USD1,000",
-  "guide_reset_plan_4_amount": "USD1,600",
-  "guide_reset_plan_5_amount": "USD5,500",
-  "guide_reset_plan_6_amount": "USD10,000",
-  "guide_reset_plan_1_extra": "USD10",
-  "guide_reset_plan_2_extra": "USD60",
-  "guide_reset_plan_3_extra": "USD120",
-  "guide_reset_plan_4_extra": "USD200",
-  "guide_reset_plan_5_extra": "USD1,200",
-  "guide_reset_plan_6_extra": "USD2,400",
-  "guide_reset_advance_title": "Bonus reset anticipato",
-  "guide_reset_advance_day_title": "Anticipo nello stesso giorno",
-  "guide_reset_range_1500_9999": "USD1,500 - USD9,999",
-  "guide_reset_range_10000_19999": "USD10,000 - USD19,999",
-  "guide_reset_range_20000_49999": "USD20,000 - USD49,999",
-  "guide_reset_range_50000_above": "USD50,000 e oltre",
-  "guide_reset_will_get": "Riceverai",
-  "guide_reset_bonus_4": "4%",
-  "guide_reset_bonus_8": "8%",
-  "guide_reset_advance_bonus": "bonus anticipato"
+  "sk_team_l6": "affascinare le persone."
 }
