@@ -412,11 +412,11 @@ const benefitCards = computed(() => [
         title: t("vip_data_security"),
         desc: t("vip_data_security_desc"),
     },
-    {
-        icon: new URL("@/static/images/user-invite.png", import.meta.url).href,
-        title: t("vip_referral_bonus"),
-        desc: t("vip_referral_bonus_desc"),
-    },
+    // {
+    //     icon: new URL("@/static/images/user-invite.png", import.meta.url).href,
+    //     title: t("vip_referral_bonus"),
+    //     desc: t("vip_referral_bonus_desc"),
+    // },
     {
         icon: vipIcons.rocket,
         title: t("vip_instant_commission"),

@@ -287,6 +287,8 @@
             <van-popup
                 v-model:show="showImg"
                 round
+                class="lucky-draw-van-popup"
+                overlay-class="lucky-draw-popup-overlay"
                 :style="{ background: 'transparent' }"
             >
                 <div class="lucky-draw-popup">
@@ -1815,6 +1817,18 @@ onMounted(() => {
     margin-top: 16px;
 }
 
+:global(.lucky-draw-van-popup) {
+    width: min(calc(100vw - 44px), calc(var(--app-pc-max-width, 375px) - 44px)) !important;
+    max-width: min(calc(100vw - 44px), calc(var(--app-pc-max-width, 375px) - 44px)) !important;
+}
+
+:global(.lucky-draw-popup-overlay) {
+    left: 50% !important;
+    right: auto !important;
+    width: min(100vw, var(--app-pc-max-width, 375px)) !important;
+    transform: translateX(-50%) !important;
+}
+
 :deep(.van-dialog__content) {
     height: 100%;
     overflow: hidden;
@@ -1866,11 +1880,17 @@ onMounted(() => {
         transform: none !important;
     }
 
-    :global(.task-fullscreen-overlay) {
+    :global(.task-fullscreen-overlay),
+    :global(.lucky-draw-popup-overlay) {
         left: 0 !important;
         right: 0 !important;
         width: 100vw !important;
         transform: none !important;
+    }
+
+    :global(.lucky-draw-van-popup) {
+        width: calc(100vw - 44px) !important;
+        max-width: calc(100vw - 44px) !important;
     }
 }
 

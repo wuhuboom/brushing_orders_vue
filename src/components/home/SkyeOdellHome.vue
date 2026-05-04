@@ -1221,7 +1221,7 @@ onBeforeUnmount(() => {
     justify-content: center;
     gap: 10px;
     white-space: nowrap;
-    font-size: clamp(22px, 6.4vw, 31px);
+    font-size: clamp(22px, 6.4vw, 26px);
 }
 
 .skye-team-line--inline span,

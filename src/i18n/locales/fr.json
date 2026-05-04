@@ -232,7 +232,7 @@
   "bank_account": "Compte bancaire",
   "account_type": "Type de compte",
   "bank_name": "Nom de la banque",
-  "bank_card_management": "Gestion des cartes bancaires",
+  "bank_card_management": "Gestion du portefeuille",
   "please_enter_bank_name": "Veuillez entrer le nom de la banque",
   "please_enter_bank_account": "Veuillez entrer le compte bancaire",
   "please_enter_name": "Veuillez entrer le nom",
@@ -448,7 +448,7 @@
   "message_center": "Centre de messages",
   "system_notifications_announcements": "Notifications système et annonces",
   "link_your_bank_card": "Méthode de paiement",
-  "bind_bank_card_for_withdrawals": "Lier une carte bancaire pour les retraits",
+  "bind_bank_card_for_withdrawals": "Lier une adresse de portefeuille pour les retraits",
   "get_help_resolve_issues": "Obtenir de l’aide et résoudre les problèmes",
   "confirm_log_out": "Confirmer la déconnexion",
   "logout_confirm_desc_1": "Êtes-vous sûr de vouloir vous déconnecter de votre compte ?",
@@ -560,7 +560,7 @@
   "vip_feature_priority_queue": "Accès prioritaire à la file des tâches",
   "vip_feature_all_vip2": "Tous les avantages VIP 2 inclus",
   "vip_feature_high_value_tasks": "Accès à des tâches exclusives à forte valeur",
-  "vip_feature_fast_withdrawal_2_days": "Traitement des retraits plus rapide (2 jours)",
+  "vip_feature_fast_withdrawal_2_days": "Traitement des retraits plus rapide",
   "vip_feature_all_vip3": "Tous les avantages VIP 3 inclus",
   "vip_feature_account_manager": "Gestionnaire de compte dédié",
   "vip_feature_one_day_withdrawal": "Traitement des retraits express en 1 jour",
@@ -568,7 +568,7 @@
   "vip_feature_all_vip4": "Tous les avantages VIP 4 inclus",
   "vip_feature_highest_rebate": "Taux de remise le plus élevé (2,5 % par tâche)",
   "vip_feature_same_day_withdrawal": "Traitement des retraits le jour même",
-  "vip_feature_top_support": "Support client prioritaire 24h/24 et 7j/7",
+  "vip_feature_top_support": "Support client dédié",
   "vip_feature_vip5_pools": "Pools de tâches légendaires exclusifs VIP 5",
   "daily_task_submission_quota": "Quota quotidien de soumission de tâches : {count} unités",
   "rebate_task": "Remise / tâche",
@@ -616,141 +616,285 @@
   "income_guide_sections": [
     {
       "title": "1) Salaire de base",
-      "image": "{basicSalaryImage}",
-      "content": "<p>L’entreprise utilise un mécanisme d’enregistrement cumulatif dans le cadre de sa structure de distribution des salaires, conçu pour encourager les utilisateurs à accomplir leurs missions quotidiennes de manière régulière. Bien que le montant du salaire de base soit fixe, il n’est <strong>pas</strong> versé en une seule fois. Au lieu de cela, le salaire est débloqué après un nombre défini de jours de travail — par exemple 2 jours, 4 jours ou 7 jours — afin de promouvoir la continuité des missions. Une fois que les utilisateurs ont atteint le nombre de jours requis, l’entreprise verse le salaire de base en conséquence.</p>"
+      "image": "",
+      "content": "<p>L’entreprise adopte un mécanisme de pointage cumulatif dans le cadre de sa structure de distribution des salaires, conçu pour encourager les utilisateurs à accomplir leurs missions quotidiennes de manière régulière. Bien que le montant du salaire de base soit fixe, il <strong>n’est pas</strong> versé en une seule fois. Au lieu de cela, le salaire est distribué après un certain nombre de jours ouvrables, tels que 2 jours, 4 jours ou 7 jours, afin d’encourager la réalisation continue des missions quotidiennes. Une fois que les utilisateurs ont complété le nombre requis de jours de travail, l’entreprise versera le salaire en conséquence.</p>",
+      "salaryScheme": {
+        "title": "Plan de rémunération",
+        "subtitle": "Se connecter . Être présent . Être payé",
+        "rows": [
+          {
+            "name": "Connexion",
+            "days": "2 jours ouvrables",
+            "amount": "130 USD"
+          },
+          {
+            "name": "Connexion",
+            "days": "4 jours ouvrables",
+            "amount": "1 200 USD"
+          },
+          {
+            "name": "Connexion",
+            "days": "7 jours ouvrables",
+            "amount": "1 500 USD"
+          },
+          {
+            "name": "Connexion",
+            "days": "15 jours ouvrables",
+            "amount": "1 800 USD"
+          },
+          {
+            "name": "Connexion",
+            "days": "30 jours ouvrables",
+            "amount": "2 370 USD"
+          }
+        ],
+        "howTitle": "Comment ça fonctionne :",
+        "howText": "Pour un revenu mensuel, connectez-vous et maintenez vos profits afin de bénéficier d’un revenu garanti !",
+        "earnText": "Plus vous êtes actif, plus vous gagnez. Invitez et commencez !",
+        "tip": "Une présence parfaite peut vous rapporter jusqu’à 7 000 USD par mois."
+      }
     },
     {
       "title": "2) Bonus de réinitialisation",
-      "image": "{resetBonusImage}",
-      "content": "<p>Le bonus de réinitialisation constitue l’une des sources de revenus les plus importantes lorsque vous commencez à travailler avec nous. Chaque utilisateur peut effectuer <strong>deux séries de missions par jour</strong>, et les commerçants offrent des bonus de réinitialisation supplémentaires pour encourager la régularité des missions.</p><p>Dans le cadre du système d’incitation à la réinitialisation :</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Vous recevrez un <strong>bonus supplémentaire de 10 USD</strong> chaque fois que vous réinitialisez votre compte pour commencer la première mission avec <strong>100 USD</strong>.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Lorsque votre <strong>montant total de réinitialisation dépasse 1 500 USD en une seule journée</strong>, vous recevrez un <strong>bonus supplémentaire de 4 %</strong> basé sur le montant cumulé des deux séries effectuées ce jour-là.</li></ol>"
+      "image": "",
+      "content": "<p>Le bonus de réinitialisation constitue l’une des sources de revenus les plus importantes lorsque vous commencez à travailler avec nous. Chaque utilisateur peut compléter <strong>deux séries de missions par jour</strong>, et les commerçants offrent des bonus de réinitialisation supplémentaires afin d’encourager une exécution régulière des missions.</p><p>Dans le cadre de cette structure d’incitation :</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Vous recevrez un <strong>bonus supplémentaire de 10 USD</strong> chaque fois que vous réinitialisez votre compte pour commencer la première mission avec <strong>100 USD</strong>.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Lorsque votre <strong>montant total de réinitialisation dépasse 1 500 USD en une seule journée</strong>, vous recevrez <strong>un bonus supplémentaire de 4 %</strong> basé sur le montant cumulé des deux séries complétées ce jour-là.</li></ol>",
+      "resetBonusScheme": {
+        "title": "Plan de rémunération",
+        "subtitle": "Se connecter . Être présent . Être payé",
+        "plans": [
+          {
+            "name": "Standard",
+            "amountLabel": "MONTANT",
+            "amount": "100 USD",
+            "extraLabel": "BONUS SUPPLÉMENTAIRE",
+            "extra": "10 USD"
+          },
+          {
+            "name": "Choix populaire",
+            "amountLabel": "MONTANT",
+            "amount": "500 USD",
+            "extraLabel": "BONUS SUPPLÉMENTAIRE",
+            "extra": "60 USD"
+          },
+          {
+            "name": "Premium",
+            "amountLabel": "MONTANT",
+            "amount": "1 000 USD",
+            "extraLabel": "BONUS SUPPLÉMENTAIRE",
+            "extra": "120 USD"
+          },
+          {
+            "name": "Élite",
+            "amountLabel": "MONTANT",
+            "amount": "1 600 USD",
+            "extraLabel": "BONUS SUPPLÉMENTAIRE",
+            "extra": "200 USD"
+          },
+          {
+            "name": "Recommandé",
+            "amountLabel": "MONTANT",
+            "amount": "5 500 USD",
+            "extraLabel": "BONUS SUPPLÉMENTAIRE",
+            "extra": "1 200 USD"
+          },
+          {
+            "name": "Élite Plus",
+            "amountLabel": "MONTANT",
+            "amount": "10 000 USD",
+            "extraLabel": "BONUS SUPPLÉMENTAIRE",
+            "extra": "2 400 USD"
+          }
+        ],
+        "advanceTitle": "Récompenses cumulées des avances du jour",
+        "advanceRows": [
+          {
+            "title": "AVANCES DU JOUR (USD)",
+            "range": "1 500 - 9 999",
+            "desc": "VOUS OBTIENDREZ (USD)",
+            "bonus": "4%",
+            "suffix": "Bonus d'avance"
+          },
+          {
+            "title": "AVANCES DU JOUR (USD)",
+            "range": "10 000 - 19 999",
+            "desc": "VOUS OBTIENDREZ (USD)",
+            "bonus": "8%",
+            "suffix": "Bonus d'avance"
+          },
+          {
+            "title": "AVANCES DU JOUR (USD)",
+            "range": "20 000 - 49 999",
+            "desc": "VOUS OBTIENDREZ (USD)",
+            "bonus": "4%",
+            "suffix": "Bonus d'avance"
+          },
+          {
+            "title": "AVANCES DU JOUR (USD)",
+            "range": "50 000 et plus",
+            "desc": "VOUS OBTIENDREZ (USD)",
+            "bonus": "4%",
+            "suffix": "Bonus d'avance"
+          }
+        ]
+      }
     },
     {
       "title": "3) Profits quotidiens",
       "image": "",
-      "content": "<p>Les profits quotidiens représentent votre principale source de revenus. Le système attribue des produits provenant de différents commerçants pour optimisation en fonction de votre solde de compte actuel. Pour chaque produit optimisé, vous gagnez entre <strong>0,5 % et 2,5 %</strong> du prix du produit.</p><p>Les niveaux de profit sont déterminés par votre <strong>niveau VIP</strong> — plus votre niveau VIP est élevé, plus votre taux de profit est important. De plus, le nombre de missions par série augmente avec votre niveau VIP.</p><p>Certains commerçants proposent également des <strong>produits combinés</strong>. Le système peut attribuer ces produits combinés de manière aléatoire selon le solde du compte. Selon les types de produits optimisés, vous pouvez obtenir <strong>un profit supplémentaire de 5 % à 25 %</strong>.</p>"
+      "content": "<p>Les profits quotidiens représentent votre principale source de revenus. Le système attribue des produits provenant de différents commerçants pour optimisation en fonction du solde actuel de votre compte. Pour chaque produit que vous optimisez, vous gagnerez <strong>0,5 % à 2,5 %</strong> du prix du produit en tant que profit.</p><p>Les niveaux de profit sont déterminés par votre <strong>niveau VIP</strong> — plus votre niveau VIP est élevé, plus votre taux de profit est élevé. De plus, le nombre de missions par série augmente à mesure que votre niveau VIP progresse.</p><p>Certains commerçants proposent également des <strong>produits combinés</strong>. Le système peut attribuer aléatoirement ces produits combinés aux utilisateurs en fonction du solde de leur compte. Selon le type de produits que vous optimisez, vous pouvez gagner <strong>un profit supplémentaire de 5 % à 25 %</strong>.</p>",
+      "vipProfitRates": {
+        "rows": [
+          {
+            "level": "VIP 1",
+            "rate": "0.5%",
+            "progress": "20%"
+          },
+          {
+            "level": "VIP 2",
+            "rate": "1%",
+            "progress": "40%"
+          },
+          {
+            "level": "VIP 3",
+            "rate": "1.5%",
+            "progress": "60%"
+          },
+          {
+            "level": "VIP 4",
+            "rate": "2%",
+            "progress": "80%"
+          },
+          {
+            "level": "VIP 5",
+            "rate": "2.5%",
+            "progress": "100%"
+          }
+        ],
+        "button": "Passer au VIP pour gagner plus →"
+      }
     }
   ],
   "clause_sections": [
     {
-      "title": "Pour optimiser et réinitialiser votre compte, vous devez d’abord compléter toutes les évaluations avec un montant minimum de 50 USD et un montant minimum de réinitialisation de compte de 100 USD.",
-      "content": "<p>1.1) Les utilisateurs ayant terminé une série de missions doivent contacter le service client pour demander une réinitialisation pour la prochaine série de tâches</p>"
+      "title": "Pour optimiser et réinitialiser votre compte, vous devez d’abord compléter toutes les évaluations avec un montant minimum de 50 USD et un montant minimum de réinitialisation de 100 USD.",
+      "content": "<p>1.1) Les utilisateurs ayant complété une série de missions doivent contacter le service client pour demander une réinitialisation afin de commencer la série suivante</p>"
     },
     {
-      "title": "Retraits des utilisateurs et exigences du système de retrait / sécurité des fonds des utilisateurs",
-      "content": "<p>2.1) Chaque utilisateur doit terminer toutes les missions d’optimisation avant de remplir les conditions de retrait du système</p><p>2.2) Afin d’éviter toute perte de fonds, tous les retraits sont traités automatiquement par le système et non manuellement</p><p>2.3) Aucun utilisateur n’est autorisé à demander un retrait en cours de mission afin de ne pas affecter les opérations des commerçants</p><p>2.4) Les fonds des utilisateurs sont entièrement sécurisés sur la plateforme et celle-ci est responsable de toute perte accidentelle</p>"
+      "title": "Retraits des utilisateurs et exigences du système / sécurité des fonds des utilisateurs",
+      "content": "<p>2.1) Chaque utilisateur doit terminer toutes les missions d’optimisation avant de pouvoir répondre aux conditions de retrait du système</p><p>2.2) Afin d’éviter toute perte de fonds, tous les retraits sont traités automatiquement par le système et non manuellement</p><p>2.3) Les utilisateurs ne sont pas autorisés à demander un retrait en cours de mission afin de ne pas perturber les opérations des commerçants</p><p>2.4) Les fonds des utilisateurs sont entièrement sécurisés sur la plateforme, et la plateforme sera responsable en cas de perte accidentelle</p>"
     },
     {
-      "title": "Veuillez ne pas divulguer votre mot de passe de compte et votre mot de passe de retrait à d’autres personnes. La plateforme ne sera pas tenue responsable des pertes ou dommages causés",
-      "content": "<p>3.1) Tous les utilisateurs sont invités à sécuriser leur compte afin d’éviter toute divulgation</p><p>3.2) La plateforme n’est pas responsable en cas de divulgation accidentelle des comptes</p><p>3.3) En raison des implications financières des comptes, il est important de ne pas les divulguer afin d’éviter des problèmes inutiles</p><p>3.4) Mot de passe de retrait : il est recommandé de ne pas utiliser une date de naissance, un numéro de carte d’identité ou un numéro de téléphone comme mot de passe. Il est conseillé d’utiliser un mot de passe plus complexe pour protéger vos fonds</p><p>3.5) Si vous oubliez votre mot de passe, vous pouvez le réinitialiser en contactant le service en ligne et devez ensuite le modifier vous-même</p>"
+      "title": "Veuillez ne pas divulguer votre mot de passe de compte ni votre mot de passe de retrait à des tiers. La plateforme ne sera pas responsable des pertes ou dommages causés",
+      "content": "<p>3.1) Il est conseillé à tous les utilisateurs de sécuriser leur compte afin d’éviter toute divulgation</p><p>3.2) La plateforme n’est pas responsable de toute divulgation accidentelle de comptes</p><p>3.3) En raison des implications financières des comptes, il est important de ne pas les divulguer afin d’éviter des problèmes inutiles</p><p>3.4) Mot de passe de retrait : il est recommandé de ne pas utiliser votre date de naissance, numéro d’identification ou numéro de téléphone. Il est conseillé de définir un mot de passe plus complexe pour protéger vos fonds</p><p>3.5) Si vous oubliez votre mot de passe, vous pouvez le réinitialiser en contactant le service en ligne et vous devez le modifier vous-même par la suite</p>"
     },
     {
-      "title": "Tous les produits d’une mission sont attribués de manière aléatoire par le système et ne peuvent en aucun cas être modifiés, annulés, contrôlés ou ignorés",
-      "content": "<p>4.1) En raison du grand nombre d’utilisateurs sur la plateforme, il n’est pas possible de distribuer manuellement les produits combinés, donc toutes les données des tâches sont attribuées de manière aléatoire par le système</p><p>4.2) Les produits combinés sont distribués de manière aléatoire par le système et ne peuvent être modifiés/annulés/ignorés par aucun utilisateur ou membre du personnel</p>"
+      "title": "Tous les produits dans une mission sont attribués aléatoirement par le système et ne peuvent être ni modifiés, annulés, contrôlés ni ignorés de quelque manière que ce soit",
+      "content": "<p>4.1) En raison du grand nombre d’utilisateurs sur la plateforme, il est impossible de distribuer manuellement les produits combinés, ainsi toutes les données des tâches sont attribuées aléatoirement par le système</p><p>4.2) Les produits combinés sont distribués aléatoirement par le système et ne peuvent être modifiés/annulés/ignorés par aucun utilisateur ou membre du personnel</p>"
     },
     {
       "title": "Des poursuites judiciaires seront engagées en cas d’utilisation abusive du compte",
       "content": ""
     },
     {
-      "title": "Chaque donnée de produit provient d’un commerçant différent, aucun dépôt pendant plus de 10 minutes, et chaque dépôt doit être confirmé avec le service en ligne pour valider les détails du commerçant.",
+      "title": "Les données de chaque produit proviennent de différents commerçants. Aucun dépôt ne doit dépasser 10 minutes et chaque dépôt doit être confirmé auprès du service en ligne pour vérifier les détails du commerçant.",
       "content": ""
     },
     {
-      "title": "La plateforme ne sera pas responsable des dépôts effectués vers de mauvaises coordonnées",
+      "title": "La plateforme ne sera pas tenue responsable des dépôts effectués vers des informations incorrectes",
       "content": ""
     },
     {
-      "title": "Chaque optimisation de produit doit être complétée dans un délai de 24 heures. En cas de non-respect entraînant une plainte du commerçant, l’utilisateur devra assumer la responsabilité de la violation du contrat",
+      "title": "Chaque optimisation de données produit doit être complétée dans un délai de 24 heures. En cas de non-respect entraînant des plaintes des commerçants, l’utilisateur devra assumer la responsabilité de rupture de contrat",
       "content": ""
     },
     {
-      "title": "Lorsqu’un compte fait l’objet d’une plainte de la part du commerçant, le système déduira des points de crédit. Lorsque le score de crédit est inférieur à 98, il n’est plus possible de demander un retrait. Le score de crédit est automatiquement recalculé par le système après chaque série de missions complétée",
+      "title": "Si le compte fait l’objet de plaintes de la part des commerçants, le système déduira des points de crédit. Si le score de crédit est inférieur à 98, aucun retrait ne sera possible. Le score de crédit est calculé automatiquement après chaque série de missions",
       "content": ""
     }
   ],
   "faq_sections": [
     {
-      "title": "Démarrer les missions d’optimisation de produits",
-      "content": "<p>1.1) Solde minimum du compte de 50 USD pour les 40 premières missions/par lot.</p><p>1.2) Un renouvellement minimum de 100 USD est requis pour démarrer de nouvelles missions.</p><p>1.3) Les utilisateurs doivent terminer les missions avant de pouvoir demander un retrait.</p>"
+      "title": "Démarrer les missions d’optimisation des produits",
+      "content": "<p>1.1) Solde minimum du compte de 50 USD pour les 40 premières missions/série.</p><p>1.2) Un renouvellement minimum de 100 USD est requis pour démarrer de nouvelles missions.</p><p>1.3) Les utilisateurs doivent terminer les missions avant de pouvoir demander un retrait.</p>"
     },
     {
       "title": "Retrait",
-      "content": "<p>2.1) Les utilisateurs doivent terminer les missions avant de pouvoir demander un retrait.</p><p>2.2) Vous ne pouvez pas demander un retrait ou un remboursement si vous abandonnez ou interrompez une mission en cours d’optimisation.</p><p>2.3) Aucun retrait ne peut être traité si la demande de retrait de l’utilisateur n’a pas été reçue.</p><p>2.4) Le montant maximum de retrait pour les utilisateurs VIP1 est de 10 000 USD, pour les utilisateurs VIP2 il est de 30 000 USD. Aucun plafond de retrait pour les VIP3 et supérieurs.</p><p>2.5) Afin d’offrir un service plus professionnel et efficace à nos utilisateurs, les comptes dont le solde dépasse 60 000 USD doivent utiliser le canal de retrait à haut volume de la plateforme. Ce canal permet un retrait unique plus rapide et plus sécurisé de l’ensemble des fonds.</p><p>2.6) Le compte utilisateur présente un score de crédit insuffisant et ne peut pas utiliser normalement toutes les fonctions de la plateforme.</p>"
+      "content": "<p>2.1) Les utilisateurs doivent terminer les missions avant de pouvoir demander un retrait.</p><p>2.2) Vous ne pouvez pas demander un retrait ou un remboursement si vous abandonnez ou vous retirez au milieu d’une mission d’optimisation.</p><p>2.3) Aucun retrait ne peut être traité si la demande de retrait de l’utilisateur n’a pas été reçue.</p><p>2.4) Le montant maximum de retrait pour les utilisateurs VIP1 est de 10 000 USD, pour les VIP2 il est de 30 000 USD. Aucune limite maximale pour VIP3 et au-delà.</p><p>2.5) Afin d’offrir à nos utilisateurs un service plus professionnel et efficace, les comptes avec un solde supérieur à 60 000 USD doivent utiliser le canal de retrait à volume élevé de la plateforme. Ce canal permet un retrait unique, rapide et sécurisé de tous les fonds.</p><p>2.6) Si le score de crédit du compte est insuffisant, certaines fonctions de la plateforme ne pourront pas être utilisées normalement.</p>"
     },
     {
       "title": "Fonds",
-      "content": "<p>3.1) Tous les fonds seront conservés en toute sécurité sur le compte de l’utilisateur et pourront être retirés en totalité une fois toutes les données complétées.</p><p>3.2) Afin d’éviter toute perte de fonds, toutes les données sont traitées par le système et non manuellement.</p><p>3.3) La plateforme assume l’entière responsabilité en cas de perte accidentelle de fonds.</p><p>3.4) Si les fonds de l’utilisateur dépassent le seuil imposable par le gouvernement, l’utilisateur devra payer des impôts.</p>"
+      "content": "<p>3.1) Tous les fonds sont conservés en toute sécurité sur le compte de l’utilisateur et peuvent être retirés intégralement une fois toutes les données complétées</p><p>3.2) Afin d’éviter toute perte de fonds, toutes les données sont traitées automatiquement par le système et non manuellement</p><p>3.3) La plateforme assume l’entière responsabilité en cas de perte accidentelle de fonds.</p><p>3.4) Si les fonds de l’utilisateur dépassent le seuil imposable fixé par le gouvernement, l’utilisateur devra payer des impôts</p>"
     },
     {
       "title": "Sécurité du compte",
-      "content": "<p>4.1) Veuillez ne pas divulguer votre mot de passe de connexion et votre mot de passe de retrait à d’autres personnes, car la plateforme ne sera pas responsable de toute perte.</p><p>4.2) Il est déconseillé aux utilisateurs d’utiliser leur date de naissance, numéro de carte d’identité ou numéro de téléphone comme mot de passe de retrait ou de connexion.</p><p>4.3) Si vous oubliez votre mot de passe de connexion ou de retrait, veuillez contacter notre service en ligne pour le réinitialiser.</p>"
+      "content": "<p>4.1) Veuillez ne pas divulguer votre mot de passe de connexion ni votre mot de passe de retrait à des tiers, car la plateforme ne sera pas responsable des pertes.</p><p>4.2) Il est déconseillé d’utiliser votre date de naissance, numéro d’identité ou numéro de téléphone comme mot de passe de connexion ou de retrait.</p><p>4.3) Si vous oubliez votre mot de passe de connexion ou de retrait, veuillez contacter le service en ligne pour le réinitialiser.</p>"
     },
     {
       "title": "Données générales des produits",
-      "content": "<p>5.1) Les profits de la plateforme sont classés en profits de données produits normales et en profits de données produits combinés multipliés par 10.</p><p>5.2) Les utilisateurs standards gagnent 0,5 % de profit pour chaque mission d’optimisation normale.</p><p>5.3) Les utilisateurs VIP 2 gagnent 1 % de profit pour chaque mission d’optimisation normale.</p><p>5.4) Les utilisateurs VIP 3 gagnent 1,5 % de profit pour chaque mission d’optimisation normale.</p><p>5.5) Les utilisateurs VIP 4 gagnent 2 % de profit pour chaque mission d’optimisation normale.</p><p>5.6) Les utilisateurs VIP 5 gagnent 2,5 % de profit pour chaque mission d’optimisation normale.</p><p>5.7) Les fonds et profits seront reversés sur le compte de l’utilisateur à chaque mission d’optimisation complétée.</p><p>5.8) Le système attribue aléatoirement les tâches au compte utilisateur en fonction du solde total du compte.</p><p>5.9) Une fois une tâche d’optimisation de produit assignée à un compte utilisateur, elle ne peut pas être annulée ni ignorée.</p>"
+      "content": "<p>5.1) Les profits de la plateforme sont divisés en profits de données de produits normaux et profits de données de produits combinés (10 fois)</p><p>5.2) Les utilisateurs normaux gagnent 0,5 % de profit pour chaque mission d’optimisation standard</p><p>5.3) Les utilisateurs VIP 2 gagnent 1 % de profit pour chaque mission d’optimisation standard</p><p>5.4) Les utilisateurs VIP 3 gagnent 1,5 % de profit pour chaque mission d’optimisation standard</p><p>5.5) Les utilisateurs VIP 4 gagnent 2 % de profit pour chaque mission d’optimisation standard</p><p>5.6) Les utilisateurs VIP 5 gagnent 2,5 % de profit pour chaque mission d’optimisation standard</p><p>5.7) Les fonds et profits seront crédités sur le compte de l’utilisateur après chaque mission complétée</p><p>5.8) Le système attribue aléatoirement les tâches au compte utilisateur en fonction du solde total du compte</p><p>5.9) Une fois qu’une tâche d’optimisation est attribuée, elle ne peut pas être annulée ni ignorée</p>"
     },
     {
       "title": "Données des produits combinés",
-      "content": "<p>6.1) Les données de produits combinés sont composées de 1 à 3 éléments. L’utilisateur ne recevra pas nécessairement 3 produits. Le système attribue aléatoirement les données des produits combinés, avec une probabilité plus élevée de recevoir 1 ou 2 produits.</p><p>6.2) Les utilisateurs recevront 10 fois plus de profit pour chaque produit combiné que pour les produits normaux.</p><p>6.3) Une fois les produits combinés reçus, tous les fonds seront bloqués et seront retournés sur votre compte après la complétion de chaque produit inclus.</p><p>6.4) Le système attribue aléatoirement les données de produits combinés au compte utilisateur en fonction du solde total du compte.</p><p>6.5) Une fois les données de produits combinés attribuées au compte utilisateur, elles ne peuvent pas être annulées ni ignorées.</p>"
+      "content": "<p>6.1) Les données des produits combinés sont composées de 1 à 3 éléments. L’utilisateur ne reçoit pas nécessairement 3 produits, le système attribue aléatoirement les données, avec plus de chances d’obtenir 1 ou 2 produits</p><p>6.2) Les utilisateurs recevront 10 fois plus de profit pour chaque produit combiné par rapport aux produits normaux</p><p>6.3) Une fois les produits combinés reçus, tous les fonds cessent d’évoluer et seront restitués sur le compte après avoir complété chaque donnée produit</p><p>6.4) Le système attribue aléatoirement les données des produits combinés en fonction du solde total du compte utilisateur</p><p>6.5) Une fois attribuées, les données des produits combinés ne peuvent être ni annulées ni ignorées</p>"
     },
     {
       "title": "Dépôt",
-      "content": "<p>7.1) Le montant du dépôt est choisi par l’utilisateur et nous ne pouvons pas déterminer ce montant. Nous recommandons à l’utilisateur d’avancer selon ses capacités ou après s’être familiarisé avec la plateforme.</p><p>7.2) Si un utilisateur doit effectuer un dépôt lors de la réception de produits combinés, il est recommandé d’avancer selon le montant insuffisant affiché sur le compte.</p><p>7.3) Avant d’effectuer un dépôt, vous devez demander une confirmation au service en ligne et valider les détails du dépôt.</p><p>7.4) La plateforme ne sera pas responsable si l’utilisateur effectue un dépôt vers de mauvais détails.</p>"
+      "content": "<p>7.1) Le montant du dépôt est choisi par l’utilisateur. Nous ne déterminons pas ce montant. Il est recommandé de déposer selon ses capacités ou après s’être familiarisé avec la plateforme.</p><p>7.2) Si un dépôt est requis lors de la réception de données de produits combinés, il est recommandé de compléter le montant insuffisant indiqué sur le compte.</p><p>7.3) Avant d’effectuer un dépôt, vous devez contacter le service en ligne pour confirmer les informations de dépôt.</p><p>7.4) La plateforme ne sera pas responsable si l’utilisateur effectue un dépôt vers des informations incorrectes.</p>"
     }
   ],
   "event_sections": [
     {
       "tag": "ACTIVE",
       "icon": "⚡",
-      "title": "Rétroaction de remerciement du 3ᵉ anniversaire",
-      "summary": "Événement promotionnel Skye Odell – Récompenses bonus de réinitialisation",
-      "reward": "10 USD - 2 400 USD de récompenses supplémentaires",
+      "title": "3e anniversaire – Offres de remerciement",
+      "summary": "Événement promotionnel Skye Odell – Bonus de réinitialisation",
+      "reward": "Récompenses supplémentaires de 10 USD à 2 400 USD",
       "progress": "",
-      "time": "Activité d’anniversaire à durée limitée",
-      "joined": "Récompenses de réinitialisation d’avance",
-      "buttonText": "Rejoindre maintenant",
+      "time": "Activité anniversaire à durée limitée",
+      "joined": "Récompenses de réinitialisation",
+      "buttonText": "Participer maintenant",
       "disabled": false,
-      "content": "<div class=\"event-section-block\"><h4>Récompenses de réinitialisation d’avance</h4><div class=\"event-reward-grid\"><div><strong>Standard</strong><span>Montant 100 USD</span><b>Recevez 10 USD supplémentaires</b></div><div><strong>Choix populaire</strong><span>Montant 500 USD</span><b>Recevez 60 USD supplémentaires</b></div><div><strong>Premium</strong><span>Montant 1 000 USD</span><b>Recevez 120 USD supplémentaires</b></div><div><strong>Élite</strong><span>Montant 1 600 USD</span><b>Recevez 200 USD supplémentaires</b></div><div><strong>Recommandé</strong><span>Montant 5 500 USD</span><b>Recevez 1 200 USD supplémentaires</b></div><div><strong>Élite Plus</strong><span>Montant 10 000 USD</span><b>Recevez 2 400 USD supplémentaires</b></div></div></div>"
+      "content": "<div class=\"event-section-block\"><h4>Récompenses de réinitialisation</h4><div class=\"event-reward-grid\"><div><strong>Standard</strong><span>Montant 100 USD</span><b>Obtenez 10 USD supplémentaires</b></div><div><strong>Choix populaire</strong><span>Montant 500 USD</span><b>Obtenez 60 USD supplémentaires</b></div><div><strong>Premium</strong><span>Montant 1 000 USD</span><b>Obtenez 120 USD supplémentaires</b></div><div><strong>Élite</strong><span>Montant 1 600 USD</span><b>Obtenez 200 USD supplémentaires</b></div><div><strong>Recommandé</strong><span>Montant 5 500 USD</span><b>Obtenez 1 200 USD supplémentaires</b></div><div><strong>Élite Plus</strong><span>Montant 10 000 USD</span><b>Obtenez 2 400 USD supplémentaires</b></div></div></div>"
     },
     {
       "tag": "HOT",
       "icon": "🎁",
-      "title": "Récompenses d’avance cumulées du jour",
-      "summary": "Gagnez des bonus d’avance supplémentaires en fonction de vos avances totales de la journée.",
-      "reward": "Bonus d’avance de 4% - 20%",
+      "title": "Récompenses cumulées des avances du jour",
+      "summary": "Gagnez des bonus supplémentaires en fonction du total de vos avances de la journée.",
+      "reward": "Bonus d'avance de 4 % à 20 %",
       "progress": "",
       "time": "Bonus cumulatif quotidien",
-      "joined": "Paliers de récompenses bonus",
-      "buttonText": "Rejoindre maintenant",
+      "joined": "Paliers de bonus",
+      "buttonText": "Participer maintenant",
       "disabled": false,
-      "content": "<div class=\"event-section-block\"><h4>Récompenses d’avance cumulées du jour</h4><div class=\"event-bonus-grid\"><div><strong>1 500 - 9 999</strong><span>Recevra</span><b>Bonus d’avance de 4%</b></div><div><strong>10 000 - 19 999</strong><span>Recevra</span><b>Bonus d’avance de 8%</b></div><div><strong>20 000 - 49 999</strong><span>Recevra</span><b>Bonus d’avance de 12%</b></div><div><strong>50 000 et plus</strong><span>Recevra</span><b>Bonus d’avance de 20%</b></div></div></div>"
+      "content": "<div class=\"event-section-block\"><h4>Récompenses cumulées des avances du jour</h4><div class=\"event-bonus-grid\"><div><strong>1 500 - 9 999</strong><span>Recevrez</span><b>Bonus d'avance de 4 %</b></div><div><strong>10 000 - 19 999</strong><span>Recevrez</span><b>Bonus d'avance de 8 %</b></div><div><strong>20 000 - 49 999</strong><span>Recevrez</span><b>Bonus d'avance de 12 %</b></div><div><strong>50 000 et plus</strong><span>Recevrez</span><b>Bonus d'avance de 20 %</b></div></div></div>"
     }
   ],
   "event_footer_line1": "Skye Odell se réserve le droit d’interprétation finale.",
   "event_footer_line2": "© 2022 Skye Odell. Tous droits réservés.",
   "tc_page_title": "Conditions générales",
-  "tc_hero_title": "Accord d’inscription utilisateur",
+  "tc_hero_title": "Accord d’inscription des utilisateurs",
   "tc_hero_intro": [
     "Bienvenue chez <strong>Main Street ROI Agency</strong> et ses services.",
-    "Veuillez lire attentivement cet <strong>Accord d’inscription utilisateur</strong> (« Accord ») avant d’utiliser le logiciel, le site web ou les services associés fournis par Main Street ROI Agency (collectivement, les « Services »). Le présent Accord régit votre accès et votre utilisation des Services."
+    "Veuillez lire attentivement cet <strong>Accord d’inscription des utilisateurs</strong> (« Accord ») avant d’utiliser le logiciel, le site web ou les services associés fournis par Main Street ROI Agency (collectivement, les « Services »). Cet Accord régit votre accès et votre utilisation des Services."
   ],
   "tc_hero_notice": [
-    "En accédant aux Services ou en les utilisant, vous confirmez avoir lu, compris et accepté d’être lié par le présent Accord ainsi que par toutes les conditions et politiques associées. Si vous n’acceptez pas ces conditions, vous ne devez pas utiliser les Services.",
+    "En accédant ou en utilisant les Services, vous confirmez avoir lu, compris et accepté d’être lié par cet Accord ainsi que par toutes les conditions et politiques associées. Si vous n’êtes pas d’accord, vous ne devez pas utiliser les Services.",
     "Vous devez avoir au moins <strong>18 ans</strong> pour utiliser les Services."
   ],
   "tc_table_of_contents": "Table des matières",
-  "tc_update_alert": "Main Street ROI Agency se réserve le droit de modifier ou de mettre à jour le présent Accord à tout moment. La dernière version publiée sur le site web prévaudra.",
+  "tc_update_alert": "Main Street ROI Agency se réserve le droit de modifier ou de mettre à jour cet Accord à tout moment. La version la plus récente publiée sur le site web fera foi.",
   "tc_terms_sections": [
     {
       "title": "Protection des informations personnelles",
       "items": [
         {
           "no": "1.1",
-          "content": "<p>La protection des informations personnelles des utilisateurs est un principe fondamental de Main Street ROI Agency. Nous utilisons des technologies de chiffrement professionnelles, des systèmes de stockage sécurisés et des méthodes de transmission sécurisées afin de protéger les données des utilisateurs.</p>"
+          "content": "<p>La protection des informations personnelles des utilisateurs est un principe fondamental de Main Street ROI Agency. Nous utilisons des technologies de chiffrement professionnelles, des méthodes de stockage sécurisées et des transmissions sécurisées pour protéger les données des utilisateurs.</p>"
         },
         {
           "no": "1.2",
-          "content": "<p>Pour accéder à certains Services, tels que l’inscription de compte, les utilisateurs doivent fournir des informations nécessaires et exactes, y compris mais sans s’y limiter un numéro de téléphone mobile, et doivent accepter le présent Accord. Le non-respect de cette obligation peut entraîner une restriction d’accès aux Services.</p>"
+          "content": "<p>Pour accéder à certains services, tels que l’inscription d’un compte, les utilisateurs doivent fournir des informations nécessaires et exactes, y compris, mais sans s’y limiter, un numéro de téléphone mobile, et doivent accepter cet Accord. Le fait de ne pas fournir des informations complètes ou exactes peut entraîner une restriction d’accès aux Services.</p>"
         },
         {
           "no": "1.3",
@@ -758,7 +902,7 @@
         },
         {
           "no": "1.4",
-          "content": "<p>Main Street ROI Agency applique des contrôles internes stricts et des systèmes de gestion afin de prévenir tout accès, utilisation ou divulgation non autorisés des informations personnelles. Toute utilisation non autorisée sera traitée conformément aux lois applicables. Une fois enregistré, le numéro de téléphone principal associé à un compte ne peut pas être modifié sans vérification.</p>"
+          "content": "<p>Main Street ROI Agency applique des contrôles internes stricts et des systèmes de gestion pour empêcher tout accès, utilisation ou divulgation non autorisés des informations personnelles. Toute utilisation non autorisée sera traitée conformément aux lois applicables. Une fois enregistré, le numéro de téléphone principal associé au compte ne peut pas être modifié sans vérification.</p>"
         },
         {
           "no": "1.5",
@@ -766,7 +910,7 @@
         },
         {
           "no": "1.6",
-          "content": "<p>Les utilisateurs âgés de moins de 18 ans ne sont pas autorisés à utiliser les Services. Si l’accès est nécessaire, un consentement écrit d’un tuteur légal doit être fourni au préalable.</p>"
+          "content": "<p>Les utilisateurs âgés de moins de 18 ans ne sont pas autorisés à utiliser les Services. Si un accès est nécessaire, un consentement écrit d’un tuteur légal doit être fourni à l’avance.</p>"
         }
       ]
     },
@@ -783,15 +927,15 @@
         },
         {
           "no": "2.3",
-          "content": "<p>Les utilisateurs ne peuvent pas annuler, ignorer ou abandonner les tâches une fois qu’elles ont été acceptées.</p>"
+          "content": "<p>Les utilisateurs ne peuvent pas annuler, ignorer ou abandonner les tâches assignées une fois qu’elles ont été acceptées.</p>"
         },
         {
           "no": "2.4",
-          "content": "<p>Les retraits supérieurs à <strong>30 000 USD</strong> sont soumis à des frais de traitement de <strong>20 %</strong>, qui seront remboursés à l’utilisateur une fois le retrait effectué avec succès.</p>"
+          "content": "<p>Les retraits dépassant <strong>30 000 USD</strong> sont soumis à des <strong>frais de traitement de 20 %</strong>, qui seront remboursés à l’utilisateur une fois le retrait effectué avec succès.</p>"
         },
         {
           "no": "2.5",
-          "content": "<p>Toute violation de ces conditions peut entraîner une réduction du score de crédit de l’utilisateur. Certaines fonctionnalités du compte peuvent être restreintes jusqu’à la restauration du score de crédit.</p>"
+          "content": "<p>Toute violation de ces conditions peut entraîner une réduction du score de crédit de l’utilisateur. Certaines fonctionnalités du compte peuvent être restreintes jusqu’à ce que le score de crédit soit rétabli.</p>"
         }
       ]
     },
@@ -800,19 +944,19 @@
       "items": [
         {
           "no": "3.1",
-          "content": "<p>Le présent Accord constitue un contrat juridiquement contraignant entre l’utilisateur et Main Street ROI Agency. Les utilisateurs doivent fournir des informations exactes et conformes à la loi afin d’accéder aux Services.</p>"
+          "content": "<p>Le présent Accord constitue un contrat juridiquement contraignant entre l’utilisateur et Main Street ROI Agency. Les utilisateurs doivent fournir des informations exactes et légales conformément aux exigences pour accéder aux Services.</p>"
         },
         {
           "no": "3.2",
-          "content": "<p>Ces conditions s’appliquent à tous les utilisateurs des Services. Si vous avez des questions, des commentaires ou des préoccupations, veuillez contacter le service d’assistance approprié.</p>"
+          "content": "<p>Ces conditions s’appliquent à tous les utilisateurs des Services. Si vous avez des questions, des retours ou des préoccupations, veuillez contacter le service d’assistance approprié.</p>"
         },
         {
           "no": "3.3",
-          "content": "<p>Ces conditions sont régies et protégées par les lois et réglementations commerciales applicables. Main Street ROI Agency se réserve le droit d’engager des poursuites judiciaires contre tout utilisateur qui viole le présent Accord de mauvaise foi.</p>"
+          "content": "<p>Ces conditions sont régies et protégées par les lois applicables et les réglementations commerciales. Main Street ROI Agency se réserve le droit d’engager des actions en justice contre tout utilisateur violant le présent Accord de mauvaise foi.</p>"
         },
         {
           "no": "3.4",
-          "content": "<p>Main Street ROI Agency se réserve le droit de modifier ou de mettre à jour le présent Accord à tout moment. La dernière version publiée sur le site web prévaudra, et Main Street ROI Agency conserve le droit final d’interprétation.</p>"
+          "content": "<p>Main Street ROI Agency se réserve le droit de modifier ou de mettre à jour le présent Accord à tout moment. La dernière version publiée sur le site web prévaut, et Main Street ROI Agency conserve le droit final d’interprétation.</p>"
         }
       ]
     }
@@ -821,74 +965,74 @@
   "sk_logo_alt": "Skye Odell",
   "sk_menu": "Menu",
   "sk_contact": "Vous avez un projet ? Contactez-nous !",
-  "sk_topics": "Sujets de service",
+  "sk_topics": "Thèmes de services",
   "sk_topic_content": "Création de contenu",
   "sk_topic_marketing": "Marketing digital",
   "sk_topic_web": "Développement web",
-  "sk_topic_strategy": "Analyse d’entreprise et stratégie",
+  "sk_topic_strategy": "Analyse et stratégie d’entreprise",
   "sk_brand": "SO Services",
   "sk_vision": "Votre vision.",
-  "sk_art_alt": "Magnifiquement réalisée",
-  "sk_intro": "Transformez votre entreprise grâce à des sites web et supports imprimés conçus par des experts, stratégiquement créés pour laisser une impression durable, renforcer la confiance envers votre marque et stimuler votre succès en ligne et hors ligne.",
+  "sk_art_alt": "Magnifiquement réalisé",
+  "sk_intro": "Transformez votre entreprise grâce à des sites web et supports imprimés conçus avec expertise, stratégiquement pensés pour laisser une impression durable, renforcer la confiance envers votre marque et stimuler votre réussite en ligne et hors ligne.",
   "sk_hero_alt": "SO Services",
   "sk_web_dev": "Conception et développement web",
-  "sk_brand_marketing": "Branding et marketing",
+  "sk_brand_marketing": "Image de marque et marketing",
   "sk_site_manage": "Gestion et hébergement de sites web",
-  "sk_hosting": "Hébergement web",
+  "sk_hosting": "Hébergement de sites web",
   "sk_maintenance": "Maintenance et support",
   "sk_social_marketing": "Marketing sur les réseaux sociaux",
   "sk_brand_design": "Branding et design graphique",
   "sk_seo": "SEO",
-  "sk_expert_1": "Experts",
+  "sk_expert_1": "Expert",
   "sk_expert_2": "Sites web,",
   "sk_expert_3": "Graphisme",
   "sk_expert_4": "Design,",
   "sk_expert_5": "Support, SEO,",
   "sk_expert_6": "Réseaux sociaux",
   "sk_expert_7": "Marketing",
-  "sk_expert_p1": "Cessez de vous fondre dans la masse, COMMENCEZ à",
+  "sk_expert_p1": "Ne vous fondez plus dans la masse, COMMENCEZ à",
   "sk_expert_p2": "captiver !",
-  "sk_expert_p3": "Réservez votre place pour une percée",
-  "sk_expert_p4": "en design dès maintenant et laissez",
-  "sk_expert_p5": "vos concurrents derrière avec SO",
+  "sk_expert_p3": "Réservez votre place pour une avancée en design",
+  "sk_expert_p4": "dès maintenant et laissez vos",
+  "sk_expert_p5": "concurrents derrière avec SO",
   "sk_expert_p6": "Services.",
-  "sk_start": "C’est parti !",
+  "sk_start": "Commençons !",
   "sk_team_1": "Nous sommes une équipe de",
   "sk_team_2": "designers, développeurs",
   "sk_team_3": "et stratèges",
   "sk_team_4": "qui",
   "sk_team_5": "croyons en l’exploitation",
-  "sk_team_6": "du pouvoir de la créativité",
+  "sk_team_6": "de la puissance de la créativité",
   "sk_team_7a": "pour",
   "sk_team_7b": "transformer les marques",
   "sk_team_8": "et captiver les gens.",
-  "sk_team_btn": "Partenaires fiables et talentueux ...",
-  "sk_how_title": "Notre méthode",
-  "sk_how_copy": "agit comme un partenaire de confiance, combinant une expertise approfondie en design avec une approche fiable et étape par étape. Nous transformons des défis techniques et créatifs complexes en solutions claires, guidant nos clients à travers un processus collaboratif qui aboutit à des supports visuels distinctifs, captivants et efficaces.",
+  "sk_team_btn": "Partenaires de confiance et talentueux ...",
+  "sk_how_title": "Comment nous procédons",
+  "sk_how_copy": "agit en tant que partenaire de confiance, en combinant une expertise approfondie en design avec une approche fiable étape par étape. Nous transformons des défis techniques et créatifs complexes en solutions claires, en guidant nos clients à travers un processus collaboratif qui aboutit à des visuels distinctifs, captivants et efficaces.",
   "sk_how_btn": "En savoir plus sur nous",
   "sk_amazing": "Incroyables",
   "sk_clients": "Clients",
-  "sk_clients_copy": "SO Services crée et maintient des sites web captivants et des supports imprimés percutants, en offrant un accompagnement continu en design et marketing pour garantir que votre marque se distingue et attire constamment des clients.",
-  "sk_clients_btn": "Voir nos clients incroyables",
+  "sk_clients_copy": "SO Services crée et maintient des sites web captivants et des supports imprimés percutants, tout en offrant un support continu en design et marketing afin de garantir que votre marque se démarque constamment et attire des clients.",
+  "sk_clients_btn": "Voir nos incroyables clients",
   "sk_prev_services": "Services précédents",
   "sk_next_services": "Services suivants",
-  "sk_time_9m": "Il y a 9 mois",
-  "sk_time_8m": "Il y a 8 mois",
-  "sk_time_7m": "Il y a 7 mois",
-  "sk_time_6y": "Il y a 6 ans",
-  "sk_review_1": "Skye est très serviable, arrangeante et patiente. SO Services fournit d’excellents services",
-  "sk_review_2": "Des créations rapides pour les sites web et le design, et pourtant très abordables. Les idées de design sont envoyées rapidement et mises en œuvre encore plus vite !! Je recommande vivement SO Services.",
-  "sk_review_3": "Chez SO Services, Skye se rend toujours disponible pour répondre à nos questions et travaille dur pour maintenir notre site à jour et en bon fonctionnement.",
-  "sk_review_4": "Notre entreprise travaille avec Skye depuis près de 10 ans. Elle fait partie des fondations de notre société grâce à son travail. Indispensable.",
-  "sk_review_5": "Skye est extrêmement créative et c’est un plaisir incroyable de travailler avec elle.",
-  "sk_review_6": "Travailler avec Skye a été un véritable plaisir. Ce qui la distingue, c’est l’enthousiasme sincère qu’elle apporte à chaque projet. Elle ne se contente pas de créer des sites web — elle prend le temps de comprendre ce qui rend chaque entreprise unique et spéciale, puis le reflète avec soin...",
-  "sk_review_7": "Skye est incroyable ! Elle est encore meilleure dans la création de nouveaux sites web. Je travaille avec elle depuis de nombreuses années, car elle est constamment excellente dans ce qu’elle fait. Ses tarifs sont raisonnables et la communication est irréprochable. N’hésitez pas à la contacter si vous envisagez un nouveau site web, elle est...",
-  "sk_review_8": "Sans hésitation, l’une des meilleures entreprises avec lesquelles travailler. Skye nous fournit des services web depuis des années et a toujours su relever tous les défis que nous lui avons proposés. Extrêmement satisfaits.",
-  "sk_review_9": "Skye a été mon mentor, mon guide, ma designer et mon amie. J’ai perdu le compte des années. Un vrai plaisir de travailler avec elle et de l’avoir dans ma vie.",
-  "sk_review_10": "Skye est formidable. Attentive, compétente, serviable et créative. C’est exactement ce dont nous avions besoin et Skye a répondu présente. Si vous lisez ceci et pensez à la contacter pour votre prochain projet – contactez-la. – Dom",
-  "sk_read_more": "Lire plus",
+  "sk_time_9m": "il y a 9 mois",
+  "sk_time_8m": "il y a 8 mois",
+  "sk_time_7m": "il y a 7 mois",
+  "sk_time_6y": "il y a 6 ans",
+  "sk_review_1": "Skye est très serviable, accommodante et patiente. SO Services fournit d’excellents services.",
+  "sk_review_2": "Créatif avec des délais très rapides pour les services web et design, tout en restant très abordable. Fournit rapidement des idées de design et les met en œuvre encore plus vite !! Hautement recommandé SO Services.",
+  "sk_review_3": "Skye chez SO Services est toujours disponible pour répondre à nos questions et travaille dur pour maintenir notre site à jour et fonctionnel.",
+  "sk_review_4": "Notre entreprise travaille avec Skye depuis près de 10 ans. Grâce à son travail, elle fait partie des fondations de notre société. Indispensable.",
+  "sk_review_5": "Skye est extrêmement créative et c’est un plaisir de travailler avec elle.",
+  "sk_review_6": "Travailler avec Skye a été un véritable plaisir. Ce qui la distingue, c’est l’enthousiasme sincère qu’elle apporte à chaque projet. Elle ne se contente pas de créer des sites web — elle prend le temps de vraiment comprendre ce qui rend chaque entreprise unique et spéciale, puis le reflète avec attention...",
+  "sk_review_7": "Skye est incroyable ! Elle est encore meilleure pour créer de nouveaux sites web. Je travaille avec elle depuis de nombreuses années et elle est toujours excellente dans ce qu’elle fait. Ses tarifs sont raisonnables et sa communication est exceptionnelle. Si vous envisagez un nouveau site web, contactez-la...",
+  "sk_review_8": "Sans aucun doute l’une des meilleures entreprises avec lesquelles travailler. Skye nous fournit des services web depuis des années et a toujours su relever tous les défis que nous lui avons présentés. Extrêmement satisfait.",
+  "sk_review_9": "Skye a été ma mentor, mon guide, ma designer et mon amie. J’ai perdu le compte des années. Un vrai plaisir de travailler avec elle et de l’avoir dans ma vie.",
+  "sk_review_10": "Skye est formidable. Attentive, compétente, serviable et créative. C’est exactement ce dont nous avions besoin et Skye a répondu à toutes nos attentes. Si vous lisez ceci et envisagez de la contacter pour votre prochain projet — faites-le. – Dom",
+  "sk_read_more": "Lire la suite",
   "sk_trustindex": "Trustindex",
-  "sk_score_text": "score :",
+  "sk_score_text": "note :",
   "sk_score_of": "sur",
   "sk_based_on": "basé sur",
   "sk_reviews_total": "37 avis",
@@ -897,35 +1041,93 @@
   "sk_published": "Publié le",
   "sk_views": "Vues",
   "sk_continue": "Continuer la lecture",
-  "sk_post1_title": "SEO et GEO pour les petites entreprises : un guide pratique pour dominer le local",
+  "sk_post1_title": "SEO et GEO pour les petites entreprises : un guide pratique pour dominer au niveau local",
   "sk_post1_date": "21 avril 2026",
-  "sk_post2_title": "Pourquoi je fais confiance à Gravity Forms (et pourquoi l’historique des plugins compte)",
+  "sk_post2_title": "Pourquoi je fais confiance à Gravity Forms (et pourquoi vous devriez vous soucier de l’historique des plugins)",
   "sk_post2_date": "12 février 2026",
-  "sk_post2_excerpt": "Gravity Forms a construit sa réputation au fil des années grâce à un développement constant et à une utilisation réelle. Ce n’est pas tape-à-l’œil pour être tape-à-l’œil. C’est stable, extensible et conçu avec intention.",
-  "sk_post3_title": "Pourquoi votre site web devrait figurer sur votre liste de résolutions du Nouvel An (et pourquoi Pressable simplifie tout)",
+  "sk_post2_excerpt": "Gravity Forms a bâti sa réputation grâce à des années de développement constant et d’utilisation concrète. Il n’est pas tape-à-l’œil sans raison. Il est stable, extensible et conçu avec intention.",
+  "sk_post3_title": "Pourquoi votre site web doit figurer sur votre liste de résolutions du Nouvel An (et pourquoi Pressable rend cela facile)",
   "sk_post3_date": "12 janvier 2026",
-  "sk_post3_excerpt": "Votre site web ne prend pas de vacances. Il fonctionne la nuit, le week-end et les jours fériés, représentant silencieusement votre entreprise pendant que vous faites autre chose.",
-  "sk_talk_label": "Discutons",
+  "sk_post3_excerpt": "Votre site web ne prend jamais de vacances. Il travaille jour et nuit, week-ends et jours fériés, représentant discrètement votre entreprise pendant que vous êtes occupé à autre chose.",
+  "sk_talk_label": "Parlons-en",
   "sk_lets": "Parlons",
-  "sk_talk": "en parler",
+  "sk_talk": "Discutons !",
   "sk_phone": "Tél : (715) 255 0036",
-  "sk_email": "Envoyez-nous un email !",
-  "sk_footer_title": "À propos de SO Services & partenaires",
-  "sk_footer_desc": "Nous proposons une gamme de services flexibles conçus pour répondre à vos besoins — qu’ils soient gérés en interne ou via notre réseau de partenaires de confiance. En collaborant avec des experts que nous connaissons et en qui nous avons confiance, nous sommes en mesure de fournir des solutions intelligentes et efficaces qui vous aident à atteindre vos objectifs en toute confiance.",
+  "sk_email": "Envoyez-nous un e-mail !",
+  "sk_footer_title": "À propos de SO Services et partenaires",
+  "sk_footer_desc": "Nous proposons une gamme de services flexibles conçus pour répondre à vos besoins, qu’ils soient réalisés en interne ou via notre réseau de partenaires de confiance. En collaborant avec des experts que nous connaissons et en qui nous avons confiance, nous sommes en mesure de fournir des solutions intelligentes et efficaces pour vous aider à atteindre vos objectifs en toute confiance.",
   "sk_footer_social": "Liens sociaux du pied de page",
-  "sk_footer_btn": "Nouveau projet ? Parlons-en !",
+  "sk_footer_btn": "Nouveau projet ? Discutons !",
   "sk_badge_label": "Nous sommes fortement recommandés par les locaux sur Alignable",
   "sk_were": "Nous sommes",
   "sk_highly": "FORTEMENT",
   "sk_recommended": "RECOMMANDÉS",
   "sk_by_locals": "par les locaux",
   "sk_on_alignable": "sur Alignable",
-  "sk_copyright": "© 2016 - 2026 • Skye O'Dell / SO Services, LLC / Partenaires listés SO Services • Tous droits réservés • Les liens sur ce site peuvent être des liens affiliés. Si vous effectuez un achat via ces liens, je peux recevoir une commission sans coût supplémentaire pour vous.",
+  "sk_copyright": "© 2016 - 2026 • Skye O'Dell / SO Services, LLC / Partenaires listés SO Services • Tous droits réservés",
   "sk_team_l1_pre": "Nous sommes une équipe de",
   "sk_team_l1_em": "designers,",
   "sk_team_l2_em": "développeurs et stratèges",
   "sk_team_l3": "qui croient en l’exploitation",
-  "sk_team_l4": "du pouvoir de la créativité pour",
+  "sk_team_l4": "de la puissance de la créativité pour",
   "sk_team_l5_soft": "transformer les marques et",
-  "sk_team_l6": "captiver les gens."
+  "sk_team_l6": "captiver les gens.",
+  "record_status_completed": "Terminé",
+  "record_status_frozen": "Gelé",
+  "record_status_to_submit": "À soumettre",
+  "phone_number": "Téléphone",
+  "Gender_fomt": "Sélectionner le genre",
+  "lucky_draw_title": "VOUS AVEZ GAGNÉ AU TIRAGE AU SORT !",
+  "lucky_draw_desc_before": "Cet événement est organisé conjointement par Web Works Marketing et des commerçants participants, avec des récompenses mystères allant de",
+  "lucky_draw_amount": "20 $ à 2 000 000 $",
+  "lucky_draw_claim_text": "Pour réclamer votre récompense, veuillez contacter notre service client.",
+  "guide_salary_scheme_title": "Plan salarial",
+  "guide_salary_scheme_subtitle": "Connectez-vous . Soyez présent . Soyez payé",
+  "guide_salary_sign_in": "Se connecter",
+  "guide_salary_2_days": "2 jours ouvrés",
+  "guide_salary_4_days": "4 jours ouvrés",
+  "guide_salary_7_days": "7 jours ouvrés",
+  "guide_salary_15_days": "15 jours ouvrés",
+  "guide_salary_30_days": "30 jours ouvrés",
+  "guide_salary_amount_130": "130 USD",
+  "guide_salary_amount_1200": "1 200 USD",
+  "guide_salary_amount_1500": "1 500 USD",
+  "guide_salary_amount_1800": "1 800 USD",
+  "guide_salary_amount_2370": "2 370 USD",
+  "guide_salary_how_title": "Comment ça fonctionne :",
+  "guide_salary_how_text": "Pour un paiement mensuel, connectez-vous et maintenez vos gains afin d’obtenir un revenu garanti !",
+  "guide_salary_earn_text": "Plus vous êtes actif, plus vous gagnez. Invitez pour commencer !",
+  "guide_salary_tip": "Une présence parfaite peut vous faire gagner jusqu’à 7 000 USD par mois !",
+  "guide_reset_scheme_title": "Plan de bonus de réinitialisation",
+  "guide_reset_scheme_subtitle": "Recharger . Réinitialiser . Gagner plus",
+  "guide_reset_plan_1_name": "Standard",
+  "guide_reset_plan_2_name": "Choix populaire",
+  "guide_reset_plan_3_name": "Premium",
+  "guide_reset_plan_4_name": "Élite",
+  "guide_reset_plan_5_name": "Recommandé",
+  "guide_reset_plan_6_name": "Élite Plus",
+  "guide_reset_amount_label": "Montant",
+  "guide_reset_extra_label": "Bonus supplémentaire",
+  "guide_reset_plan_1_amount": "100 USD",
+  "guide_reset_plan_2_amount": "500 USD",
+  "guide_reset_plan_3_amount": "1 000 USD",
+  "guide_reset_plan_4_amount": "1 600 USD",
+  "guide_reset_plan_5_amount": "5 500 USD",
+  "guide_reset_plan_6_amount": "10 000 USD",
+  "guide_reset_plan_1_extra": "10 USD",
+  "guide_reset_plan_2_extra": "60 USD",
+  "guide_reset_plan_3_extra": "120 USD",
+  "guide_reset_plan_4_extra": "200 USD",
+  "guide_reset_plan_5_extra": "1 200 USD",
+  "guide_reset_plan_6_extra": "2 400 USD",
+  "guide_reset_advance_title": "Bonus de réinitialisation avancé",
+  "guide_reset_advance_day_title": "Avance le jour même",
+  "guide_reset_range_1500_9999": "1 500 USD - 9 999 USD",
+  "guide_reset_range_10000_19999": "10 000 USD - 19 999 USD",
+  "guide_reset_range_20000_49999": "20 000 USD - 49 999 USD",
+  "guide_reset_range_50000_above": "50 000 USD et plus",
+  "guide_reset_will_get": "Vous recevrez",
+  "guide_reset_bonus_4": "4%",
+  "guide_reset_bonus_8": "8%",
+  "guide_reset_advance_bonus": "bonus d’avance"
 }

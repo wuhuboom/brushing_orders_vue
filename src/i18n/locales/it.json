@@ -232,7 +232,7 @@
   "bank_account": "Conto bancario",
   "account_type": "Tipo di conto",
   "bank_name": "Nome banca",
-  "bank_card_management": "Gestione carte bancarie",
+  "bank_card_management": "Gestione del portafoglio",
   "please_enter_bank_name": "Inserisci nome banca",
   "please_enter_bank_account": "Inserisci conto bancario",
   "please_enter_name": "Inserisci nome",
@@ -448,7 +448,7 @@
   "message_center": "Centro messaggi",
   "system_notifications_announcements": "Notifiche di sistema e annunci",
   "link_your_bank_card": "Metodo di pagamento",
-  "bind_bank_card_for_withdrawals": "Collega la carta bancaria per i prelievi",
+  "bind_bank_card_for_withdrawals": "Collega un indirizzo wallet per i prelievi",
   "get_help_resolve_issues": "Ottieni aiuto e risolvi i problemi",
   "confirm_log_out": "Conferma logout",
   "logout_confirm_desc_1": "Sei sicuro di voler uscire dal tuo account?",
@@ -560,7 +560,7 @@
   "vip_feature_priority_queue": "Accesso prioritario alla coda attività",
   "vip_feature_all_vip2": "Tutti i vantaggi VIP 2 inclusi",
   "vip_feature_high_value_tasks": "Accesso ad attività esclusive ad alto valore",
-  "vip_feature_fast_withdrawal_2_days": "Elaborazione prelievi più veloce (2 giorni)",
+  "vip_feature_fast_withdrawal_2_days": "Elaborazione dei prelievi più rapida",
   "vip_feature_all_vip3": "Tutti i vantaggi VIP 3 inclusi",
   "vip_feature_account_manager": "Account manager dedicato",
   "vip_feature_one_day_withdrawal": "Elaborazione prelievo express in 1 giorno",
@@ -568,7 +568,7 @@
   "vip_feature_all_vip4": "Tutti i vantaggi VIP 4 inclusi",
   "vip_feature_highest_rebate": "Massima percentuale di rimborso (2,5% per attività)",
   "vip_feature_same_day_withdrawal": "Elaborazione prelievo in giornata",
-  "vip_feature_top_support": "Supporto clienti prioritario 24/7",
+  "vip_feature_top_support": "Assistenza clienti dedicata",
   "vip_feature_vip5_pools": "Esclusivi pool di attività leggendari VIP 5",
   "daily_task_submission_quota": "Quota giornaliera di invio attività: {count} unità",
   "rebate_task": "Rimborso /Attività",
@@ -615,204 +615,348 @@
   "countries": "Paesi",
   "income_guide_sections": [
     {
-      "title": "1) Stipendio base",
-      "image": "{basicSalaryImage}",
-      "content": "<p>L'azienda utilizza un meccanismo di check-in cumulativo come parte della struttura di distribuzione degli stipendi, progettato per incoraggiare gli utenti a completare costantemente le attività giornaliere. Anche se l'importo dello stipendio base è fisso, <strong>non</strong> viene pagato in un'unica soluzione. Viene invece erogato dopo un numero prestabilito di giorni lavorativi—ad esempio 2 giorni, 4 giorni o 7 giorni—per promuovere il completamento continuo delle attività. Una volta soddisfatto il numero richiesto di giorni lavorativi, l'azienda erogherà lo stipendio base di conseguenza.</p>"
+      "title": "1) Stipendio Base",
+      "image": "",
+      "content": "<p>L'azienda utilizza un meccanismo di registrazione cumulativa come parte della struttura di distribuzione dello stipendio, progettato per incoraggiare gli utenti a completare le attività giornaliere in modo costante. Sebbene l'importo dello stipendio base sia fisso, <strong>non</strong> viene pagato in un'unica soluzione. Lo stipendio viene invece erogato dopo un determinato numero di giorni lavorativi, come 2 giorni, 4 giorni o 7 giorni, per incentivare il completamento regolare delle attività giornaliere. Una volta completati i giorni lavorativi richiesti, l'azienda provvederà al pagamento corrispondente.</p>",
+      "salaryScheme": {
+        "title": "Schema Stipendio",
+        "subtitle": "Accedi . Presentati . Vieni Pagato",
+        "rows": [
+          {
+            "name": "Accesso",
+            "days": "2 giorni lavorativi",
+            "amount": "USD130"
+          },
+          {
+            "name": "Accesso",
+            "days": "4 giorni lavorativi",
+            "amount": "USD1,200"
+          },
+          {
+            "name": "Accesso",
+            "days": "7 giorni lavorativi",
+            "amount": "USD1,500"
+          },
+          {
+            "name": "Accesso",
+            "days": "15 giorni lavorativi",
+            "amount": "USD1,800"
+          },
+          {
+            "name": "Accesso",
+            "days": "30 giorni lavorativi",
+            "amount": "USD2,370"
+          }
+        ],
+        "howTitle": "Come funziona:",
+        "howText": "Per il pagamento mensile, accedi e mantieni il tuo profitto, puoi ottenere un reddito garantito!",
+        "earnText": "Più sei attivo, più guadagni. Invita per iniziare!",
+        "tip": "Una presenza perfetta può farti guadagnare fino a USD 7.000 al mese."
+      }
     },
     {
       "title": "2) Bonus Reset",
-      "image": "{resetBonusImage}",
-      "content": "<p>Il Bonus Reset rappresenta una delle principali fonti di reddito quando inizi a lavorare con noi. Ogni utente può completare <strong>due serie di attività al giorno</strong>, e i merchant forniscono bonus Reset aggiuntivi per incentivare il completamento costante delle attività.</p><p>Nel sistema di incentivi di reset:</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Riceverai un <strong>bonus aggiuntivo di 10 USD</strong> ogni volta che reimposti il tuo account per iniziare la prima attività con <strong>100 USD</strong>.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Quando il tuo <strong>importo totale di reset supera 1.500 USD in un singolo giorno</strong>, riceverai <strong>un bonus extra del 4%</strong> basato sull'importo cumulativo dei reset delle due serie completate in quella giornata.</li></ol>"
+      "image": "",
+      "content": "<p>Il Bonus Reset rappresenta una delle principali fonti di reddito quando inizi a lavorare con noi. Ogni utente può completare <strong>due set di attività al giorno</strong>, e i commercianti offrono bonus di reset aggiuntivi per incoraggiare il completamento costante delle attività.</p><p>Nella struttura di incentivo del reset:</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Riceverai un <strong>bonus aggiuntivo di 10 USD</strong> ogni volta che resetti il tuo account per iniziare la prima attività con <strong>100 USD</strong>.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Quando il tuo <strong>importo totale di reset supera 1.500 USD in un singolo giorno</strong>, riceverai un <strong>bonus extra del 4%</strong> basato sull'importo cumulativo dei due set completati quel giorno.</li></ol>",
+      "resetBonusScheme": {
+        "title": "Schema Stipendio",
+        "subtitle": "Accedi . Presentati . Vieni Pagato",
+        "plans": [
+          {
+            "name": "Standard",
+            "amountLabel": "IMPORTO",
+            "amount": "USD 100",
+            "extraLabel": "EXTRA",
+            "extra": "USD 10"
+          },
+          {
+            "name": "Più Richiesto",
+            "amountLabel": "IMPORTO",
+            "amount": "USD 500",
+            "extraLabel": "EXTRA",
+            "extra": "USD 60"
+          },
+          {
+            "name": "Premium",
+            "amountLabel": "IMPORTO",
+            "amount": "USD 1000",
+            "extraLabel": "EXTRA",
+            "extra": "USD 120"
+          },
+          {
+            "name": "Elite",
+            "amountLabel": "IMPORTO",
+            "amount": "USD 1600",
+            "extraLabel": "EXTRA",
+            "extra": "USD 200"
+          },
+          {
+            "name": "Consigliato",
+            "amountLabel": "IMPORTO",
+            "amount": "USD 5500",
+            "extraLabel": "EXTRA",
+            "extra": "USD 1200"
+          },
+          {
+            "name": "Elite Plus",
+            "amountLabel": "IMPORTO",
+            "amount": "USD 10000",
+            "extraLabel": "EXTRA",
+            "extra": "USD 2400"
+          }
+        ],
+        "advanceTitle": "=Bonus Accumulati di Anticipo Giornaliero",
+        "advanceRows": [
+          {
+            "title": "ANTICIPI GIORNALIERI (USD)",
+            "range": "1.500-9.999",
+            "desc": "RICEVERAI (USD)",
+            "bonus": "4%",
+            "suffix": "Bonus Anticipo"
+          },
+          {
+            "title": "ANTICIPI GIORNALIERI (USD)",
+            "range": "10.000-19.999",
+            "desc": "RICEVERAI (USD)",
+            "bonus": "8%",
+            "suffix": "Bonus Anticipo"
+          },
+          {
+            "title": "ANTICIPI GIORNALIERI (USD)",
+            "range": "20.000-49.999",
+            "desc": "RICEVERAI (USD)",
+            "bonus": "4%",
+            "suffix": "Bonus Anticipo"
+          },
+          {
+            "title": "ANTICIPI GIORNALIERI (USD)",
+            "range": "50.000-oltre",
+            "desc": "RICEVERAI (USD)",
+            "bonus": "4%",
+            "suffix": "Bonus Anticipo"
+          }
+        ]
+      }
     },
     {
-      "title": "3) Profitti giornalieri",
+      "title": "3) Profitti Giornalieri",
       "image": "",
-      "content": "<p>I profitti giornalieri rappresentano la tua principale fonte di reddito. Il sistema assegna prodotti di vari merchant per l'ottimizzazione in base al saldo attuale del tuo account. Per ogni prodotto ottimizzato, guadagnerai tra <strong>0,5% e 2,5%</strong> del prezzo del prodotto come profitto.</p><p>I livelli di profitto sono determinati dal tuo <strong>livello VIP</strong>—più alto è il livello VIP, maggiore è la percentuale di profitto. Inoltre, il numero di attività per set aumenta con l'avanzamento del livello VIP.</p><p>Alcuni merchant forniscono anche <strong>prodotti combinati</strong>. Il sistema può assegnare casualmente questi prodotti combinati agli utenti in base al saldo del loro account. A seconda dei prodotti ottimizzati, puoi guadagnare <strong>un ulteriore 5%–25%</strong> di profitto.</p>"
+      "content": "<p>I profitti giornalieri rappresentano la tua principale fonte di reddito. Il sistema assegna prodotti di vari commercianti per l'ottimizzazione in base al saldo del tuo account. Per ogni prodotto ottimizzato, guadagnerai dal <strong>0,5% al 2,5%</strong> del prezzo del prodotto come profitto.</p><p>I livelli di profitto sono determinati dal tuo <strong>livello VIP</strong>—più alto è il tuo livello VIP, maggiore sarà il tasso di profitto. Inoltre, il numero di attività per set aumenta con l'aumentare del livello VIP.</p><p>Alcuni commercianti forniscono anche <strong>prodotti combinati</strong>. Il sistema può assegnare casualmente questi prodotti combinati agli utenti in base al saldo del loro account. A seconda dei prodotti ottimizzati, puoi guadagnare un <strong>ulteriore 5% - 25%</strong> di profitto.</p>",
+      "vipProfitRates": {
+        "rows": [
+          {
+            "level": "VIP 1",
+            "rate": "0,5%",
+            "progress": "20%"
+          },
+          {
+            "level": "VIP 2",
+            "rate": "1%",
+            "progress": "40%"
+          },
+          {
+            "level": "VIP 3",
+            "rate": "1,5%",
+            "progress": "60%"
+          },
+          {
+            "level": "VIP 4",
+            "rate": "2%",
+            "progress": "80%"
+          },
+          {
+            "level": "VIP 5",
+            "rate": "2,5%",
+            "progress": "100%"
+          }
+        ],
+        "button": "Aggiorna VIP per guadagnare di più →"
+      }
     }
   ],
   "clause_sections": [
     {
-      "title": "Per ottimizzare e reimpostare il tuo account, devi prima completare tutte le valutazioni con un importo minimo di 50 USD e un importo minimo di reset dell'account di 100 USD.",
-      "content": "<p>1.1) Gli utenti che hanno completato una serie di attività devono contattare il servizio clienti per richiedere il reset per il set successivo di attività</p>"
+      "title": "Per ottimizzare e reimpostare il tuo account, devi prima completare tutte le valutazioni con un importo minimo di 50 USD e un importo minimo di reimpostazione account di 100 USD.",
+      "content": "<p>1.1) Gli utenti che hanno completato un set di missioni devono contattare il servizio clienti per richiedere il reset per il set successivo di attività</p>"
     },
     {
       "title": "Prelievi degli utenti e requisiti di prelievo del sistema / sicurezza dei fondi degli utenti",
-      "content": "<p>2.1) Ogni utente deve completare tutte le attività di ottimizzazione prima di poter soddisfare i requisiti di prelievo del sistema</p><p>2.2) Per evitare qualsiasi perdita di fondi, tutti i prelievi vengono elaborati automaticamente dal sistema e non manualmente</p><p>2.3) A tutti gli utenti non è consentito richiedere prelievi durante lo svolgimento delle attività per evitare di influenzare le operazioni del merchant</p><p>2.4) I fondi degli utenti sono completamente sicuri sulla Piattaforma e la Piattaforma sarà responsabile per eventuali perdite accidentali</p>"
+      "content": "<p>2.1) Ogni utente deve completare tutte le missioni di ottimizzazione prima di poter soddisfare i requisiti di prelievo del sistema</p><p>2.2) Per evitare qualsiasi perdita di fondi, tutti i prelievi vengono elaborati automaticamente dal sistema e non manualmente</p><p>2.3) A tutti gli utenti non è consentito richiedere un prelievo durante lo svolgimento delle missioni per evitare di influire sulle operazioni dei merchant</p><p>2.4) I fondi degli utenti sono completamente sicuri sulla piattaforma e la piattaforma sarà responsabile per eventuali perdite accidentali</p>"
     },
     {
-      "title": "Si prega di non divulgare la password dell'account e la password di prelievo ad altri. La piattaforma non sarà responsabile per eventuali perdite o danni causati",
-      "content": "<p>3.1) Tutti gli utenti sono invitati a mantenere sicuri i propri account per evitare divulgazioni</p><p>3.2) La Piattaforma non è responsabile per eventuali divulgazioni accidentali degli account</p><p>3.3) A causa delle implicazioni finanziarie degli account, è importante non divulgarli per evitare problemi inutili</p><p>3.4) Password di prelievo: si consiglia di non impostare password come data di nascita, numero di carta d'identità o numero di telefono. È consigliato impostare una password più complessa per proteggere i fondi</p><p>3.5) Se dimentichi la password, puoi reimpostarla contattando il servizio online e assicurandoti di modificarla successivamente</p>"
+      "title": "Si prega di non divulgare la password dell’account e la password di prelievo ad altri. La piattaforma non sarà ritenuta responsabile per eventuali perdite o danni causati",
+      "content": "<p>3.1) Tutti gli utenti sono invitati a mantenere i propri account al sicuro per evitare divulgazioni</p><p>3.2) La piattaforma non è responsabile per eventuali divulgazioni accidentali degli account</p><p>3.3) A causa delle implicazioni finanziarie degli account, è importante non divulgarli per evitare problemi inutili</p><p>3.4) Password di prelievo: si consiglia di non utilizzare password come data di nascita, numero di carta d’identità o numero di telefono. È consigliato impostare una password più complessa per proteggere i propri fondi</p><p>3.5) Se dimentichi la password, puoi reimpostarla contattando il servizio online e assicurarti di modificarla successivamente</p>"
     },
     {
-      "title": "Tutti i prodotti in una missione sono assegnati casualmente dal sistema e non possono essere modificati, annullati, controllati o saltati in alcun modo",
-      "content": "<p>4.1) A causa dell'elevato numero di utenti sulla piattaforma, non è possibile distribuire manualmente i prodotti combinati, quindi tutti i dati delle attività vengono distribuiti casualmente dal sistema</p><p>4.2) I prodotti combinati vengono rilasciati casualmente dal sistema e non possono essere modificati/annullati/saltati da nessun utente o staff</p>"
+      "title": "Tutti i prodotti in una missione vengono assegnati in modo casuale dal sistema e non possono essere modificati, annullati, controllati o saltati in alcun modo",
+      "content": "<p>4.1) A causa dell’elevato numero di utenti sulla piattaforma, non è possibile distribuire manualmente i prodotti combinati, quindi tutti i dati delle missioni vengono assegnati casualmente dal sistema</p><p>4.2) I prodotti combinati vengono assegnati casualmente dal sistema e non possono essere modificati/annullati/saltati da alcun utente o staff</p>"
     },
     {
-      "title": "In caso di uso improprio dell'account verranno intraprese azioni legali",
+      "title": "Saranno intraprese azioni legali in caso di uso improprio dell’account",
       "content": ""
     },
     {
-      "title": "Ogni dato dei prodotti proviene da un merchant diverso, nessun deposito per più di 10 minuti, e ogni deposito deve essere confermato con il servizio online per verificare i dettagli del deposito del merchant.",
+      "title": "Ogni dato di prodotto proviene da un merchant diverso, non effettuare depositi per più di 10 minuti e ogni deposito deve essere confermato tramite il servizio online con i dettagli del merchant.",
       "content": ""
     },
     {
-      "title": "La piattaforma non sarà responsabile per eventuali depositi effettuati con dettagli errati",
+      "title": "La piattaforma non sarà ritenuta responsabile per eventuali depositi effettuati ai dettagli errati",
       "content": ""
     },
     {
-      "title": "Ogni ottimizzazione dei dati dei prodotti deve essere completata entro 24 ore; in caso contrario, se si generano reclami da parte dei merchant, l'utente dovrà assumersi la responsabilità della violazione del contratto",
+      "title": "Ogni ottimizzazione dei dati del prodotto deve essere completata entro 24 ore; in caso contrario, se non completata e genera reclami da parte dei merchant, l’utente dovrà assumersi la responsabilità della violazione del contratto",
       "content": ""
     },
     {
-      "title": "Quando l'account riceve un reclamo da parte del merchant, il sistema dedurrà il punteggio di credito. Quando il punteggio è inferiore a 98, non sarà possibile richiedere il prelievo. Il punteggio viene calcolato automaticamente dal sistema dopo ogni set di attività completato",
+      "title": "Quando l’account viene segnalato da un merchant, il sistema dedurrà il punteggio di credito; quando il punteggio di credito è inferiore a 98 non è possibile richiedere il prelievo. Il punteggio viene calcolato automaticamente dal sistema dopo ogni set di missioni completato",
       "content": ""
     }
   ],
   "faq_sections": [
     {
-      "title": "Avvio delle attività di ottimizzazione dei prodotti",
-      "content": "<p>1.1) Saldo minimo dell'account di 50 USD per le prime 40 attività/set.</p><p>1.2) È necessario un rinnovo minimo di 100 USD per avviare nuove attività.</p><p>1.3) Gli utenti devono completare le attività prima di poter richiedere un prelievo.</p>"
+      "title": "Avvia le missioni di ottimizzazione dei prodotti",
+      "content": "<p>1.1) Saldo minimo del conto di 50 USD per le prime 40 missioni/set.</p><p>1.2) È richiesto un rinnovo minimo di 100 USD per avviare le nuove missioni.</p><p>1.3) Gli utenti devono completare le missioni prima di poter richiedere un prelievo.</p>"
     },
     {
-      "title": "Prelievo",
-      "content": "<p>2.1) Gli utenti devono completare le attività prima di poter richiedere un prelievo.</p><p>2.2) Non è possibile richiedere un prelievo o un rimborso se si decide di abbandonare o interrompere un'attività a metà del processo di ottimizzazione.</p><p>2.3) Nessun prelievo può essere elaborato se la richiesta dell'utente non è stata ricevuta.</p><p>2.4) L'importo massimo di prelievo per gli utenti VIP1 è di 10.000 USD, per VIP2 è di 30.000 USD. Nessun limite massimo per VIP3 e superiori.</p><p>2.5) Per offrire un servizio più professionale ed efficiente, gli account con un saldo superiore a 60.000 USD devono utilizzare il canale di prelievo ad alto volume della piattaforma. Questo canale consente un prelievo completo più rapido, sicuro e in un'unica soluzione.</p><p>2.6) Il punteggio di credito dell'account dell'utente è insufficiente e non può utilizzare normalmente tutte le funzioni della piattaforma.</p>"
+      "title": "Prelievi",
+      "content": "<p>2.1) Gli utenti devono completare le missioni prima di poter richiedere un prelievo.</p><p>2.2) Non è possibile richiedere un prelievo o un rimborso se si decide di abbandonare o interrompere una missione di ottimizzazione in corso.</p><p>2.3) Nessun prelievo può essere elaborato se la richiesta dell’utente non è stata ricevuta.</p><p>2.4) L’importo massimo di prelievo per gli utenti VIP1 è di 10.000 USD, per gli utenti VIP2 è di 30.000 USD. Nessun limite massimo per VIP3 e superiori.</p><p>2.5) Per offrire ai nostri utenti un servizio più professionale ed efficiente, gli account con un saldo superiore a 60.000 USD devono utilizzare il canale di prelievo ad alto volume della piattaforma. Questo canale consente un prelievo completo, più veloce e sicuro, in un’unica soluzione.</p><p>2.6) Il punteggio di credito dell’account utente è insufficiente e non può utilizzare normalmente tutte le funzioni della piattaforma.</p>"
     },
     {
       "title": "Fondi",
-      "content": "<p>3.1) Tutti i fondi saranno conservati in modo sicuro nell'account dell'utente e potranno essere richiesti per intero una volta completati tutti i dati.</p><p>3.2) Per evitare qualsiasi perdita di fondi, tutti i dati saranno elaborati dal sistema e non manualmente.</p><p>3.3) La piattaforma si assume la piena responsabilità per eventuali perdite accidentali di fondi.</p><p>3.4) Se i fondi dell'utente superano la soglia imponibile del governo, l'utente sarà tenuto a pagare le tasse.</p>"
+      "content": "<p>3.1) Tutti i fondi saranno conservati in modo sicuro nell’account dell’utente e potranno essere richiesti integralmente una volta completati tutti i dati</p><p>3.2) Per evitare qualsiasi perdita di fondi, tutti i dati saranno elaborati dal sistema e non manualmente</p><p>3.3) La piattaforma si assume la piena responsabilità per eventuali perdite accidentali di fondi.</p><p>3.4) Se i fondi dell’utente superano l’importo imponibile stabilito dal governo, l’utente dovrà pagare le tasse</p>"
     },
     {
-      "title": "Sicurezza dell'account",
-      "content": "<p>4.1) Si prega di non divulgare la password di accesso e la password di prelievo ad altri, poiché la piattaforma non sarà responsabile per eventuali perdite.</p><p>4.2) Si sconsiglia di impostare come password di accesso o di prelievo la data di nascita, il numero di carta d'identità o il numero di telefono.</p><p>4.3) Se dimentichi la password di accesso o di prelievo, contatta il nostro servizio online per reimpostarla.</p>"
+      "title": "Sicurezza dell’account",
+      "content": "<p>4.1) Si prega di non divulgare la password di accesso e la password di prelievo ad altri, poiché la piattaforma non sarà responsabile per eventuali perdite.</p><p>4.2) Si sconsiglia agli utenti di utilizzare come password di accesso o di prelievo date di nascita, numeri di carta d’identità o numeri di telefono.</p><p>4.3) Se dimentichi la password di accesso o di prelievo, contatta il nostro servizio online per reimpostarla.</p>"
     },
     {
       "title": "Dati generali dei prodotti",
-      "content": "<p>5.1) I profitti della piattaforma sono suddivisi in profitti da dati di prodotti normali e profitti da prodotti combinati 10 volte superiori.</p><p>5.2) Gli utenti normali guadagneranno lo 0,5% di profitto per ogni attività normale di ottimizzazione.</p><p>5.3) Gli utenti VIP 2 guadagneranno l'1% di profitto per ogni attività normale di ottimizzazione.</p><p>5.4) Gli utenti VIP 3 guadagneranno l'1,5% di profitto per ogni attività normale di ottimizzazione.</p><p>5.5) Gli utenti VIP 4 guadagneranno il 2% di profitto per ogni attività normale di ottimizzazione.</p><p>5.6) Gli utenti VIP 5 guadagneranno il 2,5% di profitto per ogni attività normale di ottimizzazione.</p><p>5.7) Fondi e profitti verranno accreditati sul conto dell'utente per ogni attività di ottimizzazione completata.</p><p>5.8) Il sistema assegnerà casualmente le attività all'account dell'utente in base al saldo totale dell'account.</p><p>5.9) Una volta assegnata un'attività di ottimizzazione del prodotto a un account utente, non può essere annullata o saltata.</p>"
+      "content": "<p>5.1) I profitti della piattaforma sono suddivisi in profitti da prodotti normali e profitti da prodotti combinati 10 volte superiori</p><p>5.2) Gli utenti normali guadagneranno lo 0,5% di profitto per ogni missione di ottimizzazione normale</p><p>5.3) Gli utenti VIP 2 guadagneranno l’1% di profitto per ogni missione di ottimizzazione normale</p><p>5.4) Gli utenti VIP 3 guadagneranno l’1,5% di profitto per ogni missione di ottimizzazione normale</p><p>5.5) Gli utenti VIP 4 guadagneranno il 2% di profitto per ogni missione di ottimizzazione normale</p><p>5.6) Gli utenti VIP 5 guadagneranno il 2,5% di profitto per ogni missione di ottimizzazione normale</p><p>5.7) Fondi e profitti saranno rimborsati sul conto dell’utente per ogni missione completata</p><p>5.8) Il sistema assegnerà casualmente le attività all’account dell’utente in base al saldo totale</p><p>5.9) Una volta assegnata una missione di ottimizzazione di un prodotto, non può essere annullata o saltata</p>"
     },
     {
       "title": "Dati dei prodotti combinati",
-      "content": "<p>6.1) I dati dei prodotti combinati sono composti da 1 a 3 elementi. L'utente non riceverà necessariamente 3 prodotti; il sistema assegnerà casualmente i dati nei prodotti combinati. L'utente ha una maggiore probabilità di ricevere 1 o 2 prodotti.</p><p>6.2) Gli utenti riceveranno un profitto 10 volte superiore per ogni prodotto combinato rispetto ai dati dei prodotti normali.</p><p>6.3) Una volta ricevuti i prodotti combinati, tutti i fondi si bloccheranno e verranno restituiti all'account dopo il completamento di ciascun prodotto del pacchetto combinato.</p><p>6.4) Il sistema assegnerà casualmente i dati dei prodotti combinati all'account dell'utente in base al saldo totale dell'account.</p><p>6.5) Una volta assegnati i dati dei prodotti combinati all'account utente, non possono essere annullati o saltati.</p>"
+      "content": "<p>6.1) I prodotti combinati sono composti da 1 a 3 elementi; l’utente non riceverà necessariamente 3 prodotti. Il sistema assegnerà casualmente i dati e l’utente ha una maggiore probabilità di ricevere 1 o 2 prodotti</p><p>6.2) Gli utenti riceveranno un profitto 10 volte superiore per i prodotti combinati rispetto ai prodotti normali</p><p>6.3) Una volta ricevuti i prodotti combinati, tutti i fondi verranno sospesi e saranno restituiti all’account dopo il completamento di ogni prodotto incluso nella combinazione</p><p>6.4) Il sistema assegnerà casualmente i prodotti combinati in base al saldo totale dell’account</p><p>6.5) Una volta assegnati i prodotti combinati, non possono essere annullati o saltati</p>"
     },
     {
       "title": "Deposito",
-      "content": "<p>7.1) L'importo del deposito è scelto dall'utente e non possiamo determinarlo; si consiglia di procedere in base alle proprie capacità o dopo aver familiarizzato con la piattaforma.</p><p>7.2) Se un utente deve effettuare un deposito durante la ricezione di dati di prodotti combinati, si consiglia di effettuare un anticipo in base all'importo insufficiente mostrato nell'account.</p><p>7.3) Prima di effettuare un deposito, è necessario richiedere un anticipo al servizio online e confermare i dettagli del deposito.</p><p>7.4) La piattaforma non sarà responsabile se l'utente effettua un deposito con dettagli errati.</p>"
+      "content": "<p>7.1) L’importo del deposito è scelto dall’utente e non può essere determinato dalla piattaforma; si consiglia di operare in base alle proprie possibilità o dopo aver familiarizzato con la piattaforma.</p><p>7.2) Se un utente deve effettuare un deposito durante la ricezione di prodotti combinati, si consiglia di effettuare un anticipo in base all’importo insufficiente mostrato nell’account.</p><p>7.3) Prima di effettuare un deposito, è necessario richiedere un anticipo al servizio online e confermare i dettagli del deposito.</p><p>7.4) La piattaforma non sarà responsabile per eventuali depositi effettuati con dettagli errati.</p>"
     }
   ],
   "event_sections": [
     {
-      "tag": "ATTIVO",
+      "tag": "ACTIVE",
       "icon": "⚡",
-      "title": "3° Anniversario - Ringraziamento e Feedback",
-      "summary": "Evento promozionale Skye Odell – Ricompense bonus di reset",
-      "reward": "USD 10 - USD 2.400 Premi extra",
+      "title": "Feedback del 3° Anniversario di Ringraziamento",
+      "summary": "Evento promozionale Skye Odell – Premi bonus di reset",
+      "reward": "USD 10 - USD 2.400 di premi extra",
       "progress": "",
-      "time": "Attività anniversario a tempo limitato",
-      "joined": "Premi di anticipo reset",
+      "time": "Attività dell’anniversario a tempo limitato",
+      "joined": "Premi anticipati di reset",
       "buttonText": "Partecipa ora",
       "disabled": false,
-      "content": "<div class=\"event-section-block\"><h4>Premi di anticipo reset</h4><div class=\"event-reward-grid\"><div><strong>Standard</strong><span>Importo USD 100</span><b>Ottieni extra USD 10</b></div><div><strong>Scelta popolare</strong><span>Importo USD 500</span><b>Ottieni extra USD 60</b></div><div><strong>Premium</strong><span>Importo USD 1.000</span><b>Ottieni extra USD 120</b></div><div><strong>Elite</strong><span>Importo USD 1.600</span><b>Ottieni extra USD 200</b></div><div><strong>Consigliato</strong><span>Importo USD 5.500</span><b>Ottieni extra USD 1.200</b></div><div><strong>Elite Plus</strong><span>Importo USD 10.000</span><b>Ottieni extra USD 2.400</b></div></div></div>"
+      "content": "<div class=\"event-section-block\"><h4>Premi anticipati di reset</h4><div class=\"event-reward-grid\"><div><strong>Standard</strong><span>Importo USD 100</span><b>Ottieni extra USD 10</b></div><div><strong>Hot Pick</strong><span>Importo USD 500</span><b>Ottieni extra USD 60</b></div><div><strong>Premium</strong><span>Importo USD 1.000</span><b>Ottieni extra USD 120</b></div><div><strong>Elite</strong><span>Importo USD 1.600</span><b>Ottieni extra USD 200</b></div><div><strong>Consigliato</strong><span>Importo USD 5.500</span><b>Ottieni extra USD 1.200</b></div><div><strong>Elite Plus</strong><span>Importo USD 10.000</span><b>Ottieni extra USD 2.400</b></div></div></div>"
     },
     {
       "tag": "HOT",
       "icon": "🎁",
-      "title": "Premi anticipati cumulativi giornalieri",
-      "summary": "Guadagna bonus anticipati extra in base al totale degli anticipi effettuati durante la giornata.",
-      "reward": "Bonus anticipo 4% - 20%",
+      "title": "Premi anticipati accumulati della giornata",
+      "summary": "Guadagna bonus extra in base agli anticipi totali effettuati durante la giornata.",
+      "reward": "Bonus anticipato 4% - 20%",
       "progress": "",
-      "time": "Bonus giornaliero cumulativo",
-      "joined": "Livelli di bonus",
+      "time": "Bonus giornaliero accumulato",
+      "joined": "Fasce di premi bonus",
       "buttonText": "Partecipa ora",
       "disabled": false,
-      "content": "<div class=\"event-section-block\"><h4>Premi anticipati cumulativi giornalieri</h4><div class=\"event-bonus-grid\"><div><strong>1.500 - 9.999</strong><span>Riceverai</span><b>Bonus anticipo 4%</b></div><div><strong>10.000 - 19.999</strong><span>Riceverai</span><b>Bonus anticipo 8%</b></div><div><strong>20.000 - 49.999</strong><span>Riceverai</span><b>Bonus anticipo 12%</b></div><div><strong>50.000 e oltre</strong><span>Riceverai</span><b>Bonus anticipo 20%</b></div></div></div>"
+      "content": "<div class=\"event-section-block\"><h4>Premi anticipati accumulati della giornata</h4><div class=\"event-bonus-grid\"><div><strong>1.500 - 9.999</strong><span>Riceverai</span><b>Bonus anticipato 4%</b></div><div><strong>10.000 - 19.999</strong><span>Riceverai</span><b>Bonus anticipato 8%</b></div><div><strong>20.000 - 49.999</strong><span>Riceverai</span><b>Bonus anticipato 12%</b></div><div><strong>50.000 e oltre</strong><span>Riceverai</span><b>Bonus anticipato 20%</b></div></div></div>"
     }
   ],
   "event_footer_line1": "Skye Odell si riserva il diritto di interpretazione finale.",
   "event_footer_line2": "© 2022 Skye Odell. Tutti i diritti riservati.",
   "tc_page_title": "Termini e Condizioni",
-  "tc_hero_title": "Accordo di Registrazione dell'Utente",
+  "tc_hero_title": "Accordo di registrazione utente",
   "tc_hero_intro": [
-    "Benvenuto in <strong>Main Street ROI Agency</strong> e nei suoi servizi.",
-    "Si prega di leggere attentamente questo <strong>Accordo di Registrazione dell'Utente</strong> (“Accordo”) prima di utilizzare il software, il sito web o i servizi correlati forniti da Main Street ROI Agency (collettivamente, i “Servizi”). Il presente Accordo regola il tuo accesso e utilizzo dei Servizi."
+    "Benvenuto a <strong>Main Street ROI Agency</strong> e ai suoi servizi.",
+    "Si prega di leggere attentamente questo <strong>Accordo di registrazione utente</strong> (“Accordo”) prima di utilizzare il software, il sito web o i servizi correlati forniti da Main Street ROI Agency (collettivamente, i “Servizi”). Il presente Accordo disciplina il tuo accesso e utilizzo dei Servizi."
   ],
   "tc_hero_notice": [
-    "Accedendo o utilizzando i Servizi, confermi di aver letto, compreso e accettato di essere vincolato dal presente Accordo e da tutti i termini e le politiche correlate. Se non sei d'accordo, non devi utilizzare i Servizi.",
+    "Accedendo o utilizzando i Servizi, confermi di aver letto, compreso e accettato di essere vincolato dal presente Accordo e da tutti i termini e le politiche correlate. Se non sei d’accordo, non devi utilizzare i Servizi.",
     "Devi avere almeno <strong>18 anni</strong> per utilizzare i Servizi."
   ],
   "tc_table_of_contents": "Indice",
-  "tc_update_alert": "Main Street ROI Agency si riserva il diritto di modificare o aggiornare il presente Accordo in qualsiasi momento. Fa fede la versione più recente pubblicata sul sito web.",
+  "tc_update_alert": "Main Street ROI Agency si riserva il diritto di modificare o aggiornare il presente Accordo in qualsiasi momento. L’ultima versione pubblicata sul sito web prevarrà.",
   "tc_terms_sections": [
     {
       "title": "Protezione delle informazioni personali",
       "items": [
         {
-        "no": "1.1",
-        "content": "<p>La protezione delle informazioni personali degli utenti è un principio fondamentale di Main Street ROI Agency. Utilizziamo tecnologie di crittografia professionali, archiviazione sicura e metodi di trasmissione protetti per salvaguardare i dati degli utenti.</p>"
+          "no": "1.1",
+          "content": "<p>La protezione delle informazioni personali degli utenti è un principio fondamentale di Main Street ROI Agency. Utilizziamo tecnologie di crittografia professionali, sistemi di archiviazione sicuri e metodi di trasmissione protetti per salvaguardare i dati degli utenti.</p>"
         },
         {
-        "no": "1.2",
-        "content": "<p>Per accedere a determinati Servizi, come la registrazione dell'account, gli utenti sono tenuti a fornire informazioni necessarie e accurate, inclusi ma non limitati a un numero di telefono cellulare, e devono accettare il presente Accordo. La mancata fornitura di informazioni complete o accurate può comportare restrizioni all'accesso ai Servizi.</p>"
+          "no": "1.2",
+          "content": "<p>Per accedere a determinati Servizi, come la registrazione dell’account, gli utenti sono tenuti a fornire informazioni necessarie e accurate, inclusi ma non limitati a un numero di telefono, e devono accettare il presente Accordo. Il mancato inserimento di informazioni complete o corrette può comportare restrizioni all’accesso ai Servizi.</p>"
         },
         {
-        "no": "1.3",
-        "content": "<p>Gli utenti possono aggiornare alcune informazioni personali dopo la registrazione. Tuttavia, per motivi di sicurezza, inclusi il recupero dell'account e la prevenzione delle frodi, alcune informazioni potrebbero non essere modificabili una volta verificate.</p>"
+          "no": "1.3",
+          "content": "<p>Gli utenti possono aggiornare alcune informazioni personali dopo la registrazione. Tuttavia, per motivi di sicurezza, inclusi il recupero dell’account e la prevenzione delle frodi, alcune informazioni potrebbero non essere modificabili una volta verificate.</p>"
         },
         {
-        "no": "1.4",
-        "content": "<p>Main Street ROI Agency mantiene rigorosi controlli interni e sistemi di gestione per prevenire accessi, utilizzi o divulgazioni non autorizzate delle informazioni personali. Qualsiasi utilizzo non autorizzato sarà gestito in conformità alle leggi applicabili. Una volta registrato, il numero di telefono principale associato all'account non può essere modificato senza verifica.</p>"
+          "no": "1.4",
+          "content": "<p>Main Street ROI Agency adotta rigorosi controlli interni e sistemi di gestione per prevenire accessi, utilizzi o divulgazioni non autorizzate delle informazioni personali. Qualsiasi uso non autorizzato sarà gestito in conformità alle leggi applicabili. Una volta registrato, il numero di telefono principale associato all’account non può essere modificato senza verifica.</p>"
         },
         {
-        "no": "1.5",
-        "content": "<p>Main Street ROI Agency non divulgherà, venderà o condividerà le informazioni personali degli utenti con terze parti senza il consenso esplicito dell'utente, salvo quanto richiesto dalla legge.</p>"
+          "no": "1.5",
+          "content": "<p>Main Street ROI Agency non divulgherà, venderà o condividerà le informazioni personali degli utenti con terze parti senza il consenso esplicito dell’utente, salvo quanto richiesto dalla legge.</p>"
         },
         {
-        "no": "1.6",
-        "content": "<p>Gli utenti di età inferiore ai 18 anni non sono autorizzati a utilizzare i Servizi. Se è necessario l'accesso, deve essere fornito preventivamente il consenso scritto di un tutore legale.</p>"
+          "no": "1.6",
+          "content": "<p>Gli utenti di età inferiore ai 18 anni non sono autorizzati a utilizzare i Servizi. Se è richiesto l’accesso, è necessario fornire preventivamente il consenso scritto di un tutore legale.</p>"
         }
       ]
     },
     {
-      "title": "Responsabilità dell'utente",
+      "title": "Responsabilità dell’utente",
       "items": [
         {
-        "no": "2.1",
-        "content": "<p>Gli utenti devono completare tutte le attività giornaliere assegnate prima di richiedere un prelievo.</p>"
+          "no": "2.1",
+          "content": "<p>Gli utenti devono completare tutte le attività giornaliere assegnate prima di richiedere un prelievo.</p>"
         },
         {
-        "no": "2.2",
-        "content": "<p>I prelievi non sono consentiti mentre è in corso un processo di ottimizzazione o di attività.</p>"
+          "no": "2.2",
+          "content": "<p>I prelievi non sono consentiti durante un processo di ottimizzazione o di attività in corso.</p>"
         },
         {
-        "no": "2.3",
-        "content": "<p>Gli utenti non possono annullare, saltare o abbandonare le attività assegnate una volta che sono state accettate.</p>"
+          "no": "2.3",
+          "content": "<p>Gli utenti non possono annullare, saltare o abbandonare le attività assegnate una volta accettate.</p>"
         },
         {
-        "no": "2.4",
-        "content": "<p>I prelievi superiori a <strong>30.000 USD</strong> sono soggetti a una <strong>commissione di elaborazione del 20%</strong>, che verrà rimborsata all'utente una volta che il prelievo sarà completato con successo.</p>"
+          "no": "2.4",
+          "content": "<p>I prelievi superiori a <strong>USD 30.000</strong> sono soggetti a una <strong>commissione di elaborazione del 20%</strong>, che verrà rimborsata all’utente una volta completato con successo il prelievo.</p>"
         },
         {
-        "no": "2.5",
-        "content": "<p>Qualsiasi violazione di questi termini può comportare una riduzione del punteggio di credito dell'utente. Alcune funzionalità dell'account potrebbero essere limitate fino al ripristino del punteggio di credito.</p>"
+          "no": "2.5",
+          "content": "<p>Qualsiasi violazione di questi termini può comportare una riduzione del punteggio di credito dell’utente. Alcune funzionalità dell’account potrebbero essere limitate fino al ripristino del punteggio di credito.</p>"
         }
       ]
     },
     {
-      "title": "Termini e Condizioni",
+      "title": "Termini e condizioni",
       "items": [
         {
-        "no": "3.1",
-        "content": "<p>Il presente Accordo costituisce un contratto legalmente vincolante tra l'utente e Main Street ROI Agency. Gli utenti devono fornire informazioni accurate e conformi alla legge come richiesto per accedere ai Servizi.</p>"
+          "no": "3.1",
+          "content": "<p>Il presente Accordo costituisce un contratto legalmente vincolante tra l’utente e Main Street ROI Agency. Gli utenti devono fornire informazioni accurate e conformi alla legge per accedere ai Servizi.</p>"
         },
         {
-        "no": "3.2",
-        "content": "<p>Questi termini si applicano a tutti gli utenti dei Servizi. In caso di domande, feedback o dubbi, si prega di contattare il reparto di supporto appropriato.</p>"
+          "no": "3.2",
+          "content": "<p>Questi termini si applicano a tutti gli utenti dei Servizi. In caso di domande, feedback o dubbi, contattare il reparto di assistenza appropriato.</p>"
         },
         {
-        "no": "3.3",
-        "content": "<p>Questi termini sono regolati e tutelati dalle leggi e normative commerciali applicabili. Main Street ROI Agency si riserva il diritto di intraprendere azioni legali contro qualsiasi utente che violi il presente Accordo in malafede.</p>"
+          "no": "3.3",
+          "content": "<p>Questi termini sono regolati e protetti dalle leggi e normative commerciali applicabili. Main Street ROI Agency si riserva il diritto di intraprendere azioni legali contro qualsiasi utente che violi il presente Accordo in malafede.</p>"
         },
         {
-        "no": "3.4",
-        "content": "<p>Main Street ROI Agency si riserva il diritto di modificare o aggiornare il presente Accordo in qualsiasi momento. Fa fede la versione più recente pubblicata sul sito web e Main Street ROI Agency mantiene il diritto finale di interpretazione.</p>"
+          "no": "3.4",
+          "content": "<p>Main Street ROI Agency si riserva il diritto di modificare o aggiornare il presente Accordo in qualsiasi momento. L’ultima versione pubblicata sul sito web prevarrà e Main Street ROI Agency mantiene il diritto finale di interpretazione.</p>"
         }
       ]
     }
@@ -821,23 +965,23 @@
   "sk_logo_alt": "Skye Odell",
   "sk_menu": "Menu",
   "sk_contact": "Hai un progetto? Contattaci!",
-  "sk_topics": "Argomenti dei servizi",
+  "sk_topics": "Argomenti di servizio",
   "sk_topic_content": "Creazione di contenuti",
   "sk_topic_marketing": "Marketing digitale",
   "sk_topic_web": "Sviluppo web",
-  "sk_topic_strategy": "Analisi aziendale e strategia",
-  "sk_brand": "Servizi SO",
+  "sk_topic_strategy": "Analisi e strategia aziendale",
+  "sk_brand": "SO Services",
   "sk_vision": "La tua visione.",
-  "sk_art_alt": "Realizzata con eleganza",
-  "sk_intro": "Trasforma la tua attività con siti web e materiali stampati realizzati in modo professionale, progettati strategicamente per lasciare un'impressione duratura, aumentare la fiducia nel brand e migliorare il tuo successo sia online che offline.",
-  "sk_hero_alt": "Servizi SO",
+  "sk_art_alt": "Realizzata in modo straordinario",
+  "sk_intro": "Trasforma la tua attività con siti web e materiali stampati realizzati con competenza, progettati strategicamente per lasciare un’impressione duratura, aumentare la fiducia nel brand e migliorare il tuo successo online e offline.",
+  "sk_hero_alt": "SO Services",
   "sk_web_dev": "Web design e sviluppo",
   "sk_brand_marketing": "Branding e marketing",
   "sk_site_manage": "Gestione e hosting del sito web",
   "sk_hosting": "Hosting del sito web",
   "sk_maintenance": "Manutenzione e supporto",
   "sk_social_marketing": "Marketing sui social media",
-  "sk_brand_design": "Branding e design grafico",
+  "sk_brand_design": "Branding e grafica",
   "sk_seo": "SEO",
   "sk_expert_1": "Esperti",
   "sk_expert_2": "Siti web,",
@@ -846,46 +990,46 @@
   "sk_expert_5": "Supporto, SEO,",
   "sk_expert_6": "Social media",
   "sk_expert_7": "Marketing",
-  "sk_expert_p1": "Smetti di passare inosservato, INIZIA",
-  "sk_expert_p2": "a catturare l'attenzione!",
-  "sk_expert_p3": "Prenota ora il tuo posto per una svolta",
-  "sk_expert_p4": "nel design e lascia",
-  "sk_expert_p5": "indietro i concorrenti con SO",
+  "sk_expert_p1": "Smetti di confonderti tra la massa, INIZIA a",
+  "sk_expert_p2": "catturare l’attenzione!",
+  "sk_expert_p3": "Prenota il tuo posto per una svolta nel design",
+  "sk_expert_p4": "adesso e lascia",
+  "sk_expert_p5": "i concorrenti indietro con SO",
   "sk_expert_p6": "Services.",
   "sk_start": "Iniziamo!",
   "sk_team_1": "Siamo un team di",
   "sk_team_2": "designer, sviluppatori",
   "sk_team_3": "e strateghi",
   "sk_team_4": "che",
-  "sk_team_5": "credono nel sfruttare",
-  "sk_team_6": "il potere della creatività",
+  "sk_team_5": "credono nello sfruttamento",
+  "sk_team_6": "del potere della creatività",
   "sk_team_7a": "per",
   "sk_team_7b": "trasformare i brand",
-  "sk_team_8": "e affascinare le persone.",
-  "sk_team_btn": "Partner affidabili e talentuosi...",
-  "sk_how_title": "Come lavoriamo",
-  "sk_how_copy": "Agiamo come un partner affidabile, combinando una profonda esperienza nel design con un approccio strutturato e progressivo. Trasformiamo sfide tecniche e creative complesse in soluzioni chiare, guidando i nostri clienti attraverso un processo collaborativo che porta a risultati visivi distintivi, efficaci e coinvolgenti.",
+  "sk_team_8": "e catturare le persone.",
+  "sk_team_btn": "Partner affidabili e talentuosi ...",
+  "sk_how_title": "Come lo facciamo",
+  "sk_how_copy": "agisce come un partner affidabile, combinando una profonda esperienza nel design con un approccio strutturato e passo dopo passo. Trasformiamo sfide tecniche e creative complesse in soluzioni chiare, guidando i nostri clienti attraverso un processo collaborativo che produce risultati visivi distintivi, coinvolgenti ed efficaci.",
   "sk_how_btn": "Scopri di più su di noi",
-  "sk_amazing": "Fantastici",
+  "sk_amazing": "Incredibili",
   "sk_clients": "Clienti",
-  "sk_clients_copy": "SO Services crea e mantiene siti web coinvolgenti e materiali stampati di grande impatto, offrendo supporto continuo nel design e nel marketing per garantire che il tuo brand si distingua costantemente e attragga clienti.",
-  "sk_clients_btn": "Visualizza i nostri fantastici clienti",
+  "sk_clients_copy": "SO Services crea e mantiene siti web coinvolgenti e materiali stampati di grande impatto, offrendo supporto continuo in design e marketing per garantire che il tuo brand si distingua sempre e attiri clienti.",
+  "sk_clients_btn": "Vedi i nostri incredibili clienti",
   "sk_prev_services": "Servizi precedenti",
-  "sk_next_services": "Servizi successivi",
+  "sk_next_services": "Prossimi servizi",
   "sk_time_9m": "9 mesi fa",
   "sk_time_8m": "8 mesi fa",
   "sk_time_7m": "7 mesi fa",
   "sk_time_6y": "6 anni fa",
-  "sk_review_1": "Skye è molto disponibile, accomodante e paziente. SO Services offre servizi eccellenti.",
-  "sk_review_2": "Creatività e tempi rapidi nella realizzazione di siti web e design, ma anche molto conveniente. Fornisce idee di design rapidamente e le implementa ancora più velocemente!! Consiglio vivamente SO Services.",
+  "sk_review_1": "Skye è molto disponibile, accomodante e paziente. SO Services offre servizi eccellenti",
+  "sk_review_2": "Soluzioni creative e tempi rapidi per siti web e design, ma comunque molto convenienti. Fornisce idee di design velocemente e le implementa ancora più rapidamente!! Consiglio vivamente SO Services.",
   "sk_review_3": "Skye di SO Services è sempre disponibile per le nostre domande e lavora duramente per mantenere il nostro sito aggiornato e funzionante correttamente.",
-  "sk_review_4": "La nostra azienda lavora con Skye da quasi 10 anni. È parte fondamentale della nostra struttura grazie al suo lavoro. Indispensabile.",
-  "sk_review_5": "Skye è estremamente creativa ed è fantastica con cui lavorare.",
-  "sk_review_6": "Lavorare con Skye è stato un vero piacere. Ciò che la distingue è l'entusiasmo autentico che porta in ogni progetto. Non si limita a creare siti web: si prende il tempo per comprendere davvero ciò che rende unica ogni attività, riflettendolo con cura...",
-  "sk_review_7": "Skye è fantastica! È ancora migliore nella creazione di nuovi siti web. Lavoro con lei da molti anni ed è sempre eccellente in ciò che fa. I suoi prezzi sono ragionevoli e la comunicazione è impeccabile. Se stai pensando a un nuovo sito web, contattala...",
-  "sk_review_8": "Senza dubbio una delle migliori aziende con cui lavorare. Skye ci fornisce servizi web da anni ed è sempre riuscita ad affrontare ogni sfida. Estremamente soddisfatti.",
-  "sk_review_9": "Skye è stata la mia mentore, guida, designer e amica. Ho perso il conto degli anni. È una gioia lavorare con lei e averla nella mia vita.",
-  "sk_review_10": "Skye è fantastica. Attenta, competente, disponibile e creativa. Tutto ciò di cui avevamo bisogno, e Skye lo ha realizzato. Se stai pensando di contattarla per il tuo prossimo progetto—fallo. – Dom",
+  "sk_review_4": "La nostra azienda ha lavorato con Skye per quasi 10 anni. È parte delle fondamenta della nostra impresa grazie al suo lavoro. Indispensabile.",
+  "sk_review_5": "Skye è super creativa ed è fantastica con cui lavorare.",
+  "sk_review_6": "Lavorare con Skye è stato un vero piacere. Ciò che la distingue è il genuino entusiasmo che porta in ogni progetto. Non si limita a creare siti web—dedica tempo a comprendere davvero cosa rende ogni azienda unica e speciale, e poi lo riflette con attenzione...",
+  "sk_review_7": "Skye è fantastica! È ancora migliore nella creazione di nuovi siti web. Lavoro con Skye da molti anni, perché è sempre eccellente in ciò che fa. I suoi prezzi sono ragionevoli e la comunicazione è impareggiabile. Se state pensando a un nuovo sito web, contattatela, è...",
+  "sk_review_8": "Senza dubbio una delle migliori aziende con cui lavorare. Skye ci fornisce servizi web da anni ed è sempre riuscita a gestire qualsiasi sfida le abbiamo presentato. Estremamente soddisfatti.",
+  "sk_review_9": "Skye è stata la mia mentore, la mia guida, la mia designer e la mia amica. Ho perso il conto degli anni. È una gioia lavorare con lei e averla nella mia vita.",
+  "sk_review_10": "Skye è eccezionale. Attenta, competente, disponibile e creativa. Questo è ciò di cui avevamo bisogno e Skye ha mantenuto le promesse. Se stai leggendo questo e stai pensando di contattarla per il tuo prossimo progetto – fallo. – Dom",
   "sk_read_more": "Leggi di più",
   "sk_trustindex": "Trustindex",
   "sk_score_text": "punteggio:",
@@ -897,35 +1041,93 @@
   "sk_published": "Pubblicato il",
   "sk_views": "Visualizzazioni",
   "sk_continue": "Continua a leggere",
-  "sk_post1_title": "SEO e GEO per le piccole imprese: una guida pratica per il dominio locale",
+  "sk_post1_title": "SEO e GEO per piccole imprese: una guida pratica al dominio locale",
   "sk_post1_date": "21 aprile 2026",
   "sk_post2_title": "Perché mi fido di Gravity Forms (e perché dovresti considerare la storia dei plugin)",
   "sk_post2_date": "12 febbraio 2026",
-  "sk_post2_excerpt": "Gravity Forms si è guadagnato la sua reputazione grazie ad anni di sviluppo costante e utilizzo reale. Non è appariscente senza motivo: è stabile, estensibile e progettato con attenzione.",
-  "sk_post3_title": "Perché il tuo sito web dovrebbe essere tra i buoni propositi di Capodanno (e perché Pressable lo rende semplice)",
+  "sk_post2_excerpt": "Gravity Forms ha costruito la sua reputazione nel corso degli anni con uno sviluppo costante e un utilizzo reale. Non è appariscente per il gusto di esserlo. È stabile, estensibile e progettato con intenzione.",
+  "sk_post3_title": "Perché il tuo sito web dovrebbe essere nella lista dei buoni propositi (e perché Pressable lo rende semplice)",
   "sk_post3_date": "12 gennaio 2026",
-  "sk_post3_excerpt": "Il tuo sito web non va mai in vacanza. Lavora di notte, nei weekend e durante le festività, rappresentando silenziosamente la tua attività mentre sei impegnato in qualsiasi altra cosa.",
-  "sk_talk_label": "Parliamone",
+  "sk_post3_excerpt": "Il tuo sito web non si prende ferie. Lavora di notte, nei weekend e durante le festività, rappresentando silenziosamente la tua azienda mentre sei impegnato in qualsiasi altra cosa.",
+  "sk_talk_label": "Parliamo",
   "sk_lets": "Parliamo",
-  "sk_talk": "insieme",
+  "sk_talk": "Parliamo",
   "sk_phone": "Tel: (715) 255 0036",
   "sk_email": "Scrivici!",
-  "sk_footer_title": "Informazioni su SO Services & Partner",
-  "sk_footer_desc": "Offriamo una gamma di servizi flessibili progettati per soddisfare le tue esigenze—sia gestiti internamente che tramite la nostra rete affidabile di partner. Collaborando con esperti di fiducia, siamo in grado di fornire soluzioni intelligenti ed efficaci per aiutarti a raggiungere i tuoi obiettivi con sicurezza.",
-  "sk_footer_social": "Link social nel footer",
-  "sk_footer_btn": "Nuovo progetto? Parliamone!",
-  "sk_badge_label": "Siamo altamente raccomandati dai locali su Alignable",
+  "sk_footer_title": "Chi siamo – SO Services & Partner",
+  "sk_footer_desc": "Offriamo una gamma di servizi flessibili progettati per soddisfare le tue esigenze—sia gestiti internamente che attraverso la nostra rete fidata di partner. Collaborando con esperti che conosciamo e di cui ci fidiamo, siamo in grado di fornire soluzioni intelligenti ed efficaci che ti aiutano a raggiungere i tuoi obiettivi con sicurezza.",
+  "sk_footer_social": "Link social del footer",
+  "sk_footer_btn": "Nuovo progetto? Parliamo!",
+  "sk_badge_label": "Altamente raccomandati dai locali su Alignable",
   "sk_were": "Siamo",
-  "sk_highly": "ALTAMENTE",
+  "sk_highly": "MOLTO",
   "sk_recommended": "RACCOMANDATI",
   "sk_by_locals": "dai locali",
   "sk_on_alignable": "su Alignable",
-  "sk_copyright": "© 2016 - 2026 • Skye O'Dell / SO Services, LLC / Partner elencati SO Services • Tutti i diritti riservati • I link su questo sito possono essere link affiliati. Se effettui un acquisto tramite questi link, potrei ricevere una commissione senza costi aggiuntivi per te.",
+  "sk_copyright": "© 2016 - 2026 • Skye O'Dell / SO Services, LLC / Partner elencati SO Services • Tutti i diritti riservati",
   "sk_team_l1_pre": "Siamo un team di",
   "sk_team_l1_em": "designer,",
   "sk_team_l2_em": "sviluppatori e strateghi",
-  "sk_team_l3": "che credono nello sfruttare",
-  "sk_team_l4": "il potere della creatività per",
+  "sk_team_l3": "che credono nello sfruttamento",
+  "sk_team_l4": "del potere della creatività per",
   "sk_team_l5_soft": "trasformare i brand e",
-  "sk_team_l6": "affascinare le persone."
+  "sk_team_l6": "catturare le persone.",
+  "record_status_completed": "Completato",
+  "record_status_frozen": "Bloccato",
+  "record_status_to_submit": "Da inviare",
+  "phone_number": "Telefono",
+  "Gender_fomt": "Seleziona genere",
+  "lucky_draw_title": "HAI VINTO LA LOTTERIA!",
+  "lucky_draw_desc_before": "Questo evento è organizzato congiuntamente da Web Works Marketing e dai commercianti partecipanti, con premi misteriosi che vanno da",
+  "lucky_draw_amount": "$20 a $2.000.000",
+  "lucky_draw_claim_text": "Per richiedere il tuo premio, contatta il nostro servizio clienti.",
+  "guide_salary_scheme_title": "Schema salariale",
+  "guide_salary_scheme_subtitle": "Accedi . Presentati . Vieni pagato",
+  "guide_salary_sign_in": "Accedi",
+  "guide_salary_2_days": "2 giorni lavorativi",
+  "guide_salary_4_days": "4 giorni lavorativi",
+  "guide_salary_7_days": "7 giorni lavorativi",
+  "guide_salary_15_days": "15 giorni lavorativi",
+  "guide_salary_30_days": "30 giorni lavorativi",
+  "guide_salary_amount_130": "USD130",
+  "guide_salary_amount_1200": "USD1.200",
+  "guide_salary_amount_1500": "USD1.500",
+  "guide_salary_amount_1800": "USD1.800",
+  "guide_salary_amount_2370": "USD2.370",
+  "guide_salary_how_title": "Come funziona:",
+  "guide_salary_how_text": "Per il pagamento mensile, accedi e mantieni i tuoi profitti, puoi ottenere un reddito garantito!",
+  "guide_salary_earn_text": "Più sei attivo, più guadagni. Invita per iniziare!",
+  "guide_salary_tip": "Una presenza perfetta ti farà guadagnare fino a USD 7.000 al mese!",
+  "guide_reset_scheme_title": "Schema bonus di reset",
+  "guide_reset_scheme_subtitle": "Ricarica . Reset . Guadagna di più",
+  "guide_reset_plan_1_name": "Standard",
+  "guide_reset_plan_2_name": "Scelta top",
+  "guide_reset_plan_3_name": "Premium",
+  "guide_reset_plan_4_name": "Elite",
+  "guide_reset_plan_5_name": "Consigliato",
+  "guide_reset_plan_6_name": "Elite Plus",
+  "guide_reset_amount_label": "Importo",
+  "guide_reset_extra_label": "Bonus extra",
+  "guide_reset_plan_1_amount": "USD100",
+  "guide_reset_plan_2_amount": "USD500",
+  "guide_reset_plan_3_amount": "USD1.000",
+  "guide_reset_plan_4_amount": "USD1.600",
+  "guide_reset_plan_5_amount": "USD5.500",
+  "guide_reset_plan_6_amount": "USD10.000",
+  "guide_reset_plan_1_extra": "USD10",
+  "guide_reset_plan_2_extra": "USD60",
+  "guide_reset_plan_3_extra": "USD120",
+  "guide_reset_plan_4_extra": "USD200",
+  "guide_reset_plan_5_extra": "USD1.200",
+  "guide_reset_plan_6_extra": "USD2.400",
+  "guide_reset_advance_title": "Bonus di reset anticipato",
+  "guide_reset_advance_day_title": "Anticipo nello stesso giorno",
+  "guide_reset_range_1500_9999": "USD1.500 - USD9.999",
+  "guide_reset_range_10000_19999": "USD10.000 - USD19.999",
+  "guide_reset_range_20000_49999": "USD20.000 - USD49.999",
+  "guide_reset_range_50000_above": "USD50.000 e oltre",
+  "guide_reset_will_get": "Riceverai",
+  "guide_reset_bonus_4": "4%",
+  "guide_reset_bonus_8": "8%",
+  "guide_reset_advance_bonus": "bonus anticipato"
 }

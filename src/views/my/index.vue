@@ -339,12 +339,12 @@ const menuItems = computed(() => [
         icon: myIcons.card,
         action: () => router.push({ path: "/cardList", query: { type: 1 } }),
     },
-    {
-        title: t("contact_customer_service"),
-        desc: t("get_help_resolve_issues"),
-        icon: myIcons.service,
-        action: () => toPage("/customer"),
-    },
+    // {
+    //     title: t("contact_customer_service"),
+    //     desc: t("get_help_resolve_issues"),
+    //     icon: myIcons.service,
+    //     action: () => toPage("/customer"),
+    // },
 ]);
 
 function toPage(path) {
@@ -650,7 +650,7 @@ onDeactivated(() => {
 
 .logout-sheet__confirm {
     margin-top: 26px;
-    background:var(--theme-primary);
+    background: var(--theme-primary);
     color: #ffffff;
 }
 
@@ -663,7 +663,7 @@ onDeactivated(() => {
 
 .logout-sheet__cancel {
     margin-top: 18px;
-    color: #D37703;
+    color: #d37703;
     border: 1px solid rgba(211, 119, 3, 1);
     border-radius: 14px;
     background: rgba(211, 119, 3, 0.12);

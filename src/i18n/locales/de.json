@@ -232,7 +232,7 @@
   "bank_account": "Bankkonto",
   "account_type": "Kontotyp",
   "bank_name": "Bankname",
-  "bank_card_management": "Bankkartenverwaltung",
+  "bank_card_management": "Wallet-Verwaltung",
   "please_enter_bank_name": "Bitte geben Sie den Banknamen ein",
   "please_enter_bank_account": "Bitte geben Sie die Kontonummer ein",
   "please_enter_name": "Bitte geben Sie den Namen ein",
@@ -448,7 +448,7 @@
   "message_center": "Nachrichtenzentrum",
   "system_notifications_announcements": "Systembenachrichtigungen & Ankündigungen",
   "link_your_bank_card": "Zahlungsmethode verknüpfen",
-  "bind_bank_card_for_withdrawals": "Bankkarte für Auszahlungen verknüpfen",
+  "bind_bank_card_for_withdrawals": "Wallet-Adresse für Auszahlungen verknüpfen",
   "get_help_resolve_issues": "Hilfe erhalten & Probleme lösen",
   "confirm_log_out": "Abmeldung bestätigen",
   "logout_confirm_desc_1": "Möchten Sie sich wirklich von Ihrem Konto abmelden?",
@@ -560,7 +560,7 @@
   "vip_feature_priority_queue": "Priorisierter Zugriff auf Aufgabenwarteschlangen",
   "vip_feature_all_vip2": "Alle Vorteile von VIP 2 enthalten",
   "vip_feature_high_value_tasks": "Zugang zu exklusiven, höherwertigen Aufgaben",
-  "vip_feature_fast_withdrawal_2_days": "Schnellere Auszahlung (innerhalb von 2 Tagen)",
+  "vip_feature_fast_withdrawal_2_days": "Schnellere Auszahlungsabwicklung",
   "vip_feature_all_vip3": "Alle Vorteile von VIP 3 enthalten",
   "vip_feature_account_manager": "Persönlicher Account-Manager",
   "vip_feature_one_day_withdrawal": "Express-Auszahlung innerhalb von 1 Tag",
@@ -568,7 +568,7 @@
   "vip_feature_all_vip4": "Alle Vorteile von VIP 4 enthalten",
   "vip_feature_highest_rebate": "Höchste Rückvergütung (2,5 % pro Aufgabe)",
   "vip_feature_same_day_withdrawal": "Auszahlung am selben Tag",
-  "vip_feature_top_support": "Kundensupport mit höchster Priorität rund um die Uhr (24/7)",
+  "vip_feature_top_support": "Dedizierter Kundensupport",
   "vip_feature_vip5_pools": "Exklusive legendäre Aufgabenpools für VIP 5",
   "daily_task_submission_quota": "Tägliches Aufgabenlimit: {count} Einheiten",
   "rebate_task": "Rückvergütung / Aufgabe",
@@ -613,117 +613,261 @@
   "licenses": "Lizenzen",
   "years_operating": "Betriebsjahre",
   "countries": "Länder",
-  "income_guide_sections": [
+    "income_guide_sections": [
     {
       "title": "1) Grundgehalt",
-      "image": "{basicSalaryImage}",
-      "content": "<p>Das Unternehmen verwendet ein kumulatives Anmeldeverfahren als Teil seiner Gehaltsstruktur, um Nutzer zur kontinuierlichen Erfüllung ihrer täglichen Aufgaben zu motivieren. Obwohl das Grundgehalt festgelegt ist, wird es <strong>nicht</strong> als einmalige Zahlung ausgezahlt. Stattdessen erfolgt die Auszahlung nach einer festgelegten Anzahl von Arbeitstagen – beispielsweise nach 2, 4 oder 7 Tagen – um die kontinuierliche Aufgabenerfüllung zu fördern. Sobald die erforderliche Anzahl an Arbeitstagen erreicht ist, wird das Grundgehalt entsprechend ausgezahlt.</p>"
+      "image": "",
+      "content": "<p>Das Unternehmen verwendet ein kumulatives Check-in-System als Teil seiner Gehaltsstruktur, um Nutzer zur kontinuierlichen Erledigung täglicher Aufgaben zu motivieren. Obwohl das Grundgehalt festgelegt ist, wird es <strong>nicht</strong> als Einmalzahlung ausgezahlt. Stattdessen erfolgt die Auszahlung nach einer festgelegten Anzahl von Arbeitstagen, wie z. B. 2, 4 oder 7 Tagen, um eine kontinuierliche Teilnahme zu fördern. Sobald die erforderliche Anzahl an Arbeitstagen erreicht ist, erfolgt die entsprechende Auszahlung.</p>",
+      "salaryScheme": {
+        "title": "Gehaltsmodell",
+        "subtitle": "Einchecken . Aktiv bleiben . Verdienen",
+        "rows": [
+          {
+            "name": "Einchecken",
+            "days": "2 Arbeitstage",
+            "amount": "USD130"
+          },
+          {
+            "name": "Einchecken",
+            "days": "4 Arbeitstage",
+            "amount": "USD1,200"
+          },
+          {
+            "name": "Einchecken",
+            "days": "7 Arbeitstage",
+            "amount": "USD1,500"
+          },
+          {
+            "name": "Einchecken",
+            "days": "15 Arbeitstage",
+            "amount": "USD1,800"
+          },
+          {
+            "name": "Einchecken",
+            "days": "30 Arbeitstage",
+            "amount": "USD2,370"
+          }
+        ],
+        "howTitle": "So funktioniert es:",
+        "howText": "Für die monatliche Auszahlung melden Sie sich regelmäßig an und halten Sie Ihre Gewinne stabil – so erhalten Sie ein garantiertes Einkommen!",
+        "earnText": "Je aktiver Sie sind, desto mehr verdienen Sie. Jetzt starten und einladen!",
+        "tip": "Perfekte Anwesenheit kann Ihnen bis zu USD 7.000 pro Monat einbringen."
+      }
     },
     {
       "title": "2) Reset-Bonus",
-      "image": "{resetBonusImage}",
-      "content": "<p>Der Reset-Bonus stellt eine der wichtigsten Einnahmequellen dar, insbesondere zu Beginn Ihrer Tätigkeit. Jeder Nutzer kann <strong>zwei Aufgabenzyklen pro Tag</strong> abschließen, und Händler bieten zusätzliche Reset-Boni an, um die kontinuierliche Durchführung der Aufgaben zu fördern.</p><p>Im Rahmen dieses Anreizsystems gilt:</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Sie erhalten einen <strong>zusätzlichen Bonus von 10 USD</strong>, wenn Sie Ihr Konto zurücksetzen und die erste Aufgabe mit <strong>100 USD</strong> beginnen.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Wenn Ihr <strong>täglicher Gesamt-Reset-Betrag 1.500 USD überschreitet</strong>, erhalten Sie einen <strong>zusätzlichen Bonus von 4 %</strong>, basierend auf dem kumulierten Reset-Betrag der beiden an diesem Tag abgeschlossenen Zyklen.</li></ol>"
+      "image": "",
+      "content": "<p>Der Reset-Bonus ist eine der wichtigsten Einkommensquellen, wenn Sie neu bei uns beginnen. Jeder Nutzer kann <strong>zwei Aufgaben-Sets pro Tag</strong> abschließen, und Händler bieten zusätzliche Reset-Boni an, um eine kontinuierliche Aufgabenerfüllung zu fördern.</p><p>Im Rahmen der Reset-Anreizstruktur:</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Sie erhalten jedes Mal einen <strong>zusätzlichen Bonus von 10 USD</strong>, wenn Sie Ihr Konto zurücksetzen, um die erste Aufgabe mit <strong>100 USD</strong> zu starten.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Wenn Ihr <strong>gesamter Reset-Betrag an einem Tag 1.500 USD übersteigt</strong>, erhalten Sie einen <strong>zusätzlichen Bonus von 4%</strong> basierend auf dem kumulierten Reset-Betrag der beiden an diesem Tag abgeschlossenen Sets.</li></ol>",
+      "resetBonusScheme": {
+        "title": "Bonusmodell",
+        "subtitle": "Einchecken . Aktiv bleiben . Verdienen",
+        "plans": [
+          {
+            "name": "Standard",
+            "amountLabel": "BETRAG",
+            "amount": "USD 100",
+            "extraLabel": "ZUSÄTZLICH",
+            "extra": "USD 10"
+          },
+          {
+            "name": "Top-Auswahl",
+            "amountLabel": "BETRAG",
+            "amount": "USD 500",
+            "extraLabel": "ZUSÄTZLICH",
+            "extra": "USD 60"
+          },
+          {
+            "name": "Premium",
+            "amountLabel": "BETRAG",
+            "amount": "USD 1000",
+            "extraLabel": "ZUSÄTZLICH",
+            "extra": "USD 120"
+          },
+          {
+            "name": "Elite",
+            "amountLabel": "BETRAG",
+            "amount": "USD 1600",
+            "extraLabel": "ZUSÄTZLICH",
+            "extra": "USD 200"
+          },
+          {
+            "name": "Empfohlen",
+            "amountLabel": "BETRAG",
+            "amount": "USD 5500",
+            "extraLabel": "ZUSÄTZLICH",
+            "extra": "USD 1200"
+          },
+          {
+            "name": "Elite Plus",
+            "amountLabel": "BETRAG",
+            "amount": "USD 10000",
+            "extraLabel": "ZUSÄTZLICH",
+            "extra": "USD 2400"
+          }
+        ],
+        "advanceTitle": "Kumulierte Vorauszahlungsprämien des Tages",
+        "advanceRows": [
+          {
+            "title": "TAGES-VORAUSZAHLUNGEN (USD)",
+            "range": "1.500–9.999",
+            "desc": "ERHALTEN (USD)",
+            "bonus": "4%",
+            "suffix": "Vorauszahlungsbonus"
+          },
+          {
+            "title": "TAGES-VORAUSZAHLUNGEN (USD)",
+            "range": "10.000–19.999",
+            "desc": "ERHALTEN (USD)",
+            "bonus": "8%",
+            "suffix": "Vorauszahlungsbonus"
+          },
+          {
+            "title": "TAGES-VORAUSZAHLUNGEN (USD)",
+            "range": "20.000–49.999",
+            "desc": "ERHALTEN (USD)",
+            "bonus": "4%",
+            "suffix": "Vorauszahlungsbonus"
+          },
+          {
+            "title": "TAGES-VORAUSZAHLUNGEN (USD)",
+            "range": "50.000 und mehr",
+            "desc": "ERHALTEN (USD)",
+            "bonus": "4%",
+            "suffix": "Vorauszahlungsbonus"
+          }
+        ]
+      }
     },
     {
       "title": "3) Tägliche Gewinne",
       "image": "",
-      "content": "<p>Die täglichen Gewinne stellen Ihre wichtigste Einnahmequelle dar. Das System weist Ihnen basierend auf Ihrem aktuellen Kontostand Produkte verschiedener Händler zur Optimierung zu. Für jedes optimierte Produkt erhalten Sie <strong>0,5 % bis 2,5 %</strong> des Produktpreises als Gewinn.</p><p>Die Gewinnhöhe hängt von Ihrer <strong>VIP-Stufe</strong> ab – je höher Ihre VIP-Stufe, desto höher die Gewinnrate. Zudem steigt mit höherem VIP-Level auch die Anzahl der Aufgaben pro Zyklus.</p><p>Einige Händler bieten außerdem <strong>Kombinationsprodukte</strong> an. Diese können vom System zufällig basierend auf Ihrem Kontostand zugewiesen werden. Abhängig von den optimierten Produkttypen können Sie <strong>zusätzliche 5 % bis 25 %</strong> Gewinn erzielen.</p>"
+      "content": "<p>Die täglichen Gewinne stellen Ihre wichtigste Einnahmequelle dar. Das System weist basierend auf Ihrem aktuellen Kontostand Produkte verschiedener Händler zur Optimierung zu. Für jedes optimierte Produkt erhalten Sie <strong>0,5 % bis 2,5 %</strong> des Produktpreises als Gewinn.</p><p>Die Gewinnhöhe wird durch Ihre <strong>VIP-Stufe</strong> bestimmt – je höher Ihre VIP-Stufe, desto höher Ihre Gewinnrate. Zudem erhöht sich die Anzahl der Aufgaben pro Set mit steigender VIP-Stufe.</p><p>Einige Händler bieten auch <strong>Kombinationsprodukte</strong> an. Das System kann diese basierend auf Ihrem Kontostand zufällig zuweisen. Je nach optimierten Produkttypen können Sie <strong>zusätzliche 5 % bis 25 %</strong> Gewinn erzielen.</p>",
+      "vipProfitRates": {
+        "rows": [
+          {
+            "level": "VIP 1",
+            "rate": "0,5 %",
+            "progress": "20 %"
+          },
+          {
+            "level": "VIP 2",
+            "rate": "1 %",
+            "progress": "40 %"
+          },
+          {
+            "level": "VIP 3",
+            "rate": "1,5 %",
+            "progress": "60 %"
+          },
+          {
+            "level": "VIP 4",
+            "rate": "2 %",
+            "progress": "80 %"
+          },
+          {
+            "level": "VIP 5",
+            "rate": "2,5 %",
+            "progress": "100 %"
+          }
+        ],
+        "button": "VIP upgraden, um mehr zu verdienen →"
+      }
     }
   ],
   "clause_sections": [
     {
-      "title": "Für die Optimierung und das Zurücksetzen Ihres Kontos müssen zunächst alle Bewertungen mit einem Mindestbetrag von 50 USD sowie ein Mindest-Reset-Betrag von 100 USD abgeschlossen werden.",
-      "content": "<p>1.1) Nutzer, die einen Aufgabenzyklus abgeschlossen haben, sollten den Kundendienst kontaktieren, um das Zurücksetzen für den nächsten Aufgabenzyklus zu beantragen.</p>"
+      "title": "Um Ihr Konto zu optimieren und zurückzusetzen, müssen Sie zunächst alle Bewertungen mit einem Mindestbetrag von 50 USD sowie einem Mindest-Reset-Betrag von 100 USD abschließen.",
+      "content": "<p>1.1) Benutzer, die ein Aufgaben-Set abgeschlossen haben, sollten den Kundenservice kontaktieren, um einen Reset für das nächste Aufgaben-Set zu beantragen</p>"
     },
     {
-      "title": "Auszahlungen und Systemanforderungen / Sicherheit der Nutzergelder",
-      "content": "<p>2.1) Jeder Nutzer muss alle Optimierungsaufgaben abschließen, um die Voraussetzungen für eine Auszahlung zu erfüllen.</p><p>2.2) Um mögliche Geldverluste zu vermeiden, werden alle Auszahlungen automatisch vom System verarbeitet und nicht manuell durchgeführt.</p><p>2.3) Während eines laufenden Aufgabenzyklus sind Auszahlungsanträge nicht zulässig, um den Ablauf für Händler nicht zu beeinträchtigen.</p><p>2.4) Die Gelder der Nutzer sind auf der Plattform geschützt. Für Verluste infolge technischer Fehler übernimmt die Plattform die Verantwortung.</p>"
+      "title": "Benutzerabhebungen und Systemanforderungen für Abhebungen / Sicherheit der Benutzergelder",
+      "content": "<p>2.1) Jeder Benutzer muss alle Optimierungsaufgaben abschließen, bevor er die Systemanforderungen für eine Auszahlung erfüllt</p><p>2.2) Um jeglichen Geldverlust zu vermeiden, werden alle Auszahlungen automatisch vom System und nicht manuell verarbeitet</p><p>2.3) Benutzer dürfen während einer laufenden Aufgabe keine Auszahlung beantragen, um den Betrieb der Händler nicht zu beeinträchtigen</p><p>2.4) Die Gelder der Benutzer sind auf der Plattform vollständig sicher, und die Plattform haftet für etwaige versehentliche Verluste</p>"
     },
     {
-      "title": "Bitte geben Sie Ihr Kontopasswort und Ihr Auszahlungspasswort nicht an Dritte weiter. Für daraus entstehende Verluste oder Schäden übernimmt die Plattform keine Verantwortung.",
-      "content": "<p>3.1) Allen Nutzern wird empfohlen, ihre Kontodaten vertraulich zu behandeln.</p><p>3.2) Die Plattform übernimmt keine Verantwortung für Verluste durch unbeabsichtigte Weitergabe von Kontodaten.</p><p>3.3) Aufgrund der finanziellen Relevanz des Kontos sollten Zugangsdaten nicht weitergegeben werden, um Probleme zu vermeiden.</p><p>3.4) Für das Auszahlungspasswort wird empfohlen, keine leicht erratbaren Daten wie Geburtsdatum, Ausweisnummer oder Telefonnummer zu verwenden. Wählen Sie ein sicheres Passwort zum Schutz Ihrer Gelder.</p><p>3.5) Falls Sie Ihr Passwort vergessen, können Sie es über den Online-Support zurücksetzen und sollten es anschließend eigenständig ändern.</p>"
+      "title": "Bitte geben Sie Ihr Kontopasswort und Ihr Auszahlungspasswort nicht an andere weiter. Die Plattform übernimmt keine Verantwortung für daraus entstehende Verluste oder Schäden",
+      "content": "<p>3.1) Allen Benutzern wird empfohlen, ihre Konten sicher zu halten, um eine Offenlegung zu vermeiden</p><p>3.2) Die Plattform übernimmt keine Verantwortung für eine unbeabsichtigte Offenlegung von Kontodaten</p><p>3.3) Aufgrund der finanziellen Bedeutung der Konten ist es wichtig, diese nicht weiterzugeben, um unnötige Probleme zu vermeiden</p><p>3.4) Es wird empfohlen, kein Geburtsdatum, keine Ausweisnummer oder Telefonnummer als Auszahlungspasswort zu verwenden. Wählen Sie stattdessen ein sicheres Passwort zum Schutz Ihrer Gelder</p><p>3.5) Wenn Sie Ihr Passwort vergessen haben, können Sie es über den Online-Service zurücksetzen und sollten es anschließend selbst ändern</p>"
     },
     {
-      "title": "Alle Produkte innerhalb eines Aufgabenzyklus werden zufällig vom System zugewiesen und können nicht geändert, storniert, kontrolliert oder übersprungen werden.",
-      "content": "<p>4.1) Aufgrund der großen Anzahl an Nutzern ist eine manuelle Zuweisung von Kombinationsprodukten nicht möglich. Daher werden alle Produktdaten zufällig durch das System verteilt.</p><p>4.2) Kombinationsprodukte werden ebenfalls zufällig generiert und können von keinem Nutzer oder Mitarbeiter geändert, storniert oder übersprungen werden.</p>"
+      "title": "Alle Produkte innerhalb einer Aufgabe werden vom System zufällig zugewiesen und können in keiner Weise geändert, storniert, gesteuert oder übersprungen werden",
+      "content": "<p>4.1) Aufgrund der großen Anzahl von Benutzern auf der Plattform ist eine manuelle Zuweisung von Kombinationsprodukten nicht möglich, daher werden alle Aufgabendaten zufällig vom System verteilt</p><p>4.2) Kombinationsprodukte werden zufällig vom System vergeben und können von keinem Benutzer oder Mitarbeiter geändert/storniert/übersprungen werden</p>"
     },
     {
-      "title": "Im Falle eines Missbrauchs des Kontos können rechtliche Schritte eingeleitet werden.",
+      "title": "Im Falle eines Missbrauchs des Kontos werden rechtliche Schritte eingeleitet",
       "content": ""
     },
     {
-      "title": "Produktdaten stammen von unterschiedlichen Händlern. Einzahlungen dürfen nicht länger als 10 Minuten unbeaufsichtigt bleiben, und jede Einzahlung muss über den Online-Support bestätigt werden, um die Händlerdetails zu überprüfen.",
+      "title": "Jede Produktdateneinzahlung stammt von unterschiedlichen Händlern. Einzahlungen dürfen nicht länger als 10 Minuten verzögert werden, und jede Einzahlung muss über den Online-Service bestätigt werden, um die Einzahlungsdetails des Händlers zu verifizieren.",
       "content": ""
     },
     {
-      "title": "Die Plattform übernimmt keine Verantwortung für Einzahlungen an falsche Kontodaten.",
+      "title": "Die Plattform übernimmt keine Verantwortung für Einzahlungen, die an falsche Daten gesendet wurden",
       "content": ""
     },
     {
-      "title": "Jede Produktoptimierung muss innerhalb von 24 Stunden abgeschlossen werden. Wird dies nicht eingehalten und führt zu Beschwerden von Händlern, trägt der Nutzer die Verantwortung für Vertragsverletzungen.",
+      "title": "Jede Optimierung von Produktdaten muss innerhalb von 24 Stunden abgeschlossen werden. Wird sie nicht rechtzeitig abgeschlossen und führt zu Beschwerden von Händlern, trägt der Benutzer die Verantwortung für Vertragsverletzungen",
       "content": ""
     },
     {
-      "title": "Wenn ein Konto von Händlern beanstandet wird, reduziert das System den Bonitätsscore. Liegt dieser unter 98, ist keine Auszahlung möglich. Der Score wird nach jedem abgeschlossenen Aufgabenzyklus automatisch neu berechnet.",
+      "title": "Wenn ein Konto von einem Händler beanstandet wird, reduziert das System den Kreditwert. Liegt dieser unter 98, ist keine Auszahlung möglich. Der Kreditwert wird nach Abschluss jedes Aufgaben-Sets automatisch neu berechnet",
       "content": ""
     }
   ],
   "faq_sections": [
     {
-      "title": "Start von Produktoptimierungsaufgaben",
-      "content": "<p>1.1) Für die ersten 40 Aufgaben pro Zyklus ist ein Mindestkontostand von 50 USD erforderlich.</p><p>1.2) Für den Start neuer Aufgaben ist eine Mindestaufladung von 100 USD erforderlich.</p><p>1.3) Nutzer müssen die Aufgaben abschließen, bevor sie eine Auszahlung beantragen können.</p>"
+      "title": "Start der Produktoptimierungsaufgaben",
+      "content": "<p>1.1) Mindestkontostand von 50 USD für die ersten 40 Aufgaben pro Set.</p><p>1.2) Eine Mindestaufladung von 100 USD ist erforderlich, um neue Aufgaben zu starten.</p><p>1.3) Benutzer müssen die Aufgaben abschließen, bevor sie eine Auszahlung beantragen können.</p>"
     },
     {
       "title": "Auszahlung",
-      "content": "<p>2.1) Nutzer müssen die Aufgaben abschließen, bevor sie eine Auszahlung beantragen können.</p><p>2.2) Wenn Sie eine laufende Optimierungsaufgabe abbrechen, ist keine Auszahlung oder Rückerstattung möglich.</p><p>2.3) Auszahlungen können nur verarbeitet werden, wenn ein entsprechender Antrag gestellt wurde.</p><p>2.4) Der maximale Auszahlungsbetrag beträgt für VIP1-Nutzer 10.000 USD und für VIP2-Nutzer 30.000 USD. Für VIP3 und höher besteht kein Limit.</p><p>2.5) Um unseren Nutzern einen effizienteren Service zu bieten, müssen Konten mit einem Guthaben über 60.000 USD den speziellen Auszahlungskanal für große Beträge nutzen. Dieser ermöglicht eine schnellere und sichere einmalige Auszahlung des gesamten Guthabens.</p><p>2.6) Bei unzureichendem Bonitätsscore können nicht alle Funktionen der Plattform genutzt werden.</p>"
+      "content": "<p>2.1) Benutzer müssen die Aufgaben abschließen, bevor sie eine Auszahlung beantragen können.</p><p>2.2) Eine Auszahlung oder Rückerstattung ist nicht möglich, wenn Sie sich entscheiden, eine laufende Optimierungsaufgabe abzubrechen oder mittendrin auszusteigen.</p><p>2.3) Auszahlungen können nicht bearbeitet werden, wenn keine Auszahlungsanfrage des Benutzers vorliegt.</p><p>2.4) Der maximale Auszahlungsbetrag für VIP1 beträgt 10.000 USD, für VIP2 30.000 USD. Für VIP3 und höher gibt es kein Auszahlungslimit.</p><p>2.5) Um unseren geschätzten Benutzern einen professionelleren und effizienteren Service zu bieten, müssen Konten mit einem Guthaben von über 60.000 USD den Hochvolumen-Auszahlungskanal der Plattform nutzen. Dieser ermöglicht eine schnellere, sicherere und einmalige vollständige Auszahlung aller Gelder.</p><p>2.6) Wenn der Kreditwert des Benutzerkontos unzureichend ist, können nicht alle Funktionen der Plattform normal genutzt werden.</p>"
     },
     {
-      "title": "Guthaben",
-      "content": "<p>3.1) Alle Gelder werden sicher im Benutzerkonto verwahrt und können nach Abschluss aller Daten vollständig angefordert werden.</p><p>3.2) Zur Vermeidung von Verlusten werden alle Prozesse automatisch vom System durchgeführt.</p><p>3.3) Die Plattform übernimmt die Verantwortung für Verluste, die durch technische Fehler entstehen.</p><p>3.4) Überschreiten die Gelder des Nutzers die steuerpflichtige Grenze, ist der Nutzer verpflichtet, entsprechende Steuern zu zahlen.</p>"
+      "title": "Gelder",
+      "content": "<p>3.1) Alle Gelder werden sicher auf dem Benutzerkonto verwahrt und können vollständig ausgezahlt werden, sobald alle Daten abgeschlossen sind</p><p>3.2) Um Verluste zu vermeiden, werden alle Daten automatisch vom System und nicht manuell verarbeitet</p><p>3.3) Die Plattform übernimmt die volle Verantwortung für etwaige versehentliche Verluste von Geldern.</p><p>3.4) Wenn die Gelder des Benutzers den steuerpflichtigen Betrag überschreiten, ist der Benutzer verpflichtet, Steuern zu zahlen</p>"
     },
     {
       "title": "Kontosicherheit",
-      "content": "<p>4.1) Bitte geben Sie Ihr Login- und Auszahlungspasswort nicht weiter, da die Plattform keine Haftung für daraus entstehende Verluste übernimmt.</p><p>4.2) Es wird nicht empfohlen, leicht zu erratende Daten wie Geburtsdatum, Ausweisnummer oder Telefonnummer als Passwort zu verwenden.</p><p>4.3) Wenn Sie Ihr Passwort vergessen haben, kontaktieren Sie bitte den Online-Support, um es zurückzusetzen.</p>"
+      "content": "<p>4.1) Bitte geben Sie Ihr Login- und Auszahlungspasswort nicht an andere weiter, da die Plattform für daraus entstehende Verluste nicht haftet.</p><p>4.2) Es wird nicht empfohlen, Geburtsdatum, Ausweisnummer oder Telefonnummer als Login- oder Auszahlungspasswort zu verwenden.</p><p>4.3) Wenn Sie Ihr Login- oder Auszahlungspasswort vergessen haben, wenden Sie sich bitte an unseren Online-Service, um es zurückzusetzen.</p>"
     },
     {
       "title": "Allgemeine Produktdaten",
-      "content": "<p>5.1) Die Plattformerträge werden in normale Produktdaten-Erträge und 10-fache Kombinationsprodukt-Erträge unterteilt.</p><p>5.2) Standardnutzer erhalten 0,5 % Gewinn pro Optimierungsaufgabe.</p><p>5.3) VIP2-Nutzer erhalten 1 % Gewinn pro Optimierungsaufgabe.</p><p>5.4) VIP3-Nutzer erhalten 1,5 % Gewinn pro Optimierungsaufgabe.</p><p>5.5) VIP4-Nutzer erhalten 2 % Gewinn pro Optimierungsaufgabe.</p><p>5.6) VIP5-Nutzer erhalten 2,5 % Gewinn pro Optimierungsaufgabe.</p><p>5.7) Gelder und Gewinne werden nach Abschluss jeder Aufgabe dem Benutzerkonto gutgeschrieben.</p><p>5.8) Das System weist Aufgaben basierend auf dem Kontostand des Nutzers zufällig zu.</p><p>5.9) Zugewiesene Aufgaben können weder storniert noch übersprungen werden.</p>"
+      "content": "<p>5.1) Die Plattformgewinne werden in normale Produktdatengewinne und 10-fache Kombinationsproduktgewinne unterteilt</p><p>5.2) Normale Benutzer erhalten 0,5 % Gewinn pro Optimierungsaufgabe</p><p>5.3) VIP 2 Benutzer erhalten 1 % Gewinn pro Optimierungsaufgabe</p><p>5.4) VIP 3 Benutzer erhalten 1,5 % Gewinn pro Optimierungsaufgabe</p><p>5.5) VIP 4 Benutzer erhalten 2 % Gewinn pro Optimierungsaufgabe</p><p>5.6) VIP 5 Benutzer erhalten 2,5 % Gewinn pro Optimierungsaufgabe</p><p>5.7) Gelder und Gewinne werden nach jeder abgeschlossenen Optimierungsaufgabe auf das Benutzerkonto zurückerstattet</p><p>5.8) Das System weist Aufgaben basierend auf dem Gesamtguthaben des Benutzerkontos zufällig zu</p><p>5.9) Sobald eine Aufgabe zur Produktoptimierung zugewiesen wurde, kann sie nicht storniert oder übersprungen werden</p>"
     },
     {
-      "title": "Kombinationsprodukte",
-      "content": "<p>6.1) Kombinationsprodukte bestehen aus 1 bis 3 Dateneinheiten. Das System weist diese zufällig zu, wobei Nutzer häufiger 1 oder 2 Produkte erhalten.</p><p>6.2) Für Kombinationsprodukte erhalten Nutzer das 10-fache des normalen Gewinns.</p><p>6.3) Nach Zuweisung eines Kombinationsprodukts werden alle Mittel pausiert und nach Abschluss aller enthaltenen Produktdaten zurückgebucht.</p><p>6.4) Die Zuweisung erfolgt zufällig basierend auf dem Kontostand.</p><p>6.5) Zugewiesene Kombinationsprodukte können nicht storniert oder übersprungen werden.</p>"
+      "title": "Kombinationsproduktdaten",
+      "content": "<p>6.1) Kombinationsprodukte bestehen aus 1 bis 3 Datensätzen. Benutzer erhalten nicht zwingend 3 Produkte; das System weist zufällig zu, wobei die Wahrscheinlichkeit höher ist, 1 oder 2 Produkte zu erhalten</p><p>6.2) Benutzer erhalten für Kombinationsprodukte das 10-fache des Gewinns im Vergleich zu normalen Produktdaten</p><p>6.3) Nach Erhalt eines Kombinationsprodukts werden alle Gelder eingefroren und erst nach Abschluss aller enthaltenen Produktdaten wieder dem Konto gutgeschrieben</p><p>6.4) Das System weist Kombinationsprodukte basierend auf dem Gesamtguthaben des Benutzerkontos zufällig zu</p><p>6.5) Einmal zugewiesene Kombinationsprodukte können nicht storniert oder übersprungen werden</p>"
     },
     {
       "title": "Einzahlung",
-      "content": "<p>7.1) Die Höhe der Einzahlung wird vom Nutzer selbst festgelegt. Es wird empfohlen, Einzahlungen entsprechend der eigenen finanziellen Möglichkeiten vorzunehmen.</p><p>7.2) Wenn bei Kombinationsprodukten eine zusätzliche Einzahlung erforderlich ist, sollte diese entsprechend dem angezeigten Fehlbetrag erfolgen.</p><p>7.3) Vor jeder Einzahlung muss der Online-Support kontaktiert werden, um die Zahlungsdetails zu bestätigen.</p><p>7.4) Die Plattform übernimmt keine Verantwortung für Einzahlungen an falsche Kontodaten.</p>"
+      "content": "<p>7.1) Der Einzahlungsbetrag wird vom Benutzer selbst gewählt. Wir empfehlen, Einzahlungen entsprechend der eigenen finanziellen Möglichkeiten oder nach ausreichender Vertrautheit mit der Plattform vorzunehmen.</p><p>7.2) Wenn bei Kombinationsprodukten eine Einzahlung erforderlich ist, wird empfohlen, den fehlenden Betrag gemäß der Kontoanzeige aufzustocken</p><p>7.3) Vor jeder Einzahlung müssen Sie den Online-Service kontaktieren und die Einzahlungsdetails bestätigen</p><p>7.4) Die Plattform übernimmt keine Verantwortung für Einzahlungen an falsche Daten</p>"
     }
   ],
   "event_sections": [
     {
       "tag": "AKTIV",
       "icon": "⚡",
-      "title": "3. Jubiläum – Dankeschön-Aktion",
-      "summary": "Skye Odell Werbeaktion – Reset-Bonusprämien",
-      "reward": "USD 10 – USD 2.400 Zusatzprämien",
+      "title": "3. Jubiläums-Dankeschön-Aktion",
+      "summary": "Skye Odell Werbeaktion – Reset-Bonus-Belohnungen",
+      "reward": "USD 10 - USD 2.400 Zusatzbelohnungen",
       "progress": "",
       "time": "Zeitlich begrenzte Jubiläumsaktion",
-      "joined": "Reset-Vorauszahlungsprämien",
+      "joined": "Reset-Vorauszahlungsboni",
       "buttonText": "Jetzt teilnehmen",
       "disabled": false,
-      "content": "<div class=\"event-section-block\"><h4>Reset-Vorauszahlungsprämien</h4><div class=\"event-reward-grid\"><div><strong>Standard</strong><span>Betrag USD 100</span><b>+ USD 10 Bonus</b></div><div><strong>Beliebt</strong><span>Betrag USD 500</span><b>+ USD 60 Bonus</b></div><div><strong>Premium</strong><span>Betrag USD 1.000</span><b>+ USD 120 Bonus</b></div><div><strong>Elite</strong><span>Betrag USD 1.600</span><b>+ USD 200 Bonus</b></div><div><strong>Empfohlen</strong><span>Betrag USD 5.500</span><b>+ USD 1.200 Bonus</b></div><div><strong>Elite Plus</strong><span>Betrag USD 10.000</span><b>+ USD 2.400 Bonus</b></div></div></div>"
+      "content": "<div class=\"event-section-block\"><h4>Reset-Vorauszahlungsboni</h4><div class=\"event-reward-grid\"><div><strong>Standard</strong><span>Betrag USD 100</span><b>Erhalte zusätzlich USD 10</b></div><div><strong>Top-Auswahl</strong><span>Betrag USD 500</span><b>Erhalte zusätzlich USD 60</b></div><div><strong>Premium</strong><span>Betrag USD 1.000</span><b>Erhalte zusätzlich USD 120</b></div><div><strong>Elite</strong><span>Betrag USD 1.600</span><b>Erhalte zusätzlich USD 200</b></div><div><strong>Empfohlen</strong><span>Betrag USD 5.500</span><b>Erhalte zusätzlich USD 1.200</b></div><div><strong>Elite Plus</strong><span>Betrag USD 10.000</span><b>Erhalte zusätzlich USD 2.400</b></div></div></div>"
     },
     {
       "tag": "HEISS",
       "icon": "🎁",
-      "title": "Tägliche kumulierte Vorauszahlungsprämien",
-      "summary": "Erhalten Sie zusätzliche Bonusprämien basierend auf Ihren täglichen Gesamt-Vorauszahlungen.",
-      "reward": "4 % – 20 % Vorauszahlungsbonus",
+      "title": "Kumulierte Tages-Vorauszahlungsboni",
+      "summary": "Erhalten Sie zusätzliche Boni basierend auf Ihren täglichen Vorauszahlungen.",
+      "reward": "4% - 20% Vorauszahlungsbonus",
       "progress": "",
-      "time": "Täglicher kumulierter Bonus",
-      "joined": "Bonusstufen",
+      "time": "Täglicher kumulativer Bonus",
+      "joined": "Bonus-Stufen",
       "buttonText": "Jetzt teilnehmen",
       "disabled": false,
-      "content": "<div class=\"event-section-block\"><h4>Tägliche kumulierte Vorauszahlungsprämien</h4><div class=\"event-bonus-grid\"><div><strong>1.500 – 9.999</strong><span>Erhalten Sie</span><b>4 % Bonus</b></div><div><strong>10.000 – 19.999</strong><span>Erhalten Sie</span><b>8 % Bonus</b></div><div><strong>20.000 – 49.999</strong><span>Erhalten Sie</span><b>12 % Bonus</b></div><div><strong>50.000 – darüber</strong><span>Erhalten Sie</span><b>20 % Bonus</b></div></div></div>"
+      "content": "<div class=\"event-section-block\"><h4>Kumulierte Tages-Vorauszahlungsboni</h4><div class=\"event-bonus-grid\"><div><strong>1.500 - 9.999</strong><span>Erhalten Sie</span><b>4% Vorauszahlungsbonus</b></div><div><strong>10.000 - 19.999</strong><span>Erhalten Sie</span><b>8% Vorauszahlungsbonus</b></div><div><strong>20.000 - 49.999</strong><span>Erhalten Sie</span><b>12% Vorauszahlungsbonus</b></div><div><strong>50.000 und mehr</strong><span>Erhalten Sie</span><b>20% Vorauszahlungsbonus</b></div></div></div>"
     }
   ],
   "event_footer_line1": "Skye Odell behält sich das Recht der endgültigen Auslegung vor.",
@@ -731,42 +875,42 @@
   "tc_page_title": "Allgemeine Geschäftsbedingungen",
   "tc_hero_title": "Benutzerregistrierungsvereinbarung",
   "tc_hero_intro": [
-    "Willkommen bei <strong>Main Street ROI Agency</strong> und deren Dienstleistungen.",
+    "Willkommen bei <strong>Main Street ROI Agency</strong> und ihren Dienstleistungen.",
     "Bitte lesen Sie diese <strong>Benutzerregistrierungsvereinbarung</strong> („Vereinbarung“) sorgfältig durch, bevor Sie die von Main Street ROI Agency bereitgestellte Software, Website oder damit verbundene Dienste (zusammen die „Dienste“) nutzen. Diese Vereinbarung regelt Ihren Zugriff auf und die Nutzung der Dienste."
   ],
   "tc_hero_notice": [
-    "Durch den Zugriff auf oder die Nutzung der Dienste bestätigen Sie, dass Sie diese Vereinbarung sowie alle zugehörigen Bedingungen und Richtlinien gelesen, verstanden und akzeptiert haben und daran gebunden sind. Wenn Sie nicht zustimmen, dürfen Sie die Dienste nicht nutzen.",
+    "Durch den Zugriff auf oder die Nutzung der Dienste bestätigen Sie, dass Sie diese Vereinbarung sowie alle zugehörigen Bedingungen und Richtlinien gelesen, verstanden und akzeptiert haben. Wenn Sie nicht einverstanden sind, dürfen Sie die Dienste nicht nutzen.",
     "Sie müssen mindestens <strong>18 Jahre alt</strong> sein, um die Dienste nutzen zu dürfen."
   ],
   "tc_table_of_contents": "Inhaltsverzeichnis",
-  "tc_update_alert": "Main Street ROI Agency behält sich das Recht vor, diese Vereinbarung jederzeit zu ändern oder zu aktualisieren. Es gilt die jeweils aktuellste auf der Website veröffentlichte Version.",
+  "tc_update_alert": "Main Street ROI Agency behält sich das Recht vor, diese Vereinbarung jederzeit zu ändern oder zu aktualisieren. Maßgeblich ist die jeweils auf der Website veröffentlichte neueste Version.",
   "tc_terms_sections": [
     {
       "title": "Schutz personenbezogener Daten",
       "items": [
         {
           "no": "1.1",
-          "content": "<p>Der Schutz der personenbezogenen Daten der Nutzer ist ein grundlegendes Prinzip von Main Street ROI Agency. Wir verwenden professionelle Verschlüsselungstechnologien sowie sichere Speicher- und Übertragungsmethoden, um die Daten der Nutzer zu schützen.</p>"
+          "content": "<p>Der Schutz der persönlichen Daten der Nutzer ist ein grundlegendes Prinzip von Main Street ROI Agency. Wir verwenden professionelle Verschlüsselungstechnologien, sichere Speicherung und sichere Übertragungsmethoden, um Benutzerdaten zu schützen.</p>"
         },
         {
           "no": "1.2",
-          "content": "<p>Um bestimmte Dienste nutzen zu können, wie z. B. die Registrierung eines Kontos, sind Nutzer verpflichtet, erforderliche und korrekte Angaben zu machen, einschließlich, aber nicht beschränkt auf eine Mobiltelefonnummer, und dieser Vereinbarung zuzustimmen. Unvollständige oder ungenaue Angaben können zu Einschränkungen bei der Nutzung der Dienste führen.</p>"
+          "content": "<p>Um auf bestimmte Dienste zuzugreifen, wie z. B. die Kontoregistrierung, müssen Nutzer notwendige und korrekte Informationen angeben, einschließlich, aber nicht beschränkt auf eine Mobiltelefonnummer, und dieser Vereinbarung zustimmen. Unvollständige oder ungenaue Angaben können zu eingeschränktem Zugriff auf die Dienste führen.</p>"
         },
         {
           "no": "1.3",
-          "content": "<p>Nutzer können nach der Registrierung bestimmte personenbezogene Daten aktualisieren. Aus Sicherheitsgründen, einschließlich Kontowiederherstellung und Betrugsprävention, können jedoch einige Angaben nach der Verifizierung nicht mehr geändert werden.</p>"
+          "content": "<p>Nutzer können bestimmte persönliche Daten nach der Registrierung aktualisieren. Aus Sicherheitsgründen, einschließlich Kontowiederherstellung und Betrugsprävention, können einige Informationen nach der Verifizierung jedoch nicht mehr geändert werden.</p>"
         },
         {
           "no": "1.4",
-          "content": "<p>Main Street ROI Agency unterhält strenge interne Kontroll- und Verwaltungssysteme, um unbefugten Zugriff, Nutzung oder Offenlegung personenbezogener Daten zu verhindern. Jede unbefugte Nutzung wird gemäß den geltenden Gesetzen behandelt. Nach der Registrierung kann die primäre mit dem Konto verknüpfte Mobiltelefonnummer ohne Verifizierung nicht geändert werden.</p>"
+          "content": "<p>Main Street ROI Agency unterhält strenge interne Kontroll- und Verwaltungssysteme, um unbefugten Zugriff, Nutzung oder Offenlegung personenbezogener Daten zu verhindern. Jede unbefugte Nutzung wird gemäß den geltenden Gesetzen behandelt. Nach der Registrierung kann die primäre Mobiltelefonnummer eines Kontos ohne Verifizierung nicht geändert werden.</p>"
         },
         {
           "no": "1.5",
-          "content": "<p>Main Street ROI Agency wird personenbezogene Daten der Nutzer ohne deren ausdrückliche Zustimmung nicht an Dritte weitergeben, verkaufen oder teilen, es sei denn, dies ist gesetzlich vorgeschrieben.</p>"
+          "content": "<p>Main Street ROI Agency wird personenbezogene Daten der Nutzer ohne ausdrückliche Zustimmung nicht an Dritte weitergeben, verkaufen oder teilen, es sei denn, dies ist gesetzlich vorgeschrieben.</p>"
         },
         {
           "no": "1.6",
-          "content": "<p>Personen unter 18 Jahren ist die Nutzung der Dienste nicht gestattet. Falls eine Nutzung erforderlich ist, muss im Voraus eine schriftliche Zustimmung eines gesetzlichen Vertreters vorgelegt werden.</p>"
+          "content": "<p>Nutzer unter 18 Jahren dürfen die Dienste nicht nutzen. Falls ein Zugriff erforderlich ist, muss im Voraus eine schriftliche Zustimmung eines gesetzlichen Vertreters eingeholt werden.</p>"
         }
       ]
     },
@@ -775,23 +919,23 @@
       "items": [
         {
           "no": "2.1",
-          "content": "<p>Nutzer müssen alle zugewiesenen täglichen Aufgaben vollständig abschließen, bevor sie eine Auszahlung beantragen können.</p>"
+          "content": "<p>Nutzer müssen alle zugewiesenen täglichen Aufgaben abschließen, bevor sie eine Auszahlung beantragen.</p>"
         },
         {
           "no": "2.2",
-          "content": "<p>Während eines laufenden Optimierungs- oder Aufgabenprozesses sind Auszahlungen nicht zulässig.</p>"
+          "content": "<p>Auszahlungen sind nicht zulässig, solange ein Optimierungs- oder Aufgabenprozess läuft.</p>"
         },
         {
           "no": "2.3",
-          "content": "<p>Nutzer dürfen zugewiesene Aufgaben nach der Annahme weder stornieren noch überspringen oder abbrechen.</p>"
+          "content": "<p>Nutzer dürfen zugewiesene Aufgaben nach Annahme nicht stornieren, überspringen oder abbrechen.</p>"
         },
         {
           "no": "2.4",
-          "content": "<p>Auszahlungen über <strong>30.000 USD</strong> unterliegen einer <strong>Bearbeitungsgebühr von 20 %</strong>, die dem Nutzer nach erfolgreichem Abschluss der Auszahlung zurückerstattet wird.</p>"
+          "content": "<p>Auszahlungen über <strong>30.000 USD</strong> unterliegen einer <strong>Bearbeitungsgebühr von 20%</strong>, die dem Nutzer nach erfolgreichem Abschluss der Auszahlung zurückerstattet wird.</p>"
         },
         {
           "no": "2.5",
-          "content": "<p>Verstöße gegen diese Bedingungen können zu einer Reduzierung des Bonitätsscores des Nutzers führen. Bestimmte Kontofunktionen können eingeschränkt werden, bis der Bonitätsscore wiederhergestellt ist.</p>"
+          "content": "<p>Verstöße gegen diese Bestimmungen können zu einer Verringerung des Kreditwerts des Nutzers führen. Bestimmte Kontofunktionen können eingeschränkt werden, bis der Kreditwert wiederhergestellt ist.</p>"
         }
       ]
     },
@@ -800,19 +944,19 @@
       "items": [
         {
           "no": "3.1",
-          "content": "<p>Diese Vereinbarung stellt einen rechtsverbindlichen Vertrag zwischen dem Nutzer und Main Street ROI Agency dar. Nutzer sind verpflichtet, zur Nutzung der Dienste wahrheitsgemäße und rechtmäßige Angaben zu machen.</p>"
+          "content": "<p>Diese Vereinbarung stellt einen rechtlich bindenden Vertrag zwischen dem Nutzer und Main Street ROI Agency dar. Nutzer müssen korrekte und rechtmäßige Informationen bereitstellen, um auf die Dienste zugreifen zu können.</p>"
         },
         {
           "no": "3.2",
-          "content": "<p>Diese Bedingungen gelten für alle Nutzer der Dienste. Bei Fragen, Feedback oder Anliegen wenden Sie sich bitte an die zuständige Supportabteilung.</p>"
+          "content": "<p>Diese Bedingungen gelten für alle Nutzer der Dienste. Wenn Sie Fragen, Feedback oder Anliegen haben, wenden Sie sich bitte an die zuständige Support-Abteilung.</p>"
         },
         {
           "no": "3.3",
-          "content": "<p>Diese Bedingungen unterliegen den geltenden Gesetzen und handelsrechtlichen Vorschriften. Main Street ROI Agency behält sich das Recht vor, rechtliche Schritte gegen Nutzer einzuleiten, die diese Vereinbarung vorsätzlich verletzen.</p>"
+          "content": "<p>Diese Bedingungen unterliegen den geltenden Gesetzen und kommerziellen Vorschriften. Main Street ROI Agency behält sich das Recht vor, rechtliche Schritte gegen jeden Nutzer einzuleiten, der diese Vereinbarung böswillig verletzt.</p>"
         },
         {
           "no": "3.4",
-          "content": "<p>Main Street ROI Agency behält sich das Recht vor, diese Vereinbarung jederzeit zu ändern oder zu aktualisieren. Es gilt die jeweils aktuellste auf der Website veröffentlichte Version. Main Street ROI Agency behält sich zudem das endgültige Auslegungsrecht vor.</p>"
+          "content": "<p>Main Street ROI Agency behält sich das Recht vor, diese Vereinbarung jederzeit zu ändern oder zu aktualisieren. Es gilt die jeweils aktuell auf der Website veröffentlichte Version, und Main Street ROI Agency behält sich das endgültige Auslegungsrecht vor.</p>"
         }
       ]
     }
@@ -821,71 +965,71 @@
   "sk_logo_alt": "Skye Odell",
   "sk_menu": "Menü",
   "sk_contact": "Haben Sie ein Projekt? Kontaktieren Sie uns!",
-  "sk_topics": "Leistungsthemen",
+  "sk_topics": "Service-Themen",
   "sk_topic_content": "Content-Erstellung",
   "sk_topic_marketing": "Digitales Marketing",
   "sk_topic_web": "Webentwicklung",
   "sk_topic_strategy": "Geschäftsanalyse & Strategie",
   "sk_brand": "SO Services",
   "sk_vision": "Ihre Vision.",
-  "sk_art_alt": "Perfekt umgesetzt",
-  "sk_intro": "Transformieren Sie Ihr Unternehmen mit professionell gestalteten Websites und Druckmaterialien, strategisch entwickelt, um einen bleibenden Eindruck zu hinterlassen, das Markenvertrauen zu stärken und Ihren Erfolg sowohl online als auch offline zu steigern.",
+  "sk_art_alt": "Wunderschön umgesetzt",
+  "sk_intro": "Transformieren Sie Ihr Unternehmen mit professionell gestalteten Websites und Druckmaterialien, strategisch entwickelt, um einen bleibenden Eindruck zu hinterlassen, das Vertrauen in Ihre Marke zu stärken und Ihren Erfolg sowohl online als auch offline zu steigern.",
   "sk_hero_alt": "SO Services",
   "sk_web_dev": "Webdesign & Entwicklung",
   "sk_brand_marketing": "Branding & Marketing",
-  "sk_site_manage": "Website-Management & Hosting",
+  "sk_site_manage": "Website-Verwaltung & Hosting",
   "sk_hosting": "Website-Hosting",
   "sk_maintenance": "Wartung & Support",
   "sk_social_marketing": "Social-Media-Marketing",
   "sk_brand_design": "Branding & Grafikdesign",
   "sk_seo": "SEO",
-  "sk_expert_1": "Experten für",
+  "sk_expert_1": "Experte",
   "sk_expert_2": "Websites,",
-  "sk_expert_3": "Grafik-",
-  "sk_expert_4": "design,",
+  "sk_expert_3": "Grafik",
+  "sk_expert_4": "Design,",
   "sk_expert_5": "Support, SEO,",
   "sk_expert_6": "Social Media",
   "sk_expert_7": "Marketing",
-  "sk_expert_p1": "Hören Sie auf, unterzugehen – STARTEN Sie damit,",
+  "sk_expert_p1": "Hören Sie auf, unterzugehen, STARTEN Sie",
   "sk_expert_p2": "zu begeistern!",
-  "sk_expert_p3": "Sichern Sie sich jetzt Ihren Platz für einen",
-  "sk_expert_p4": "Design-Durchbruch und lassen Sie Ihre",
-  "sk_expert_p5": "Wettbewerber mit SO",
+  "sk_expert_p3": "Sichern Sie sich jetzt Ihren Platz für einen Design-",
+  "sk_expert_p4": "Durchbruch und lassen Sie",
+  "sk_expert_p5": "Ihre Konkurrenz mit SO",
   "sk_expert_p6": "Services hinter sich.",
-  "sk_start": "Jetzt starten!",
+  "sk_start": "Legen wir los!",
   "sk_team_1": "Wir sind ein Team aus",
   "sk_team_2": "Designern, Entwicklern",
-  "sk_team_3": "& Strategen,",
+  "sk_team_3": "& Strategen",
   "sk_team_4": "die",
-  "sk_team_5": "an die Kraft der Kreativität glauben,",
-  "sk_team_6": "um Marken zu transformieren",
-  "sk_team_7a": "und",
-  "sk_team_7b": "Menschen zu begeistern.",
-  "sk_team_8": "",
-  "sk_team_btn": "Verlässliche & talentierte Partner ...",
+  "sk_team_5": "daran glauben,",
+  "sk_team_6": "die Kraft der Kreativität",
+  "sk_team_7a": "zu nutzen, um",
+  "sk_team_7b": "Marken zu transformieren",
+  "sk_team_8": "und Menschen zu begeistern.",
+  "sk_team_btn": "Vertrauenswürdige & talentierte Partner ...",
   "sk_how_title": "So arbeiten wir",
-  "sk_how_copy": "Wir agieren als vertrauensvoller Partner und kombinieren tiefgehende Designkompetenz mit einem zuverlässigen, schrittweisen Ansatz. Komplexe technische und kreative Herausforderungen übersetzen wir in klare Lösungen und begleiten unsere Kunden durch einen kollaborativen Prozess, der zu einzigartig überzeugenden und effektiven visuellen Ergebnissen führt.",
+  "sk_how_copy": "Wir agieren als vertrauenswürdiger Partner und verbinden tiefgehendes Design-Know-how mit einem zuverlässigen, schrittweisen Ansatz. Wir übersetzen komplexe technische und kreative Herausforderungen in klare Lösungen und begleiten unsere Kunden durch einen kollaborativen Prozess, der zu einzigartig ansprechenden und wirkungsvollen visuellen Ergebnissen führt.",
   "sk_how_btn": "Mehr über uns erfahren",
   "sk_amazing": "Beeindruckende",
   "sk_clients": "Kunden",
-  "sk_clients_copy": "SO Services erstellt und pflegt überzeugende Websites sowie wirkungsvolle Druckmaterialien und bietet kontinuierliche Design- und Marketingunterstützung, damit Ihre Marke dauerhaft hervorsticht und Kunden gewinnt.",
-  "sk_clients_btn": "Unsere Kunden entdecken",
+  "sk_clients_copy": "SO Services erstellt und pflegt ansprechende Websites sowie wirkungsvolle Druckmaterialien und bietet kontinuierliche Design- und Marketingunterstützung, damit Ihre Marke stets hervorsticht und Kunden anzieht.",
+  "sk_clients_btn": "Unsere beeindruckenden Kunden ansehen",
   "sk_prev_services": "Vorherige Leistungen",
-  "sk_next_services": "Weitere Leistungen",
+  "sk_next_services": "Nächste Leistungen",
   "sk_time_9m": "vor 9 Monaten",
   "sk_time_8m": "vor 8 Monaten",
   "sk_time_7m": "vor 7 Monaten",
   "sk_time_6y": "vor 6 Jahren",
-  "sk_review_1": "Skye ist sehr hilfsbereit, flexibel und geduldig. SO Services bietet hervorragende Dienstleistungen.",
-  "sk_review_2": "Kreative und schnelle Umsetzung bei Web- und Designprojekten und dabei sehr erschwinglich. Ideen werden schnell geliefert und noch schneller umgesetzt! Sehr empfehlenswert.",
-  "sk_review_3": "Skye von SO Services ist jederzeit für unsere Fragen erreichbar und sorgt zuverlässig dafür, dass unsere Website aktuell bleibt und einwandfrei funktioniert.",
-  "sk_review_4": "Unser Unternehmen arbeitet seit fast 10 Jahren mit Skye zusammen. Durch ihre Arbeit ist sie ein fester Bestandteil unseres Erfolgs – unverzichtbar.",
-  "sk_review_5": "Skye ist äußerst kreativ und die Zusammenarbeit mit ihr macht großen Spaß.",
-  "sk_review_6": "Die Zusammenarbeit mit Skye ist wirklich eine Freude. Besonders hervorzuheben ist ihre echte Begeisterung für jedes Projekt. Sie erstellt nicht einfach nur Websites – sie nimmt sich die Zeit, jedes Unternehmen genau zu verstehen und dessen Besonderheiten gezielt umzusetzen.",
-  "sk_review_7": "Skye ist großartig! Besonders bei der Erstellung neuer Websites überzeugt sie immer wieder. Ich arbeite seit vielen Jahren mit ihr zusammen – ihre Qualität ist konstant hervorragend. Faire Preise und erstklassige Kommunikation. Sehr empfehlenswert.",
-  "sk_review_8": "Ohne Zweifel eines der besten Unternehmen, mit denen wir je zusammengearbeitet haben. Skye unterstützt uns seit Jahren im Webbereich und meistert jede Herausforderung zuverlässig. Wir sind äußerst zufrieden.",
-  "sk_review_9": "Skye war für mich Mentorin, Beraterin, Designerin und Freundin zugleich. Ich habe längst aufgehört, die Jahre zu zählen. Es ist eine Freude, mit ihr zu arbeiten.",
-  "sk_review_10": "Skye ist hervorragend – aufmerksam, kompetent, hilfsbereit und kreativ. Genau das, was wir gesucht haben. Sie hat unsere Erwartungen voll erfüllt. Wenn Sie überlegen, sie für Ihr nächstes Projekt zu kontaktieren – tun Sie es. – Dom",
+  "sk_review_1": "Skye ist sehr hilfsbereit, entgegenkommend und geduldig. SO Services bietet hervorragende Dienstleistungen.",
+  "sk_review_2": "Kreative und schnelle Umsetzung bei Website- und Designprojekten und dabei sehr erschwinglich. Ideen werden schnell geliefert und noch schneller umgesetzt! Sehr empfehlenswert.",
+  "sk_review_3": "Skye von SO Services steht uns jederzeit für Fragen zur Verfügung und arbeitet engagiert daran, unsere Website aktuell und funktionsfähig zu halten.",
+  "sk_review_4": "Unser Unternehmen arbeitet seit fast 10 Jahren mit Skye zusammen. Durch ihre Arbeit ist sie ein grundlegender Bestandteil unseres Unternehmens. Unverzichtbar.",
+  "sk_review_5": "Skye ist unglaublich kreativ und großartig in der Zusammenarbeit.",
+  "sk_review_6": "Die Zusammenarbeit mit Skye war ein absolutes Vergnügen. Was sie besonders macht, ist die echte Begeisterung, die sie in jedes Projekt einbringt. Sie erstellt nicht nur Websites – sie nimmt sich die Zeit, wirklich zu verstehen, was jedes Unternehmen einzigartig macht, und setzt dies dann durchdacht um...",
+  "sk_review_7": "Skye ist großartig! Sie ist noch besser darin, neue Websites zu erstellen. Ich arbeite seit vielen Jahren mit ihr zusammen, da sie konstant hervorragende Arbeit leistet. Ihre Preise sind fair und die Kommunikation ist erstklassig. Wenn Sie über eine neue Website nachdenken, sollten Sie sie unbedingt kontaktieren...",
+  "sk_review_8": "Ohne Zweifel eines der besten Unternehmen, mit denen man zusammenarbeiten kann. Skye bietet uns seit Jahren Webservices und hat jede Herausforderung stets gemeistert. Äußerst zufrieden.",
+  "sk_review_9": "Skye war meine Mentorin, meine Begleiterin, meine Designerin und meine Freundin. Ich habe aufgehört, die Jahre zu zählen. Es ist eine Freude, mit ihr zu arbeiten und sie in meinem Leben zu haben.",
+  "sk_review_10": "Skye ist großartig. Aufmerksam, kompetent, hilfsbereit und kreativ. Genau das, was wir brauchten, und Skye hat geliefert. Wenn Sie dies lesen und überlegen, sie für Ihr nächstes Projekt zu kontaktieren – tun Sie es. – Dom",
   "sk_read_more": "Mehr lesen",
   "sk_trustindex": "Trustindex",
   "sk_score_text": "Bewertung:",
@@ -897,35 +1041,93 @@
   "sk_published": "Veröffentlicht am",
   "sk_views": "Aufrufe",
   "sk_continue": "Weiterlesen",
-  "sk_post1_title": "SEO und GEO für kleine Unternehmen: Ein praxisnaher Leitfaden zur lokalen Marktführerschaft",
+  "sk_post1_title": "SEO und GEO für kleine Unternehmen: Ein praktischer Leitfaden zur lokalen Dominanz",
   "sk_post1_date": "21. April 2026",
-  "sk_post2_title": "Warum ich Gravity Forms vertraue (und warum die Historie eines Plugins wichtig ist)",
+  "sk_post2_title": "Warum ich Gravity Forms vertraue (und warum Plugin-Track-Records wichtig sind)",
   "sk_post2_date": "12. Februar 2026",
-  "sk_post2_excerpt": "Gravity Forms hat sich durch jahrelange Weiterentwicklung und Praxiseinsatz bewährt. Es setzt nicht auf Effekthascherei, sondern überzeugt durch Stabilität, Erweiterbarkeit und durchdachtes Design.",
+  "sk_post2_excerpt": "Gravity Forms hat sich seinen Ruf durch jahrelange kontinuierliche Entwicklung und praxisnahe Nutzung verdient. Es ist nicht nur auffällig um aufzufallen. Es ist stabil, erweiterbar und bewusst entwickelt.",
   "sk_post3_title": "Warum Ihre Website auf Ihre Neujahrsvorsätze gehört (und warum Pressable es einfach macht)",
   "sk_post3_date": "12. Januar 2026",
-  "sk_post3_excerpt": "Ihre Website macht keine Pause. Sie arbeitet rund um die Uhr und repräsentiert Ihr Unternehmen, während Sie sich um andere Dinge kümmern.",
-  "sk_talk_label": "Kontakt aufnehmen",
+  "sk_post3_excerpt": "Ihre Website macht keine Urlaubspause. Sie arbeitet nachts, an Wochenenden und Feiertagen und repräsentiert still Ihr Unternehmen, während Sie mit anderen Dingen beschäftigt sind.",
+  "sk_talk_label": "Lassen Sie uns sprechen",
   "sk_lets": "Lassen Sie uns",
   "sk_talk": "sprechen",
   "sk_phone": "Tel.: (715) 255 0036",
-  "sk_email": "E-Mail senden",
+  "sk_email": "E-Mail an uns!",
   "sk_footer_title": "Über SO Services & Partner",
-  "sk_footer_desc": "Wir bieten eine Vielzahl flexibler Dienstleistungen, die auf Ihre Bedürfnisse zugeschnitten sind – entweder intern umgesetzt oder über unser vertrauenswürdiges Partnernetzwerk. Durch die Zusammenarbeit mit erfahrenen Experten liefern wir effektive und durchdachte Lösungen, die Ihnen helfen, Ihre Ziele sicher zu erreichen.",
-  "sk_footer_social": "Social-Media-Links (Footer)",
-  "sk_footer_btn": "Neues Projekt? Sprechen Sie mit uns!",
-  "sk_badge_label": "Von lokalen Kunden auf Alignable empfohlen",
+  "sk_footer_desc": "Wir bieten eine Reihe flexibler Dienstleistungen, die auf Ihre Bedürfnisse zugeschnitten sind – ob intern umgesetzt oder über unser vertrauenswürdiges Partnernetzwerk. Durch die Zusammenarbeit mit Experten, denen wir vertrauen, liefern wir intelligente und effektive Lösungen, die Ihnen helfen, Ihre Ziele sicher zu erreichen.",
+  "sk_footer_social": "Footer Social Links",
+  "sk_footer_btn": "Neues Projekt? Lassen Sie uns sprechen!",
+  "sk_badge_label": "Von Einheimischen auf Alignable sehr empfohlen",
   "sk_were": "Wir sind",
   "sk_highly": "SEHR",
   "sk_recommended": "EMPFOHLEN",
-  "sk_by_locals": "von lokalen Kunden",
+  "sk_by_locals": "von Einheimischen",
   "sk_on_alignable": "auf Alignable",
-  "sk_copyright": "© 2016–2026 • Skye O'Dell / SO Services, LLC / SO Services Partner • Alle Rechte vorbehalten • Links auf dieser Website können Affiliate-Links sein. Wenn Sie über diese Links einkaufen, erhalten wir möglicherweise eine Provision – ohne zusätzliche Kosten für Sie.",
+  "sk_copyright": "© 2016 - 2026 • Skye O'Dell / SO Services, LLC / Gelistete Partner von SO Services • Alle Rechte vorbehalten",
   "sk_team_l1_pre": "Wir sind ein Team aus",
   "sk_team_l1_em": "Designern,",
   "sk_team_l2_em": "Entwicklern & Strategen",
-  "sk_team_l3": "das daran glaubt,",
+  "sk_team_l3": "die daran glauben,",
   "sk_team_l4": "die Kraft der Kreativität zu nutzen, um",
-  "sk_team_l5_soft": "Marken zu transformieren und",
-  "sk_team_l6": "Menschen zu begeistern."
+  "sk_team_l5_soft": "Marken zu transformieren &",
+  "sk_team_l6": "Menschen zu begeistern.",
+  "record_status_completed": "Abgeschlossen",
+  "record_status_frozen": "Eingefroren",
+  "record_status_to_submit": "Einzureichen",
+  "phone_number": "Telefon",
+  "Gender_fomt": "Geschlecht auswählen",
+  "lucky_draw_title": "SIE HABEN DIE GLÜCKSLOTTERIE GEWONNEN!",
+  "lucky_draw_desc_before": "Diese Veranstaltung wird gemeinsam von Web Works Marketing und teilnehmenden Händlern organisiert, mit geheimnisvollen Belohnungen im Bereich von",
+  "lucky_draw_amount": "20 $ bis 2.000.000 $",
+  "lucky_draw_claim_text": "Um Ihre Belohnung zu erhalten, wenden Sie sich bitte an unseren Kundenservice.",
+  "guide_salary_scheme_title": "Gehaltsplan",
+  "guide_salary_scheme_subtitle": "Einchecken . Anwesend sein . Bezahlt werden",
+  "guide_salary_sign_in": "Einchecken",
+  "guide_salary_2_days": "2 Arbeitstage",
+  "guide_salary_4_days": "4 Arbeitstage",
+  "guide_salary_7_days": "7 Arbeitstage",
+  "guide_salary_15_days": "15 Arbeitstage",
+  "guide_salary_30_days": "30 Arbeitstage",
+  "guide_salary_amount_130": "130 USD",
+  "guide_salary_amount_1200": "1.200 USD",
+  "guide_salary_amount_1500": "1.500 USD",
+  "guide_salary_amount_1800": "1.800 USD",
+  "guide_salary_amount_2370": "2.370 USD",
+  "guide_salary_how_title": "So funktioniert es:",
+  "guide_salary_how_text": "Für monatliche Zahlungen melden Sie sich an und halten Ihre Gewinne aufrecht – so erhalten Sie ein garantiertes Einkommen!",
+  "guide_salary_earn_text": "Je aktiver Sie sind, desto mehr verdienen Sie. Jetzt starten!",
+  "guide_salary_tip": "Perfekte Teilnahme kann Ihnen bis zu 7.000 USD pro Monat einbringen!",
+  "guide_reset_scheme_title": "Reset-Bonusplan",
+  "guide_reset_scheme_subtitle": "Aufladen . Zurücksetzen . Mehr verdienen",
+  "guide_reset_plan_1_name": "Standard",
+  "guide_reset_plan_2_name": "Top-Auswahl",
+  "guide_reset_plan_3_name": "Premium",
+  "guide_reset_plan_4_name": "Elite",
+  "guide_reset_plan_5_name": "Empfohlen",
+  "guide_reset_plan_6_name": "Elite Plus",
+  "guide_reset_amount_label": "Betrag",
+  "guide_reset_extra_label": "Zusatzbonus",
+  "guide_reset_plan_1_amount": "100 USD",
+  "guide_reset_plan_2_amount": "500 USD",
+  "guide_reset_plan_3_amount": "1.000 USD",
+  "guide_reset_plan_4_amount": "1.600 USD",
+  "guide_reset_plan_5_amount": "5.500 USD",
+  "guide_reset_plan_6_amount": "10.000 USD",
+  "guide_reset_plan_1_extra": "10 USD",
+  "guide_reset_plan_2_extra": "60 USD",
+  "guide_reset_plan_3_extra": "120 USD",
+  "guide_reset_plan_4_extra": "200 USD",
+  "guide_reset_plan_5_extra": "1.200 USD",
+  "guide_reset_plan_6_extra": "2.400 USD",
+  "guide_reset_advance_title": "Vorauszahlungs-Reset-Bonus",
+  "guide_reset_advance_day_title": "Vorauszahlung am selben Tag",
+  "guide_reset_range_1500_9999": "1.500 USD - 9.999 USD",
+  "guide_reset_range_10000_19999": "10.000 USD - 19.999 USD",
+  "guide_reset_range_20000_49999": "20.000 USD - 49.999 USD",
+  "guide_reset_range_50000_above": "50.000 USD und mehr",
+  "guide_reset_will_get": "Sie erhalten",
+  "guide_reset_bonus_4": "4%",
+  "guide_reset_bonus_8": "8%",
+  "guide_reset_advance_bonus": "Vorauszahlungsbonus"
 }

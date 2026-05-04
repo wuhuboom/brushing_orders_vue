@@ -232,7 +232,7 @@
   "bank_account": "Rekening Bank",
   "account_type": "Jenis Akun",
   "bank_name": "Nama Bank",
-  "bank_card_management": "Manajemen Kartu Bank",
+  "bank_card_management": "Manajemen Dompet",
   "please_enter_bank_name": "Silakan masukkan nama bank",
   "please_enter_bank_account": "Silakan masukkan rekening bank",
   "please_enter_name": "Silakan masukkan nama",
@@ -448,7 +448,7 @@
   "message_center": "Pusat pesan",
   "system_notifications_announcements": "Notifikasi sistem & pengumuman",
   "link_your_bank_card": "Metode pembayaran",
-  "bind_bank_card_for_withdrawals": "Tautkan kartu bank untuk penarikan",
+  "bind_bank_card_for_withdrawals": "Tautkan alamat dompet untuk penarikan",
   "get_help_resolve_issues": "Dapatkan bantuan & selesaikan masalah",
   "confirm_log_out": "Konfirmasi keluar",
   "logout_confirm_desc_1": "Apakah Anda yakin ingin keluar dari akun Anda?",
@@ -560,7 +560,7 @@
   "vip_feature_priority_queue": "Akses antrean tugas prioritas",
   "vip_feature_all_vip2": "Semua manfaat VIP 2 termasuk",
   "vip_feature_high_value_tasks": "Akses ke tugas bernilai tinggi eksklusif",
-  "vip_feature_fast_withdrawal_2_days": "Pemrosesan penarikan lebih cepat (2 hari)",
+  "vip_feature_fast_withdrawal_2_days": "Proses penarikan lebih cepat",
   "vip_feature_all_vip3": "Semua manfaat VIP 3 termasuk",
   "vip_feature_account_manager": "Manajer akun khusus",
   "vip_feature_one_day_withdrawal": "Pemrosesan penarikan ekspres 1 hari",
@@ -568,7 +568,7 @@
   "vip_feature_all_vip4": "Semua manfaat VIP 4 termasuk",
   "vip_feature_highest_rebate": "Tingkat rebate tertinggi (2.5% per tugas)",
   "vip_feature_same_day_withdrawal": "Pemrosesan penarikan di hari yang sama",
-  "vip_feature_top_support": "Dukungan pelanggan prioritas utama 24/7",
+  "vip_feature_top_support": "Dukungan pelanggan khusus",
   "vip_feature_vip5_pools": "Kolam tugas legendaris eksklusif VIP 5",
   "daily_task_submission_quota": "Kuota pengiriman tugas harian: {count} unit",
   "rebate_task": "Rebate /Tugas",
@@ -613,117 +613,261 @@
   "licenses": "Lisensi",
   "years_operating": "Tahun beroperasi",
   "countries": "Negara",
-  "income_guide_sections": [
+    "income_guide_sections": [
     {
       "title": "1) Gaji Dasar",
-      "image": "{basicSalaryImage}",
-      "content": "<p>Perusahaan menggunakan mekanisme check-in akumulatif sebagai bagian dari struktur distribusi gaji, yang dirancang untuk mendorong pengguna menyelesaikan tugas harian secara konsisten. Meskipun jumlah gaji dasar bersifat tetap, gaji tersebut <strong>tidak</strong> dibayarkan sekaligus. Sebaliknya, gaji akan dicairkan setelah jumlah hari kerja tertentu—seperti 2 hari, 4 hari, atau 7 hari—untuk mendorong penyelesaian tugas secara berkelanjutan. Setelah pengguna memenuhi jumlah hari kerja yang ditentukan, perusahaan akan memberikan gaji dasar sesuai ketentuan.</p>"
+      "image": "",
+      "content": "<p>Perusahaan menerapkan mekanisme check-in kumulatif sebagai bagian dari struktur distribusi gaji, yang dirancang untuk mendorong pengguna menyelesaikan tugas harian secara konsisten. Meskipun jumlah gaji dasar tetap, gaji tersebut <strong>tidak</strong> dibayarkan sekaligus. Sebaliknya, gaji akan diberikan setelah jumlah hari kerja tertentu, seperti 2 hari, 4 hari, atau 7 hari, untuk mendorong penyelesaian tugas harian secara konsisten. Setelah pengguna menyelesaikan jumlah hari kerja yang diperlukan, perusahaan akan membayar sesuai ketentuan.</p>",
+      "salaryScheme": {
+        "title": "Skema Gaji",
+        "subtitle": "Check-in . Hadir . Dibayar",
+        "rows": [
+          {
+            "name": "Check-in",
+            "days": "2 hari kerja",
+            "amount": "USD130"
+          },
+          {
+            "name": "Check-in",
+            "days": "4 hari kerja",
+            "amount": "USD1,200"
+          },
+          {
+            "name": "Check-in",
+            "days": "7 hari kerja",
+            "amount": "USD1,500"
+          },
+          {
+            "name": "Check-in",
+            "days": "15 hari kerja",
+            "amount": "USD1,800"
+          },
+          {
+            "name": "Check-in",
+            "days": "30 hari kerja",
+            "amount": "USD2,370"
+          }
+        ],
+        "howTitle": "Cara Kerja:",
+        "howText": "Untuk pembayaran bulanan, lakukan check-in dan pertahankan keuntungan Anda untuk mendapatkan penghasilan yang terjamin!",
+        "earnText": "Semakin aktif Anda, semakin banyak yang Anda hasilkan. Ajak untuk mulai!",
+        "tip": "Kehadiran sempurna dapat menghasilkan hingga USD 7,000 per bulan."
+      }
     },
     {
       "title": "2) Bonus Reset",
-      "image": "{resetBonusImage}",
-      "content": "<p>Bonus Reset merupakan salah satu sumber pendapatan paling signifikan saat Anda pertama kali mulai bekerja dengan kami. Setiap pengguna dapat menyelesaikan <strong>dua set tugas per hari</strong>, dan merchant menyediakan Bonus Reset tambahan untuk mendorong konsistensi penyelesaian tugas.</p><p>Dalam struktur insentif reset:</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Anda akan menerima <strong>bonus tambahan 10 USD</strong> setiap kali Anda melakukan reset akun untuk memulai tugas pertama dengan <strong>100 USD</strong>.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Ketika <strong>total jumlah reset Anda melebihi 1.500 USD dalam satu hari</strong>, Anda akan menerima <strong>bonus tambahan 4%</strong> berdasarkan total akumulasi reset untuk dua set yang diselesaikan hari itu.</li></ol>"
+      "image": "",
+      "content": "<p>Bonus Reset merupakan salah satu sumber pendapatan paling signifikan saat Anda pertama kali mulai bekerja dengan kami. Setiap pengguna dapat menyelesaikan <strong>dua set misi per hari</strong>, dan merchant memberikan Bonus Reset tambahan untuk mendorong penyelesaian misi secara konsisten.</p><p>Dalam struktur insentif reset:</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Anda akan menerima <strong>bonus tambahan sebesar 10 USD</strong> setiap kali Anda mereset akun untuk memulai misi pertama dengan <strong>100 USD</strong>.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>Ketika <strong>total jumlah reset Anda melebihi 1.500 USD dalam satu hari</strong>, Anda akan menerima <strong>bonus tambahan sebesar 4%</strong> berdasarkan total akumulasi reset dari dua set yang diselesaikan pada hari tersebut.</li></ol>",
+      "resetBonusScheme": {
+        "title": "Skema Gaji",
+        "subtitle": "Check-in . Hadir . Dibayar",
+        "plans": [
+          {
+            "name": "Standar",
+            "amountLabel": "JUMLAH",
+            "amount": "USD 100",
+            "extraLabel": "DAPATKAN TAMBAHAN",
+            "extra": "USD 10"
+          },
+          {
+            "name": "Pilihan Populer",
+            "amountLabel": "JUMLAH",
+            "amount": "USD 500",
+            "extraLabel": "DAPATKAN TAMBAHAN",
+            "extra": "USD 60"
+          },
+          {
+            "name": "Premium",
+            "amountLabel": "JUMLAH",
+            "amount": "USD 1000",
+            "extraLabel": "DAPATKAN TAMBAHAN",
+            "extra": "USD 120"
+          },
+          {
+            "name": "Elite",
+            "amountLabel": "JUMLAH",
+            "amount": "USD 1600",
+            "extraLabel": "DAPATKAN TAMBAHAN",
+            "extra": "USD 200"
+          },
+          {
+            "name": "Direkomendasikan",
+            "amountLabel": "JUMLAH",
+            "amount": "USD 5500",
+            "extraLabel": "DAPATKAN TAMBAHAN",
+            "extra": "USD 1200"
+          },
+          {
+            "name": "Elite Plus",
+            "amountLabel": "JUMLAH",
+            "amount": "USD 10000",
+            "extraLabel": "DAPATKAN TAMBAHAN",
+            "extra": "USD 2400"
+          }
+        ],
+        "advanceTitle": "Akumulasi Bonus Advance Harian",
+        "advanceRows": [
+          {
+            "title": "TOTAL ADVANCE HARIAN (USD)",
+            "range": "1,500-9,999",
+            "desc": "AKAN MENDAPATKAN (USD)",
+            "bonus": "4%",
+            "suffix": "Bonus Advance"
+          },
+          {
+            "title": "TOTAL ADVANCE HARIAN (USD)",
+            "range": "10,000-19,999",
+            "desc": "AKAN MENDAPATKAN (USD)",
+            "bonus": "8%",
+            "suffix": "Bonus Advance"
+          },
+          {
+            "title": "TOTAL ADVANCE HARIAN (USD)",
+            "range": "20,000-49,999",
+            "desc": "AKAN MENDAPATKAN (USD)",
+            "bonus": "4%",
+            "suffix": "Bonus Advance"
+          },
+          {
+            "title": "TOTAL ADVANCE HARIAN (USD)",
+            "range": "50,000-Atas",
+            "desc": "AKAN MENDAPATKAN (USD)",
+            "bonus": "4%",
+            "suffix": "Bonus Advance"
+          }
+        ]
+      }
     },
     {
       "title": "3) Keuntungan Harian",
       "image": "",
-      "content": "<p>Keuntungan harian merupakan sumber pendapatan utama Anda. Sistem menetapkan produk dari berbagai merchant untuk dioptimalkan berdasarkan saldo akun Anda saat ini. Untuk setiap produk yang Anda optimalkan, Anda akan memperoleh <strong>0.5% hingga 2.5%</strong> dari harga produk sebagai keuntungan.</p><p>Tingkat keuntungan ditentukan oleh <strong>tingkat VIP</strong> Anda—semakin tinggi level VIP, semakin tinggi tingkat keuntungan Anda. Selain itu, jumlah tugas per set juga meningkat seiring peningkatan level VIP.</p><p>Beberapa merchant juga menyediakan <strong>produk kombinasi</strong>. Sistem dapat secara acak menetapkan produk kombinasi ini kepada pengguna berdasarkan saldo akun. Bergantung pada jenis produk yang Anda optimalkan, Anda dapat memperoleh <strong>tambahan 5% hingga 25%</strong> keuntungan.</p>"
+      "content": "<p>Keuntungan harian merupakan sumber pendapatan utama Anda. Sistem akan menetapkan produk dari berbagai merchant untuk ditingkatkan berdasarkan saldo akun Anda saat ini. Untuk setiap produk yang Anda optimalkan, Anda akan mendapatkan <strong>0,5% hingga 2,5%</strong> dari harga produk sebagai keuntungan.</p><p>Tingkat keuntungan ditentukan oleh <strong>level VIP</strong> Anda—semakin tinggi level VIP, semakin tinggi tingkat keuntungan Anda. בנוסף, jumlah misi per set juga akan meningkat seiring kenaikan level VIP Anda.</p><p>Beberapa merchant juga menyediakan <strong>produk kombinasi</strong>. Sistem dapat secara acak menetapkan produk kombinasi ini kepada pengguna sesuai dengan saldo akun mereka. Tergantung pada jenis produk yang Anda optimalkan, Anda dapat memperoleh <strong>tambahan keuntungan sebesar 5% hingga 25%</strong>.</p>",
+      "vipProfitRates": {
+        "rows": [
+          {
+            "level": "VIP 1",
+            "rate": "0.5%",
+            "progress": "20%"
+          },
+          {
+            "level": "VIP 2",
+            "rate": "1%",
+            "progress": "40%"
+          },
+          {
+            "level": "VIP 3",
+            "rate": "1.5%",
+            "progress": "60%"
+          },
+          {
+            "level": "VIP 4",
+            "rate": "2%",
+            "progress": "80%"
+          },
+          {
+            "level": "VIP 5",
+            "rate": "2.5%",
+            "progress": "100%"
+          }
+        ],
+        "button": "Tingkatkan VIP untuk Mendapatkan Lebih Banyak →"
+      }
     }
   ],
   "clause_sections": [
     {
-      "title": "Untuk mengoptimalkan dan mereset akun Anda, Anda harus terlebih dahulu menyelesaikan semua penilaian dengan jumlah minimum 50 USD dan jumlah reset akun minimum 100 USD.",
-      "content": "<p>1.1) Pengguna yang telah menyelesaikan satu set tugas harus menghubungi layanan pelanggan untuk meminta reset untuk set tugas berikutnya</p>"
+      "title": "Untuk melakukan optimasi dan reset akun, Anda harus terlebih dahulu menyelesaikan semua penilaian dengan jumlah minimum 50 USD dan jumlah reset akun minimum 100 USD.",
+      "content": "<p>1.1) Pengguna yang telah menyelesaikan satu set misi harus menghubungi layanan pelanggan untuk meminta reset guna memulai set tugas berikutnya</p>"
     },
     {
       "title": "Penarikan pengguna dan persyaratan penarikan sistem / keamanan dana pengguna",
-      "content": "<p>2.1) Setiap pengguna perlu menyelesaikan semua tugas optimasi sebelum memenuhi persyaratan penarikan sistem</p><p>2.2) Untuk menghindari kehilangan dana, semua penarikan diproses secara otomatis oleh sistem dan bukan secara manual</p><p>2.3) Semua pengguna tidak diperbolehkan mengajukan penarikan di tengah proses tugas untuk menghindari gangguan terhadap operasional merchant</p><p>2.4) Dana pengguna sepenuhnya aman di Platform dan Platform bertanggung jawab atas setiap kehilangan yang tidak disengaja</p>"
+      "content": "<p>2.1) Setiap pengguna harus menyelesaikan semua misi optimasi sebelum memenuhi persyaratan penarikan sistem</p><p>2.2) Untuk menghindari kehilangan dana, semua penarikan diproses secara otomatis oleh sistem dan bukan secara manual</p><p>2.3) Semua pengguna tidak diperbolehkan mengajukan penarikan di tengah misi untuk menghindari gangguan pada operasional merchant</p><p>2.4) Dana pengguna sepenuhnya aman di platform dan platform akan bertanggung jawab atas setiap kehilangan yang tidak disengaja</p>"
     },
     {
       "title": "Harap jangan membagikan kata sandi akun dan kata sandi penarikan Anda kepada orang lain. Platform tidak bertanggung jawab atas kerugian atau kerusakan yang terjadi",
-      "content": "<p>3.1) Semua pengguna disarankan untuk menjaga keamanan akun mereka agar tidak bocor</p><p>3.2) Platform tidak bertanggung jawab atas kebocoran akun yang tidak disengaja</p><p>3.3) Karena akun memiliki implikasi keuangan, sangat penting untuk tidak membagikannya untuk menghindari masalah yang tidak perlu</p><p>3.4) Kata sandi penarikan disarankan untuk tidak menggunakan tanggal lahir, nomor KTP, atau nomor ponsel. Disarankan menggunakan kata sandi yang lebih kuat untuk melindungi dana Anda</p><p>3.5) Jika Anda lupa kata sandi, Anda dapat meresetnya dengan menghubungi layanan online dan pastikan untuk mengubahnya sendiri setelahnya</p>"
+      "content": "<p>3.1) Semua pengguna disarankan untuk menjaga keamanan akun mereka agar tidak terjadi kebocoran</p><p>3.2) Platform tidak bertanggung jawab atas kebocoran akun yang tidak disengaja</p><p>3.3) Karena akun memiliki implikasi finansial, penting untuk tidak membagikannya guna menghindari masalah yang tidak perlu</p><p>3.4) Untuk kata sandi penarikan, disarankan untuk tidak menggunakan tanggal lahir, nomor KTP, atau nomor ponsel, dan disarankan untuk menggunakan kata sandi yang lebih kuat untuk melindungi dana Anda</p><p>3.5) Jika Anda lupa kata sandi, Anda dapat meresetnya dengan menghubungi layanan online dan pastikan untuk menggantinya sendiri setelah itu</p>"
     },
     {
-      "title": "Semua produk dalam tugas ditetapkan secara acak oleh sistem dan tidak dapat diubah, dibatalkan, dikendalikan, atau dilewati dengan cara apa pun",
-      "content": "<p>4.1) Karena jumlah pengguna yang besar di platform, distribusi produk kombinasi tidak dapat dilakukan secara manual, sehingga semua data produk tugas didistribusikan secara acak oleh sistem</p><p>4.2) Produk kombinasi dirilis secara acak oleh sistem dan tidak dapat diubah/dibatalkan/dilewati oleh pengguna atau staf</p>"
+      "title": "Semua produk dalam suatu misi ditetapkan secara acak oleh sistem dan tidak dapat diubah, dibatalkan, dikendalikan, atau dilewati dengan cara apa pun",
+      "content": "<p>4.1) Karena banyaknya pengguna di platform, distribusi produk kombinasi tidak dapat dilakukan secara manual, sehingga semua data produk tugas didistribusikan secara acak oleh sistem</p><p>4.2) Produk kombinasi dirilis secara acak oleh sistem dan tidak dapat diubah/dibatalkan/dilewati oleh pengguna maupun staf mana pun</p>"
     },
     {
       "title": "Tindakan hukum akan diambil jika terjadi penyalahgunaan akun",
       "content": ""
     },
     {
-      "title": "Setiap data produk berasal dari merchant yang berbeda, tidak ada deposit lebih dari 10 menit, dan setiap deposit harus dilakukan melalui layanan online untuk mengonfirmasi detail deposit merchant.",
+      "title": "Setiap data produk berasal dari merchant yang berbeda, tidak boleh melakukan deposit lebih dari 10 menit, dan setiap deposit harus dikonfirmasi melalui layanan online untuk memastikan detail deposit merchant",
       "content": ""
     },
     {
-      "title": "Platform tidak bertanggung jawab atas deposit yang dikirim ke detail yang salah",
+      "title": "Platform tidak bertanggung jawab atas deposit yang dilakukan ke detail yang salah",
       "content": ""
     },
     {
-      "title": "Setiap optimasi data produk harus diselesaikan dalam waktu 24 jam, jika tidak diselesaikan sehingga menyebabkan keluhan dari merchant, pengguna harus menanggung tanggung jawab pelanggaran kontrak",
+      "title": "Setiap optimasi data produk harus diselesaikan dalam waktu 24 jam, jika tidak diselesaikan dan menyebabkan keluhan dari merchant, pengguna harus menanggung tanggung jawab atas pelanggaran kontrak",
       "content": ""
     },
     {
-      "title": "Ketika akun mendapat keluhan dari merchant, sistem akan mengurangi skor kredit. Jika skor kredit akun di bawah 98, pengguna tidak dapat mengajukan penarikan. Skor kredit akan dihitung otomatis oleh sistem setelah setiap set tugas selesai",
+      "title": "Jika akun mendapatkan keluhan dari merchant, sistem akan mengurangi skor kredit. Jika skor kredit akun di bawah 98, maka tidak dapat mengajukan penarikan. Skor kredit akan dihitung secara otomatis oleh sistem setelah menyelesaikan setiap set misi",
       "content": ""
     }
   ],
   "faq_sections": [
     {
-      "title": "Mulai misi Optimasi Produk",
-      "content": "<p>1.1) Saldo akun minimum 50USD untuk 40 misi/set pertama.</p><p>1.2) Diperlukan minimal pengisian ulang sebesar 100USD untuk memulai misi baru.</p><p>1.3) Pengguna harus menyelesaikan misi sebelum dapat mengajukan penarikan.</p>"
+      "title": "Mulai Misi Optimasi Produk",
+      "content": "<p>1.1) Saldo akun minimum sebesar 50 USD untuk 40 misi pertama per set.</p><p>1.2) Diperlukan pembaruan minimum sebesar 100 USD untuk memulai misi baru.</p><p>1.3) Pengguna harus menyelesaikan misi sebelum dapat mengajukan penarikan.</p>"
     },
     {
       "title": "Penarikan",
-      "content": "<p>2.1) Pengguna harus menyelesaikan misi sebelum dapat mengajukan penarikan.</p><p>2.2) Anda tidak dapat mengajukan penarikan atau refund jika memilih untuk berhenti atau menarik diri di tengah proses optimasi misi.</p><p>2.3) Tidak ada penarikan yang dapat diproses jika permintaan penarikan pengguna belum diterima.</p><p>2.4) Batas maksimum penarikan untuk pengguna VIP1 adalah 10.000USD, untuk VIP2 adalah 30.000USD. Tidak ada batas maksimum penarikan untuk VIP3 ke atas.</p><p>2.5) Untuk memberikan layanan yang lebih profesional dan efisien kepada pengguna, akun dengan saldo di atas 60.000USD diwajibkan menggunakan kanal penarikan volume tinggi platform. Kanal ini memungkinkan penarikan penuh dana secara lebih cepat, aman, dan sekaligus.</p><p>2.6) Akun pengguna memiliki skor kredit yang tidak mencukupi dan tidak dapat menggunakan semua fungsi platform secara normal.</p>"
+      "content": "<p>2.1) Pengguna harus menyelesaikan misi sebelum dapat mengajukan penarikan.</p><p>2.2) Anda tidak dapat mengajukan penarikan atau pengembalian dana jika memilih untuk berhenti atau menarik diri di tengah proses optimasi misi.</p><p>2.3) Penarikan tidak dapat diproses jika permintaan penarikan dari pengguna belum diterima.</p><p>2.4) Batas maksimum penarikan untuk pengguna VIP1 adalah 10.000 USD, untuk VIP2 adalah 30.000 USD. Tidak ada batas maksimum penarikan untuk VIP3 ke atas.</p><p>2.5) Untuk memberikan layanan yang lebih profesional dan efisien kepada pengguna kami, akun dengan saldo di atas 60.000 USD diwajibkan menggunakan jalur penarikan volume tinggi. Jalur ini memungkinkan penarikan penuh satu kali yang lebih cepat dan aman.</p><p>2.6) Akun pengguna memiliki skor kredit yang tidak mencukupi dan tidak dapat menggunakan semua fungsi platform secara normal.</p>"
     },
     {
       "title": "Dana",
-      "content": "<p>3.1) Semua dana akan disimpan dengan aman di akun pengguna dan dapat ditarik sepenuhnya setelah semua data diselesaikan</p><p>3.2) Untuk menghindari kehilangan dana, semua data akan diproses oleh sistem dan bukan secara manual</p><p>3.3) Platform akan bertanggung jawab penuh atas kehilangan dana yang tidak disengaja.</p><p>3.4) Jika dana pengguna melebihi jumlah kena pajak pemerintah, pengguna diwajibkan membayar pajak</p>"
+      "content": "<p>3.1) Semua dana akan disimpan dengan aman di akun pengguna dan dapat ditarik sepenuhnya setelah semua data selesai</p><p>3.2) Untuk menghindari kehilangan dana, semua data akan diproses oleh sistem dan bukan secara manual</p><p>3.3) Platform akan bertanggung jawab penuh atas setiap kehilangan dana yang tidak disengaja.</p><p>3.4) Jika dana pengguna melebihi batas pajak pemerintah, pengguna wajib membayar pajak</p>"
     },
     {
       "title": "Keamanan Akun",
-      "content": "<p>4.1) Harap jangan membagikan kata sandi login dan kata sandi penarikan kepada orang lain, karena platform tidak bertanggung jawab atas kerugian apa pun.</p><p>4.2) Pengguna tidak disarankan menggunakan tanggal lahir, nomor KTP, atau nomor telepon sebagai kata sandi penarikan atau login.</p><p>4.3) Jika Anda lupa kata sandi login atau penarikan, silakan hubungi layanan online kami untuk meresetnya.</p>"
+      "content": "<p>4.1) Harap jangan membagikan kata sandi login dan kata sandi penarikan kepada orang lain, karena platform tidak bertanggung jawab atas kerugian apa pun.</p><p>4.2) Pengguna tidak disarankan menggunakan tanggal lahir, nomor identitas, atau nomor ponsel sebagai kata sandi login atau kata sandi penarikan.</p><p>4.3) Jika Anda lupa kata sandi login atau kata sandi penarikan, silakan hubungi layanan online kami untuk meresetnya.</p>"
     },
     {
       "title": "Data Produk Umum",
-      "content": "<p>5.1) Keuntungan platform dikategorikan menjadi keuntungan data produk normal dan keuntungan data produk combo 10x</p><p>5.2) Pengguna normal akan mendapatkan 0,5% keuntungan untuk setiap misi optimasi normal</p><p>5.3) Pengguna VIP 2 akan mendapatkan 1% keuntungan untuk setiap misi optimasi normal</p><p>5.4) Pengguna VIP 3 akan mendapatkan 1,5% keuntungan untuk setiap misi optimasi normal</p><p>5.5) Pengguna VIP 4 akan mendapatkan 2% keuntungan untuk setiap misi optimasi normal</p><p>5.6) Pengguna VIP 5 akan mendapatkan 2,5% keuntungan untuk setiap misi optimasi normal</p><p>5.7) Dana dan keuntungan akan dikembalikan ke akun pengguna setelah setiap misi optimasi selesai</p><p>5.8) Sistem akan secara acak mengalokasikan tugas ke akun pengguna berdasarkan total saldo akun pengguna</p><p>5.9) Setelah tugas optimasi produk diberikan ke akun pengguna, tugas tidak dapat dibatalkan atau dilewati</p>"
+      "content": "<p>5.1) Keuntungan platform dibagi menjadi keuntungan data produk normal dan keuntungan data produk kombinasi 10 kali lipat</p><p>5.2) Pengguna normal akan mendapatkan 0,5% keuntungan untuk setiap misi optimasi produk normal</p><p>5.3) Pengguna VIP 2 akan mendapatkan 1% keuntungan untuk setiap misi optimasi produk normal</p><p>5.4) Pengguna VIP 3 akan mendapatkan 1,5% keuntungan untuk setiap misi optimasi produk normal</p><p>5.5) Pengguna VIP 4 akan mendapatkan 2% keuntungan untuk setiap misi optimasi produk normal</p><p>5.6) Pengguna VIP 5 akan mendapatkan 2,5% keuntungan untuk setiap misi optimasi produk normal</p><p>5.7) Dana dan keuntungan akan dikembalikan ke akun pengguna setelah setiap misi optimasi selesai</p><p>5.8) Sistem akan secara acak menetapkan tugas ke akun pengguna berdasarkan total saldo akun</p><p>5.9) Setelah tugas optimasi produk ditetapkan ke akun pengguna, tugas tersebut tidak dapat dibatalkan atau dilewati</p>"
     },
     {
       "title": "Data Produk Kombinasi",
-      "content": "<p>6.1) Data Produk Kombinasi terdiri dari 1 hingga 3 data, pengguna mungkin tidak selalu mendapatkan 3 produk, sistem akan secara acak mengalokasikan data dalam produk kombinasi dan pengguna lebih berpeluang mendapatkan 1 atau 2 produk</p><p>6.2) Pengguna akan mendapatkan keuntungan 10 kali lipat untuk setiap produk kombinasi dibandingkan dengan data produk normal</p><p>6.3) Setelah menerima produk kombinasi, semua dana akan berhenti berputar dan akan dikembalikan ke akun setelah setiap data produk dalam kombinasi diselesaikan.</p><p>6.4) Sistem akan secara acak mengalokasikan data produk kombinasi ke akun pengguna sesuai dengan total saldo akun pengguna</p><p>6.5) Setelah data produk kombinasi dialokasikan ke akun pengguna, tidak dapat dibatalkan atau dilewati.</p>"
+      "content": "<p>6.1) Data Produk Kombinasi terdiri dari 1 hingga 3 data, pengguna tidak selalu mendapatkan 3 produk, sistem akan secara acak menetapkan data dalam produk kombinasi, dan pengguna memiliki kemungkinan lebih besar mendapatkan 1 atau 2 produk</p><p>6.2) Pengguna akan mendapatkan keuntungan 10 kali lipat untuk setiap produk kombinasi dibandingkan produk normal</p><p>6.3) Setelah menerima produk kombinasi, semua dana akan berhenti berputar dan akan dikembalikan ke akun setelah Anda menyelesaikan setiap data produk dalam kombinasi tersebut</p><p>6.4) Sistem akan secara acak menetapkan data produk kombinasi ke akun pengguna berdasarkan total saldo akun</p><p>6.5) Setelah data produk kombinasi ditetapkan ke akun pengguna, tidak dapat dibatalkan atau dilewati.</p>"
     },
     {
       "title": "Deposit",
-      "content": "<p>7.1) Jumlah deposit ditentukan oleh pengguna dan kami tidak menentukan jumlah deposit, kami menyarankan pengguna menyesuaikan dengan kemampuan atau setelah memahami platform.</p><p>7.2) Jika pengguna perlu melakukan deposit saat menerima data produk kombinasi, disarankan untuk menambah dana sesuai kekurangan yang ditampilkan di akun.</p><p>7.3) Sebelum melakukan deposit, Anda harus meminta konfirmasi dari layanan online dan memastikan detail deposit.</p><p>7.4) Platform tidak bertanggung jawab jika pengguna melakukan deposit ke detail yang salah.</p>"
+      "content": "<p>7.1) Jumlah deposit ditentukan oleh pengguna dan kami tidak dapat menentukan jumlah deposit untuk pengguna, kami menyarankan pengguna untuk melakukan deposit sesuai kemampuan atau setelah memahami platform.</p><p>7.2) Jika pengguna perlu melakukan deposit saat menerima data produk kombinasi, disarankan untuk melakukan deposit sesuai kekurangan saldo yang ditampilkan pada akun.</p><p>7.3) Sebelum melakukan deposit, Anda harus meminta konfirmasi dari layanan online dan memastikan detail deposit.</p><p>7.4) Platform tidak bertanggung jawab jika pengguna melakukan deposit ke detail yang salah.</p>"
     }
   ],
   "event_sections": [
     {
       "tag": "ACTIVE",
       "icon": "⚡",
-      "title": "Ucapan Syukur Anniversary ke-3 & Umpan Balik",
-      "summary": "Acara Promosi Skye Odell – Hadiah Bonus Reset",
-      "reward": "USD 10 - USD 2,400 Hadiah Tambahan",
+      "title": "Ulang Tahun ke-3 – Bonus Apresiasi",
+      "summary": "Acara Promosi Skye Odell – Bonus Reset",
+      "reward": "USD 10 - USD 2,400 Bonus Tambahan",
       "progress": "",
-      "time": "Event ulang tahun terbatas waktu",
-      "joined": "Bonus advance reset",
+      "time": "Acara ulang tahun terbatas",
+      "joined": "Bonus reset advance",
       "buttonText": "Gabung Sekarang",
       "disabled": false,
-      "content": "<div class=\"event-section-block\"><h4>Bonus Advance Reset</h4><div class=\"event-reward-grid\"><div><strong>Standar</strong><span>Jumlah USD 100</span><b>Dapat Bonus USD 10</b></div><div><strong>Pilihan Populer</strong><span>Jumlah USD 500</span><b>Dapat Bonus USD 60</b></div><div><strong>Premium</strong><span>Jumlah USD 1,000</span><b>Dapat Bonus USD 120</b></div><div><strong>Elite</strong><span>Jumlah USD 1,600</span><b>Dapat Bonus USD 200</b></div><div><strong>Rekomendasi</strong><span>Jumlah USD 5,500</span><b>Dapat Bonus USD 1,200</b></div><div><strong>Elite Plus</strong><span>Jumlah USD 10,000</span><b>Dapat Bonus USD 2,400</b></div></div></div>"
+      "content": "<div class=\"event-section-block\"><h4>Bonus Reset Advance</h4><div class=\"event-reward-grid\"><div><strong>Standar</strong><span>Jumlah USD 100</span><b>Dapatkan Tambahan USD 10</b></div><div><strong>Pilihan Populer</strong><span>Jumlah USD 500</span><b>Dapatkan Tambahan USD 60</b></div><div><strong>Premium</strong><span>Jumlah USD 1,000</span><b>Dapatkan Tambahan USD 120</b></div><div><strong>Elite</strong><span>Jumlah USD 1,600</span><b>Dapatkan Tambahan USD 200</b></div><div><strong>Rekomendasi</strong><span>Jumlah USD 5,500</span><b>Dapatkan Tambahan USD 1,200</b></div><div><strong>Elite Plus</strong><span>Jumlah USD 10,000</span><b>Dapatkan Tambahan USD 2,400</b></div></div></div>"
     },
     {
       "tag": "HOT",
       "icon": "🎁",
-      "title": "Bonus Advance Terkumpul Harian",
-      "summary": "Dapatkan bonus advance tambahan berdasarkan total advance Anda setiap hari.",
+      "title": "Bonus Advance Akumulasi Harian",
+      "summary": "Dapatkan bonus advance tambahan berdasarkan total advance Anda dalam satu hari.",
       "reward": "Bonus Advance 4% - 20%",
       "progress": "",
       "time": "Bonus akumulasi harian",
-      "joined": "Tingkatan bonus",
+      "joined": "Tingkat bonus",
       "buttonText": "Gabung Sekarang",
       "disabled": false,
-      "content": "<div class=\"event-section-block\"><h4>Bonus Advance Terkumpul Harian</h4><div class=\"event-bonus-grid\"><div><strong>1,500 - 9,999</strong><span>Akan Mendapatkan</span><b>Bonus Advance 4%</b></div><div><strong>10,000 - 19,999</strong><span>Akan Mendapatkan</span><b>Bonus Advance 8%</b></div><div><strong>20,000 - 49,999</strong><span>Akan Mendapatkan</span><b>Bonus Advance 12%</b></div><div><strong>50,000 ke Atas</strong><span>Akan Mendapatkan</span><b>Bonus Advance 20%</b></div></div></div>"
+      "content": "<div class=\"event-section-block\"><h4>Bonus Advance Akumulasi Harian</h4><div class=\"event-bonus-grid\"><div><strong>1,500 - 9,999</strong><span>Akan Mendapatkan</span><b>Bonus Advance 4%</b></div><div><strong>10,000 - 19,999</strong><span>Akan Mendapatkan</span><b>Bonus Advance 8%</b></div><div><strong>20,000 - 49,999</strong><span>Akan Mendapatkan</span><b>Bonus Advance 12%</b></div><div><strong>50,000 - Ke atas</strong><span>Akan Mendapatkan</span><b>Bonus Advance 20%</b></div></div></div>"
     }
   ],
   "event_footer_line1": "Skye Odell berhak atas interpretasi akhir.",
@@ -731,42 +875,42 @@
   "tc_page_title": "Syarat & Ketentuan",
   "tc_hero_title": "Perjanjian Pendaftaran Pengguna",
   "tc_hero_intro": [
-    "Selamat datang di <strong>Main Street ROI Agency</strong> dan layanan-layanannya.",
-    "Silakan baca <strong>Perjanjian Pendaftaran Pengguna</strong> (“Perjanjian”) ini dengan saksama sebelum menggunakan perangkat lunak, situs web, atau layanan terkait yang disediakan oleh Main Street ROI Agency (secara kolektif disebut “Layanan”). Perjanjian ini mengatur akses dan penggunaan Anda terhadap Layanan."
+    "Selamat datang di <strong>Main Street ROI Agency</strong> dan layanan yang disediakan.",
+    "Harap baca <strong>Perjanjian Pendaftaran Pengguna</strong> (“Perjanjian”) ini dengan saksama sebelum menggunakan perangkat lunak, situs web, atau layanan terkait yang disediakan oleh Main Street ROI Agency (secara kolektif disebut “Layanan”). Perjanjian ini mengatur akses dan penggunaan Anda terhadap Layanan."
   ],
   "tc_hero_notice": [
-    "Dengan mengakses atau menggunakan Layanan, Anda menyatakan bahwa Anda telah membaca, memahami, dan menyetujui untuk terikat oleh Perjanjian ini serta semua ketentuan dan kebijakan terkait. Jika Anda tidak menyetujuinya, Anda tidak boleh menggunakan Layanan.",
+    "Dengan mengakses atau menggunakan Layanan, Anda menyatakan bahwa Anda telah membaca, memahami, dan setuju untuk terikat oleh Perjanjian ini serta semua syarat dan kebijakan terkait. Jika Anda tidak setuju, Anda tidak boleh menggunakan Layanan.",
     "Anda harus berusia minimal <strong>18 tahun</strong> untuk menggunakan Layanan."
   ],
   "tc_table_of_contents": "Daftar Isi",
-  "tc_update_alert": "Main Street ROI Agency berhak untuk mengubah atau memperbarui Perjanjian ini kapan saja. Versi terbaru yang dipublikasikan di situs web akan berlaku sebagai versi yang sah.",
+  "tc_update_alert": "Main Street ROI Agency berhak mengubah atau memperbarui Perjanjian ini kapan saja. Versi terbaru yang dipublikasikan di situs web akan berlaku.",
   "tc_terms_sections": [
     {
       "title": "Perlindungan Informasi Pribadi",
       "items": [
         {
           "no": "1.1",
-          "content": "<p>Melindungi informasi pribadi pengguna adalah prinsip dasar Main Street ROI Agency. Kami menggunakan teknologi enkripsi profesional, penyimpanan yang aman, dan metode transmisi yang aman untuk melindungi data pengguna.</p>"
+          "content": "<p>Melindungi informasi pribadi pengguna adalah prinsip dasar Main Street ROI Agency. Kami menggunakan teknologi enkripsi profesional, penyimpanan aman, dan metode transmisi yang aman untuk melindungi data pengguna.</p>"
         },
         {
           "no": "1.2",
-          "content": "<p>Untuk mengakses layanan tertentu, seperti pendaftaran akun, pengguna diwajibkan memberikan informasi yang diperlukan dan akurat, termasuk namun tidak terbatas pada nomor ponsel, serta menyetujui Perjanjian ini. Kegagalan dalam memberikan informasi yang lengkap atau akurat dapat menyebabkan pembatasan akses ke Layanan.</p>"
+          "content": "<p>Untuk mengakses layanan tertentu, seperti pendaftaran akun, pengguna diwajibkan memberikan informasi yang diperlukan dan akurat, termasuk namun tidak terbatas pada nomor telepon, serta harus menyetujui Perjanjian ini. Kegagalan dalam memberikan informasi yang lengkap atau akurat dapat menyebabkan pembatasan akses ke layanan.</p>"
         },
         {
           "no": "1.3",
-          "content": "<p>Pengguna dapat memperbarui beberapa informasi pribadi setelah pendaftaran. Namun, demi alasan keamanan, termasuk pemulihan akun dan pencegahan penipuan, beberapa informasi tidak dapat diubah setelah diverifikasi.</p>"
+          "content": "<p>Pengguna dapat memperbarui beberapa informasi pribadi setelah pendaftaran. Namun, demi alasan keamanan termasuk pemulihan akun dan pencegahan penipuan, beberapa informasi tidak dapat diubah setelah diverifikasi.</p>"
         },
         {
           "no": "1.4",
-          "content": "<p>Main Street ROI Agency menerapkan sistem kontrol internal dan manajemen yang ketat untuk mencegah akses, penggunaan, atau pengungkapan informasi pribadi tanpa izin. Setiap penyalahgunaan akan ditangani sesuai dengan hukum yang berlaku. Setelah terdaftar, nomor ponsel utama yang terkait dengan akun tidak dapat diubah tanpa verifikasi.</p>"
+          "content": "<p>Main Street ROI Agency menerapkan kontrol internal dan sistem manajemen yang ketat untuk mencegah akses, penggunaan, atau pengungkapan informasi pribadi tanpa izin. Setiap penggunaan yang tidak sah akan ditangani sesuai dengan hukum yang berlaku. Setelah terdaftar, nomor ponsel utama yang terkait dengan akun tidak dapat diubah tanpa verifikasi.</p>"
         },
         {
           "no": "1.5",
-          "content": "<p>Main Street ROI Agency tidak akan mengungkapkan, menjual, atau membagikan informasi pribadi pengguna kepada pihak ketiga tanpa persetujuan eksplisit dari pengguna, kecuali diwajibkan oleh hukum.</p>"
+          "content": "<p>Main Street ROI Agency tidak akan mengungkapkan, menjual, atau membagikan informasi pribadi pengguna kepada pihak ketiga tanpa persetujuan eksplisit pengguna, kecuali diwajibkan oleh hukum.</p>"
         },
         {
           "no": "1.6",
-          "content": "<p>Pengguna yang berusia di bawah 18 tahun tidak diizinkan menggunakan Layanan. Jika akses diperlukan, persetujuan tertulis dari wali hukum harus diberikan terlebih dahulu.</p>"
+          "content": "<p>Pengguna di bawah usia 18 tahun tidak diperbolehkan menggunakan layanan ini. Jika akses diperlukan, persetujuan tertulis dari wali hukum harus diberikan terlebih dahulu.</p>"
         }
       ]
     },
@@ -783,15 +927,15 @@
         },
         {
           "no": "2.3",
-          "content": "<p>Pengguna tidak diperbolehkan membatalkan, melewati, atau meninggalkan tugas yang telah diterima.</p>"
+          "content": "<p>Pengguna tidak boleh membatalkan, melewati, atau meninggalkan tugas yang telah diterima.</p>"
         },
         {
           "no": "2.4",
-          "content": "<p>Penarikan yang melebihi <strong>USD 30.000</strong> dikenakan <strong>biaya pemrosesan 20%</strong>, yang akan dikembalikan kepada pengguna setelah penarikan berhasil diproses.</p>"
+          "content": "<p>Penarikan melebihi <strong>USD 30,000</strong> dikenakan <strong>biaya pemrosesan 20%</strong>, yang akan dikembalikan kepada pengguna setelah penarikan berhasil diproses.</p>"
         },
         {
           "no": "2.5",
-          "content": "<p>Setiap pelanggaran terhadap ketentuan ini dapat menyebabkan penurunan skor kredit pengguna. Beberapa fitur akun dapat dibatasi hingga skor kredit dipulihkan.</p>"
+          "content": "<p>Setiap pelanggaran terhadap ketentuan ini dapat mengakibatkan penurunan skor kredit pengguna. Beberapa fitur akun dapat dibatasi hingga skor kredit dipulihkan.</p>"
         }
       ]
     },
@@ -800,15 +944,15 @@
       "items": [
         {
           "no": "3.1",
-          "content": "<p>Perjanjian ini merupakan kontrak yang mengikat secara hukum antara pengguna dan Main Street ROI Agency. Pengguna wajib memberikan informasi yang akurat dan sesuai hukum sebagaimana diperlukan untuk mengakses Layanan.</p>"
+          "content": "<p>Perjanjian ini merupakan kontrak yang mengikat secara hukum antara pengguna dan Main Street ROI Agency. Pengguna harus memberikan informasi yang akurat dan sah sesuai persyaratan untuk mengakses layanan.</p>"
         },
         {
           "no": "3.2",
-          "content": "<p>Ketentuan ini berlaku untuk semua pengguna Layanan. Jika Anda memiliki pertanyaan, masukan, atau keluhan, silakan hubungi departemen dukungan yang sesuai.</p>"
+          "content": "<p>Ketentuan ini berlaku untuk semua pengguna layanan. Jika Anda memiliki pertanyaan, masukan, atau keluhan, silakan hubungi departemen dukungan yang sesuai.</p>"
         },
         {
           "no": "3.3",
-          "content": "<p>Ketentuan ini diatur dan dilindungi oleh hukum serta peraturan perdagangan yang berlaku. Main Street ROI Agency berhak mengambil tindakan hukum terhadap pengguna mana pun yang melanggar Perjanjian ini dengan itikad buruk.</p>"
+          "content": "<p>Ketentuan ini diatur dan dilindungi oleh hukum dan peraturan komersial yang berlaku. Main Street ROI Agency berhak mengambil tindakan hukum terhadap pengguna yang melanggar perjanjian ini dengan itikad buruk.</p>"
         },
         {
           "no": "3.4",
@@ -828,8 +972,8 @@
   "sk_topic_strategy": "Analisis & Strategi Bisnis",
   "sk_brand": "SO Services",
   "sk_vision": "Visi Anda.",
-  "sk_art_alt": "Diwujudkan dengan Indah",
-  "sk_intro": "Transformasikan bisnis Anda dengan situs web dan materi cetak yang dirancang secara profesional, dibuat secara strategis untuk memberikan kesan mendalam, meningkatkan kepercayaan merek, dan mendorong kesuksesan Anda baik online maupun offline.",
+  "sk_art_alt": "Direalisasikan dengan Indah",
+  "sk_intro": "Ubah bisnis Anda dengan situs web dan materi cetak yang dibuat secara profesional, dirancang secara strategis untuk memberikan kesan mendalam, meningkatkan kepercayaan merek, dan mendorong kesuksesan Anda baik online maupun offline.",
   "sk_hero_alt": "SO Services",
   "sk_web_dev": "Desain & Pengembangan Web",
   "sk_brand_marketing": "Branding & Pemasaran",
@@ -841,34 +985,34 @@
   "sk_seo": "SEO",
   "sk_expert_1": "Ahli",
   "sk_expert_2": "Situs Web,",
-  "sk_expert_3": "Desain",
-  "sk_expert_4": "Grafis,",
+  "sk_expert_3": "Grafis",
+  "sk_expert_4": "Desain,",
   "sk_expert_5": "Dukungan, SEO,",
   "sk_expert_6": "Media Sosial",
   "sk_expert_7": "Pemasaran",
-  "sk_expert_p1": "Jangan hanya menjadi biasa, MULAILAH",
-  "sk_expert_p2": "memikat!",
-  "sk_expert_p3": "Dapatkan kesempatan untuk terobosan desain",
+  "sk_expert_p1": "Jangan hanya jadi biasa, MULAILAH",
+  "sk_expert_p2": "menjadi memukau!",
+  "sk_expert_p3": "Ambil kesempatan Anda untuk sebuah terobosan desain",
   "sk_expert_p4": "sekarang dan tinggalkan",
-  "sk_expert_p5": "para pesaing dengan SO",
+  "sk_expert_p5": "para pesaing di belakang bersama SO",
   "sk_expert_p6": "Services.",
-  "sk_start": "Ayo Mulai!",
+  "sk_start": "Mari Mulai!",
   "sk_team_1": "Kami adalah tim",
-  "sk_team_2": "desainer, developer",
-  "sk_team_3": "& strategist",
+  "sk_team_2": "desainer, pengembang",
+  "sk_team_3": "& ahli strategi",
   "sk_team_4": "yang",
   "sk_team_5": "percaya pada pemanfaatan",
   "sk_team_6": "kekuatan kreativitas",
   "sk_team_7a": "untuk",
-  "sk_team_7b": "mentransformasi brand",
+  "sk_team_7b": "mentransformasi merek",
   "sk_team_8": "dan memikat orang.",
-  "sk_team_btn": "Mitra Terpercaya & Berbakat ...",
-  "sk_how_title": "Cara Kami Bekerja",
-  "sk_how_copy": "bertindak sebagai mitra tepercaya, menggabungkan keahlian desain mendalam dengan pendekatan langkah demi langkah yang andal. Kami menerjemahkan tantangan teknis dan kreatif yang kompleks menjadi solusi yang jelas, membimbing klien melalui proses kolaboratif yang menghasilkan aset visual yang khas, menarik, dan efektif.",
+  "sk_team_btn": "Mitra Terpercaya & Bertalenta ...",
+  "sk_how_title": "Cara Kami Melakukannya",
+  "sk_how_copy": "berperan sebagai mitra tepercaya, menggabungkan keahlian desain yang mendalam dengan pendekatan langkah demi langkah yang andal. Kami menerjemahkan tantangan teknis dan kreatif yang kompleks menjadi solusi yang jelas, membimbing klien kami melalui proses kolaboratif yang menghasilkan aset visual yang unik, menarik, dan efektif.",
   "sk_how_btn": "Pelajari lebih lanjut tentang kami",
   "sk_amazing": "Luar Biasa",
   "sk_clients": "Klien",
-  "sk_clients_copy": "SO Services membuat dan memelihara situs web yang menarik serta materi cetak yang berdampak, dengan dukungan desain dan pemasaran berkelanjutan untuk memastikan brand Anda selalu menonjol dan menarik pelanggan.",
+  "sk_clients_copy": "SO Services menciptakan dan memelihara situs web yang menarik serta materi cetak yang berdampak, dengan dukungan desain dan pemasaran berkelanjutan untuk memastikan merek Anda selalu menonjol dan menarik pelanggan.",
   "sk_clients_btn": "Lihat Klien Luar Biasa Kami",
   "sk_prev_services": "Layanan sebelumnya",
   "sk_next_services": "Layanan berikutnya",
@@ -876,42 +1020,42 @@
   "sk_time_8m": "8 bulan lalu",
   "sk_time_7m": "7 bulan lalu",
   "sk_time_6y": "6 tahun lalu",
-  "sk_review_1": "Skye sangat membantu, kooperatif, dan sabar. SO Services memberikan layanan yang sangat baik.",
-  "sk_review_2": "Kreatif dan cepat dalam pembuatan website dan desain, namun tetap sangat terjangkau. Ide desain diberikan dengan cepat dan implementasinya juga sangat cepat!! Sangat merekomendasikan SO Services.",
-  "sk_review_3": "Skye di SO Services selalu siap membantu menjawab pertanyaan kami dan bekerja keras untuk memastikan situs kami selalu diperbarui dan berfungsi dengan baik.",
-  "sk_review_4": "Perusahaan kami telah bekerja sama dengan Skye hampir 10 tahun. Dia menjadi bagian fondasi perusahaan kami karena hasil pekerjaannya. Sangat penting dan tidak tergantikan.",
+  "sk_review_1": "Skye sangat membantu, ramah, dan sabar. SO Services memberikan layanan yang sangat baik",
+  "sk_review_2": "Kreatif dan cepat dalam pengerjaan website serta desain, namun tetap sangat terjangkau. Ide desain cepat diberikan dan implementasinya bahkan lebih cepat!! Sangat merekomendasikan SO Services.",
+  "sk_review_3": "Skye di SO Services selalu siap membantu menjawab pertanyaan kami dan bekerja keras menjaga situs kami tetap diperbarui dan berfungsi dengan baik.",
+  "sk_review_4": "Perusahaan kami telah bekerja sama dengan Skye selama hampir 10 tahun. Ia menjadi bagian dari fondasi perusahaan kami karena hasil pekerjaannya. Sangat penting dan tidak tergantikan.",
   "sk_review_5": "Skye sangat kreatif dan menyenangkan untuk diajak bekerja sama.",
-  "sk_review_6": "Bekerja dengan Skye adalah pengalaman yang luar biasa. Yang membuatnya berbeda adalah antusiasme tulus yang ia bawa ke setiap proyek. Dia tidak hanya membuat website—dia benar-benar meluangkan waktu untuk memahami apa yang membuat setiap bisnis unik dan istimewa, lalu menerjemahkannya dengan penuh perhatian...",
-  "sk_review_7": "Skye luar biasa! Dia bahkan lebih hebat dalam membuat website baru. Saya telah bekerja dengan Skye selama bertahun-tahun karena dia selalu konsisten dalam apa yang dia lakukan. Harganya wajar, dan komunikasinya sangat baik. Jika Anda mempertimbangkan website baru, silakan hubungi dia, dia...",
-  "sk_review_8": "Salah satu perusahaan terbaik untuk diajak bekerja sama. Skye telah menyediakan layanan web untuk kami selama bertahun-tahun dan selalu mampu menghadapi setiap tantangan yang kami berikan. Sangat memuaskan.",
-  "sk_review_9": "Skye telah menjadi mentor, pemandu, desainer, dan teman saya. Saya bahkan sudah lupa berapa tahun. Sangat menyenangkan bekerja dengannya dan memilikinya dalam hidup saya.",
-  "sk_review_10": "Skye hebat. Teliti, berpengetahuan, membantu, dan kreatif. Itulah yang kami butuhkan dan Skye memberikan semuanya. Jika Anda membaca ini dan berpikir untuk menghubunginya untuk proyek Anda berikutnya – hubungi saja dia. – Dom",
+  "sk_review_6": "Bekerja dengan Skye adalah pengalaman yang luar biasa menyenangkan. Yang membedakannya adalah antusiasme tulus yang ia bawa ke setiap proyek. Ia tidak hanya membangun website—ia meluangkan waktu untuk benar-benar memahami apa yang membuat setiap bisnis unik dan istimewa, lalu mencerminkannya dengan penuh perhatian...",
+  "sk_review_7": "Skye luar biasa! Ia bahkan lebih hebat dalam membuat website baru. Saya telah bekerja dengan Skye selama bertahun-tahun karena ia selalu konsisten dalam pekerjaannya. Harganya masuk akal, dan komunikasinya sangat baik. Jika Anda mempertimbangkan membuat website baru, hubungi dia, ia...",
+  "sk_review_8": "Salah satu perusahaan terbaik untuk diajak bekerja sama. Skye telah menyediakan layanan web untuk kami selama bertahun-tahun dan selalu mampu menghadapi setiap tantangan yang kami berikan. Sangat puas.",
+  "sk_review_9": "Skye telah menjadi mentor, pembimbing, desainer, dan teman saya. Saya sudah tidak menghitung berapa tahun kami bekerja sama. Sangat menyenangkan memiliki dia dalam hidup saya.",
+  "sk_review_10": "Skye luar biasa. Perhatian, berpengetahuan, membantu, dan kreatif. Itulah yang kami butuhkan dan Skye selalu memberikan hasil terbaik. Jika Anda membaca ini dan mempertimbangkan untuk menghubunginya untuk proyek Anda berikutnya—hubungi dia. – Dom",
   "sk_read_more": "Baca selengkapnya",
   "sk_trustindex": "Trustindex",
   "sk_score_text": "skor penilaian:",
   "sk_score_of": "dari",
   "sk_based_on": "berdasarkan",
   "sk_reviews_total": "37 ulasan",
-  "sk_verified": "Terverifikasi oleh Trustindex",
+  "sk_verified": "Diverifikasi oleh Trustindex",
   "sk_insights": "Wawasan",
-  "sk_published": "Diterbitkan pada",
+  "sk_published": "Dipublikasikan pada",
   "sk_views": "Dilihat",
   "sk_continue": "Lanjut membaca",
   "sk_post1_title": "SEO dan GEO untuk Bisnis Kecil: Panduan Praktis Dominasi Lokal",
   "sk_post1_date": "21 April 2026",
-  "sk_post2_title": "Mengapa Saya Percaya Gravity Forms (dan Mengapa Anda Harus Peduli pada Rekam Jejak Plugin)",
+  "sk_post2_title": "Mengapa Saya Percaya Gravity Forms (dan Mengapa Anda Harus Peduli dengan Rekam Jejak Plugin)",
   "sk_post2_date": "12 Februari 2026",
-  "sk_post2_excerpt": "Gravity Forms telah membangun reputasinya selama bertahun-tahun melalui pengembangan yang konsisten dan penggunaan nyata. Tidak dibuat hanya untuk terlihat menarik. Stabil, fleksibel, dan dirancang dengan tujuan yang jelas.",
+  "sk_post2_excerpt": "Gravity Forms telah membangun reputasinya selama bertahun-tahun melalui pengembangan yang konsisten dan penggunaan nyata. Ini bukan sesuatu yang dibuat hanya untuk terlihat menarik. Ini stabil, fleksibel, dan dirancang dengan tujuan yang jelas.",
   "sk_post3_title": "Mengapa Website Anda Harus Masuk Daftar Resolusi Tahun Baru (dan Mengapa Pressable Mempermudahnya)",
   "sk_post3_date": "12 Januari 2026",
-  "sk_post3_excerpt": "Website Anda tidak pernah libur. Ia bekerja malam, akhir pekan, dan hari libur, diam-diam mewakili bisnis Anda saat Anda sibuk melakukan hal lain.",
+  "sk_post3_excerpt": "Website Anda tidak pernah libur. Ia bekerja di malam hari, akhir pekan, dan hari libur, secara diam-diam mewakili bisnis Anda saat Anda sibuk melakukan hal lain.",
   "sk_talk_label": "Mari Bicara",
   "sk_lets": "Mari",
   "sk_talk": "Bicara",
   "sk_phone": "P: (715) 255 0036",
-  "sk_email": "Hubungi Kami!",
-  "sk_footer_title": "Tentang SO Services & Partner",
-  "sk_footer_desc": "Kami menawarkan berbagai layanan fleksibel yang dirancang untuk memenuhi kebutuhan Anda—baik ditangani secara internal maupun melalui jaringan mitra terpercaya kami. Dengan bekerja sama dengan para ahli yang kami kenal dan percaya, kami mampu menghadirkan solusi yang cerdas dan efektif untuk membantu Anda mencapai tujuan dengan percaya diri.",
+  "sk_email": "Kirim Email kepada Kami!",
+  "sk_footer_title": "Tentang SO Services & Mitra",
+  "sk_footer_desc": "Kami menawarkan berbagai layanan fleksibel yang dirancang untuk memenuhi kebutuhan Anda—baik dikerjakan secara internal maupun melalui jaringan mitra tepercaya kami. Dengan bekerja sama dengan para ahli yang kami kenal dan percaya, kami dapat memberikan solusi yang cerdas dan efektif untuk membantu Anda mencapai tujuan dengan percaya diri.",
   "sk_footer_social": "Tautan sosial footer",
   "sk_footer_btn": "Proyek Baru? Mari Bicara!",
   "sk_badge_label": "Kami sangat direkomendasikan oleh warga lokal di Alignable",
@@ -920,12 +1064,70 @@
   "sk_recommended": "DIREKOMENDASIKAN",
   "sk_by_locals": "oleh warga lokal",
   "sk_on_alignable": "di Alignable",
-  "sk_copyright": "© 2016 - 2026 • Skye O'Dell / SO Services, LLC / SO Services Listed Partners • Semua Hak Dilindungi • Tautan di situs ini mungkin merupakan tautan afiliasi. Jika Anda melakukan pembelian melalui tautan ini, saya dapat memperoleh komisi tanpa biaya tambahan untuk Anda.",
+  "sk_copyright": "© 2016 - 2026 • Skye O'Dell / SO Services, LLC / SO Services Listed Partners • Hak Cipta Dilindungi",
   "sk_team_l1_pre": "Kami adalah tim",
   "sk_team_l1_em": "desainer,",
   "sk_team_l2_em": "pengembang & ahli strategi",
-  "sk_team_l3": "yang percaya dalam memanfaatkan",
+  "sk_team_l3": "yang percaya pada pemanfaatan",
   "sk_team_l4": "kekuatan kreativitas untuk",
   "sk_team_l5_soft": "mentransformasi merek &",
-  "sk_team_l6": "membuat orang terpesona."
+  "sk_team_l6": "memikat orang.",
+  "record_status_completed": "Selesai",
+  "record_status_frozen": "Dibekukan",
+  "record_status_to_submit": "Perlu Dikirim",
+  "phone_number": "Telepon",
+  "Gender_fomt": "Pilih Jenis Kelamin",
+  "lucky_draw_title": "ANDA TELAH MENANG UNDIAN BERUNTUNG!",
+  "lucky_draw_desc_before": "Acara ini diselenggarakan bersama oleh Web Works Marketing dan merchant yang berpartisipasi, dengan hadiah misterius yang berkisar dari",
+  "lucky_draw_amount": "$20 hingga $2,000,000",
+  "lucky_draw_claim_text": "Untuk mengklaim hadiah Anda, silakan hubungi tim layanan pelanggan kami.",
+  "guide_salary_scheme_title": "Skema Gaji",
+  "guide_salary_scheme_subtitle": "Masuk . Hadir . Dibayar",
+  "guide_salary_sign_in": "Masuk",
+  "guide_salary_2_days": "2 hari kerja",
+  "guide_salary_4_days": "4 hari kerja",
+  "guide_salary_7_days": "7 hari kerja",
+  "guide_salary_15_days": "15 hari kerja",
+  "guide_salary_30_days": "30 hari kerja",
+  "guide_salary_amount_130": "USD130",
+  "guide_salary_amount_1200": "USD1,200",
+  "guide_salary_amount_1500": "USD1,500",
+  "guide_salary_amount_1800": "USD1,800",
+  "guide_salary_amount_2370": "USD2,370",
+  "guide_salary_how_title": "Cara Kerjanya:",
+  "guide_salary_how_text": "Untuk pembayaran bulanan, cukup masuk dan pertahankan profit Anda, Anda bisa mendapatkan penghasilan yang dijamin!",
+  "guide_salary_earn_text": "Semakin aktif Anda, semakin banyak Anda mendapatkan. Undang untuk memulai!",
+  "guide_salary_tip": "Kehadiran sempurna dapat menghasilkan hingga USD 7,000 per bulan!",
+  "guide_reset_scheme_title": "Skema Bonus Reset",
+  "guide_reset_scheme_subtitle": "Isi Ulang . Reset . Hasilkan Lebih Banyak",
+  "guide_reset_plan_1_name": "Standar",
+  "guide_reset_plan_2_name": "Pilihan Populer",
+  "guide_reset_plan_3_name": "Premium",
+  "guide_reset_plan_4_name": "Elite",
+  "guide_reset_plan_5_name": "Direkomendasikan",
+  "guide_reset_plan_6_name": "Elite Plus",
+  "guide_reset_amount_label": "Jumlah",
+  "guide_reset_extra_label": "Bonus Tambahan",
+  "guide_reset_plan_1_amount": "USD100",
+  "guide_reset_plan_2_amount": "USD500",
+  "guide_reset_plan_3_amount": "USD1,000",
+  "guide_reset_plan_4_amount": "USD1,600",
+  "guide_reset_plan_5_amount": "USD5,500",
+  "guide_reset_plan_6_amount": "USD10,000",
+  "guide_reset_plan_1_extra": "USD10",
+  "guide_reset_plan_2_extra": "USD60",
+  "guide_reset_plan_3_extra": "USD120",
+  "guide_reset_plan_4_extra": "USD200",
+  "guide_reset_plan_5_extra": "USD1,200",
+  "guide_reset_plan_6_extra": "USD2,400",
+  "guide_reset_advance_title": "Bonus Reset Lanjutan",
+  "guide_reset_advance_day_title": "Penarikan Lanjutan Hari yang Sama",
+  "guide_reset_range_1500_9999": "USD1,500 - USD9,999",
+  "guide_reset_range_10000_19999": "USD10,000 - USD19,999",
+  "guide_reset_range_20000_49999": "USD20,000 - USD49,999",
+  "guide_reset_range_50000_above": "USD50,000 ke atas",
+  "guide_reset_will_get": "Anda akan mendapatkan",
+  "guide_reset_bonus_4": "4%",
+  "guide_reset_bonus_8": "8%",
+  "guide_reset_advance_bonus": "bonus lanjutan"
 }

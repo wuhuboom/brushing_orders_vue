@@ -377,6 +377,9 @@ const ruleForm = reactive({
     inviteCode: "",
 });
 
+const REGISTER_FORM_CACHE_KEY = "skye_register_form_cache";
+const REGISTER_FORM_CACHE_MAX_AGE = 30 * 60 * 1000;
+
 const rules = computed(() => {
     return {};
 });
@@ -438,8 +441,70 @@ async function getNeedPhoneConfig() {
     }
 }
 
+function clearRegisterFormCache() {
+    try {
+        sessionStorage.removeItem(REGISTER_FORM_CACHE_KEY);
+    } catch (error) {}
+}
+
+function saveRegisterFormCache() {
+    try {
+        sessionStorage.setItem(
+            REGISTER_FORM_CACHE_KEY,
+            JSON.stringify({
+                timestamp: Date.now(),
+                ruleForm: {
+                    username: ruleForm.username || "",
+                    phone: ruleForm.phone || "",
+                    password: ruleForm.password || "",
+                    tradePassword: ruleForm.tradePassword || "",
+                    sex: ruleForm.sex,
+                    inviteCode: ruleForm.inviteCode || "",
+                },
+                agentPassword: agentPassword.value || "",
+                checked: checked.value,
+            }),
+        );
+    } catch (error) {}
+}
+
+function restoreRegisterFormCache() {
+    try {
+        const cache = sessionStorage.getItem(REGISTER_FORM_CACHE_KEY);
+        if (!cache) return false;
+
+        const data = JSON.parse(cache);
+        clearRegisterFormCache();
+
+        if (
+            !data?.timestamp ||
+            Date.now() - Number(data.timestamp) > REGISTER_FORM_CACHE_MAX_AGE
+        ) {
+            return false;
+        }
+
+        const cachedRuleForm = data.ruleForm || {};
+        const cachedSex = Number(cachedRuleForm.sex);
+
+        ruleForm.username = cachedRuleForm.username || "";
+        ruleForm.phone = cachedRuleForm.phone || "";
+        ruleForm.password = cachedRuleForm.password || "";
+        ruleForm.tradePassword = cachedRuleForm.tradePassword || "";
+        ruleForm.sex = [1, 2].includes(cachedSex) ? cachedSex : null;
+        ruleForm.inviteCode = cachedRuleForm.inviteCode || "";
+        agentPassword.value = data.agentPassword || "";
+        checked.value = Boolean(data.checked);
+
+        return true;
+    } catch (error) {
+        clearRegisterFormCache();
+        return false;
+    }
+}
+
 function toLogin() {
     if (switchLeaving.value) return;
+    clearRegisterFormCache();
     switchLeaving.value = true;
     window.setTimeout(() => {
         router.replace("/account/login");
@@ -514,6 +579,7 @@ function sendCode() {
     isSubmitting.value = true;
     register(submitForm)
         .then(() => {
+            clearRegisterFormCache();
             showToast(t("registration_successful"));
             return router.push({
                 path: "/account/login",
@@ -533,6 +599,7 @@ function getHashParam(key) {
 }
 
 const jump = () => {
+    saveRegisterFormCache();
     router.push({
         path: "/tc",
     });
@@ -545,8 +612,13 @@ const jumpToService = () => {
 };
 
 onMounted(() => {
+    restoreRegisterFormCache();
+
     const code = getHashParam("code");
-    ruleForm.inviteCode = code;
+    if (code) {
+        ruleForm.inviteCode = code;
+    }
+
     getNeedPhoneConfig();
 });
 </script>
