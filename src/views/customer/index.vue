@@ -54,12 +54,12 @@
                         </div>
                     </div>
                     <div class="customer-card__aside">
-                        <div
+                        <!-- <div
                             class="customer-card__badge"
                             :class="index === 0 ? 'is-online' : 'is-reply'"
                         >
                             {{ index === 0 ? $t("online") : $t("reply_24h") }}
-                        </div>
+                        </div> -->
                         <img
                             class="customer-card__aside-arrow"
                             src="@/static/images/rightarrow.png"
