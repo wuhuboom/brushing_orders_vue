@@ -340,7 +340,6 @@ import {
 import { useI18n } from "vue-i18n";
 import TaskOrderDialog from "@/components/TaskOrderDialog.vue";
 import {
-    userGetInfo,
     getGoodsListTwo,
     createOrder,
     submitOrder,
@@ -610,7 +609,7 @@ const doCreateOrder = () => {
             showCenter.value = true;
             currentStep.value = 1;
             showInsufficientWarning.value = false;
-            userGetInfoMethods();
+            userGetInfoMethods({ force: true });
             goods.value = res.data;
         })
         .catch((err) => {
@@ -638,7 +637,7 @@ const submitForm = () => {
     submitOrder(goods.value.id)
         .then((res) => {
             closeToast();
-            userGetInfoMethods();
+            userGetInfoMethods({ force: true });
             if (res.code == 201) {
                 goods.value = res.data;
             }
@@ -689,13 +688,18 @@ onUnmounted(() => {
 const userLevel = ref("");
 const orderCount = ref(0);
 
-const userGetInfoMethods = () => {
-    userGetInfo().then((res) => {
-        userInfo.value = res.data;
-        avatarUrl.value = `${url}${res.data.userLevel.icon}`;
-        orderCount.value = res.data.userLevel.orderCount;
-        userLevel.value = res.data.userLevel.nameEn;
-    });
+const syncUserInfo = (info = {}) => {
+    userInfo.value = info || {};
+    const levelInfo = info?.userLevel || {};
+    avatarUrl.value = levelInfo.icon ? `${url}${levelInfo.icon}` : "";
+    orderCount.value = levelInfo.orderCount || 0;
+    userLevel.value = levelInfo.nameEn || "";
+};
+
+const userGetInfoMethods = async (options = {}) => {
+    const info = await userStore.getUserInfo(options);
+    syncUserInfo(info);
+    return info;
 };
 
 onMounted(() => {

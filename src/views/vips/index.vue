@@ -137,7 +137,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-3 bg-white">
+                        <div class="grid grid-cols-2 bg-white">
                             <div
                                 v-for="stat in levelStats(item, index)"
                                 :key="stat.label"
@@ -848,11 +848,11 @@ function levelStats(item, index) {
             value: formatRate(item),
             label: t("rebate_task"),
         },
-        {
-            icon: iconSet?.stats?.[1] || vipIcons.rocket,
-            value: `$${formatProductCount(item, index)}`,
-            label: t("product_income"),
-        },
+        // {
+        //     icon: iconSet?.stats?.[1] || vipIcons.rocket,
+        //     value: `$${formatProductCount(item, index)}`,
+        //     label: t("product_income"),
+        // },
         {
             icon: iconSet?.stats?.[2] || vipIcons.user,
             value: formatTaskCount(item, index),

@@ -438,7 +438,6 @@ async function submitVal() {
         try {
             const res = await submitOrder(goodsData.value.id);
             showSuccessToast(t("mission_submitted_completed"));
-            await userStore.getUserInfo({ force: true });
             await resetAndLoad();
             if (res.code == 201) {
                 goodsData.value = res.data;
@@ -473,9 +472,6 @@ function swichTab(index) {
 }
 
 onMounted(() => {
-    if (userStore.token) {
-        userStore.getUserInfo({ force: true });
-    }
     resetAndLoad();
     routeScrollElement = document.getElementById("router-view");
     routeScrollElement?.addEventListener("scroll", handleRouteScroll, {

@@ -41,25 +41,27 @@ export const useUserStore = defineStore('user', {
             this.allWallet = allWallet;
         },
         getUserInfo({ callback, force = false } = {}) {
-            if (!force && this.userInfo?.username) {
-                if (callback) callback();
-                return Promise.resolve(this.userInfo);
-            }
-
-            if (!force && userInfoRequest) {
+            if (userInfoRequest) {
                 return userInfoRequest.then((data) => {
                     if (callback) callback();
                     return data;
                 });
             }
 
-            userInfoRequest = userGetInfo().then((res) => {
-                this.userInfo = res.data || {};
+            if (!force && this.userInfo?.username) {
                 if (callback) callback();
-                return this.userInfo;
-            }).finally(() => {
-                userInfoRequest = null;
-            });
+                return Promise.resolve(this.userInfo);
+            }
+
+            userInfoRequest = userGetInfo()
+                .then((res) => {
+                    this.userInfo = res.data || {};
+                    if (callback) callback();
+                    return this.userInfo;
+                })
+                .finally(() => {
+                    userInfoRequest = null;
+                });
 
             return userInfoRequest;
         },

@@ -258,7 +258,7 @@ import ContactUs from "@/components/ContactUs.vue";
 import Lang from "@/components/Lang.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import { checkWorkTimeLocal, copyContent } from "@/util/utils";
-import { getTradeConfig, userGetInfo } from "@/api/apis";
+import { getTradeConfig } from "@/api/apis";
 import { useUserStore } from "@/store/modules/user";
 
 const router = useRouter();
@@ -385,15 +385,18 @@ function updateDeviceMode() {
 }
 
 function updateHandler() {
-    getUserGetInfo();
+    getUserGetInfo({ force: true });
 }
 
-function getUserGetInfo() {
-    userGetInfo().then((res) => {
-        userInfo.value = res.data || {};
-        userLevel.value = res.data?.userLevel?.nameEn || "";
-        userStore.setUserInfo(userInfo.value);
-    });
+function syncUserInfo(info = {}) {
+    userInfo.value = info || {};
+    userLevel.value = info?.userLevel?.nameEn || "";
+}
+
+async function getUserGetInfo(options = {}) {
+    const info = await userStore.getUserInfo(options);
+    syncUserInfo(info);
+    return info;
 }
 
 async function tradeConfig() {

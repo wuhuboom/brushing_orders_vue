@@ -429,7 +429,7 @@ watch(
         }
 
         if (userStore.token) {
-            userStore.getUserInfo();
+            userStore.getUserInfo({ force: isMainTabRoute(route.path) });
         }
     },
     { immediate: true },
