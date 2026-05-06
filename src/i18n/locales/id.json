@@ -368,7 +368,7 @@
   "home_upgrade_vip_to_unlock_more_tasks": "Upgrade VIP untuk membuka lebih banyak tugas",
   "home_higher_level_higher_earnings": "Level lebih tinggi, penghasilan lebih tinggi",
   "home_featured_partner": "Mitra unggulan",
-  "home_partner_company": "Skye Odell (SO Services)",
+  "home_partner_company": "Skye O'Dell (SO Services)",
   "home_partner_tagline": "Visi Anda. Direalisasikan dengan indah.",
   "home_partner_description": "Agensi kreatif digital dan pemasaran terpadu mulai dari pembangunan brand dan pengembangan website hingga pemasaran skala penuh, membantu brand Anda mencapai pertumbuhan yang berbeda secara online dan offline.",
   "home_content_creation": "Pembuatan konten",
@@ -423,7 +423,7 @@
   "task_instructions": "Instruksi tugas",
   "task_instruction_1": "1. Setelah menerima tugas, selesaikan pesanan dalam waktu 30 menit.",
   "task_instruction_2": "2. Jangan membatalkan atau mengubah pesanan.",
-  "task_instruction_3": "3. Ambil tangkapan layar setelah melakukan pesanan sebagai bukti.",
+  "task_instruction_3": "3. Mungkin terdapat sedikit keterlambatan setelah melakukan pesanan. Harap menunggu dengan sabar",
   "task_instruction_4": "4. Komisi akan dikreditkan setelah konfirmasi.",
   "mystery_blind_box": "Kotak Misteri",
   "reset": "Reset",
@@ -475,7 +475,7 @@
   "bind_wallet_account": "Tautkan akun dompet",
   "account_encrypted_notice": "Informasi akun Anda dienkripsi dan dilindungi. Kami tidak akan membagikannya kepada pihak ketiga.",
   "our_certifications": "Sertifikasi kami",
-  "certifications_desc": "ShopReward beroperasi di bawah kepatuhan regulasi yang ketat dengan semua lisensi dan sertifikasi keamanan yang diperlukan untuk melindungi pengguna kami.",
+  "certifications_desc": "Skye O'Dell beroperasi dengan kepatuhan regulasi yang ketat serta memiliki semua lisensi dan sertifikasi keamanan yang diperlukan untuk melindungi pengguna kami.",
   "documents": "Dokumen",
   "images": "Gambar",
   "sections": "Bagian",
@@ -518,7 +518,7 @@
   "frequently_asked_questions": "Pertanyaan yang sering diajukan",
   "find_instant_answers": "Temukan jawaban instan untuk pertanyaan umum",
   "terms_last_updated": "Terakhir diperbarui: 15 Januari 2025. Harap baca dengan seksama sebelum menggunakan layanan kami.",
-  "terms_continue_notice": "Dengan terus menggunakan ShopReward, Anda mengakui bahwa Anda telah membaca, memahami, dan setuju untuk terikat oleh semua ketentuan dalam dokumen ini.",
+  "terms_continue_notice": "Dengan terus menggunakan Skye O'Dell, Anda mengakui bahwa Anda telah membaca, memahami, dan setuju untuk terikat oleh semua ketentuan yang tercantum dalam dokumen ini.",
   "table_of_contents": "Daftar isi",
   "terms_update_alert": "Ketentuan ini terakhir diperbarui pada 15 Januari 2025. Penggunaan platform setelah pembaruan berarti Anda menyetujui ketentuan yang telah direvisi. Hubungi support{'@'}shopreward.com jika ada pertanyaan.",
   "vip_five_star_title": "VIP Bintang Lima SUG",
@@ -776,70 +776,70 @@
   ],
   "clause_sections": [
     {
-      "title": "Untuk melakukan optimasi dan reset akun, Anda harus terlebih dahulu menyelesaikan semua penilaian dengan jumlah minimum 50 USD dan jumlah reset akun minimum 100 USD.",
-      "content": "<p>1.1) Pengguna yang telah menyelesaikan satu set misi harus menghubungi layanan pelanggan untuk meminta reset guna memulai set tugas berikutnya</p>"
+      "title": "Peningkatan dan Reset Akun",
+      "content": "<p>1.1 Pengguna harus menyelesaikan semua misi penilaian dengan jumlah partisipasi minimum sebesar 50 USD dan mempertahankan jumlah minimum reset akun sebesar 100 USD.</p><p>1.2 Setelah menyelesaikan setiap set misi, pengguna harus menghubungi layanan pelanggan untuk mengajukan reset akun sebelum memulai set berikutnya.</p>"
     },
     {
-      "title": "Penarikan pengguna dan persyaratan penarikan sistem / keamanan dana pengguna",
-      "content": "<p>2.1) Setiap pengguna harus menyelesaikan semua misi optimasi sebelum memenuhi persyaratan penarikan sistem</p><p>2.2) Untuk menghindari kehilangan dana, semua penarikan diproses secara otomatis oleh sistem dan bukan secara manual</p><p>2.3) Semua pengguna tidak diperbolehkan mengajukan penarikan di tengah misi untuk menghindari gangguan pada operasional merchant</p><p>2.4) Dana pengguna sepenuhnya aman di platform dan platform akan bertanggung jawab atas setiap kehilangan yang tidak disengaja</p>"
+      "title": "Penarikan dan Keamanan Dana",
+      "content": "<p>2.1 Pengguna harus menyelesaikan semua misi optimasi sebelum memenuhi syarat untuk melakukan penarikan.</p><p>2.2 Untuk mencegah potensi kehilangan dana, semua penarikan diproses secara otomatis oleh sistem dan tidak dapat dilakukan secara manual.</p><p>2.3 Pengguna tidak diperbolehkan mengajukan penarikan selama misi masih berlangsung untuk menghindari gangguan pada operasional merchant.</p><p>2.4 Dana pengguna dijamin aman di platform, dan platform bertanggung jawab atas kerugian yang disebabkan oleh kesalahan sistem.</p>"
     },
     {
-      "title": "Harap jangan membagikan kata sandi akun dan kata sandi penarikan Anda kepada orang lain. Platform tidak bertanggung jawab atas kerugian atau kerusakan yang terjadi",
-      "content": "<p>3.1) Semua pengguna disarankan untuk menjaga keamanan akun mereka agar tidak terjadi kebocoran</p><p>3.2) Platform tidak bertanggung jawab atas kebocoran akun yang tidak disengaja</p><p>3.3) Karena akun memiliki implikasi finansial, penting untuk tidak membagikannya guna menghindari masalah yang tidak perlu</p><p>3.4) Untuk kata sandi penarikan, disarankan untuk tidak menggunakan tanggal lahir, nomor KTP, atau nomor ponsel, dan disarankan untuk menggunakan kata sandi yang lebih kuat untuk melindungi dana Anda</p><p>3.5) Jika Anda lupa kata sandi, Anda dapat meresetnya dengan menghubungi layanan online dan pastikan untuk menggantinya sendiri setelah itu</p>"
+      "title": "Keamanan Akun dan Kata Sandi",
+      "content": "<p>3.1 Pengguna tidak boleh membagikan kata sandi login atau penarikan kepada pihak lain.</p><p>3.2 Pengguna bertanggung jawab untuk menjaga kerahasiaan informasi akun mereka.</p><p>3.3 Platform tidak bertanggung jawab atas kerugian yang disebabkan oleh kebocoran data akun secara tidak sengaja.</p><p>3.4 Pengguna disarankan untuk tidak menggunakan kata sandi yang mudah ditebak (misalnya tanggal lahir, nomor identitas, atau nomor telepon). Disarankan menggunakan kata sandi yang kuat untuk melindungi dana.</p><p>3.5 Jika pengguna lupa kata sandi, mereka dapat meresetnya melalui layanan pelanggan online dan harus menggantinya setelah itu.</p>"
     },
     {
-      "title": "Semua produk dalam suatu misi ditetapkan secara acak oleh sistem dan tidak dapat diubah, dibatalkan, dikendalikan, atau dilewati dengan cara apa pun",
-      "content": "<p>4.1) Karena banyaknya pengguna di platform, distribusi produk kombinasi tidak dapat dilakukan secara manual, sehingga semua data produk tugas didistribusikan secara acak oleh sistem</p><p>4.2) Produk kombinasi dirilis secara acak oleh sistem dan tidak dapat diubah/dibatalkan/dilewati oleh pengguna maupun staf mana pun</p>"
+      "title": "Penugasan Produk Misi",
+      "content": "<p>4.1 Semua produk atau tugas dalam misi ditugaskan secara otomatis dan acak oleh sistem dan tidak dapat diubah, dibatalkan, dikontrol, atau dilewati.</p><p>4.2 Karena jumlah pengguna yang besar, platform tidak melakukan penugasan kombinasi produk secara manual. Semua data produk didistribusikan secara acak oleh sistem.</p>"
     },
     {
-      "title": "Tindakan hukum akan diambil jika terjadi penyalahgunaan akun",
-      "content": ""
+      "title": "Penyalahgunaan Akun",
+      "content": "Tindakan hukum akan diambil terhadap setiap penyalahgunaan atau aktivitas penipuan yang melibatkan akun pengguna."
     },
     {
-      "title": "Setiap data produk berasal dari merchant yang berbeda, tidak boleh melakukan deposit lebih dari 10 menit, dan setiap deposit harus dikonfirmasi melalui layanan online untuk memastikan detail deposit merchant",
-      "content": ""
+      "title": "Persyaratan Deposit (Advance)",
+      "content": "Setiap produk dalam sebuah misi dapat berasal dari merchant yang berbeda. Tidak ada deposit yang boleh tertunda lebih dari 10 menit, dan setiap deposit harus dikonfirmasi melalui layanan online untuk memverifikasi detail merchant."
     },
     {
-      "title": "Platform tidak bertanggung jawab atas deposit yang dilakukan ke detail yang salah",
-      "content": ""
+      "title": "Informasi Deposit yang Salah",
+      "content": "Platform tidak bertanggung jawab atas kerugian yang disebabkan oleh deposit ke detail akun yang salah atau tidak terverifikasi."
     },
     {
-      "title": "Setiap optimasi data produk harus diselesaikan dalam waktu 24 jam, jika tidak diselesaikan dan menyebabkan keluhan dari merchant, pengguna harus menanggung tanggung jawab atas pelanggaran kontrak",
-      "content": ""
+      "title": "Batas Waktu Penyelesaian",
+      "content": "Setiap set misi optimasi harus diselesaikan dalam waktu 24 jam. Kegagalan untuk melakukannya dapat menyebabkan keluhan dari merchant, dan pengguna akan menanggung konsekuensi pelanggaran kontrak yang timbul."
     },
     {
-      "title": "Jika akun mendapatkan keluhan dari merchant, sistem akan mengurangi skor kredit. Jika skor kredit akun di bawah 98, maka tidak dapat mengajukan penarikan. Skor kredit akan dihitung secara otomatis oleh sistem setelah menyelesaikan setiap set misi",
-      "content": ""
+      "title": "Pengurangan Skor Kredit",
+      "content": "Jika merchant mengajukan keluhan, sistem akan mengurangi skor kredit pengguna. Akun dengan skor kredit di bawah 98 tidak memenuhi syarat untuk penarikan. Sistem akan menghitung ulang skor kredit secara otomatis setelah setiap set misi selesai."
     }
   ],
   "faq_sections": [
     {
-      "title": "Mulai Misi Optimasi Produk",
-      "content": "<p>1.1) Saldo akun minimum sebesar 50 USD untuk 40 misi pertama per set.</p><p>1.2) Diperlukan pembaruan minimum sebesar 100 USD untuk memulai misi baru.</p><p>1.3) Pengguna harus menyelesaikan misi sebelum dapat mengajukan penarikan.</p>"
+      "title": "Misi Peningkatan Produk",
+      "content": "<p>1.1 Saldo minimum akun sebesar USD 50 diperlukan untuk memulai 40 misi pertama.</p><p>1.2 Diperlukan minimal pembaruan (advance) sebesar USD 100 untuk memulai set misi baru.</p><p>1.3 Pengguna harus menyelesaikan semua misi yang ditugaskan sebelum mengajukan permintaan penarikan.</p>"
     },
     {
-      "title": "Penarikan",
-      "content": "<p>2.1) Pengguna harus menyelesaikan misi sebelum dapat mengajukan penarikan.</p><p>2.2) Anda tidak dapat mengajukan penarikan atau pengembalian dana jika memilih untuk berhenti atau menarik diri di tengah proses optimasi misi.</p><p>2.3) Penarikan tidak dapat diproses jika permintaan penarikan dari pengguna belum diterima.</p><p>2.4) Batas maksimum penarikan untuk pengguna VIP1 adalah 10.000 USD, untuk VIP2 adalah 30.000 USD. Tidak ada batas maksimum penarikan untuk VIP3 ke atas.</p><p>2.5) Untuk memberikan layanan yang lebih profesional dan efisien kepada pengguna kami, akun dengan saldo di atas 60.000 USD diwajibkan menggunakan jalur penarikan volume tinggi. Jalur ini memungkinkan penarikan penuh satu kali yang lebih cepat dan aman.</p><p>2.6) Akun pengguna memiliki skor kredit yang tidak mencukupi dan tidak dapat menggunakan semua fungsi platform secara normal.</p>"
+      "title": "Penarikan Dana",
+      "content": "<p>2.1 Pengguna harus menyelesaikan semua misi sebelum memenuhi syarat untuk mengajukan penarikan.</p><p>2.2 Jika pengguna memilih untuk meninggalkan atau keluar dari proses peningkatan misi yang sedang berlangsung, maka permintaan penarikan atau pengembalian dana tidak akan diterima.</p><p>2.3 Penarikan tidak dapat diproses kecuali permintaan penarikan yang valid telah diajukan.</p><p>2.4 Jumlah maksimum penarikan untuk pengguna VIP1 adalah USD 10.000, dan USD 30.000 untuk VIP2. VIP3 ke atas tidak memiliki batas maksimum penarikan.</p><p>2.5 Untuk memastikan layanan yang lebih cepat dan aman, akun dengan saldo melebihi USD 60.000 diwajibkan menggunakan saluran penarikan volume tinggi platform, yang memungkinkan penarikan penuh satu kali untuk semua dana.</p><p>2.6 Akun dengan skor kredit yang tidak mencukupi dapat dibatasi dalam mengakses fitur tertentu di platform.</p>"
     },
     {
       "title": "Dana",
-      "content": "<p>3.1) Semua dana akan disimpan dengan aman di akun pengguna dan dapat ditarik sepenuhnya setelah semua data selesai</p><p>3.2) Untuk menghindari kehilangan dana, semua data akan diproses oleh sistem dan bukan secara manual</p><p>3.3) Platform akan bertanggung jawab penuh atas setiap kehilangan dana yang tidak disengaja.</p><p>3.4) Jika dana pengguna melebihi batas pajak pemerintah, pengguna wajib membayar pajak</p>"
+      "content": "<p>3.1 Semua dana disimpan dengan aman di akun pengguna dan dapat ditarik sepenuhnya setelah semua misi data terkait telah diselesaikan.</p><p>3.2 Untuk mencegah ketidaksesuaian finansial, semua pemrosesan data dilakukan secara otomatis oleh sistem, bukan secara manual.</p><p>3.3 Platform bertanggung jawab penuh atas setiap kehilangan dana pengguna yang tidak disengaja.</p><p>3.4 Jika dana pengguna melebihi ambang pajak yang ditetapkan pemerintah, pengguna bertanggung jawab untuk membayar semua pajak yang berlaku.</p>"
     },
     {
       "title": "Keamanan Akun",
-      "content": "<p>4.1) Harap jangan membagikan kata sandi login dan kata sandi penarikan kepada orang lain, karena platform tidak bertanggung jawab atas kerugian apa pun.</p><p>4.2) Pengguna tidak disarankan menggunakan tanggal lahir, nomor identitas, atau nomor ponsel sebagai kata sandi login atau kata sandi penarikan.</p><p>4.3) Jika Anda lupa kata sandi login atau kata sandi penarikan, silakan hubungi layanan online kami untuk meresetnya.</p>"
+      "content": "<p>4.1 Pengguna tidak boleh mengungkapkan kata sandi login atau penarikan kepada pihak ketiga mana pun. Platform tidak bertanggung jawab atas kerugian akibat pengungkapan tanpa izin.</p><p>4.2 Pengguna sangat disarankan untuk tidak menggunakan tanggal lahir, nomor identitas, atau nomor telepon sebagai kata sandi login atau penarikan.</p><p>4.3 Jika pengguna lupa kata sandi login atau penarikan, silakan hubungi layanan pelanggan online kami untuk mengatur ulang kata sandi.</p>"
     },
     {
       "title": "Data Produk Umum",
-      "content": "<p>5.1) Keuntungan platform dibagi menjadi keuntungan data produk normal dan keuntungan data produk kombinasi 10 kali lipat</p><p>5.2) Pengguna normal akan mendapatkan 0,5% keuntungan untuk setiap misi optimasi produk normal</p><p>5.3) Pengguna VIP 2 akan mendapatkan 1% keuntungan untuk setiap misi optimasi produk normal</p><p>5.4) Pengguna VIP 3 akan mendapatkan 1,5% keuntungan untuk setiap misi optimasi produk normal</p><p>5.5) Pengguna VIP 4 akan mendapatkan 2% keuntungan untuk setiap misi optimasi produk normal</p><p>5.6) Pengguna VIP 5 akan mendapatkan 2,5% keuntungan untuk setiap misi optimasi produk normal</p><p>5.7) Dana dan keuntungan akan dikembalikan ke akun pengguna setelah setiap misi optimasi selesai</p><p>5.8) Sistem akan secara acak menetapkan tugas ke akun pengguna berdasarkan total saldo akun</p><p>5.9) Setelah tugas optimasi produk ditetapkan ke akun pengguna, tugas tersebut tidak dapat dibatalkan atau dilewati</p>"
+      "content": "<p>5.1 Kategori keuntungan platform mencakup keuntungan data produk normal dan keuntungan data produk kombinasi 10×.</p><p>5.2 Pengguna normal mendapatkan keuntungan 0,5% untuk setiap misi peningkatan normal yang diselesaikan.</p><p>5.3 Pengguna VIP2 mendapatkan keuntungan 1% untuk setiap misi peningkatan normal yang diselesaikan.</p><p>5.4 Pengguna VIP3 mendapatkan keuntungan 1,5% untuk setiap misi peningkatan normal yang diselesaikan.</p><p>5.5 Pengguna VIP4 mendapatkan keuntungan 2% untuk setiap misi peningkatan normal yang diselesaikan.</p><p>5.6 Pengguna VIP5 mendapatkan keuntungan 2,5% untuk setiap misi peningkatan normal yang diselesaikan.</p><p>5.7 Dana dan keuntungan akan secara otomatis dikreditkan kembali ke akun pengguna setelah setiap misi selesai.</p><p>5.8 Misi ditugaskan secara acak oleh sistem berdasarkan total saldo akun pengguna.</p><p>5.9 Setelah misi peningkatan produk ditugaskan kepada pengguna, misi tersebut tidak dapat dibatalkan atau dilewati.</p>"
     },
     {
       "title": "Data Produk Kombinasi",
-      "content": "<p>6.1) Data Produk Kombinasi terdiri dari 1 hingga 3 data, pengguna tidak selalu mendapatkan 3 produk, sistem akan secara acak menetapkan data dalam produk kombinasi, dan pengguna memiliki kemungkinan lebih besar mendapatkan 1 atau 2 produk</p><p>6.2) Pengguna akan mendapatkan keuntungan 10 kali lipat untuk setiap produk kombinasi dibandingkan produk normal</p><p>6.3) Setelah menerima produk kombinasi, semua dana akan berhenti berputar dan akan dikembalikan ke akun setelah Anda menyelesaikan setiap data produk dalam kombinasi tersebut</p><p>6.4) Sistem akan secara acak menetapkan data produk kombinasi ke akun pengguna berdasarkan total saldo akun</p><p>6.5) Setelah data produk kombinasi ditetapkan ke akun pengguna, tidak dapat dibatalkan atau dilewati.</p>"
+      "content": "<p>6.1 Data produk kombinasi terdiri dari 1 hingga 3 item. Pengguna mungkin tidak selalu menerima 3 item; misi ditugaskan secara acak, dengan kemungkinan lebih tinggi menerima 1 atau 2 item.</p><p>6.2 Pengguna mendapatkan keuntungan 10× dari data produk kombinasi dibandingkan dengan data produk normal.</p><p>6.3 Setelah menerima data produk kombinasi, semua dana yang berjalan akan dihentikan sementara dan akan dikembalikan ke akun pengguna setelah semua item dalam kombinasi diselesaikan.</p><p>6.4 Data produk kombinasi ditugaskan secara acak berdasarkan total saldo dalam akun pengguna.</p><p>6.5 Setelah ditugaskan, data produk kombinasi tidak dapat dibatalkan atau dilewati.</p>"
     },
     {
-      "title": "Deposit",
-      "content": "<p>7.1) Jumlah deposit ditentukan oleh pengguna dan kami tidak dapat menentukan jumlah deposit untuk pengguna, kami menyarankan pengguna untuk melakukan deposit sesuai kemampuan atau setelah memahami platform.</p><p>7.2) Jika pengguna perlu melakukan deposit saat menerima data produk kombinasi, disarankan untuk melakukan deposit sesuai kekurangan saldo yang ditampilkan pada akun.</p><p>7.3) Sebelum melakukan deposit, Anda harus meminta konfirmasi dari layanan online dan memastikan detail deposit.</p><p>7.4) Platform tidak bertanggung jawab jika pengguna melakukan deposit ke detail yang salah.</p>"
+      "title": "Dana Awal (Advance)",
+      "content": "<p>7.1 Jumlah dana awal sepenuhnya ditentukan oleh pengguna. Platform tidak menetapkan jumlah dana awal dan menyarankan pengguna untuk menyesuaikannya dengan kemampuan finansial atau setelah memahami platform.</p><p>7.2 Jika dana awal diperlukan untuk data produk kombinasi, pengguna disarankan untuk menambahkan dana sesuai dengan kekurangan yang ditampilkan di akun.</p><p>7.3 Sebelum melakukan dana awal, pengguna harus menghubungi layanan pelanggan online untuk meminta dan mengonfirmasi detail dana awal.</p><p>7.4 Platform tidak bertanggung jawab atas kerugian yang timbul akibat dana awal yang dilakukan dengan detail yang salah.</p>"
     }
   ],
   "event_sections": [
@@ -847,7 +847,7 @@
       "tag": "ACTIVE",
       "icon": "⚡",
       "title": "Ulang Tahun ke-3 – Bonus Apresiasi",
-      "summary": "Acara Promosi Skye Odell – Bonus Reset",
+      "summary": "Acara Promosi Skye O'Dell – Bonus Reset Hadiah",
       "reward": "USD 10 - USD 2,400 Bonus Tambahan",
       "progress": "",
       "time": "Acara ulang tahun terbatas",
@@ -870,47 +870,46 @@
       "content": "<div class=\"event-section-block\"><h4>Bonus Advance Akumulasi Harian</h4><div class=\"event-bonus-grid\"><div><strong>1,500 - 9,999</strong><span>Akan Mendapatkan</span><b>Bonus Advance 4%</b></div><div><strong>10,000 - 19,999</strong><span>Akan Mendapatkan</span><b>Bonus Advance 8%</b></div><div><strong>20,000 - 49,999</strong><span>Akan Mendapatkan</span><b>Bonus Advance 12%</b></div><div><strong>50,000 - Ke atas</strong><span>Akan Mendapatkan</span><b>Bonus Advance 20%</b></div></div></div>"
     }
   ],
-  "event_footer_line1": "Skye Odell berhak atas interpretasi akhir.",
-  "event_footer_line2": "© 2022 Skye Odell. Hak cipta dilindungi.",
+  "event_footer_line1": "Skye O'Dell berhak atas interpretasi akhir.",
+  "event_footer_line2": "© 2022 Skye O'Dell. Hak cipta dilindungi undang-undang.",
   "tc_page_title": "Syarat & Ketentuan",
-  "tc_hero_title": "Perjanjian Pendaftaran Pengguna",
+  "tc_hero_title": "Perjanjian Pendaftaran Pengguna.",
   "tc_hero_intro": [
-    "Selamat datang di <strong>Main Street ROI Agency</strong> dan layanan yang disediakan.",
-    "Harap baca <strong>Perjanjian Pendaftaran Pengguna</strong> (“Perjanjian”) ini dengan saksama sebelum menggunakan perangkat lunak, situs web, atau layanan terkait yang disediakan oleh Main Street ROI Agency (secara kolektif disebut “Layanan”). Perjanjian ini mengatur akses dan penggunaan Anda terhadap Layanan."
+    "Selamat datang di <strong>Skye O'Dell</strong> dan layanan-layanannya.",
+    "Untuk memastikan keamanan situs ini serta perangkat lunak milik pembuat “Penggunaan dan Layanan Perangkat Lunak”, harap tinjau dengan cermat Lisensi Perangkat Lunak dan Layanan berikut (“Perangkat Lunak” atau “Perjanjian”). Anda harus sepenuhnya memahami syarat dan ketentuan ini—terutama yang berkaitan dengan ketentuan layanan, pembatasan, dan perjanjian tambahan apa pun—serta mengakui dan menerima tanggung jawab yang terkait."
   ],
   "tc_hero_notice": [
-    "Dengan mengakses atau menggunakan Layanan, Anda menyatakan bahwa Anda telah membaca, memahami, dan setuju untuk terikat oleh Perjanjian ini serta semua syarat dan kebijakan terkait. Jika Anda tidak setuju, Anda tidak boleh menggunakan Layanan.",
-    "Anda harus berusia minimal <strong>18 tahun</strong> untuk menggunakan Layanan."
+    "Dengan mengakses atau menggunakan Situs, Anda menyatakan bahwa Anda berusia minimal 18 tahun dan telah membaca, memahami, serta menyetujui Perjanjian ini beserta syarat dan ketentuan terkait. Jika Anda tidak memenuhi persyaratan ini, Anda tidak diizinkan untuk mengunduh atau menggunakan Layanan."
   ],
   "tc_table_of_contents": "Daftar Isi",
-  "tc_update_alert": "Main Street ROI Agency berhak mengubah atau memperbarui Perjanjian ini kapan saja. Versi terbaru yang dipublikasikan di situs web akan berlaku.",
+  "tc_update_alert": "Skye O'Dell berhak untuk mengubah atau memperbarui Perjanjian ini kapan saja, dan versi terbaru yang dipublikasikan di situs web akan berlaku.",
   "tc_terms_sections": [
     {
-      "title": "Perlindungan Informasi Pribadi",
+      "title": "Perlindungan Informasi Pribadi Pengguna",
       "items": [
         {
           "no": "1.1",
-          "content": "<p>Melindungi informasi pribadi pengguna adalah prinsip dasar Main Street ROI Agency. Kami menggunakan teknologi enkripsi profesional, penyimpanan aman, dan metode transmisi yang aman untuk melindungi data pengguna.</p>"
+          "content": "<p>Melindungi informasi pribadi pengguna serta pembuat merupakan prinsip inti dari situs ini. Skye O'Dell menggunakan penyimpanan terenkripsi tingkat profesional dan metode transmisi aman untuk melindungi semua informasi. Jika ada informasi yang diungkapkan tanpa izin dari pihak asal, Situs akan mengambil tindakan hukum.</p>"
         },
         {
           "no": "1.2",
-          "content": "<p>Untuk mengakses layanan tertentu, seperti pendaftaran akun, pengguna diwajibkan memberikan informasi yang diperlukan dan akurat, termasuk namun tidak terbatas pada nomor telepon, serta harus menyetujui Perjanjian ini. Kegagalan dalam memberikan informasi yang lengkap atau akurat dapat menyebabkan pembatasan akses ke layanan.</p>"
+          "content": "<p>Selama penggunaan Layanan, pengguna diwajibkan memberikan informasi tertentu yang diperlukan. Misalnya, untuk menyelesaikan pendaftaran akun, pengguna harus memberikan nomor ponsel dan menyetujui Ketentuan Penggunaan. Kegagalan memberikan informasi lengkap dapat mengakibatkan pembatasan penggunaan Layanan.</p>"
         },
         {
           "no": "1.3",
-          "content": "<p>Pengguna dapat memperbarui beberapa informasi pribadi setelah pendaftaran. Namun, demi alasan keamanan termasuk pemulihan akun dan pencegahan penipuan, beberapa informasi tidak dapat diubah setelah diverifikasi.</p>"
+          "content": "<p>Pada umumnya, pengguna dapat mengubah informasi yang telah dikirimkan kapan saja. Namun, demi alasan keamanan (seperti proses pemulihan akun), beberapa informasi pribadi mungkin tidak dapat diubah secara bebas setelah pendaftaran.</p>"
         },
         {
           "no": "1.4",
-          "content": "<p>Main Street ROI Agency menerapkan kontrol internal dan sistem manajemen yang ketat untuk mencegah akses, penggunaan, atau pengungkapan informasi pribadi tanpa izin. Setiap penggunaan yang tidak sah akan ditangani sesuai dengan hukum yang berlaku. Setelah terdaftar, nomor ponsel utama yang terkait dengan akun tidak dapat diubah tanpa verifikasi.</p>"
+          "content": "<p>Skye O'Dell menggunakan berbagai teknologi keamanan, prosedur operasional, dan sistem manajemen yang kuat untuk melindungi informasi pengguna. Setiap penggunaan, akses, atau pengungkapan tanpa izin akan dikenakan sanksi hukum. Nomor ponsel yang terdaftar pada akun Skye O'Dell tidak dapat diubah secara sembarangan.</p>"
         },
         {
           "no": "1.5",
-          "content": "<p>Main Street ROI Agency tidak akan mengungkapkan, menjual, atau membagikan informasi pribadi pengguna kepada pihak ketiga tanpa persetujuan eksplisit pengguna, kecuali diwajibkan oleh hukum.</p>"
+          "content": "<p>Dalam keadaan apa pun, Skye O'Dell tidak akan mengungkapkan informasi pengguna kepada perusahaan atau organisasi eksternal tanpa persetujuan eksplisit dari pengguna.</p>"
         },
         {
           "no": "1.6",
-          "content": "<p>Pengguna di bawah usia 18 tahun tidak diperbolehkan menggunakan layanan ini. Jika akses diperlukan, persetujuan tertulis dari wali hukum harus diberikan terlebih dahulu.</p>"
+          "content": "<p>Individu yang berusia di bawah 18 tahun harus memberikan izin tertulis dari orang tua atau wali hukum sebelum mengakses Layanan yang disediakan di situs ini.</p>"
         }
       ]
     },
@@ -919,23 +918,23 @@
       "items": [
         {
           "no": "2.1",
-          "content": "<p>Pengguna harus menyelesaikan semua tugas harian yang diberikan sebelum mengajukan penarikan.</p>"
+          "content": "<p>Pengguna harus menyelesaikan semua misi harian sebelum mengajukan permintaan penarikan.</p>"
         },
         {
           "no": "2.2",
-          "content": "<p>Penarikan tidak diperbolehkan saat proses optimasi atau tugas sedang berlangsung.</p>"
+          "content": "<p>Pengguna tidak diperbolehkan melakukan penarikan selama proses peningkatan misi sedang berlangsung.</p>"
         },
         {
           "no": "2.3",
-          "content": "<p>Pengguna tidak boleh membatalkan, melewati, atau meninggalkan tugas yang telah diterima.</p>"
+          "content": "<p>Pengguna tidak boleh membatalkan atau melewati misi apa pun.</p>"
         },
         {
           "no": "2.4",
-          "content": "<p>Penarikan melebihi <strong>USD 30,000</strong> dikenakan <strong>biaya pemrosesan 20%</strong>, yang akan dikembalikan kepada pengguna setelah penarikan berhasil diproses.</p>"
+          "content": "<p>Untuk akun dengan dana melebihi $60,000, akan dikenakan biaya penarikan yang sesuai. Biaya ini akan dikembalikan kepada pengguna segera setelah penarikan berhasil diproses. Untuk informasi lebih lanjut, silakan hubungi Layanan Pelanggan.</p>"
         },
         {
           "no": "2.5",
-          "content": "<p>Setiap pelanggaran terhadap ketentuan ini dapat mengakibatkan penurunan skor kredit pengguna. Beberapa fitur akun dapat dibatasi hingga skor kredit dipulihkan.</p>"
+          "content": "<p>Pelanggaran terhadap aturan oleh pengguna akan mengakibatkan penurunan skor kredit pengguna, yang akan dipotong secara otomatis oleh sistem. Skor kredit pengguna harus dipulihkan sebelum semua fitur akun dapat digunakan sepenuhnya.</p>"
         }
       ]
     },
@@ -944,25 +943,25 @@
       "items": [
         {
           "no": "3.1",
-          "content": "<p>Perjanjian ini merupakan kontrak yang mengikat secara hukum antara pengguna dan Main Street ROI Agency. Pengguna harus memberikan informasi yang akurat dan sah sesuai persyaratan untuk mengakses layanan.</p>"
+          "content": "<p>Perjanjian ini, bersama dengan Kontrak Pengguna dan Ketentuan Layanan, didasarkan pada ketentuan yang ditampilkan dalam akun pengguna. Pengguna harus memberikan informasi dan dokumen yang relevan kepada Situs sesuai dengan yang dipersyaratkan. Materi tersebut merupakan lampiran dari Perjanjian ini.</p>"
         },
         {
           "no": "3.2",
-          "content": "<p>Ketentuan ini berlaku untuk semua pengguna layanan. Jika Anda memiliki pertanyaan, masukan, atau keluhan, silakan hubungi departemen dukungan yang sesuai.</p>"
+          "content": "<p>Syarat dan Ketentuan ini menetapkan dasar di mana Situs menyediakan layanan kepada semua pengguna. Untuk pertanyaan atau hal penting, silakan hubungi departemen terkait untuk mendapatkan bantuan.</p>"
         },
         {
           "no": "3.3",
-          "content": "<p>Ketentuan ini diatur dan dilindungi oleh hukum dan peraturan komersial yang berlaku. Main Street ROI Agency berhak mengambil tindakan hukum terhadap pengguna yang melanggar perjanjian ini dengan itikad buruk.</p>"
+          "content": "<p>Semua Syarat dan Ketentuan di situs web ini diatur oleh perjanjian perdagangan yang berlaku dan dilindungi oleh hukum. Jika pengguna melanggar kontrak dengan itikad buruk, situs web berhak untuk menempuh tindakan hukum.</p>"
         },
         {
           "no": "3.4",
-          "content": "<p>Main Street ROI Agency berhak untuk mengubah atau memperbarui Perjanjian ini kapan saja. Versi terbaru yang dipublikasikan di situs web akan berlaku, dan Main Street ROI Agency memiliki hak interpretasi akhir.</p>"
+          "content": "<p>Situs web ini berhak untuk mengubah semua Syarat dan Ketentuan, baik formal maupun informal, atas kebijakannya sendiri. Hak interpretasi akhir sepenuhnya dimiliki oleh situs web ini.</p>"
         }
       ]
     }
   ],
   "sk_social_label": "Tautan sosial",
-  "sk_logo_alt": "Skye Odell",
+  "sk_logo_alt": "Skye O'Dell",
   "sk_menu": "Menu",
   "sk_contact": "Punya proyek? Hubungi kami!",
   "sk_topics": "Topik layanan",
@@ -1074,12 +1073,12 @@
   "sk_team_l6": "memikat orang.",
   "record_status_completed": "Selesai",
   "record_status_frozen": "Dibekukan",
-  "record_status_to_submit": "Perlu Dikirim",
+  "record_status_to_submit": "Untuk Dikirim",
   "phone_number": "Telepon",
   "Gender_fomt": "Pilih Jenis Kelamin",
-  "lucky_draw_title": "ANDA TELAH MENANG UNDIAN BERUNTUNG!",
-  "lucky_draw_desc_before": "Acara ini diselenggarakan bersama oleh Web Works Marketing dan merchant yang berpartisipasi, dengan hadiah misterius yang berkisar dari",
-  "lucky_draw_amount": "$20 hingga $2,000,000",
+  "lucky_draw_title": "Selamat! Anda telah memenangkan hadiah dalam undian berhadiah!",
+  "lucky_draw_desc_before": "Acara ini diselenggarakan bersama oleh Skye O'Dell dan para merchant yang berpartisipasi. Hadiah misteri berkisar dari",
+  "lucky_draw_amount": "$20 hingga $2,000,000.",
   "lucky_draw_claim_text": "Untuk mengklaim hadiah Anda, silakan hubungi tim layanan pelanggan kami.",
   "guide_salary_scheme_title": "Skema Gaji",
   "guide_salary_scheme_subtitle": "Masuk . Hadir . Dibayar",

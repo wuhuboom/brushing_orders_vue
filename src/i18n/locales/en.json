@@ -218,7 +218,7 @@
   "ok": "OK",
   "cancel": "Cancel",
   "enter_your_username_and_password_to_access_2": "Enter your username and password to access",
-  "sign_up_and_get_usd_20_free": "Sign up and get $20 free",
+  "sign_up_and_get_usdt_20_free": "Sign up and get $20 free",
   "live.chat.str": "Live Chat",
   "start.optimization.str": "Start Optimization",
   "start.notice.str": "Notice",
@@ -335,7 +335,7 @@
   "index.intro1": "Platform profile",
   "index.introText1": "MALL is an intelligent cloud global order matching center with a sense of mission, which plays an important role in major e-commerce platforms around the world. Currently, MALL maintains close strategic partnership with Amazon, Alibaba, AliExpress, souq, jumia, maxfashion and Daraz. Cooperation, Blocking traffic through online vacuuming, updating layered product information through digital product reconstruction, enabling scenarios and enhancing competitiveness. MALL uses an intelligent cloud algorithm engine to accurately match buyers and users with established merchants and automatically match transactions, allowing many established merchants to stand out in the fierce business competition. MALL is not a single cloud shopping platform. Its greatest value lies in allowing consumers to earn commissions through free sharing while shopping normally. Merchants will have a promoter at the same time they pick up the order. With its leading 5G intelligent cloud matching technology, MALL has helped countless merchants and consumers.",
   "index.intro2": "Platform rules",
-  "index.introText2": "About recharge: [The platform will change the recharge method from time to time] Each user should click the recharge interface to check the latest recharge method before recharging, so as to avoid recharge failure on the old account due to recharge. If your recharge request has not been completed, please contact the recharge customer service for consultation in time.  About withdrawal: The minimum withdrawal amount of MALL is 20USDT, and the minimum deposit amount is 10USDT. When you request a withdrawal, we will process it immediately and arrive within 24 hours. Due to the large number of users on the platform, in order to ensure that each user has a good experience and normal withdrawal, please wait patiently for the withdrawal process to complete. Please understand that,  If you do not receive the money on the withdrawal slip within 24 hours, please contact customer service in time! About freezing the order: If the order is not delivered within 10 minutes after the user places the order, or the user returns to the page after receiving the order, the order will be frozen. Just click [Home] - [Order] to send immediately. Only one account with the correct mobile number is allowed to register with MALL per identical username.If the system monitors you to register multiple accounts and IPs, you will be suspected of illegal money laundering, which will affect normal withdrawals and cause the account to be frozen.",
+  "index.introText2": "About recharge: [The platform will change the recharge method from time to time] Each user should click the recharge interface to check the latest recharge method before recharging, so as to avoid recharge failure on the old account due to recharge. If your recharge request has not been completed, please contact the recharge customer service for consultation in time.  About withdrawal: The minimum withdrawal amount of MALL is 20USD, and the minimum deposit amount is 10USD. When you request a withdrawal, we will process it immediately and arrive within 24 hours. Due to the large number of users on the platform, in order to ensure that each user has a good experience and normal withdrawal, please wait patiently for the withdrawal process to complete. Please understand that,  If you do not receive the money on the withdrawal slip within 24 hours, please contact customer service in time! About freezing the order: If the order is not delivered within 10 minutes after the user places the order, or the user returns to the page after receiving the order, the order will be frozen. Just click [Home] - [Order] to send immediately. Only one account with the correct mobile number is allowed to register with MALL per identical username.If the system monitors you to register multiple accounts and IPs, you will be suspected of illegal money laundering, which will affect normal withdrawals and cause the account to be frozen.",
   "deposit.btn.submit.money.text": "Submitted order amount",
   "team.info.total.money.text": "All subordinate accounts' total account balance summary",
   "contract": "Contract",
@@ -354,7 +354,7 @@
   "home_complete_tasks_and_earn": "Complete tasks and earn up to $500/day commission",
   "home_grab_tasks": "Grab Tasks",
   "home_my_wallet": "My Wallet",
-  "home_balance_usdt": "Balance (USDT)",
+  "home_balance_usdt": "Balance (USD)",
   "home_today_s_earnings": "Today's Earnings",
   "home_total_earnings": "Total Earnings",
   "home_user_just_earned": "just earned",
@@ -368,7 +368,7 @@
   "home_upgrade_vip_to_unlock_more_tasks": "Upgrade VIP to Unlock More Tasks",
   "home_higher_level_higher_earnings": "Higher Level, Higher Earnings",
   "home_featured_partner": "Featured Partner",
-  "home_partner_company": "Skye Odell (SO Services)",
+  "home_partner_company": "Skye O'Dell (SO Services)",
   "home_partner_tagline": "Your Vision. Beautifully Realized.",
   "home_partner_description": "One-stop digital creative and marketing agency from brand building and website development to full-scale marketing, helping your brand achieve differentiated growth online and offline.",
   "home_content_creation": "Content Creation",
@@ -404,7 +404,7 @@
   "ui_refreshing": "Refreshing...",
   "ui_pull_to_refresh": "Pull to refresh",
   "ui_loading": "Loading...",
-  "ui_usdt": "USDT",
+  "ui_USDT": "USD",
   "ui_usd": "USD",
   "task_center": "Task Center",
   "today_tasks": "Today's Tasks",
@@ -423,7 +423,7 @@
   "task_instructions": "Task Instructions",
   "task_instruction_1": "1. After accepting the task, complete the order within 30 minutes.",
   "task_instruction_2": "2. Do not cancel or modify the order.",
-  "task_instruction_3": "3. Take a screenshot after placing the order as proof.",
+  "task_instruction_3": "3. There may be a slight delay after placing your order. Please wait patiently",
   "task_instruction_4": "4. Commission will be credited upon confirmation.",
   "mystery_blind_box": "Mystery Blind Box",
   "reset": "Reset",
@@ -454,7 +454,7 @@
   "logout_confirm_desc_1": "Are you sure you want to log out of your account?",
   "logout_confirm_desc_2": "You will need to log in again to access your data.",
   "available_balance": "Available Balance",
-  "enter_amount_usdt": "Enter Amount (USDT)",
+  "enter_amount_USDT": "Enter Amount (USD)",
   "select_customer_service_channel": "Select customer service to get a recharge channel",
   "customer_service_no": "Customer Service No.{number}",
   "customer_service": "Customer Service",
@@ -475,7 +475,7 @@
   "bind_wallet_account": "Bind Wallet Account",
   "account_encrypted_notice": "Your account information is encrypted and protected. We will never share it with third parties.",
   "our_certifications": "Our Certifications",
-  "certifications_desc": "ShopReward operates under strict regulatory compliance with all required licenses and security certifications to protect our users.",
+  "certifications_desc": "Skye O'Dell operates under strict regulatory compliance with all required licenses and security certifications to protect our users.",
   "documents": "Documents",
   "images": "Images",
   "sections": "Sections",
@@ -518,7 +518,7 @@
   "frequently_asked_questions": "Frequently Asked Questions",
   "find_instant_answers": "Find instant answers to common questions",
   "terms_last_updated": "Last updated: January 15, 2025. Please read carefully before using our services.",
-  "terms_continue_notice": "By continuing to use ShopReward, you acknowledge that you have read, understood, and agree to be bound by all terms outlined in this document.",
+  "terms_continue_notice": "By continuing to use Skye O'Dell, you acknowledge that you have read, understood, and agree to be bound by all terms outlined in this document.",
   "table_of_contents": "Table of Contents",
   "terms_update_alert": "These terms were last updated on January 15, 2025. Continued use of the platform after any updates constitutes acceptance of the revised terms. Contact support{'@'}shopreward.com for any questions.",
   "vip_five_star_title": "SUG Five-Star VIP",
@@ -776,70 +776,70 @@
   ],
   "clause_sections": [
     {
-      "title": "To optimize and reset your account, you must first complete all ratings with a minimum amount of 50USD and a minimum account reset amount of 100USD.",
-      "content": "<p>1.1) Users who have completed a set of mission should contact customer service to request a reset for the next set of tasks</p>"
+      "title": " Account Enhancement and Reset",
+      "content": "<p>1.1 Users must complete all rating mission with a minimum participation amount of 50 USD and maintain a minimum account reset amount of 100 USD.</p><p>1.2 After completing each set of missions, users must contact customer service to request an account reset before starting the next set.</p>"
     },
     {
-      "title": "User withdrawals and system withdrawal requirements / security of user funds",
-      "content": "<p>2.1) Each user needs to complete all the optimization mission before they can meet the system withdrawal requirements</p><p>2.2) In order to avoid any loss of funds, all withdrawals are processed automatically by the system and not manually</p><p>2.3) All users are not allowed to apply for withdrawal in the middle of mission to avoid affecting the merchant's operation</p><p>2.4) Users' funds are completely safe on the Platform and the Platform will be liable for any accidental loss</p>"
+      "title": "Withdrawals and Fund Security",
+      "content": "<p>2.1 Users must complete all enhancement missions before becoming eligible for withdrawal.</p><p>2.2 To prevent potential fund loss, all withdrawals are processed automatically by the system and cannot be handled manually.</p><p>2.3 Users are not permitted to request withdrawals during an ongoing mission to avoid disruptions to merchant operations.</p><p>2.4 User funds are securely protected on the platform, and the platform will be liable for any accidental loss caused by system issues.</p>"
     },
     {
-      "title": "Please do not disclose your account password and withdrawal password to others. The platform will not be held responsible for any loss or damage caused",
-      "content": "<p>3.1) All users are advised to keep their accounts secure to avoid disclosure</p><p>3.2) The Platform is not responsible for any accidental disclosure of accounts</p><p>3.3) Because of the financial implications of the accounts, it is important not to disclose them to avoid unnecessary problems</p><p>3.4) Withdrawal password It is recommended that you do not set a birthday password, ID card number or mobile phone number, etc. It is recommended that you set a more difficult password to protect your funds</p><p>3.5) If you forget your password, you can reset it by contacting the online service and be sure to change it yourself afterwards</p>"
+      "title": "Account and Password Security",
+      "content": "<p>3.1 Users must not disclose their account login password or withdrawal password to anyone.</p><p>3.2 Users are responsible for keeping their account information confidential.</p><p>3.3 The platform will not be responsible for any losses caused by accidental disclosure of account credentials.</p><p>3.4 Users are advised not to use easily guessable passwords (e.g., birthdays, ID numbers, phone numbers). Strong passwords are recommended for fund protection.</p><p>3.5 If a user forgets their password, they may reset it by contacting online customer service and must update it afterwards.</p>"
     },
     {
-      "title": "All products in a mission are randomly assigned by the system and they are not able to be changed, canceled, controlled or skipped in any way",
-      "content": "<p>4.1) Due to the large number of users on the platform, it is not possible to distribute combinations products manually, so all task product data is distributed randomly by the system</p><p>4.2) Combinations products are randomly released by the system and cannot be changed/cancelled/skipped by any user/staff</p>"
+      "title": "Mission Product Assignment",
+      "content": "<p>4.1 All products or mission within missions are automatically and randomly assigned by the system and cannot be modified, canceled, controlled, or skipped.</p><p>4.2 Due to the large number of users, the platform does not manually assign product combinations. All product data are distributed randomly by the system.</p>"
     },
     {
-      "title": "Legal action will be taken in the event of misuse of the account",
-      "content": ""
+      "title": "Misuse of Accounts",
+      "content": "Legal action will be taken against any misuse or fraudulent activity involving user accounts."
     },
     {
-      "title": "Each product data comes from a different merchant, no deposit for more than 10 minutes, and each deposit must be made with the online service to confirm the merchant's deposit detail.",
-      "content": ""
+      "title": "Advance Requirements",
+      "content": "Each product within a mission may come from a different merchant. No advance may remain pending for more than 10 minutes, and each advance must be confirmed with online service to verify the merchant’s details."
     },
     {
-      "title": "The platform will not be held responsible for any deposits made to the wrong detail",
-      "content": ""
+      "title": "Incorrect Advance Information",
+      "content": "The platform is not responsible for any losses caused by advance made to incorrect or unverified account details."
     },
     {
-      "title": "Each optimization of commodity data, the user needs to be completed within 24 hours, such as not completed resulting in complaints from merchants, the user needs to bear the responsibility of breach of contract",
-      "content": ""
+      "title": "Completion Time Requirements",
+      "content": "Each set of enhancement mission must be completed within 24 hours. Failure to do so may result in merchant complaints, and users will bear any resulting breach-of-contract liabilities."
     },
     {
-      "title": "When the account is complained by the merchant, the system will deduct the credit score, when the account credit score is lower than 98 is unable to apply for withdrawal, the credit score will be automatically calculate by the system after completing every set of mission",
-      "content": ""
+      "title": "Credit Score Deduction",
+      "content": "If a merchant files a complaint, the system will deduct the user’s credit score. Accounts with a credit score below 98 are not eligible for withdrawal. The system will automatically recalculate the credit score after each completed set of missions."
     }
   ],
   "faq_sections": [
     {
-      "title": "Start Product Optimization missions",
-      "content": "<p>1.1) Minimum account balance of 50USD for the first 40 missions/set.</p><p>1.2) A minimum renewal of 100USD is required to start the new missions.</p><p>1.3) Users need to complete the missions before they can request a withdrawal.</p>"
+      "title": "Product Enhancement mission",
+      "content": "<p>1.1 A minimum account balance of USD 50 is required to initiate the first set of 40 missions.</p><p>1.2 A minimum renewal advanceof USD 100 is required to begin a new set of missions.</p><p>1.3 Users must complete all assigned missions before submitting any withdrawal request.</p>"
     },
     {
-      "title": "Withdrawal",
-      "content": "<p>2.1) Users need to complete the missions before they can request a withdrawal.</p><p>2.2) You cannot request a withdrawal or refund if you choose to give up or withdraw in the middle of a missions optimization.</p><p>2.3) No withdrawals can be processed if the user's withdrawal request has not been received.</p><p>2.4) The maximum withdrawal amount for VIP1 users is 10,000USD, for VIP2 users it is 30,000USD. No maximum withdrawal limit for VIP3 and above.</p><p>2.5) To offer our valued users more professional and efficient service, accounts with a balance over 60,000USD are required to use the platform’s high volume withdrawal channel. This channel allows for a faster, safer, one time full withdrawal of all funds.</p><p>2.6) The user account has insufficient credit score and can't use all functions of the platform normally.</p>"
+      "title": "Withdrawals",
+      "content": "<p>2.1 Users must complete all missions before being eligible to request a withdrawal.</p><p>2.2 If a user chooses to abandon or exit an ongoing mission enhancement, no withdrawal or refund request will be accepted.</p><p>2.3 Withdrawals cannot be processed unless a valid withdrawal request has been submitted.</p><p>2.4 The maximum withdrawal amount for VIP1 users is USD 10,000, and USD 30,000 for VIP2 users. VIP3 and above have no maximum withdrawal limit.</p><p>2.5 To ensure faster and more secure service, accounts with balances exceeding USD 60,000 are required to use the platform’s high-volume withdrawal channel, which enables a one-time full withdrawal of all funds.</p><p>2.6 Accounts with insufficient credit scores may be restricted from accessing certain platform features.</p>"
     },
     {
       "title": "Funds",
-      "content": "<p>3.1) All funds will be held securely in the user's account and can be requested in full once all data has been completed</p><p>3.2) To avoid any loss of funds, all data will be processed by the system and not manually</p><p>3.3) The platform will take full responsibility for any accidental loss of funds.</p><p>3.4) If the user's funds exceed the taxable amount of the government, the user will need to pay tax</p>"
+      "content": "<p>3.1 All funds are securely held in the user’s account and may be withdrawn in full once all relevant data mission have been completed.</p><p>3.2 To prevent any financial discrepancies, all data processing is conducted automatically by the system and not manually.</p><p>3.3 The platform assumes full responsibility for any accidental loss of user funds.</p><p>3.4 If a user’s funds exceed the government’s taxable threshold, the user is responsible for paying all applicable taxes.</p>"
     },
     {
       "title": "Account Security",
-      "content": "<p>4.1) Please do not disclose your login password and withdrawal password to others, as the platform will not be held responsible for any loss.</p><p>4.2) Users are not recommended to set their birthday password, ID card number, or mobile phone number as their withdrawal password or login password.</p><p>4.3) If you forget your login password or withdrawal password, please contact our online service to reset it.</p>"
+      "content": "<p>4.1 Users must not disclose their login or withdrawal passwords to any third party. The platform is not liable for any losses resulting from unauthorized disclosure.</p><p>4.2 Users are strongly advised not to use birthdays, ID numbers, or mobile phone numbers as login or withdrawal passwords.</p><p>4.3 If a user forgets their login or withdrawal password, please contact our online customer service team for a password reset.</p>"
     },
     {
       "title": "General Product Data",
-      "content": "<p>5.1) Platform profit is categorized into normal product data profit and 10 times combo product data profit</p><p>5.2) Normal users will earn 0.5% of the profit for each normal missions of optimizing</p><p>5.3) VIP 2 users will earn 1% of the profit for each normal missions of optimizing</p><p>5.4) VIP 3 users will earn 1.5% of the profit for each normal missions of optimizing</p><p>5.5) VIP 4 users will earn 2% of the profit for each normal missions of optimizing</p><p>5.6) VIP 5 users will earn 2.5% of the profit for each normal missions of optimizing</p><p>5.7) Funds and profits will be refunded to the user's account for each completed missions of optimizing</p><p>5.8) The system will randomly allocate tasks to the user's account based on the total amount in the user's account</p><p>5.9) Once a task to optimize a product is assigned to a user account, it can't be canceled or skipped</p>"
+      "content": "<p>5.1 Platform profit categories include normal product data profit and 10× combination product data profit.</p><p>5.2 Normal users earn 0.5% profit for each completed normal enhancement mission.</p><p>5.3 VIP2 users earn 1% profit for each completed normal enhancement mission.</p><p>5.4 VIP3 users earn 1.5% profit for each completed normal enhancement mission.</p><p>5.5 VIP4 users earn 2% profit for each completed normal enhancement mission.</p><p>5.6 VIP5 users earn 2.5% profit for each completed normal enhancement mission.</p><p>5.7 Funds and profits are automatically credited back to the user’s account after each mission is completed.</p><p>5.8 Mission are randomly assigned by the system based on the user’s total account balance.</p><p>5.9 Once a product enhancement mission is assigned to a user, it cannot be cancelled or skipped.</p>"
     },
     {
-      "title": "Combination products Data",
-      "content": "<p>6.1) Combination Products Data is composed of 1 to 3 data, the user may not necessarily 3 products, the system will randomly allocate the data in the combination products the user has a higher chance of getting 1 or 2 product</p><p>6.2) Users will receive 10 times the profit for each combination products than for the normal product data</p><p>6.3) Once you have received the combination products, all funds will stop rolling and will be returned to your account after you have completed each product data in the combined.</p><p>6.4) The system will randomly allocate the combination products data to the user's account according to the total balance on the user's account</p><p>6.5) Once the combination products data has been allocated to the user's account, it cannot be cancelled or skipped.</p>"
+      "title": "Combination Product Data",
+      "content": "<p>6.1 Combination product data consists of 1 to 3 items. Users may not always receive all 3 items; mission are randomly assigned, with a higher likelihood of receiving 1 or 2 items.</p><p>6.2 Users earn 10× the profit from combination product data compared to normal product data.</p><p>6.3 Upon receiving combination product data, all rolling funds will pause and will be returned to the user’s account once all items in the combination are completed.</p><p>6.4 Combination product data is assigned randomly based on the total balance in the user’s account.</p><p>6.5 Once assigned, combination product data cannot be cancelled or skipped.</p>"
     },
     {
-      "title": "Deposit",
-      "content": "<p>7.1) The amount of the deposit is chosen by the user and we cannot determine the amount of the deposit for the user, we recommend that the user advances according to his/her ability or after familiarizing himself/herself with the platform.</p><p>7.2) If a user needs to make a deposit when receiving combination product data, it is recommended that the user be able to make an advance based on the insufficient amount shown on the account.</p><p>7.3) Before making an deposit, you must request an advance from the online service and confirm the deposit detail.</p><p>7.4) The platform will not be held responsible if the user deposits the wrong deposit detail.</p>"
+      "title": "Advance",
+      "content": "<p>7.1 The advance amount is determined solely by the user. The platform does not set advance amounts and recommends that users advance according to their financial capability or after becoming familiar with the platform.</p><p>7.2 If a advance is needed for combination product data, the user is advised to advance the amount corresponding to the insufficiency shown on the account.</p><p>7.3 Before making any advance, users must contact online customer service to request and confirm the advance details.</p><p>7.4 The platform will not be responsible for any losses resulting from advance made using incorrect advance details.</p>"
     }
   ],
   "event_sections": [
@@ -847,7 +847,7 @@
       "tag": "ACTIVE",
       "icon": "⚡",
       "title": "3rd Anniversary Thanksgiving Feedback",
-      "summary": "Skye Odell Promotional Event – Reset Bonus Rewards",
+      "summary": "Skye O'Dell Promotional Event – Reset Bonus Rewards",
       "reward": "USD 10 - USD 2,400 Extra Rewards",
       "progress": "",
       "time": "Limited-time anniversary activity",
@@ -870,47 +870,46 @@
       "content": "<div class=\"event-section-block\"><h4>Accumulated Advance Rewards For The Day</h4><div class=\"event-bonus-grid\"><div><strong>1,500 - 9,999</strong><span>Will Get</span><b>4% Advance Bonus</b></div><div><strong>10,000 - 19,999</strong><span>Will Get</span><b>8% Advance Bonus</b></div><div><strong>20,000 - 49,999</strong><span>Will Get</span><b>12% Advance Bonus</b></div><div><strong>50,000 - Above</strong><span>Will Get</span><b>20% Advance Bonus</b></div></div></div>"
     }
   ],
-  "event_footer_line1": "TSkye Odell reserves the right of final interpretation.",
-  "event_footer_line2": "© 2022 Skye Odell. All rights reserved.",
+  "event_footer_line1": "TSkye O'Dell reserves the right of final interpretation.",
+  "event_footer_line2": "© 2022 Skye O'Dell. All rights reserved.",
   "tc_page_title": "Terms & Conditions",
-  "tc_hero_title": "User Registration Agreement",
+  "tc_hero_title": "User Registration Agreement.",
   "tc_hero_intro": [
-    "Welcome to <strong>Main Street ROI Agency</strong> and its services.",
-    "Please read this <strong>User Registration Agreement</strong> (“Agreement”) carefully before using the software, website, or related services provided by Main Street ROI Agency (collectively, the “Services”). This Agreement governs your access to and use of the Services."
+    "Welcome to <strong>Skye O'Dell</strong> and its services.",
+    "To ensure the security of this website and the creator’s software “Software Use and Services”, please carefully review the following Software and Services License (“Software” or “Agreement”). You must fully understand these terms and conditions—particularly those concerning service provisions, restrictions, and any supplementary agreements—and acknowledge and accept the associated responsibilities."
   ],
   "tc_hero_notice": [
-    "By accessing or using the Services, you confirm that you have read, understood, and agreed to be bound by this Agreement and all related terms and policies. If you do not agree, you must not use the Services.",
-    "You must be at least <strong>18 years of age</strong> to use the Services."
+    "By accessing or using the Site, you confirm that you are at least 18 years of age and that you have read, understood, and agreed to this Agreement and its related terms and conditions. If you do not meet these requirements, you are not authorized to download or use the Services."
   ],
   "tc_table_of_contents": "Table of Contents",
-  "tc_update_alert": "Main Street ROI Agency reserves the right to modify or update this Agreement at any time. The latest version published on the website shall prevail.",
+  "tc_update_alert": "Skye O'Dell reserves the right to modify or update this Agreement at any time, and the most recent version published on the website shall prevail.",
   "tc_terms_sections": [
     {
-      "title": "Protection of Personal Information",
+      "title": "Protection of Users’ Personal Information",
       "items": [
         {
           "no": "1.1",
-          "content": "<p>Protecting users’ personal information is a fundamental principle of Main Street ROI Agency. We use professional encryption technologies, secure storage, and secure transmission methods to safeguard user data.</p>"
+          "content": "<p>Protecting users’ personal information and that of the creator is a core principle of this website. Skye O'Dell employs professional-grade encrypted storage and secure transmission methods to safeguard all information. If any information is disclosed without authorization from the originator, the Site will take legal action.</p>"
         },
         {
           "no": "1.2",
-          "content": "<p>To access certain Services, such as account registration, users are required to provide necessary and accurate information, including but not limited to a mobile phone number, and must agree to this Agreement. Failure to provide complete or accurate information may result in restricted access to the Services.</p>"
+          "content": "<p>During the use of the Services, users are required to provide certain necessary information. For example, to complete account registration, users must provide a mobile phone number and agree to the Terms of Use. Failure to provide complete information may result in restrictions on the use of the Services.</p>"
         },
         {
           "no": "1.3",
-          "content": "<p>Users may update certain personal information after registration. However, for security reasons, including account recovery and fraud prevention, some information may not be modified once verified.</p>"
+          "content": "<p>Ordinarily, users may modify submitted information at any time. However, for security-related reasons (such as account recovery processes), certain personal information may not be freely changed after registration.</p>"
         },
         {
           "no": "1.4",
-          "content": "<p>Main Street ROI Agency maintains strict internal controls and management systems to prevent unauthorized access, use, or disclosure of personal information. Any unauthorized use will be handled in accordance with applicable laws. Once registered, the primary mobile number associated with an account cannot be changed without verification.</p>"
+          "content": "<p>Skye O'Dell utilizes a range of security technologies, operational procedures, and a robust management system to protect user information. Any unauthorized use, access, or disclosure will be subject to legal penalties. The final registered mobile phone number associated with any Skye O'Dell account, as well as existing account mobile numbers, may not be altered arbitrarily.</p>"
         },
         {
           "no": "1.5",
-          "content": "<p>Main Street ROI Agency will not disclose, sell, or share users’ personal information with third parties without the user’s explicit consent, except as required by law.</p>"
+          "content": "<p>Under no circumstances will Skye O'Dell disclose user information to external companies or organizations without the explicit consent of the user.</p>"
         },
         {
           "no": "1.6",
-          "content": "<p>Users under the age of 18 are not permitted to use the Services. If access is required, written consent from a legal guardian must be provided in advance.</p>"
+          "content": "<p>Individuals under 18 years of age must provide written authorization from a parent or legal guardian before accessing the Services offered on this website.</p>"
         }
       ]
     },
@@ -919,23 +918,23 @@
       "items": [
         {
           "no": "2.1",
-          "content": "<p>Users must complete all assigned daily tasks before requesting a withdrawal.</p>"
+          "content": "<p>Users must complete all daily missions prior to submitting any withdrawal request.</p>"
         },
         {
           "no": "2.2",
-          "content": "<p>Withdrawals are not permitted while an optimization or task process is in progress.</p>"
+          "content": "<p>Users may not initiate a withdrawal while a mission Enhancement process is in progress.</p>"
         },
         {
           "no": "2.3",
-          "content": "<p>Users may not cancel, skip, or abandon assigned tasks once they have been accepted.</p>"
+          "content": "<p>Users may not cancel or skip any mission.</p>"
         },
         {
           "no": "2.4",
-          "content": "<p>Withdrawals exceeding <strong>USD 30,000</strong> are subject to a <strong>20% processing fee</strong>, which will be refunded to the user once the withdrawal is successfully completed.</p>"
+          "content": "<p>For accounts with funds exceeding $60,000, a corresponding withdrawal fee will be applied. This fee will be refunded to the user immediately after the withdrawal is successfully processed. For further details, please contact Customer Support.</p>"
         },
         {
           "no": "2.5",
-          "content": "<p>Any violation of these terms may result in a reduction of the user’s credit score. Certain account features may be restricted until the credit score is restored.</p>"
+          "content": "<p>Any violation of the rules by the user will result in a reduction of the user’s credit score, which the system will automatically deduct. The user’s credit score must be restored before all account features can be fully utilized.</p>"
         }
       ]
     },
@@ -944,25 +943,25 @@
       "items": [
         {
           "no": "3.1",
-          "content": "<p>This Agreement constitutes a legally binding contract between the user and Main Street ROI Agency. Users must provide accurate and lawful information as required to access the Services.</p>"
+          "content": "<p>This Agreement, together with the User Contract and Terms of Service, is based on the provisions displayed within the user account. Users must provide the Site with relevant information and documentation as required. These materials constitute an attachment to this Agreement.</p>"
         },
         {
           "no": "3.2",
-          "content": "<p>These terms apply to all users of the Services. If you have questions, feedback, or concerns, please contact the appropriate support department.</p>"
+          "content": "<p>These Terms and Conditions define the basis on which the Site provides services to all users. For questions or important concerns, please contact the appropriate department for assistance.</p>"
         },
         {
           "no": "3.3",
-          "content": "<p>These terms are governed and protected by applicable laws and commercial regulations. Main Street ROI Agency reserves the right to pursue legal action against any user who violates this Agreement in bad faith.</p>"
+          "content": "<p>All Terms and Conditions on this website are governed by applicable trade agreements and protected by law. If a user breaches the contract in bad faith, the website reserves the right to pursue legal liability.</p>"
         },
         {
           "no": "3.4",
-          "content": "<p>Main Street ROI Agency reserves the right to modify or update this Agreement at any time. The latest version published on the website shall prevail, and Main Street ROI Agency retains the final right of interpretation.</p>"
+          "content": "<p>This website reserves the right to amend all formal and informal Terms and Conditions at its sole discretion. The final right of interpretation belongs exclusively to this website.</p>"
         }
       ]
     }
   ],
   "sk_social_label": "Social links",
-  "sk_logo_alt": "Skye Odell",
+  "sk_logo_alt": "Skye O'Dell",
   "sk_menu": "Menu",
   "sk_contact": "Got a project? Contact us!",
   "sk_topics": "Service topics",
@@ -1074,7 +1073,7 @@
   "sk_team_l6": "captivate people.",
   "record_status_completed": "Completed",
   "record_status_frozen": "Frozen",
-  "record_status_to_submit": "To Submit",
+  "record_status_to_submit": "Submit",
   "phone_number": "Phone",
   "Gender_fomt": "Select Gender",
   "lucky_draw_title": "Congratulations! You have won a prize in the lucky draw!",

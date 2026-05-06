@@ -368,7 +368,7 @@
   "home_upgrade_vip_to_unlock_more_tasks": "Passa a VIP per sbloccare più attività",
   "home_higher_level_higher_earnings": "Livello più alto, guadagni più alti",
   "home_featured_partner": "Partner in evidenza",
-  "home_partner_company": "Skye Odell (SO Services)",
+  "home_partner_company": "Skye O'Dell (SO Services)",
   "home_partner_tagline": "La tua visione. Realizzata in modo straordinario.",
   "home_partner_description": "Agenzia creativa e di marketing digitale a servizio completo, dalla costruzione del brand allo sviluppo web fino al marketing su larga scala, aiutando il tuo marchio a ottenere una crescita differenziata online e offline.",
   "home_content_creation": "Creazione di contenuti",
@@ -423,7 +423,7 @@
   "task_instructions": "Istruzioni dell'attività",
   "task_instruction_1": "1. Dopo aver accettato l'attività, completa l'ordine entro 30 minuti.",
   "task_instruction_2": "2. Non annullare o modificare l'ordine.",
-  "task_instruction_3": "3. Fai uno screenshot dopo aver effettuato l'ordine come prova.",
+  "task_instruction_3": "3. Dopo aver effettuato l’ordine potrebbe verificarsi un leggero ritardo. Si prega di attendere pazientemente",
   "task_instruction_4": "4. La commissione verrà accreditata dopo la conferma.",
   "mystery_blind_box": "Box misterioso",
   "reset": "Reset",
@@ -475,7 +475,7 @@
   "bind_wallet_account": "Collega account wallet",
   "account_encrypted_notice": "Le informazioni del tuo account sono criptate e protette. Non le condivideremo mai con terze parti.",
   "our_certifications": "Le nostre certificazioni",
-  "certifications_desc": "ShopReward opera nel rispetto delle normative con tutte le licenze e certificazioni di sicurezza necessarie per proteggere i nostri utenti.",
+  "certifications_desc": "Skye O'Dell opera nel rispetto di rigorosi standard normativi, con tutte le licenze e certificazioni di sicurezza necessarie per proteggere i nostri utenti.",
   "documents": "Documenti",
   "images": "Immagini",
   "sections": "Sezioni",
@@ -518,7 +518,7 @@
   "frequently_asked_questions": "Domande frequenti",
   "find_instant_answers": "Trova risposte immediate alle domande più comuni",
   "terms_last_updated": "Ultimo aggiornamento: 15 gennaio 2025. Leggere attentamente prima di utilizzare i nostri servizi.",
-  "terms_continue_notice": "Continuando a utilizzare ShopReward, riconosci di aver letto, compreso e accettato di essere vincolato da tutti i termini descritti in questo documento.",
+  "terms_continue_notice": "Continuando a utilizzare Skye O'Dell, riconosci di aver letto, compreso e accettato tutti i termini indicati in questo documento.",
   "table_of_contents": "Indice",
   "terms_update_alert": "Questi termini sono stati aggiornati l'ultima volta il 15 gennaio 2025. L'uso continuato della piattaforma dopo eventuali aggiornamenti costituisce accettazione dei termini rivisti. Contatta supporto{'@'}shopreward.com per qualsiasi domanda.",
   "vip_five_star_title": "VIP SUG a cinque stelle",
@@ -776,70 +776,70 @@
   ],
   "clause_sections": [
     {
-      "title": "Per ottimizzare e reimpostare il tuo account, devi prima completare tutte le valutazioni con un importo minimo di 50 USD e un importo minimo di reimpostazione account di 100 USD.",
-      "content": "<p>1.1) Gli utenti che hanno completato un set di missioni devono contattare il servizio clienti per richiedere il reset per il set successivo di attività</p>"
+      "title": "Miglioramento e reimpostazione dell’account",
+      "content": "<p>1.1 Gli utenti devono completare tutte le missioni di valutazione con un importo minimo di partecipazione di 50 USD e mantenere un importo minimo di reimpostazione dell’account di 100 USD.</p><p>1.2 Dopo aver completato ogni set di missioni, gli utenti devono contattare il servizio clienti per richiedere la reimpostazione dell’account prima di iniziare il set successivo.</p>"
     },
     {
-      "title": "Prelievi degli utenti e requisiti di prelievo del sistema / sicurezza dei fondi degli utenti",
-      "content": "<p>2.1) Ogni utente deve completare tutte le missioni di ottimizzazione prima di poter soddisfare i requisiti di prelievo del sistema</p><p>2.2) Per evitare qualsiasi perdita di fondi, tutti i prelievi vengono elaborati automaticamente dal sistema e non manualmente</p><p>2.3) A tutti gli utenti non è consentito richiedere un prelievo durante lo svolgimento delle missioni per evitare di influire sulle operazioni dei merchant</p><p>2.4) I fondi degli utenti sono completamente sicuri sulla piattaforma e la piattaforma sarà responsabile per eventuali perdite accidentali</p>"
+      "title": "Prelievi e sicurezza dei fondi",
+      "content": "<p>2.1 Gli utenti devono completare tutte le missioni di ottimizzazione prima di poter richiedere un prelievo.</p><p>2.2 Per prevenire eventuali perdite di fondi, tutti i prelievi vengono elaborati automaticamente dal sistema e non possono essere gestiti manualmente.</p><p>2.3 Gli utenti non possono richiedere prelievi durante una missione in corso per evitare interruzioni delle operazioni dei commercianti.</p><p>2.4 I fondi degli utenti sono protetti in modo sicuro sulla piattaforma e la piattaforma è responsabile per eventuali perdite causate da problemi di sistema.</p>"
     },
     {
-      "title": "Si prega di non divulgare la password dell’account e la password di prelievo ad altri. La piattaforma non sarà ritenuta responsabile per eventuali perdite o danni causati",
-      "content": "<p>3.1) Tutti gli utenti sono invitati a mantenere i propri account al sicuro per evitare divulgazioni</p><p>3.2) La piattaforma non è responsabile per eventuali divulgazioni accidentali degli account</p><p>3.3) A causa delle implicazioni finanziarie degli account, è importante non divulgarli per evitare problemi inutili</p><p>3.4) Password di prelievo: si consiglia di non utilizzare password come data di nascita, numero di carta d’identità o numero di telefono. È consigliato impostare una password più complessa per proteggere i propri fondi</p><p>3.5) Se dimentichi la password, puoi reimpostarla contattando il servizio online e assicurarti di modificarla successivamente</p>"
+      "title": "Sicurezza dell’account e della password",
+      "content": "<p>3.1 Gli utenti non devono divulgare a terzi la password di accesso o di prelievo.</p><p>3.2 Gli utenti sono responsabili della riservatezza delle proprie informazioni di account.</p><p>3.3 La piattaforma non è responsabile per eventuali perdite causate dalla divulgazione accidentale delle credenziali.</p><p>3.4 Si consiglia agli utenti di non utilizzare password facilmente intuibili (ad esempio date di nascita, numeri di documento o numeri di telefono). Si raccomanda l’uso di password complesse per la protezione dei fondi.</p><p>3.5 Se un utente dimentica la password, può reimpostarla contattando il servizio clienti online e dovrà poi aggiornarla.</p>"
     },
     {
-      "title": "Tutti i prodotti in una missione vengono assegnati in modo casuale dal sistema e non possono essere modificati, annullati, controllati o saltati in alcun modo",
-      "content": "<p>4.1) A causa dell’elevato numero di utenti sulla piattaforma, non è possibile distribuire manualmente i prodotti combinati, quindi tutti i dati delle missioni vengono assegnati casualmente dal sistema</p><p>4.2) I prodotti combinati vengono assegnati casualmente dal sistema e non possono essere modificati/annullati/saltati da alcun utente o staff</p>"
+      "title": "Assegnazione dei prodotti delle missioni",
+      "content": "<p>4.1 Tutti i prodotti o le attività all’interno delle missioni sono assegnati automaticamente e casualmente dal sistema e non possono essere modificati, annullati, controllati o saltati.</p><p>4.2 A causa dell’elevato numero di utenti, la piattaforma non assegna manualmente combinazioni di prodotti. Tutti i dati dei prodotti sono distribuiti casualmente dal sistema.</p>"
     },
     {
-      "title": "Saranno intraprese azioni legali in caso di uso improprio dell’account",
-      "content": ""
+      "title": "Uso improprio degli account",
+      "content": "Verranno intraprese azioni legali contro qualsiasi uso improprio o attività fraudolenta relativa agli account degli utenti."
     },
     {
-      "title": "Ogni dato di prodotto proviene da un merchant diverso, non effettuare depositi per più di 10 minuti e ogni deposito deve essere confermato tramite il servizio online con i dettagli del merchant.",
-      "content": ""
+      "title": "Requisiti di anticipo",
+      "content": "Ogni prodotto all’interno di una missione può provenire da commercianti diversi. Nessun anticipo può rimanere in sospeso per più di 10 minuti e ogni anticipo deve essere confermato con il servizio online per verificare i dettagli del commerciante."
     },
     {
-      "title": "La piattaforma non sarà ritenuta responsabile per eventuali depositi effettuati ai dettagli errati",
-      "content": ""
+      "title": "Informazioni di anticipo errate",
+      "content": "La piattaforma non è responsabile per eventuali perdite causate da anticipi effettuati su dati di account errati o non verificati."
     },
     {
-      "title": "Ogni ottimizzazione dei dati del prodotto deve essere completata entro 24 ore; in caso contrario, se non completata e genera reclami da parte dei merchant, l’utente dovrà assumersi la responsabilità della violazione del contratto",
-      "content": ""
+      "title": "Requisiti di completamento",
+      "content": "Ogni set di missioni di ottimizzazione deve essere completato entro 24 ore. In caso contrario, potrebbero verificarsi reclami da parte dei commercianti e gli utenti saranno responsabili per eventuali violazioni contrattuali."
     },
     {
-      "title": "Quando l’account viene segnalato da un merchant, il sistema dedurrà il punteggio di credito; quando il punteggio di credito è inferiore a 98 non è possibile richiedere il prelievo. Il punteggio viene calcolato automaticamente dal sistema dopo ogni set di missioni completato",
-      "content": ""
+      "title": "Detrazione del punteggio di credito",
+      "content": "Se un commerciante presenta un reclamo, il sistema ridurrà il punteggio di credito dell’utente. Gli account con un punteggio inferiore a 98 non sono idonei al prelievo. Il sistema ricalcolerà automaticamente il punteggio di credito dopo ogni set di missioni completato."
     }
   ],
   "faq_sections": [
     {
-      "title": "Avvia le missioni di ottimizzazione dei prodotti",
-      "content": "<p>1.1) Saldo minimo del conto di 50 USD per le prime 40 missioni/set.</p><p>1.2) È richiesto un rinnovo minimo di 100 USD per avviare le nuove missioni.</p><p>1.3) Gli utenti devono completare le missioni prima di poter richiedere un prelievo.</p>"
+      "title": "Missioni di miglioramento del prodotto",
+      "content": "<p>1.1 È richiesto un saldo minimo del conto di 50 USD per avviare il primo set di 40 missioni.</p><p>1.2 È richiesto un anticipo minimo di rinnovo di 100 USD per iniziare un nuovo set di missioni.</p><p>1.3 Gli utenti devono completare tutte le missioni assegnate prima di inviare qualsiasi richiesta di prelievo.</p>"
     },
     {
       "title": "Prelievi",
-      "content": "<p>2.1) Gli utenti devono completare le missioni prima di poter richiedere un prelievo.</p><p>2.2) Non è possibile richiedere un prelievo o un rimborso se si decide di abbandonare o interrompere una missione di ottimizzazione in corso.</p><p>2.3) Nessun prelievo può essere elaborato se la richiesta dell’utente non è stata ricevuta.</p><p>2.4) L’importo massimo di prelievo per gli utenti VIP1 è di 10.000 USD, per gli utenti VIP2 è di 30.000 USD. Nessun limite massimo per VIP3 e superiori.</p><p>2.5) Per offrire ai nostri utenti un servizio più professionale ed efficiente, gli account con un saldo superiore a 60.000 USD devono utilizzare il canale di prelievo ad alto volume della piattaforma. Questo canale consente un prelievo completo, più veloce e sicuro, in un’unica soluzione.</p><p>2.6) Il punteggio di credito dell’account utente è insufficiente e non può utilizzare normalmente tutte le funzioni della piattaforma.</p>"
+      "content": "<p>2.1 Gli utenti devono completare tutte le missioni prima di poter richiedere un prelievo.</p><p>2.2 Se un utente sceglie di abbandonare o uscire da una missione di miglioramento in corso, non saranno accettate richieste di prelievo o rimborso.</p><p>2.3 I prelievi non possono essere elaborati senza una richiesta valida di prelievo.</p><p>2.4 L'importo massimo di prelievo per gli utenti VIP1 è di 10.000 USD e per gli utenti VIP2 è di 30.000 USD. Gli utenti VIP3 e superiori non hanno limiti massimi di prelievo.</p><p>2.5 Per garantire un servizio più rapido e sicuro, gli account con saldo superiore a 60.000 USD devono utilizzare il canale di prelievo ad alto volume della piattaforma, che consente un prelievo completo in un'unica soluzione.</p><p>2.6 Gli account con punteggio di credito insufficiente potrebbero avere restrizioni nell’accesso ad alcune funzionalità della piattaforma.</p>"
     },
     {
       "title": "Fondi",
-      "content": "<p>3.1) Tutti i fondi saranno conservati in modo sicuro nell’account dell’utente e potranno essere richiesti integralmente una volta completati tutti i dati</p><p>3.2) Per evitare qualsiasi perdita di fondi, tutti i dati saranno elaborati dal sistema e non manualmente</p><p>3.3) La piattaforma si assume la piena responsabilità per eventuali perdite accidentali di fondi.</p><p>3.4) Se i fondi dell’utente superano l’importo imponibile stabilito dal governo, l’utente dovrà pagare le tasse</p>"
+      "content": "<p>3.1 Tutti i fondi sono conservati in modo sicuro nell’account dell’utente e possono essere prelevati interamente una volta completate tutte le missioni di dati pertinenti.</p><p>3.2 Per evitare eventuali discrepanze finanziarie, tutti i processi dei dati sono eseguiti automaticamente dal sistema e non manualmente.</p><p>3.3 La piattaforma si assume la piena responsabilità per eventuali perdite accidentali dei fondi degli utenti.</p><p>3.4 Se i fondi dell’utente superano la soglia imponibile stabilita dal governo, l’utente è responsabile del pagamento di tutte le imposte applicabili.</p>"
     },
     {
       "title": "Sicurezza dell’account",
-      "content": "<p>4.1) Si prega di non divulgare la password di accesso e la password di prelievo ad altri, poiché la piattaforma non sarà responsabile per eventuali perdite.</p><p>4.2) Si sconsiglia agli utenti di utilizzare come password di accesso o di prelievo date di nascita, numeri di carta d’identità o numeri di telefono.</p><p>4.3) Se dimentichi la password di accesso o di prelievo, contatta il nostro servizio online per reimpostarla.</p>"
+      "content": "<p>4.1 Gli utenti non devono divulgare a terzi le proprie password di accesso o di prelievo. La piattaforma non è responsabile per eventuali perdite derivanti da divulgazioni non autorizzate.</p><p>4.2 Si consiglia vivamente agli utenti di non utilizzare date di nascita, numeri di documento o numeri di telefono come password di accesso o di prelievo.</p><p>4.3 Se un utente dimentica la password di accesso o di prelievo, deve contattare il servizio clienti online per reimpostarla.</p>"
     },
     {
       "title": "Dati generali dei prodotti",
-      "content": "<p>5.1) I profitti della piattaforma sono suddivisi in profitti da prodotti normali e profitti da prodotti combinati 10 volte superiori</p><p>5.2) Gli utenti normali guadagneranno lo 0,5% di profitto per ogni missione di ottimizzazione normale</p><p>5.3) Gli utenti VIP 2 guadagneranno l’1% di profitto per ogni missione di ottimizzazione normale</p><p>5.4) Gli utenti VIP 3 guadagneranno l’1,5% di profitto per ogni missione di ottimizzazione normale</p><p>5.5) Gli utenti VIP 4 guadagneranno il 2% di profitto per ogni missione di ottimizzazione normale</p><p>5.6) Gli utenti VIP 5 guadagneranno il 2,5% di profitto per ogni missione di ottimizzazione normale</p><p>5.7) Fondi e profitti saranno rimborsati sul conto dell’utente per ogni missione completata</p><p>5.8) Il sistema assegnerà casualmente le attività all’account dell’utente in base al saldo totale</p><p>5.9) Una volta assegnata una missione di ottimizzazione di un prodotto, non può essere annullata o saltata</p>"
+      "content": "<p>5.1 Le categorie di profitto della piattaforma includono il profitto dei dati di prodotto normali e il profitto dei dati di prodotto combinati (10×).</p><p>5.2 Gli utenti normali guadagnano lo 0,5% di profitto per ogni missione di miglioramento normale completata.</p><p>5.3 Gli utenti VIP2 guadagnano l’1% di profitto per ogni missione di miglioramento normale completata.</p><p>5.4 Gli utenti VIP3 guadagnano l’1,5% di profitto per ogni missione di miglioramento normale completata.</p><p>5.5 Gli utenti VIP4 guadagnano il 2% di profitto per ogni missione di miglioramento normale completata.</p><p>5.6 Gli utenti VIP5 guadagnano il 2,5% di profitto per ogni missione di miglioramento normale completata.</p><p>5.7 I fondi e i profitti vengono automaticamente accreditati sull’account dell’utente dopo ogni missione completata.</p><p>5.8 Le missioni sono assegnate casualmente dal sistema in base al saldo totale dell’account dell’utente.</p><p>5.9 Una volta assegnata una missione di miglioramento del prodotto a un utente, non può essere annullata né saltata.</p>"
     },
     {
       "title": "Dati dei prodotti combinati",
-      "content": "<p>6.1) I prodotti combinati sono composti da 1 a 3 elementi; l’utente non riceverà necessariamente 3 prodotti. Il sistema assegnerà casualmente i dati e l’utente ha una maggiore probabilità di ricevere 1 o 2 prodotti</p><p>6.2) Gli utenti riceveranno un profitto 10 volte superiore per i prodotti combinati rispetto ai prodotti normali</p><p>6.3) Una volta ricevuti i prodotti combinati, tutti i fondi verranno sospesi e saranno restituiti all’account dopo il completamento di ogni prodotto incluso nella combinazione</p><p>6.4) Il sistema assegnerà casualmente i prodotti combinati in base al saldo totale dell’account</p><p>6.5) Una volta assegnati i prodotti combinati, non possono essere annullati o saltati</p>"
+      "content": "<p>6.1 I dati dei prodotti combinati sono composti da 1 a 3 elementi. Gli utenti potrebbero non ricevere sempre tutti e 3 gli elementi; le missioni sono assegnate casualmente, con una maggiore probabilità di riceverne 1 o 2.</p><p>6.2 Gli utenti guadagnano un profitto 10 volte superiore dai dati dei prodotti combinati rispetto ai dati dei prodotti normali.</p><p>6.3 Dopo aver ricevuto i dati dei prodotti combinati, tutti i fondi in corso verranno sospesi e restituiti all’account dell’utente una volta completati tutti gli elementi della combinazione.</p><p>6.4 I dati dei prodotti combinati sono assegnati casualmente in base al saldo totale dell’account dell’utente.</p><p>6.5 Una volta assegnati, i dati dei prodotti combinati non possono essere annullati né saltati.</p>"
     },
     {
-      "title": "Deposito",
-      "content": "<p>7.1) L’importo del deposito è scelto dall’utente e non può essere determinato dalla piattaforma; si consiglia di operare in base alle proprie possibilità o dopo aver familiarizzato con la piattaforma.</p><p>7.2) Se un utente deve effettuare un deposito durante la ricezione di prodotti combinati, si consiglia di effettuare un anticipo in base all’importo insufficiente mostrato nell’account.</p><p>7.3) Prima di effettuare un deposito, è necessario richiedere un anticipo al servizio online e confermare i dettagli del deposito.</p><p>7.4) La piattaforma non sarà responsabile per eventuali depositi effettuati con dettagli errati.</p>"
+      "title": "Anticipo",
+      "content": "<p>7.1 L’importo dell’anticipo è determinato esclusivamente dall’utente. La piattaforma non stabilisce gli importi e raccomanda agli utenti di procedere in base alle proprie capacità finanziarie o dopo aver acquisito familiarità con la piattaforma.</p><p>7.2 Se è necessario un anticipo per i dati dei prodotti combinati, si consiglia all’utente di versare l’importo corrispondente alla carenza indicata nell’account.</p><p>7.3 Prima di effettuare qualsiasi anticipo, gli utenti devono contattare il servizio clienti online per richiedere e confermare i dettagli dell’anticipo.</p><p>7.4 La piattaforma non è responsabile per eventuali perdite derivanti da anticipi effettuati con dettagli errati.</p>"
     }
   ],
   "event_sections": [
@@ -847,7 +847,7 @@
       "tag": "ACTIVE",
       "icon": "⚡",
       "title": "Feedback del 3° Anniversario di Ringraziamento",
-      "summary": "Evento promozionale Skye Odell – Premi bonus di reset",
+      "summary": "Evento promozionale Skye O'Dell – Bonus di ripristino",
       "reward": "USD 10 - USD 2.400 di premi extra",
       "progress": "",
       "time": "Attività dell’anniversario a tempo limitato",
@@ -870,99 +870,98 @@
       "content": "<div class=\"event-section-block\"><h4>Premi anticipati accumulati della giornata</h4><div class=\"event-bonus-grid\"><div><strong>1.500 - 9.999</strong><span>Riceverai</span><b>Bonus anticipato 4%</b></div><div><strong>10.000 - 19.999</strong><span>Riceverai</span><b>Bonus anticipato 8%</b></div><div><strong>20.000 - 49.999</strong><span>Riceverai</span><b>Bonus anticipato 12%</b></div><div><strong>50.000 e oltre</strong><span>Riceverai</span><b>Bonus anticipato 20%</b></div></div></div>"
     }
   ],
-  "event_footer_line1": "Skye Odell si riserva il diritto di interpretazione finale.",
-  "event_footer_line2": "© 2022 Skye Odell. Tutti i diritti riservati.",
+  "event_footer_line1": "Skye O'Dell si riserva il diritto di interpretazione finale.",
+  "event_footer_line2": "© 2022 Skye O'Dell. Tutti i diritti riservati.",
   "tc_page_title": "Termini e Condizioni",
-  "tc_hero_title": "Accordo di registrazione utente",
+  "tc_hero_title": "Accordo di registrazione dell’utente.",
   "tc_hero_intro": [
-    "Benvenuto a <strong>Main Street ROI Agency</strong> e ai suoi servizi.",
-    "Si prega di leggere attentamente questo <strong>Accordo di registrazione utente</strong> (“Accordo”) prima di utilizzare il software, il sito web o i servizi correlati forniti da Main Street ROI Agency (collettivamente, i “Servizi”). Il presente Accordo disciplina il tuo accesso e utilizzo dei Servizi."
+    "Benvenuto su <strong>Skye O'Dell</strong> e nei suoi servizi.",
+    "Per garantire la sicurezza di questo sito web e del software del creatore “Uso del software e dei servizi”, si prega di leggere attentamente la seguente Licenza del software e dei servizi (“Software” o “Accordo”). È necessario comprendere pienamente questi termini e condizioni—in particolare quelli relativi alle disposizioni dei servizi, alle restrizioni e a eventuali accordi supplementari—e riconoscere e accettare le responsabilità associate."
   ],
   "tc_hero_notice": [
-    "Accedendo o utilizzando i Servizi, confermi di aver letto, compreso e accettato di essere vincolato dal presente Accordo e da tutti i termini e le politiche correlate. Se non sei d’accordo, non devi utilizzare i Servizi.",
-    "Devi avere almeno <strong>18 anni</strong> per utilizzare i Servizi."
+    "Accedendo o utilizzando il Sito, confermi di avere almeno 18 anni e di aver letto, compreso e accettato il presente Accordo e i relativi termini e condizioni. Se non soddisfi questi requisiti, non sei autorizzato a scaricare o utilizzare i Servizi."
   ],
   "tc_table_of_contents": "Indice",
-  "tc_update_alert": "Main Street ROI Agency si riserva il diritto di modificare o aggiornare il presente Accordo in qualsiasi momento. L’ultima versione pubblicata sul sito web prevarrà.",
+  "tc_update_alert": "Skye O'Dell si riserva il diritto di modificare o aggiornare il presente Accordo in qualsiasi momento; farà fede la versione più recente pubblicata sul sito web.",
   "tc_terms_sections": [
     {
-      "title": "Protezione delle informazioni personali",
+      "title": "Protezione delle informazioni personali degli utenti",
       "items": [
         {
           "no": "1.1",
-          "content": "<p>La protezione delle informazioni personali degli utenti è un principio fondamentale di Main Street ROI Agency. Utilizziamo tecnologie di crittografia professionali, sistemi di archiviazione sicuri e metodi di trasmissione protetti per salvaguardare i dati degli utenti.</p>"
+          "content": "<p>La protezione delle informazioni personali degli utenti e del creatore è un principio fondamentale di questo sito web. Skye O'Dell utilizza tecnologie di crittografia di livello professionale, archiviazione sicura e metodi di trasmissione protetti per salvaguardare tutte le informazioni. Qualsiasi divulgazione non autorizzata da parte dell'origine comporterà azioni legali da parte del sito.</p>"
         },
         {
           "no": "1.2",
-          "content": "<p>Per accedere a determinati Servizi, come la registrazione dell’account, gli utenti sono tenuti a fornire informazioni necessarie e accurate, inclusi ma non limitati a un numero di telefono, e devono accettare il presente Accordo. Il mancato inserimento di informazioni complete o corrette può comportare restrizioni all’accesso ai Servizi.</p>"
+          "content": "<p>Durante l'utilizzo dei Servizi, gli utenti sono tenuti a fornire alcune informazioni necessarie. Ad esempio, per completare la registrazione dell'account, gli utenti devono fornire un numero di telefono cellulare e accettare i Termini di utilizzo. La mancata fornitura di informazioni complete può comportare limitazioni nell'uso dei Servizi.</p>"
         },
         {
           "no": "1.3",
-          "content": "<p>Gli utenti possono aggiornare alcune informazioni personali dopo la registrazione. Tuttavia, per motivi di sicurezza, inclusi il recupero dell’account e la prevenzione delle frodi, alcune informazioni potrebbero non essere modificabili una volta verificate.</p>"
+          "content": "<p>Di norma, gli utenti possono modificare le informazioni fornite in qualsiasi momento. Tuttavia, per motivi di sicurezza (come le procedure di recupero dell'account), alcune informazioni personali potrebbero non essere modificabili liberamente dopo la registrazione.</p>"
         },
         {
           "no": "1.4",
-          "content": "<p>Main Street ROI Agency adotta rigorosi controlli interni e sistemi di gestione per prevenire accessi, utilizzi o divulgazioni non autorizzate delle informazioni personali. Qualsiasi uso non autorizzato sarà gestito in conformità alle leggi applicabili. Una volta registrato, il numero di telefono principale associato all’account non può essere modificato senza verifica.</p>"
+          "content": "<p>Skye O'Dell utilizza una serie di tecnologie di sicurezza, procedure operative e un solido sistema di gestione per proteggere le informazioni degli utenti. Qualsiasi uso, accesso o divulgazione non autorizzati saranno soggetti a sanzioni legali. Il numero di telefono cellulare finale associato a qualsiasi account Skye O'Dell, così come i numeri già registrati, non possono essere modificati arbitrariamente.</p>"
         },
         {
           "no": "1.5",
-          "content": "<p>Main Street ROI Agency non divulgherà, venderà o condividerà le informazioni personali degli utenti con terze parti senza il consenso esplicito dell’utente, salvo quanto richiesto dalla legge.</p>"
+          "content": "<p>In nessun caso Skye O'Dell divulgherà le informazioni degli utenti a società o organizzazioni esterne senza il consenso esplicito dell'utente.</p>"
         },
         {
           "no": "1.6",
-          "content": "<p>Gli utenti di età inferiore ai 18 anni non sono autorizzati a utilizzare i Servizi. Se è richiesto l’accesso, è necessario fornire preventivamente il consenso scritto di un tutore legale.</p>"
+          "content": "<p>Le persone di età inferiore ai 18 anni devono fornire un'autorizzazione scritta da parte di un genitore o tutore legale prima di accedere ai Servizi offerti da questo sito web.</p>"
         }
       ]
     },
     {
-      "title": "Responsabilità dell’utente",
+      "title": "Responsabilità degli utenti",
       "items": [
         {
           "no": "2.1",
-          "content": "<p>Gli utenti devono completare tutte le attività giornaliere assegnate prima di richiedere un prelievo.</p>"
+          "content": "<p>Gli utenti devono completare tutte le missioni giornaliere prima di inviare qualsiasi richiesta di prelievo.</p>"
         },
         {
           "no": "2.2",
-          "content": "<p>I prelievi non sono consentiti durante un processo di ottimizzazione o di attività in corso.</p>"
+          "content": "<p>Gli utenti non possono avviare un prelievo mentre è in corso un processo di miglioramento della missione.</p>"
         },
         {
           "no": "2.3",
-          "content": "<p>Gli utenti non possono annullare, saltare o abbandonare le attività assegnate una volta accettate.</p>"
+          "content": "<p>Gli utenti non possono annullare né saltare alcuna missione.</p>"
         },
         {
           "no": "2.4",
-          "content": "<p>I prelievi superiori a <strong>USD 30.000</strong> sono soggetti a una <strong>commissione di elaborazione del 20%</strong>, che verrà rimborsata all’utente una volta completato con successo il prelievo.</p>"
+          "content": "<p>Per gli account con fondi superiori a 60.000 USD, verrà applicata una commissione di prelievo corrispondente. Questa commissione sarà rimborsata all’utente immediatamente dopo l’elaborazione con successo del prelievo. Per ulteriori dettagli, si prega di contattare il servizio clienti.</p>"
         },
         {
           "no": "2.5",
-          "content": "<p>Qualsiasi violazione di questi termini può comportare una riduzione del punteggio di credito dell’utente. Alcune funzionalità dell’account potrebbero essere limitate fino al ripristino del punteggio di credito.</p>"
+          "content": "<p>Qualsiasi violazione delle regole da parte dell’utente comporterà una riduzione del punteggio di credito dell’utente, che verrà automaticamente detratto dal sistema. Il punteggio di credito dell’utente deve essere ripristinato prima che tutte le funzionalità dell’account possano essere completamente utilizzate.</p>"
         }
       ]
     },
     {
-      "title": "Termini e condizioni",
+      "title": "Termini e Condizioni",
       "items": [
         {
           "no": "3.1",
-          "content": "<p>Il presente Accordo costituisce un contratto legalmente vincolante tra l’utente e Main Street ROI Agency. Gli utenti devono fornire informazioni accurate e conformi alla legge per accedere ai Servizi.</p>"
+          "content": "<p>Il presente Accordo, insieme al Contratto dell’Utente e ai Termini di Servizio, si basa sulle disposizioni visualizzate all’interno dell’account utente. Gli utenti devono fornire al Sito le informazioni e la documentazione richieste. Tali materiali costituiscono un allegato al presente Accordo.</p>"
         },
         {
           "no": "3.2",
-          "content": "<p>Questi termini si applicano a tutti gli utenti dei Servizi. In caso di domande, feedback o dubbi, contattare il reparto di assistenza appropriato.</p>"
+          "content": "<p>I presenti Termini e Condizioni definiscono la base sulla quale il Sito fornisce servizi a tutti gli utenti. Per domande o questioni importanti, si prega di contattare il dipartimento competente per assistenza.</p>"
         },
         {
           "no": "3.3",
-          "content": "<p>Questi termini sono regolati e protetti dalle leggi e normative commerciali applicabili. Main Street ROI Agency si riserva il diritto di intraprendere azioni legali contro qualsiasi utente che violi il presente Accordo in malafede.</p>"
+          "content": "<p>Tutti i Termini e Condizioni di questo sito web sono disciplinati dagli accordi commerciali applicabili e protetti dalla legge. In caso di violazione del contratto in malafede da parte dell’utente, il sito web si riserva il diritto di perseguire la responsabilità legale.</p>"
         },
         {
           "no": "3.4",
-          "content": "<p>Main Street ROI Agency si riserva il diritto di modificare o aggiornare il presente Accordo in qualsiasi momento. L’ultima versione pubblicata sul sito web prevarrà e Main Street ROI Agency mantiene il diritto finale di interpretazione.</p>"
+          "content": "<p>Questo sito web si riserva il diritto di modificare tutti i Termini e Condizioni formali e informali a propria discrezione. Il diritto finale di interpretazione appartiene esclusivamente a questo sito web.</p>"
         }
       ]
     }
   ],
   "sk_social_label": "Link social",
-  "sk_logo_alt": "Skye Odell",
+  "sk_logo_alt": "Skye O'Dell",
   "sk_menu": "Menu",
   "sk_contact": "Hai un progetto? Contattaci!",
   "sk_topics": "Argomenti di servizio",
@@ -1077,10 +1076,10 @@
   "record_status_to_submit": "Da inviare",
   "phone_number": "Telefono",
   "Gender_fomt": "Seleziona genere",
-  "lucky_draw_title": "HAI VINTO LA LOTTERIA!",
-  "lucky_draw_desc_before": "Questo evento è organizzato congiuntamente da Web Works Marketing e dai commercianti partecipanti, con premi misteriosi che vanno da",
-  "lucky_draw_amount": "$20 a $2.000.000",
-  "lucky_draw_claim_text": "Per richiedere il tuo premio, contatta il nostro servizio clienti.",
+  "lucky_draw_title": "Congratulazioni! Hai vinto un premio nell’estrazione!",
+  "lucky_draw_desc_before": "Questo evento è organizzato congiuntamente da Skye O'Dell e dai commercianti partecipanti. I premi misteriosi variano da",
+  "lucky_draw_amount": "$20 a $2.000.000.",
+  "lucky_draw_claim_text": "Per riscattare il tuo premio, contatta il nostro servizio clienti.",
   "guide_salary_scheme_title": "Schema salariale",
   "guide_salary_scheme_subtitle": "Accedi . Presentati . Vieni pagato",
   "guide_salary_sign_in": "Accedi",

@@ -368,7 +368,7 @@
   "home_upgrade_vip_to_unlock_more_tasks": "Passez VIP pour débloquer plus de tâches",
   "home_higher_level_higher_earnings": "Niveau plus élevé, gains plus élevés",
   "home_featured_partner": "Partenaire en vedette",
-  "home_partner_company": "Skye Odell (SO Services)",
+  "home_partner_company": "Skye O'Dell (SO Services)",
   "home_partner_tagline": "Votre vision. Magnifiquement réalisée.",
   "home_partner_description": "Agence digitale et marketing créatif tout-en-un, de la création de marque et du développement de sites web au marketing à grande échelle, aidant votre marque à obtenir une croissance différenciée en ligne et hors ligne.",
   "home_content_creation": "Création de contenu",
@@ -423,7 +423,7 @@
   "task_instructions": "Instructions de la tâche",
   "task_instruction_1": "1. Après avoir accepté la tâche, terminez la commande dans les 30 minutes.",
   "task_instruction_2": "2. Ne pas annuler ou modifier la commande.",
-  "task_instruction_3": "3. Prenez une capture d’écran après avoir passé la commande comme preuve.",
+  "task_instruction_3": "3. Il peut y avoir un léger délai après avoir passé votre commande. Veuillez patienter.",
   "task_instruction_4": "4. La commission sera créditée après confirmation.",
   "mystery_blind_box": "Boîte mystère",
   "reset": "Réinitialiser",
@@ -475,7 +475,7 @@
   "bind_wallet_account": "Lier un compte portefeuille",
   "account_encrypted_notice": "Les informations de votre compte sont chiffrées et protégées. Nous ne les partagerons jamais avec des tiers.",
   "our_certifications": "Nos certifications",
-  "certifications_desc": "ShopReward fonctionne sous une stricte conformité réglementaire avec toutes les licences et certifications de sécurité requises pour protéger nos utilisateurs.",
+  "certifications_desc": "Skye O'Dell opère dans le strict respect des réglementations, avec toutes les licences requises et les certifications de sécurité nécessaires pour protéger nos utilisateurs.",
   "documents": "Documents",
   "images": "Images",
   "sections": "Sections",
@@ -518,7 +518,7 @@
   "frequently_asked_questions": "Questions fréquentes",
   "find_instant_answers": "Trouvez des réponses instantanées aux questions courantes",
   "terms_last_updated": "Dernière mise à jour : 15 janvier 2025. Veuillez lire attentivement avant d’utiliser nos services.",
-  "terms_continue_notice": "En continuant à utiliser ShopReward, vous reconnaissez avoir lu, compris et accepté d’être lié par toutes les conditions décrites dans ce document.",
+  "terms_continue_notice": "En continuant à utiliser Skye O'Dell, vous reconnaissez avoir lu, compris et accepté d’être lié par toutes les conditions décrites dans ce document.",
   "table_of_contents": "Table des matières",
   "terms_update_alert": "Ces conditions ont été mises à jour pour la dernière fois le 15 janvier 2025. L’utilisation continue de la plateforme après toute mise à jour vaut acceptation des conditions révisées. Contactez le support {'@'}shopreward.com pour toute question.",
   "vip_five_star_title": "VIP cinq étoiles SUG",
@@ -776,70 +776,70 @@
   ],
   "clause_sections": [
     {
-      "title": "Pour optimiser et réinitialiser votre compte, vous devez d’abord compléter toutes les évaluations avec un montant minimum de 50 USD et un montant minimum de réinitialisation de 100 USD.",
-      "content": "<p>1.1) Les utilisateurs ayant complété une série de missions doivent contacter le service client pour demander une réinitialisation afin de commencer la série suivante</p>"
+      "title": "Amélioration du compte et réinitialisation",
+      "content": "<p>1.1 Les utilisateurs doivent compléter toutes les missions d’évaluation avec un montant minimum de participation de 50 USD et maintenir un montant minimum de réinitialisation du compte de 100 USD.</p><p>1.2 Après avoir complété chaque série de missions, les utilisateurs doivent contacter le service client pour demander une réinitialisation du compte avant de commencer la série suivante.</p>"
     },
     {
-      "title": "Retraits des utilisateurs et exigences du système / sécurité des fonds des utilisateurs",
-      "content": "<p>2.1) Chaque utilisateur doit terminer toutes les missions d’optimisation avant de pouvoir répondre aux conditions de retrait du système</p><p>2.2) Afin d’éviter toute perte de fonds, tous les retraits sont traités automatiquement par le système et non manuellement</p><p>2.3) Les utilisateurs ne sont pas autorisés à demander un retrait en cours de mission afin de ne pas perturber les opérations des commerçants</p><p>2.4) Les fonds des utilisateurs sont entièrement sécurisés sur la plateforme, et la plateforme sera responsable en cas de perte accidentelle</p>"
+      "title": "Retraits et sécurité des fonds",
+      "content": "<p>2.1 Les utilisateurs doivent terminer toutes les missions d’amélioration avant de pouvoir demander un retrait.</p><p>2.2 Afin d’éviter toute perte de fonds, tous les retraits sont traités automatiquement par le système et ne peuvent pas être effectués manuellement.</p><p>2.3 Les utilisateurs ne sont pas autorisés à demander un retrait pendant une mission en cours afin d’éviter toute perturbation des opérations des commerçants.</p><p>2.4 Les fonds des utilisateurs sont sécurisés sur la plateforme, et celle-ci est responsable de toute perte accidentelle causée par des problèmes système.</p>"
     },
     {
-      "title": "Veuillez ne pas divulguer votre mot de passe de compte ni votre mot de passe de retrait à des tiers. La plateforme ne sera pas responsable des pertes ou dommages causés",
-      "content": "<p>3.1) Il est conseillé à tous les utilisateurs de sécuriser leur compte afin d’éviter toute divulgation</p><p>3.2) La plateforme n’est pas responsable de toute divulgation accidentelle de comptes</p><p>3.3) En raison des implications financières des comptes, il est important de ne pas les divulguer afin d’éviter des problèmes inutiles</p><p>3.4) Mot de passe de retrait : il est recommandé de ne pas utiliser votre date de naissance, numéro d’identification ou numéro de téléphone. Il est conseillé de définir un mot de passe plus complexe pour protéger vos fonds</p><p>3.5) Si vous oubliez votre mot de passe, vous pouvez le réinitialiser en contactant le service en ligne et vous devez le modifier vous-même par la suite</p>"
+      "title": "Sécurité du compte et des mots de passe",
+      "content": "<p>3.1 Les utilisateurs ne doivent divulguer leur mot de passe de connexion ou de retrait à personne.</p><p>3.2 Les utilisateurs sont responsables de la confidentialité de leurs informations de compte.</p><p>3.3 La plateforme ne sera pas responsable des pertes causées par la divulgation accidentelle des identifiants de compte.</p><p>3.4 Il est conseillé aux utilisateurs de ne pas utiliser des mots de passe faciles à deviner (par exemple : dates de naissance, numéros d’identification, numéros de téléphone). Des mots de passe forts sont recommandés pour protéger les fonds.</p><p>3.5 Si un utilisateur oublie son mot de passe, il peut le réinitialiser en contactant le service client en ligne et devra ensuite le modifier.</p>"
     },
     {
-      "title": "Tous les produits dans une mission sont attribués aléatoirement par le système et ne peuvent être ni modifiés, annulés, contrôlés ni ignorés de quelque manière que ce soit",
-      "content": "<p>4.1) En raison du grand nombre d’utilisateurs sur la plateforme, il est impossible de distribuer manuellement les produits combinés, ainsi toutes les données des tâches sont attribuées aléatoirement par le système</p><p>4.2) Les produits combinés sont distribués aléatoirement par le système et ne peuvent être modifiés/annulés/ignorés par aucun utilisateur ou membre du personnel</p>"
+      "title": "Attribution des produits de mission",
+      "content": "<p>4.1 Tous les produits ou missions sont automatiquement et aléatoirement attribués par le système et ne peuvent pas être modifiés, annulés, contrôlés ou ignorés.</p><p>4.2 En raison du grand nombre d’utilisateurs, la plateforme n’attribue pas manuellement les combinaisons de produits. Toutes les données produits sont distribuées aléatoirement par le système.</p>"
     },
     {
-      "title": "Des poursuites judiciaires seront engagées en cas d’utilisation abusive du compte",
-      "content": ""
+      "title": "Utilisation abusive des comptes",
+      "content": "Des actions en justice seront engagées en cas d’utilisation abusive ou d’activité frauduleuse impliquant des comptes utilisateurs."
     },
     {
-      "title": "Les données de chaque produit proviennent de différents commerçants. Aucun dépôt ne doit dépasser 10 minutes et chaque dépôt doit être confirmé auprès du service en ligne pour vérifier les détails du commerçant.",
-      "content": ""
+      "title": "Exigences relatives aux avances",
+      "content": "Chaque produit dans une mission peut provenir de différents commerçants. Aucune avance ne peut rester en attente plus de 10 minutes, et chaque avance doit être confirmée auprès du service en ligne afin de vérifier les informations du commerçant."
     },
     {
-      "title": "La plateforme ne sera pas tenue responsable des dépôts effectués vers des informations incorrectes",
-      "content": ""
+      "title": "Informations d’avance incorrectes",
+      "content": "La plateforme n’est pas responsable des pertes causées par des avances effectuées vers des informations de compte incorrectes ou non vérifiées."
     },
     {
-      "title": "Chaque optimisation de données produit doit être complétée dans un délai de 24 heures. En cas de non-respect entraînant des plaintes des commerçants, l’utilisateur devra assumer la responsabilité de rupture de contrat",
-      "content": ""
+      "title": "Exigences de délai d’achèvement",
+      "content": "Chaque série de missions d’amélioration doit être complétée dans un délai de 24 heures. En cas de non-respect, des plaintes des commerçants peuvent survenir et les utilisateurs devront assumer les responsabilités liées à une violation de contrat."
     },
     {
-      "title": "Si le compte fait l’objet de plaintes de la part des commerçants, le système déduira des points de crédit. Si le score de crédit est inférieur à 98, aucun retrait ne sera possible. Le score de crédit est calculé automatiquement après chaque série de missions",
-      "content": ""
+      "title": "Déduction du score de crédit",
+      "content": "Si un commerçant dépose une plainte, le système déduira le score de crédit de l’utilisateur. Les comptes avec un score de crédit inférieur à 98 ne sont pas éligibles au retrait. Le système recalculera automatiquement le score de crédit après chaque série de missions complétée."
     }
   ],
   "faq_sections": [
     {
-      "title": "Démarrer les missions d’optimisation des produits",
-      "content": "<p>1.1) Solde minimum du compte de 50 USD pour les 40 premières missions/série.</p><p>1.2) Un renouvellement minimum de 100 USD est requis pour démarrer de nouvelles missions.</p><p>1.3) Les utilisateurs doivent terminer les missions avant de pouvoir demander un retrait.</p>"
+      "title": "Mission d’optimisation des produits",
+      "content": "<p>1.1 Un solde minimum de 50 USD est requis pour lancer la première série de 40 missions.</p><p>1.2 Un montant minimum de renouvellement de 100 USD est requis pour commencer une nouvelle série de missions.</p><p>1.3 Les utilisateurs doivent compléter toutes les missions assignées avant de soumettre une demande de retrait.</p>"
     },
     {
-      "title": "Retrait",
-      "content": "<p>2.1) Les utilisateurs doivent terminer les missions avant de pouvoir demander un retrait.</p><p>2.2) Vous ne pouvez pas demander un retrait ou un remboursement si vous abandonnez ou vous retirez au milieu d’une mission d’optimisation.</p><p>2.3) Aucun retrait ne peut être traité si la demande de retrait de l’utilisateur n’a pas été reçue.</p><p>2.4) Le montant maximum de retrait pour les utilisateurs VIP1 est de 10 000 USD, pour les VIP2 il est de 30 000 USD. Aucune limite maximale pour VIP3 et au-delà.</p><p>2.5) Afin d’offrir à nos utilisateurs un service plus professionnel et efficace, les comptes avec un solde supérieur à 60 000 USD doivent utiliser le canal de retrait à volume élevé de la plateforme. Ce canal permet un retrait unique, rapide et sécurisé de tous les fonds.</p><p>2.6) Si le score de crédit du compte est insuffisant, certaines fonctions de la plateforme ne pourront pas être utilisées normalement.</p>"
+      "title": "Retraits",
+      "content": "<p>2.1 Les utilisateurs doivent terminer toutes les missions avant de pouvoir demander un retrait.</p><p>2.2 Si un utilisateur choisit d’abandonner ou de quitter une mission en cours, aucune demande de retrait ou de remboursement ne sera acceptée.</p><p>2.3 Les retraits ne peuvent être traités que si une demande de retrait valide a été soumise.</p><p>2.4 Le montant maximum de retrait est de 10 000 USD pour les utilisateurs VIP1 et de 30 000 USD pour les utilisateurs VIP2. Les utilisateurs VIP3 et supérieurs n’ont pas de limite maximale de retrait.</p><p>2.5 Afin de garantir un service plus rapide et plus sécurisé, les comptes dont le solde dépasse 60 000 USD doivent utiliser le canal de retrait à volume élevé de la plateforme, permettant un retrait complet en une seule fois.</p><p>2.6 Les comptes avec un score de crédit insuffisant peuvent être limités dans l’accès à certaines fonctionnalités de la plateforme.</p>"
     },
     {
       "title": "Fonds",
-      "content": "<p>3.1) Tous les fonds sont conservés en toute sécurité sur le compte de l’utilisateur et peuvent être retirés intégralement une fois toutes les données complétées</p><p>3.2) Afin d’éviter toute perte de fonds, toutes les données sont traitées automatiquement par le système et non manuellement</p><p>3.3) La plateforme assume l’entière responsabilité en cas de perte accidentelle de fonds.</p><p>3.4) Si les fonds de l’utilisateur dépassent le seuil imposable fixé par le gouvernement, l’utilisateur devra payer des impôts</p>"
+      "content": "<p>3.1 Tous les fonds sont conservés en toute sécurité sur le compte de l’utilisateur et peuvent être retirés intégralement une fois toutes les missions de données complétées.</p><p>3.2 Afin d’éviter toute anomalie financière, toutes les données sont traitées automatiquement par le système et non manuellement.</p><p>3.3 La plateforme assume l’entière responsabilité en cas de perte accidentelle des fonds des utilisateurs.</p><p>3.4 Si les fonds d’un utilisateur dépassent le seuil imposable fixé par le gouvernement, l’utilisateur est responsable du paiement des taxes applicables.</p>"
     },
     {
       "title": "Sécurité du compte",
-      "content": "<p>4.1) Veuillez ne pas divulguer votre mot de passe de connexion ni votre mot de passe de retrait à des tiers, car la plateforme ne sera pas responsable des pertes.</p><p>4.2) Il est déconseillé d’utiliser votre date de naissance, numéro d’identité ou numéro de téléphone comme mot de passe de connexion ou de retrait.</p><p>4.3) Si vous oubliez votre mot de passe de connexion ou de retrait, veuillez contacter le service en ligne pour le réinitialiser.</p>"
+      "content": "<p>4.1 Les utilisateurs ne doivent pas divulguer leurs mots de passe de connexion ou de retrait à des tiers. La plateforme n’est pas responsable des pertes résultant d’une divulgation non autorisée.</p><p>4.2 Il est fortement conseillé de ne pas utiliser des dates de naissance, numéros d’identité ou numéros de téléphone comme mots de passe.</p><p>4.3 Si un utilisateur oublie son mot de passe, veuillez contacter le service client en ligne pour le réinitialiser.</p>"
     },
     {
       "title": "Données générales des produits",
-      "content": "<p>5.1) Les profits de la plateforme sont divisés en profits de données de produits normaux et profits de données de produits combinés (10 fois)</p><p>5.2) Les utilisateurs normaux gagnent 0,5 % de profit pour chaque mission d’optimisation standard</p><p>5.3) Les utilisateurs VIP 2 gagnent 1 % de profit pour chaque mission d’optimisation standard</p><p>5.4) Les utilisateurs VIP 3 gagnent 1,5 % de profit pour chaque mission d’optimisation standard</p><p>5.5) Les utilisateurs VIP 4 gagnent 2 % de profit pour chaque mission d’optimisation standard</p><p>5.6) Les utilisateurs VIP 5 gagnent 2,5 % de profit pour chaque mission d’optimisation standard</p><p>5.7) Les fonds et profits seront crédités sur le compte de l’utilisateur après chaque mission complétée</p><p>5.8) Le système attribue aléatoirement les tâches au compte utilisateur en fonction du solde total du compte</p><p>5.9) Une fois qu’une tâche d’optimisation est attribuée, elle ne peut pas être annulée ni ignorée</p>"
+      "content": "<p>5.1 Les catégories de profit de la plateforme incluent les profits des données de produits normaux et les profits des données de produits combinés (×10).</p><p>5.2 Les utilisateurs normaux gagnent 0,5 % de profit pour chaque mission d’optimisation standard complétée.</p><p>5.3 Les utilisateurs VIP2 gagnent 1 % de profit pour chaque mission d’optimisation standard complétée.</p><p>5.4 Les utilisateurs VIP3 gagnent 1,5 % de profit pour chaque mission d’optimisation standard complétée.</p><p>5.5 Les utilisateurs VIP4 gagnent 2 % de profit pour chaque mission d’optimisation standard complétée.</p><p>5.6 Les utilisateurs VIP5 gagnent 2,5 % de profit pour chaque mission d’optimisation standard complétée.</p><p>5.7 Les fonds et les profits sont automatiquement crédités sur le compte de l’utilisateur après chaque mission complétée.</p><p>5.8 Les missions sont attribuées aléatoirement par le système en fonction du solde total du compte de l’utilisateur.</p><p>5.9 Une fois attribuée, une mission d’optimisation de produit ne peut être ni annulée ni ignorée.</p>"
     },
     {
-      "title": "Données des produits combinés",
-      "content": "<p>6.1) Les données des produits combinés sont composées de 1 à 3 éléments. L’utilisateur ne reçoit pas nécessairement 3 produits, le système attribue aléatoirement les données, avec plus de chances d’obtenir 1 ou 2 produits</p><p>6.2) Les utilisateurs recevront 10 fois plus de profit pour chaque produit combiné par rapport aux produits normaux</p><p>6.3) Une fois les produits combinés reçus, tous les fonds cessent d’évoluer et seront restitués sur le compte après avoir complété chaque donnée produit</p><p>6.4) Le système attribue aléatoirement les données des produits combinés en fonction du solde total du compte utilisateur</p><p>6.5) Une fois attribuées, les données des produits combinés ne peuvent être ni annulées ni ignorées</p>"
+      "title": "Données de produits combinés",
+      "content": "<p>6.1 Les données de produits combinés comprennent de 1 à 3 éléments. Les utilisateurs ne recevront pas toujours les 3 éléments ; les missions sont attribuées aléatoirement, avec une probabilité plus élevée de recevoir 1 ou 2 éléments.</p><p>6.2 Les utilisateurs gagnent 10 fois plus de profit avec les produits combinés qu’avec les produits normaux.</p><p>6.3 Lors de la réception de produits combinés, tous les fonds en cours sont suspendus et seront retournés au compte de l’utilisateur une fois tous les éléments complétés.</p><p>6.4 Les données de produits combinés sont attribuées aléatoirement en fonction du solde total du compte de l’utilisateur.</p><p>6.5 Une fois attribuées, les données de produits combinés ne peuvent pas être annulées ni ignorées.</p>"
     },
     {
-      "title": "Dépôt",
-      "content": "<p>7.1) Le montant du dépôt est choisi par l’utilisateur. Nous ne déterminons pas ce montant. Il est recommandé de déposer selon ses capacités ou après s’être familiarisé avec la plateforme.</p><p>7.2) Si un dépôt est requis lors de la réception de données de produits combinés, il est recommandé de compléter le montant insuffisant indiqué sur le compte.</p><p>7.3) Avant d’effectuer un dépôt, vous devez contacter le service en ligne pour confirmer les informations de dépôt.</p><p>7.4) La plateforme ne sera pas responsable si l’utilisateur effectue un dépôt vers des informations incorrectes.</p>"
+      "title": "Avance",
+      "content": "<p>7.1 Le montant de l’avance est déterminé uniquement par l’utilisateur. La plateforme ne fixe pas de montant et recommande aux utilisateurs d’avancer selon leurs capacités financières ou après s’être familiarisés avec la plateforme.</p><p>7.2 Si une avance est nécessaire pour des produits combinés, l’utilisateur est invité à avancer le montant correspondant à l’insuffisance affichée sur le compte.</p><p>7.3 Avant toute avance, les utilisateurs doivent contacter le service client en ligne pour demander et confirmer les détails.</p><p>7.4 La plateforme ne sera pas responsable des pertes résultant d’avances effectuées avec des informations incorrectes.</p>"
     }
   ],
   "event_sections": [
@@ -847,7 +847,7 @@
       "tag": "ACTIVE",
       "icon": "⚡",
       "title": "3e anniversaire – Offres de remerciement",
-      "summary": "Événement promotionnel Skye Odell – Bonus de réinitialisation",
+      "summary": "Événement promotionnel Skye O'Dell – Récompenses de bonus de réinitialisation",
       "reward": "Récompenses supplémentaires de 10 USD à 2 400 USD",
       "progress": "",
       "time": "Activité anniversaire à durée limitée",
@@ -870,20 +870,19 @@
       "content": "<div class=\"event-section-block\"><h4>Récompenses cumulées des avances du jour</h4><div class=\"event-bonus-grid\"><div><strong>1 500 - 9 999</strong><span>Recevrez</span><b>Bonus d'avance de 4 %</b></div><div><strong>10 000 - 19 999</strong><span>Recevrez</span><b>Bonus d'avance de 8 %</b></div><div><strong>20 000 - 49 999</strong><span>Recevrez</span><b>Bonus d'avance de 12 %</b></div><div><strong>50 000 et plus</strong><span>Recevrez</span><b>Bonus d'avance de 20 %</b></div></div></div>"
     }
   ],
-  "event_footer_line1": "Skye Odell se réserve le droit d’interprétation finale.",
-  "event_footer_line2": "© 2022 Skye Odell. Tous droits réservés.",
+  "event_footer_line1": "Skye O'Dell se réserve le droit d’interprétation finale.",
+  "event_footer_line2": "© 2022 Skye O'Dell. Tous droits réservés.",
   "tc_page_title": "Conditions générales",
-  "tc_hero_title": "Accord d’inscription des utilisateurs",
+  "tc_hero_title": "Accord d'inscription des utilisateurs.",
   "tc_hero_intro": [
-    "Bienvenue chez <strong>Main Street ROI Agency</strong> et ses services.",
-    "Veuillez lire attentivement cet <strong>Accord d’inscription des utilisateurs</strong> (« Accord ») avant d’utiliser le logiciel, le site web ou les services associés fournis par Main Street ROI Agency (collectivement, les « Services »). Cet Accord régit votre accès et votre utilisation des Services."
+    "Bienvenue sur <strong>Skye O'Dell</strong> et ses services.",
+    "Afin de garantir la sécurité de ce site web et du logiciel du créateur « Utilisation et services du logiciel », veuillez lire attentivement la licence suivante relative aux logiciels et services (« Logiciel » ou « Accord »). Vous devez comprendre pleinement ces termes et conditions — en particulier ceux concernant les dispositions de service, les restrictions et tout accord complémentaire — et reconnaître et accepter les responsabilités associées."
   ],
   "tc_hero_notice": [
-    "En accédant ou en utilisant les Services, vous confirmez avoir lu, compris et accepté d’être lié par cet Accord ainsi que par toutes les conditions et politiques associées. Si vous n’êtes pas d’accord, vous ne devez pas utiliser les Services.",
-    "Vous devez avoir au moins <strong>18 ans</strong> pour utiliser les Services."
+    "En accédant au Site ou en l'utilisant, vous confirmez avoir au moins 18 ans et avoir lu, compris et accepté cet Accord ainsi que ses termes et conditions associés. Si vous ne remplissez pas ces conditions, vous n'êtes pas autorisé à télécharger ou à utiliser les Services."
   ],
   "tc_table_of_contents": "Table des matières",
-  "tc_update_alert": "Main Street ROI Agency se réserve le droit de modifier ou de mettre à jour cet Accord à tout moment. La version la plus récente publiée sur le site web fera foi.",
+  "tc_update_alert": "Skye O'Dell se réserve le droit de modifier ou de mettre à jour le présent Accord à tout moment, et la version la plus récente publiée sur le site web fera foi.",
   "tc_terms_sections": [
     {
       "title": "Protection des informations personnelles",
@@ -962,7 +961,7 @@
     }
   ],
   "sk_social_label": "Liens sociaux",
-  "sk_logo_alt": "Skye Odell",
+  "sk_logo_alt": "Skye O'Dell",
   "sk_menu": "Menu",
   "sk_contact": "Vous avez un projet ? Contactez-nous !",
   "sk_topics": "Thèmes de services",
@@ -1077,9 +1076,9 @@
   "record_status_to_submit": "À soumettre",
   "phone_number": "Téléphone",
   "Gender_fomt": "Sélectionner le genre",
-  "lucky_draw_title": "VOUS AVEZ GAGNÉ AU TIRAGE AU SORT !",
-  "lucky_draw_desc_before": "Cet événement est organisé conjointement par Web Works Marketing et des commerçants participants, avec des récompenses mystères allant de",
-  "lucky_draw_amount": "20 $ à 2 000 000 $",
+  "lucky_draw_title": "Félicitations ! Vous avez gagné un prix au tirage au sort !",
+  "lucky_draw_desc_before": "Cet événement est organisé conjointement par Skye O'Dell et les commerçants participants. Les récompenses mystères vont de",
+  "lucky_draw_amount": "20 $ à 2 000 000 $.",
   "lucky_draw_claim_text": "Pour réclamer votre récompense, veuillez contacter notre service client.",
   "guide_salary_scheme_title": "Plan salarial",
   "guide_salary_scheme_subtitle": "Connectez-vous . Soyez présent . Soyez payé",

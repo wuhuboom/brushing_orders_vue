@@ -368,7 +368,7 @@
   "home_upgrade_vip_to_unlock_more_tasks": "VIP upgraden, um mehr Aufgaben freizuschalten",
   "home_higher_level_higher_earnings": "Höheres Level, höhere Einnahmen",
   "home_featured_partner": "Ausgewählter Partner",
-  "home_partner_company": "Skye Odell (SO Services)",
+  "home_partner_company": "Skye O'Dell (SO Services)",
   "home_partner_tagline": "Ihre Vision. Perfekt umgesetzt.",
   "home_partner_description": "Eine Full-Service-Digitalagentur für Kreativ- und Marketinglösungen – von Markenaufbau und Webentwicklung bis hin zu umfassenden Marketingstrategien, die nachhaltiges Wachstum online und offline ermöglichen.",
   "home_content_creation": "Content-Erstellung",
@@ -423,7 +423,7 @@
   "task_instructions": "Aufgabenanweisungen",
   "task_instruction_1": "1. Nach Annahme der Aufgabe muss die Bestellung innerhalb von 30 Minuten abgeschlossen werden.",
   "task_instruction_2": "2. Die Bestellung darf nicht storniert oder geändert werden.",
-  "task_instruction_3": "3. Machen Sie nach der Bestellung einen Screenshot als Nachweis.",
+  "task_instruction_3": "3. Nach der Bestellung kann es zu einer leichten Verzögerung kommen. Bitte haben Sie etwas Geduld",
   "task_instruction_4": "4. Die Provision wird nach Bestätigung gutgeschrieben.",
   "mystery_blind_box": "Mystery-Box",
   "reset": "Zurücksetzen",
@@ -454,7 +454,7 @@
   "logout_confirm_desc_1": "Möchten Sie sich wirklich von Ihrem Konto abmelden?",
   "logout_confirm_desc_2": "Sie müssen sich erneut anmelden, um auf Ihre Daten zuzugreifen.",
   "available_balance": "Verfügbares Guthaben",
-  "enter_amount_usdt": "Betrag eingeben (USDT)",
+  "enter_amount_usdt": "Betrag eingeben (USD)",
   "select_customer_service_channel": "Wählen Sie den Kundendienst, um einen Einzahlungskanal zu erhalten",
   "customer_service_no": "Kundendienst Nr. {number}",
   "customer_service": "Kundendienst",
@@ -475,7 +475,7 @@
   "bind_wallet_account": "Wallet verknüpfen",
   "account_encrypted_notice": "Ihre Kontoinformationen sind verschlüsselt und geschützt. Wir geben sie niemals an Dritte weiter.",
   "our_certifications": "Unsere Zertifizierungen",
-  "certifications_desc": "ShopReward arbeitet unter strenger Einhaltung gesetzlicher Vorschriften und verfügt über alle erforderlichen Lizenzen und Sicherheitszertifizierungen zum Schutz unserer Nutzer.",
+  "certifications_desc": "Skye O'Dell arbeitet unter strenger Einhaltung aller regulatorischen Anforderungen und verfügt über alle erforderlichen Lizenzen sowie Sicherheitszertifizierungen, um unsere Nutzer zu schützen.",
   "documents": "Dokumente",
   "images": "Bilder",
   "sections": "Abschnitte",
@@ -518,7 +518,7 @@
   "frequently_asked_questions": "Häufig gestellte Fragen",
   "find_instant_answers": "Finden Sie sofort Antworten auf häufige Fragen",
   "terms_last_updated": "Zuletzt aktualisiert: 15. Januar 2025. Bitte lesen Sie diese Informationen sorgfältig, bevor Sie unsere Dienste nutzen.",
-  "terms_continue_notice": "Durch die weitere Nutzung von ShopReward bestätigen Sie, dass Sie alle in diesem Dokument aufgeführten Bedingungen gelesen, verstanden und akzeptiert haben.",
+  "terms_continue_notice": "Durch die weitere Nutzung von Skye O'Dell bestätigen Sie, dass Sie alle in diesem Dokument aufgeführten Bedingungen gelesen, verstanden und akzeptiert haben.",
   "table_of_contents": "Inhaltsverzeichnis",
   "terms_update_alert": "Diese Bedingungen wurden zuletzt am 15. Januar 2025 aktualisiert. Die fortgesetzte Nutzung der Plattform nach Änderungen gilt als Zustimmung zu den aktualisierten Bedingungen. Bei Fragen kontaktieren Sie bitte support{'@'}shopreward.com.",
   "vip_five_star_title": "SUG Fünf-Sterne-VIP",
@@ -814,32 +814,32 @@
   ],
   "faq_sections": [
     {
-      "title": "Start der Produktoptimierungsaufgaben",
-      "content": "<p>1.1) Mindestkontostand von 50 USD für die ersten 40 Aufgaben pro Set.</p><p>1.2) Eine Mindestaufladung von 100 USD ist erforderlich, um neue Aufgaben zu starten.</p><p>1.3) Benutzer müssen die Aufgaben abschließen, bevor sie eine Auszahlung beantragen können.</p>"
+      "title": "Produktoptimierungsmission",
+      "content": "<p>1.1 Ein Mindestkontostand von USD 50 ist erforderlich, um die ersten 40 Missionen zu starten.</p><p>1.2 Eine Mindestaufladung von USD 100 ist erforderlich, um einen neuen Missionssatz zu beginnen.</p><p>1.3 Nutzer müssen alle zugewiesenen Missionen abschließen, bevor sie eine Auszahlung beantragen können.</p>"
     },
     {
-      "title": "Auszahlung",
-      "content": "<p>2.1) Benutzer müssen die Aufgaben abschließen, bevor sie eine Auszahlung beantragen können.</p><p>2.2) Eine Auszahlung oder Rückerstattung ist nicht möglich, wenn Sie sich entscheiden, eine laufende Optimierungsaufgabe abzubrechen oder mittendrin auszusteigen.</p><p>2.3) Auszahlungen können nicht bearbeitet werden, wenn keine Auszahlungsanfrage des Benutzers vorliegt.</p><p>2.4) Der maximale Auszahlungsbetrag für VIP1 beträgt 10.000 USD, für VIP2 30.000 USD. Für VIP3 und höher gibt es kein Auszahlungslimit.</p><p>2.5) Um unseren geschätzten Benutzern einen professionelleren und effizienteren Service zu bieten, müssen Konten mit einem Guthaben von über 60.000 USD den Hochvolumen-Auszahlungskanal der Plattform nutzen. Dieser ermöglicht eine schnellere, sicherere und einmalige vollständige Auszahlung aller Gelder.</p><p>2.6) Wenn der Kreditwert des Benutzerkontos unzureichend ist, können nicht alle Funktionen der Plattform normal genutzt werden.</p>"
+      "title": "Auszahlungen",
+      "content": "<p>2.1 Nutzer müssen alle Missionen abschließen, bevor sie berechtigt sind, eine Auszahlung zu beantragen.</p><p>2.2 Wenn ein Nutzer eine laufende Optimierungsmission abbricht oder verlässt, werden keine Auszahlungs- oder Rückerstattungsanträge akzeptiert.</p><p>2.3 Auszahlungen können nur bearbeitet werden, wenn ein gültiger Auszahlungsantrag eingereicht wurde.</p><p>2.4 Der maximale Auszahlungsbetrag beträgt für VIP1-Nutzer USD 10.000 und für VIP2-Nutzer USD 30.000. Für VIP3 und höher gibt es kein Auszahlungslimit.</p><p>2.5 Um einen schnelleren und sichereren Service zu gewährleisten, müssen Konten mit einem Guthaben von über USD 60.000 den Hochvolumen-Auszahlungskanal der Plattform nutzen, der eine einmalige vollständige Auszahlung aller Mittel ermöglicht.</p><p>2.6 Konten mit unzureichender Kreditbewertung können beim Zugriff auf bestimmte Plattformfunktionen eingeschränkt werden.</p>"
     },
     {
-      "title": "Gelder",
-      "content": "<p>3.1) Alle Gelder werden sicher auf dem Benutzerkonto verwahrt und können vollständig ausgezahlt werden, sobald alle Daten abgeschlossen sind</p><p>3.2) Um Verluste zu vermeiden, werden alle Daten automatisch vom System und nicht manuell verarbeitet</p><p>3.3) Die Plattform übernimmt die volle Verantwortung für etwaige versehentliche Verluste von Geldern.</p><p>3.4) Wenn die Gelder des Benutzers den steuerpflichtigen Betrag überschreiten, ist der Benutzer verpflichtet, Steuern zu zahlen</p>"
+      "title": "Guthaben",
+      "content": "<p>3.1 Alle Gelder werden sicher im Benutzerkonto aufbewahrt und können vollständig abgehoben werden, sobald alle relevanten Datenmissionen abgeschlossen sind.</p><p>3.2 Um finanzielle Unstimmigkeiten zu vermeiden, erfolgt die gesamte Datenverarbeitung automatisch durch das System und nicht manuell.</p><p>3.3 Die Plattform übernimmt die volle Verantwortung für etwaige unbeabsichtigte Verluste von Nutzergeldern.</p><p>3.4 Wenn die Gelder eines Nutzers die steuerliche Freigrenze der Regierung überschreiten, ist der Nutzer für die Zahlung aller anfallenden Steuern verantwortlich.</p>"
     },
     {
       "title": "Kontosicherheit",
-      "content": "<p>4.1) Bitte geben Sie Ihr Login- und Auszahlungspasswort nicht an andere weiter, da die Plattform für daraus entstehende Verluste nicht haftet.</p><p>4.2) Es wird nicht empfohlen, Geburtsdatum, Ausweisnummer oder Telefonnummer als Login- oder Auszahlungspasswort zu verwenden.</p><p>4.3) Wenn Sie Ihr Login- oder Auszahlungspasswort vergessen haben, wenden Sie sich bitte an unseren Online-Service, um es zurückzusetzen.</p>"
+      "content": "<p>4.1 Nutzer dürfen ihre Login- oder Auszahlungspasswörter nicht an Dritte weitergeben. Die Plattform haftet nicht für Verluste aufgrund unbefugter Offenlegung.</p><p>4.2 Nutzern wird dringend empfohlen, keine Geburtstage, Ausweisnummern oder Telefonnummern als Login- oder Auszahlungspasswort zu verwenden.</p><p>4.3 Wenn ein Nutzer sein Login- oder Auszahlungspasswort vergisst, wenden Sie sich bitte an unseren Online-Kundendienst, um es zurückzusetzen.</p>"
     },
     {
       "title": "Allgemeine Produktdaten",
-      "content": "<p>5.1) Die Plattformgewinne werden in normale Produktdatengewinne und 10-fache Kombinationsproduktgewinne unterteilt</p><p>5.2) Normale Benutzer erhalten 0,5 % Gewinn pro Optimierungsaufgabe</p><p>5.3) VIP 2 Benutzer erhalten 1 % Gewinn pro Optimierungsaufgabe</p><p>5.4) VIP 3 Benutzer erhalten 1,5 % Gewinn pro Optimierungsaufgabe</p><p>5.5) VIP 4 Benutzer erhalten 2 % Gewinn pro Optimierungsaufgabe</p><p>5.6) VIP 5 Benutzer erhalten 2,5 % Gewinn pro Optimierungsaufgabe</p><p>5.7) Gelder und Gewinne werden nach jeder abgeschlossenen Optimierungsaufgabe auf das Benutzerkonto zurückerstattet</p><p>5.8) Das System weist Aufgaben basierend auf dem Gesamtguthaben des Benutzerkontos zufällig zu</p><p>5.9) Sobald eine Aufgabe zur Produktoptimierung zugewiesen wurde, kann sie nicht storniert oder übersprungen werden</p>"
+      "content": "<p>5.1 Die Gewinne der Plattform umfassen normale Produktdatengewinne und 10-fache Kombinationsproduktdatengewinne.</p><p>5.2 Normale Nutzer verdienen 0,5 % Gewinn für jede abgeschlossene normale Optimierungsmission.</p><p>5.3 VIP2-Nutzer verdienen 1 % Gewinn für jede abgeschlossene normale Optimierungsmission.</p><p>5.4 VIP3-Nutzer verdienen 1,5 % Gewinn für jede abgeschlossene normale Optimierungsmission.</p><p>5.5 VIP4-Nutzer verdienen 2 % Gewinn für jede abgeschlossene normale Optimierungsmission.</p><p>5.6 VIP5-Nutzer verdienen 2,5 % Gewinn für jede abgeschlossene normale Optimierungsmission.</p><p>5.7 Gelder und Gewinne werden nach Abschluss jeder Mission automatisch dem Benutzerkonto gutgeschrieben.</p><p>5.8 Missionen werden vom System basierend auf dem Gesamtguthaben des Nutzers zufällig zugewiesen.</p><p>5.9 Sobald eine Produktoptimierungsmission zugewiesen wurde, kann sie nicht storniert oder übersprungen werden.</p>"
     },
     {
       "title": "Kombinationsproduktdaten",
-      "content": "<p>6.1) Kombinationsprodukte bestehen aus 1 bis 3 Datensätzen. Benutzer erhalten nicht zwingend 3 Produkte; das System weist zufällig zu, wobei die Wahrscheinlichkeit höher ist, 1 oder 2 Produkte zu erhalten</p><p>6.2) Benutzer erhalten für Kombinationsprodukte das 10-fache des Gewinns im Vergleich zu normalen Produktdaten</p><p>6.3) Nach Erhalt eines Kombinationsprodukts werden alle Gelder eingefroren und erst nach Abschluss aller enthaltenen Produktdaten wieder dem Konto gutgeschrieben</p><p>6.4) Das System weist Kombinationsprodukte basierend auf dem Gesamtguthaben des Benutzerkontos zufällig zu</p><p>6.5) Einmal zugewiesene Kombinationsprodukte können nicht storniert oder übersprungen werden</p>"
+      "content": "<p>6.1 Kombinationsproduktdaten bestehen aus 1 bis 3 Elementen. Nutzer erhalten möglicherweise nicht immer alle 3 Elemente; Missionen werden zufällig zugewiesen, wobei die Wahrscheinlichkeit höher ist, 1 oder 2 Elemente zu erhalten.</p><p>6.2 Nutzer erhalten das 10-fache des Gewinns bei Kombinationsproduktdaten im Vergleich zu normalen Produktdaten.</p><p>6.3 Nach Erhalt von Kombinationsproduktdaten wird die laufende Kapitalbewegung pausiert und nach Abschluss aller Elemente dem Benutzerkonto zurückerstattet.</p><p>6.4 Kombinationsproduktdaten werden zufällig basierend auf dem Gesamtguthaben des Nutzers zugewiesen.</p><p>6.5 Nach der Zuweisung können Kombinationsproduktdaten nicht storniert oder übersprungen werden.</p>"
     },
     {
-      "title": "Einzahlung",
-      "content": "<p>7.1) Der Einzahlungsbetrag wird vom Benutzer selbst gewählt. Wir empfehlen, Einzahlungen entsprechend der eigenen finanziellen Möglichkeiten oder nach ausreichender Vertrautheit mit der Plattform vorzunehmen.</p><p>7.2) Wenn bei Kombinationsprodukten eine Einzahlung erforderlich ist, wird empfohlen, den fehlenden Betrag gemäß der Kontoanzeige aufzustocken</p><p>7.3) Vor jeder Einzahlung müssen Sie den Online-Service kontaktieren und die Einzahlungsdetails bestätigen</p><p>7.4) Die Plattform übernimmt keine Verantwortung für Einzahlungen an falsche Daten</p>"
+      "title": "Vorschuss",
+      "content": "<p>7.1 Der Vorschussbetrag wird ausschließlich vom Nutzer bestimmt. Die Plattform legt keinen Betrag fest und empfiehlt, nur entsprechend der eigenen finanziellen Möglichkeiten oder nach ausreichender Vertrautheit mit der Plattform vorzuschießen.</p><p>7.2 Wenn ein Vorschuss für Kombinationsproduktdaten erforderlich ist, wird empfohlen, den fehlenden Betrag gemäß der Kontoanzeige aufzustocken.</p><p>7.3 Vor jeder Vorschusszahlung müssen Nutzer den Online-Kundendienst kontaktieren, um die Details zu bestätigen.</p><p>7.4 Die Plattform übernimmt keine Verantwortung für Verluste durch Vorschusszahlungen an falsche Angaben.</p>"
     }
   ],
   "event_sections": [
@@ -847,7 +847,7 @@
       "tag": "AKTIV",
       "icon": "⚡",
       "title": "3. Jubiläums-Dankeschön-Aktion",
-      "summary": "Skye Odell Werbeaktion – Reset-Bonus-Belohnungen",
+      "summary": "Skye O'Dell Werbeaktion – Reset-Bonus-Belohnungen",
       "reward": "USD 10 - USD 2.400 Zusatzbelohnungen",
       "progress": "",
       "time": "Zeitlich begrenzte Jubiläumsaktion",
@@ -870,72 +870,71 @@
       "content": "<div class=\"event-section-block\"><h4>Kumulierte Tages-Vorauszahlungsboni</h4><div class=\"event-bonus-grid\"><div><strong>1.500 - 9.999</strong><span>Erhalten Sie</span><b>4% Vorauszahlungsbonus</b></div><div><strong>10.000 - 19.999</strong><span>Erhalten Sie</span><b>8% Vorauszahlungsbonus</b></div><div><strong>20.000 - 49.999</strong><span>Erhalten Sie</span><b>12% Vorauszahlungsbonus</b></div><div><strong>50.000 und mehr</strong><span>Erhalten Sie</span><b>20% Vorauszahlungsbonus</b></div></div></div>"
     }
   ],
-  "event_footer_line1": "Skye Odell behält sich das Recht der endgültigen Auslegung vor.",
-  "event_footer_line2": "© 2022 Skye Odell. Alle Rechte vorbehalten.",
+  "event_footer_line1": "Skye O'Dell behält sich das Recht der endgültigen Auslegung vor.",
+  "event_footer_line2": "© 2022 Skye O'Dell. Alle Rechte vorbehalten.",
   "tc_page_title": "Allgemeine Geschäftsbedingungen",
-  "tc_hero_title": "Benutzerregistrierungsvereinbarung",
+  "tc_hero_title": "Nutzerregistrierungsvereinbarung.",
   "tc_hero_intro": [
-    "Willkommen bei <strong>Main Street ROI Agency</strong> und ihren Dienstleistungen.",
-    "Bitte lesen Sie diese <strong>Benutzerregistrierungsvereinbarung</strong> („Vereinbarung“) sorgfältig durch, bevor Sie die von Main Street ROI Agency bereitgestellte Software, Website oder damit verbundene Dienste (zusammen die „Dienste“) nutzen. Diese Vereinbarung regelt Ihren Zugriff auf und die Nutzung der Dienste."
+    "Willkommen bei <strong>Skye O'Dell</strong> und seinen Dienstleistungen.",
+    "Um die Sicherheit dieser Website sowie der Software des Anbieters („Software und Dienstleistungen“) zu gewährleisten, lesen Sie bitte die folgende Software- und Dienstleistungslizenz („Software“ oder „Vereinbarung“) sorgfältig durch. Sie müssen diese Bedingungen vollständig verstehen – insbesondere die Bestimmungen zu Dienstleistungen, Einschränkungen sowie etwaige ergänzende Vereinbarungen – und die damit verbundenen Verantwortlichkeiten anerkennen und akzeptieren."
   ],
   "tc_hero_notice": [
-    "Durch den Zugriff auf oder die Nutzung der Dienste bestätigen Sie, dass Sie diese Vereinbarung sowie alle zugehörigen Bedingungen und Richtlinien gelesen, verstanden und akzeptiert haben. Wenn Sie nicht einverstanden sind, dürfen Sie die Dienste nicht nutzen.",
-    "Sie müssen mindestens <strong>18 Jahre alt</strong> sein, um die Dienste nutzen zu dürfen."
+    "Durch den Zugriff auf oder die Nutzung der Website bestätigen Sie, dass Sie mindestens 18 Jahre alt sind und diese Vereinbarung sowie die dazugehörigen Bedingungen gelesen, verstanden und akzeptiert haben. Wenn Sie diese Voraussetzungen nicht erfüllen, sind Sie nicht berechtigt, die Dienste herunterzuladen oder zu nutzen."
   ],
   "tc_table_of_contents": "Inhaltsverzeichnis",
-  "tc_update_alert": "Main Street ROI Agency behält sich das Recht vor, diese Vereinbarung jederzeit zu ändern oder zu aktualisieren. Maßgeblich ist die jeweils auf der Website veröffentlichte neueste Version.",
+  "tc_update_alert": "Skye O'Dell behält sich das Recht vor, diese Vereinbarung jederzeit zu ändern oder zu aktualisieren. Es gilt die jeweils aktuell auf der Website veröffentlichte Version.",
   "tc_terms_sections": [
     {
-      "title": "Schutz personenbezogener Daten",
+      "title": "Schutz der persönlichen Daten der Nutzer",
       "items": [
         {
           "no": "1.1",
-          "content": "<p>Der Schutz der persönlichen Daten der Nutzer ist ein grundlegendes Prinzip von Main Street ROI Agency. Wir verwenden professionelle Verschlüsselungstechnologien, sichere Speicherung und sichere Übertragungsmethoden, um Benutzerdaten zu schützen.</p>"
+          "content": "<p>Der Schutz der persönlichen Daten der Nutzer sowie des Erstellers ist ein Grundprinzip dieser Website. Skye O'Dell verwendet professionelle Verschlüsselungstechnologien, sichere Speicherung und geschützte Übertragungsmethoden, um alle Informationen zu schützen. Im Falle einer unbefugten Offenlegung wird die Website rechtliche Schritte einleiten.</p>"
         },
         {
           "no": "1.2",
-          "content": "<p>Um auf bestimmte Dienste zuzugreifen, wie z. B. die Kontoregistrierung, müssen Nutzer notwendige und korrekte Informationen angeben, einschließlich, aber nicht beschränkt auf eine Mobiltelefonnummer, und dieser Vereinbarung zustimmen. Unvollständige oder ungenaue Angaben können zu eingeschränktem Zugriff auf die Dienste führen.</p>"
+          "content": "<p>Bei der Nutzung der Dienste sind Nutzer verpflichtet, bestimmte notwendige Informationen bereitzustellen. Beispielsweise müssen Nutzer zur Registrierung eines Kontos eine Mobiltelefonnummer angeben und den Nutzungsbedingungen zustimmen. Unvollständige Angaben können zu Einschränkungen bei der Nutzung der Dienste führen.</p>"
         },
         {
           "no": "1.3",
-          "content": "<p>Nutzer können bestimmte persönliche Daten nach der Registrierung aktualisieren. Aus Sicherheitsgründen, einschließlich Kontowiederherstellung und Betrugsprävention, können einige Informationen nach der Verifizierung jedoch nicht mehr geändert werden.</p>"
+          "content": "<p>Grundsätzlich können Nutzer ihre angegebenen Informationen jederzeit ändern. Aus Sicherheitsgründen (z. B. bei der Kontowiederherstellung) können jedoch bestimmte persönliche Daten nach der Registrierung nicht frei geändert werden.</p>"
         },
         {
           "no": "1.4",
-          "content": "<p>Main Street ROI Agency unterhält strenge interne Kontroll- und Verwaltungssysteme, um unbefugten Zugriff, Nutzung oder Offenlegung personenbezogener Daten zu verhindern. Jede unbefugte Nutzung wird gemäß den geltenden Gesetzen behandelt. Nach der Registrierung kann die primäre Mobiltelefonnummer eines Kontos ohne Verifizierung nicht geändert werden.</p>"
+          "content": "<p>Skye O'Dell setzt verschiedene Sicherheitstechnologien, Betriebsverfahren und ein umfassendes Managementsystem ein, um Nutzerdaten zu schützen. Jede unbefugte Nutzung, jeder Zugriff oder jede Offenlegung wird rechtlich verfolgt. Die endgültig registrierte Mobiltelefonnummer eines Skye O'Dell-Kontos kann nicht beliebig geändert werden.</p>"
         },
         {
           "no": "1.5",
-          "content": "<p>Main Street ROI Agency wird personenbezogene Daten der Nutzer ohne ausdrückliche Zustimmung nicht an Dritte weitergeben, verkaufen oder teilen, es sei denn, dies ist gesetzlich vorgeschrieben.</p>"
+          "content": "<p>Unter keinen Umständen wird Skye O'Dell Nutzerdaten ohne ausdrückliche Zustimmung des Nutzers an externe Unternehmen oder Organisationen weitergeben.</p>"
         },
         {
           "no": "1.6",
-          "content": "<p>Nutzer unter 18 Jahren dürfen die Dienste nicht nutzen. Falls ein Zugriff erforderlich ist, muss im Voraus eine schriftliche Zustimmung eines gesetzlichen Vertreters eingeholt werden.</p>"
+          "content": "<p>Personen unter 18 Jahren müssen vor der Nutzung der Dienste eine schriftliche Zustimmung eines Elternteils oder Erziehungsberechtigten vorlegen.</p>"
         }
       ]
     },
     {
-      "title": "Pflichten der Nutzer",
+      "title": "Verantwortlichkeiten der Nutzer",
       "items": [
         {
           "no": "2.1",
-          "content": "<p>Nutzer müssen alle zugewiesenen täglichen Aufgaben abschließen, bevor sie eine Auszahlung beantragen.</p>"
+          "content": "<p>Nutzer müssen alle täglichen Missionen abschließen, bevor sie eine Auszahlung beantragen können.</p>"
         },
         {
           "no": "2.2",
-          "content": "<p>Auszahlungen sind nicht zulässig, solange ein Optimierungs- oder Aufgabenprozess läuft.</p>"
+          "content": "<p>Nutzer dürfen keine Auszahlung einleiten, während ein Missionsoptimierungsprozess läuft.</p>"
         },
         {
           "no": "2.3",
-          "content": "<p>Nutzer dürfen zugewiesene Aufgaben nach Annahme nicht stornieren, überspringen oder abbrechen.</p>"
+          "content": "<p>Nutzer dürfen keine Mission abbrechen oder überspringen.</p>"
         },
         {
           "no": "2.4",
-          "content": "<p>Auszahlungen über <strong>30.000 USD</strong> unterliegen einer <strong>Bearbeitungsgebühr von 20%</strong>, die dem Nutzer nach erfolgreichem Abschluss der Auszahlung zurückerstattet wird.</p>"
+          "content": "<p>Für Konten mit einem Guthaben von über $60.000 wird eine entsprechende Auszahlungsgebühr erhoben. Diese Gebühr wird dem Nutzer unmittelbar nach erfolgreicher Verarbeitung der Auszahlung zurückerstattet. Für weitere Informationen wenden Sie sich bitte an den Kundensupport.</p>"
         },
         {
           "no": "2.5",
-          "content": "<p>Verstöße gegen diese Bestimmungen können zu einer Verringerung des Kreditwerts des Nutzers führen. Bestimmte Kontofunktionen können eingeschränkt werden, bis der Kreditwert wiederhergestellt ist.</p>"
+          "content": "<p>Jeder Verstoß gegen die Regeln führt zu einer Verringerung der Kreditbewertung des Nutzers, die automatisch vom System berechnet wird. Die Kreditbewertung muss wiederhergestellt werden, bevor alle Kontofunktionen vollständig genutzt werden können.</p>"
         }
       ]
     },
@@ -944,25 +943,25 @@
       "items": [
         {
           "no": "3.1",
-          "content": "<p>Diese Vereinbarung stellt einen rechtlich bindenden Vertrag zwischen dem Nutzer und Main Street ROI Agency dar. Nutzer müssen korrekte und rechtmäßige Informationen bereitstellen, um auf die Dienste zugreifen zu können.</p>"
+          "content": "<p>Diese Vereinbarung basiert zusammen mit dem Nutzervertrag und den Nutzungsbedingungen auf den im Benutzerkonto angezeigten Bestimmungen. Nutzer müssen der Website die erforderlichen relevanten Informationen und Unterlagen zur Verfügung stellen. Diese Materialien stellen einen Anhang zu dieser Vereinbarung dar.</p>"
         },
         {
           "no": "3.2",
-          "content": "<p>Diese Bedingungen gelten für alle Nutzer der Dienste. Wenn Sie Fragen, Feedback oder Anliegen haben, wenden Sie sich bitte an die zuständige Support-Abteilung.</p>"
+          "content": "<p>Diese Geschäftsbedingungen definieren die Grundlage, auf der die Website ihre Dienstleistungen für alle Nutzer bereitstellt. Bei Fragen oder wichtigen Anliegen wenden Sie sich bitte an die zuständige Abteilung.</p>"
         },
         {
           "no": "3.3",
-          "content": "<p>Diese Bedingungen unterliegen den geltenden Gesetzen und kommerziellen Vorschriften. Main Street ROI Agency behält sich das Recht vor, rechtliche Schritte gegen jeden Nutzer einzuleiten, der diese Vereinbarung böswillig verletzt.</p>"
+          "content": "<p>Alle Geschäftsbedingungen auf dieser Website unterliegen den geltenden Handelsabkommen und sind gesetzlich geschützt. Verstößt ein Nutzer in böser Absicht gegen den Vertrag, behält sich die Website das Recht vor, rechtliche Schritte einzuleiten.</p>"
         },
         {
           "no": "3.4",
-          "content": "<p>Main Street ROI Agency behält sich das Recht vor, diese Vereinbarung jederzeit zu ändern oder zu aktualisieren. Es gilt die jeweils aktuell auf der Website veröffentlichte Version, und Main Street ROI Agency behält sich das endgültige Auslegungsrecht vor.</p>"
+          "content": "<p>Diese Website behält sich das Recht vor, alle formellen und informellen Geschäftsbedingungen nach eigenem Ermessen zu ändern. Das endgültige Auslegungsrecht liegt ausschließlich bei dieser Website.</p>"
         }
       ]
     }
   ],
   "sk_social_label": "Soziale Links",
-  "sk_logo_alt": "Skye Odell",
+  "sk_logo_alt": "Skye O'Dell",
   "sk_menu": "Menü",
   "sk_contact": "Haben Sie ein Projekt? Kontaktieren Sie uns!",
   "sk_topics": "Service-Themen",
@@ -1077,10 +1076,10 @@
   "record_status_to_submit": "Einzureichen",
   "phone_number": "Telefon",
   "Gender_fomt": "Geschlecht auswählen",
-  "lucky_draw_title": "SIE HABEN DIE GLÜCKSLOTTERIE GEWONNEN!",
-  "lucky_draw_desc_before": "Diese Veranstaltung wird gemeinsam von Web Works Marketing und teilnehmenden Händlern organisiert, mit geheimnisvollen Belohnungen im Bereich von",
-  "lucky_draw_amount": "20 $ bis 2.000.000 $",
-  "lucky_draw_claim_text": "Um Ihre Belohnung zu erhalten, wenden Sie sich bitte an unseren Kundenservice.",
+  "lucky_draw_title": "Herzlichen Glückwunsch! Sie haben einen Preis bei der Verlosung gewonnen!",
+  "lucky_draw_desc_before": "Diese Veranstaltung wird gemeinsam von Skye O'Dell und teilnehmenden Händlern organisiert. Geheimnisvolle Belohnungen reichen von",
+  "lucky_draw_amount": "$20 bis $2.000.000.",
+  "lucky_draw_claim_text": "Um Ihren Gewinn zu erhalten, wenden Sie sich bitte an unser Kundendienstteam.",
   "guide_salary_scheme_title": "Gehaltsplan",
   "guide_salary_scheme_subtitle": "Einchecken . Anwesend sein . Bezahlt werden",
   "guide_salary_sign_in": "Einchecken",
