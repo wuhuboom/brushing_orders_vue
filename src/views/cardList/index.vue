@@ -192,8 +192,30 @@ const customer = () => {
     ContactUsRef.value.open();
 };
 
-const editAccount = () => {
-    router.push({ path: "/customer" });
+const editAccount = (item) => {
+    if (!item?.id) return;
+
+    const query = {
+        ...getCardListReturnQuery(),
+        id: item.id,
+    };
+
+    if (Number(item.type) === 1) {
+        router.push({
+            path: "/addCard",
+            query,
+        });
+        return;
+    }
+
+    router.push({
+        path: "/addWallet",
+        query: {
+            ...query,
+            type: route.query.type,
+            fromType: route.query.fromType,
+        },
+    });
 };
 
 const goCustomerPage = () => {

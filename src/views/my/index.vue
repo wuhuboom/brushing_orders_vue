@@ -176,8 +176,8 @@
             v-if="!isPc"
             v-model:show="showLogoutPopup"
             position="bottom"
-            class="logout-sheet"
-            overlay-class="logout-sheet-overlay"
+            class="logout-sheet logout-sheet--mobile"
+            overlay-class="logout-sheet-overlay logout-sheet-overlay--mobile"
             transition="logout-sheet-slide"
             round
         >
@@ -576,14 +576,34 @@ onDeactivated(() => {
     left: 50% !important;
     transform: translateX(-50%) !important;
     border-radius: 20px 20px 0 0;
-    padding: 39px 22px 36px;
+    padding: 39px 22px calc(36px + env(safe-area-inset-bottom, 0px));
     background: #ffffff;
     box-sizing: border-box;
+}
+
+.logout-sheet--mobile {
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+    transform: none !important;
 }
 
 :global(.logout-sheet-overlay) {
     background: rgba(0, 0, 0, 0.42);
     backdrop-filter: blur(4px);
+}
+
+:global(.logout-sheet-overlay--mobile) {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
 }
 
 :global(.logout-sheet-slide-enter-active),
@@ -596,13 +616,13 @@ onDeactivated(() => {
 :global(.logout-sheet-slide-enter-from),
 :global(.logout-sheet-slide-leave-to) {
     opacity: 0;
-    transform: translate3d(-50%, 100%, 0) !important;
+    transform: translate3d(0, 100%, 0) !important;
 }
 
 :global(.logout-sheet-slide-enter-to),
 :global(.logout-sheet-slide-leave-from) {
     opacity: 1;
-    transform: translate3d(-50%, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
 }
 
 .logout-sheet__icon {

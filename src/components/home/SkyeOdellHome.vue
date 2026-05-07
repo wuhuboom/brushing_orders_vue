@@ -49,6 +49,12 @@
         </section>
 
         <section class="skye-intro-section">
+            <img
+                class="skye-hero-image"
+                :src="heroImage"
+                :alt="t('sk_hero_alt')"
+            />
+
             <div class="skye-intro-text-wrap">
                 <!-- <h1 class="skye-mobile-title">
                     <span class="skye-mobile-title-main">{{ t('sk_vision') }}</span>
@@ -56,11 +62,6 @@
                 </h1> -->
                 <p class="skye-intro-copy">{{ t("sk_intro") }}</p>
             </div>
-            <img
-                class="skye-hero-image"
-                :src="heroImage"
-                :alt="t('sk_hero_alt')"
-            />
         </section>
 
         <!-- <section class="skye-service-buttons">

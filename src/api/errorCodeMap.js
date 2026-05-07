@@ -61,7 +61,7 @@ export const errorMessages = {
   917: "order_has_been_completed",
   918: "order_status_does_not_allow_submission",
   919: "we_ll_be_happy_to_help_and_get_back_to_you_once_we_re_online",
-  920: "customer_service_is_currently_unavailable",
+  920: "supportHours",
   921: "please_contact_customer_service_to_enable_the_task",
 
   // ====== 特殊status码 ======

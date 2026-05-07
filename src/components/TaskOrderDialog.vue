@@ -4,8 +4,8 @@
         :title="''"
         :show-confirm-button="false"
         :close-on-click-overlay="false"
-        class-name="task-order-dialog-panel"
-        overlay-class="task-order-dialog-overlay"
+        :class-name="dialogPanelClass"
+        :overlay-class="dialogOverlayClass"
         :style="dialogStyle"
         @closed="emit('closed')"
     >
@@ -124,7 +124,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 const props = defineProps({
     modelValue: {
@@ -212,13 +212,46 @@ const dialogVisible = computed({
 
 const currentStep = computed(() => Number(props.step || 1));
 
-const dialogStyle = {
-    width: "100%",
-    maxWidth: "var(--app-pc-max-width, 375px)",
+const isMobileViewport = ref(false);
+
+const updateViewportMode = () => {
+    if (typeof window === "undefined") {
+        isMobileViewport.value = false;
+        return;
+    }
+    isMobileViewport.value = window.innerWidth < 768;
+};
+
+onMounted(() => {
+    updateViewportMode();
+    window.addEventListener("resize", updateViewportMode);
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener("resize", updateViewportMode);
+});
+
+const dialogPanelClass = computed(() =>
+    isMobileViewport.value
+        ? "task-order-dialog-panel task-order-dialog-panel--mobile"
+        : "task-order-dialog-panel",
+);
+
+const dialogOverlayClass = computed(() =>
+    isMobileViewport.value
+        ? "task-order-dialog-overlay task-order-dialog-overlay--mobile"
+        : "task-order-dialog-overlay",
+);
+
+const dialogStyle = computed(() => ({
+    width: isMobileViewport.value ? "100vw" : "100%",
+    maxWidth: isMobileViewport.value
+        ? "100vw"
+        : "var(--app-pc-max-width, 375px)",
     height: "100vh",
     background: "#fff",
     borderRadius: "0px",
-};
+}));
 
 const stepCheckIcon = new URL(
     "@/static/images/order-step-check.png",
@@ -240,8 +273,11 @@ const isActiveStep = (stepIndex) =>
 <style scoped>
 .task-order-dialog {
     display: flex;
+    height: 100%;
     min-height: 100vh;
+    min-height: 100dvh;
     max-height: 100vh;
+    max-height: 100dvh;
     flex-direction: column;
     overflow-y: auto;
     background: #f4faf5;
@@ -533,6 +569,30 @@ const isActiveStep = (stepIndex) =>
     right: auto !important;
     width: min(100vw, var(--app-pc-max-width, 375px)) !important;
     transform: translateX(-50%) !important;
+}
+
+
+:global(.task-order-dialog-panel--mobile) {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    transform: none !important;
+}
+
+:global(.task-order-dialog-overlay--mobile) {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    transform: none !important;
 }
 
 @media (max-width: 767px) {

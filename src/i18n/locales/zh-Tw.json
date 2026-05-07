@@ -9,7 +9,8 @@
   "please_enter_email": "Please enter email",
   "please_enter_phone_number": "Please enter phone number",
   "team_amount": "Team amount",
-  "need_help": "Hai bisogno di aiuto?",
+  "need_help": "需要幫助？",
+  "need_help_desc": "聯絡客服",
   "price": "Price",
   "home_welcome_back": "Welcome back",
   "home_start_earning_today": "Start Earning Today!",
@@ -234,5 +235,6 @@
   "guide_reset_will_get": "您將獲得",
   "guide_reset_bonus_4": "4%",
   "guide_reset_bonus_8": "8%",
-  "guide_reset_advance_bonus": "預支獎金"
+  "guide_reset_advance_bonus": "預支獎金",
+  "supportHours": "客服目前不在線，請留意在線時間。"
 }

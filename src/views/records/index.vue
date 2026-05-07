@@ -1019,6 +1019,30 @@ onUnmounted(() => {
     }
 }
 
+
+:global(.van-dialog.task-order-dialog-panel--mobile) {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    transform: none !important;
+}
+
+:global(.van-overlay.task-order-dialog-overlay--mobile) {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    transform: none !important;
+}
+
 @media (max-width: 360px) {
     .record-step {
         width: 78px;

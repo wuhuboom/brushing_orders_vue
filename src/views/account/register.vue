@@ -324,11 +324,20 @@
                         {{ $t("login_now") }}
                     </span>
                 </div>
+
+                <div class="auth-footer">
+                    <span class="auth-footer__muted">{{
+                        $t("need_help")
+                    }}</span>
+                    <span class="auth-footer__link" @click="customer">
+                        {{ $t("need_help_desc") }}
+                    </span>
+                </div>
             </el-form>
         </div>
 
         <Lang ref="langRef"></Lang>
-        <AppLoadingScreen :visible="isSubmitting" />
+        <AppLoadingScreen :visible="isSubmitting || isCustomerLoading" />
     </div>
 </template>
 
@@ -337,11 +346,13 @@ import AppLoadingScreen from "@/components/AppLoadingScreen.vue";
 import Lang from "@/components/Lang.vue";
 import { Hide, View } from "@element-plus/icons-vue";
 import { computed, onMounted, reactive, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { register, reqBeedPhone } from "../../api/apis";
+import { register, reqBeedPhone, getTradeConfig } from "../../api/apis";
 import { showToast } from "@/util/message";
 import { useCommonStore } from "@/store/modules/common";
+import { useUserStore } from "@/store/modules/user";
+import { checkWorkTimeLocal } from "../../util/utils";
 import { LANGS } from "@/config/lang";
 
 const onUsernameInput = (val) => {
@@ -353,14 +364,17 @@ const onPhoneInput = (val) => {
 };
 
 const router = useRouter();
+const route = useRoute();
 const { t } = useI18n();
 const ruleFormRef = ref(null);
 const langRef = ref(null);
 const commonStore = useCommonStore();
+const userStore = useUserStore();
 const agentPassword = ref("");
 const checked = ref(false);
 const switchLeaving = ref(false);
 const isSubmitting = ref(false);
+const isCustomerLoading = ref(false);
 const genderMenuOpen = ref(false);
 const showTradePassword = ref(false);
 const showPassword = ref(false);
@@ -605,10 +619,56 @@ const jump = () => {
     });
 };
 
-const jumpToService = () => {
-    router.push({
-        path: "/service",
+const TradeInfor = ref({});
+
+const tradeConfig = async () => {
+    const res = await getTradeConfig();
+    TradeInfor.value = res.data || {};
+    return TradeInfor.value;
+};
+
+const ensureTradeConfig = async () => {
+    // 每次点击 Contact Customer Service 都重新请求最新客服时间配置，
+    // 避免使用上一次缓存导致必须刷新页面才会重新判断。
+    return tradeConfig();
+};
+
+const showSupportHoursToast = () => {
+    showToast({
+        content: t("supportHours"),
+        key: "customer-support-hours",
     });
+};
+
+const customer = async () => {
+    if (isCustomerLoading.value) return;
+
+    isCustomerLoading.value = true;
+    try {
+        const tradeInfo = await ensureTradeConfig();
+
+        if (tradeInfo?.workTimeStart && tradeInfo?.workTimeEnd) {
+            const time = checkWorkTimeLocal(
+                tradeInfo.workTimeStart,
+                tradeInfo.workTimeEnd,
+                userStore.zoneActive?.tzName,
+            );
+
+            if (!time) {
+                showSupportHoursToast();
+                return;
+            }
+        }
+
+        saveRegisterFormCache();
+        await router.push({
+            path: "/customer",
+        });
+    } catch (error) {
+        showToast(error?.msg || error?.message || t("network_error"));
+    } finally {
+        isCustomerLoading.value = false;
+    }
 };
 
 onMounted(() => {

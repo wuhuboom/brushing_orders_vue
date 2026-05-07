@@ -142,6 +142,7 @@
   "modify_personal_information": "Modify Personal Information",
   "are_you_sure_you_want_to_logout": "Are you sure you want to logout?",
   "contact_customer_service": "Contact Customer Service",
+  "need_help_desc": "Contact Customer Service",
   "need_help": "Need help?",
   "account_amount": "Account Amount",
   "you_will_receive_your_withdrawal_within_an_hour": "You will receive your withdrawal within an hour",
@@ -404,7 +405,7 @@
   "ui_refreshing": "Refreshing...",
   "ui_pull_to_refresh": "Pull to refresh",
   "ui_loading": "Loading...",
-  "ui_USDT": "USD",
+  "ui_usdt": "USD",
   "ui_usd": "USD",
   "task_center": "Task Center",
   "today_tasks": "Today's Tasks",
@@ -454,7 +455,7 @@
   "logout_confirm_desc_1": "Are you sure you want to log out of your account?",
   "logout_confirm_desc_2": "You will need to log in again to access your data.",
   "available_balance": "Available Balance",
-  "enter_amount_USDT": "Enter Amount (USD)",
+  "enter_amount_usdt": "Enter Amount (USD)",
   "select_customer_service_channel": "Select customer service to get a recharge channel",
   "customer_service_no": "Customer Service No.{number}",
   "customer_service": "Customer Service",
@@ -552,7 +553,7 @@
   "vip_event_access_desc": "All VIP members unlock exclusive promotions and bonus events",
   "vip_feature_full_access": "Full access to all platform features",
   "vip_feature_premium_unlocked": "All premium exclusive functions unlocked",
-  "vip_feature_invite_team": "Invite teammates & build your own team",
+  "vip_feature_invite_team": " Build your earnings network",
   "vip_feature_deposit_rebate": "Deposit ask rebate earnings",
   "vip_feature_optimized_income": "Optimized product suite fixed income",
   "vip_feature_all_vip1": "All VIP 1 benefits included",
@@ -815,7 +816,7 @@
   "faq_sections": [
     {
       "title": "Product Enhancement mission",
-      "content": "<p>1.1 A minimum account balance of USD 50 is required to initiate the first set of 40 missions.</p><p>1.2 A minimum renewal advanceof USD 100 is required to begin a new set of missions.</p><p>1.3 Users must complete all assigned missions before submitting any withdrawal request.</p>"
+      "content": "<p>1.1 A minimum account balance of USD 50 is required to initiate the first set of 40 missions.</p><p>1.2 A minimum renewal advance of USD 100 is required to begin a new set of missions.</p><p>1.3 Users must complete all assigned missions before submitting any withdrawal request.</p>"
     },
     {
       "title": "Withdrawals",

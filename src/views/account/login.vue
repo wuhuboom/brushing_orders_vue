@@ -94,12 +94,12 @@
                 {{ $t("log_in") }}
             </div>
 
-            <!-- <div class="auth-meta">
-                <span class="auth-meta__muted">{{ $t("need_help") }}</span>
-                <span class="auth-meta__link" @click="customer">
-                    {{ $t("contact_customer_service") }}
+            <div class="auth-footer auth-footer--help">
+                <span class="auth-footer__muted">{{ $t("need_help") }}</span>
+                <span class="auth-footer__link" @click="customer">
+                    {{ $t("need_help_desc") }}
                 </span>
-            </div> -->
+            </div>
 
             <!-- <div class="auth-footer">
         <span class="auth-footer__muted">{{ $t("don_t_have_an_account") }}</span>
@@ -110,29 +110,26 @@
         </div>
 
         <Lang ref="langRef"></Lang>
-        <ContactUs ref="ContactUsRef"></ContactUs>
-        <AppLoadingScreen :visible="isSubmitting" />
+        <AppLoadingScreen :visible="isSubmitting || isCustomerLoading" />
     </div>
 </template>
 
 <script setup>
 import AppLoadingScreen from "@/components/AppLoadingScreen.vue";
 import Lang from "@/components/Lang.vue";
-import ContactUs from "@/components/ContactUs.vue";
 import { Hide, View } from "@element-plus/icons-vue";
 import { computed, onMounted, reactive, ref } from "vue";
 import { showFailToast, showToast } from "@/util/message";
 import { useCommonStore } from "@/store/modules/common";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { login, getTradeConfig } from "../../api/apis";
 import { checkWorkTimeLocal } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
 import { LANGS } from "@/config/lang";
 
-const ContactUsRef = ref(null);
-
 const router = useRouter();
+const route = useRoute();
 const { t } = useI18n();
 const ruleFormRef = ref(null);
 const userStore = useUserStore();
@@ -140,6 +137,7 @@ const langRef = ref(null);
 const switchLeaving = ref(false);
 const showPassword = ref(false);
 const isSubmitting = ref(false);
+const isCustomerLoading = ref(false);
 const ruleForm = reactive({
     email: "",
     password: "",
@@ -192,25 +190,52 @@ function handleChangeLang() {
 const TradeInfor = ref({});
 const tradeConfig = async () => {
     const res = await getTradeConfig();
-    TradeInfor.value = res.data;
+    TradeInfor.value = res.data || {};
+    return TradeInfor.value;
 };
 
-const customer = () => {
-    const time = checkWorkTimeLocal(
-        TradeInfor.value.workTimeStart,
-        TradeInfor.value.workTimeEnd,
-        userStore.zoneActive.tzName,
-    );
-    if (time) {
-        ContactUsRef.value.open();
-    } else {
-        showToast(t("supportHours"));
+const ensureTradeConfig = async () => {
+    // 每次点击 Contact Customer Service 都重新请求最新客服时间配置，
+    // 避免使用上一次缓存导致必须刷新页面才会重新判断。
+    return tradeConfig();
+};
+
+const showSupportHoursToast = () => {
+    showToast({
+        content: t("supportHours"),
+        key: "customer-support-hours",
+    });
+};
+
+const customer = async () => {
+    if (isCustomerLoading.value) return;
+
+    isCustomerLoading.value = true;
+    try {
+        const tradeInfo = await ensureTradeConfig();
+
+        if (tradeInfo?.workTimeStart && tradeInfo?.workTimeEnd) {
+            const time = checkWorkTimeLocal(
+                tradeInfo.workTimeStart,
+                tradeInfo.workTimeEnd,
+                userStore.zoneActive?.tzName,
+            );
+
+            if (!time) {
+                showSupportHoursToast();
+                return;
+            }
+        }
+
+        await router.push({
+            path: "/customer",
+        });
+    } catch (error) {
+        showToast(error?.msg || error?.message || t("network_error"));
+    } finally {
+        isCustomerLoading.value = false;
     }
 };
-
-onMounted(() => {
-    tradeConfig();
-});
 </script>
 
 <style scoped>

@@ -18,10 +18,10 @@
                             $t("customer_help_desc", { timerstr: workTimeText })
                         }}
                     </p>
-                    <div class="customer-hero__status">
+                    <!-- <div class="customer-hero__status">
                         <span class="customer-dot"></span>
                         <span>{{ $t("all_agents_online_now") }}</span>
-                    </div>
+                    </div> -->
                 </div>
                 <span class="customer-hero__orb"></span>
             </section>
@@ -164,27 +164,68 @@
 
 <script setup>
 import { onMounted, ref, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import {
-    getCustomerService,
+    getCustomerServiceByLang,
     getEmailAddress,
-    userGetInfo,
     getTradeConfig,
 } from "@/api/apis";
 import { useUserStore } from "@/store/modules/user";
+import { useCommonStore } from "@/store/modules/common";
+import { useI18n } from "vue-i18n";
+import { showToast } from "@/util/message";
+import { errorMessages } from "@/api/errorCodeMap";
 import md5 from "crypto-js/md5";
 import { copyContent } from "@/util/utils";
 import cusmessIcon from "@/static/images/cusmess.png";
 import cusserveIcon from "@/static/images/user-service.png";
 const showCenter = ref(false);
+const router = useRouter();
+const route = useRoute();
 const userStore = useUserStore();
+const commonStore = useCommonStore();
+const { t } = useI18n();
 const customerList = ref([]);
 const emailAddressInfo = ref("");
 const userInfo = ref({});
 
+const parLang = computed(() => {
+    const mapped = commonStore.getValueByKey(commonStore.lang);
+    return mapped ?? commonStore.lang;
+});
+
+const showServiceError = (error) => {
+    if (Number(error?.code) === 920) {
+        showToast({
+            content: t("supportHours"),
+            key: "customer-support-hours",
+        });
+        return;
+    }
+
+    const errorKey = errorMessages[error?.code];
+    showToast(
+        errorKey
+            ? t(errorKey)
+            : error?.msg || error?.message || t("network_error"),
+    );
+};
+
+const loadCustomerService = async () => {
+    try {
+        const res = await getCustomerServiceByLang({ lang: parLang.value });
+        customerList.value = res?.data || [];
+        return customerList.value;
+    } catch (error) {
+        customerList.value = [];
+        showServiceError(error);
+        return [];
+    }
+};
+
 const open = async () => {
     showCenter.value = true;
-    const res = await getCustomerService();
-    customerList.value = res.data;
+    await loadCustomerService();
 };
 
 const close = () => (showCenter.value = false);
@@ -233,13 +274,20 @@ function buildKefuUrl(baseUrl, username) {
     }
 }
 
-const getUserGetInfo = () => {
-    userGetInfo().then((res) => {
-        userInfo.value = res.data;
-    });
+const getUserGetInfo = async () => {
+    if (!userStore.token) {
+        userInfo.value = {};
+        return userInfo.value;
+    }
+
+    const info = await userStore.getUserInfo();
+    userInfo.value = info || {};
+    return userInfo.value;
 };
 
-const onClickLeft = () => history.back();
+const onClickLeft = () => {
+    history.back();
+};
 const TradeInfor = ref({});
 const tradeConfig = async () => {
     let res = await getTradeConfig();
@@ -256,8 +304,7 @@ onMounted(async () => {
     emailAddress();
     getUserGetInfo();
     tradeConfig();
-    const res = await getCustomerService();
-    customerList.value = res.data;
+    await loadCustomerService();
 });
 
 defineExpose({

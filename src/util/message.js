@@ -33,7 +33,12 @@ const getMessageConfig = (options, type) => {
 };
 
 export const showToast = (options) => {
-  message.info(getContent(options));
+  const config = getMessageConfig(options, "info");
+  if (typeof config === "string") {
+    message.info(config);
+  } else {
+    message.open(config);
+  }
 };
 
 export const showSuccessToast = (options) => {
