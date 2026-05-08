@@ -57,14 +57,37 @@ const router = createRouter({
   routes,
 });
 
-// update路由拦截
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = true;
-  if (to.path !== "/account/login" && !isAuthenticated) {
-    next("/account/login");
-  } else {
-    next();
+// 登录路由拦截
+// 只判断本地持久化的 token，避免未登录用户直接输入首页/其他业务页面地址时先看到页面。
+const publicRoutePaths = [
+  "/account/login",
+  "/account/register",
+  "/tc",
+  "/clause",
+  "/customer",
+];
+
+function getPersistedToken() {
+  try {
+    const userState = JSON.parse(localStorage.getItem("user") || "{}");
+    return typeof userState?.token === "string" ? userState.token.trim() : "";
+  } catch (error) {
+    return "";
   }
+}
+
+router.beforeEach((to, from, next) => {
+  if (publicRoutePaths.includes(to.path)) {
+    next();
+    return;
+  }
+
+  if (!getPersistedToken()) {
+    next({ path: "/account/login", replace: true });
+    return;
+  }
+
+  next();
 });
 
 export default router;
