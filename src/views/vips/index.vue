@@ -295,12 +295,7 @@ const designFeatureGroups = computed(() => [
         t("vip_d_deposit"),
         t("vip_d_loss"),
     ],
-    [
-        t("vip_d_all1"),
-        t("vip_d_double"),
-        t("vip_d_same3"),
-        t("vip_d_deposit"),
-    ],
+    [t("vip_d_all1"), t("vip_d_double"), t("vip_d_same3"), t("vip_d_deposit")],
     [
         t("vip_d_all2"),
         t("vip_d_enhanced2"),
@@ -729,12 +724,10 @@ function featureCheckIcon(index) {
 }
 
 function includedFeatures(index) {
-    const quota =
-        designLevelStats[index]?.quota ??
-        formatTaskCount(displayLevels.value[index], index);
+    const dailyQuota = formatProductCount(displayLevels.value[index], index);
     return [
-        ...(designFeatureGroups.value[index] || designFeatureGroups.value[0]),
-        t("vip_d_daily", { quota }),
+        ...(featureGroups.value[index] || featureGroups.value[0]),
+        t("daily_task_submission_quota", { count: dailyQuota }),
     ];
 }
 
