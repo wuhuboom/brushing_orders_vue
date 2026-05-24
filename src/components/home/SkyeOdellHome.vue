@@ -794,8 +794,20 @@ const partnerEcommerce = new URL(
     import.meta.url,
 ).href;
 
+const growthVLSSHB = new URL(
+    "@/static/images/algofy-growth/VLSSHB.png",
+    import.meta.url,
+).href;
 const growthMonster = new URL(
     "@/static/images/algofy-growth/monster-k9.png",
+    import.meta.url,
+).href;
+const growthGL = new URL(
+    "@/static/images/algofy-growth/GL.png",
+    import.meta.url,
+).href;
+const growthUSWESHB = new URL(
+    "@/static/images/algofy-growth/USWESHB.png",
     import.meta.url,
 ).href;
 const growthPackfire = new URL(
@@ -806,6 +818,7 @@ const growthGiantLoop = new URL(
     "@/static/images/algofy-growth/giant-loop.png",
     import.meta.url,
 ).href;
+
 const growthUswe = new URL(
     "@/static/images/algofy-growth/uswe.png",
     import.meta.url,
@@ -814,12 +827,21 @@ const growthReef = new URL(
     "@/static/images/algofy-growth/reef.png",
     import.meta.url,
 ).href;
+const growthMoonSHB = new URL(
+    "@/static/images/algofy-growth/MoonSHB.png",
+    import.meta.url,
+).href;
+
 const growthMoon = new URL(
     "@/static/images/algofy-growth/moon.png",
     import.meta.url,
 ).href;
 const growthAurora = new URL(
     "@/static/images/algofy-growth/aurora.png",
+    import.meta.url,
+).href;
+const growthAmazon = new URL(
+    "@/static/images/algofy-growth/amazon.png",
     import.meta.url,
 ).href;
 const growthAnalytics = new URL(
@@ -883,27 +905,27 @@ const ecommerceEmailSms = new URL(
 ).href;
 
 const channelAmazon = new URL(
-    "@/static/images/algofy-assets/brand-amazon.png",
+    "@/static/images/algofy-assets/amazong.png",
     import.meta.url,
 ).href;
 const channelAnalytics = new URL(
-    "@/static/images/algofy-channel/analytics.svg",
+    "@/static/images/algofy-assets/ansgo.png",
     import.meta.url,
 ).href;
 const channelShopify = new URL(
-    "@/static/images/algofy-channel/shopify.svg",
+    "@/static/images/algofy-assets/googshop.png",
     import.meta.url,
 ).href;
 const channelMeta = new URL(
-    "@/static/images/algofy-channel/meta.svg",
+    "@/static/images/algofy-assets/metatr.png",
     import.meta.url,
 ).href;
 const channelKlaviyo = new URL(
-    "@/static/images/algofy-channel/klaviyo.svg",
+    "@/static/images/algofy-assets/kla.png",
     import.meta.url,
 ).href;
 const channelGoogleAds = new URL(
-    "@/static/images/algofy-channel/google-ads.svg",
+    "@/static/images/algofy-assets/goads.png",
     import.meta.url,
 ).href;
 
@@ -1141,14 +1163,16 @@ const footerPartnerBadges = [
 ];
 
 const growthSlides = [
-    { name: "Monster K9", image: growthMonster },
-    { name: "Packfire", image: growthPackfire },
-    { name: "Giant Loop", image: growthGiantLoop },
-    { name: "USWE", image: growthUswe },
-    { name: "Reef", image: growthReef },
-    { name: "Moon", image: growthMoon },
-    { name: "Aurora", image: growthAurora },
-    { name: "Analytics", image: growthAnalytics },
+    { name: "Monster K9", image: growthVLSSHB },
+    { name: "Packfire", image: growthMonster },
+    { name: "Giant Loop", image: growthGL },
+    // growthGiantLoop
+    { name: "USWE", image: growthUSWESHB },
+    { name: "Reef", image: growthPackfire },
+    { name: "Moon", image: growthMoonSHB },
+    { name: "Aurora", image: growthReef },
+    { name: "Analytics", image: growthAmazon },
+    // growthAnalytics
 ];
 
 const buildItems = computed(() => [
@@ -1391,7 +1415,7 @@ const storyCards = computed(() => [
     },
     {
         name: "Giant Loop",
-        image: growthGiantLoop,
+        image: growthAurora,
         logo: caseLogoGiantLoop,
         copyHtml: t("skye.story_giant_loop_copy"),
         stats: [
@@ -2833,29 +2857,26 @@ onBeforeUnmount(() => {
 }
 
 .channel-item span {
-    width: 52px;
-    height: 52px;
+    width: 69px;
+    height: 69px;
     margin: 0 auto 11px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #a7b8ff;
     border-radius: 6px;
-    background: #fff;
-    box-shadow: 0 5px 12px rgba(55, 79, 150, 0.16);
 }
 
 .channel-item img {
     display: block;
-    max-width: 36px;
-    max-height: 36px;
+    max-width: 69px;
+    max-height: 69px;
     object-fit: contain;
 }
 
 .channel-item p {
     margin: 0;
     color: #3b3e46;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 1.3;
 }
@@ -2871,7 +2892,8 @@ onBeforeUnmount(() => {
 
 .pricing-section {
     background: #eef3fb;
-    padding: 38px 20px 76px;
+    /*padding: 38px 20px 76px;*/
+    padding: 38px 20px 1px;
     text-align: center;
 }
 
@@ -3082,7 +3104,8 @@ onBeforeUnmount(() => {
 
 .stellar-section {
     background: #eef3fb;
-    padding: 38px 32px 44px;
+    /*padding: 38px 32px 44px;*/
+    padding: 8px 32px 44px;
     color: #333741;
 }
 
@@ -3352,14 +3375,11 @@ onBeforeUnmount(() => {
     width: 42px;
     height: 42px;
     margin-bottom: 34px;
-    border-radius: 4px;
-    background: #eef3fb;
-    color: #c6d1df;
 }
 
 .footer-social svg {
-    width: 28px;
-    height: 28px;
+    width: 42px;
+    height: 42px;
     display: block;
 }
 
