@@ -32,7 +32,7 @@
             body {
                 margin: 0;
                 min-height: 100%;
-                background: #f5faf6;
+                background: #e9edf5;
             }
 
             html {
@@ -46,7 +46,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background: #ffffff;
+                background: #000000;
                 z-index: 9999;
                 transition: opacity 0.18s ease;
             }
@@ -67,74 +67,24 @@
                 pointer-events: none;
             }
 
-            .boot-splash__panel {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .boot-splash__dot {
-                position: relative;
-                width: 28px;
-                height: 28px;
-                animation: boot-spin 0.88s linear infinite;
-            }
-
-            .boot-splash__ring,
-            .boot-splash__tail {
-                position: absolute;
+            .boot-splash__logo {
                 display: block;
+                width: min(72vw, 270px);
+                height: auto;
+                user-select: none;
+                -webkit-user-drag: none;
             }
 
-            .boot-splash__ring {
-                inset: 0;
-                border-radius: 50%;
-                background: conic-gradient(
-                    from 214deg,
-                    rgba(255, 255, 255, 0) 0deg 148deg,
-                    var(--theme-loading-color-1, rgba(211, 119, 3, 0.12)) 148deg 160deg,
-                    var(--theme-loading-color-2, rgba(211, 119, 3, 0.32)) 168deg,
-                    var(--theme-loading-color-3, rgba(211, 119, 3, 0.58)) 192deg,
-                    var(--theme-loading-color-4, rgba(211, 119, 3, 0.82)) 228deg,
-                    var(--theme-loading-color-5, #D37703) 264deg,
-                    var(--theme-loading-color-6, rgba(211, 119, 3, 0.46)) 298deg,
-                    rgba(255, 255, 255, 0) 322deg 360deg
-                );
-                -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.1px));
-                mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.1px));
-                filter: blur(0.25px);
-            }
-
-            .boot-splash__tail {
-                top: 12px;
-                right: 1px;
-                width: 5px;
-                height: 2px;
-                border-radius: 999px;
-                background: linear-gradient(90deg, var(--theme-loading-tail-start, rgba(211, 119, 3, 0.08)), var(--theme-loading-tail-end, #D37703));
-                transform: rotate(24deg);
-                filter: blur(0.15px);
-            }
-
-            .boot-splash__text {
-                display: none;
-            }
-
-            @keyframes boot-spin {
-                to {
-                    transform: rotate(360deg);
+            @media (min-width: 768px) {
+                .boot-splash__logo {
+                    width: min(72%, 270px);
                 }
             }
         </style>
     </head>
     <body>
         <div id="boot-splash">
-            <div class="boot-splash__panel">
-                <div class="boot-splash__dot">
-                    <span class="boot-splash__ring"></span>
-                    <span class="boot-splash__tail"></span>
-                </div>
-            </div>
+            <img class="boot-splash__logo" src="/组 142624@2x.png" alt="ALGOfY" />
         </div>
         <div id="app"></div>
         <script type="module" src="/src/main.js"></script>

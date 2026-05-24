@@ -3,6 +3,7 @@ import { createApp } from "vue";
 
 import "./style.css";
 import "./styles/theme.css";
+import "./styles/material-pages.css";
 import App from "./App.vue";
 import PageTopBar from "@/components/PageTopBar.vue";
 import "./index.css";

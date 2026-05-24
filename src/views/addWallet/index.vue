@@ -1,12 +1,12 @@
 <template>
-    <div class="payment-method-page min-h-screen bg-[#F5F8F7]">
+    <div class="payment-method-page min-h-screen bg-[#eef2fb]">
         <PageTopBar
             :title="$t('wallet_management')"
             show-back
             @click-left="onClickLeft"
         />
 
-        <div class="pt-[48px] pb-[36px]">
+        <div class="payment-method-page__body">
             <div class="hero-card">
                 <div class="hero-icon-wrap">
                     <!-- <van-icon name="coupon-o" size="34" color="#fff" /> -->
@@ -30,10 +30,9 @@
                 </div>
             </div>
 
-            <div class="px-[16px] mt-[26px]">
+            <div class="px-[20px] mt-[30px]">
                 <div class="field-group">
                     <div class="field-label">
-                        <img src="@/static/images/wallname.png" alt="" />
                         <span>{{ $t("wallet_name") }}</span>
                     </div>
                     <van-field
@@ -47,7 +46,6 @@
 
                 <div class="field-group">
                     <div class="field-label">
-                        <img src="@/static/images/wallnet.png" alt="" />
                         <span>{{ $t("network") }}</span>
                     </div>
                     <van-field
@@ -61,7 +59,6 @@
 
                 <div class="field-group">
                     <div class="field-label">
-                        <img src="@/static/images/walladdr.png" alt="" />
                         <span>{{ $t("wallet_address") }}</span>
                     </div>
                     <van-field
@@ -154,7 +151,8 @@ const getReturnQuery = (returnPath) => {
     const query = {};
     if (route.query.type != null) query.type = route.query.type;
     if (route.query.fromType != null) query.fromType = route.query.fromType;
-    if (route.query.sourceType != null) query.sourceType = route.query.sourceType;
+    if (route.query.sourceType != null)
+        query.sourceType = route.query.sourceType;
     return query;
 };
 
@@ -207,26 +205,34 @@ onMounted(() => {
 
 <style scoped>
 .payment-method-page :deep(.van-nav-bar) {
-    background: #ffffff;
+    background: #000000;
 }
 
 .payment-method-page :deep(.van-nav-bar__title) {
-    color: #24352d;
+    color: #ffffff;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .payment-method-page :deep(.van-nav-bar .van-icon) {
-    color: var(--theme-primary);
+    color: #ffffff;
 }
 
 .payment-method-page :deep(.van-nav-bar::after) {
-    border-bottom: 1px solid #dbe9df;
+    border-bottom: none;
+}
+
+.payment-method-page__body {
+    padding: 10px 0 36px;
 }
 
 .hero-card {
-    background: var(--theme-button-gradient-background);
-    padding: 28px 22px 22px;
+    position: relative;
+    overflow: hidden;
+    background: url(@/static/images/wallet-amount-card-bg.png) no-repeat;
+    background-size: 100% 100%;
+    padding: 28px 24px 24px;
+    margin: 0 10px;
     display: flex;
     gap: 16px;
     align-items: flex-start;
@@ -244,6 +250,8 @@ onMounted(() => {
 }
 
 .hero-content {
+    position: relative;
+    z-index: 1;
     min-width: 0;
     flex: 1;
 }
@@ -262,74 +270,79 @@ onMounted(() => {
 }
 
 .field-group + .field-group {
-    margin-top: 18px;
+    margin-top: 22px;
 }
 
 .field-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #4f9664;
+    display: block;
+    color: #000000;
     font-size: 14px;
     line-height: 20px;
-    margin-bottom: 10px;
-    img {
-        width: 12px;
-        height: 12px;
-    }
+    font-weight: 500;
+    margin-bottom: 13px;
 }
 
 .custom-field {
-    border: 1px solid #cfe5d5;
-    border-radius: 16px;
+    height: 48px;
+    min-height: 48px;
+    border: 1px solid #d5deeb;
+    border-radius: 7px;
     background: #ffffff;
-    padding: 14px 16px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    box-shadow: none;
 }
 
 .payment-method-page :deep(.custom-field.van-cell) {
-    padding: 14px 16px;
+    padding: 0 16px;
+}
+
+.payment-method-page :deep(.custom-field .van-field__body),
+.payment-method-page :deep(.custom-field .van-field__control) {
+    height: 100%;
 }
 
 .payment-method-page :deep(.custom-field .van-field__control) {
-    color: #24352d;
-    font-size: 16px;
-    min-height: 24px;
+    color: #111827;
+    font-size: 15px;
+    min-height: 0;
 }
 
 .payment-method-page :deep(.custom-field .van-field__control::placeholder) {
-    color: #98a39d;
+    color: #9aa3b2;
 }
 
 .notice-card {
     margin-top: 34px;
     padding: 15px 12px;
     border-radius: 16px;
-    background: #e8f3eb;
-    border: 1px solid #cfe5d5;
+    background: #f3f6ff;
+    border: 1px solid #d8e0ee;
     display: flex;
     align-items: flex-start;
     gap: 12px;
 }
 
 .notice-text {
-    color: #6f8f78;
+    color: #6f7d95;
     font-size: 12px;
 }
 
 .submit-btn {
-    height: 56px;
+    padding: 15px 40px;
     border: none;
     border-radius: 16px;
-    background: var(--theme-button-disabled);
-    color: #5c9369;
-    font-size: 16px;
-    font-weight: 500;
+    background: #d6dcfa;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
     transition: all 0.2s ease;
 }
 
 .submit-btn--active {
-    background: var(--theme-primary);
+    background: linear-gradient(90deg, #3b45df 0%, #3a4be7 100%);
     color: #ffffff;
-    box-shadow: 0 10px 24px var(--theme-button-shadow);
+    box-shadow: none;
 }
 </style>

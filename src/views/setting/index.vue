@@ -1,93 +1,144 @@
 <template>
-  <div class="flex flex-col bg-[#f8f8f8] h-[100vh]">
-    <div class="relative flex items-center justify-center h-[56px] px-[16px] bg-[#fff]">
-      <div class="absolute left-[16px]">
-        <van-icon
-          name="arrow-left"
-          color="#000"
-          size="22px"
-          @click="onClickLeft"
+    <div class="setting-page min-h-[100vh] bg-[#edf1f9]">
+        <PageTopBar
+            :title="$t('setting')"
+            show-back
+            @click-left="onClickLeft"
         />
-      </div>
-      <div class="text-base text-[#000000] font-medium">
-        {{ $t("setting") }}
-      </div>
-    </div>
-    <div class="pt-[10px] pb-[20px]">
-         <div
-          @click="change"
-          class="flex items-center justify-between p-4 box-border border-b-[1px] border-[#F0F0F0] bg-[#fff]"
-        >
-          <div class="flex items-center">
-            <!-- <img
-              src="@/static/images/ContactUs.png"
-              class="w-6 h-6 mr-3"
-              alt=""
-            /> -->
-            <div class="text-[#1a1a1a] text-sm">{{ $t("change_language") }}</div>
-          </div>
-          <van-icon name="arrow" color="#999" size="18px" />
-        </div>
-    </div>
-    <div
-        @click="logout"
-        class="w-full h-[50px] flex items-center justify-center bg-[#fff] bold text-[#eb5641] text-[16px]"
-      >
-        {{ $t("log_out") }}
-    </div>
-    <Lang ref="langRef"></Lang>
 
-      
-  </div>
+        <div class="px-[16px] pt-[86px] pb-[24px]">
+            <section class="setting-card">
+                <button class="setting-row" type="button" @click="change">
+                    <div class="setting-row__icon setting-row__icon--lang">
+                        <van-icon name="notes-o" size="22" color="#0b9b73" />
+                    </div>
+                    <div class="setting-row__content">
+                        <div class="setting-row__title">
+                            {{ $t("change_language") }}
+                        </div>
+                        <div class="setting-row__desc">
+                            {{ $t("choose_language") }}
+                        </div>
+                    </div>
+                    <van-icon name="arrow" color="#2f78db" size="18px" />
+                </button>
+            </section>
+
+            <button class="setting-logout" type="button" @click="logout">
+                <van-icon
+                    name="revoke"
+                    size="20"
+                    color="#f04d45"
+                    class="mr-[8px]"
+                />
+                {{ $t("log_out") }}
+            </button>
+        </div>
+
+        <Lang ref="langRef"></Lang>
+    </div>
 </template>
+
 <script setup>
-import Header from "@/components/Header.vue";
+import PageTopBar from "@/components/PageTopBar.vue";
 import Lang from "@/components/Lang.vue";
-import { getStaticImageUrl } from "@/util/utils.js";
 import { useI18n } from "vue-i18n";
-import { useCommonStore } from "@/store/modules/common";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
 import { showConfirmDialog } from "vant";
-import { showToast } from "@/util/message";
+import { ref } from "vue";
+
 const { t } = useI18n();
 const userStore = useUserStore();
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-const { locale } = useI18n();
 const router = useRouter();
 const langRef = ref(null);
-const langs = [
-  { title: "中文", code: "zh" },
-  { title: "English", code: "en" },
-];
-const commonStore = useCommonStore();
-const langCode = computed(() => commonStore.lang);
 
-function onClickLang(val) {
-  commonStore.updateLang(val);
-  locale.value = val;
-}
 const onClickLeft = () => {
-  router.replace({
-    path: "/my",
-  });
-};
-
-const logout = () => {
-  showConfirmDialog({
-    title: t("exit"),
-    message: t("are_you_sure_you_want_to_logout"),
-    confirmButtonColor: "var(--theme-primary)", // 确认按钮颜色使用公共主题色
-  })
-    .then(() => {
-      userStore.logout();
-    })
-    .catch(() => {
-      // on cancel
+    router.replace({
+        path: "/my",
     });
 };
 
-const change = () =>{
-langRef.value.open();
-}
+const logout = () => {
+    showConfirmDialog({
+        title: t("exit"),
+        message: t("are_you_sure_you_want_to_logout"),
+        confirmButtonColor: "var(--theme-primary)",
+    })
+        .then(() => {
+            userStore.logout();
+        })
+        .catch(() => {});
+};
+
+const change = () => {
+    langRef.value.open();
+};
 </script>
+
+<style scoped>
+.setting-card {
+    overflow: hidden;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 10px 24px rgba(17, 28, 56, 0.06);
+}
+
+.setting-row {
+    width: 100%;
+    min-height: 112px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+}
+
+.setting-row__icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.setting-row__icon--lang {
+    background: #e7faf4;
+}
+
+.setting-row__content {
+    flex: 1;
+    min-width: 0;
+    padding: 0 16px;
+    text-align: left;
+}
+
+.setting-row__title {
+    color: #121826;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 600;
+}
+
+.setting-row__desc {
+    margin-top: 6px;
+    color: #7a8396;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.setting-logout {
+    margin-top: 18px;
+    width: 100%;
+    height: 58px;
+    border-radius: 16px;
+    background: #fff2ef;
+    color: #f04d45;
+    font-size: 18px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>

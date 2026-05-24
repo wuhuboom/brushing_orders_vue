@@ -1,393 +1,211 @@
 <template>
-    <div class="cert-page">
-        <PageTopBar
-            :title="$t('certificate')"
-            show-back
-            @click-left="onClickLeft"
-        />
+  <div class="plain-design-page cert-page">
+    <PageTopBar :title="$t('certificate')" show-back @click-left="onClickLeft" />
 
-        <div class="cert-body">
-            <section class="cert-hero">
-                <div class="cert-hero__head">
-                    <div class="cert-hero__icon">
-                        <img src="@/static/images/cert1.png" />
-                    </div>
+    <main class="cert-content">
+      <img
+        src="@/static/images/certprod2.png"
+        class="certificate-image"
+        :alt="$t('certificate')"
+        @click="openContentPreview"
+      />
+    </main>
 
-                    <div class="cert-hero__content">
-                        <div class="cert-hero__title">
-                            {{ $t("our_certifications") }}
-                        </div>
-                        <div class="cert-hero__desc">
-                            {{ $t("certifications_desc") }}
-                        </div>
-                    </div>
-                </div>
+    <van-image-preview
+      v-if="!isPc"
+      v-model:show="showCertPreview"
+      :images="certContentPreviewImages"
+      :start-position="0"
+      closeable
+      close-icon="cross"
+    />
 
-                <span class="cert-hero__orb"></span>
-
-                <div class="cert-stats">
-                    <div class="cert-stat">
-                        <strong> 1+ </strong>
-                        <span>{{ $t("licenses") }}</span>
-                    </div>
-                    <div class="cert-stat">
-                        <strong>3+ </strong>
-                        <span>{{ $t("years_operating") }}</span>
-                    </div>
-                    <div class="cert-stat">
-                        <strong>40+ </strong>
-                        <span>{{ $t("countries") }}</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="cert-overview">
-                <div class="cert-section-title">
-                    {{ $t("trust_safety_overview") }}
-                </div>
-
-                <div class="cert-overview-grid">
-                    <div class="cert-overview-card">
-                        <div class="cert-overview-card__icon is-green">
-                            <img src="@/static/images/cert2.png" />
-                        </div>
-                        <div class="cert-overview-card__text">
-                            {{ $t("secure_platform") }}
-                        </div>
-                    </div>
-
-                    <div class="cert-overview-card">
-                        <div class="cert-overview-card__icon is-blue">
-                            <img src="@/static/images/cert3.png" />
-                        </div>
-                        <div class="cert-overview-card__text">
-                            {{ $t("verified_documents") }}
-                        </div>
-                    </div>
-
-                    <div class="cert-overview-card">
-                        <div class="cert-overview-card__icon is-orange">
-                            <img
-                                class="cert-preview-trigger"
-                                src="@/static/images/cert4.png"
-                                @click="openCertPreview"
-                            />
-                        </div>
-                        <div class="cert-overview-card__text">
-                            {{ $t("compliance_records") }}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="cert-content-card">
-                <div class="cert-section-title">{{ $t("certificates") }}</div>
-                <div class="cert-content rich-content">
-                    <img
-                        src="@/static/images/certprod2.png"
-                        class="cert-content__preview-image"
-                        @click="openContentPreview"
-                    />
-                </div>
-            </section>
+    <transition name="cert-desktop-preview-fade">
+      <div
+        v-if="isPc && showCertPreview"
+        class="cert-desktop-preview"
+        @click.self="showCertPreview = false"
+      >
+        <button
+          class="cert-desktop-preview__close"
+          type="button"
+          :aria-label="$t('close_preview')"
+          @click="showCertPreview = false"
+        >
+          ×
+        </button>
+        <div class="cert-desktop-preview__panel">
+          <img
+            :src="certProductImage"
+            class="cert-desktop-preview__image"
+            :alt="$t('certificate_preview')"
+          />
         </div>
-
-        <van-image-preview
-            v-model:show="showCertPreview"
-            :images="activePreviewImages"
-            :start-position="0"
-            closeable
-            close-icon="cross"
-        />
-    </div>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
-import { getConfigByLang } from "../../api/apis";
-import { useCommonStore } from "@/store/modules/common";
-import cert4Image from "@/static/images/cert4.png";
-import certProductImage from "@/static/images/certprod2.png";
-
-const certificateEn = ref("");
-const commonStore = useCommonStore();
+import PageTopBar from "@/components/PageTopBar.vue";
+import { onMounted, onUnmounted, ref } from 'vue';
+import certProductImage from '@/static/images/certprod2.png';
 
 const showCertPreview = ref(false);
-const certPreviewImages = [cert4Image];
 const certContentPreviewImages = [certProductImage];
-const activePreviewImages = ref(certPreviewImages);
-
-const parLang = computed(() => {
-    const mapped = commonStore.getValueByKey(commonStore.lang);
-    return mapped ?? commonStore.lang;
-});
-
-const openCertPreview = () => {
-    activePreviewImages.value = certPreviewImages;
-    showCertPreview.value = true;
-};
+const isPc = ref(false);
 
 const openContentPreview = () => {
-    activePreviewImages.value = certContentPreviewImages;
-    showCertPreview.value = true;
+  showCertPreview.value = true;
 };
 
-// const certStats = computed(() => {
-//     const html = certificateEn.value || "";
-//     const imageCount = (html.match(/<img/gi) || []).length;
-//     const sectionCount = (html.match(/<(h1|h2|h3)/gi) || []).length;
-//
-//     return {
-//         documents: Math.max(sectionCount || imageCount, 1),
-//         images: Math.max(imageCount, 1),
-//         sections: Math.max(sectionCount, 1),
-//     };
-// });
+const onClickLeft = () => {
+  history.back();
+};
 
-// const getGetGlobalConfig = async () => {
-//     const res = await getConfigByLang({ lang: "en" });
-//     certificateEn.value = res?.data?.certificate ?? "";
-// };
+const updateDeviceMode = () => {
+  isPc.value = window.matchMedia("(min-width: 768px)").matches;
+};
 
-// onMounted(() => {
-//     getGetGlobalConfig();
-// });
+onMounted(() => {
+  updateDeviceMode();
+  window.addEventListener("resize", updateDeviceMode);
+});
 
-const onClickLeft = () => history.back();
+onUnmounted(() => {
+  window.removeEventListener("resize", updateDeviceMode);
+});
 </script>
 
 <style scoped>
-.cert-page {
-    min-height: 100vh;
-    background: #edf4ef;
+.plain-design-page {
+  min-height: 100vh;
+  background: #eef2f8;
+  color: #111;
+  font-family: inherit;
 }
 
-.cert-body {
-    padding: 78px 16px 28px;
+.design-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: 52px;
+  display: grid;
+  grid-template-columns: 56px 1fr 56px;
+  align-items: center;
+  background: #030303;
+  color: #fff;
 }
 
-.cert-hero {
-    position: relative;
-    overflow: hidden;
-    border-radius: 24px;
-    background: var(--theme-button-gradient);
-    color: #fff;
-    padding: 18px 16px 20px;
-    box-shadow: 0 16px 30px rgba(31, 130, 66, 0.16);
+.design-title {
+  text-align: center;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
-.cert-hero__head {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: flex-start;
+.design-back {
+  width: 52px;
+  height: 52px;
+  border: 0;
+  background: transparent;
+  position: relative;
 }
 
-.cert-hero__icon {
-    width: 50px;
-    height: 50px;
-    flex: 0 0 50px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.14);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.design-back::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 18px;
+  width: 13px;
+  height: 13px;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  transform: rotate(45deg);
+  border-radius: 1px;
 }
 
-.cert-hero__icon img {
-    width: 26px;
-    height: 26px;
-    display: block;
-    object-fit: contain;
-}
 
-.cert-hero__content {
-    position: relative;
-    z-index: 1;
-    flex: 1;
-    min-width: 0;
-    margin-left: 12px;
-    margin-top: 0;
-}
-
-.cert-hero__title {
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 600;
-}
-
-.cert-hero__desc {
-    margin-top: 8px;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.92);
-}
-
-.cert-hero__orb {
-    position: absolute;
-    top: -20px;
-    right: -18px;
-    width: 116px;
-    height: 116px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.cert-stats {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    margin-top: 16px;
-}
-
-.cert-stat {
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.13);
-    text-align: center;
-    padding: 12px 8px;
-}
-
-.cert-stat strong {
-    display: block;
-    font-size: 16px;
-    line-height: 26px;
-}
-
-.cert-stat span {
-    display: block;
-    margin-top: 4px;
-    font-size: 10px;
-    line-height: 18px;
-}
-
-.cert-overview,
-.cert-content-card {
-    margin-top: 16px;
-}
-
-.cert-section-title {
-    margin-bottom: 20px;
-    color: #1e291f;
-    font-size: 18px;
-    line-height: 24px;
-    font-weight: 500;
-}
-
-.cert-overview-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-}
-
-.cert-overview-card {
-    border-radius: 18px;
-    border: 1px solid #d7e9da;
-    background: #fff;
-    padding: 16px 6px 14px;
-    text-align: center;
-    box-shadow: 0 10px 24px rgba(26, 77, 42, 0.05);
-}
-
-.cert-overview-card__icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 10px;
-    font-size: 20px;
-}
-
-.cert-overview-card__icon.is-green {
-    background: #e9f7ec;
-    color: #2ca24d;
-}
-
-.cert-overview-card__icon.is-blue {
-    background: #ebf1ff;
-    color: #3d84f3;
-}
-
-.cert-overview-card__icon.is-orange {
-    background: #fff1df;
-    color: #e4a243;
-}
-
-.cert-preview-trigger {
-    cursor: pointer;
-}
-
-.cert-overview-card__text {
-    color: #293328;
-    font-size: 11px;
-    line-height: 20px;
-    white-space: nowrap;
-}
-
-.cert-content-card {
-    border-radius: 20px;
-    background: transparent;
+.cert-page :deep(.page-top-bar) {
+  position: sticky;
+  top: 0;
+  left: auto !important;
+  right: auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  transform: none !important;
 }
 
 .cert-content {
-    border-radius: 20px;
-    background: transparent;
+  padding: 28px 20px 48px;
 }
 
-.rich-content :deep(*) {
-    box-sizing: border-box;
+.certificate-image {
+  display: block;
+  width: 100%;
+  background: #fff;
+  object-fit: contain;
 }
 
-.rich-content :deep(p) {
-    margin: 0 0 12px;
-    color: #607861;
-    font-size: 13px;
-    line-height: 24px;
+.cert-desktop-preview {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 4000;
+  width: var(--app-pc-max-width, 375px);
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.56);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.rich-content :deep(img) {
-    display: block;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    margin: 0 auto;
-    border-radius: 0;
-    background: #fff;
-    box-shadow: 0 12px 28px rgba(25, 78, 43, 0.08);
+.cert-desktop-preview__panel {
+  width: 100%;
+  max-height: calc(100vh - 64px);
+  max-height: calc(100dvh - 64px);
+  padding: 12px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0 16px 42px rgba(15, 23, 42, 0.2);
 }
 
-.cert-content__preview-image {
-    cursor: pointer;
+.cert-desktop-preview__image {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 88px);
+  max-height: calc(100dvh - 88px);
+  object-fit: contain;
 }
 
-.rich-content :deep(figure),
-.rich-content :deep(table) {
-    margin: 0;
+.cert-desktop-preview__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
 }
 
-.rich-content :deep(table) {
-    width: 100%;
+.cert-desktop-preview-fade-enter-active,
+.cert-desktop-preview-fade-leave-active {
+  transition: opacity 0.24s ease;
 }
 
-.rich-content :deep(td),
-.rich-content :deep(th) {
-    padding: 0;
-}
-
-:deep(.cert-nav .van-nav-bar) {
-    background: #fff;
-}
-
-:deep(.cert-nav .van-nav-bar__title) {
-    color: #1f2a1f;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-:deep(.cert-nav .van-icon-arrow-left) {
-    color: #28a14d;
-    font-size: 22px;
+.cert-desktop-preview-fade-enter-from,
+.cert-desktop-preview-fade-leave-to {
+  opacity: 0;
 }
 </style>

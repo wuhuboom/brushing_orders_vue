@@ -1,89 +1,114 @@
 :root {
-  /* 公共主题色：所有主按钮、选中态和 loading 默认都从这里取色 */
-  --theme-primary: #D37703;
-  --theme-green-defalut: #22A050;
-  --theme-primary-bg-green:  linear-gradient(135.00deg, rgba(52, 190, 100, 1),rgba(20, 140, 65, 1) 100%);
-  --theme-primary-hover: #1e9644;
-  --theme-primary-active: #169741;
-  --theme-primary-start: #34c263;
-  --theme-primary-end: #169741;
-  --theme-primary-deep: #159c42;
-  --theme-primary-soft: #e9f5ec;
-  --theme-primary-weak: #edf7f0;
-  --theme-primary-border: #cfe3d3;
-  --theme-primary-text: #176d35;
-  --theme-button-disabled: rgba(220, 140, 30, 0.1);
-  --theme-button-shadow: rgba(211, 119, 3, 0.3);
-  --theme-button-shadow-strong: rgba(34, 160, 80, 0.3);
-  --theme-button-gradient: #64756B;
-  --theme-button-gradient-horizontal: linear-gradient(90deg, var(--theme-primary-start) 0%, var(--theme-primary-end) 100%);
-  --theme-button-gradient-vertical: #D37703;
-  --theme-button-gradient-background: linear-gradient(152.39deg, rgba(51, 60, 55, 1) 0%,rgba(74, 101, 101, 1) 100%);
-  --theme-home-scrollbar-thumb: #D37703;
-  --theme-home-scrollbar-track: rgba(211, 119, 3, 0.14);
-  --theme-home-topic-bg: #C9D2D2;
+    /* 公共主题色：所有主按钮、选中态和 loading 默认都从这里取色 */
+    --theme-primary: #2556f4;
+    --theme-green-defalut: #22a050;
+    --theme-primary-bg-green: linear-gradient(
+        135deg,
+        rgba(52, 190, 100, 1),
+        rgba(20, 140, 65, 1) 100%
+    );
+    --theme-primary-hover: #1e9644;
+    --theme-primary-active: #169741;
+    --theme-primary-start: #34c263;
+    --theme-primary-end: #169741;
+    --theme-primary-deep: #159c42;
+    --theme-primary-soft: #e9f5ec;
+    --theme-primary-weak: #edf7f0;
+    --theme-primary-border: #cfe3d3;
+    --theme-primary-text: #176d35;
+    --theme-button-disabled: rgba(220, 140, 30, 0.1);
+    --theme-button-shadow: rgba(211, 119, 3, 0.3);
+    --theme-button-shadow-strong: rgba(34, 160, 80, 0.3);
+    --theme-button-gradient: #64756b;
+    --theme-button-gradient-horizontal: linear-gradient(
+        90deg,
+        var(--theme-primary-start) 0%,
+        var(--theme-primary-end) 100%
+    );
+    --theme-button-gradient-vertical: #d37703;
+    --theme-button-gradient-background: linear-gradient(
+        152.39deg,
+        rgba(51, 60, 55, 1) 0%,
+        rgba(74, 101, 101, 1) 100%
+    );
+    --theme-home-scrollbar-thumb: linear-gradient(
+        180deg,
+        #86dcff 0%,
+        #4f97ff 36%,
+        #2f7bff 68%,
+        #3543ec 100%
+    );
+    --theme-home-scrollbar-thumb-color: #4f97ff;
+    --theme-home-scrollbar-thumb-hover: linear-gradient(
+        180deg,
+        #9ce5ff 0%,
+        #63a6ff 34%,
+        #3b87ff 66%,
+        #4353ff 100%
+    );
+    --theme-home-scrollbar-track: rgba(79, 151, 255, 0.18);
+    --theme-home-topic-bg: #c9d2d2;
 
-  /* records 页面订单状态按钮/角标颜色 */
-  --records-status-pending-bg: var(--theme-primary);
-  --records-status-pending-dot: var(--theme-primary);
-  --records-status-pending-shadow: var(--theme-button-shadow);
-  --records-status-completed-bg: #1FAA53;
-  --records-status-completed-dot: #1FAA53;
-  --records-status-completed-shadow: rgba(31, 170, 83, 0.22);
-  --records-status-frozen-bg: #EB4B40;
-  --records-status-frozen-dot: #EB4B40;
-  --records-status-frozen-shadow: rgba(235, 75, 64, 0.22);
+    /* records 页面订单状态按钮/角标颜色 */
+    --records-status-pending-bg: var(--theme-primary);
+    --records-status-pending-dot: var(--theme-primary);
+    --records-status-pending-shadow: var(--theme-button-shadow);
+    --records-status-completed-bg: #1faa53;
+    --records-status-completed-dot: #1faa53;
+    --records-status-completed-shadow: rgba(31, 170, 83, 0.22);
+    --records-status-frozen-bg: #eb4b40;
+    --records-status-frozen-dot: #eb4b40;
+    --records-status-frozen-shadow: rgba(235, 75, 64, 0.22);
 
-  --theme-loading-color-1: rgba(211, 119, 3, 0.12);
-  --theme-loading-color-2: rgba(211, 119, 3, 0.32);
-  --theme-loading-color-3: rgba(211, 119, 3, 0.58);
-  --theme-loading-color-4: rgba(211, 119, 3, 0.82);
-  --theme-loading-color-5: var(--theme-primary);
-  --theme-loading-color-6: rgba(211, 119, 3, 0.46);
-  --theme-loading-tail-start: rgba(211, 119, 3, 0.08);
-  --theme-loading-tail-end: var(--theme-primary);
-  --theme-loading-pulse: rgba(211, 119, 3, 0.18);
+    --theme-loading-color-1: rgba(47, 123, 255, 0.12);
+    --theme-loading-color-2: rgba(47, 123, 255, 0.28);
+    --theme-loading-color-3: rgba(47, 123, 255, 0.52);
+    --theme-loading-color-4: rgba(53, 67, 236, 0.78);
+    --theme-loading-color-5: #2f7bff;
+    --theme-loading-color-6: rgba(20, 215, 255, 0.46);
+    --theme-loading-tail-start: rgba(47, 123, 255, 0.08);
+    --theme-loading-tail-end: #3543ec;
+    --theme-loading-pulse: rgba(47, 123, 255, 0.18);
 
-  --main-color: var(--theme-primary);
-  --van-primary-color: var(--theme-primary);
-  --van-button-primary-background: var(--theme-primary);
-  --van-button-primary-border-color: var(--theme-primary);
-  --van-loading-spinner-color: var(--theme-primary);
-  --van-checkbox-checked-icon-color: var(--theme-primary);
-  --el-color-primary: var(--theme-primary) !important;
-  --el-color-primary-light-3: var(--theme-primary-start) !important;
-  --el-color-primary-dark-2: var(--theme-primary-end) !important;
+    --main-color: var(--theme-primary);
+    --van-primary-color: var(--theme-primary);
+    --van-button-primary-background: var(--theme-primary);
+    --van-button-primary-border-color: var(--theme-primary);
+    --van-loading-spinner-color: #2f7bff;
+    --van-checkbox-checked-icon-color: var(--theme-primary);
+    --el-color-primary: var(--theme-primary) !important;
+    --el-color-primary-light-3: var(--theme-primary-start) !important;
+    --el-color-primary-dark-2: var(--theme-primary-end) !important;
 }
 
 .van-button--primary,
 .el-button--primary,
 .ant-btn-primary,
 .theme-primary-button {
-  border-color: var(--theme-primary) !important;
-  background: var(--theme-button-gradient) !important;
-  color: #ffffff !important;
-  box-shadow: 0 10px 24px var(--theme-button-shadow);
+    border-color: var(--theme-primary) !important;
+    background: var(--theme-button-gradient) !important;
+    color: #ffffff !important;
+    box-shadow: 0 10px 24px var(--theme-button-shadow);
 }
 
 .van-button--disabled,
 .van-button:disabled,
 .el-button.is-disabled,
 .ant-btn[disabled] {
-  border-color: var(--theme-button-disabled) !important;
-  background: var(--theme-button-disabled) !important;
+    border-color: var(--theme-button-disabled) !important;
+    background: var(--theme-button-disabled) !important;
 }
 
 .van-loading,
 .van-loading__spinner,
 .el-loading-spinner .el-loading-text,
 .ant-message .anticon-loading {
-  color: var(--theme-primary) !important;
+    color: #2f7bff !important;
 }
 
 .el-loading-spinner .path {
-  stroke: var(--theme-primary) !important;
+    stroke: #2f7bff !important;
 }
-
 
 /* 首页滚动条主题色
    注意：App.vue 里首页不能再带 hide-scroll，否则 ::-webkit-scrollbar 会被隐藏。 */
@@ -94,8 +119,9 @@ body,
 .app-route-view.home-scrollbar,
 .home-page,
 .skye-home-embed {
-  scrollbar-width: thin;
-  scrollbar-color: var(--theme-home-scrollbar-thumb) var(--theme-home-scrollbar-track);
+    scrollbar-width: thin;
+    scrollbar-color: var(--theme-home-scrollbar-thumb-color)
+        var(--theme-home-scrollbar-track);
 }
 
 html::-webkit-scrollbar,
@@ -105,9 +131,9 @@ body::-webkit-scrollbar,
 .app-route-view.home-scrollbar::-webkit-scrollbar,
 .home-page::-webkit-scrollbar,
 .skye-home-embed::-webkit-scrollbar {
-  display: block !important;
-  width: 6px;
-  height: 6px;
+    display: block !important;
+    width: 6px;
+    height: 6px;
 }
 
 html::-webkit-scrollbar-track,
@@ -117,8 +143,8 @@ body::-webkit-scrollbar-track,
 .app-route-view.home-scrollbar::-webkit-scrollbar-track,
 .home-page::-webkit-scrollbar-track,
 .skye-home-embed::-webkit-scrollbar-track {
-  background: var(--theme-home-scrollbar-track) !important;
-  border-radius: 999px;
+    background: var(--theme-home-scrollbar-track) !important;
+    border-radius: 999px;
 }
 
 html::-webkit-scrollbar-thumb,
@@ -128,8 +154,12 @@ body::-webkit-scrollbar-thumb,
 .app-route-view.home-scrollbar::-webkit-scrollbar-thumb,
 .home-page::-webkit-scrollbar-thumb,
 .skye-home-embed::-webkit-scrollbar-thumb {
-  background: var(--theme-home-scrollbar-thumb) !important;
-  border-radius: 999px;
+    background-color: var(--theme-home-scrollbar-thumb-color) !important;
+    background-image: var(--theme-home-scrollbar-thumb) !important;
+    border-radius: 999px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+        0 0 10px rgba(47, 123, 255, 0.18);
 }
 
 html::-webkit-scrollbar-thumb:hover,
@@ -139,44 +169,114 @@ body::-webkit-scrollbar-thumb:hover,
 .app-route-view.home-scrollbar::-webkit-scrollbar-thumb:hover,
 .home-page::-webkit-scrollbar-thumb:hover,
 .skye-home-embed::-webkit-scrollbar-thumb:hover {
-  background: var(--theme-primary) !important;
+    background-color: #63a6ff !important;
+    background-image: var(--theme-home-scrollbar-thumb-hover) !important;
 }
 
 @media (min-width: 768px) {
-  html.app-home-scroll-lock,
-  body.app-home-scroll-lock,
-  body.app-home-scroll-lock #app,
-  body.app-home-scroll-lock .app-frame {
-    scrollbar-width: none;
-  }
+    html.app-home-scroll-lock,
+    body.app-home-scroll-lock,
+    body.app-home-scroll-lock #app,
+    body.app-home-scroll-lock .app-frame {
+        scrollbar-width: none;
+    }
 
-  html.app-home-scroll-lock::-webkit-scrollbar,
-  body.app-home-scroll-lock::-webkit-scrollbar,
-  body.app-home-scroll-lock #app::-webkit-scrollbar,
-  body.app-home-scroll-lock .app-frame::-webkit-scrollbar {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-  }
+    html.app-home-scroll-lock::-webkit-scrollbar,
+    body.app-home-scroll-lock::-webkit-scrollbar,
+    body.app-home-scroll-lock #app::-webkit-scrollbar,
+    body.app-home-scroll-lock .app-frame::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
 
-  body.app-home-scroll-lock .app-route-view.home-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--theme-home-scrollbar-thumb) var(--theme-home-scrollbar-track);
-  }
+    body.app-home-scroll-lock .app-route-view.home-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: var(--theme-home-scrollbar-thumb-color)
+            var(--theme-home-scrollbar-track);
+    }
 
-  body.app-home-scroll-lock .app-route-view.home-scrollbar::-webkit-scrollbar {
-    display: block !important;
-    width: 6px;
-    height: 6px;
-  }
+    body.app-home-scroll-lock
+        .app-route-view.home-scrollbar::-webkit-scrollbar {
+        display: block !important;
+        width: 6px;
+        height: 6px;
+    }
 
-  body.app-home-scroll-lock .app-route-view.home-scrollbar::-webkit-scrollbar-track {
-    background: var(--theme-home-scrollbar-track) !important;
-    border-radius: 999px;
-  }
+    body.app-home-scroll-lock
+        .app-route-view.home-scrollbar::-webkit-scrollbar-track {
+        background: var(--theme-home-scrollbar-track) !important;
+        border-radius: 999px;
+    }
 
-  body.app-home-scroll-lock .app-route-view.home-scrollbar::-webkit-scrollbar-thumb {
-    background: var(--theme-home-scrollbar-thumb) !important;
-    border-radius: 999px;
-  }
+    body.app-home-scroll-lock
+        .app-route-view.home-scrollbar::-webkit-scrollbar-thumb {
+        background-color: var(--theme-home-scrollbar-thumb-color) !important;
+        background-image: var(--theme-home-scrollbar-thumb) !important;
+        border-radius: 999px;
+        box-shadow:
+            inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+            0 0 10px rgba(47, 123, 255, 0.18);
+    }
+
+    body .van-overlay {
+        left: 50% !important;
+        right: auto !important;
+        width: 100% !important;
+        max-width: var(--app-pc-max-width, 375px) !important;
+        transform: translateX(-50%) !important;
+    }
 }
+
+/* app wave loading override */
+.app-wave-loading-mask,
+.app-wave-loading-mask.el-loading-mask {
+    background: #ffffff !important;
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+.app-wave-loading-mask .el-loading-spinner {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 118px !important;
+    height: 76px !important;
+    margin: -38px 0 0 -59px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+.app-wave-loading-mask .el-loading-spinner svg,
+.app-wave-loading-mask .el-loading-spinner .circular,
+.app-wave-loading-mask .el-loading-spinner .path,
+.app-wave-loading-mask .el-loading-spinner .el-icon-loading,
+.app-wave-loading-mask .el-loading-spinner i {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+
+.app-wave-loading-mask .el-loading-spinner::before {
+    content: "";
+    display: block;
+    width: 118px;
+    height: 76px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 118 76'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%238af3ff'/%3E%3Cstop offset='.34' stop-color='%234b97ff'/%3E%3Cstop offset='.68' stop-color='%232f7bff'/%3E%3Cstop offset='1' stop-color='%233543ec'/%3E%3C/linearGradient%3E%3Cfilter id='s' x='-40%25' y='-40%25' width='180%25' height='200%25'%3E%3CfeDropShadow dx='0' dy='9' stdDeviation='6' flood-color='%232f7bff' flood-opacity='.22'/%3E%3C/filter%3E%3C/defs%3E%3Cellipse cx='59' cy='63' rx='42' ry='7' fill='%232f7bff' fill-opacity='.08'/%3E%3Cg filter='url(%23s)'%3E%3Crect x='17' y='35' width='6' height='14' rx='3' fill='url(%23g)'/%3E%3Crect x='28' y='31' width='6' height='22' rx='3' fill='url(%23g)'/%3E%3Crect x='39' y='24' width='6' height='32' rx='3' fill='url(%23g)'/%3E%3Crect x='50' y='16' width='7' height='42' rx='3.5' fill='url(%23g)'/%3E%3Crect x='62' y='10' width='7' height='52' rx='3.5' fill='url(%23g)'/%3E%3Crect x='74' y='16' width='7' height='42' rx='3.5' fill='url(%23g)'/%3E%3Crect x='85' y='24' width='6' height='32' rx='3' fill='url(%23g)'/%3E%3Crect x='96' y='31' width='6' height='22' rx='3' fill='url(%23g)'/%3E%3Crect x='107' y='35' width='6' height='14' rx='3' fill='url(%23g)'/%3E%3C/g%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 118px 76px;
+    filter: drop-shadow(0 10px 24px rgba(47, 123, 255, 0.2));
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+}
+

@@ -1,335 +1,333 @@
 <template>
-    <div class="starting-page">
-        <div class="starting-shell">
-            <header class="top-welcome">
-                <div>
-                    <div class="top-welcome__eyebrow">
+    <div class="starting-page algofy-starting-page">
+        <MainTabTopBar :title="$t('start')" />
+        <div class="algofy-starting-shell">
+            <section class="algofy-user-strip">
+                <div class="algofy-user-avatar-wrap">
+                    <img
+                        v-if="avatarUrl"
+                        class="algofy-user-avatar"
+                        :src="avatarUrl"
+                        alt=""
+                    />
+                    <img
+                        v-else
+                        class="algofy-user-avatar"
+                        src="@/static/images/vip_design/avatar.png"
+                        alt=""
+                    />
+                </div>
+                <div class="algofy-user-copy">
+                    <div class="algofy-user-welcome">
                         {{ $t("welcome_back") }}
-                        <span aria-hidden="true">👋</span>
                     </div>
-                    <div class="top-welcome__name">{{ displayName }}</div>
+                    <div class="algofy-user-name">{{ displayName }}</div>
                 </div>
-                <div class="top-welcome__actions">
-                    <button
-                        type="button"
-                        class="top-icon-btn"
-                        aria-label="notice"
-                        @click="toNotice"
-                    >
-                        <img src="@/static/images/home/alert1.png" />
-                    </button>
-                    <button
-                        type="button"
-                        class="top-icon-btn"
-                        aria-label="profile"
-                        @click="toMy"
-                    >
-                        <img src="@/static/images/starting/starting-menu.png" />
-                    </button>
-                </div>
-            </header>
+                <img
+                    class="algofy-user-vip"
+                    src="@/static/images/vip_design/vip1.png"
+                    alt=""
+                />
+            </section>
 
-            <main class="starting-content">
-                <section class="hero-card">
-                    <div class="hero-card__bubble hero-card__bubble--one"></div>
-                    <div class="hero-card__bubble hero-card__bubble--two"></div>
-                    <div
-                        class="hero-card__bubble hero-card__bubble--three"
-                    ></div>
-
-                    <div class="hero-card__header">
-                        <div class="hero-avatar">
-                            <div class="hero-avatar__inner">
-                                {{ displayInitial }}
-                            </div>
-                            <span class="hero-avatar__dot"></span>
-                        </div>
-
-                        <div class="hero-card__identity">
-                            <div class="hero-card__welcome">
-                                {{ $t("welcome_back") }}
-                                <span aria-hidden="true">👋</span>
-                            </div>
-                            <div class="hero-card__name">
-                                {{ $t("hi") }},{{ displayName }}
-                            </div>
-                            <div class="hero-card__tags">
-                                <span class="hero-tag hero-tag--vip">
-                                    <img
-                                        src="@/static/images/home/hggg.png"
-                                        class="h-[16px] w-[16px] mr-[5px]"
-                                    />
-                                    <span>{{ userLevel || "VIP1" }}</span>
-                                </span>
-                                <span class="hero-tag">
-                                    {{ orderCount || 0 }}
-                                    {{ $t("tasks") }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            class="hero-setting-btn"
-                            @click="toMy"
-                        >
-                            <img src="@/static/images/starting/setin.png" />
-                        </button>
-                    </div>
-
-                    <div class="hero-stats">
-                        <div class="hero-stat">
-                            <div class="hero-stat__label">
-                                <img
-                                    src="@/static/images/starting/wallet.png"
-                                />
-                                <span>{{ $t("balance") }}</span>
-                            </div>
-                            <div class="hero-stat__value">
-                                ${{ userInfo.balance || "0.00" }}
-                            </div>
-                            <div class="hero-stat__meta">
-                                {{ $t("ui_usd") }}
-                            </div>
-                        </div>
-                        <div class="hero-stat">
-                            <div class="hero-stat__label">
-                                <img src="@/static/images/starting/ansia.png" />
-                                <span>{{ $t("today") }}</span>
-                            </div>
-                            <div class="hero-stat__value">
-                                ${{ userInfo.commission || "0.00" }}
-                            </div>
-                            <div class="hero-stat__meta">
-                                {{ $t("earned") }}
-                            </div>
-                        </div>
-                        <div class="hero-stat">
-                            <div class="hero-stat__label">
-                                <img src="@/static/images/starting/task.png" />
-                                <span>{{ $t("tasks") }}</span>
-                            </div>
-                            <div class="hero-stat__value">
-                                {{ userInfo.dealCount || 0 }}/{{
-                                    orderCount || 0
-                                }}
-                            </div>
-                            <div class="hero-stat__meta">{{ $t("today") }}</div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="blind-box-panel">
-                    <div class="blind-box-panel__top">
-                        <div class="blind-box-panel__title-wrap">
-                            <div class="blind-box-panel__title-icon">
-                                <img src="@/static/images/starting/giff.png" />
-                            </div>
-                            <div class="blind-box-panel__title">
-                                {{ $t("mystery_blind_box") }}
-                            </div>
-                        </div>
-                        <div class="blind-box-panel__actions">
-                            <span class="today-pill">{{ $t("today") }}</span>
-                        </div>
-                    </div>
-
-                    <div class="opened-progress">
-                        {{
-                            $t("opened_boxes", {
-                                opened: userInfo.dealCount || 0,
-                                total: orderCount || 0,
-                            })
-                        }}
-                    </div>
-
-                    <div class="blind-box-grid">
+            <main class="algofy-starting-content">
+                <section class="algofy-product-section">
+                    <div class="algofy-product-gallery">
                         <div
-                            v-for="(item, index) in visibleGoods"
-                            :key="getBlindBoxItemKey(item, index)"
-                            class="blind-box-item"
+                            class="algofy-product-thumbs algofy-product-thumbs--left"
+                        >
+                            <div
+                                :key="getBlindBoxItemKey(galleryGoods[0], 0)"
+                                class="algofy-thumb-card algofy-gallery-animated"
+                                :class="[
+                                    blindBoxAnimationClass,
+                                    {
+                                        'algofy-gallery-animated--placeholder':
+                                            !galleryGoods[0]?.coverUrl ||
+                                            !isBlindBoxReady,
+                                    },
+                                ]"
+                                :style="{ '--blind-box-index': 0 }"
+                            >
+                                <img
+                                    v-if="isGalleryItemLoaded(galleryGoods[0])"
+                                    :src="getBlindBoxCoverUrl(galleryGoods[0])"
+                                    alt=""
+                                />
+                                <div
+                                    v-else
+                                    class="algofy-skeleton algofy-skeleton--thumb"
+                                ></div>
+                            </div>
+                            <div
+                                :key="getBlindBoxItemKey(galleryGoods[1], 1)"
+                                class="algofy-thumb-card algofy-gallery-animated"
+                                :class="[
+                                    blindBoxAnimationClass,
+                                    {
+                                        'algofy-gallery-animated--placeholder':
+                                            !galleryGoods[1]?.coverUrl ||
+                                            !isBlindBoxReady,
+                                    },
+                                ]"
+                                :style="{ '--blind-box-index': 1 }"
+                            >
+                                <img
+                                    v-if="isGalleryItemLoaded(galleryGoods[1])"
+                                    :src="getBlindBoxCoverUrl(galleryGoods[1])"
+                                    alt=""
+                                />
+                                <div
+                                    v-else
+                                    class="algofy-skeleton algofy-skeleton--thumb"
+                                ></div>
+                            </div>
+                        </div>
+
+                        <div
+                            :key="getBlindBoxItemKey(featuredGoods, 2)"
+                            class="algofy-product-main-img algofy-gallery-animated"
                             :class="[
                                 blindBoxAnimationClass,
                                 {
-                                    'blind-box-item--placeholder':
-                                        !item.coverUrl || !isBlindBoxReady,
+                                    'algofy-gallery-animated--placeholder':
+                                        !featuredGoods?.coverUrl ||
+                                        !isBlindBoxReady,
                                 },
                             ]"
-                            :style="{ '--blind-box-index': index }"
+                            :style="{ '--blind-box-index': 2 }"
                         >
-                            <div class="blind-box-item__corner"></div>
-                            <div class="blind-box-item__icon">
+                            <img
+                                v-if="isGalleryItemLoaded(featuredGoods)"
+                                :src="getBlindBoxCoverUrl(featuredGoods)"
+                                alt=""
+                            />
+                            <div
+                                v-else
+                                class="algofy-skeleton algofy-skeleton--main"
+                            ></div>
+                        </div>
+
+                        <div
+                            class="algofy-product-thumbs algofy-product-thumbs--right"
+                        >
+                            <div
+                                :key="getBlindBoxItemKey(galleryGoods[3], 3)"
+                                class="algofy-thumb-card algofy-gallery-animated"
+                                :class="[
+                                    blindBoxAnimationClass,
+                                    {
+                                        'algofy-gallery-animated--placeholder':
+                                            !galleryGoods[3]?.coverUrl ||
+                                            !isBlindBoxReady,
+                                    },
+                                ]"
+                                :style="{ '--blind-box-index': 3 }"
+                            >
                                 <img
-                                    v-if="item.coverUrl && isBlindBoxReady"
-                                    :src="getBlindBoxCoverUrl(item)"
+                                    v-if="isGalleryItemLoaded(galleryGoods[3])"
+                                    :src="getBlindBoxCoverUrl(galleryGoods[3])"
                                     alt=""
-                                    class="blind-box-item__image"
-                                    decoding="async"
                                 />
-                                <van-icon
+                                <div
                                     v-else
-                                    name="gift-o"
-                                    size="28"
-                                    color="#22a447"
-                                />
+                                    class="algofy-skeleton algofy-skeleton--thumb"
+                                ></div>
                             </div>
-                            <!-- <div class="blind-box-item__text">
-                                {{ $t("tap_to_open") }}
-                            </div> -->
+                            <div
+                                :key="getBlindBoxItemKey(galleryGoods[4], 4)"
+                                class="algofy-thumb-card algofy-thumb-card--dark algofy-gallery-animated"
+                                :class="[
+                                    blindBoxAnimationClass,
+                                    {
+                                        'algofy-gallery-animated--placeholder':
+                                            !galleryGoods[4]?.coverUrl ||
+                                            !isBlindBoxReady,
+                                    },
+                                ]"
+                                :style="{ '--blind-box-index': 4 }"
+                            >
+                                <img
+                                    v-if="isGalleryItemLoaded(galleryGoods[4])"
+                                    :src="getBlindBoxCoverUrl(galleryGoods[4])"
+                                    alt=""
+                                />
+                                <div
+                                    v-else
+                                    class="algofy-skeleton algofy-skeleton--thumb"
+                                ></div>
+                            </div>
                         </div>
                     </div>
 
+                    <h1
+                        :key="`title-${featuredGoodsKey}`"
+                        class="algofy-product-title algofy-product-meta-animated"
+                    >
+                        {{ productTitleText }}
+                    </h1>
+                    <!-- <div class="algofy-product-rating">
+                        <span class="algofy-rating-star">★</span>
+                        <strong>{{ productScoreText }}</strong>
+                        <span>{{ productReviewText }}</span>
+                    </div> -->
+                    <div
+                        :key="`price-${featuredGoodsKey}`"
+                        class="algofy-product-price algofy-product-meta-animated"
+                    >
+                        <span>{{ $t("order_amount") }}:</span>
+                        <strong>USD {{ productPriceText }}</strong>
+                    </div>
                     <button
                         type="button"
-                        class="blind-box-start-btn"
+                        class="algofy-start-btn"
                         :disabled="!isBlindBoxReady"
                         @click="handleClick"
                     >
-                        Start
+                        {{ translateWithFallback("start", "Start") }} ({{
+                            userInfo.dealCount || 0
+                        }}/{{ orderCount || 0 }})
                     </button>
                 </section>
 
-                <section class="support-card">
-                    <div class="support-card__icon">
-                        <van-icon name="star-o" size="18" color="#1ca447" />
+                <section class="algofy-balance-card">
+                    <img
+                        class="algofy-commission-icon"
+                        src="@/static/images/starting-design/commission-icon.png"
+                        alt=""
+                    />
+                    <div class="algofy-commission-label">
+                        {{ $t("today") }} {{ $t("commission") }}
                     </div>
-                    <div class="support-card__text">
-                        <div class="support-card__title">
-                            {{ $t("online_support_hours") }}
-                            {{ TradeInfor?.workTimeStart || "--:--" }} -
-                            {{ TradeInfor?.workTimeEnd || "--:--" }}
+                    <div class="algofy-commission-amount">
+                        USD {{ userInfo.commission || "456.78" }}
+                    </div>
+                    <div class="algofy-commission-desc">{{ $t("auto_the_displayed_amount_reflects_the") }}<br />{{ $t("auto_commissions_earned_today_as_an_indication") }}</div>
+                    <div class="algofy-balance-grid">
+                        <div class="algofy-mini-balance">
+                            <img
+                                src="@/static/images/starting-design/wallet-icon.png"
+                                alt=""
+                            />
+                            <div class="algofy-mini-title">
+                                {{ $t("balance") }}
+                            </div>
+                            <div class="algofy-mini-amount">
+                                USD {{ userInfo.balance || "123.45" }}
+                            </div>
+                            <p>{{ $t("auto_the_total_balance_reflects") }}<br />{{ $t("auto_both_the_deposited") }}<br />{{ $t("auto_amount_and") }}<br />{{ $t("auto_commissions_earned") }}</p>
                         </div>
-                        <div class="support-card__desc">
-                            {{ $t("please_contact_online_support") }}
+                        <div class="algofy-mini-balance">
+                            <img
+                                src="@/static/images/starting-design/freeze-icon.png"
+                                alt=""
+                            />
+                            <div class="algofy-mini-title">{{ $t("auto_freeze_amount") }}</div>
+                            <div class="algofy-mini-amount">
+                                USD
+                                {{
+                                    userInfo.freezeAmount ||
+                                    userInfo.frozenAmount ||
+                                    "1,234.56"
+                                }}
+                            </div>
+                            <p>{{ $t("auto_pinned_balance") }}<br />{{ $t("auto_where_there_is_a") }}<br />{{ $t("auto_pending_combination") }}<br />{{ $t("auto_product_in_process") }}</p>
                         </div>
                     </div>
                 </section>
+
+                <section class="algofy-notice-card">
+                    <h2>
+                        {{
+                            translateWithFallback(
+                                "important_notice",
+                                "Important Notice",
+                            )
+                        }}:
+                    </h2>
+                    <p>
+                        {{ $t("online_support_hours") }}
+                        {{ TradeInfor?.workTimeStart || "10:00" }} -
+                        {{ TradeInfor?.workTimeEnd || "23:00" }}<br />
+                        {{ $t("please_contact_online_support") }}
+                    </p>
+                </section>
+
+                <footer class="algofy-copyright-card">
+                    <img
+                        src="@/static/images/starting-design/footer-logo.png"
+                        alt=""
+                    />
+                    <p>{{ $t("auto_copyright_2025_algofy_company") }}</p>
+                    <p>
+                        {{
+                            translateWithFallback(
+                                "all_rights_reserved",
+                                "All Rights Reserved",
+                            )
+                        }}
+                    </p>
+                </footer>
             </main>
 
-            <TaskOrderDialog
-                v-model="showCenter"
-                :title="$t('complete_the_order')"
-                :step="currentStep"
-                :step-labels="taskStepLabels"
-                :product-name="goods.goodsName"
-                :cover-url="goods.coverUrl ? url + goods.coverUrl : ''"
-                :amount-label="$t('order_amount')"
-                :amount-text="`$${goods.price || '0.00'}`"
-                :commission-label="$t('commission')"
-                :commission-text="`+$${goods.commission || '0.00'}`"
-                :success-message="taskSuccessMessage"
-                :show-warning="currentStep === 2 && showInsufficientWarning"
-                :warning-text="$t('insufficient_balance_please')"
-                :warning-action-text="$t('recharge')"
-                :action-text="
-                    currentStep === 1
-                        ? $t('accept_task')
-                        : currentStep === 2
-                          ? $t('complete_the_order')
-                          : $t('continue_tasks')
-                "
-                :action-loading="currentStep === 2 && isTaskSubmitting"
-                :action-disabled="currentStep === 2 && isTaskSubmitting"
-                @back="handleDialogBack"
-                @closed="resetDialogState"
-                @warning-action="goRecharge"
-                @primary="
-                    currentStep === 1
-                        ? goToOrderStep()
-                        : currentStep === 2
-                          ? submitForm()
-                          : handleContinueTasks()
-                "
-            >
-                <template #panel="{ step }">
-                    <div v-if="step === 1" class="task-panel">
-                        <div class="task-panel__title task-panel__title--warn">
-                            <van-icon
-                                name="warning-o"
-                                size="20"
-                                color="#e39a1a"
-                            />
-                            <span>{{ $t("task_instructions") }}</span>
-                        </div>
-                        <div class="task-panel__instructions">
-                            {{ $t("task_instruction_1") }}<br />
-                            {{ $t("task_instruction_2") }}<br />
-                            {{ $t("task_instruction_3") }}<br />
-                            {{ $t("task_instruction_4") }}
-                        </div>
-                    </div>
-
-                    <div v-else-if="step === 2" class="task-panel">
-                        <div class="task-panel__heading">
-                            {{ $t("place_order") }}
-                        </div>
-                        <div class="task-order-card">
-                            <div class="task-order-card__label">
-                                {{ $t("order_id") }}
-                            </div>
-                            <div class="task-order-card__id">
-                                #{{ goods.orderNo }}
-                            </div>
-                        </div>
-                        <div class="task-order-card__time">
-                            {{ $t("creation_at_colon") }}
-                            {{
-                                formatWithTimezone(
-                                    goods.createTime,
-                                    userStore.zoneActive.tzName,
-                                )
-                            }}
-                        </div>
-                    </div>
-                </template>
-            </TaskOrderDialog>
+            <MissionSubmissionPopup
+                v-model="showMissionDialog"
+                :product-name="missionProductTitle"
+                :cover-url="missionCoverUrl"
+                :score-text="missionScoreText"
+                :review-text="missionReviewText"
+                :price-text="missionPriceText"
+                :total-amount-text="missionTotalAmountText"
+                :commission-text="missionCommissionText"
+                :create-time-text="missionCreateTimeText"
+                :order-no-text="missionOrderNoText"
+                :submitting="isMissionSubmitting"
+                @back="closeMissionDialog"
+                @submit="submitForm"
+            />
 
             <van-popup
                 v-model:show="showImg"
-                round
                 class="lucky-draw-van-popup"
                 overlay-class="lucky-draw-popup-overlay"
                 :style="{ background: 'transparent' }"
             >
-                <div class="lucky-draw-popup">
-                    <!-- width: '86%',<div class="lucky-draw-popup__emoji">🎉</div> -->
-
+                <div class="lucky-draw-popup" @click="closeImg">
                     <img
-                        @click="closeImg"
-                        class="block mx-auto w-[65px] h-[65px] object-contain"
-                        src="../../static/images/superConf.png"
+                        class="lucky-draw-popup__panel"
+                        src="@/static/images/popup-design/lucky-draw-panel.png"
                         alt=""
                     />
-                    <div class="lucky-draw-popup__title">
-                        {{ $t("lucky_draw_title") }}
-                    </div>
-
-                    <div class="lucky-draw-popup__desc">
-                        {{ $t("lucky_draw_desc_before") }}
-                        <span class="lucky-draw-popup__amount">
-                            {{ $t("lucky_draw_amount") }}
-                        </span>
-                    </div>
-
-                    <div class="lucky-draw-popup__claim">
-                        {{ $t("lucky_draw_claim_text") }}
+                    <div class="lucky-draw-popup__content">
+                        <div class="lucky-draw-popup__title">
+                            <span
+                                v-for="(line, index) in luckyDrawTitleLines"
+                                :key="index"
+                            >
+                                {{ line }}
+                            </span>
+                        </div>
+                        <div class="lucky-draw-popup__desc">
+                            {{ $t("lucky_draw_desc_before") }}
+                            <span class="lucky-draw-popup__amount">
+                                {{ $t("lucky_draw_amount") }}
+                            </span>
+                        </div>
+                        <div class="lucky-draw-popup__claim">
+                            {{ $t("lucky_draw_claim_text") }}
+                        </div>
+                        <div class="lucky-draw-popup__disclaimer">
+                            {{ $t("lucky_draw_disclaimer") }}
+                        </div>
                     </div>
                 </div>
-
-                <van-button
-                    color="var(--theme-primary)"
-                    round
-                    class="w-full lucky-draw-popup__ok"
-                    @click="closeImg"
-                >
-                    {{ $t("ok") }}
-                </van-button>
             </van-popup>
         </div>
     </div>
 </template>
 
 <script setup>
+import MainTabTopBar from "@/components/MainTabTopBar.vue";
 import { computed, onMounted, ref, onUnmounted } from "vue";
 import {
     showLoadingToast,
@@ -338,7 +336,6 @@ import {
     showSuccessToast,
 } from "@/util/message";
 import { useI18n } from "vue-i18n";
-import TaskOrderDialog from "@/components/TaskOrderDialog.vue";
 import {
     getGoodsListTwo,
     createOrder,
@@ -349,31 +346,31 @@ import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";
+import MissionSubmissionPopup from "@/components/MissionSubmissionPopup.vue";
 
-const url = window.g.VITE_API_IMG_URL;
 const userStore = useUserStore();
 const router = useRouter();
-const { t } = useI18n();
+const { t, te, locale } = useI18n();
+
+const translateWithFallback = (key, fallback) => {
+    return te(key) ? t(key) : fallback;
+};
 
 const userInfo = ref({});
+const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL
+    ? window.g.VITE_API_IMG_URL
+    : import.meta.env.VITE_API_IMG_URL;
+const url = VITE_API_IMG_URL;
 const avatarUrl = ref("");
 let timer = null;
+let luckyDrawTimer = null;
 
 const goodsList = ref([]);
 const visibleGoodsSource = ref([]);
-const showCenter = ref(false);
+const showMissionDialog = ref(false);
 const showImg = ref(false);
 const goods = ref({});
-const totalCount = ref(0);
-const currentStep = ref(1);
-const showInsufficientWarning = ref(false);
-const isTaskSubmitting = ref(false);
-const taskSuccessMessage = ref(t("task_completed_successfully"));
-const taskStepLabels = computed(() => [
-    t("accept_task"),
-    t("place_order"),
-    t("submit_proof"),
-]);
+const isMissionSubmitting = ref(false);
 
 const blindBoxAnimationClass = ref("blind-box-item--anim-rise");
 const blindBoxRenderSeed = ref(0);
@@ -421,11 +418,6 @@ const displayName = computed(() => {
     return userInfo.value.username || userStore.userInfo?.username || "--";
 });
 
-const displayInitial = computed(() => {
-    const name = `${displayName.value || "?"}`.trim();
-    return name ? name.charAt(0).toUpperCase() : "?";
-});
-
 const BLIND_BOX_VISIBLE_COUNT = 9;
 const isBlindBoxReady = ref(false);
 let blindBoxPreloadToken = 0;
@@ -446,6 +438,10 @@ const getBlindBoxItemKey = (item, index) => {
     return `${blindBoxRenderSeed.value}-${baseKey}-${index}`;
 };
 
+const isGalleryItemLoaded = (item) => {
+    return Boolean(item?.coverUrl && isBlindBoxReady.value);
+};
+
 const getBlindBoxGoodsKey = (list) => {
     return normalizeBlindBoxList(list)
         .map((item, index) =>
@@ -459,24 +455,143 @@ const getBlindBoxGoodsKey = (list) => {
         .join("||");
 };
 
-const visibleGoods = computed(() => {
-    const list = [...(visibleGoodsSource.value || [])].slice(
-        0,
-        BLIND_BOX_VISIBLE_COUNT,
-    );
-    while (list.length < BLIND_BOX_VISIBLE_COUNT) {
-        list.push({ id: `placeholder-${list.length}` });
-    }
-    return list;
+const galleryGoods = computed(() =>
+    normalizeBlindBoxList(visibleGoodsSource.value).filter(
+        (item) => item?.coverUrl,
+    ),
+);
+
+const featuredGoods = computed(
+    () => galleryGoods.value[2] || galleryGoods.value[0] || {},
+);
+
+const featuredGoodsKey = computed(() => {
+    const item = featuredGoods.value || {};
+    return item.id || item.orderNo || item.coverUrl || "featured-placeholder";
 });
 
-const loadBlindBoxImage = (src) => {
+const getGoodsTitle = (item = {}) => {
+    return (
+        item.goodsName ||
+        item.name ||
+        item.title ||
+        item.productName ||
+        item.commodityName ||
+        item.goodsTitle ||
+        item.productTitle ||
+        "NIKE Dunk Low Retro Men's Shoe"
+    );
+};
+
+const getGoodsAmount = (item = {}) => {
+    return (
+        item.price ??
+        item.goodsPrice ??
+        item.productPrice ??
+        item.amount ??
+        item.orderAmount ??
+        item.salePrice ??
+        0
+    );
+};
+
+const formatGoodsAmount = (amount) => {
+    const numberAmount = Number(amount);
+    return Number.isFinite(numberAmount) ? numberAmount.toFixed(2) : "0.00";
+};
+
+const productTitleText = computed(() => getGoodsTitle(featuredGoods.value));
+
+const productPriceText = computed(() =>
+    formatGoodsAmount(getGoodsAmount(featuredGoods.value)),
+);
+
+const productScoreText = computed(
+    () => featuredGoods.value?.score || featuredGoods.value?.rate || "4.9",
+);
+
+const productReviewText = computed(() => {
+    const reviewCount =
+        featuredGoods.value?.reviewCount ??
+        featuredGoods.value?.commentCount ??
+        featuredGoods.value?.saleCount ??
+        123;
+    return `${reviewCount} ${t("reviews")}`;
+});
+
+const missionCoverUrl = computed(() => {
+    if (goods.value?.coverUrl) return `${url}${goods.value.coverUrl}`;
+    return featuredGoods.value?.coverUrl
+        ? `${url}${featuredGoods.value.coverUrl}`
+        : "";
+});
+
+const missionGoods = computed(() => {
+    const createdGoods = goods.value || {};
+    if (
+        createdGoods.id ||
+        createdGoods.orderNo ||
+        createdGoods.coverUrl ||
+        createdGoods.goodsName
+    ) {
+        return createdGoods;
+    }
+    return featuredGoods.value;
+});
+
+const missionProductTitle = computed(() => getGoodsTitle(missionGoods.value));
+const missionScoreText = computed(
+    () =>
+        missionGoods.value?.score ||
+        missionGoods.value?.rate ||
+        featuredGoods.value?.score ||
+        featuredGoods.value?.rate ||
+        "4.9",
+);
+const missionReviewText = computed(() => productReviewText.value);
+const missionPriceText = computed(() =>
+    formatGoodsAmount(getGoodsAmount(missionGoods.value)),
+);
+const missionTotalAmountText = computed(() => {
+    const amount = Number(getGoodsAmount(goods.value || {}));
+    return amount ? amount.toFixed(2) : "456.78";
+});
+const missionCommissionText = computed(() => {
+    const amount = Number(goods.value?.commission || 0);
+    return amount ? amount.toFixed(2) : "46.78";
+});
+const missionCreateTimeText = computed(() => {
+    if (!goods.value?.createTime) return "2025-06-15 19:38:44";
+    return formatWithTimezone(
+        goods.value.createTime,
+        userStore.zoneActive?.tzName,
+    );
+});
+const missionOrderNoText = computed(
+    () => goods.value?.orderNo || "202506157896541230123",
+);
+
+const luckyDrawTitleLines = computed(() => {
+    const title = t("lucky_draw_title");
+    if (!title) return [];
+    if (title.includes("\n")) {
+        return title
+            .split("\n")
+            .map((item) => item.trim())
+            .filter(Boolean);
+    }
+    if (locale.value === "en" || /Lucky Draw/i.test(title)) {
+        return ["You Have Won The", "Lucky Draw!"];
+    }
+    return [title];
+});
+
+const loadBlindBoxImage = async (src) => {
     return new Promise((resolve) => {
         if (!src) {
             resolve();
             return;
         }
-
         const image = new Image();
         let settled = false;
         const done = () => {
@@ -484,15 +599,12 @@ const loadBlindBoxImage = (src) => {
             settled = true;
             resolve();
         };
-
         image.onload = async () => {
             try {
                 if (typeof image.decode === "function") {
                     await image.decode();
                 }
-            } catch (error) {
-                // decode 失败时仍然继续渲染，避免坏图阻塞九宫格。
-            }
+            } catch (error) {}
             done();
         };
         image.onerror = done;
@@ -503,16 +615,12 @@ const loadBlindBoxImage = (src) => {
 const preloadBlindBoxImages = async (list) => {
     const normalizedList = normalizeBlindBoxList(list);
     const nextGoodsKey = getBlindBoxGoodsKey(normalizedList);
-
-    if (isBlindBoxReady.value && nextGoodsKey === lastBlindBoxGoodsKey) {
-        return;
-    }
+    if (isBlindBoxReady.value && nextGoodsKey === lastBlindBoxGoodsKey) return;
 
     const nextToken = ++blindBoxPreloadToken;
     const imageUrls = Array.from(
         new Set(normalizedList.map(getBlindBoxCoverUrl).filter(Boolean)),
     );
-
     await Promise.all(imageUrls.map(loadBlindBoxImage));
 
     if (nextToken !== blindBoxPreloadToken || isStartingPageUnmounted) return;
@@ -539,61 +647,21 @@ const getList = async () => {
     }
 };
 
-const toLogin = () => {
-    router.replace({ path: "/projectspage" });
-};
-
-const getImageByIndex = (i) => {
-    if (i === 4) return null;
-    const realIndex = i < 5 ? i : i - 1;
-    return goodsList.value[realIndex]?.coverUrl || "";
-};
-
 const handleClick = () => {
     doCreateOrder();
 };
 
 const closeImg = () => {
     showImg.value = false;
-};
-
-const resetDialogState = () => {
-    currentStep.value = 1;
-    showInsufficientWarning.value = false;
-    isTaskSubmitting.value = false;
-    taskSuccessMessage.value = t("task_completed_successfully");
-};
-
-const goToOrderStep = () => {
-    currentStep.value = 2;
-    showInsufficientWarning.value = false;
-};
-
-const handleDialogBack = () => {
-    if (isTaskSubmitting.value) return;
-
-    if (currentStep.value === 2) {
-        currentStep.value = 1;
-        showInsufficientWarning.value = false;
-        return;
+    if (luckyDrawTimer) {
+        clearTimeout(luckyDrawTimer);
+        luckyDrawTimer = null;
     }
-
-    if (currentStep.value >= 3) {
-        showCenter.value = false;
-        resetDialogState();
-        return;
-    }
-
-    showCenter.value = false;
 };
 
-const handleContinueTasks = () => {
-    showCenter.value = false;
-    resetDialogState();
-};
-
-const goRecharge = () => {
-    router.push("/deposit");
+const closeMissionDialog = () => {
+    if (isMissionSubmitting.value) return;
+    showMissionDialog.value = false;
 };
 
 const doCreateOrder = () => {
@@ -606,48 +674,45 @@ const doCreateOrder = () => {
     createOrder()
         .then((res) => {
             closeToast();
-            showCenter.value = true;
-            currentStep.value = 1;
-            showInsufficientWarning.value = false;
+            goods.value = res.data || {};
+            showMissionDialog.value = true;
             userGetInfoMethods({ force: true });
-            goods.value = res.data;
         })
         .catch((err) => {
             closeToast();
             if (err.code == 2000) {
                 showImg.value = true;
-                setTimeout(() => {
+                if (luckyDrawTimer) clearTimeout(luckyDrawTimer);
+                luckyDrawTimer = setTimeout(() => {
                     showImg.value = false;
-                }, 2000);
+                    luckyDrawTimer = null;
+                }, 15000);
             } else if (err.code == 909) {
                 showToast(
                     `User has filled in ${err.data} pieces of data. please contact Customer Service to apply for resetting account`,
                 );
             } else {
-                showToast(t(errorMessages[err.code]));
+                showToast(t(errorMessages[err.code] || "creation_failed"));
             }
         });
 };
 
 const submitForm = () => {
-    if (isTaskSubmitting.value) return;
-
-    showInsufficientWarning.value = false;
-    isTaskSubmitting.value = true;
+    if (isMissionSubmitting.value || !goods.value?.id) return;
+    isMissionSubmitting.value = true;
     submitOrder(goods.value.id)
         .then((res) => {
             closeToast();
             userGetInfoMethods({ force: true });
-            if (res.code == 201) {
+            if (res.code == 201 && res.data) {
                 goods.value = res.data;
             }
             showSuccessToast(t("mission_submitted_completed"));
-            taskSuccessMessage.value = t("mission_submitted_completed");
-            currentStep.value = 3;
+            showMissionDialog.value = false;
         })
         .catch((err) => {
             if (err.code == 916) {
-                showInsufficientWarning.value = true;
+                showToast(t("insufficient_balance_please"));
                 return;
             }
             if (err.code == 906) {
@@ -661,37 +726,30 @@ const submitForm = () => {
             }
         })
         .finally(() => {
-            isTaskSubmitting.value = false;
+            isMissionSubmitting.value = false;
         });
-};
-
-const toNotice = () => {
-    router.push({ path: "/notice" });
-};
-
-const toMy = () => {
-    router.push({ path: "/my" });
 };
 
 const TradeInfor = ref({});
 const tradeConfig = async () => {
-    let res = await getTradeConfig();
+    const res = await getTradeConfig();
     TradeInfor.value = res.data;
 };
-
-onUnmounted(() => {
-    isStartingPageUnmounted = true;
-    blindBoxPreloadToken += 1;
-    if (timer) clearTimeout(timer);
-});
 
 const userLevel = ref("");
 const orderCount = ref(0);
 
 const syncUserInfo = (info = {}) => {
     userInfo.value = info || {};
-    const levelInfo = info?.userLevel || {};
-    avatarUrl.value = levelInfo.icon ? `${url}${levelInfo.icon}` : "";
+
+    const levelInfo = userInfo.value?.userLevel || {};
+    // console.log("userInfo.value", userInfo.value);
+    // console.log("userInfo.value.avatar", userInfo.value.avatar);
+    avatarUrl.value = userInfo.value.avatar
+        ? userInfo.value.avatar
+        : levelInfo.icon
+          ? `${url}${levelInfo.icon}`
+          : "";
     orderCount.value = levelInfo.orderCount || 0;
     userLevel.value = levelInfo.nameEn || "";
 };
@@ -702,448 +760,338 @@ const userGetInfoMethods = async (options = {}) => {
     return info;
 };
 
+onUnmounted(() => {
+    isStartingPageUnmounted = true;
+    blindBoxPreloadToken += 1;
+    if (timer) clearTimeout(timer);
+    if (luckyDrawTimer) clearTimeout(luckyDrawTimer);
+});
+
 onMounted(() => {
     getList();
     userGetInfoMethods();
     tradeConfig();
 });
 </script>
-
 <style scoped>
-.starting-page {
+.algofy-starting-page {
     min-height: 100vh;
-    background: #f4faf5;
+    background: #eef2f8;
+    color: #111111;
 }
 
-.starting-shell {
+.algofy-starting-shell {
     min-height: 100vh;
-    background: linear-gradient(180deg, #ffffff 0 59px, #f4faf5 59px 100%);
+    background: #eef2f8;
+    overflow-x: hidden;
+    padding-top: var(--main-tab-top-bar-height, 104px);
 }
 
-.top-welcome {
-    position: fixed;
+.algofy-starting-header {
+    position: relative;
+    height: 100px;
+    background: #191919 url("@/static/images/auth/algofy-register-hero.png") top
+        center / cover no-repeat;
+    color: #ffffff;
+}
+
+.algofy-starting-header__status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 44px;
+    padding: 0 16px 0 24px;
+}
+
+.algofy-starting-header__time {
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.algofy-starting-header__status-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.algofy-starting-header__signal {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+}
+
+.algofy-starting-header__signal span {
+    display: block;
+    width: 3px;
+    border-radius: 999px;
+    background: #ffffff;
+}
+
+.algofy-starting-header__signal span:nth-child(1) {
+    height: 5px;
+    opacity: 0.7;
+}
+.algofy-starting-header__signal span:nth-child(2) {
+    height: 7px;
+    opacity: 0.8;
+}
+.algofy-starting-header__signal span:nth-child(3) {
+    height: 10px;
+    opacity: 0.9;
+}
+.algofy-starting-header__signal span:nth-child(4) {
+    height: 12px;
+}
+
+.algofy-starting-header__wifi {
+    position: relative;
+    width: 16px;
+    height: 11px;
+}
+
+.algofy-starting-header__wifi::before,
+.algofy-starting-header__wifi::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.algofy-starting-header__wifi::before {
+    top: 1px;
+    width: 16px;
+    height: 12px;
+}
+
+.algofy-starting-header__wifi::after {
+    top: 4px;
+    width: 9px;
+    height: 7px;
+}
+
+.algofy-starting-header__battery {
+    position: relative;
+    width: 24px;
+    height: 12px;
+    border: 1.8px solid #ffffff;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.algofy-starting-header__battery::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    right: -3px;
+    width: 2px;
+    height: 4px;
+    border-radius: 0 1px 1px 0;
+    background: #ffffff;
+}
+
+.algofy-starting-header__battery-level {
+    position: absolute;
+    inset: 2px;
+    border-radius: 1px;
+    background: #ffffff;
+}
+
+.algofy-starting-header__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.algofy-user-strip {
+    height: 93px;
+    padding: 18px 16px 16px;
+    background: linear-gradient(180deg, #3e86ff 0%, #2554de 100%);
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+.algofy-user-avatar-wrap {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 54px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #d7ecff;
+}
+
+.algofy-user-avatar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.algofy-user-copy {
+    flex: 1;
+    min-width: 0;
+    padding-left: 12px;
+}
+
+.algofy-user-welcome {
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 14px;
+    color: #ffffff;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.algofy-user-name {
+    margin-top: 8px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.algofy-user-vip {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin-left: 8px;
+}
+
+.algofy-starting-content {
+    padding: 0 0 10px;
+    background: #eef2f8;
+}
+
+.algofy-product-section {
+    position: relative;
+    background: #ffffff;
+    padding: 26px 16px 24px;
+    overflow: hidden;
+}
+
+.algofy-product-section::before {
+    content: "";
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    height: 42px;
+    background: #eef2f8;
+    clip-path: polygon(0 0, 100% 0, 100% 31%, 0 100%);
+}
+
+.algofy-product-gallery {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 85px 1fr 73px;
     gap: 12px;
-    height: 59px;
-    padding: 0 16px;
-    background: #ffffff;
-}
-
-.top-welcome::before {
-    content: "";
-    display: block;
-    width: 72px;
-    height: 38px;
-    background: url("@/static/images/starting/starting-logo.png") center /
-        contain no-repeat;
-    flex: 0 0 72px;
-}
-
-.top-welcome > div:first-child {
-    display: none;
-}
-
-.top-welcome__eyebrow {
-    color: #1fa44b;
-    font-size: 13px;
-    line-height: 1.25;
-}
-
-.top-welcome__name {
-    margin-top: 4px;
-    color: #0f1f12;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.05;
-}
-
-.top-welcome__actions {
-    display: flex;
     align-items: center;
-    gap: 10px;
+    min-height: 190px;
 }
 
-.top-icon-btn {
-    position: relative;
-    width: 34px;
-    height: 34px;
-    border: 1px solid #cce8d3;
-    border-radius: 999px;
-    background: linear-gradient(180deg, #f7fdf8 0%, #e8f7ed 100%);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.top-icon-btn__badge {
-    position: absolute;
-    top: 10px;
-    right: 11px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #ff4d55;
-    box-shadow: 0 0 0 2px #ffffff;
-}
-
-.top-welcome__actions .top-icon-btn:last-child {
-    border: 0;
-    background: url("@/static/images/starting/starting-menu.png") center / 34px
-        34px no-repeat;
-    box-shadow: none;
-}
-
-.top-welcome__actions .top-icon-btn:last-child :deep(.van-icon) {
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .top-welcome {
-        left: 50%;
-        right: auto;
-        width: 100%;
-        max-width: var(--app-pc-max-width, 375px);
-        transform: translateX(-50%);
-    }
-}
-
-.starting-content {
-    padding: 59px 0 108px;
-}
-
-.hero-card {
-    position: relative;
-    overflow: hidden;
-    margin-top: 0;
-    padding: 18px 18px 0;
-    background: var(--theme-button-gradient-background);
-}
-
-.hero-card__bubble {
-    position: absolute;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.hero-card__bubble--one {
-    top: -24px;
-    right: -28px;
-    width: 108px;
-    height: 108px;
-}
-
-.hero-card__bubble--two {
-    top: 42px;
-    right: 86px;
-    width: 56px;
-    height: 56px;
-}
-
-.hero-card__bubble--three {
-    bottom: 14px;
-    left: -12px;
-    width: 70px;
-    height: 70px;
-}
-
-.hero-card__header {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: flex-start;
-}
-
-.hero-avatar {
-    position: relative;
-    width: 66px;
-    height: 66px;
-    border-radius: 50%;
-    border: 3px solid rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
-}
-
-.hero-avatar__inner {
-    color: #ffffff;
-    font-size: 34px;
-    font-weight: 500;
-    line-height: 1;
-}
-
-.hero-avatar__dot {
-    position: absolute;
-    right: -2px;
-    bottom: 1px;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: #78f0a0;
-    border: 2px solid #ffffff;
-}
-
-.hero-card__identity {
-    flex: 1;
-    min-width: 0;
-    margin-left: 14px;
-    padding-top: 3px;
-    color: #ffffff;
-}
-
-.hero-card__welcome {
-    font-size: 14px;
-    line-height: 1.2;
-    color: rgba(255, 255, 255, 0.92);
-}
-
-.hero-card__name {
-    margin-top: 6px;
-    font-size: 19px;
-    font-weight: 700;
-    line-height: 1.2;
-    word-break: break-all;
-}
-
-.hero-card__tags {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-}
-
-.hero-tag {
-    display: inline-flex;
-    align-items: center;
-    height: 28px;
-    padding: 0 11px;
-    border-radius: 999px;
-    background: rgba(255, 215, 97, 0.26);
-    color: #eaf8ee;
-    font-size: 12px;
-    line-height: 1;
-}
-
-.hero-tag--vip {
-    background: rgba(255, 215, 97, 0.26);
-    color: #fff4d0;
-}
-
-.hero-setting-btn {
-    position: relative;
-    z-index: 1;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.34);
-    background: rgba(255, 255, 255, 0.1);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px;
-}
-
-.hero-stats {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-top: 18px;
-    background: rgba(255, 255, 255, 0.08);
-    border-top-left-radius: 18px;
-    border-top-right-radius: 18px;
-    overflow: hidden;
-}
-
-.hero-stat {
-    min-width: 0;
-    padding: 14px 10px 16px;
-    text-align: center;
-    color: #ffffff;
-}
-
-.hero-stat + .hero-stat {
-    border-left: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.hero-stat__label {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 12px;
-    line-height: 1.2;
-}
-
-.hero-stat__value {
-    margin-top: 8px;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1.1;
-    word-break: break-word;
-}
-
-.hero-stat__meta {
-    margin-top: 5px;
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 12px;
-    line-height: 1.2;
-}
-
-.blind-box-panel {
-    margin-top: 18px;
-    margin-left: 14px;
-    margin-right: 14px;
-}
-
-.blind-box-panel__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.blind-box-panel__title-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-}
-
-.blind-box-panel__title-icon {
-    width: 22px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.blind-box-panel__title {
-    color: #122418;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-.blind-box-panel__actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.today-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 24px;
-    padding: 0 10px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, #d69129 0%, #bd7420 100%);
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.reset-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    height: 34px;
-    padding: 0 14px;
-    border-radius: 999px;
-    border: 1px solid #bfe0c6;
-    background: #f4fbf6;
-    color: #249347;
-    font-size: 14px;
-}
-
-.opened-progress {
-    margin-top: 14px;
-    min-height: 46px;
-    padding: 0 18px;
-    border: 1px solid #cbe7d1;
-    border-radius: 14px;
-    background: #eef8f0;
-    color: #63846a;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-}
-
-.blind-box-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-}
-
-.blind-box-tag {
-    display: inline-flex;
-    align-items: center;
-    height: 22px;
-    padding: 0 8px;
-    border-radius: 999px;
-    background: #ffffff;
-    font-size: 12px;
-    line-height: 1;
-}
-
-.blind-box-tag--common {
-    color: #55a64a;
-}
-
-.blind-box-tag--rare {
-    color: #4d87ef;
-}
-
-.blind-box-tag--epic {
-    color: #9249cd;
-}
-
-.blind-box-tag--legendary {
-    color: #ef9628;
-}
-
-.blind-box-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-    margin-top: 14px;
-}
-
-.blind-box-item {
-    position: relative;
-    overflow: hidden;
-    min-height: 150px;
-    padding: 18px 10px 12px;
-    border: 1px solid #cbe7d1;
-    border-radius: 18px;
-    background: #ffffff;
-    box-shadow: 0 8px 20px rgba(38, 126, 61, 0.08);
+.algofy-product-thumbs {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 20px;
+}
+
+.algofy-thumb-card {
+    width: 78px;
+    height: 78px;
+    border-radius: 6px;
+    background: #f3f5f8;
+    overflow: hidden;
+}
+
+.algofy-thumb-card--dark {
+    background: #111111;
+}
+
+.algofy-thumb-card img,
+.algofy-product-main-img img,
+.algofy-skeleton {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.algofy-thumb-card img,
+.algofy-product-main-img img {
+    object-fit: cover;
+}
+
+.algofy-product-main-img {
+    height: 178px;
+    border: 2px solid #7592ff;
+    border-radius: 8px;
+    background: #f8f8f8;
+    overflow: hidden;
+}
+
+.algofy-gallery-animated {
     opacity: 0;
     transform: translateY(14px) scale(0.96);
     animation-duration: 560ms;
     animation-timing-function: cubic-bezier(0.2, 0.9, 0.25, 1.15);
     animation-fill-mode: forwards;
     animation-delay: calc(var(--blind-box-index, 0) * 90ms);
-    will-change: transform, opacity;
+    will-change: transform, opacity, filter;
 }
 
-.blind-box-item--placeholder {
+.algofy-gallery-animated--placeholder {
     opacity: 1;
     transform: none;
     animation: none;
+}
+
+.algofy-gallery-animated--placeholder.algofy-thumb-card--dark {
+    background: #f3f5f8;
+}
+
+.algofy-skeleton {
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #edf1f6 20%, #f7f9fc 50%, #edf1f6 80%);
+    background-size: 200% 100%;
+    animation: algofySkeletonShimmer 1.4s ease-in-out infinite;
+}
+
+.algofy-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.55) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%);
+    animation: algofySkeletonGlow 1.6s linear infinite;
+}
+
+.algofy-skeleton--thumb {
+    border-radius: 6px;
+}
+
+.algofy-skeleton--main {
+    border-radius: 8px;
 }
 
 .blind-box-item--anim-rise {
@@ -1184,63 +1132,6 @@ onMounted(() => {
 
 .blind-box-item--anim-blur {
     animation-name: blindBoxRevealBlur;
-}
-
-.blind-box-item__corner {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 44px;
-    height: 34px;
-    background: #edf6ee;
-    border-bottom-left-radius: 24px;
-}
-
-.blind-box-item__icon {
-    width: 54px;
-    height: 54px;
-    border-radius: 16px;
-    background: #eef7ef;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.blind-box-item__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.blind-box-item__text {
-    margin-top: 18px;
-    color: #7c8d7d;
-    font-size: 14px;
-    line-height: 1.25;
-    text-align: center;
-}
-
-.blind-box-start-btn {
-    width: 100%;
-    height: 56px;
-    margin-top: 18px;
-    border: 0;
-    border-radius: 10px;
-    background: var(--theme-primary, #d87c00);
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: 500;
-    box-shadow: 0 8px 18px rgba(216, 124, 0, 0.18);
-}
-
-.blind-box-start-btn:active {
-    transform: translateY(1px);
-}
-
-.blind-box-start-btn:disabled {
-    opacity: 0.65;
-    cursor: default;
 }
 
 @keyframes blindBoxRevealRise {
@@ -1385,217 +1276,288 @@ onMounted(() => {
     }
 }
 
+@keyframes algofySkeletonShimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+@keyframes algofySkeletonGlow {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.algofy-product-meta-animated {
+    animation: algofyProductMetaFade 260ms ease-out both;
+}
+
+@keyframes algofyProductMetaFade {
+    0% {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .blind-box-item {
+    .algofy-gallery-animated,
+    .algofy-product-meta-animated,
+    .algofy-skeleton,
+    .algofy-skeleton::after {
         opacity: 1;
         transform: none;
         animation: none;
     }
 }
 
-.support-card {
-    margin-top: 18px;
-    margin-bottom: 10px;
-    margin-left: 14px;
-    margin-right: 14px;
-    padding: 20px 18px;
-    border: 1px solid #cbe7d1;
-    border-radius: 18px;
-    background: #ffffff;
-    box-shadow: 0 8px 20px rgba(38, 126, 61, 0.06);
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-.support-card__icon {
-    width: 24px;
-    padding-top: 2px;
-    display: flex;
-    justify-content: center;
-}
-
-.support-card__title {
-    color: #1c2a1f;
-    font-size: 13px;
-    line-height: 1.55;
-}
-
-.support-card__desc {
-    color: #1c2a1f;
-    font-size: 13px;
-    line-height: 1.55;
-}
-
-.task-dialog {
-    display: flex;
-    flex-direction: column;
-    background: #f4faf5;
-    min-height: 100vh;
-    max-height: 100vh;
-    overflow-y: auto;
-    padding-bottom: 24px;
-    box-sizing: border-box;
-}
-
-.task-dialog__header {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 76px;
-    padding: 18px 18px 14px;
-    background: #ffffff;
-    border-bottom: 1px solid #dcecdf;
-}
-
-.task-dialog__back {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    border: 0;
-    background: transparent;
-    padding: 8px;
-    line-height: 1;
-    transform: translateY(-50%);
-}
-
-.task-dialog__title {
-    color: #1c261d;
-    font-size: 18px;
+.algofy-product-title {
+    margin: 18px auto 0;
+    font-family: Montserrat, Montserrat;
     font-weight: 600;
-}
-
-.task-stepper {
-    flex-shrink: 0;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 0;
-    padding: 22px 16px 20px;
-    background: #ffffff;
-}
-
-.task-step {
-    width: 86px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.task-step__circle {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: #dcebe0;
-    color: #7d967f;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 16px;
-    font-weight: 600;
+    color: #000000;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
 }
 
-.task-step__label {
-    margin-top: 10px;
-    color: #88a089;
-    font-size: 13px;
-    line-height: 1.2;
+.algofy-product-rating {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #6f7787;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.algofy-product-rating strong {
+    color: #111111;
+    font-weight: 800;
+}
+
+.algofy-rating-star {
+    color: #f5b400;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.algofy-product-price {
+    margin-top: 18px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.algofy-product-price strong {
+    color: #3043e3;
+}
+
+.algofy-start-btn {
+    width: 100%;
+    height: 52px;
+    margin-top: 25px;
+    border: 0;
+    border-radius: 8px;
+    background: #3043e3;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    color: #fafafa;
+    line-height: 24px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.algofy-start-btn:disabled {
+    opacity: 0.72;
+}
+
+.algofy-balance-card {
+    margin: 0 16px;
+    padding: 28px 18px 26px;
+    border-radius: 8px;
+    background: #243f90;
+    color: #ffffff;
     text-align: center;
 }
 
-.task-step--active .task-step__circle,
-.task-step--done .task-step__circle {
-    background: var(--theme-primary);
-    color: #ffffff;
+.algofy-commission-icon {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+    margin: 0 auto 12px;
 }
 
-.task-step--active .task-step__label,
-.task-step--done .task-step__label {
-    color: #1f9c47;
-}
-
-.task-stepper__line {
-    flex: 1;
-    min-width: 34px;
-    max-width: 78px;
-    height: 3px;
-    border-radius: 999px;
-    background: #dcebe0;
-    margin-top: 18px;
-}
-
-.task-stepper__line--done {
-    background: #9cd3ac;
-}
-
-.task-product-card,
-.task-panel,
-.task-warning-bar,
-.task-success {
-    margin: 16px 16px 0;
-}
-
-.task-product-card {
-    display: flex;
-    gap: 14px;
-    padding: 16px;
-    border-radius: 18px;
-    background: #ffffff;
-    box-shadow: 0 8px 20px rgba(38, 126, 61, 0.08);
-}
-
-.task-product-card__thumb {
-    width: 92px;
-    height: 92px;
-    border-radius: 12px;
-    background: #f1f4f1;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.task-product-card__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.task-product-card__content {
-    min-width: 0;
-    flex: 1;
-    padding-top: 4px;
-}
-
-.task-product-card__name {
-    color: #172217;
-    font-size: 16px;
+.algofy-commission-label {
+    color: #ffcf17;
+    font-family: Montserrat, Montserrat;
     font-weight: 600;
-    line-height: 1.35;
+    font-size: 14px;
+    color: #facc15;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
 }
 
-.task-product-card__meta {
-    margin-top: 10px;
-    color: #668368;
-    font-size: 15px;
-    line-height: 1.2;
+.algofy-commission-amount {
+    margin-top: 12px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 30px;
+    color: #ffffff;
+    line-height: 36px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
 }
 
-.task-product-card__meta span {
-    color: #2a3c2d;
+.algofy-commission-desc {
+    margin-top: 12px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 12px;
+    color: #bfdbfe;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
 }
 
-.task-product-card__meta--accent,
-.task-product-card__meta--accent span {
-    color: #18a647;
+.algofy-balance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 17px;
+}
+
+.algofy-mini-balance img {
+    width: 53px;
+    height: 53px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.algofy-mini-title {
+    color: #ffcf17;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    color: #facc15;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.algofy-mini-amount {
+    margin-top: 5px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 28px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.algofy-mini-balance p {
+    margin: 13px 0 0;
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 12px;
+    color: #bfdbfe;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.algofy-notice-card {
+    margin: 16px 16px 0;
+    padding: 18px 12px 20px;
+    border-radius: 8px;
+    background: #e5e7eb;
+    text-align: center;
+}
+
+.algofy-notice-card h2 {
+    margin: 0;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    color: #000000;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.algofy-notice-card p {
+    margin: 6px 0 0;
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 12px;
+    color: #4b5563;
+    line-height: 23px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.algofy-copyright-card {
+    margin-top: 18px;
+    padding: 26px 16px 26px;
+    background: #111827;
+    color: #ffffff;
+    text-align: center;
+}
+
+.algofy-copyright-card img {
+    display: block;
+    width: 53px;
+    height: 53px;
+    object-fit: contain;
+    margin: 0 auto 12px;
+}
+
+.algofy-copyright-card p {
+    margin: 0;
+    font-family: Geist-Regular, Geist-Regular;
+    font-weight: normal;
+    font-size: 12px;
+    color: #ffffff;
+    line-height: 16px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
 }
 
 .task-panel {
     padding: 20px 18px;
     border-radius: 18px;
     background: #ffffff;
-    box-shadow: 0 8px 20px rgba(38, 126, 61, 0.08);
 }
 
 .task-panel__title {
@@ -1654,301 +1616,480 @@ onMounted(() => {
     line-height: 1.5;
 }
 
-.task-warning-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 16px;
-    border: 1px solid #efb7b3;
-    border-radius: 14px;
-    background: #fff4f3;
-    color: #d23f36;
-    font-size: 14px;
-    line-height: 1.3;
-}
-
-.task-warning-bar__link {
-    color: #24a44b;
-    font-weight: 600;
+.lucky-draw-van-popup {
     background: transparent;
-    border: 0;
-    padding: 0;
-}
-
-.task-success {
-    padding: 24px 16px 10px;
-    min-height: 280px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.task-success__icon {
-    width: 112px;
-    height: 112px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.task-success__text {
-    margin-top: 14px;
-    color: #199f45;
-    font-size: 18px;
-    font-weight: 500;
-    text-align: center;
-}
-
-.task-dialog__footer {
-    padding: 20px 16px 28px;
-}
-
-.task-stepper,
-.task-product-card,
-.task-panel,
-.task-warning-bar,
-.task-success,
-.task-dialog__footer {
-    flex-shrink: 0;
-}
-
-.task-stepper {
     overflow: visible;
 }
 
-.task-dialog > .task-stepper {
-    border-bottom: 1px solid #e6f0e8;
-}
-
-.task-dialog > .task-stepper,
-.task-dialog > .task-product-card,
-.task-dialog > .task-panel,
-.task-dialog > .task-warning-bar,
-.task-dialog > .task-success,
-.task-dialog > .task-dialog__footer {
-    position: relative;
-}
-
-.task-dialog__header ~ .task-stepper,
-.task-dialog__header ~ .task-product-card,
-.task-dialog__header ~ .task-panel,
-.task-dialog__header ~ .task-warning-bar,
-.task-dialog__header ~ .task-success,
-.task-dialog__header ~ .task-dialog__footer {
-    --task-scroll-offset: 76px;
-}
-
-.task-action-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    height: 62px;
-    border: 0;
-    border-radius: 16px;
-    background: var(--theme-button-gradient-vertical);
-    box-shadow: 0 12px 24px var(--theme-button-shadow);
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.task-action-btn:disabled {
-    opacity: 0.72;
-}
-
-.task-action-btn__loading {
-    flex-shrink: 0;
-}
-
-.task-action-btn--small {
-    width: 246px;
-    max-width: 100%;
-    display: block;
-    margin: 0 auto;
+:deep(.lucky-draw-popup-overlay) {
+    background: rgba(0, 0, 0, 0.55);
 }
 
 .lucky-draw-popup {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0px 22px 30px;
-    border: 2px solid #a7dfbd;
-    border-radius: 26px;
-    background: #eef8f0;
+    position: relative;
+    width: 286px;
     text-align: center;
-    color: #173421;
 }
 
-.lucky-draw-popup__emoji {
-    width: 65px;
-    height: 65px;
-    /*font-size: 48px;
-    line-height: 1;
-    margin-bottom: 34px;*/
+.lucky-draw-popup__panel {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.lucky-draw-popup__content {
+    position: absolute;
+    inset: 152px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
 }
 
 .lucky-draw-popup__title {
-    color: #142a1b;
-    font-size: 15px;
+    margin: 0;
+    max-width: 224px;
+    color: #ffffff;
+    font-size: 17px;
+    line-height: 1.28;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+
+.lucky-draw-popup__title span {
+    display: block;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.lucky-draw-popup__desc,
+.lucky-draw-popup__claim,
+.lucky-draw-popup__disclaimer {
+    margin: 12px 0 0;
+    color: #ffffff;
+    font-size: 10.5px;
     font-weight: 500;
-    line-height: 1.35;
-    letter-spacing: 0.3px;
+    word-break: break-word;
 }
 
 .lucky-draw-popup__desc {
-    margin-top: 24px;
-    color: #4e4e4e;
-    font-size: 12px;
-    line-height: 1.55;
-}
+    max-width: 224px;
 
-.lucky-draw-popup__amount {
-    color: #169b4c;
-    white-space: nowrap;
+    font-family: Montserrat, Montserrat;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
 }
 
 .lucky-draw-popup__claim {
-    margin-top: 46px;
-    color: #4d4d4d;
-    font-size: 15px;
+    max-width: 218px;
+    margin-top: 12px;
+}
+
+.lucky-draw-popup__disclaimer {
+    max-width: 236px;
+    margin-top: 10px;
+    padding-bottom: 6px;
+    line-height: 1.25;
+}
+
+.lucky-draw-popup__amount {
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffed12;
+}
+
+.mission-submission-van-popup {
+    background: #edeef5;
+}
+
+:deep(.mission-submission-popup-overlay) {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.mission-submission-popup {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: #e9ebf2;
+}
+
+.mission-submission-header {
+    background: #000000;
+    color: #ffffff;
+}
+
+.mission-submission-header__status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 44px;
+    padding: 0 16px 0 24px;
+}
+
+.mission-submission-header__time {
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.mission-submission-header__status-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mission-submission-header__signal {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+}
+
+.mission-submission-header__signal span {
+    display: block;
+    width: 3px;
+    border-radius: 999px;
+    background: #ffffff;
+}
+
+.mission-submission-header__signal span:nth-child(1) {
+    height: 5px;
+    opacity: 0.7;
+}
+.mission-submission-header__signal span:nth-child(2) {
+    height: 7px;
+    opacity: 0.8;
+}
+.mission-submission-header__signal span:nth-child(3) {
+    height: 10px;
+    opacity: 0.9;
+}
+.mission-submission-header__signal span:nth-child(4) {
+    height: 12px;
+}
+
+.mission-submission-header__wifi {
+    position: relative;
+    width: 16px;
+    height: 11px;
+}
+
+.mission-submission-header__wifi::before,
+.mission-submission-header__wifi::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.mission-submission-header__wifi::before {
+    top: 1px;
+    width: 16px;
+    height: 12px;
+}
+
+.mission-submission-header__wifi::after {
+    top: 4px;
+    width: 9px;
+    height: 7px;
+}
+
+.mission-submission-header__battery {
+    position: relative;
+    width: 22px;
+    height: 11px;
+    border: 1.8px solid #ffffff;
+    border-radius: 3px;
+}
+
+.mission-submission-header__battery::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: -3px;
+    width: 2px;
+    height: 5px;
+    border-radius: 1px;
+    background: #ffffff;
+}
+
+.mission-submission-header__battery-level {
+    position: absolute;
+    inset: 1px;
+    border-radius: 2px;
+    background: #ffffff;
+}
+
+.mission-submission-header__bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+}
+
+.mission-submission-header__back {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    transform: translateY(-50%);
+}
+
+.mission-submission-header__title {
+    font-size: 16px;
+    letter-spacing: 0.02em;
+}
+
+.mission-submission-body {
+    padding: 22px 16px 30px;
+}
+
+.mission-card {
+    border-radius: 22px;
+    background: #28459b;
+    padding: 22px 20px 24px;
+    box-shadow: 0 8px 18px rgba(30, 51, 114, 0.08);
+}
+
+.mission-card__image-wrap {
+    width: 212px;
+    height: 212px;
+    margin: 0 auto;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #c52b31;
+}
+
+.mission-card__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mission-card__title {
+    margin: 22px 0 0;
+    color: #ffffff;
+    font-size: 25px;
+    line-height: 1.22;
+    font-weight: 600;
+    text-align: center;
+}
+
+.mission-card__rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.mission-card__rating strong {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.mission-card__star {
+    color: #ffcc21;
+    font-size: 28px;
+    line-height: 1;
+}
+
+.mission-card__price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.mission-card__price strong {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.mission-card__summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 26px;
+}
+
+.mission-card__summary-box,
+.mission-card__meta-box {
+    border-radius: 14px;
+    background: #08153c;
+    color: #ffffff;
+}
+
+.mission-card__summary-box {
+    min-height: 128px;
+    padding: 18px 18px 16px;
+}
+
+.mission-card__summary-label {
+    color: #ffd835;
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.mission-card__summary-value {
+    margin-top: 18px;
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 300;
+}
+
+.mission-card__summary-value--large {
+    margin-top: 18px;
+    font-size: 30px;
+    line-height: 1.1;
+    font-weight: 300;
+}
+
+.mission-card__meta-box {
+    margin-top: 18px;
+    padding: 16px 18px;
+}
+
+.mission-card__meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.mission-card__meta-row + .mission-card__meta-row {
+    margin-top: 14px;
+}
+
+.mission-card__meta-row strong {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: right;
+}
+
+.mission-card__submit {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 58px;
+    margin-top: 30px;
+    border: 0;
+    border-radius: 14px;
+    background: #3b48e8;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.mission-card__submit:disabled {
+    opacity: 0.7;
+}
+
+.mission-card__submit-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: mission-submit-spin 0.8s linear infinite;
+}
+
+@keyframes mission-submit-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.mission-submission-footer {
+    padding: 26px 0 8px;
+    color: #6c7892;
+    font-size: 17px;
     line-height: 1.45;
+    text-align: center;
 }
 
-.lucky-draw-popup__ok {
-    margin-top: 16px;
+.lucky-draw-popup__content {
+    inset: 148px 24px 26px;
 }
 
-:global(.lucky-draw-van-popup) {
-    width: min(calc(100vw - 44px), calc(var(--app-pc-max-width, 375px) - 44px)) !important;
-    max-width: min(calc(100vw - 44px), calc(var(--app-pc-max-width, 375px) - 44px)) !important;
+.lucky-draw-popup__title {
+    max-width: 218px;
+    font-size: 17px;
+    line-height: 1.2;
 }
 
-:global(.lucky-draw-popup-overlay) {
-    left: 50% !important;
-    right: auto !important;
-    width: min(100vw, var(--app-pc-max-width, 375px)) !important;
-    transform: translateX(-50%) !important;
+.lucky-draw-popup__disclaimer {
+    max-width: 218px;
+    margin-top: 12px;
+    line-height: 1.22;
 }
 
-:deep(.van-dialog__content) {
-    height: 100%;
-    overflow: hidden;
+/* starting top: remove fake status bar and keep compact header */
+.algofy-starting-header {
+    height: 78px !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    padding-bottom: 17px !important;
+    box-sizing: border-box !important;
 }
 
-:deep(.van-dialog) {
-    left: 50% !important;
-    top: 0 !important;
-    width: min(100vw, var(--app-pc-max-width, 375px)) !important;
-    max-width: min(100vw, var(--app-pc-max-width, 375px)) !important;
-    height: 100vh !important;
-    height: 100dvh !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    transform: translate3d(-50%, 0, 0) !important;
+.algofy-starting-header__status,
+.algofy-starting-header__time,
+.algofy-starting-header__status-icons,
+.algofy-starting-header__signal,
+.algofy-starting-header__wifi,
+.algofy-starting-header__battery {
+    display: none !important;
 }
 
-:global(.task-fullscreen-dialog) {
-    left: 50% !important;
-    top: 0 !important;
-    width: min(100vw, var(--app-pc-max-width, 375px)) !important;
-    max-width: min(100vw, var(--app-pc-max-width, 375px)) !important;
-    height: 100vh !important;
-    height: 100dvh !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    transform: translate3d(-50%, 0, 0) !important;
+.algofy-starting-header__title {
+    height: auto !important;
 }
 
-:global(.task-fullscreen-dialog .van-dialog__content) {
-    height: 100%;
-    overflow: hidden;
+/* final starting header adjustment: no fake phone status bar */
+.algofy-starting-header {
+    height: 78px !important;
 }
-
-:global(.task-fullscreen-overlay) {
-    left: 50% !important;
-    right: auto !important;
-    width: min(100vw, var(--app-pc-max-width, 375px)) !important;
-    transform: translateX(-50%) !important;
-}
-
-@media (max-width: 767px) {
-    :deep(.van-dialog),
-    :global(.task-fullscreen-dialog) {
-        left: 0 !important;
-        right: 0 !important;
-        width: 100vw !important;
-        max-width: 100vw !important;
-        transform: none !important;
-    }
-
-    :global(.task-fullscreen-overlay),
-    :global(.lucky-draw-popup-overlay) {
-        left: 0 !important;
-        right: 0 !important;
-        width: 100vw !important;
-        transform: none !important;
-    }
-
-    :global(.lucky-draw-van-popup) {
-        width: calc(100vw - 44px) !important;
-        max-width: calc(100vw - 44px) !important;
-    }
-}
-
-@media (max-width: 360px) {
-    .hero-card__name {
-        font-size: 17px;
-    }
-
-    .blind-box-grid {
-        gap: 10px;
-    }
-
-    .blind-box-item {
-        min-height: 138px;
-        border-radius: 16px;
-    }
-
-    .blind-box-start-btn {
-        height: 56px;
-        margin-top: 16px;
-        font-size: 18px;
-    }
-
-    .task-step {
-        width: 78px;
-    }
-
-    .task-product-card__thumb {
-        width: 82px;
-        height: 82px;
-    }
-
-    .lucky-draw-popup {
-        padding: 32px 18px 28px;
-        border-radius: 24px;
-    }
-
-    .lucky-draw-popup__emoji {
-        font-size: 44px;
-        margin-bottom: 28px;
-    }
-
-    .lucky-draw-popup__title {
-        font-size: 20px;
-    }
-
-    .lucky-draw-popup__desc {
-        margin-top: 20px;
-        font-size: 16px;
-    }
-
-    .lucky-draw-popup__claim {
-        margin-top: 36px;
-        font-size: 14px;
-    }
+.algofy-starting-header__status,
+.algofy-starting-header__time,
+.algofy-starting-header__status-icons,
+.algofy-starting-header__signal,
+.algofy-starting-header__wifi,
+.algofy-starting-header__battery,
+.algofy-starting-header__battery-level {
+    display: none !important;
 }
 </style>

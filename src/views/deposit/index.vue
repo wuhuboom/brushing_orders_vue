@@ -1,5 +1,5 @@
 <template>
-    <div class="deposit-page min-h-screen bg-[#F5F8F7]">
+    <div class="deposit-page min-h-screen bg-[#eef2fb]">
         <PageTopBar
             :title="$t('deposit')"
             :right-text="$t('Withdrawal.History')"
@@ -8,43 +8,43 @@
             @click-right="toHistory"
         />
 
-        <div class="px-[20px] pt-[82px] pb-[34px]">
+        <div class="px-[20px] pt-[16px] pb-[34px]">
             <div class="balance-card">
                 <div>
-                    <div class="balance-label">
-                        {{ $t("available_balance") }}
-                    </div>
+                    <div class="balance-label">{{ $t("auto_account_amount") }}</div>
                     <div class="balance-value">
-                        ${{ formatMoney(userInfo.balance) }}
+                        {{ formatMoney(userInfo.balance) }}
                     </div>
                 </div>
-                <div class="balance-tag">{{ $t("ui_usdt") }}</div>
             </div>
 
-            <!-- <div class="section-label mt-[22px]">{{ $t("enter_amount_usdt") }}</div>
-      <div class="amount-card">
-        <div class="amount-prefix">$</div>
-        <van-field
-          v-model="amount"
-          type="number"
-          input-align="left"
-          maxlength="12"
-          :border="false"
-          placeholder="0.00"
-          class="deposit-field"
-        />
-      </div>
+            <div class="section-label mt-[18px]">
+                {{ $t("enter_amount_usdt") }}
+            </div>
+            <div class="amount-card">
+                <div class="amount-prefix">$</div>
+                <van-field
+                    v-model="amount"
+                    type="number"
+                    input-align="left"
+                    maxlength="12"
+                    :border="false"
+                    placeholder="0.00"
+                    class="deposit-field"
+                />
+            </div>
 
-      <div class="quick-amounts">
-        <div
-          v-for="item in quickAmounts"
-          :key="item"
-          class="quick-amount-item"
-          @click="selectQuickAmount(item)"
-        >
-          ${{ formatQuickAmount(item) }}
-        </div>
-      </div> -->
+            <div class="quick-amounts">
+                <div
+                    v-for="item in quickAmounts"
+                    :key="item"
+                    class="quick-amount-item"
+                    :class="{ active: amount === String(item) }"
+                    @click="selectQuickAmount(item)"
+                >
+                    ${{ formatQuickAmount(item) }}
+                </div>
+            </div>
 
             <div class="section-label mt-[18px]">
                 {{ $t("select_customer_service_channel") }}
@@ -274,115 +274,132 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.page-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    height: 64px;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
+.deposit-page {
+    min-height: 100vh;
+    background: #eef2fb;
+    color: #0f1115;
+}
+
+.deposit-page :deep(.page-top-bar) {
+    height: 80px;
+    padding-top: 0;
+    grid-template-columns: 50px minmax(0, 1fr) 74px;
+    background: #000;
+}
+
+.deposit-page :deep(.page-top-bar::before),
+:deep(.deposit-field.van-cell::after),
+.service-radio,
+.service-radio__dot {
+    display: none;
+}
+
+.deposit-page :deep(.page-top-bar__title) {
+    padding-top: 0;
+    color: #fff;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.deposit-page :deep(.page-top-bar__side) {
+    padding: 0;
+}
+
+.deposit-page :deep(.page-top-bar__side--left),
+.deposit-page :deep(.page-top-bar__side--right) {
     justify-content: center;
-    border-bottom: 1px solid #dce9df;
 }
 
-@media (min-width: 768px) {
-    .page-header {
-        left: 50%;
-        right: auto;
-        width: 100%;
-        max-width: var(--app-pc-max-width, 375px);
-        transform: translateX(-50%);
-    }
+.deposit-page :deep(.page-top-bar__right-text) {
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
-.page-header__left,
-.page-header__right {
-    position: absolute;
-    top: 0;
-    height: 64px;
-    display: flex;
-    align-items: center;
-}
-
-.page-header__left {
-    left: 18px;
-}
-
-.page-header__right {
-    right: 18px;
-    color: #26352e;
-    font-size: 16px;
-    font-weight: 400;
-}
-
-.page-header__title {
-    color: #22342b;
-    font-size: 18px;
-    font-weight: 500;
+.deposit-page :deep(.page-top-bar .van-icon) {
+    color: #fff !important;
+    font-size: 28px !important;
 }
 
 .balance-card {
+    position: relative;
+    overflow: hidden;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    padding: 24px 24px 22px;
-    border-radius: 20px;
-    background: var(--theme-button-gradient-background);
-    box-shadow: 0 10px 22px rgba(33, 154, 72, 0.18);
+    padding: 17px 18px 26px;
+    /*background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 7px 7px 7px 7px;*/
+
+    border-radius: 8px;
+    background: url(@/static/images/wallet-amount-card-bg.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.balance-label,
+.balance-value {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-weight: 700;
 }
 
 .balance-label {
-    color: rgba(255, 255, 255, 0.88);
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 21px;
+    line-height: 1.15;
 }
 
 .balance-value {
-    margin-top: 8px;
+    margin-top: 12px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 26px;
     color: #ffffff;
-    font-size: 24px;
-    line-height: 32px;
-    font-weight: 500;
-}
-
-.balance-tag {
-    min-width: 78px;
-    padding: 8px 14px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.18);
-    color: #ffffff;
-    text-align: center;
-    font-size: 14px;
-    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .section-label {
-    color: #6f8f78;
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    color: #000000;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .amount-card {
     display: flex;
     align-items: center;
-    min-height: 72px;
-    border-radius: 18px;
-    border: 1px solid #cfe5d5;
-    background: #ffffff;
-    padding: 0 18px;
+    height: 48px;
+    overflow: hidden;
+    padding: 0 24px;
+    border: 1px solid #d8e0ee;
+    border-radius: 12px;
+    background: #fff;
+    box-sizing: border-box;
 }
 
 .amount-prefix {
     flex-shrink: 0;
-    color: var(--theme-primary);
-    font-size: 22px;
-    line-height: 1;
-    font-weight: 500;
-    margin-right: 10px;
+    margin-right: 8px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    color: #78828a;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 :deep(.deposit-field) {
@@ -391,61 +408,74 @@ onMounted(() => {
     background: transparent;
 }
 
-:deep(.deposit-field .van-field__body) {
-    min-height: 56px;
+:deep(.deposit-field .van-field__body),
+:deep(.deposit-field .van-field__control) {
+    min-height: 94px;
 }
 
 :deep(.deposit-field .van-field__control) {
-    min-height: 56px;
-    color: #6c746f;
-    font-size: 20px;
-    line-height: 28px;
+    color: #111827;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    color: #78828a;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 :deep(.deposit-field .van-field__control::placeholder) {
-    color: #98a39d;
+    color: #7b8597;
+    opacity: 1;
 }
 
 .quick-amounts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px 8px;
+    margin-top: 16px;
 }
 
 .quick-amount-item {
-    min-width: 54px;
-    height: 34px;
-    padding: 0 16px;
-    border-radius: 10px;
-    border: 1px solid #cfe5d5;
-    background: #ffffff;
-    color: #68806f;
+    padding: 8px 39px 10px;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
     font-size: 14px;
-    line-height: 32px;
+    color: #757575;
+    line-height: 20px;
     text-align: center;
-    box-sizing: border-box;
+    font-style: normal;
+    text-transform: none;
+}
+
+.quick-amount-item.active {
+    border-color: #3442e6;
+    background: #3442e6;
+    color: #fff;
 }
 
 .service-list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
 }
 
 .service-item {
-    min-height: 64px;
-    border-radius: 18px;
-    border: 1px solid #d8ece0;
-    background: #ffffff;
-    padding: 0 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 14px 12px 16px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: #fff;
+    box-sizing: border-box;
 }
 
 .service-item.active {
-    border-color: #7bc995;
+    border-color: #3442e6;
 }
 
 .service-item--empty {
@@ -453,42 +483,30 @@ onMounted(() => {
 }
 
 .service-name {
-    color: #22342b;
-    font-size: 16px;
-    line-height: 24px;
-}
-
-.service-radio {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid #b6d6c0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
-
-.service-radio.active {
-    border-color: var(--theme-primary);
-}
-
-.service-radio__dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--theme-primary);
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .contact-btn {
-    margin-top: 20px;
-    height: 56px;
+    margin-top: 32px;
+    padding: 15px 40px;
     border: none;
-    border-radius: 18px;
-    background: var(--theme-primary);
-    box-shadow: 0 10px 20px var(--theme-button-shadow);
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 500;
+    border-radius: 8px;
+    background: #3043e3;
+    box-shadow: none;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    color: #fafafa;
+    line-height: 24px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
 }
 </style>

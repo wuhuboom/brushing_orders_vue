@@ -1,102 +1,46 @@
 <template>
-    <div class="vip-page min-h-[100vh] bg-[#f5faf6] text-[#14351f]">
-        <main class="pb-[18px] pt-0">
-            <section
-                class="vip-hero relative overflow-hidden bg-gradient-to-br from-[#333C37] to-[#4A6565] px-[22px] py-[34px] text-center text-white"
-            >
-                <div class="vip-bubble vip-bubble--top"></div>
-                <div class="vip-bubble vip-bubble--bottom"></div>
-                <div class="relative z-[1]">
-                    <img
-                        :src="vipIcons.crownLarge"
-                        class="mx-auto h-[52px] w-[52px]"
-                        alt=""
-                    />
-                    <h1
-                        class="mt-[14px] text-[22px] font-semibold leading-[1.2] tracking-[0.5px]"
-                    >
-                        {{ $t("vip_five_star_title") }}
-                    </h1>
-                    <p
-                        class="mx-auto mt-[14px] max-w-[280px] text-[12px] font-medium leading-[20px] text-white/90"
-                    >
-                        {{ $t("vip_five_star_desc") }}
-                    </p>
-                    <div
-                        class="mx-auto mt-[18px] inline-flex min-w-[170px] items-center justify-center rounded-full bg-white/20 px-[18px] py-[8px] text-[12px] font-semibold"
-                    >
+    <div class="vip-page min-h-[100vh] bg-[#f2f4f8] text-[#14351f]">
+        <MainTabTopBar :title="$t('vip')" />
+        <main class="vip-page__main pb-[24px]">
+            <section class="vip-showcase">
+                <div class="vip-showcase__card">
+                    <div class="vip-showcase__avatar-shell">
                         <img
-                            :src="vipIcons.user"
-                            class="mr-[6px] h-[13px] w-[13px]"
+                            :src="userAvatar"
+                            class="vip-showcase__avatar"
                             alt=""
                         />
-                        {{ $t("current_level") }}: {{ currentLevelName }}
                     </div>
+                    <div class="vip-showcase__badge">
+                        <img :src="currentVipBadgeIcon" alt="" />
+                    </div>
+                    <div class="vip-showcase__name">
+                        {{ userStore.userInfo?.username || "Wuhu1" }}
+                    </div>
+                    <div class="vip-showcase__level">
+                        {{ currentLevelName }}
+                    </div>
+                    <p class="vip-showcase__desc">
+                        {{ $t("vip_five_star_desc") }}
+                    </p>
                 </div>
             </section>
 
-            <section class="mt-[16px] px-[20px]">
-                <h2
-                    class="flex items-center text-[14px] font-medium text-[#152b1b]"
-                >
-                    <img
-                        :src="vipIcons.star"
-                        class="mr-[8px] h-[16px] w-[16px]"
-                        alt=""
-                    />
-                    {{ $t("vip_universal_benefits") }}
-                </h2>
-                <div
-                    class="mt-[12px] rounded-[9px] border border-[#d9eadc] bg-white px-[13px] py-[13px]"
-                >
-                    <div
-                        v-for="item in benefitCards"
-                        :key="item.title"
-                        class="benefit-row"
-                    >
-                        <div class="benefit-icon">
-                            <img
-                                :src="item.icon"
-                                class="h-[16px] w-[16px]"
-                                alt=""
-                            />
-                        </div>
-                        <div class="min-w-0 flex-1">
-                            <div class="text-[12px] font-medium text-[#111]">
-                                {{ item.title }}
-                            </div>
-                            <div
-                                class="mt-[6px] text-[10px] leading-[17px] text-[#6b8b73]"
-                            >
-                                {{ item.desc }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mt-[18px] px-[20px]">
-                <h2
-                    class="flex items-center text-[14px] font-medium text-[#152b1b]"
-                >
-                    <img
-                        :src="vipIcons.crownSmall"
-                        class="mr-[8px] h-[11px] w-[11px]"
-                        alt=""
-                    />
+            <section class="mt-[16px] px-[14px]">
+                <h2 class="vip-section-title">
                     {{ $t("vip_level_details_all_expanded") }}
                 </h2>
 
-                <div class="mt-[12px] space-y-[14px]">
+                <div class="vip-card-list">
                     <article
                         v-for="(item, index) in displayLevels"
                         :key="item.id || item.nameEn || index"
-                        class="vip-card overflow-hidden border bg-white"
+                        class="vip-card overflow-hidden bg-white"
                         :class="vipCardBorderClass(item, index)"
                         :style="cardThemeStyle(item, index)"
                     >
                         <div
-                            class="vip-card-head relative overflow-hidden px-[14px] py-[17px] text-white"
+                            class="vip-card-head relative overflow-hidden px-[13px] py-[14px] text-white"
                             :class="cardTheme(item, index).headClass"
                         >
                             <div class="vip-card-bubble"></div>
@@ -106,12 +50,12 @@
                             >
                                 {{ $t("current") }}
                             </div>
-                            <div
+                            <!-- <div
                                 v-else-if="index === displayLevels.length - 1"
                                 class="absolute right-[14px] top-[12px] rounded-full bg-white/20 px-[10px] py-[3px] text-[8px] font-bold uppercase tracking-[0.5px]"
                             >
                                 {{ $t("top") }}
-                            </div>
+                            </div> -->
                             <div class="relative z-[1] flex items-center">
                                 <div class="vip-medal">
                                     <img
@@ -120,83 +64,73 @@
                                         alt=""
                                     />
                                 </div>
-                                <div class="ml-[13px] min-w-0">
+                                <div class="ml-[11px] min-w-0">
                                     <div
-                                        class="text-[20px] font-medium leading-[24px]"
+                                        class="text-[15px] font-semibold leading-[18px]"
                                     >
                                         {{ normalizeLevelName(item, index) }}
                                     </div>
                                     <div
-                                        class="mt-[8px] text-[10px] leading-[14px] text-white/85"
+                                        class="mt-[2px] text-[9px] leading-[12px] text-white/90"
                                     >
-                                        {{ $t("min_deposit") }}:${{
-                                            formatDeposit(item, index)
-                                        }}
+                                        {{ vipSubtitle(item, index) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="vip-head-stats relative z-[1]">
+                                <div
+                                    v-for="stat in levelStats(item, index)"
+                                    :key="stat.label"
+                                    class="vip-head-stat"
+                                >
+                                    <div class="vip-head-stat__label">
+                                        {{ stat.label }}
+                                    </div>
+                                    <div class="vip-head-stat__value">
+                                        {{ stat.value }}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-2 bg-white">
-                            <div
-                                v-for="stat in levelStats(item, index)"
-                                :key="stat.label"
-                                class="vip-stat"
-                                :class="cardTheme(item, index).statTextClass"
-                            >
-                                <img
-                                    :src="stat.icon"
-                                    class="vip-stat-icon"
-                                    alt=""
-                                />
+                        <div class="vip-card-body">
+                            <div class="vip-feature-panel">
                                 <div
-                                    class="mt-[8px] text-[18px] leading-[22px]"
+                                    class="text-[10px] font-semibold uppercase leading-[14px] tracking-[1px] text-[#333]"
                                 >
-                                    {{ stat.value }}
+                                    {{ $t("included_features") }}
                                 </div>
-                                <div
-                                    class="mt-[2px] text-[9px] leading-[12px] text-[#6f8a76]"
+                                <div class="mt-[10px] space-y-[7px]">
+                                    <div
+                                        v-for="feature in includedFeatures(
+                                            index,
+                                        )"
+                                        :key="feature"
+                                        class="flex items-start text-[10px] leading-[15px] text-[#222]"
+                                    >
+                                        <img
+                                            :src="featureCheckIcon(index)"
+                                            class="vip-feature-icon mr-[7px] mt-[1px] shrink-0"
+                                            alt=""
+                                        />
+                                        <span>{{ feature }}</span>
+                                    </div>
+                                </div>
+
+                                <!-- <div
+                                    v-if="index === displayLevels.length - 1"
+                                    class="mt-[10px] rounded-[8px] border border-[#efc76a] bg-[#fff7df] px-[12px] py-[10px] text-center text-[10px] leading-[16px] text-[#7a4b00]"
                                 >
-                                    {{ stat.label }}
-                                </div>
+                                    {{
+                                        $t("vip5_exclusive_desc", {
+                                            level: highestLevelName,
+                                        })
+                                    }}
+                                </div> -->
                             </div>
-                        </div>
-
-                        <div class="px-[14px] pb-[14px] pt-[14px]">
-                            <div
-                                class="text-[10px] font-medium uppercase leading-[14px] tracking-[2px] text-[#67846f]"
-                            >
-                                {{ $t("included_features") }}
-                            </div>
-                            <div class="mt-[10px] space-y-[9px]">
-                                <div
-                                    v-for="feature in includedFeatures(index)"
-                                    :key="feature"
-                                    class="flex items-start text-[12px] leading-[17px] text-[#111]"
-                                >
-                                    <img
-                                        :src="featureCheckIcon(index)"
-                                        class="vip-feature-icon mr-[8px] mt-[2px] shrink-0"
-                                        alt=""
-                                    />
-                                    <span>{{ feature }}</span>
-                                </div>
-                            </div>
-
-                            <div
-                                v-if="index === displayLevels.length - 1"
-                                class="mt-[14px] rounded-[6px] border border-[#efc76a] bg-[#fff7df] px-[12px] py-[12px] text-center text-[11px] leading-[18px] text-[#7a4b00]"
-                            >
-                                {{
-                                    $t("vip5_exclusive_desc", {
-                                        level: highestLevelName,
-                                    })
-                                }}
-                            </div>
-
                             <button
                                 v-if="shouldShowLevelButton(item, index)"
-                                class="vip-level-button mt-[14px] h-[36px] w-full rounded-[7px] text-[12px] font-medium text-white"
+                                class="vip-level-button mt-[12px] h-[37px] w-full rounded-[5px] text-[11px] font-semibold text-white"
                                 :class="levelButtonClass(item, index)"
                                 :disabled="isLevelButtonDisabled(item, index)"
                                 type="button"
@@ -206,11 +140,6 @@
                                     <span
                                         class="inline-flex items-center justify-center"
                                     >
-                                        <img
-                                            :src="vipIcons.currentLevel"
-                                            class="mr-[6px] h-[12px] w-[12px] shrink-0"
-                                            alt=""
-                                        />
                                         {{ $t("your_current_level") }}
                                     </span>
                                 </template>
@@ -223,7 +152,6 @@
                                             ),
                                         })
                                     }}
-                                    <span class="ml-[10px]">→</span>
                                 </template>
                             </button>
                         </div>
@@ -237,113 +165,12 @@
                     </div>
                 </div>
             </section>
-
-            <section v-if="displayLevels.length" class="mt-[18px] px-[20px]">
-                <h2
-                    class="flex items-center text-[14px] font-medium text-[#152b1b]"
-                >
-                    <img :src="vipIcons.vip12" class="mr-[8px]" />
-                    {{ $t("level_up_comparison_table") }}
-                </h2>
-                <div
-                    class="mt-[24px] overflow-hidden rounded-[8px] border border-[#c9e8d2] bg-white"
-                >
-                    <div
-                        class="grid grid-cols-4 bg-[#21b756] py-[11px] text-center text-[10px] font-medium text-white"
-                    >
-                        <div>VIP</div>
-                        <div>{{ $t("rebate") }}</div>
-                        <div>{{ $t("product_plus") }}</div>
-                        <div>{{ $t("daily_limit") }}</div>
-                    </div>
-
-                    <div
-                        v-for="(item, index) in displayLevels"
-                        :key="`table-${item.id || index}`"
-                        class="grid grid-cols-4 border-t border-[#d9eadf] py-[13px] text-center text-[10px] text-[#234a2f]"
-                    >
-                        <div class="flex items-center justify-center">
-                            <span
-                                v-if="isCurrentLevel(item, index)"
-                                class="inline-flex min-w-[34px] items-center justify-center rounded-full bg-[#159947] px-[7px] py-[2px] text-center text-[8px] font-bold text-white"
-                            >
-                                {{ normalizeLevelName(item, index) }}
-                            </span>
-
-                            <span v-else class="block w-full text-center">
-                                {{ normalizeLevelName(item, index) }}
-                            </span>
-                        </div>
-
-                        <div
-                            class="flex items-center justify-center text-[#159947]"
-                        >
-                            {{
-                                $t("rate_per_task", { rate: formatRate(item) })
-                            }}
-                        </div>
-
-                        <div class="flex items-center justify-center">
-                            {{ formatProductCount(item, index) }}
-                        </div>
-
-                        <div class="flex items-center justify-center">
-                            {{
-                                $t("unit_count", {
-                                    count: formatTaskCount(item, index),
-                                })
-                            }}
-                        </div>
-                    </div>
-                </div>
-                <p
-                    class="mx-auto mt-[8px] max-w-[250px] text-center text-[9px] leading-[15px] text-[#708a76]"
-                >
-                    {{ $t("vip_upgrade_rule") }}
-                </p>
-            </section>
-
-            <section v-if="showVipUpgradeCard" class="mt-[18px] px-[20px]">
-                <div
-                    class="vip-upgrade-card relative overflow-hidden bg-gradient-to-br from-[#1fb658] to-[#078331] px-[24px] py-[28px] text-center text-white"
-                >
-                    <div class="vip-bubble vip-bubble--upgrade"></div>
-                    <div class="relative z-[1]">
-                        <img
-                            :src="vipIcons.rocketf"
-                            class="mx-auto h-[30px] w-[30px]"
-                            alt=""
-                        />
-                        <div class="mt-[18px] text-[18px] font-medium">
-                            {{ $t("ready_to_upgrade") }}
-                        </div>
-                        <p
-                            class="mx-auto mt-[12px] max-w-[250px] text-[11px] leading-[20px] text-white/88"
-                        >
-                            {{ $t("recharge_unlock_vip") }}
-                        </p>
-                        <button
-                            class="upgrade-cta mt-[20px] h-[40px] w-[206px] rounded-[9px] bg-white text-[13px] font-medium text-[#178c3c]"
-                            type="button"
-                            @click="goDeposit"
-                        >
-                            <span class="upgrade-cta__icon" aria-hidden="true">
-                                <img
-                                    :src="vipIcons.userbottom"
-                                    class="upgrade-cta__icon-img"
-                                    alt=""
-                                />
-                            </span>
-                            <span>{{ $t("recharge_to_upgrade_vip") }}</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
         </main>
     </div>
 </template>
 
 <script setup>
+import MainTabTopBar from "@/components/MainTabTopBar.vue";
 import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -403,31 +230,46 @@ const vipIcons = {
         "@/static/images/design/vip-level-4.png",
         import.meta.url,
     ).href,
+    designAvatar: new URL(
+        "@/static/images/vip_design/avatar.png",
+        import.meta.url,
+    ).href,
+    profileBadge: new URL(
+        "@/static/images/vip_design/profile-badge.png",
+        import.meta.url,
+    ).href,
+    designVip1: new URL("@/static/images/vip_design/vip1.png", import.meta.url)
+        .href,
+    designVip2: new URL("@/static/images/vip_design/vip2.png", import.meta.url)
+        .href,
+    designVip3: new URL("@/static/images/vip_design/vip3.png", import.meta.url)
+        .href,
+    designVip4: new URL("@/static/images/vip_design/vip4.png", import.meta.url)
+        .href,
+    designVip5: new URL("@/static/images/vip_design/vip5.png", import.meta.url)
+        .href,
+    checkGreen: new URL(
+        "@/static/images/vip_design/check-green.png",
+        import.meta.url,
+    ).href,
+    checkBlue: new URL(
+        "@/static/images/vip_design/check-blue.png",
+        import.meta.url,
+    ).href,
+    checkOrange: new URL(
+        "@/static/images/vip_design/check-orange.png",
+        import.meta.url,
+    ).href,
+    checkRed: new URL(
+        "@/static/images/vip_design/check-red.png",
+        import.meta.url,
+    ).href,
+    checkPurple: new URL(
+        "@/static/images/vip_design/check-purple.png",
+        import.meta.url,
+    ).href,
+    userFallback: new URL("@/static/images/userImg.png", import.meta.url).href,
 };
-
-const benefitCards = computed(() => [
-    {
-        icon: new URL("@/static/images/auth/auth-trade.png", import.meta.url)
-            .href,
-        title: t("vip_data_security"),
-        desc: t("vip_data_security_desc"),
-    },
-    // {
-    //     icon: new URL("@/static/images/user-invite.png", import.meta.url).href,
-    //     title: t("vip_referral_bonus"),
-    //     desc: t("vip_referral_bonus_desc"),
-    // },
-    {
-        icon: vipIcons.rocket,
-        title: t("vip_instant_commission"),
-        desc: t("vip_instant_commission_desc"),
-    },
-    {
-        icon: vipIcons.star,
-        title: t("vip_event_access"),
-        desc: t("vip_event_access_desc"),
-    },
-]);
 
 const levelFallbacks = [
     { nameEn: "VIP1", commissionRatio: 0.5, orderCount: 80, price: 50 },
@@ -436,6 +278,49 @@ const levelFallbacks = [
     { nameEn: "VIP4", commissionRatio: 2, orderCount: 110, price: 1500 },
     { nameEn: "VIP5", commissionRatio: 2.5, orderCount: 120, price: 5000 },
 ];
+
+const designLevelStats = [
+    { deposit: 50, rate: 0.5, product: 40, tasks: 80, quota: 90 },
+    { deposit: 200, rate: 1, product: 45, tasks: 90, quota: 90 },
+    { deposit: 500, rate: 1.5, product: 50, tasks: 100, quota: 100 },
+    { deposit: 1500, rate: 2, product: 55, tasks: 110, quota: 100 },
+    { deposit: 5000, rate: 2.5, product: 60, tasks: 120, quota: 120 },
+];
+
+const designFeatureGroups = computed(() => [
+    [
+        t("vip_d_all0"),
+        t("vip_d_full"),
+        t("vip_d_launch"),
+        t("vip_d_deposit"),
+        t("vip_d_loss"),
+    ],
+    [
+        t("vip_d_all1"),
+        t("vip_d_double"),
+        t("vip_d_same3"),
+        t("vip_d_deposit"),
+    ],
+    [
+        t("vip_d_all2"),
+        t("vip_d_enhanced2"),
+        t("vip_d_bonus2"),
+        t("vip_d_badge3"),
+        t("vip_d_support"),
+    ],
+    [
+        t("vip_d_manager"),
+        t("vip_d_withdraw5"),
+        t("vip_d_badge4"),
+        t("vip_d_rebate1"),
+    ],
+    [
+        t("vip_d_same"),
+        t("vip_d_badge5"),
+        t("vip_d_support"),
+        t("vip_d_legend5"),
+    ],
+]);
 
 const featureGroups = computed(() => [
     [
@@ -477,10 +362,13 @@ const featureGroups = computed(() => [
 
 const themes = [
     {
-        headClass: "bg-gradient-to-br from-[#2ec363] to-[#0a8934]",
+        headClass: "bg-gradient-to-br from-[#34be70] to-[#28af64]",
         borderClass: "border-[#159947]",
-        headFrom: "#2ec363",
-        headTo: "#0a8934",
+        headFrom: "#34be70",
+        headTo: "#28af64",
+        headGradient:
+            "linear-gradient(180deg, #34be70 0%, #28af64 56.04%, #ffffff 100%)",
+        buttonColor: "#28AF64",
         borderColor: "#159947",
         statColor: "#19a653",
         statTextClass: "text-[#159947]",
@@ -488,10 +376,13 @@ const themes = [
         iconFilter: "none",
     },
     {
-        headClass: "bg-gradient-to-br from-[#62bbea] to-[#2787d7]",
+        headClass: "bg-gradient-to-br from-[#3181CE] to-[#5BABEA]",
         borderClass: "border-[#2787d7]",
-        headFrom: "#62bbea",
-        headTo: "#2787d7",
+        headFrom: "#3181CE",
+        headTo: "#5BABEA",
+        headGradient:
+            "linear-gradient(180deg, #3181CE 0%, #5BABEA 56.04%, #FFFFFF 100%)",
+        buttonColor: "#2C7CCB",
         borderColor: "#2787d7",
         statColor: "#349be0",
         statTextClass: "text-[#349be0]",
@@ -499,21 +390,27 @@ const themes = [
         iconFilter: "none",
     },
     {
-        headClass: "bg-gradient-to-br from-[#2dbb61] to-[#148a3c]",
-        borderClass: "border-[#159947]",
-        headFrom: "#2dbb61",
-        headTo: "#148a3c",
-        borderColor: "#159947",
-        statColor: "#1f9c47",
-        statTextClass: "text-[#1f9c47]",
+        headClass: "bg-gradient-to-br from-[#FFA726] to-[#FD9810]",
+        borderClass: "border-[#ff9e2c]",
+        headFrom: "#FFA726",
+        headTo: "#FD9810",
+        headGradient:
+            "linear-gradient(180deg, #FFA726 0%, #FD9810 56.67%, #FFFFFF 100%)",
+        buttonColor: "#FA9B29",
+        borderColor: "#ff9e2c",
+        statColor: "#f29a21",
+        statTextClass: "text-[#f29a21]",
         buttonClass: "vip-level-button--theme",
         iconFilter: "none",
     },
     {
-        headClass: "bg-gradient-to-br from-[#ff6656] to-[#dd3426]",
+        headClass: "bg-gradient-to-br from-[#F24A32] to-[#EF7F6F]",
         borderClass: "border-[#dd3426]",
-        headFrom: "#ff6656",
-        headTo: "#dd3426",
+        headFrom: "#F24A32",
+        headTo: "#EF7F6F",
+        headGradient:
+            "linear-gradient(181deg, #F24A32 0%, #EF7F6F 52.71%, #FFFFFF 100%)",
+        buttonColor: "#FF634D",
         borderColor: "#dd3426",
         statColor: "#ef4b3d",
         statTextClass: "text-[#ef4b3d]",
@@ -521,15 +418,18 @@ const themes = [
         iconFilter: "none",
     },
     {
-        headClass: "bg-gradient-to-br from-[#ffc145] to-[#d98c05]",
-        borderClass: "border-[#d98c05]",
-        headFrom: "#ffc145",
-        headTo: "#d98c05",
-        borderColor: "#d98c05",
-        statColor: "#f0a017",
-        statTextClass: "text-[#f0a017]",
+        headClass: "bg-gradient-to-br from-[#6131CE] to-[#985BEA]",
+        borderClass: "border-[#7340df]",
+        headFrom: "#6131CE",
+        headTo: "#985BEA",
+        headGradient:
+            "linear-gradient(180deg, #6131CE 0%, #985BEA 56.04%, #FFFFFF 100%)",
+        buttonColor: "#6C39D3",
+        borderColor: "#7340df",
+        statColor: "#7a48e7",
+        statTextClass: "text-[#7a48e7]",
         buttonClass: "vip-level-button--theme",
-        iconFilter: "hue-rotate(34deg) saturate(1.25) brightness(1.05)",
+        iconFilter: "hue-rotate(20deg) saturate(1.1) brightness(1.02)",
     },
 ];
 
@@ -540,6 +440,10 @@ const currentLevelName = computed(() => {
         "VIP1"
     );
 });
+
+const userAvatar = computed(
+    () => userStore.userInfo?.avatar || vipIcons.designAvatar,
+);
 
 const currentLevelId = computed(() => userStore.userInfo?.levelId);
 
@@ -558,6 +462,23 @@ const displayLevels = computed(() =>
 const currentLevelNumber = computed(() =>
     getLevelNumericValue(currentLevelName.value),
 );
+
+const currentVipBadgeIcon = computed(() => {
+    switch (currentLevelNumber.value) {
+        case 1:
+            return vipIcons.designVip1;
+        case 2:
+            return vipIcons.designVip2;
+        case 3:
+            return vipIcons.designVip3;
+        case 4:
+            return vipIcons.designVip4;
+        case 5:
+            return vipIcons.designVip5;
+        default:
+            return vipIcons.profileBadge;
+    }
+});
 
 const currentLevelIdNumber = computed(() => {
     const value = Number(currentLevelId.value);
@@ -671,31 +592,11 @@ const showVipUpgradeCard = computed(
 );
 
 const vipLevelIconSets = [
-    {
-        medal: vipIcons.level2,
-        stats: [vipIcons.vip12, vipIcons.vip13, vipIcons.vip14],
-        check: vipIcons.vip11,
-    },
-    {
-        medal: vipIcons.level3,
-        stats: [vipIcons.vip22, vipIcons.vip23, vipIcons.vip24],
-        check: vipIcons.vip21,
-    },
-    {
-        medal: vipIcons.level1,
-        stats: [vipIcons.vip12, vipIcons.vip13, vipIcons.vip14],
-        check: vipIcons.vip11,
-    },
-    {
-        medal: vipIcons.vipLevel4,
-        stats: [vipIcons.vip32, vipIcons.vip33, vipIcons.vip34],
-        check: vipIcons.vip31,
-    },
-    {
-        medal: vipIcons.crownLarge,
-        stats: [vipIcons.vip32, vipIcons.vip33, vipIcons.vip34],
-        check: vipIcons.vip31,
-    },
+    { medal: vipIcons.designVip1, check: vipIcons.checkGreen },
+    { medal: vipIcons.designVip2, check: vipIcons.checkBlue },
+    { medal: vipIcons.designVip3, check: vipIcons.checkOrange },
+    { medal: vipIcons.designVip4, check: vipIcons.checkRed },
+    { medal: vipIcons.designVip5, check: vipIcons.checkPurple },
 ];
 
 function normalizeLevelName(item, index) {
@@ -751,33 +652,26 @@ function isCurrentLevel(item, index) {
     return index === currentLevelIndex.value;
 }
 
-function formatRate(item) {
-    const value = item?.commissionRatio ?? item?.rebateRatio ?? item?.rate ?? 0;
-    const numeric = Number(value);
-    if (Number.isNaN(numeric)) return `${value}`;
-    return `${numeric}%`;
+function formatRate(item, index = 0) {
+    return `${designLevelStats[index]?.rate ?? 0}%`;
 }
 
 function formatTaskCount(item, index) {
-    return (
-        item?.orderCount ??
-        item?.taskCount ??
-        item?.maxOrderCount ??
-        80 + index * 10
-    );
+    return designLevelStats[index]?.tasks ?? 80 + index * 10;
 }
 
 function formatProductCount(item, index) {
-    return (
-        item?.productCount ??
-        item?.goodsCount ??
-        item?.incomeCount ??
-        40 + index * 5
-    );
+    return designLevelStats[index]?.product ?? 40 + index * 5;
 }
 
 function formatDeposit(item, index) {
-    return item?.price ?? item?.minDeposit ?? levelFallbacks[index]?.price ?? 0;
+    return (
+        designLevelStats[index]?.deposit ?? levelFallbacks[index]?.price ?? 0
+    );
+}
+
+function vipSubtitle(item, index) {
+    return `${t("min_deposit")}:$${formatDeposit(item, index)}`;
 }
 
 function cardTheme(item, index) {
@@ -796,6 +690,8 @@ function cardThemeStyle(item, index) {
     return {
         "--vip-head-from": theme.headFrom,
         "--vip-head-to": theme.headTo,
+        "--vip-head-gradient": theme.headGradient,
+        "--vip-button-color": theme.buttonColor || theme.statColor,
         "--vip-card-border": theme.borderColor,
         "--vip-card-accent": theme.statColor,
         "--vip-card-icon-filter": theme.iconFilter || "none",
@@ -833,10 +729,12 @@ function featureCheckIcon(index) {
 }
 
 function includedFeatures(index) {
-    const taskCount = formatTaskCount(displayLevels.value[index], index);
+    const quota =
+        designLevelStats[index]?.quota ??
+        formatTaskCount(displayLevels.value[index], index);
     return [
-        ...(featureGroups.value[index] || featureGroups.value[0]),
-        t("daily_task_submission_quota", { count: taskCount }),
+        ...(designFeatureGroups.value[index] || designFeatureGroups.value[0]),
+        t("vip_d_daily", { quota }),
     ];
 }
 
@@ -845,14 +743,14 @@ function levelStats(item, index) {
     return [
         {
             icon: iconSet?.stats?.[0] || vipIcons.star,
-            value: formatRate(item),
+            value: formatRate(item, index),
             label: t("rebate_task"),
         },
-        // {
-        //     icon: iconSet?.stats?.[1] || vipIcons.rocket,
-        //     value: `$${formatProductCount(item, index)}`,
-        //     label: t("product_income"),
-        // },
+        {
+            icon: iconSet?.stats?.[1] || vipIcons.rocket,
+            value: `$ ${formatProductCount(item, index)}`,
+            label: t("product_income"),
+        },
         {
             icon: iconSet?.stats?.[2] || vipIcons.user,
             value: formatTaskCount(item, index),
@@ -880,16 +778,155 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.vip-page__main {
+    padding-top: var(--main-tab-top-bar-height, 104px);
+}
+
 .vip-page {
     font-family: "Montserrat", "Poppins", sans-serif;
     width: 100%;
+    max-width: none;
+    min-height: 100vh;
+    margin: 0;
     overflow-x: hidden;
+    background: #f2f4f8;
+    color: #111;
 }
 
-.vip-hero {
-    min-height: 236px;
+.vip-showcase {
+    position: relative;
+    padding-bottom: 0;
+}
+
+.vip-showcase__top {
+    position: relative;
+    height: 83px;
+    overflow: hidden;
+    background: #181818 url("@/static/images/auth/algofy-register-hero.png")
+        center top / cover no-repeat;
+}
+
+.vip-showcase__title {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.vip-showcase__card {
+    position: relative;
+    margin: 0;
+    padding: 14px 22px 16px;
+    min-height: 198px;
     border-radius: 0;
+    background: linear-gradient(180deg, #3f8cff 0%, #2d62ee 100%);
+    text-align: center;
+    color: #fff;
+    box-shadow: none;
+}
+
+.vip-showcase__card::after {
+    content: "";
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.vip-showcase__avatar-shell {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
+}
+
+.vip-showcase__avatar {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vip-showcase__badge {
+    position: absolute;
+    top: 80px;
+    left: calc(50% + 19px);
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vip-showcase__badge img {
+    width: 31px;
+    height: 31px;
+    object-fit: contain;
+}
+
+.vip-showcase__name {
+    position: relative;
+    z-index: 1;
+    margin-top: 3px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.vip-showcase__level {
+    position: relative;
+    z-index: 1;
+    margin-top: 12px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 23px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.vip-showcase__desc {
+    position: relative;
+    z-index: 1;
+    margin: 8px auto 0;
+    max-width: 311px;
+    font-family: Montserrat, Montserrat;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.vip-section-title {
+    display: flex;
+    align-items: center;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    color: #374151;
+    line-height: 23px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .vip-bubble,
@@ -931,14 +968,14 @@ onMounted(() => {
 }
 
 .benefit-icon {
-    margin-right: 12px;
+    margin-right: 10px;
     display: flex;
-    height: 36px;
-    width: 36px;
+    height: 34px;
+    width: 34px;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    border-radius: 9px;
+    border-radius: 12px;
     background: #eef8f1;
 }
 
@@ -946,37 +983,24 @@ onMounted(() => {
     object-fit: contain;
 }
 
-.vip-card {
-    border-width: 1px;
-    border-radius: 12px;
-    border-color: var(--vip-card-border, #159947);
-}
-
 .vip-card--current {
-    border-width: 2px;
-}
-
-.vip-card-head {
-    min-height: 77px;
-    background: linear-gradient(
-        135deg,
-        var(--vip-head-from, #2ec363),
-        var(--vip-head-to, #0a8934)
-    ) !important;
+    box-shadow:
+        0 10px 24px rgba(31, 41, 55, 0.08),
+        0 0 0 2px rgba(255, 255, 255, 0.9);
 }
 
 .vip-card-bubble {
-    right: -22px;
-    top: -32px;
-    height: 94px;
-    width: 94px;
+    right: -16px;
+    top: -16px;
+    height: 86px;
+    width: 86px;
 }
 
 .vip-medal {
     position: relative;
     display: flex;
-    height: 48px;
-    width: 48px;
+    height: 44px;
+    width: 44px;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
@@ -999,37 +1023,33 @@ onMounted(() => {
     line-height: 10px;
 }
 
-.vip-stat {
-    min-height: 74px;
-    border-right: 1px solid #d9eadf;
-    padding: 14px 4px 11px;
-    text-align: center;
-    color: var(--vip-card-accent, #159947) !important;
+.vip-head-stat {
+    text-align: left;
 }
 
-.vip-stat:last-child {
-    border-right: 0;
+.vip-card-body {
+    padding: 0 0 12px;
+}
+
+.vip-feature-panel {
+    border-radius: 7px;
+    background: #fff;
+    margin: 0 16px;
+    margin-top: -1px;
+    box-shadow: inset 0 0 0 1px #e6edf5;
+    padding: 11px 14px 12px;
 }
 
 .vip-upgrade-card {
     min-height: 212px;
-    border-radius: 10px;
+    border-radius: 12px;
 }
 
 .vip-medal-img {
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
     object-fit: contain;
     display: block;
-    filter: var(--vip-card-icon-filter, none);
-}
-
-.vip-stat-icon {
-    width: 14px;
-    height: 14px;
-    object-fit: contain;
-    display: inline-block;
-    vertical-align: middle;
     filter: var(--vip-card-icon-filter, none);
 }
 
@@ -1040,30 +1060,13 @@ onMounted(() => {
     filter: var(--vip-card-icon-filter, none);
 }
 
-.vip-level-button--current {
-    border: 1px solid var(--theme-primary-border);
-    background: var(--theme-primary-weak) !important;
-    color: var(--theme-primary) !important;
-}
-
 .vip-level-button--theme {
-    background: linear-gradient(
-        135deg,
-        var(--vip-head-from, var(--theme-primary)),
-        var(--vip-head-to, var(--theme-primary))
-    );
+    background: var(--vip-button-color) !important;
 }
 
 .vip-level-button:disabled {
     cursor: not-allowed;
     pointer-events: none;
-}
-
-.vip-level-button--disabled {
-    border: 1px solid var(--theme-primary-border);
-    background: var(--theme-primary-weak) !important;
-    color: #7b9682 !important;
-    opacity: 0.72;
 }
 
 .upgrade-cta {
@@ -1084,8 +1087,8 @@ onMounted(() => {
 }
 
 .upgrade-cta__icon-img {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     object-fit: contain;
     display: block;
 }
@@ -1095,5 +1098,347 @@ onMounted(() => {
     font-size: 14px;
     line-height: 1;
     font-weight: 700;
+}
+
+.vip-card-list {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.vip-card {
+    border-width: 0;
+    border-color: transparent;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+.vip-card-head {
+    min-height: 114px;
+    background: linear-gradient(
+        135deg,
+        var(--vip-head-from, #2ec363),
+        var(--vip-head-to, #0a8934)
+    ) !important;
+    padding: 16px 25px 15px !important;
+}
+
+.vip-card-head .text-\[15px\] {
+    font-size: 20px !important;
+    line-height: 24px !important;
+    font-weight: 700 !important;
+}
+
+.vip-card-head .text-\[9px\] {
+    font-size: 12px !important;
+    line-height: 15px !important;
+    font-weight: 600 !important;
+}
+
+.vip-head-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.vip-head-stat__label {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: 700;
+}
+
+.vip-head-stat__value {
+    color: #fff;
+    margin-top: 5px;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+}
+
+.vip-feature-panel > div:first-child {
+    font-size: 13px !important;
+    line-height: 16px !important;
+    letter-spacing: 0;
+    font-weight: 500 !important;
+    color: #2c2c2c !important;
+}
+
+.vip-feature-panel .space-y-\[7px\] {
+    margin-top: 12px !important;
+}
+
+.vip-feature-panel .text-\[10px\] {
+    font-size: 13px !important;
+    line-height: 17px !important;
+    color: #242424 !important;
+}
+
+.vip-feature-panel .space-y-\[7px\] > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 9px !important;
+}
+
+.vip-level-button {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    width: calc(100% - 32px) !important;
+    height: 58px !important;
+    margin-top: 14px !important;
+    border-radius: 7px !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+}
+
+.vip-level-button--current {
+    background: #2bb66a !important;
+    border: 0 !important;
+    color: #fff !important;
+}
+
+.vip-level-button--disabled {
+    height: 38px !important;
+    background: #f7faff !important;
+    border: 0 !important;
+    color: #9aa2af !important;
+    opacity: 1;
+}
+
+@media (min-width: 376px) {
+    .vip-page {
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+}
+
+.vip-card-list .vip-medal {
+    width: 54px !important;
+    height: 54px !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.vip-card-list .vip-medal-img {
+    width: 54px !important;
+    height: 54px !important;
+}
+
+.vip-card-list .vip-card-bubble {
+    opacity: 0.28 !important;
+}
+
+.vip-card-list .vip-card-head .absolute.right-\[14px\] {
+    top: 32px !important;
+    right: 26px !important;
+    min-width: 80px !important;
+    padding: 9px 15px 9px 18px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 999px !important;
+    background: #fff !important;
+    font-family: Geist-SemiBold, Geist-SemiBold;
+    font-weight: normal;
+    font-size: 12px !important;
+    color: #005a28 !important;
+    line-height: 17px !important;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.vip-card-list .vip-card {
+    background: #fff !important;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.vip-card-list .vip-card-head {
+    position: relative;
+    z-index: 1;
+    min-height: 326px !important;
+    padding: 34px 24px 106px !important;
+    border-radius: 8px 8px 0 0 !important;
+    background: var(--vip-head-gradient) !important;
+}
+
+.vip-card-list .vip-card-body {
+    position: relative;
+    z-index: 3;
+    margin-top: -136px !important;
+    padding: 0 24px 20px !important;
+    background: transparent !important;
+    border-radius: 0 0 8px 8px !important;
+}
+
+.vip-card-list .vip-feature-panel {
+    position: relative;
+    z-index: 4;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 18px 18px 22px !important;
+    border-radius: 8px !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+}
+
+.vip-card-list .vip-level-button {
+    display: block;
+    margin-bottom: 0 !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.vip-card-list .vip-level-button--current {
+    height: 58px !important;
+    margin-top: 31px !important;
+    border-radius: 7px !important;
+    background: var(--vip-button-color) !important;
+    border: 0 !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+
+.vip-card-list .vip-level-button--disabled,
+.vip-card-list .vip-level-button--theme {
+    height: 48px !important;
+    margin-top: 14px !important;
+    border-radius: 8px !important;
+}
+
+.vip-card-list .vip-level-button--theme {
+    background: var(--vip-button-color) !important;
+    color: #fff !important;
+}
+
+.vip-card-list .vip-level-button--disabled {
+    background: #f7faff !important;
+    border: 0 !important;
+    color: #9aa2af !important;
+    opacity: 1;
+}
+
+.vip-card-list .vip-medal,
+.vip-card-list .vip-medal-img {
+    width: 62px !important;
+    height: 62px !important;
+    margin-left: -10px;
+}
+
+.vip-card-list .vip-card-head .text-\[15px\] {
+    font-family: Montserrat, Montserrat;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    color: #ffffff;
+    line-height: 20px !important;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.vip-card-list .vip-card-head .text-\[9px\] {
+    margin-top: 4px !important;
+    font-family: Montserrat, Montserrat;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    color: #ffffff;
+    line-height: 18px !important;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.vip-card-list .vip-head-stats {
+    grid-template-columns: 1fr 1.2fr 1fr !important;
+    gap: 14px !important;
+    margin-top: 17px !important;
+}
+
+.vip-card-list .vip-head-stat__label {
+    white-space: nowrap !important;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    color: #ffffff;
+    line-height: 17px !important;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.vip-card-list .vip-head-stat__value {
+    margin-top: 7px !important;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    color: #ffffff;
+    line-height: 24px !important;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.vip-card-list .vip-feature-panel > div:first-child {
+    letter-spacing: 0 !important;
+    font-family: Geist-SemiBold, Geist-SemiBold;
+    font-weight: normal;
+    font-size: 12px !important;
+    color: #212121 !important;
+    line-height: 18px !important;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.vip-card-list .vip-feature-panel .space-y-\[7px\] {
+    margin-top: 18px !important;
+}
+
+.vip-card-list .vip-feature-panel .text-\[10px\] {
+    font-family: Montserrat, Montserrat;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    color: #212121 !important;
+    line-height: 18px !important;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.vip-card-list
+    .vip-feature-panel
+    .space-y-\[7px\]
+    > :not([hidden])
+    ~ :not([hidden]) {
+    margin-top: 12px !important;
+}
+
+.vip-card-list .vip-feature-icon {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 12px !important;
+    margin-top: 2px !important;
+}
+@media (max-width: 767px) {
+    .vip-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .vip-page {
+        max-width: var(--app-pc-max-width, 375px);
+        margin: 0 auto;
+    }
 }
 </style>

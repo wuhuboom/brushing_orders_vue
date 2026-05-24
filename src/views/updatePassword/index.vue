@@ -1,129 +1,53 @@
 <template>
-    <div class="password-page min-h-screen bg-[#F5F8F7]">
+    <div class="password-page min-h-screen">
         <PageTopBar :title="pageTitle" show-back @click-left="onClickLeft" />
 
-        <div class="page-body px-[16px] pt-[72px] pb-[36px]">
-            <div class="hero-wrap">
-                <div class="hero-icon">
-                    <img
-                        src="@/static/images/auth/uppass.png"
-                        alt=""
-                        class="hero-icon__image"
-                    />
-                </div>
-                <h1 class="hero-title">{{ titleText }}</h1>
-                <p class="hero-desc">
-                    {{ $t("strong_passwords_protect_account") }}
-                </p>
-            </div>
-
-            <div class="form-card mt-[24px]">
+        <div class="page-body">
+            <div class="form-card">
                 <div class="field-block">
-                    <div class="field-label">
-                        {{ $t("current_password_upper") }}
-                    </div>
+                    <div class="field-label">{{ $t("auto_old_login_password") }}</div>
                     <van-field
                         v-model="ruleForm.oldPassword"
                         :type="showOldPassword ? 'text' : 'password'"
-                        :placeholder="$t('enter_current_password')"
+                        placeholder=""
                         class="custom-field"
-                    >
-                        <template #left-icon>
-                            <img
-                                src="@/static/images/auth/auth-password.png"
-                                alt=""
-                                class="field-key-image"
-                            />
-                        </template>
-                        <template #right-icon>
-                            <van-icon
-                                :name="showOldPassword ? 'eye-o' : 'closed-eye'"
-                                size="18"
-                                color="#7BA78A"
-                                @click.stop="showOldPassword = !showOldPassword"
-                            />
-                        </template>
-                    </van-field>
+                    />
                 </div>
-
                 <div class="field-block">
-                    <div class="field-label">
-                        {{ $t("new_password_upper") }}
-                    </div>
+                    <div class="field-label">{{ $t("auto_new_login_password") }}</div>
                     <van-field
                         v-model="ruleForm.newPassword"
                         :type="showNewPassword ? 'text' : 'password'"
-                        :placeholder="$t('enter_new_password')"
+                        placeholder=""
                         class="custom-field"
-                    >
-                        <template #left-icon>
-                            <img
-                                src="@/static/images/auth/auth-password.png"
-                                alt=""
-                                class="field-key-image"
-                            />
-                        </template>
-                        <template #right-icon>
-                            <van-icon
-                                :name="showNewPassword ? 'eye-o' : 'closed-eye'"
-                                size="18"
-                                color="#7BA78A"
-                                @click.stop="showNewPassword = !showNewPassword"
-                            />
-                        </template>
-                    </van-field>
+                    />
                 </div>
-
                 <div class="field-block field-block-last">
-                    <div class="field-label">
-                        {{ $t("confirm_new_password_upper") }}
-                    </div>
+                    <div class="field-label">{{ $t("auto_confirm_new_login_password") }}</div>
                     <van-field
                         v-model="agentNewPassword"
                         :type="showConfirmPassword ? 'text' : 'password'"
-                        :placeholder="$t('re_enter_new_password')"
+                        placeholder=""
                         class="custom-field"
-                    >
-                        <template #left-icon>
-                            <img
-                                src="@/static/images/auth/auth-password.png"
-                                alt=""
-                                class="field-key-image"
-                            />
-                        </template>
-                        <template #right-icon>
-                            <van-icon
-                                :name="
-                                    showConfirmPassword ? 'eye-o' : 'closed-eye'
-                                "
-                                size="18"
-                                color="#7BA78A"
-                                @click.stop="
-                                    showConfirmPassword = !showConfirmPassword
-                                "
-                            />
-                        </template>
-                    </van-field>
+                    />
                 </div>
             </div>
 
-            <div class="mt-[18px]">
-                <van-button
-                    :class="[
-                        'submit-btn',
-                        { 'submit-btn--active': isFormReady },
-                    ]"
-                    block
-                    @click="submitForm"
-                >
-                    {{ buttonText }}
-                </van-button>
+            <div class="password-note">
+                {{ $t("strong_passwords_protect_account") }}
             </div>
+
+            <van-button
+                :class="['submit-btn', { 'submit-btn--active': isFormReady }]"
+                block
+                @click="submitForm"
+            >{{ $t("auto_update") }}</van-button>
         </div>
     </div>
 </template>
 
 <script setup>
+import PageTopBar from "@/components/PageTopBar.vue";
 import { computed, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
@@ -212,57 +136,71 @@ const submitForm = async () => {
 </script>
 
 <style scoped>
-.page-body {
-    min-height: calc(100vh - 53px);
+.password-page {
+    min-height: 100vh;
+    background: #eef2fa;
+    color: #0d0f14;
 }
 
-.hero-wrap {
-    display: flex;
-    flex-direction: column;
+.password-header {
+    height: 68px;
+    background: #000000;
+    color: #ffffff;
+}
+
+.password-nav {
+    height: 56px;
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) 64px;
     align-items: center;
-    text-align: center;
 }
 
-.hero-icon {
-    width: 88px;
-    height: 88px;
-    border-radius: 999px;
-    background: #deeee3;
+.password-title {
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.password-back {
+    width: 64px;
+    height: 56px;
+    border: none;
+    outline: none;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
 }
 
-.hero-icon__image {
-    width: 26px;
-    height: 26px;
+.password-back span {
+    width: 17px;
+    height: 17px;
+    border-left: 4px solid #ffffff;
+    border-bottom: 4px solid #ffffff;
+    transform: rotate(45deg);
+    border-radius: 2px;
+    margin-left: 8px;
 }
 
-.hero-title {
-    margin-top: 16px;
-    color: #22362c;
-    font-size: 18px;
-    line-height: 28px;
-    font-weight: 500;
-}
-
-.hero-desc {
-    max-width: 320px;
-    margin-top: 8px;
-    color: #7ba78a;
-    font-size: 13px;
-    line-height: 20px;
+.page-body {
+    padding: 29px 20px 36px;
+    min-height: calc(100vh - 68px);
+    box-sizing: border-box;
 }
 
 .form-card {
-    border: 1px solid #d4e6d9;
-    border-radius: 20px;
-    background: #ffffff;
-    padding: 16px;
+    background: transparent;
+    padding: 0;
 }
 
 .field-block {
-    margin-bottom: 16px;
+    margin-bottom: 22px;
 }
 
 .field-block-last {
@@ -270,60 +208,65 @@ const submitForm = async () => {
 }
 
 .field-label {
-    margin-bottom: 10px;
-    color: #6f9b7a;
-    font-size: 11px;
-    line-height: 15px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-}
-
-.field-key-image {
-    width: 16px;
-    height: 16px;
+    margin-bottom: 13px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .custom-field {
-    min-height: 54px;
-    border: 1px solid rgba(210, 235, 218, 1) !important;
-    border-radius: 10px;
-    background: rgba(240, 250, 243, 1) !important;
-    border-radius: 14px;
-    padding: 4px 12px;
+    height: 48px;
+    min-height: 48px;
+    border: 1px solid #d5deeb !important;
+    border-radius: 7px;
+    background: #ffffff !important;
+    padding: 0 16px;
     display: flex;
     align-items: center;
+    box-shadow: none;
 }
 
-.password-page :deep(.custom-field .van-field__left-icon) {
-    margin-right: 10px;
-}
-
-.password-page :deep(.custom-field .van-field__right-icon) {
-    margin-left: 10px;
+.password-page :deep(.custom-field .van-field__body),
+.password-page :deep(.custom-field .van-field__control) {
+    height: 100%;
 }
 
 .password-page :deep(.custom-field .van-field__control) {
-    color: #22362c;
+    color: #111827;
     font-size: 15px;
 }
 
 .password-page :deep(.custom-field .van-field__control::placeholder) {
-    color: #97aa9d;
+    color: transparent;
+}
+
+.password-note {
+    margin: 21px 2px 52px;
+    color: #7b7d83;
+    font-size: 14px;
+    line-height: 1.35;
+    font-weight: 400;
 }
 
 .submit-btn {
-    height: 54px;
+    height: 44px;
     border: none;
-    border-radius: 16px;
-    background: #dfeee2;
-    color: #6e9c7b;
-    font-size: 15px;
-    font-weight: 500;
+    border-radius: 7px;
+    background: #3442e6;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
 }
 
 .submit-btn--active {
-    background: var(--theme-primary);
+    background: #3442e6;
     color: #ffffff;
-    box-shadow: 0 10px 24px var(--theme-button-shadow);
+    box-shadow: none;
 }
 </style>

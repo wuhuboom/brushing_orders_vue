@@ -13,6 +13,54 @@ let api = null; // 延迟创建 axios 实例
 let loading = null;
 let isHandlingUnauthorized = false;
 
+const requestLoadingSvg = `
+<defs>
+  <linearGradient id="appWaveLoadingGradient" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#8af3ff"/>
+    <stop offset="34%" stop-color="#4b97ff"/>
+    <stop offset="68%" stop-color="#2f7bff"/>
+    <stop offset="100%" stop-color="#3543ec"/>
+  </linearGradient>
+  <filter id="appWaveLoadingShadow" x="-40%" y="-40%" width="180%" height="200%">
+    <feDropShadow dx="0" dy="9" stdDeviation="6" flood-color="#2f7bff" flood-opacity="0.22"/>
+  </filter>
+</defs>
+<ellipse cx="59" cy="63" rx="42" ry="7" fill="#2f7bff" fill-opacity="0.08"/>
+<g filter="url(#appWaveLoadingShadow)">
+  <rect x="17" y="35" width="6" height="14" rx="3" fill="url(#appWaveLoadingGradient)"/>
+  <rect x="28" y="31" width="6" height="22" rx="3" fill="url(#appWaveLoadingGradient)"/>
+  <rect x="39" y="24" width="6" height="32" rx="3" fill="url(#appWaveLoadingGradient)"/>
+  <rect x="50" y="16" width="7" height="42" rx="3.5" fill="url(#appWaveLoadingGradient)"/>
+  <rect x="62" y="10" width="7" height="52" rx="3.5" fill="url(#appWaveLoadingGradient)"/>
+  <rect x="74" y="16" width="7" height="42" rx="3.5" fill="url(#appWaveLoadingGradient)"/>
+  <rect x="85" y="24" width="6" height="32" rx="3" fill="url(#appWaveLoadingGradient)"/>
+  <rect x="96" y="31" width="6" height="22" rx="3" fill="url(#appWaveLoadingGradient)"/>
+  <rect x="107" y="35" width="6" height="14" rx="3" fill="url(#appWaveLoadingGradient)"/>
+</g>`;
+
+const requestLoadingHtml = `
+<div class="app-request-loading__wave" aria-hidden="true">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>`;
+
+function renderRequestLoadingWave() {
+  if (typeof document === "undefined") return;
+  window.requestAnimationFrame(() => {
+    const spinner = document.querySelector(
+      ".app-wave-loading-mask .el-loading-spinner",
+    );
+    if (spinner) {
+      spinner.innerHTML = requestLoadingHtml;
+    }
+  });
+}
+
 // 获取 BASEURL，确保 window.g 已加载
 export function getBaseURL() {
   return window.g?.VITE_API_BASE_URL || import.meta.env.VITE_API_BASE_URL;
@@ -83,7 +131,14 @@ export function initAPI() {
             loading.close();
             loading = null;
           }
-          loading = ElLoading.service({ fullscreen: true });
+          loading = ElLoading.service({
+            fullscreen: true,
+            background: "#ffffff",
+            customClass: "app-wave-loading-mask",
+            svg: requestLoadingSvg,
+            svgViewBox: "0 0 118 76",
+          });
+          renderRequestLoadingWave();
         }
 
         const userStore = useUserStore(pinia);

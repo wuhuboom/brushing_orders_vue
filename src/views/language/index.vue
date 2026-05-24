@@ -1,37 +1,24 @@
 <template>
-  <div>
+  <div class="language-page min-h-screen bg-[#eef2fb]">
     <PageTopBar :title="$t('change_language')" show-back @click-left="onClickLeft" />
-    <!-- <div>
-      <div
-        class="bg-gray w-8 h-8 flex items-center justify-center rounded-2.5"
-        @click="close"
-      >
-        <el-icon>
-          <Close />
-        </el-icon>
-      </div>
-      <p class="text-[25px] mt-5 text-black">{{ $t("choose_language") }}</p>
-    </div> -->
-    <!-- </template> -->
-    <div class="flex flex-col gap-4 mt-20 px-[20px]">
+
+    <div class="language-page__body">
       <div
         v-for="item in LANGS"
         :key="item.code"
-        class="flex items-center gap-4 border border-[#F3F4F6] rounded-[12px]"
+        class="language-page__row"
+        :class="{ 'language-page__row--active': item.code === commonStore.clientLang }"
         @click="handleChangeLang(item)"
       >
-        <div class=" w-full h-full flex flex-col box-border">
-          <div
-            class="w-full h-16 flex items-center justify-between pl-[17px]  text-[#000] text-lg uppercase"
-          >
-            <div>{{ item.name }}</div>
-            <img v-if="item.code ===commonStore.clientLang" src="../../static/images/dui.png" class="w-[24px] h-[24px]" alt="">
-          </div>
-          
-        </div>
+        <div class="language-page__name">{{ item.name }}</div>
+        <img
+          v-if="item.code === commonStore.clientLang"
+          src="../../static/images/dui.png"
+          class="language-page__check"
+          alt=""
+        />
       </div>
     </div>
-    <!-- </van-popup> -->
   </div>
 </template>
 
@@ -75,14 +62,40 @@ function handleChangeLang(item) {
 </script>
 
 <style scoped>
-:deep(.el-drawer.btt) {
-  border-top-left-radius: 20px !important;
-  border-top-right-radius: 20px !important;
+.language-page__body {
+  padding: 92px 20px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
-</style>
-<style>
-.header {
-  margin: 0 !important;
-  padding: 20px 20px 0 !important;
+
+.language-page__row {
+  min-height: 78px;
+  padding: 0 20px;
+  border: 1px solid #edf0f8;
+  border-radius: 18px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 22px rgba(18, 25, 38, 0.03);
+}
+
+.language-page__row--active {
+  border-color: #cfd8ff;
+  background: #f7f9ff;
+}
+
+.language-page__name {
+  color: #111827;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.language-page__check {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 </style>

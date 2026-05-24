@@ -1,297 +1,100 @@
 <template>
-    <div class="faqs-page">
-        <PageTopBar :title="$t('faqs')" show-back @click-left="onClickLeft" />
+  <div class="faqs-design-page">
+    <PageTopBar :title="$t('faqs')" show-back @click-left="onClickLeft" />
 
-        <div class="faqs-body">
-            <section class="faqs-hero">
-                <div class="faqs-hero__icon">?</div>
-
-                <div class="faqs-hero__content">
-                    <div class="faqs-hero__title">
-                        {{ $t("frequently_asked_questions") }}
-                    </div>
-                    <div class="faqs-hero__desc">
-                        {{ $t("find_instant_answers") }}
-                    </div>
-                </div>
-
-                <span class="faqs-hero__orb"></span>
-            </section>
-
-            <section v-if="faqSections.length" class="faqs-accordion">
-                <van-collapse
-                    v-model="activeNames"
-                    :border="false"
-                    class="faqs-collapse"
-                >
-                    <van-collapse-item
-                        v-for="(section, index) in faqSections"
-                        :key="`${section.title}-${index}`"
-                        :name="String(index)"
-                        class="faqs-card"
-                    >
-                        <template #title>
-                            <div class="faqs-card__header">
-                                <div class="faqs-card__icon">
-                                    <van-icon name="question-o" />
-                                </div>
-
-                                <div class="faqs-card__title">
-                                    {{ section.title }}
-                                </div>
-                            </div>
-                        </template>
-
-                        <div
-                            v-if="section.content"
-                            class="faqs-card__content rich-content"
-                            v-html="section.content"
-                        ></div>
-                    </van-collapse-item>
-                </van-collapse>
-            </section>
-
-            <div v-else class="faqs-fallback rich-content">
-                {{ $t("faq") }}
-            </div>
-        </div>
-    </div>
+    <main class="faqs-content">
+      <template v-for="section in faqSections" :key="section.title">
+        <h2>{{ section.title }}</h2>
+        <p v-for="item in section.items" :key="item">{{ item }}</p>
+      </template>
+    </main>
+  </div>
 </template>
 
 <script setup>
-import { computed, ref, watch } from "vue";
+import PageTopBar from "@/components/PageTopBar.vue";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-
-const activeNames = ref([]);
-const { tm } = useI18n();
-
-const faqSections = computed(() => {
-    const sections = tm("faq_sections");
-    return Array.isArray(sections) ? sections : [];
-});
-
-watch(
-    faqSections,
-    (val) => {
-        activeNames.value = val
-            .slice(0, Math.min(3, val.length))
-            .map((_, index) => String(index));
-    },
-    { immediate: true },
-);
-
+const { t } = useI18n();
+const faqSections = computed(() => [
+  { title: t("faq_mission_title"), items: [t("faq_mission_1"), t("faq_mission_2"), t("faq_mission_3")] },
+  { title: t("withdrawal"), items: [t("faq_withdraw_1"), t("faq_withdraw_2"), t("faq_withdraw_3"), t("faq_withdraw_4"), t("faq_withdraw_5")] },
+  { title: t("faq_funds_title"), items: [t("faq_funds_1"), t("faq_funds_2")] },
+]);
 const onClickLeft = () => {
-    history.back();
+  history.back();
 };
 </script>
 
 <style scoped>
-.faqs-page {
-    min-height: 100vh;
-    background: #edf4ef;
+.faqs-design-page {
+  min-height: 100vh;
+  background: #eef2f8;
+  color: #050505;
+  font-family: inherit;
 }
 
-.faqs-body {
-    padding: 78px 16px 24px;
+.design-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: 52px;
+  display: grid;
+  grid-template-columns: 56px 1fr 56px;
+  align-items: center;
+  background: #030303;
+  color: #fff;
 }
 
-.faqs-hero {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-radius: 18px;
-    padding: 14px 14px;
-    background: var(--theme-button-gradient);
-    color: #fff;
-    box-shadow: 0 16px 28px rgba(31, 132, 64, 0.16);
+.design-title {
+  text-align: center;
+  font-size: 17px;
+  line-height: 22px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
-.faqs-hero__icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.14);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: #ff3e3e;
-    font-weight: 700;
-    position: relative;
-    z-index: 1;
+.design-back {
+  width: 52px;
+  height: 52px;
+  border: 0;
+  background: transparent;
+  position: relative;
 }
 
-.faqs-hero__content {
-    position: relative;
-    z-index: 1;
+.design-back::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 18px;
+  width: 13px;
+  height: 13px;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  transform: rotate(45deg);
+  border-radius: 1px;
 }
 
-.faqs-hero__title {
-    font-size: 19px;
-    line-height: 26px;
-    font-weight: 500;
+.faqs-content {
+  padding: 27px 19px 30px;
 }
 
-.faqs-hero__desc {
-    margin-top: 2px;
-    color: rgba(255, 255, 255, 0.82);
-    font-size: 12px;
-    line-height: 18px;
+.faqs-content h2 {
+  margin: 0 0 26px;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 800;
 }
 
-.faqs-hero__orb {
-    position: absolute;
-    right: -20px;
-    top: -24px;
-    width: 82px;
-    height: 82px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
+.faqs-content p {
+  margin: 0 0 33px;
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
-.faqs-accordion,
-.faqs-fallback {
-    margin-top: 14px;
-}
-
-.faqs-collapse {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background: transparent;
-}
-
-.faqs-card,
-.faqs-fallback {
-    overflow: hidden;
-    border-radius: 18px;
-    border: 1px solid #d8e9da;
-    background: #fff;
-    box-shadow: 0 10px 22px rgba(26, 77, 42, 0.05);
-}
-
-.faqs-card__header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.faqs-card__icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 10px;
-    background: rgba(34, 160, 80, 0.08);
-    color: #2ca24d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-}
-
-.faqs-card__title {
-    flex: 1;
-    min-width: 0;
-    color: #1f2b1f;
-    font-size: 15px;
-    line-height: 22px;
-    font-weight: 500;
-}
-
-.faqs-card__content,
-.faqs-fallback {
-    color: #607861;
-}
-
-.rich-content :deep(*) {
-    box-sizing: border-box;
-}
-
-.rich-content :deep(p),
-.rich-content :deep(li) {
-    margin: 0 0 10px;
-    color: #607861;
-    font-size: 13px;
-    line-height: 24px;
-}
-
-.rich-content :deep(p:last-child),
-.rich-content :deep(li:last-child) {
-    margin-bottom: 0;
-}
-
-.rich-content :deep(ul),
-.rich-content :deep(ol) {
-    margin: 0 0 10px;
-    padding-left: 18px;
-}
-
-.rich-content :deep(table) {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 8px;
-}
-
-.rich-content :deep(td),
-.rich-content :deep(th) {
-    background: #eef6ef;
-    padding: 12px;
-    font-size: 13px;
-    line-height: 20px;
-    color: #314531;
-}
-
-.rich-content :deep(td:first-child),
-.rich-content :deep(th:first-child) {
-    border-radius: 10px 0 0 10px;
-}
-
-.rich-content :deep(td:last-child),
-.rich-content :deep(th:last-child) {
-    border-radius: 0 10px 10px 0;
-}
-
-.faqs-fallback {
-    padding: 16px 14px;
-}
-
-:deep(.faqs-nav .van-nav-bar) {
-    background: #fff;
-}
-
-:deep(.faqs-nav .van-nav-bar__title) {
-    color: #202c20;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-:deep(.faqs-nav .van-icon-arrow-left) {
-    color: #27a14c;
-    font-size: 22px;
-}
-
-:deep(.faqs-collapse .van-cell) {
-    align-items: center;
-    padding: 14px;
-    background: #fff;
-}
-
-:deep(.faqs-collapse .van-collapse-item__title--expanded) {
-    background: rgba(34, 160, 80, 0.04) !important;
-}
-
-:deep(.faqs-collapse .van-cell::after) {
-    display: none;
-}
-
-:deep(.faqs-collapse .van-collapse-item__content) {
-    padding: 0 14px 14px;
-    background: #fff;
-}
-
-:deep(.faqs-collapse .van-icon-arrow) {
-    color: #6d8d70;
-}
+.faqs-content p:nth-of-type(3) { margin-bottom: 52px; }
+.faqs-content p:nth-of-type(8) { margin-bottom: 54px; }
 </style>

@@ -1,5 +1,6 @@
 <template>
     <div ref="appFrameRef" class="app-frame">
+        <AppLoadingScreen :visible="initialGlobalLoading" />
         <router-view
             class="app-route-view text-white font-normal dark:text-[#303133] text-sm w-full overflow-scroll"
             :class="{
@@ -51,6 +52,7 @@ import {
 import { useRoute, useRouter } from "vue-router";
 import { useCurrentLang } from "vant";
 import Footer from "@/components/Footer.vue";
+import AppLoadingScreen from "@/components/AppLoadingScreen.vue";
 
 BigNumber.config({
     DECIMAL_PLACES: 10,
@@ -69,6 +71,7 @@ const newStageRef = ref(null);
 const stackAnimating = ref(false);
 const stackActive = ref(false);
 const stackDirection = ref("forward");
+const initialGlobalLoading = ref(true);
 const mainTabPaths = ["/", "/vips", "/starting", "/records", "/my"];
 const routePathStackKey = "route-path-stack";
 const explicitBackRouteTargets = {
@@ -239,14 +242,24 @@ function freezeFixedState(source, clone, frameRect) {
 
     const computedStyle = window.getComputedStyle(source);
     if (computedStyle.position === "fixed") {
+        const isTopBar =
+            source.classList.contains("main-tab-top-bar") ||
+            source.classList.contains("page-top-bar");
+        const isFooter =
+            source.classList.contains("pc-fixed-footer") ||
+            source.classList.contains("algofy-footer");
         const rect = source.getBoundingClientRect();
         clone.style.position = "absolute";
-        clone.style.top = `${rect.top - frameRect.top}px`;
-        clone.style.left = `${rect.left - frameRect.left}px`;
+        clone.style.top = isTopBar ? "0px" : `${rect.top - frameRect.top}px`;
+        clone.style.left = isTopBar
+            ? "0px"
+            : isFooter
+              ? "0px"
+              : `${rect.left - frameRect.left}px`;
         clone.style.width = `${rect.width}px`;
         clone.style.height = `${rect.height}px`;
-        clone.style.right = "auto";
-        clone.style.bottom = "auto";
+        clone.style.right = isFooter ? "0px" : "auto";
+        clone.style.bottom = isFooter ? "0px" : "auto";
         clone.style.margin = "0";
         clone.style.transform = "none";
         clone.style.zIndex = computedStyle.zIndex;
@@ -438,6 +451,10 @@ watch(
 if (commonStore.lang) locale.value = commonStore.lang;
 
 onMounted(() => {
+    window.setTimeout(() => {
+        initialGlobalLoading.value = false;
+    }, 650);
+
     routePathStack = loadRoutePathStack(route.path);
     saveRoutePathStack();
 
@@ -633,7 +650,7 @@ onBeforeUnmount(() => {
 
 .app-route-view--with-footer {
     box-sizing: border-box;
-    padding-bottom: 88px;
+    padding-bottom: 86px;
 }
 
 .app-route-view--stacking {

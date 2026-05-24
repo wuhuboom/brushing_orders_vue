@@ -1,8 +1,8 @@
 <template>
-    <div class="records-page min-h-[100vh] bg-[#f5faf6] text-[#111]">
-        <PageTopBar :title="$t('task_center')" />
+    <div class="records-page min-h-[100vh] bg-[#eef2f8] text-[#111]">
+        <MainTabTopBar :title="$t('orders')" />
 
-        <main class="px-[16px] pb-[88px] pt-[88px]">
+        <main class="records-main px-[16px] pb-[88px] pt-[114px]">
             <div
                 ref="refreshZoneRef"
                 class="records-refresh-zone"
@@ -37,7 +37,7 @@
                     </div> -->
                 </section>
 
-                <section class="mt-[12px] flex gap-[8px]">
+                <section class="records-tabs mt-[10px] flex gap-[8px]">
                     <button
                         v-for="tab in tabs"
                         :key="tab.value"
@@ -58,51 +58,82 @@
                         :key="item.id || item.orderNo"
                         class="task-card"
                     >
-                        <div
-                            class="relative h-[70px] w-[70px] shrink-0 overflow-hidden rounded-[6px] bg-[#f2f4f2]"
-                        >
-                            <img
-                                v-if="getCoverUrl(item.coverUrl)"
-                                class="h-full w-full object-cover"
-                                :src="getCoverUrl(item.coverUrl)"
-                                alt=""
-                            />
-                            <span
-                                class="status-dot"
-                                :class="statusMeta(item.status).dotClass"
-                            ></span>
-                        </div>
-
-                        <div class="min-w-0 flex-1 px-[12px]">
-                            <div
-                                class="truncate text-[14px] font-medium leading-[19px]"
-                            >
-                                {{ item.goodsName || "--" }}
+                        <div class="task-card__head">
+                            <div class="task-card__time">
+                                {{
+                                    formatWithTimezone(
+                                        item.createTime,
+                                        userStore.zoneActive.tzName,
+                                    )
+                                }}
                             </div>
                             <div
-                                class="mt-[6px] text-[12px] leading-[16px] text-[#48564d]"
+                                class="task-card__status"
+                                :class="statusMeta(item.status).pillClass"
                             >
-                                {{ $t("price") }}:${{ formatMoney(item.price) }}
-                            </div>
-                            <div
-                                class="mt-[5px] text-[12px] leading-[16px] text-[#111]"
-                            >
-                                {{ $t("commission") }}:
-                                <span class="font-medium text-[#159947]">
-                                    +${{ formatMoney(item.commission) }}
-                                </span>
+                                {{ statusMeta(item.status).label }}
                             </div>
                         </div>
 
-                        <button
-                            class="grab-btn"
-                            :class="statusMeta(item.status).buttonClass"
-                            :disabled="!isOrderSubmittable(item.status)"
-                            type="button"
-                            @click="handleOrderAction(item)"
-                        >
-                            {{ statusMeta(item.status).label }}
-                        </button>
+                        <div class="task-card__body">
+                            <div
+                                class="task-card__cover relative overflow-hidden rounded-[6px] bg-[#f2f4f2]"
+                            >
+                                <img
+                                    v-if="getCoverUrl(item.coverUrl)"
+                                    class="h-full w-full object-cover"
+                                    :src="getCoverUrl(item.coverUrl)"
+                                    alt=""
+                                />
+                            </div>
+
+                            <div class="min-w-0 flex-1">
+                                <div
+                                    class="truncate text-[14px] font-medium leading-[19px]"
+                                >
+                                    {{ item.goodsName || "--" }}
+                                </div>
+                                <div class="task-card__subtitle">
+                                    {{
+                                        item.goodsDesc || item.goodsName || "--"
+                                    }}
+                                </div>
+                                <div class="task-card__price">
+                                    USD {{ formatMoney(item.price) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-card__foot">
+                            <div class="task-card__metrics">
+                                <div class="task-card__metric">
+                                    <div class="task-card__metric-label">
+                                        {{ $t("order_amount") }}
+                                    </div>
+                                    <div class="task-card__metric-value">
+                                        USD {{ formatMoney(orderAmount(item)) }}
+                                    </div>
+                                </div>
+                                <div class="task-card__metric">
+                                    <div class="task-card__metric-label">
+                                        {{ $t("commission") }}
+                                    </div>
+                                    <div class="task-card__metric-value">
+                                        USD {{ formatMoney(item.commission) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button
+                                v-if="isOrderSubmittable(item.status)"
+                                class="grab-btn"
+                                :class="statusMeta(item.status).buttonClass"
+                                type="button"
+                                @click="handleOrderAction(item)"
+                            >
+                                {{ statusMeta(item.status).actionText }}
+                            </button>
+                        </div>
                     </article>
 
                     <div
@@ -127,63 +158,36 @@
                             'records-list-loading--inline': list.length,
                         }"
                     >
-                        <span class="records-list-loading__dot"></span>
+                        <div class="records-list-loading__wave" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
-        <TaskOrderDialog
+        <MissionSubmissionPopup
             v-model="show"
-            :title="$t('complete_the_order')"
-            :step="submitStep"
-            :step-labels="taskStepLabels"
-            :product-name="goodsData.goodsName"
-            :cover-url="getCoverUrl(goodsData.coverUrl)"
-            :amount-label="$t('order_amount')"
-            :amount-text="`$${formatMoney(goodsData.price)}`"
-            :commission-label="$t('commission')"
-            :commission-text="`+$${formatMoney(goodsData.commission)}`"
-            :success-message="$t('task_completed_successfully')"
-            :show-warning="showInsufficientWarning"
-            :warning-text="$t('insufficient_balance_please')"
-            :warning-action-text="$t('recharge')"
-            :action-text="
-                submitStep === 2
-                    ? $t('complete_the_order')
-                    : $t('continue_tasks')
+            :product-name="
+                goodsData.goodsName || 'NIKE Dunk Low Retro Men\'s Shoe'
             "
-            :action-loading="submitStep === 2 && isSubmitting"
-            :action-disabled="submitStep === 2 && isSubmitting"
+            :cover-url="getCoverUrl(goodsData.coverUrl)"
+            :score-text="goodsData.score || goodsData.rate || '4.9'"
+            :review-text="recordReviewText"
+            :price-text="formatMoney(goodsData.price)"
+            :total-amount-text="formatMoney(orderAmount(goodsData))"
+            :commission-text="formatMoney(goodsData.commission)"
+            :create-time-text="recordCreateTimeText"
+            :order-no-text="goodsData.orderNo || '--'"
+            :submitting="isSubmitting"
             @back="show = false"
-            @closed="resetSubmitDialog"
-            @primary="submitStep === 2 ? submitVal() : (show = false)"
-            @warning-action="goRecharge"
-        >
-            <template #panel="{ step }">
-                <div v-if="step === 2" class="record-task-panel">
-                    <div class="record-task-panel__heading">
-                        {{ $t("place_order") }}
-                    </div>
-                    <div class="record-order-card">
-                        <div class="record-order-card__label">
-                            {{ $t("order_id") }}
-                        </div>
-                        <div class="record-order-card__id">
-                            #{{ goodsData.orderNo }}
-                        </div>
-                    </div>
-                    <div class="record-order-card__time">
-                        {{ $t("creation_at_colon") }}
-                        {{
-                            formatWithTimezone(
-                                goodsData.createTime,
-                                userStore.zoneActive.tzName,
-                            )
-                        }}
-                    </div>
-                </div>
-            </template>
-        </TaskOrderDialog>
+            @submit="submitVal"
+        />
     </div>
 </template>
 
@@ -193,8 +197,8 @@ import { useRouter } from "vue-router";
 import { showFailToast, showSuccessToast } from "@/util/message";
 import { useI18n } from "vue-i18n";
 
-import PageTopBar from "@/components/PageTopBar.vue";
-import TaskOrderDialog from "@/components/TaskOrderDialog.vue";
+import MainTabTopBar from "@/components/MainTabTopBar.vue";
+import MissionSubmissionPopup from "@/components/MissionSubmissionPopup.vue";
 import { getOrderInfos, submitOrder } from "@/api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { errorMessages } from "@/api/errorCodeMap";
@@ -242,6 +246,23 @@ const taskStepLabels = computed(() => [
     t("submit_proof"),
 ]);
 
+const recordReviewText = computed(() => {
+    const count =
+        goodsData.value?.reviewCount ??
+        goodsData.value?.commentCount ??
+        goodsData.value?.saleCount ??
+        123;
+    return `${count} ${t("reviews")}`;
+});
+
+const recordCreateTimeText = computed(() => {
+    if (!goodsData.value?.createTime) return "2025-06-15 19:38:44";
+    return formatWithTimezone(
+        goodsData.value.createTime,
+        userStore.zoneActive.tzName,
+    );
+});
+
 const completedCount = computed(() =>
     Number(userStore.userInfo?.dealCount || 0),
 );
@@ -271,6 +292,8 @@ function statusMeta(status) {
             label: t("record_status_completed"),
             dotClass: "status-dot--done",
             buttonClass: "grab-btn--completed",
+            pillClass: "task-card__status--completed",
+            actionText: t("record_status_completed"),
         };
     }
 
@@ -279,14 +302,22 @@ function statusMeta(status) {
             label: t("record_status_frozen"),
             dotClass: "status-dot--frozen",
             buttonClass: "grab-btn--frozen",
+            pillClass: "task-card__status--frozen",
+            actionText: t("record_status_frozen"),
         };
     }
 
     return {
-        label: t("record_status_to_submit"),
+        label: t("pending"),
         dotClass: "status-dot--pending",
         buttonClass: "grab-btn--pending",
+        pillClass: "task-card__status--pending",
+        actionText: t("record_status_to_submit"),
     };
+}
+
+function orderAmount(item) {
+    return item?.orderAmount ?? item?.amount ?? item?.price ?? 0;
 }
 
 async function resetAndLoad() {
@@ -442,7 +473,7 @@ async function submitVal() {
             if (res.code == 201) {
                 goodsData.value = res.data;
             }
-            submitStep.value = 3;
+            show.value = false;
         } catch (err) {
             if (err.code == 916) {
                 showInsufficientWarning.value = true;
@@ -487,8 +518,151 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.task-card__head,
+.task-card__body,
+.task-card__foot,
+.task-card__metrics {
+    display: flex;
+}
+
+.task-card__head,
+.task-card__foot {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task-card__body {
+    margin-top: 20px;
+    gap: 12px;
+}
+
+.task-card__foot {
+    margin-top: 28px;
+    gap: 12px;
+}
+
+.task-card__cover {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 12px;
+}
+
+.task-card__time {
+    color: #69758a;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.task-card__status {
+    min-width: 102px;
+    height: 24px;
+    padding: 0 14px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.task-card__status--pending,
+.task-card__status--frozen {
+    background: #ff4947;
+}
+
+.task-card__status--completed {
+    background: #3d4ce4;
+}
+
+.task-card__subtitle {
+    margin-top: 8px;
+    color: #717b8f;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.task-card__price {
+    margin-top: 10px;
+    color: #3552ea;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+}
+
+.task-card__metrics {
+    gap: 22px;
+    min-width: 0;
+}
+
+.task-card__metric-label {
+    color: #69758a;
+    font-size: 14px;
+    line-height: 18px;
+    white-space: nowrap;
+}
+
+.task-card__metric-value {
+    margin-top: 8px;
+    color: #000;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+@media (max-width: 767px) {
+    .records-main {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .records-main {
+        max-width: var(--app-pc-max-width, 375px);
+        margin: 0 auto;
+    }
+}
+</style>
+
+<style scoped>
 .records-page {
     font-family: "Montserrat", "Poppins", sans-serif;
+}
+
+.records-page :deep(.page-top-bar) {
+    height: 104px;
+    padding-top: 0;
+    background: #151515;
+}
+
+.records-page :deep(.page-top-bar::before) {
+    background: #151515 url("@/static/images/auth/algofy-register-hero.png")
+        center top / cover no-repeat;
+    opacity: 1;
+}
+
+.records-page :deep(.page-top-bar__title) {
+    align-items: flex-end;
+    padding-top: 0;
+    padding-bottom: 20px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+}
+
+.records-page :deep(.page-top-bar__side) {
+    align-items: flex-start;
+    padding-top: 34px;
+}
+
+.records-main {
+    max-width: none;
+    margin: 0;
 }
 
 .records-refresh-zone,
@@ -523,98 +697,121 @@ onUnmounted(() => {
     min-height: 72px;
 }
 
-.records-list-loading__dot {
+.records-list-loading__wave {
     position: relative;
-    display: block;
-    width: 12px;
-    height: 12px;
-    border-radius: 999px;
-    background: var(--theme-primary);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    width: 68px;
+    height: 44px;
+    padding-bottom: 6px;
 }
 
-.records-list-loading__dot::before,
-.records-list-loading__dot::after {
-    position: absolute;
-    inset: 0;
+.records-list-loading__wave::before {
     content: "";
-    border-radius: inherit;
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 4px;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(
+        90deg,
+        rgba(138, 243, 255, 0.06) 0%,
+        rgba(75, 151, 255, 0.18) 50%,
+        rgba(53, 67, 236, 0.06) 100%
+    );
 }
 
-.records-list-loading__dot::before {
-    background: var(--theme-loading-pulse);
-    animation: records-loading-pulse 1.05s cubic-bezier(0.25, 0.1, 0.25, 1)
-        infinite;
+.records-list-loading__wave span {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 4px;
+    height: 16px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #8af3ff 0%, #4b97ff 34%, #2f7bff 68%, #3543ec 100%);
+    box-shadow: 0 5px 12px rgba(47, 123, 255, 0.22);
+    transform-origin: center bottom;
+    animation: records-loading-wave 1s ease-in-out infinite;
 }
 
-.records-list-loading__dot::after {
-    background: var(--theme-primary);
-    transform: scale(0.62);
-    animation: records-loading-core 1.05s cubic-bezier(0.25, 0.1, 0.25, 1)
-        infinite;
+.records-list-loading__wave span:nth-child(1) {
+    height: 12px;
+    animation-delay: -0.36s;
 }
 
-@keyframes records-loading-pulse {
-    0% {
-        transform: scale(0.55);
-        opacity: 0.95;
-    }
-    38% {
-        transform: scale(2.35);
-        opacity: 0.72;
-    }
-    72% {
-        transform: scale(2.95);
-        opacity: 0.12;
-    }
-    100% {
-        transform: scale(0.55);
-        opacity: 0.95;
-    }
+.records-list-loading__wave span:nth-child(2) {
+    height: 18px;
+    animation-delay: -0.24s;
 }
 
-@keyframes records-loading-core {
+.records-list-loading__wave span:nth-child(3) {
+    height: 26px;
+    animation-delay: -0.12s;
+}
+
+.records-list-loading__wave span:nth-child(4) {
+    width: 5px;
+    height: 34px;
+    animation-delay: 0s;
+}
+
+.records-list-loading__wave span:nth-child(5) {
+    height: 26px;
+    animation-delay: 0.12s;
+}
+
+.records-list-loading__wave span:nth-child(6) {
+    height: 18px;
+    animation-delay: 0.24s;
+}
+
+.records-list-loading__wave span:nth-child(7) {
+    height: 12px;
+    animation-delay: 0.36s;
+}
+
+@keyframes records-loading-wave {
     0%,
     100% {
-        transform: scale(0.58);
-        opacity: 0.98;
+        transform: scaleY(0.58);
+        opacity: 0.5;
     }
-    45% {
-        transform: scale(0.42);
-        opacity: 0.78;
-    }
-    70% {
-        transform: scale(0.1);
-        opacity: 0.35;
+    50% {
+        transform: scaleY(1.16);
+        opacity: 1;
     }
 }
 
 .record-tab {
-    height: 32px;
-    min-width: 60px;
-    border: 1px solid #d9eadf;
-    border-radius: 999px;
+    height: 36px;
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    border-radius: 10px;
     background: #fff;
-    color: #6b806f;
-    font-size: 12px;
-    font-weight: 500;
+    color: #69758a;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: none;
 }
 
 .record-tab--active {
-    border-color: var(--theme-green-defalut);
-    background: var(--theme-green-defalut);
+    background: #2f63e8;
     color: #fff;
 }
 
 .task-card {
     position: relative;
-    display: flex;
-    min-height: 95px;
-    align-items: center;
-    border: 1px solid #d9eadf;
-    border-radius: 12px;
+    display: block;
+    min-height: 218px;
+    border: 0;
+    border-radius: 14px;
     background: #fff;
-    padding: 11px 12px;
-    box-shadow: 0 8px 20px rgba(19, 93, 43, 0.05);
+    padding: 20px 17px 18px;
+    box-shadow: 0 2px 6px rgba(20, 30, 50, 0.04);
 }
 
 .status-dot {
@@ -653,14 +850,15 @@ onUnmounted(() => {
 
 .grab-btn {
     display: flex;
-    height: 34px;
-    min-width: 88px;
+    height: 36px;
+    /*min-width: 133px;*/
     align-items: center;
     justify-content: center;
-    border-radius: 7px;
+    border-radius: 9px;
     color: #fff;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 .grab-btn:disabled {
@@ -1019,7 +1217,6 @@ onUnmounted(() => {
     }
 }
 
-
 :global(.van-dialog.task-order-dialog-panel--mobile) {
     left: 0 !important;
     right: 0 !important;
@@ -1051,6 +1248,285 @@ onUnmounted(() => {
     .record-product-card__thumb {
         width: 82px;
         height: 82px;
+    }
+}
+
+/* ALGOFY orders design restoration */
+.records-page {
+    min-height: 100vh !important;
+    background: #eef2f8 !important;
+    color: #111111 !important;
+}
+
+.records-page :deep(.page-top-bar) {
+    height: 104px !important;
+    padding-top: 0 !important;
+    grid-template-columns: 72px minmax(0, 1fr) 72px !important;
+    background: #171717 !important;
+}
+
+.records-page :deep(.page-top-bar::before) {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(18, 18, 18, 0.12) 100%
+        ),
+        #171717 url("@/static/images/auth/algofy-register-hero.png") center
+            top / cover no-repeat !important;
+    opacity: 1 !important;
+}
+
+.records-page :deep(.page-top-bar__title) {
+    align-items: flex-end !important;
+    padding-bottom: 19px !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    line-height: 20px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.055em !important;
+}
+
+.records-page main {
+    padding: var(--main-tab-top-bar-height, 104px) 16px 96px !important;
+}
+
+.records-refresh-zone {
+    padding-top: 0 !important;
+}
+
+.records-refresh-tip {
+    color: #7a8495 !important;
+}
+
+.task-summary {
+    display: none !important;
+}
+
+.records-page section.mt-\[12px\] {
+    margin-top: 0 !important;
+    gap: 8px !important;
+}
+
+.record-tab {
+    flex: 1 1 0 !important;
+    height: 36px !important;
+    min-width: 0 !important;
+    border: 0 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    color: #69758a !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+}
+
+.record-tab--active {
+    background: #2f62e9 !important;
+    color: #ffffff !important;
+}
+
+.records-touch-area {
+    margin-top: 12px !important;
+}
+
+.records-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+}
+
+.records-list.space-y-\[12px\] > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.task-card {
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    padding: 18px 17px 18px !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    background: #ffffff !important;
+    box-shadow: 0 2px 7px rgba(29, 42, 70, 0.06) !important;
+}
+
+.task-card__head {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.task-card__time {
+    color: #69758a !important;
+    font-size: 15px !important;
+    line-height: 20px !important;
+    font-weight: 500 !important;
+}
+
+.task-card__status {
+    min-width: 92px !important;
+    height: 24px !important;
+    padding: 0 15px !important;
+    border-radius: 999px !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    line-height: 20px !important;
+    font-weight: 500 !important;
+}
+
+.task-card__status--pending,
+.task-card__status--frozen {
+    background: #f34848 !important;
+}
+
+.task-card__status--completed {
+    background: #3345e5 !important;
+}
+
+.task-card__body {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    margin-top: 22px !important;
+}
+
+.task-card__cover {
+    width: 80px !important;
+    height: 80px !important;
+    flex: 0 0 80px !important;
+    border-radius: 8px !important;
+    background: #f2f4f7 !important;
+}
+
+.task-card__cover img {
+    object-fit: cover !important;
+}
+
+.task-card__body .min-w-0 {
+    padding-top: 0 !important;
+}
+
+.task-card__body .truncate {
+    max-width: 100% !important;
+    color: #050505 !important;
+    font-size: 15px !important;
+    line-height: 20px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
+}
+
+.task-card__subtitle {
+    margin-top: 7px !important;
+    color: #717b8e !important;
+    font-size: 13px !important;
+    line-height: 17px !important;
+    font-weight: 500 !important;
+}
+
+.task-card__price {
+    margin-top: 9px !important;
+    color: #2f62e9 !important;
+    font-size: 15px !important;
+    line-height: 20px !important;
+    font-weight: 800 !important;
+}
+
+.task-card__foot {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    margin-top: 26px !important;
+}
+
+.task-card__metrics {
+    display: flex !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    gap: 28px !important;
+}
+
+.task-card__metric {
+    min-width: 0 !important;
+}
+
+.task-card__metric-label {
+    color: #717b8e !important;
+    font-size: 13px !important;
+    line-height: 17px !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+}
+
+.task-card__metric-value {
+    margin-top: 8px !important;
+    color: #050505 !important;
+    font-size: 15px !important;
+    line-height: 20px !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+}
+
+.grab-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    /*width: 133px !important;
+    min-width: 133px !important;*/
+    height: 36px !important;
+    border: 0 !important;
+    border-radius: 8px !important;
+    color: #ffffff !important;
+    font-size: 15px !important;
+    line-height: 20px !important;
+    font-weight: 500 !important;
+    box-shadow: none !important;
+}
+
+.grab-btn--pending {
+    background: #2f62e9 !important;
+}
+
+.grab-btn--completed {
+    background: #3345e5 !important;
+}
+
+.grab-btn--frozen {
+    background: #f34848 !important;
+}
+
+@media (min-width: 420px) {
+    .records-page :deep(.page-top-bar::before) {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(18, 18, 18, 0.12) 100%
+            ),
+            #171717 url("@/static/images/auth/algofy-register-hero.png") center
+                top / cover no-repeat !important;
+    }
+}
+@media (max-width: 767px) {
+    .records-main {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+
+/* records pc width final override */
+@media (min-width: 768px) {
+    .records-main {
+        max-width: var(--app-pc-max-width, 375px);
+        margin: 0 auto;
     }
 }
 </style>

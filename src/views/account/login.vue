@@ -1,37 +1,26 @@
 <template>
-    <div class="auth-shell" :class="`auth-shell--lang-${currentLang.code}`">
-        <div class="auth-hero">
+    <div
+        class="auth-shell auth-shell--login-page"
+        :class="`auth-shell--lang-${currentLang.code}`"
+    >
+        <div class="auth-hero auth-hero--login">
             <img
                 class="auth-hero__image"
-                src="@/static/images/auth/auth-hero.png"
+                src="@/static/images/auth/algofy-login-hero.png"
                 alt=""
             />
-            <div class="auth-hero__overlay"></div>
             <div class="auth-lang" @click="handleChangeLang">
                 <span class="auth-lang__globe">◎</span>
                 <span class="auth-lang__flag">{{ currentLang.flag }}</span>
                 <span class="auth-lang__text">{{ currentLang.name }}</span>
                 <span class="auth-lang__arrow"></span>
             </div>
-            <div class="auth-hero__caption">
-                {{ $t("hello_welcome") }}
+            <div class="auth-brand">
+                <img src="@/static/images/logo.png" alt="" />
             </div>
         </div>
 
         <div class="auth-card auth-card--login">
-            <div
-                class="auth-switch auth-switch--login"
-                :class="{ 'auth-switch--to-register': switchLeaving }"
-            >
-                <div class="auth-switch__thumb"></div>
-                <div class="auth-switch__item auth-switch__item--active">
-                    {{ $t("login") }}
-                </div>
-                <div class="auth-switch__item" @click="toRegister">
-                    {{ $t("register") }}
-                </div>
-            </div>
-
             <el-form
                 ref="ruleFormRef"
                 :model="ruleForm"
@@ -40,73 +29,84 @@
                 label-width="0"
                 class="auth-form"
             >
-                <el-form-item prop="">
-                    <div class="auth-input">
-                        <img
-                            class="auth-input__icon"
-                            src="@/static/images/auth/auth-phone.png"
-                            alt=""
-                        />
-                        <el-input
-                            v-model.trim="ruleForm.username"
-                            type="text"
-                            :placeholder="$t('username_phone')"
-                            autocomplete="off"
-                            size="large"
-                        />
+                <div class="auth-field">
+                    <div class="auth-field__label">
+                        {{ $t("username") }}<span>*</span>
                     </div>
-                </el-form-item>
+                    <el-form-item prop="">
+                        <div class="auth-input">
+                            <el-input
+                                v-model.trim="ruleForm.username"
+                                type="text"
+                                :placeholder="$t('username')"
+                                autocomplete="off"
+                                size="large"
+                            />
+                        </div>
+                    </el-form-item>
+                </div>
 
-                <el-form-item prop="">
-                    <div class="auth-input">
-                        <img
-                            class="auth-input__icon"
-                            src="@/static/images/auth/auth-lock.png"
-                            alt=""
-                        />
-                        <el-input
-                            v-model="ruleForm.password"
-                            :placeholder="$t('password')"
-                            :type="showPassword ? 'text' : 'password'"
-                            autocomplete="off"
-                            size="large"
-                        >
-                            <template #suffix>
-                                <el-icon
-                                    class="auth-eye-icon"
-                                    @click.stop="showPassword = !showPassword"
-                                >
-                                    <Hide v-if="showPassword" />
-                                    <View v-else />
-                                </el-icon>
-                            </template>
-                        </el-input>
+                <div class="auth-field">
+                    <div class="auth-field__label">
+                        {{ $t("password") }}<span>*</span>
                     </div>
-                </el-form-item>
+                    <el-form-item prop="">
+                        <div class="auth-input">
+                            <el-input
+                                v-model="ruleForm.password"
+                                :placeholder="$t('password')"
+                                :type="showPassword ? 'text' : 'password'"
+                                autocomplete="off"
+                                size="large"
+                            />
+                        </div>
+                    </el-form-item>
+                </div>
             </el-form>
 
+            <div class="auth-meta auth-meta--login">
+                <label class="auth-check">
+                    <input v-model="rememberMe" type="checkbox" />
+                    <span class="auth-check__box"></span>
+                    <span>{{ $t("auto_remember_me") }}</span>
+                </label>
+                <!-- <span class="auth-meta__link">
+                    {{ $t("forgot_password_question") }}
+                </span> -->
+            </div>
+
             <div
-                class="auth-submit mt-[20px] mb-[22px]"
-                :class="{ 'auth-submit--disabled': !isLoginReady || isSubmitting }"
+                class="auth-submit"
+                :class="{
+                    'auth-submit--disabled': !isLoginReady || isSubmitting,
+                }"
                 :aria-disabled="!isLoginReady || isSubmitting"
                 @click="submitForm(ruleFormRef)"
             >
-                {{ $t("log_in") }}
+                {{ $t("auto_sign_in") }}
+            </div>
+
+            <div class="auth-footer">
+                <span class="auth-footer__muted">{{
+                    $t("don_t_have_an_account")
+                }}</span>
+                <span class="auth-footer__link" @click="toRegister">{{
+                    $t("auto_register")
+                }}</span>
             </div>
 
             <div class="auth-footer auth-footer--help">
                 <span class="auth-footer__muted">{{ $t("need_help") }}</span>
-                <span class="auth-footer__link" @click="customer">
-                    {{ $t("need_help_desc") }}
-                </span>
+                <span class="auth-footer__link" @click="customer">{{
+                    $t("auto_contact_customer")
+                }}</span>
             </div>
 
-            <!-- <div class="auth-footer">
-        <span class="auth-footer__muted">{{ $t("don_t_have_an_account") }}</span>
-        <span class="auth-footer__link" @click="toRegister">
-          {{ $t("register_now") }}
-        </span>
-      </div> -->
+            <div class="auth-copyright">
+                {{ $t("auto_copyright_2025_algofy_company") }}<br />{{
+                    $t("auto_all_rights_reserved")
+                }}
+            </div>
         </div>
 
         <Lang ref="langRef"></Lang>
@@ -117,11 +117,10 @@
 <script setup>
 import AppLoadingScreen from "@/components/AppLoadingScreen.vue";
 import Lang from "@/components/Lang.vue";
-import { Hide, View } from "@element-plus/icons-vue";
-import { computed, onMounted, reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { showFailToast, showToast } from "@/util/message";
 import { useCommonStore } from "@/store/modules/common";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { login, getTradeConfig } from "../../api/apis";
 import { checkWorkTimeLocal } from "../../util/utils";
@@ -129,7 +128,6 @@ import { useUserStore } from "@/store/modules/user";
 import { LANGS } from "@/config/lang";
 
 const router = useRouter();
-const route = useRoute();
 const { t } = useI18n();
 const ruleFormRef = ref(null);
 const userStore = useUserStore();
@@ -138,6 +136,7 @@ const switchLeaving = ref(false);
 const showPassword = ref(false);
 const isSubmitting = ref(false);
 const isCustomerLoading = ref(false);
+const rememberMe = ref(false);
 const ruleForm = reactive({
     email: "",
     password: "",
@@ -148,7 +147,9 @@ const rules = computed(() => {
     return {};
 });
 const currentLang = computed(() => LANGS[commonStore.lang] || LANGS.en);
-const isLoginReady = computed(() => Boolean(ruleForm.username && ruleForm.password));
+const isLoginReady = computed(() =>
+    Boolean(ruleForm.username && ruleForm.password),
+);
 
 function toRegister() {
     if (switchLeaving.value) return;
@@ -174,7 +175,9 @@ function submitForm(formEl) {
                     return router.push({ path: "/" });
                 })
                 .catch((err) => {
-                    showFailToast(err?.msg || err?.message || t("network_error"));
+                    showFailToast(
+                        err?.msg || err?.message || t("network_error"),
+                    );
                 })
                 .finally(() => {
                     isSubmitting.value = false;
@@ -195,8 +198,6 @@ const tradeConfig = async () => {
 };
 
 const ensureTradeConfig = async () => {
-    // 每次点击 Contact Customer Service 都重新请求最新客服时间配置，
-    // 避免使用上一次缓存导致必须刷新页面才会重新判断。
     return tradeConfig();
 };
 
@@ -241,53 +242,49 @@ const customer = async () => {
 <style scoped>
 .auth-shell {
     min-height: 100vh;
-    background: linear-gradient(180deg, #eff8f1 0%, #f5faf6 42%, #f5faf6 100%);
+    background: #161616 !important;
     position: relative;
     overflow: hidden;
+    color: #ffffff;
+}
+
+.auth-shell--login-page {
+    background: #161616 !important;
 }
 
 .auth-hero {
     position: relative;
-    height: 220px;
+    height: 323px;
+    background: #161616;
+    overflow: hidden;
+}
+
+.auth-shell--login-page .auth-brand {
+    display: none;
 }
 
 .auth-hero__image {
     width: 100%;
-    height: 198px;
+    height: 323px;
     object-fit: cover;
+    object-position: center top;
     display: block;
 }
 
-.auth-hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        180deg,
-        rgba(28, 159, 75, 0.18) 0%,
-        rgba(245, 250, 246, 0) 80%
-    );
-}
-
-.auth-hero__caption {
-    position: absolute;
-    left: 50%;
-    top: 168px;
-    transform: translateX(-50%);
-    color: #199346;
-    font-size: 12px;
-    line-height: 18px;
-    white-space: nowrap;
+.auth-brand {
+    display: none;
 }
 
 .auth-lang {
     position: absolute;
-    top: 18px;
-    right: 22px;
+    top: 20px;
+    right: 18px;
+    z-index: 5;
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    width: 156px;
     height: 42px;
-    min-width: 156px;
     padding: 0 11px;
     border: 1px solid rgba(34, 160, 80, 0.18);
     border-radius: 999px;
@@ -295,8 +292,8 @@ const customer = async () => {
     color: #1d2b21;
     font-size: 14px;
     font-weight: 700;
-    z-index: 2;
     box-shadow: 0 8px 22px rgba(32, 125, 59, 0.1);
+    box-sizing: border-box;
 }
 
 .auth-lang__globe {
@@ -319,7 +316,6 @@ const customer = async () => {
     border-radius: 2px;
     overflow: hidden;
     background: center / contain no-repeat;
-    box-shadow: 0 0 0 1px rgba(20, 80, 36, 0.08);
     flex: 0 0 20px;
     font-size: 0;
     line-height: 0;
@@ -329,7 +325,10 @@ const customer = async () => {
     background-image: url("@/static/images/lang/en.png");
 }
 
-.auth-shell--lang-zh .auth-lang__flag {
+.auth-shell--lang-zh .auth-lang__flag,
+.auth-shell--lang-zh-TW .auth-lang__flag,
+.auth-shell--lang-zhTw .auth-lang__flag,
+.auth-shell--lang-zh-tw .auth-lang__flag {
     background-image: url("@/static/images/lang/zh.png");
 }
 
@@ -372,102 +371,57 @@ const customer = async () => {
 
 .auth-card {
     position: relative;
-    margin: -14px 24px 0;
-    padding: 0 0 28px;
-    /*background: rgba(255, 253, 248, 0.9);*/
+    margin: 0;
+    padding: 0px 25px 34px;
+    background: #161616 !important;
+    color: #dde1ef;
+    box-shadow: none !important;
+    border: 0 !important;
 }
 
 .auth-card--login {
-    min-height: calc(100vh - 206px);
-}
-
-.auth-switch {
-    display: flex;
-    position: relative;
-    padding: 4px;
-    border-radius: 14px;
-    background: #ebf8ee;
-    margin-bottom: 24px;
-    overflow: hidden;
-}
-
-.auth-switch__thumb {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: calc(50% - 4px);
-    height: 41px;
-    border-radius: 11px;
-    background: var(--theme-primary);
-    box-shadow: 0 3px 8px var(--theme-button-shadow);
-    transition:
-        transform 0.22s ease,
-        box-shadow 0.22s ease;
-}
-
-.auth-switch__item {
-    position: relative;
-    z-index: 1;
-    flex: 1;
-    height: 41px;
-    border-radius: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #789680;
-    font-size: 14px;
-}
-
-.auth-switch__item--active {
-    color: #fff;
-}
-
-.auth-switch--to-register .auth-switch__thumb {
-    transform: translateX(calc(100% + 4px));
-}
-
-.auth-switch--to-register .auth-switch__item:first-child {
-    color: #789680;
-}
-
-.auth-switch--to-register .auth-switch__item:last-child {
-    color: #fff;
-}
-
-.auth-title {
-    font-size: 28px;
-    line-height: 1.2;
-    font-weight: 700;
-    color: #153822;
-    margin-bottom: 20px;
+    min-height: calc(100vh - 323px);
+    box-sizing: border-box;
 }
 
 .auth-form :deep(.el-form-item) {
-    margin-bottom: 14px;
+    margin-bottom: 0;
 }
 
 .auth-form :deep(.el-form-item__content) {
     line-height: normal;
 }
 
+.auth-field + .auth-field {
+    margin-top: 20px;
+}
+
+.auth-field__label {
+    margin-bottom: 12px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 400;
+    font-size: 15px;
+    color: #dbe2eb;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.auth-field__label span {
+    color: #ff1d1d;
+}
+
 .auth-input {
     display: flex;
     align-items: center;
-    gap: 10px;
     width: 100%;
-    height: 51px;
-    padding: 0 14px 0 16px;
-    border: 1px solid rgba(34, 160, 80, 0.2);
-    border-radius: 14px;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(34, 160, 80, 0.06);
+    height: 62px;
+    padding: 0 14px;
+    border: 1px solid #cfd6e2;
+    border-radius: 8px;
+    background: #ffffff;
     overflow: hidden;
-}
-
-.auth-input__icon {
-    width: 16px;
-    height: 16px;
-    flex: 0 0 16px;
+    box-sizing: border-box;
 }
 
 .auth-input :deep(.el-input) {
@@ -484,17 +438,23 @@ const customer = async () => {
 }
 
 .auth-input :deep(.el-input__inner) {
-    height: 49px;
-    font-size: 14px;
-    color: #142819;
+    height: 60px;
     border: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
     outline: none !important;
+
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 15px;
+    color: #191919;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .auth-input :deep(.el-input__inner::placeholder) {
-    color: rgba(20, 40, 25, 0.5);
+    color: #b4bac8;
 }
 
 .auth-input :deep(.el-input__wrapper.is-focus) {
@@ -503,18 +463,7 @@ const customer = async () => {
 
 .auth-input :deep(.el-input__suffix),
 .auth-input :deep(.el-input__prefix) {
-    display: flex;
-    align-items: center;
-}
-
-.auth-input :deep(.el-input__suffix-inner) {
-    color: #8caa94;
-}
-
-.auth-eye-icon {
-    font-size: 18px;
-    color: #8caa94;
-    cursor: pointer;
+    display: none !important;
 }
 
 .auth-meta,
@@ -522,49 +471,112 @@ const customer = async () => {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 4px;
-    font-size: 12px;
-    line-height: 18px;
+    gap: 5px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .auth-meta {
-    margin: 0 0 18px;
+    margin: 28px 0 36px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .auth-footer {
-    margin-top: 18px;
+    margin-top: 23px;
+}
+
+.auth-footer--help {
+    margin-top: 23px;
 }
 
 .auth-meta__muted,
 .auth-footer__muted {
-    color: #8caa94;
+    color: #dde1ef;
 }
 
 .auth-meta__link,
 .auth-footer__link {
-    color: var(--theme-primary);
+    color: #778ff9;
+}
+
+.auth-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    color: #dbe2eb;
+    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.auth-check input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.auth-check__box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #dde1ef;
+    border-radius: 4px;
+    background: transparent;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.auth-check input:checked + .auth-check__box::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 6px;
+    height: 11px;
+    border-right: 2px solid #506eff;
+    border-bottom: 2px solid #506eff;
+    transform: rotate(40deg);
 }
 
 .auth-submit {
-    height: 56px;
-    border-radius: 14px;
+    height: 62px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--theme-primary);
-    /*box-shadow: 0 4px 16px var(--theme-button-shadow-strong);*/
-    color: #fff;
-    font-size: 16px;
+    background: #354bea;
+    font-family: Montserrat, Montserrat;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 16px;
+    color: #fafafa;
+    line-height: 24px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
 }
 
 .auth-submit--disabled {
     pointer-events: none;
     cursor: not-allowed;
-    background: var(--theme-button-disabled);
-    box-shadow: none;
-    color: var(--theme-primary);
+    background: #354bea;
+    color: #ffffff;
     opacity: 1;
+}
+
+.auth-copyright {
+    margin-top: 108px;
+    color: rgba(216, 220, 234, 0.42);
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
 }
 </style>

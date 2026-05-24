@@ -1,70 +1,68 @@
 <template>
-  <div class="w-full bg-[#fff] pl-4 pr-4">
+  <div class="add-card-page min-h-screen bg-[#eef2fb]">
     <PageTopBar :title="$t('bank_card_management')" show-back @click-left="onClickLeft" />
-    <div class="text-[16px] text-[#000] mb-4 pt-20">
-      {{ $t("add_bank_card") }}
+    <div class="add-card-page__body">
+    <div class="add-card-page__header-card">
+      <div class="add-card-page__header-title">{{ $t("add_bank_card") }}</div>
+      <div class="add-card-page__header-desc">{{ $t("bank_card_management") }}</div>
     </div>
-    <div class="text-[#4B5563] font-semibold mt-10 pl-[8px]">
+    <div class="field-title mt-8">
       {{ $t("bank_name") }}
     </div>
     <div
-      class="w-full mt-2 flex justify-start items-center overflow-hidden rounded-[8px]"
-      style="border: 1px solid #EEEEEE"
+      class="field-box"
     >
-      <img class="w-[20px] h-[20px] ml-[17px]" src="../../static/images/code.png" alt="">
+      <img class="field-icon" src="../../static/images/code.png" alt="">
       <van-field
         v-model="form.bankCode"
         label=""
         :placeholder="$t('please_enter_bank_name')"
         label-align="top"
-        size="large"
+        class="custom-field"
       />
     </div>
-    <div class="text-[#4B5563] font-semibold mt-5 pl-[8px]">
+    <div class="field-title">
       {{ $t("name") }}
     </div>
     <div
-      class="w-full flex justify-start items-center mt-2 overflow-hidden"
-      style="border-bottom: 1px solid #e5e7eb"
+      class="field-box"
     >
-     <img class="w-[20px] h-[20px] ml-[17px]" src="../../static/images/name.png" alt="">
+     <img class="field-icon" src="../../static/images/name.png" alt="">
       <van-field
         v-model="form.name"
         label=""
         :placeholder="$t('please_enter_name')"
         label-align="top"
-        size="large"
+        class="custom-field"
       />
     </div>
-    <div class="text-[#4B5563] font-semibold mt-5 pl-[8px]">
+    <div class="field-title">
       {{ $t("bank_account") }}
     </div>
     <div
-      class="w-full flex justify-start items-center  mt-2 overflow-hidden"
-      style="border-bottom: 1px solid #e5e7eb"
+      class="field-box"
     >
-      <img class="w-[20px] h-[20px] ml-[17px]" src="../../static/images/accout.png" alt="">
+      <img class="field-icon" src="../../static/images/accout.png" alt="">
       <van-field
         v-model="form.bankCard"
         label=""
         :placeholder="$t('please_enter_bank_account')"
         label-align="top"
-        size="large"
+        class="custom-field"
       />
     </div>
-    <div class="text-[#4B5563] font-semibold mt-5 pl-[8px]">
+    <div class="field-title">
       {{ $t("account_type") }}
     </div>
     <div
-      class="w-full mt-2 overflow-hidden"
-      style="border-bottom: 1px solid #e5e7eb"
+      class="field-box"
     >
       <van-field
         v-model="form.bankType"
         label=""
         :placeholder="$t('please_enter_account_type')"
         label-align="top"
-        size="large"
+        class="custom-field"
       />
     </div>
     <!-- <div
@@ -77,15 +75,11 @@
     </div> -->
     <div class="w-full mt-10">
       <van-button
-        color=""
-        class="w-full"
-        style="
-            background: var(--theme-button-gradient);
-            color: #fff;
-          "
+        class="submit-btn w-full"
         @click="submitForm"
         >{{ $t("submit") }}</van-button
       >
+    </div>
     </div>
 
     <!-- <van-popup
@@ -188,3 +182,115 @@ onMounted(async () => {
   form.withdrawType = userStore.userInfo.withdrawType;
 });
 </script>
+<style scoped>
+.add-card-page__body {
+  padding: 92px 20px 36px;
+}
+
+.add-card-page__header-card {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 26px 30px;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #2d49a6 0%, #4485f5 100%);
+  color: #ffffff;
+}
+
+.add-card-page__header-card::before,
+.add-card-page__header-card::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.add-card-page__header-card::before {
+  top: -34px;
+  right: -10px;
+  width: 150px;
+  height: 150px;
+}
+
+.add-card-page__header-card::after {
+  right: 92px;
+  bottom: -48px;
+  width: 188px;
+  height: 188px;
+}
+
+.add-card-page__header-title,
+.add-card-page__header-desc {
+  position: relative;
+  z-index: 1;
+}
+
+.add-card-page__header-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.add-card-page__header-desc {
+  margin-top: 8px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.field-title {
+  margin: 24px 0 12px;
+  color: #121212;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.field-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 94px;
+  padding: 0 20px;
+  border: 1px solid #d8e0ee;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.field-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.custom-field {
+  flex: 1;
+  padding: 0;
+  background: transparent;
+}
+
+.add-card-page :deep(.custom-field.van-cell) {
+  padding: 0;
+  background: transparent;
+}
+
+.add-card-page :deep(.custom-field .van-field__body) {
+  min-height: 94px;
+}
+
+.add-card-page :deep(.custom-field .van-field__control) {
+  color: #111827;
+  font-size: 18px;
+}
+
+.add-card-page :deep(.custom-field .van-field__control::placeholder) {
+  color: #9aa3b2;
+}
+
+.submit-btn {
+  height: 58px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #3b45df 0%, #3a4be7 100%);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+</style>

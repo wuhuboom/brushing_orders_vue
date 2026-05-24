@@ -5,9 +5,14 @@
             class="app-loading-screen"
             :class="{ 'app-loading-screen--solid': solid }"
         >
-            <div class="app-loading-screen__spinner" aria-hidden="true">
-                <span class="app-loading-screen__ring"></span>
-                <span class="app-loading-screen__tail"></span>
+            <div class="app-loading-screen__wave" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </transition>

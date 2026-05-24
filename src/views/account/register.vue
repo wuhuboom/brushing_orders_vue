@@ -3,38 +3,35 @@
         class="auth-shell auth-shell--register"
         :class="`auth-shell--lang-${currentLang.code}`"
     >
-        <div class="auth-hero">
+        <div class="auth-hero auth-hero--register">
             <img
                 class="auth-hero__image"
-                src="@/static/images/auth/auth-hero.png"
+                src="@/static/images/auth/algofy-register-hero.png"
                 alt=""
             />
-            <div class="auth-hero__overlay"></div>
-            <div class="auth-lang" @click="handleChangeLang">
-                <span class="auth-lang__globe">◎</span>
-                <span class="auth-lang__flag">{{ currentLang.flag }}</span>
+            <button class="auth-back" type="button" @click="toLogin">
+                <van-icon name="arrow-left" size="28" color="#ffffff" />
+            </button>
+            <div class="auth-register-title">{{ $t("register") }}</div>
+            <div v-if="false" class="auth-lang" @click="handleChangeLang">
+                <span class="auth-lang__globe"></span>
+                <img
+                    v-if="currentLangIcon"
+                    class="auth-lang__flag"
+                    :src="currentLangIcon"
+                    alt=""
+                    aria-hidden="true"
+                />
+                <span
+                    v-else
+                    class="auth-lang__flag auth-lang__flag--fallback"
+                ></span>
                 <span class="auth-lang__text">{{ currentLang.name }}</span>
                 <span class="auth-lang__arrow"></span>
-            </div>
-            <div class="auth-hero__caption">
-                {{ $t("hello_welcome") }}
             </div>
         </div>
 
         <div class="auth-card auth-card--register">
-            <div
-                class="auth-switch auth-switch--register"
-                :class="{ 'auth-switch--to-login': switchLeaving }"
-            >
-                <div class="auth-switch__thumb"></div>
-                <div class="auth-switch__item" @click="toLogin">
-                    {{ $t("login") }}
-                </div>
-                <div class="auth-switch__item auth-switch__item--active">
-                    {{ $t("register") }}
-                </div>
-            </div>
-
             <el-form
                 ref="ruleFormRef"
                 :model="ruleForm"
@@ -43,22 +40,15 @@
                 label-width="0"
                 class="auth-form"
             >
-                <div class="auth-section">
-                    <div class="auth-section__title">
-                        <span class="auth-section__badge">1</span>
-                        <span>{{ $t("basic_information_upper") }}</span>
+                <div class="auth-field">
+                    <div class="auth-field__label">
+                        {{ $t("auto_full_name") }}<span>*</span>
                     </div>
-
                     <el-form-item prop="username">
                         <div class="auth-input">
-                            <img
-                                class="auth-input__icon"
-                                src="@/static/images/auth/auth-user-green.png"
-                                alt=""
-                            />
                             <el-input
                                 v-model="ruleForm.username"
-                                :placeholder="$t('username')"
+                                :placeholder="''"
                                 type="text"
                                 autocomplete="off"
                                 size="large"
@@ -66,17 +56,17 @@
                             />
                         </div>
                     </el-form-item>
+                </div>
 
-                    <el-form-item v-if="isNeedPhone" prop="phone">
+                <div v-if="isNeedPhone" class="auth-field">
+                    <div class="auth-field__label">
+                        {{ $t("auto_phone_no") }}<span>*</span>
+                    </div>
+                    <el-form-item prop="phone">
                         <div class="auth-input">
-                            <img
-                                class="auth-input__icon"
-                                src="@/static/images/auth/phonein.png"
-                                alt=""
-                            />
                             <el-input
                                 v-model="ruleForm.phone"
-                                :placeholder="$t('phone_number')"
+                                :placeholder="''"
                                 type="text"
                                 autocomplete="off"
                                 size="large"
@@ -84,7 +74,12 @@
                             />
                         </div>
                     </el-form-item>
+                </div>
 
+                <div class="auth-field">
+                    <div class="auth-field__label">
+                        {{ $t("auto_select") }}<span>*</span>
+                    </div>
                     <div class="auth-gender-select">
                         <button
                             type="button"
@@ -124,15 +119,16 @@
                                 @click="selectGender(1)"
                             >
                                 <span class="auth-gender-select__value">
-                                    <span class="auth-gender-emoji">🧑</span>
+                                    <span class="auth-gender-emoji">{{
+                                        $t("auto_m")
+                                    }}</span>
                                     <span>{{ $t("male") }}</span>
                                 </span>
                                 <span
                                     v-if="ruleForm.sex === 1"
                                     class="auth-gender-select__check"
+                                    >{{ $t("auto_ok") }}</span
                                 >
-                                    ✓
-                                </span>
                             </button>
                             <button
                                 type="button"
@@ -144,36 +140,30 @@
                                 @click="selectGender(2)"
                             >
                                 <span class="auth-gender-select__value">
-                                    <span class="auth-gender-emoji">👩</span>
+                                    <span class="auth-gender-emoji">{{
+                                        $t("auto_f")
+                                    }}</span>
                                     <span>{{ $t("female") }}</span>
                                 </span>
                                 <span
                                     v-if="ruleForm.sex === 2"
                                     class="auth-gender-select__check"
+                                    >{{ $t("auto_ok") }}</span
                                 >
-                                    ✓
-                                </span>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="auth-section">
-                    <div class="auth-section__title">
-                        <span class="auth-section__badge">2</span>
-                        <span>{{ $t("account_security_upper") }}</span>
+                <div class="auth-field">
+                    <div class="auth-field__label">
+                        {{ $t("auto_transaction_password") }}<span>*</span>
                     </div>
-
                     <el-form-item prop="tradePassword">
                         <div class="auth-input">
-                            <img
-                                class="auth-input__icon"
-                                src="@/static/images/auth/authtrade.png"
-                                alt=""
-                            />
                             <el-input
                                 v-model="ruleForm.tradePassword"
-                                :placeholder="$t('transaction_password')"
+                                :placeholder="''"
                                 :type="showTradePassword ? 'text' : 'password'"
                                 maxlength="6"
                                 autocomplete="off"
@@ -186,100 +176,58 @@
                                         )
                                 "
                             >
-                                <template #suffix>
-                                    <el-icon
-                                        class="auth-eye-icon"
-                                        @click.stop="
-                                            showTradePassword =
-                                                !showTradePassword
-                                        "
-                                    >
-                                        <Hide v-if="showTradePassword" />
-                                        <View v-else />
-                                    </el-icon>
-                                </template>
                             </el-input>
                         </div>
                     </el-form-item>
+                </div>
 
+                <div class="auth-field">
+                    <div class="auth-field__label">
+                        {{ $t("auto_login_password") }}<span>*</span>
+                    </div>
                     <el-form-item prop="password">
                         <div class="auth-input">
-                            <img
-                                class="auth-input__icon"
-                                src="@/static/images/auth/authlock.png"
-                                alt=""
-                            />
                             <el-input
                                 v-model="ruleForm.password"
-                                :placeholder="$t('password')"
+                                :placeholder="''"
                                 :type="showPassword ? 'text' : 'password'"
                                 autocomplete="off"
                                 size="large"
                             >
-                                <template #suffix>
-                                    <el-icon
-                                        class="auth-eye-icon"
-                                        @click.stop="
-                                            showPassword = !showPassword
-                                        "
-                                    >
-                                        <Hide v-if="showPassword" />
-                                        <View v-else />
-                                    </el-icon>
-                                </template>
                             </el-input>
                         </div>
                     </el-form-item>
+                </div>
 
+                <div class="auth-field">
+                    <div class="auth-field__label">
+                        {{ $t("auto_confirm_password") }}<span>*</span>
+                    </div>
                     <el-form-item prop="agentPassword">
                         <div class="auth-input">
-                            <img
-                                class="auth-input__icon"
-                                src="@/static/images/auth/auth-lock.png"
-                                alt=""
-                            />
                             <el-input
                                 v-model="agentPassword"
-                                :placeholder="$t('confirm_password')"
+                                :placeholder="''"
                                 :type="
                                     showConfirmPassword ? 'text' : 'password'
                                 "
                                 autocomplete="off"
                                 size="large"
                             >
-                                <template #suffix>
-                                    <el-icon
-                                        class="auth-eye-icon"
-                                        @click.stop="
-                                            showConfirmPassword =
-                                                !showConfirmPassword
-                                        "
-                                    >
-                                        <Hide v-if="showConfirmPassword" />
-                                        <View v-else />
-                                    </el-icon>
-                                </template>
                             </el-input>
                         </div>
                     </el-form-item>
                 </div>
 
-                <div class="auth-section auth-section--compact">
-                    <div class="auth-section__title">
-                        <span class="auth-section__badge">3</span>
-                        <span>{{ $t("invitation_code_upper") }}</span>
+                <div class="auth-field">
+                    <div class="auth-field__label">
+                        {{ $t("auto_invite_code_required") }}
                     </div>
-
                     <el-form-item prop="inviteCode">
                         <div class="auth-input">
-                            <img
-                                class="auth-input__icon"
-                                src="@/static/images/auth/authinvite.png"
-                                alt=""
-                            />
                             <el-input
                                 v-model="ruleForm.inviteCode"
-                                :placeholder="$t('invite_code_required')"
+                                :placeholder="''"
                                 type="text"
                                 autocomplete="off"
                                 size="large"
@@ -291,16 +239,16 @@
                 <div class="auth-agreement">
                     <van-checkbox
                         v-model="checked"
-                        checked-color="var(--theme-primary)"
-                        shape="square"
+                        checked-color="#4d63ff"
+                        shape="round"
                         icon-size="20px"
                     >
                         <span class="auth-agreement__muted">{{
-                            $t("i_agree")
+                            $t("auto_accept_our_s")
                         }}</span>
-                        <span class="auth-agreement__link" @click.stop="jump">
-                            {{ $t("terms_and_conditions_2") }}
-                        </span>
+                        <span class="auth-agreement__link" @click.stop="jump">{{
+                            $t("auto_terms_conditions")
+                        }}</span>
                     </van-checkbox>
                 </div>
 
@@ -313,30 +261,21 @@
                     :aria-disabled="!isRegisterReady || isSubmitting"
                     @click="sendCode"
                 >
-                    {{ $t("register") }}
-                </div>
-
-                <div class="auth-footer">
-                    <span class="auth-footer__muted">{{
-                        $t("already_have_an_account_2")
-                    }}</span>
-                    <span class="auth-footer__link" @click="toLogin">
-                        {{ $t("login_now") }}
-                    </span>
+                    {{ $t("auto_submit") }}
                 </div>
 
                 <div class="auth-footer">
                     <span class="auth-footer__muted">{{
                         $t("need_help")
                     }}</span>
-                    <span class="auth-footer__link" @click="customer">
-                        {{ $t("need_help_desc") }}
-                    </span>
+                    <span class="auth-footer__link" @click="customer">{{
+                        $t("auto_contact_customer")
+                    }}</span>
                 </div>
             </el-form>
         </div>
 
-        <Lang ref="langRef"></Lang>
+        <Lang v-if="false" ref="langRef"></Lang>
         <AppLoadingScreen :visible="isSubmitting || isCustomerLoading" />
     </div>
 </template>
@@ -346,7 +285,7 @@ import AppLoadingScreen from "@/components/AppLoadingScreen.vue";
 import Lang from "@/components/Lang.vue";
 import { Hide, View } from "@element-plus/icons-vue";
 import { computed, onMounted, reactive, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { register, reqBeedPhone, getTradeConfig } from "../../api/apis";
 import { showToast } from "@/util/message";
@@ -354,6 +293,7 @@ import { useCommonStore } from "@/store/modules/common";
 import { useUserStore } from "@/store/modules/user";
 import { checkWorkTimeLocal } from "../../util/utils";
 import { LANGS } from "@/config/lang";
+import { LANG_ICONS } from "@/config/langIcons";
 
 const onUsernameInput = (val) => {
     ruleForm.username = val.replace(/[^a-zA-Z0-9]/g, "");
@@ -364,7 +304,6 @@ const onPhoneInput = (val) => {
 };
 
 const router = useRouter();
-const route = useRoute();
 const { t } = useI18n();
 const ruleFormRef = ref(null);
 const langRef = ref(null);
@@ -379,7 +318,6 @@ const genderMenuOpen = ref(false);
 const showTradePassword = ref(false);
 const showPassword = ref(false);
 const showConfirmPassword = ref(false);
-
 const needPhone = ref(1);
 
 const ruleForm = reactive({
@@ -399,6 +337,7 @@ const rules = computed(() => {
 });
 
 const currentLang = computed(() => LANGS[commonStore.lang] || LANGS.en);
+const currentLangIcon = computed(() => LANG_ICONS[currentLang.value.code]);
 
 const isNeedPhone = computed(() => {
     return Number(needPhone.value) === 0;
@@ -411,8 +350,8 @@ const genderLabel = computed(() => {
 });
 
 const genderEmoji = computed(() => {
-    if (ruleForm.sex === 2) return "👩";
-    return "🧑";
+    if (ruleForm.sex === 2) return "F";
+    return "M";
 });
 
 const isRegisterReady = computed(() => {
@@ -628,8 +567,6 @@ const tradeConfig = async () => {
 };
 
 const ensureTradeConfig = async () => {
-    // 每次点击 Contact Customer Service 都重新请求最新客服时间配置，
-    // 避免使用上一次缓存导致必须刷新页面才会重新判断。
     return tradeConfig();
 };
 
@@ -686,124 +623,129 @@ onMounted(() => {
 <style scoped>
 .auth-shell {
     min-height: 100vh;
-    background: linear-gradient(180deg, #eff8f1 0%, #f5faf6 42%, #f5faf6 100%);
+    background: #181818 !important;
     position: relative;
     overflow-x: hidden;
+    color: #ffffff;
+    font-family: "Montserrat", "Avenir Next", Arial, sans-serif;
 }
 
 .auth-shell--register {
     overflow-y: auto;
+    background: #181818 !important;
 }
 
 .auth-hero {
-    position: relative;
-    height: 220px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 87px;
+    background: #181818;
+    overflow: visible;
+    transform: translateZ(0);
+}
+.auth-shell--register .auth-hero {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: min(100vw, var(--app-pc-max-width, 375px));
+    transform: translateX(-50%);
+}
+.auth-shell--register .auth-card--register {
+    margin-top: 117px;
 }
 
 .auth-hero__image {
     width: 100%;
-    height: 198px;
+    height: 87px;
     object-fit: cover;
     display: block;
 }
 
-.auth-hero__overlay {
+.auth-back {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        180deg,
-        rgba(28, 159, 75, 0.18) 0%,
-        rgba(245, 250, 246, 0) 80%
-    );
+    left: 18px;
+    top: 63px;
+    z-index: 2;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.auth-hero__caption {
+.auth-register-title {
     position: absolute;
     left: 50%;
-    top: 168px;
+    top: 66px;
     transform: translateX(-50%);
-    color: #199346;
-    font-size: 12px;
-    line-height: 18px;
+    color: #ffffff;
+    font-size: 17px;
+    line-height: 22px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     white-space: nowrap;
 }
 
 .auth-lang {
     position: absolute;
-    top: 18px;
-    right: 22px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    height: 42px;
-    width: 156px;
-    padding: 0 11px;
-    border: 1px solid rgba(34, 160, 80, 0.18);
+    right: 18px;
+    top: 48px;
+    z-index: 5;
+    min-width: 142px;
+    height: 44px;
+    padding: 0 14px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.94);
-    color: #1d2b21;
-    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #151923;
+    font-size: 15px;
+    line-height: 20px;
     font-weight: 700;
-    z-index: 2;
-    box-shadow: 0 8px 22px rgba(32, 125, 59, 0.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+    box-sizing: border-box;
 }
 
 .auth-lang__globe {
-    width: 20px;
-    height: 20px;
-    flex: 0 0 20px;
-    background: url("@/static/images/lang/globe.png") center / contain no-repeat;
-    font-size: 0;
-    line-height: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #2c9b52;
+    border-radius: 50%;
+    box-sizing: border-box;
+    position: relative;
+    flex: 0 0 18px;
 }
 
-.auth-lang__globe::before,
-.auth-lang__globe::after {
-    display: none;
+.auth-lang__globe::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -2px;
+    bottom: -2px;
+    width: 2px;
+    background: #2c9b52;
+    transform: translateX(-50%);
 }
 
 .auth-lang__flag {
-    width: 20px;
-    height: 14px;
+    width: 22px;
+    height: 15px;
     border-radius: 2px;
-    overflow: hidden;
-    background: center / contain no-repeat;
-    box-shadow: 0 0 0 1px rgba(20, 80, 36, 0.08);
-    flex: 0 0 20px;
-    font-size: 0;
-    line-height: 0;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+    flex: 0 0 22px;
 }
 
-.auth-shell--lang-en .auth-lang__flag {
-    background-image: url("@/static/images/lang/en.png");
-}
-
-.auth-shell--lang-zh .auth-lang__flag {
-    background-image: url("@/static/images/lang/zh.png");
-}
-
-.auth-shell--lang-id .auth-lang__flag {
-    background-image: url("@/static/images/lang/id.png");
-}
-
-.auth-shell--lang-th .auth-lang__flag {
-    background-image: url("@/static/images/lang/th.png");
-}
-
-.auth-shell--lang-ko .auth-lang__flag {
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            #d83b3b 0 3px,
-            #2462b8 3px 6px,
-            transparent 6px
-        ),
-        #ffffff;
+.auth-lang__flag--fallback {
+    background: #e6eef8;
 }
 
 .auth-lang__text {
-    flex: 1;
-    min-width: 0;
+    max-width: 72px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -812,149 +754,60 @@ onMounted(() => {
 .auth-lang__arrow {
     width: 8px;
     height: 8px;
-    flex: 0 0 8px;
-    margin-left: 1px;
-    border-right: 2px solid #6c8a74;
-    border-bottom: 2px solid #6c8a74;
+    border-right: 2px solid #6d806f;
+    border-bottom: 2px solid #6d806f;
     transform: rotate(45deg) translateY(-2px);
+    flex: 0 0 8px;
 }
 
 .auth-card {
     position: relative;
-    margin: -14px 24px 0;
-    padding-bottom: 28px;
-}
-
-.auth-card--register {
-    margin-bottom: 12px;
-}
-
-.auth-switch {
-    display: flex;
-    position: relative;
-    padding: 4px;
-    border-radius: 14px;
-    background: #fff;
-    margin-bottom: 22px;
-    overflow: hidden;
-}
-
-.auth-switch__thumb {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: calc(50% - 4px);
-    height: 41px;
-    border-radius: 11px;
-    background: var(--theme-primary);
-    box-shadow: 0 3px 8px var(--theme-button-shadow);
-    transform: translateX(calc(100% + 4px));
-    transition:
-        transform 0.22s ease,
-        box-shadow 0.22s ease;
-}
-
-.auth-switch__item {
-    position: relative;
-    z-index: 1;
-    flex: 1;
-    height: 41px;
-    border-radius: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #789680;
-    font-size: 14px;
-}
-
-.auth-switch__item--active {
-    color: #fff;
-}
-
-.auth-switch--to-login .auth-switch__thumb {
-    transform: translateX(0);
-}
-
-.auth-switch--to-login .auth-switch__item:first-child {
-    color: #fff;
-}
-
-.auth-switch--to-login .auth-switch__item:last-child {
-    color: #789680;
+    margin: 30px 20px 0;
+    padding: 0 0 50px;
+    background: #181818 !important;
 }
 
 .auth-form :deep(.el-form-item) {
-    margin-bottom: 12px;
+    margin-bottom: 0;
 }
 
 .auth-form :deep(.el-form-item__content) {
     line-height: normal;
 }
 
-.auth-section {
-    margin-bottom: 18px;
+.auth-field {
+    margin: 0;
 }
 
-.auth-section--compact {
-    margin-bottom: 14px;
+.auth-field + .auth-field {
+    margin-top: 19px;
 }
 
-.auth-section__title {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 10px;
-    line-height: 14px;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    color: #afc1b5;
+.auth-field__label {
     margin-bottom: 12px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 400;
+    font-size: 15px;
+    color: #dbe2eb;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
-.auth-section__badge {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 1px solid #b9cdc1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    line-height: 1;
-    color: #95ab9e;
-    flex: 0 0 16px;
+.auth-field__label span {
+    color: #ff1f1f;
 }
 
 .auth-input {
     display: flex;
     align-items: center;
-    gap: 10px;
     width: 100%;
-    min-height: 51px;
-    padding: 0 14px 0 16px;
-    border: 1px solid rgba(34, 160, 80, 0.2);
-    border-radius: 14px;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(34, 160, 80, 0.06);
+    height: 48px;
+    padding: 0 11px;
+    border: 1px solid #c9d0df;
+    border-radius: 8px;
+    background: #ffffff;
     overflow: hidden;
-}
-
-.auth-input__icon {
-    width: 16px;
-    height: 16px;
-    flex: 0 0 16px;
-}
-
-.auth-input__phone-icon {
-    width: 16px;
-    height: 16px;
-    flex: 0 0 16px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--theme-primary);
-    font-size: 14px;
-    line-height: 1;
 }
 
 .auth-input :deep(.el-input) {
@@ -971,9 +824,10 @@ onMounted(() => {
 }
 
 .auth-input :deep(.el-input__inner) {
-    height: 49px;
-    font-size: 14px;
-    color: #142819;
+    height: 46px;
+    font-size: 16px;
+    line-height: 46px;
+    color: #1a1f29;
     border: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
@@ -981,245 +835,185 @@ onMounted(() => {
 }
 
 .auth-input :deep(.el-input__inner::placeholder) {
-    color: rgba(20, 40, 25, 0.5);
+    color: transparent;
 }
 
 .auth-input :deep(.el-input__wrapper.is-focus) {
     box-shadow: none !important;
 }
 
-.auth-input :deep(.el-input__suffix),
-.auth-input :deep(.el-input__prefix) {
-    display: flex;
-    align-items: center;
-}
-
-.auth-input :deep(.el-input__suffix-inner) {
-    color: #8caa94;
-}
-
 .auth-eye-icon {
-    font-size: 18px;
-    color: #8caa94;
-    cursor: pointer;
+    display: none;
 }
 
 .auth-gender-select {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    position: relative;
-}
-
-.auth-gender-select__trigger,
-.auth-gender-select__option {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    min-height: 52px;
-    padding: 0 16px;
-    border: 1px solid rgba(34, 160, 80, 0.2);
-    border-radius: 14px;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(34, 160, 80, 0.06);
-    color: #1f3527;
-    font-size: 14px;
-    text-align: left;
+    margin-bottom: 0;
 }
 
 .auth-gender-select__trigger {
-    background: #fff;
-    color: #203626;
+    width: 100%;
+    height: 48px;
+    padding: 0 24px 0 12px;
+    border: 1px solid #c9d0df;
+    border-radius: 8px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: none;
+}
+
+.auth-gender-select__value {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    font-family: Montserrat, Montserrat;
     font-weight: 500;
+    font-size: 15px;
+    color: #191919;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.auth-gender-select__trigger--placeholder .auth-gender-select__value {
+    color: #191919;
+}
+
+.auth-gender-emoji {
+    display: none;
+}
+
+.auth-gender-select__arrow {
+    width: 12px;
+    height: 12px;
+    border-right: 3px solid #181818;
+    border-bottom: 3px solid #181818;
+    transform: rotate(45deg) translateY(-4px);
+    transition: transform 0.2s ease;
+}
+
+.auth-gender-select__arrow--open {
+    transform: rotate(225deg) translateY(-1px);
 }
 
 .auth-gender-select__menu {
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 1px solid #c9d0df;
+    background: #ffffff;
     overflow: hidden;
-    background: #fff;
-    border: 1px solid rgba(34, 160, 80, 0.18);
-    border-radius: 14px;
-    box-shadow: 0 8px 20px rgba(34, 160, 80, 0.06);
 }
 
 .auth-gender-select__option {
-    border-radius: 0;
-    box-shadow: none;
-    border: 0;
-    min-height: 46px;
-    padding: 0 18px;
-}
-
-.auth-gender-select__option--active {
-    background: #eef7f1;
-}
-
-.auth-gender-select__option + .auth-gender-select__option {
-    border-top: 1px solid rgba(34, 160, 80, 0.12);
+    width: 100%;
+    min-height: 48px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #1a1f29;
+    border-bottom: 1px solid #eef1f5;
 }
 
 .auth-gender-select__option:last-child {
     border-bottom: 0;
 }
 
-.auth-gender-select__value {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.auth-gender-emoji {
-    width: 16px;
-    height: 16px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 16px;
-    font-size: 14px;
-    line-height: 1;
-}
-
-.auth-gender-select__trigger .auth-gender-select__value span:last-child {
-    color: #203626;
-}
-
-.auth-gender-select__trigger--placeholder
-    .auth-gender-select__value
-    span:last-child {
-    color: #b5c5ba;
-}
-
-.auth-gender-select__arrow {
-    width: 8px;
-    height: 8px;
-    border-right: 1.5px solid #95ab9e;
-    border-bottom: 1.5px solid #95ab9e;
-    transform: rotate(45deg);
-    transition: transform 0.2s ease;
-    margin-right: 2px;
-}
-
-.auth-gender-select__arrow--open {
-    transform: rotate(-135deg);
-}
-
+.auth-gender-select__option--active,
 .auth-gender-select__check {
-    color: #1fa654;
-    font-size: 16px;
-    line-height: 1;
+    color: #4d63ff;
 }
 
 .auth-agreement {
-    margin: 6px 0 18px;
+    margin: 18px 0 0;
+    font-family: Montserrat, Montserrat;
+    font-weight: 400;
     font-size: 12px;
-    line-height: 19px;
+    color: #dbe2eb;
+    line-height: 16px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .auth-agreement :deep(.van-checkbox) {
-    display: flex;
-    align-items: flex-start;
-}
-
-.auth-agreement :deep(.van-checkbox__icon) {
-    flex: 0 0 20px;
-    width: 20px;
-    height: 20px;
-    margin-top: 0;
-}
-
-.auth-agreement :deep(.van-checkbox__icon .van-icon) {
-    width: 20px;
-    height: 20px;
-    border-radius: 5px;
-    border: 2px solid #a9e5c1;
-    background: #fff;
-    color: transparent;
-    font-size: 14px;
-    line-height: 18px;
-    box-sizing: border-box;
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease;
-}
-
-.auth-agreement :deep(.van-checkbox__icon--checked .van-icon) {
-    border-color: var(--theme-primary);
-    background: var(--theme-primary);
-    color: #fff;
+    align-items: center;
 }
 
 .auth-agreement :deep(.van-checkbox__label) {
-    flex: 1;
-    min-width: 0;
     margin-left: 6px;
-    color: #64826e;
-    line-height: 19px;
+    color: #d9dde8;
+}
+
+.auth-agreement :deep(.van-checkbox__icon) {
+    font-size: 18px !important;
+}
+
+.auth-agreement :deep(.van-checkbox__icon .van-icon) {
+    border-color: #d9dde8;
+    background: transparent;
+}
+
+.auth-agreement :deep(.van-checkbox__icon--checked .van-icon) {
+    border-color: #4d63ff;
+    background: #4d63ff;
 }
 
 .auth-agreement__muted {
-    color: #64826e;
+    color: #d9dde8;
 }
 
 .auth-agreement__link {
-    color: #149347;
-    margin-left: 4px;
-    font-weight: 700;
+    color: #d9dde8;
 }
 
 .auth-submit {
-    height: 56px;
-    border-radius: 14px;
+    margin-top: 36px;
+    height: 48px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--theme-primary);
-    color: #fff;
+    background: #3547e8;
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
     font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition:
-        background 0.2s ease,
-        box-shadow 0.2s ease,
-        color 0.2s ease,
-        opacity 0.2s ease;
+    color: #fafafa;
+    line-height: 24px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
 }
 
 .auth-submit--disabled {
     pointer-events: none;
-    cursor: not-allowed;
-    background: var(--theme-button-disabled);
+    background: #3547e8;
     box-shadow: none;
-    color: var(--theme-primary);
-    opacity: 1;
-}
-
-.auth-footer,
-.auth-help {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 4px;
-    font-size: 12px;
-    line-height: 18px;
+    color: #ffffff;
 }
 
 .auth-footer {
-    margin-top: 18px;
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    color: #778ff9;
+    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
-.auth-help {
-    margin-top: 12px;
-    margin-bottom: 10px;
+.auth-footer__muted {
+    color: #d9dde8;
 }
 
-.auth-footer__muted,
-.auth-help__muted {
-    color: #8caa94;
-}
-
-.auth-footer__link,
-.auth-help__link {
-    color: var(--theme-primary);
+.auth-footer__link {
+    color: #6d84ff;
 }
 </style>

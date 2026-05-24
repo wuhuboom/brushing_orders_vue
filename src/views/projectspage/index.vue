@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <div class="flex items-center relative bg-[#fff]">
+  <div class="project-menu-page">
+    <div class="project-menu-page__header flex items-center relative bg-[#fff]">
       <!-- 左侧箭头 -->
       <!-- <div class="absolute left-3" @click="onClickLeft">
         <van-icon name="arrow-left" color="#fff" size="24px" />
       </div> -->
       <!-- 中间标题 -->
-      <div class="mx-auto text-[#000] text-[22px] py-[12px]">{{ $t("menu") }}</div>
+      <div class="project-menu-page__title mx-auto text-[#000] text-[22px] py-[12px]">{{ $t("menu") }}</div>
     </div>
     <van-tabs
       color="var(--theme-primary)"
@@ -21,9 +21,9 @@
         :title="'VIP' + item.vipLevel"
       ></van-tab>
     </van-tabs>
-    <div class="h-[80vh] overflow-y-scroll px-[20px] mt-[16px]">
+    <div class="project-menu-page__list h-[80vh] overflow-y-scroll px-[20px] mt-[16px]">
       <div
-        class="w-full px-2 py-6 box-border flex bg-[#f1f4eb] border-[1px] rounded-[10px] mb-[7px]"
+        class="project-menu-page__card w-full px-2 py-6 box-border flex bg-[#f1f4eb] border-[1px] rounded-[10px] mb-[7px]"
         v-for="item in shopList"
         :key="item.id"
         @click="goToDetail(item)"
@@ -34,19 +34,19 @@
           alt=""
         />
         <div>
-          <div class="text-[20px] text-[#333] flex items-end">
+          <div class="project-menu-page__card-title text-[20px] text-[#333] flex items-end">
             {{ item.name }}
             <span
-              class="bg-gradient-to-r from-[#fecb2e] to-[#fca322] text-[#fff] text-[12px] w-[35px] h-[20px] flex justify-center items-top rounded-[10px] ml-[10px]"
+              class="project-menu-page__vip-tag bg-gradient-to-r from-[#fecb2e] to-[#fca322] text-[#fff] text-[12px] w-[35px] h-[20px] flex justify-center items-top rounded-[10px] ml-[10px]"
               >vip{{ item.vipLevel }}</span
             >
           </div>
-          <div class="text-[12px] text-[#666]">
+          <div class="project-menu-page__card-desc text-[12px] text-[#666]">
             {{ $t("available_balance_colon") }}
             <span v-if="item.maxMoney == 0">≥{{ item.minMoney }} USDT </span>
             <span v-else>{{ item.minMoney }}USDT-{{ item.maxMoney }}USDT</span>
           </div>
-          <div class="text-[12px] text-[#8aabd2]">
+          <div class="project-menu-page__card-meta text-[12px] text-[#8aabd2]">
             {{ $t("commissions_colon") }}
             <span class="text-[#ec3838]">{{ item.commissionPercentage }}%</span>
           </div>

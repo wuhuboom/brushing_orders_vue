@@ -1,177 +1,139 @@
-﻿<template>
-    <div class="my-page min-h-[100vh] bg-[#f5faf6] pb-[118px] text-[#111]">
-        <PageTopBar :title="$t('my')" />
+<template>
+    <div class="my-page">
+        <MainTabTopBar :title="$t('my')" />
 
-        <main class="px-[16px] pt-[85px] pb-[16px]">
-            <section
-                class="profile-hero relative overflow-hidden rounded-[18px] bg-gradient-to-br from-[#333C37] to-[#4A6565] px-[20px] py-[24px] text-white"
-            >
-                <div class="hero-bubble hero-bubble--top"></div>
-                <div class="hero-bubble hero-bubble--bottom"></div>
+        <AppLoadingScreen :visible="isAvatarUploading" />
 
-                <div class="relative z-[1] flex items-center">
-                    <div class="avatar-ring">
+        <van-uploader
+            ref="uploaderRef"
+            v-model="fileList"
+            :after-read="afterRead"
+            reupload
+            max-count="1"
+            class="hidden-uploader"
+        />
+
+        <main class="my-page__main">
+            <section class="my-hero">
+                <div class="my-hero__badge">
+                    <img :src="currentVipBadgeIcon" alt="" />
+                    <span>{{ displayVipLevel }}</span>
+                </div>
+
+                <div class="my-hero__avatar-wrap">
+                    <div class="my-hero__avatar-shell">
                         <div
                             v-if="userInfo.avatar === undefined"
-                            class="h-full w-full animate-pulse rounded-full bg-white/20"
+                            class="my-hero__avatar-loading"
                         ></div>
-                        <img
-                            v-else-if="userInfo.avatar"
-                            :src="userInfo.avatar"
-                            class="h-full w-full rounded-full object-cover"
-                            :alt="$t('user_avatar')"
-                            @error="(e) => (e.target.src = userImg)"
-                        />
                         <img
                             v-else
-                            :src="myIcons.user"
-                            class="avatar-fallback h-[27px] w-[27px]"
-                            :alt="$t('default_avatar')"
+                            :src="displayAvatar"
+                            class="my-hero__avatarImg"
+                            :alt="userInfo.avatar ? $t('user_avatar') : $t('default_avatar')"
+                            @error="(e) => (e.target.src = defaultAvatar)"
                         />
                     </div>
-
-                    <div class="ml-[15px] min-w-0">
-                        <div class="flex items-center">
-                            <div
-                                class="max-w-[150px] truncate text-[22px] font-medium leading-[26px]"
-                            >
-                                {{ $t("hi") }},{{ userInfo.username || "--" }}
-                            </div>
-                            <div
-                                class="ml-[8px] rounded-full bg-white/25 px-[10px] py-[4px] text-[11px] font-bold"
-                            >
-                                {{ userLevel || "VIP1" }}
-                            </div>
-                        </div>
-                        <div class="mt-[8px] text-[13px] text-white/80">
-                            {{ $t("my_profile_welcome") }}
-                        </div>
-                    </div>
-                </div>
-
-                <div
-                    class="relative z-[1] mt-[18px] rounded-[10px] bg-white/18 px-[14px] py-[12px]"
-                >
-                    <div
-                        class="flex items-center justify-between text-[12px] text-white/90"
-                    >
-                        <div class="flex items-center">
-                            <img
-                                :src="myIcons.topy"
-                                class="mr-[6px] h-[14px] w-[14px]"
-                            />
-                            {{ $t("credit_score") }}
-                        </div>
-                        <div>{{ creditScoreDisplay }}</div>
-                    </div>
-                    <div class="mt-[10px] h-[4px] rounded-full bg-white/20">
-                        <div
-                            class="credit-progress-bar h-full rounded-full bg-white"
-                            :style="{ width: creditScorePercent }"
-                        ></div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mt-[18px] grid grid-cols-2 gap-[10px]">
-                <div class="info-card">
-                    <div class="tracking-title">
-                        {{ $t("member_invitation_code") }}
-                    </div>
-                    <div
-                        class="mt-[14px] truncate text-[15px] font-medium tracking-[4px] text-[#159947]"
-                    >
-                        {{ userInfo.inviteCode || "--" }}
-                    </div>
-                    <button
-                        class="copy-btn"
-                        type="button"
-                        @click="
-                            copyContent(userInfo.inviteCode, {
-                                duration: 4,
-                            })
-                        "
-                    >
-                        <img
-                            :src="myIcons.copy"
-                            class="mr-[6px] h-[14px] w-[14px]"
-                            alt=""
-                        />
-                        {{ $t("copy_code") }}
+                    <button class="my-hero__edit" type="button" @click="triggerUploader">
+                        <img :src="myIcons.edit" alt="" />
                     </button>
                 </div>
 
-                <div class="info-card">
-                    <div class="tracking-title">{{ $t("wallet_balance") }}</div>
-                    <div
-                        class="mt-[5px] text-[20px] font-medium leading-[24px]"
+                <div class="my-hero__name">
+                    {{ userInfo.username || "--" }}
+                </div>
+
+                <div class="my-hero__row my-hero__row--referral">
+                    <span class="my-hero__label"
+                        >{{ $t("my_referral_code") }}:</span
                     >
-                        {{ walletBalance }}
+                    <button
+                        class="my-hero__code"
+                        type="button"
+                        @click="
+                            copyContent(userInfo.inviteCode, { duration: 4 })
+                        "
+                    >
+                        {{ userInfo.inviteCode || "--" }}
+                    </button>
+                    <button
+                        class="my-hero__copy-btn"
+                        type="button"
+                        @click="
+                            copyContent(userInfo.inviteCode, { duration: 4 })
+                        "
+                    >
+                        <img :src="myIcons.copy" alt="" />
+                    </button>
+                </div>
+
+                <div class="my-hero__row my-hero__row--score">
+                    <span class="my-hero__label"
+                        >{{ $t("credit_score") }}:</span
+                    >
+                    <span class="my-hero__score-value">{{
+                        creditScoreDisplay
+                    }}</span>
+                </div>
+
+                <div class="my-hero__progress">
+                    <div class="my-hero__progress-track">
+                        <div
+                            class="my-hero__progress-fill"
+                            :style="{ width: `${safeAnimatedCreditScore}%` }"
+                        ></div>
                     </div>
-                    <div class="text-[11px] text-[#159947]">
-                        {{ $t("rebate") }}:{{ rebateAmount }}
+                </div>
+
+                <div class="my-hero__stats">
+                    <div class="my-stat">
+                        <div class="my-stat__label">
+                            {{ $t("wallet_amount") }}
+                        </div>
+                        <div class="my-stat__value">
+                            <span>{{ walletBalance }}</span>
+                            <em>USD</em>
+                        </div>
                     </div>
-                    <div class="wallet-actions flex gap-[7px] mt-[8px]">
-                        <button
-                            class="wallet-btn wallet-btn--primary"
-                            type="button"
-                            @click="toPage('/deposit')"
-                        >
-                            {{ $t("deposit") }}
-                        </button>
-                        <button
-                            class="wallet-btn"
-                            type="button"
-                            @click="toPage('/withdraw')"
-                        >
-                            {{ $t("withdraw") }}
-                        </button>
+                    <div class="my-stat my-stat--divider">
+                        <div class="my-stat__label">
+                            {{ $t("todays_commission") }}
+                        </div>
+                        <div class="my-stat__value">
+                            <span>{{ rebateAmount }}</span>
+                            <em>USD</em>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section
-                class="menu-card mt-[16px] overflow-hidden rounded-[13px] border border-[#cfe9d5] bg-white"
-            >
+            <section class="my-menu-card">
                 <div
                     v-for="item in menuItems"
                     :key="item.title"
-                    class="menu-row"
+                    class="my-menu-row"
                     @click="item.action"
                 >
-                    <div class="menu-icon">
-                        <img
-                            :src="item.icon"
-                            class="h-[18px] w-[18px]"
-                            alt=""
-                        />
+                    <div class="my-menu-row__icon">
+                        <img :src="item.icon" alt="" />
                     </div>
-                    <div class="min-w-0 flex-1">
-                        <div class="text-[16px] leading-[20px] text-[#1b261e]">
-                            {{ item.title }}
-                        </div>
-                        <div
-                            class="mt-[4px] truncate text-[12px] leading-[16px] text-[#5b8064]"
-                        >
-                            {{ item.desc }}
-                        </div>
+                    <div class="my-menu-row__content">
+                        <div class="my-menu-row__title">{{ item.title }}</div>
+                        <div class="my-menu-row__desc">{{ item.desc }}</div>
                     </div>
-                    <van-icon name="arrow" size="16" color="#5f8067" />
                 </div>
             </section>
 
-            <button class="logout-btn" type="button" @click="logout">
-                <img
-                    :src="myIcons.logout"
-                    class="mr-[8px] h-[17px] w-[17px]"
-                    alt=""
-                />
-                {{ $t("log_out") }}
+            <button class="my-logout" type="button" @click="logout">
+                <img :src="myIcons.logout" alt="" />
+                <span>{{ $t("log_out") }}</span>
             </button>
         </main>
+
         <ContactUs ref="ContactUsRef"></ContactUs>
         <tradePassword ref="tradePasswordRef"></tradePassword>
         <Lang ref="langRef"></Lang>
+
         <van-popup
             v-if="!isPc"
             v-model:show="showLogoutPopup"
@@ -205,6 +167,7 @@
                 {{ $t("cancel") }}
             </button>
         </van-popup>
+
         <transition name="logout-desktop-fade">
             <div
                 v-if="isPc && showLogoutPopup"
@@ -249,49 +212,98 @@ import {
     onMounted,
     onUnmounted,
     ref,
+    watch,
 } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { showToast } from "@/util/message";
+import { showToast, showSuccessToast } from "@/util/message";
 
+import MainTabTopBar from "@/components/MainTabTopBar.vue";
 import ContactUs from "@/components/ContactUs.vue";
 import Lang from "@/components/Lang.vue";
 import tradePassword from "@/components/tradePassword.vue";
+import AppLoadingScreen from "@/components/AppLoadingScreen.vue";
 import { checkWorkTimeLocal, copyContent } from "@/util/utils";
-import { getTradeConfig } from "@/api/apis";
+import { getTradeConfig, updateAvatar, upload } from "@/api/apis";
 import { useUserStore } from "@/store/modules/user";
 
 const router = useRouter();
 const userStore = useUserStore();
 const { t } = useI18n();
-const userImg = new URL("@/static/images/userImg2.png", import.meta.url).href;
+
+const defaultAvatar = new URL(
+    "@/static/images/my-design/my-default-avatar.png",
+    import.meta.url,
+).href;
 
 const langRef = ref(null);
 const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
+const uploaderRef = ref(null);
+const fileList = ref([]);
 const userInfo = ref({});
 const userLevel = ref("");
 const TradeInfor = ref({});
 const showLogoutPopup = ref(false);
 const isPc = ref(false);
+const animatedCreditScore = ref(0);
+let creditScoreAnimationFrame = 0;
+const VITE_API_IMG_URL = window.g?.VITE_API_IMG_URL || "";
+const isAvatarUploading = ref(false);
+const avatarVersion = ref(0);
 
 const myIcons = {
-    user: new URL("@/static/images/user-mine.png", import.meta.url).href,
-    copy: new URL("@/static/images/copy.png", import.meta.url).href,
-    topy: new URL("@/static/images/topy.png", import.meta.url).href,
-    profile: new URL("@/static/images/user-mine2.png", import.meta.url).href,
-    wallet: new URL("@/static/images/user-wallet.png", import.meta.url).href,
-    message: new URL("@/static/images/user-message.png", import.meta.url).href,
-    card: new URL("@/static/images/LinkCard.png", import.meta.url).href,
-    service: new URL("@/static/images/user-service.png", import.meta.url).href,
-    logout: new URL("@/static/images/log-out.png", import.meta.url).href,
+    edit: new URL("@/static/images/my-design/my-edit-icon.png", import.meta.url)
+        .href,
+    copy: new URL("@/static/images/my-design/my-copy-icon.png", import.meta.url)
+        .href,
+    profile: new URL(
+        "@/static/images/my-design/my-menu-profile.png",
+        import.meta.url,
+    ).href,
+    wallet: new URL(
+        "@/static/images/my-design/my-menu-payment.png",
+        import.meta.url,
+    ).href,
+    message: new URL(
+        "@/static/images/my-design/my-menu-message.png",
+        import.meta.url,
+    ).href,
+    card: new URL("@/static/images/my-design/my-menu-link.png", import.meta.url)
+        .href,
+    service: new URL(
+        "@/static/images/my-design/my-menu-service.png",
+        import.meta.url,
+    ).href,
+    logout: new URL(
+        "@/static/images/my-design/my-logout-icon.png",
+        import.meta.url,
+    ).href,
+    level1: new URL("@/static/images/vip_design/vip1.png", import.meta.url)
+        .href,
+    level2: new URL("@/static/images/vip_design/vip2.png", import.meta.url)
+        .href,
+    level3: new URL("@/static/images/vip_design/vip3.png", import.meta.url)
+        .href,
+    level4: new URL("@/static/images/vip_design/vip4.png", import.meta.url)
+        .href,
+    level5: new URL("@/static/images/vip_design/vip5.png", import.meta.url)
+        .href,
+    levelDefault: new URL(
+        "@/static/images/my-design/my-vip-badge.png",
+        import.meta.url,
+    ).href,
 };
 
 const walletBalance = computed(() => {
     const value =
         userInfo.value.totalBalance ??
         Number(userInfo.value?.balance || 0) +
-            Number(userInfo.value?.frozenBalance || 0);
+            Number(
+                userInfo.value?.frozenBalance ??
+                    userInfo.value?.freezeAmount ??
+                    0,
+            );
     return Number(value || 0).toLocaleString("en-US", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
@@ -312,7 +324,105 @@ const creditScore = computed(() => {
 });
 
 const creditScoreDisplay = computed(() => `${Math.round(creditScore.value)}%`);
-const creditScorePercent = computed(() => `${creditScore.value}%`);
+const safeAnimatedCreditScore = computed(() =>
+    Math.min(100, Math.max(0, Math.round(Number(animatedCreditScore.value || 0)))),
+);
+
+const displayVipLevel = computed(() => {
+    const raw =
+        `${userLevel.value || userInfo.value?.userLevel?.nameEn || "VIP1"}`
+            .trim()
+            .replace(/\s+/g, " ");
+    const matched = raw.match(/^VIP\s*(\d+)$/i);
+    if (matched) return `VIP ${matched[1]}`;
+    return raw || "VIP 1";
+});
+
+const currentVipLevelNumber = computed(() => {
+    const matched = `${userLevel.value || userInfo.value?.userLevel?.nameEn || ""}`.match(
+        /\d+/,
+    );
+    return matched ? Number(matched[0]) : 0;
+});
+
+
+const previewAvatar = computed(() => {
+    if (fileList.value?.[0]?.url) return fileList.value[0].url;
+    return displayAvatar.value;
+});
+
+const withAvatarCacheBust = (url) => {
+    if (!url || url.startsWith("data:")) return url || defaultAvatar;
+    if (!avatarVersion.value) return url;
+    const separator = url.includes("?") ? "&" : "?";
+    return `${url}${separator}avatar_v=${avatarVersion.value}`;
+};
+
+const displayAvatar = computed(() =>
+    withAvatarCacheBust(userInfo.value?.avatar || userStore.userInfo?.avatar || defaultAvatar),
+);
+
+const triggerUploader = () => {
+    const input = uploaderRef.value?.$el?.querySelector('input[type="file"]');
+    if (input) input.click();
+};
+
+const normalizeAvatarUrl = (avatar) => {
+    if (!avatar) return "";
+    if (/^https?:\/\//i.test(avatar) || avatar.startsWith("data:")) return avatar;
+    return `${VITE_API_IMG_URL}${avatar}`;
+};
+
+const afterRead = async (file) => {
+    isAvatarUploading.value = true;
+    try {
+        const uploadRes = await upload({ file: file.file });
+        if (uploadRes.code !== 200) {
+            showSuccessToast(uploadRes.msg || t("image_upload_failed"));
+            fileList.value = [{ url: previewAvatar.value }];
+            return;
+        }
+
+        const fullAvatar = normalizeAvatarUrl(uploadRes.fileName);
+        fileList.value = [{ url: fullAvatar }];
+
+        const updateRes = await updateAvatar({ avatar: fullAvatar });
+        if (updateRes.code === 200) {
+            showSuccessToast(t("avatar_updated_successfully"));
+            avatarVersion.value = Date.now();
+            userStore.setUserInfo({ ...(userStore.userInfo || {}), avatar: fullAvatar });
+            const freshInfo = await userStore.getUserInfo({ force: true }).catch(() => null);
+            userInfo.value = { ...(freshInfo || userInfo.value || {}), avatar: fullAvatar };
+            userStore.setUserInfo({ ...(freshInfo || userStore.userInfo || {}), avatar: fullAvatar });
+            userLevel.value = userInfo.value?.userLevel?.nameEn || userLevel.value || "";
+            fileList.value = [{ url: withAvatarCacheBust(fullAvatar) }];
+        } else {
+            showSuccessToast(updateRes.msg || t("avatar_update_failed"));
+        }
+    } catch (error) {
+        showSuccessToast(t("network_error"));
+        fileList.value = [{ url: previewAvatar.value }];
+    } finally {
+        isAvatarUploading.value = false;
+    }
+};
+
+const currentVipBadgeIcon = computed(() => {
+    switch (currentVipLevelNumber.value) {
+        case 1:
+            return myIcons.level1;
+        case 2:
+            return myIcons.level2;
+        case 3:
+            return myIcons.level3;
+        case 4:
+            return myIcons.level4;
+        case 5:
+            return myIcons.level5;
+        default:
+            return myIcons.levelDefault;
+    }
+});
 
 const menuItems = computed(() => [
     {
@@ -343,7 +453,7 @@ const menuItems = computed(() => [
     //     title: t("contact_customer_service"),
     //     desc: t("get_help_resolve_issues"),
     //     icon: myIcons.service,
-    //     action: () => toPage("/customer"),
+    //     action: customer,
     // },
 ]);
 
@@ -384,6 +494,36 @@ function updateDeviceMode() {
     isPc.value = window.matchMedia("(min-width: 768px)").matches;
 }
 
+function animateCreditScore(targetValue) {
+    const endValue = Math.min(100, Math.max(0, Number(targetValue || 0)));
+    const startValue = Number(animatedCreditScore.value || 0);
+    const duration = 960;
+    const startAt = performance.now();
+
+    if (creditScoreAnimationFrame) {
+        cancelAnimationFrame(creditScoreAnimationFrame);
+    }
+
+    const step = (now) => {
+        const progress = Math.min((now - startAt) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        animatedCreditScore.value = Math.round(
+            startValue + (endValue - startValue) * eased,
+        );
+
+        if (progress < 1) {
+            creditScoreAnimationFrame = requestAnimationFrame(step);
+            return;
+        }
+
+        animatedCreditScore.value = endValue;
+        creditScoreAnimationFrame = 0;
+    };
+
+    creditScoreAnimationFrame = requestAnimationFrame(step);
+}
+
 function updateHandler() {
     getUserGetInfo({ force: true });
 }
@@ -391,6 +531,7 @@ function updateHandler() {
 function syncUserInfo(info = {}) {
     userInfo.value = info || {};
     userLevel.value = info?.userLevel?.nameEn || "";
+    fileList.value = [{ url: userInfo.value.avatar || defaultAvatar }];
 }
 
 async function getUserGetInfo(options = {}) {
@@ -412,6 +553,14 @@ onMounted(() => {
     tradeConfig();
 });
 
+watch(
+    creditScore,
+    (value) => {
+        animateCreditScore(value);
+    },
+    { immediate: true },
+);
+
 onActivated(() => {
     window.addEventListener("updateTrade", updateHandler);
 });
@@ -419,6 +568,9 @@ onActivated(() => {
 onUnmounted(() => {
     window.removeEventListener("updateTrade", updateHandler);
     window.removeEventListener("resize", updateDeviceMode);
+    if (creditScoreAnimationFrame) {
+        cancelAnimationFrame(creditScoreAnimationFrame);
+    }
 });
 
 onDeactivated(() => {
@@ -428,146 +580,378 @@ onDeactivated(() => {
 
 <style scoped>
 .my-page {
+    min-height: 100vh;
+    padding-bottom: 118px;
+    background: #eef0f5;
+    color: #111111;
     font-family: "Montserrat", "Poppins", sans-serif;
 }
 
-.profile-hero {
-    min-height: 193px;
+.my-page__main {
+    padding: var(--main-tab-top-bar-height, 104px) 15px 16px;
 }
 
-.credit-progress-bar {
-    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.hero-bubble {
-    position: absolute;
-    border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.hero-bubble--top {
-    right: -24px;
-    top: -36px;
-    height: 112px;
-    width: 112px;
-}
-
-.hero-bubble--bottom {
-    bottom: -42px;
-    left: -36px;
-    height: 106px;
-    width: 106px;
-}
-
-.avatar-ring {
-    display: flex;
-    height: 62px;
-    width: 62px;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
+.my-hero {
+    position: relative;
+    min-height: 365px;
+    padding: 22px 24px 24px;
+    border-radius: 16px;
+    background: #3545e8 url("@/static/images/my-design/my-hero-bg.png") center /
+        cover no-repeat;
+    color: #ffffff;
     overflow: hidden;
-    border-radius: 9999px;
-    /*border: 2px solid rgba(255, 255, 255, 0.45);*/
-    background: rgba(255, 255, 255, 0.12);
 }
 
-.info-card {
-    display: flex;
-    flex-direction: column;
-    min-height: 141px;
-    border: 1px solid #cfe9d5;
-    border-radius: 14px;
-    background: #fff;
-    padding: 18px 13px;
+.my-hero__badge {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    text-align: center;
 }
 
-.tracking-title {
-    color: #5c7c63;
-    font-size: 10px;
+.my-hero__badge img {
+    width: 44px;
+    height: 44px;
+    display: block;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.my-hero__badge span {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1;
     font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
 }
 
-.copy-btn {
-    margin-top: auto;
-    display: flex;
-    height: 32px;
+.my-hero__avatarImg {
+    width: 98px;
+    height: 98px;
+}
+
+.my-hero__avatar-wrap {
+    position: relative;
+    width: 110px;
+    margin: 18px auto 0;
+}
+
+.my-hero__avatar-shell {
+    width: 98px;
+    height: 98px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.my-hero__avatar,
+.my-hero__avatar-loading {
     width: 100%;
-    align-items: center;
-    justify-content: center;
-    border-radius: 7px;
-    background: var(--theme-green-defalut);
-    color: #fff;
-    font-size: 12px;
-    font-weight: 500;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
-.copy-btn img {
-    filter: brightness(0) invert(1);
+.my-hero__avatar-loading {
+    background: rgba(255, 255, 255, 0.2);
+    animation: pulse 1.6s ease-in-out infinite;
 }
 
-.wallet-actions {
-    /*margin-top: auto;*/
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.45;
+    }
+    50% {
+        opacity: 0.8;
+    }
 }
 
-.wallet-btn {
-    display: flex;
+.my-hero__edit {
+    position: absolute;
+    right: 10px;
+    bottom: 1px;
+    width: 32px;
     height: 32px;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    border-radius: 7px;
-    background: var(--theme-primary-soft);
-    color: var(--theme-primary-text);
-    font-size: 12px;
-    font-weight: 500;
+    padding: 0;
+    border: 0;
+    background: transparent;
 }
 
-.wallet-btn--primary {
-    background: var(--theme-green-defalut);
-    color: #fff;
+.my-hero__edit img {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
-.menu-row {
+.my-hero__name {
+    margin-top: 13px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 24px;
+    color: #ffffff;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.my-hero__row {
     display: flex;
-    min-height: 73px;
     align-items: center;
-    border-bottom: 1px solid #d9eadf;
-    padding: 14px 16px;
 }
 
-.menu-row:last-child {
+.my-hero__row--referral {
+    justify-content: center;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.my-hero__label {
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.my-hero__code {
+    min-width: 83px;
+    padding: 8px 2px 10px 4px;
+    border: 0;
+    border-radius: 8px;
+    background: #34ca5d;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 20px;
+    text-align: cebter;
+    font-style: normal;
+    text-transform: none;
+}
+
+.my-hero__copy-btn {
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.my-hero__copy-btn img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.my-hero__row--score {
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.my-hero__score-value {
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.my-hero__progress {
+    margin-top: 16px;
+}
+
+.my-hero__progress-track {
+    position: relative;
+    height: 8px !important;
+    border-radius: 999px !important;
+    overflow: hidden !important;
+    background: rgba(255, 255, 255, 0.26);
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.my-hero__progress-fill {
+    position: relative;
+    height: 100%;
+    border-radius: 999px !important;
+    overflow: hidden;
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    background: linear-gradient(
+        90deg,
+        #63f27b 0%,
+        #33d45d 48%,
+        #1ebf50 100%
+    ) !important;
+    box-shadow: 0 0 16px rgba(51, 212, 93, 0.28);
+}
+
+.my-hero__progress-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.32) 36%,
+        rgba(255, 255, 255, 0.58) 50%,
+        rgba(255, 255, 255, 0.18) 64%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%);
+    animation: my-progress-shimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes my-progress-shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.my-hero__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 30px;
+}
+
+.my-stat {
+    /*padding: 0 12px;*/
+    text-align: center;
+}
+
+.my-stat--divider {
+    border-left: 4px dashed rgba(255, 255, 255, 0.18);
+}
+
+.my-stat__label {
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 12px;
+    color: #ffffff;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.my-stat__value {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.my-stat__value span {
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.my-stat__value em {
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 20px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.my-menu-card {
+    margin-top: 16px;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.my-menu-row {
+    display: flex;
+    align-items: center;
+    min-height: 74px;
+    padding: 0 18px;
+    border-bottom: 1px solid #edf0f5;
+    box-sizing: border-box;
+}
+
+.my-menu-row:last-child {
     border-bottom: 0;
 }
 
-.menu-icon {
-    margin-right: 14px;
-    display: flex;
-    height: 42px;
-    width: 42px;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    border-radius: 11px;
-    background: #edf8f0;
+.my-menu-row__icon {
+    flex: 0 0 58px;
+    width: 40px;
+    height: 40px;
+    margin-right: 18px;
 }
 
-.logout-btn {
-    margin-top: 16px;
-    display: flex;
-    height: 54px;
+.my-menu-row__icon img {
     width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.my-menu-row__content {
+    min-width: 0;
+}
+
+.my-menu-row__title {
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.my-menu-row__desc {
+    margin-top: 4px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 12px;
+    color: #6b7280;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.my-logout {
+    width: 100%;
+    height: 52px;
+    margin-top: 16px;
+    border: 0;
+    border-radius: 18px;
+    background: #f8edee;
+    display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #f0c9c3;
-    border-radius: 13px;
-    background: #fff7f5;
-    color: #df392d;
-    font-size: 15px;
-    font-weight: 500;
+    gap: 12px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ef5350;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+}
+
+.my-logout img {
+    width: 20px;
+    height: 20px;
 }
 
 .logout-sheet {
@@ -739,5 +1123,20 @@ onDeactivated(() => {
 .logout-desktop-fade-leave-to .logout-desktop-card {
     opacity: 0;
     transform: translateY(14px) scale(0.96);
+}
+
+.hidden-uploader {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.hidden-uploader :deep(.van-uploader__wrapper),
+.hidden-uploader :deep(.van-uploader__upload) {
+    width: 1px;
+    height: 1px;
 }
 </style>

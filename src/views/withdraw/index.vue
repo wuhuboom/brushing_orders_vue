@@ -8,7 +8,7 @@
             </template>
         </PageTopBar>
 
-        <div class="px-[20px] pt-[96px] pb-[36px]">
+        <div class="px-[20px] pt-[26px] pb-[36px]">
             <div class="balance-card">
                 <div>
                     <div class="balance-label">
@@ -18,14 +18,6 @@
                         ${{ formatMoney(userInfo.balance) }}
                     </div>
                 </div>
-                <!-- <div
-                    class="min-tag"
-                    v-if="userInfo?.userLevel?.minWithdrawAmount != null"
-                >
-                    {{ $t("min_amount") }} ${{
-                        userInfo.userLevel.minWithdrawAmount
-                    }}
-                </div> -->
             </div>
 
             <div class="section-title mt-[24px]">
@@ -77,14 +69,8 @@
                         </div>
                     </div>
 
-                    <div class="account-row-icon">
-                        <!-- <van-icon
-                            :name="item.type == 1 ? 'balance-o' : 'coupon-o'"
-                            size="22"
-                            color="var(--theme-primary)"
-                        />
-                         -->
-                        <img src="@/static/images/bank1.png" alt="" />
+                    <div class="account-row-icon account-row-icon--blue">
+                        <van-icon name="card" size="18" color="#3550E8" />
                     </div>
 
                     <div class="account-row-info">
@@ -96,59 +82,55 @@
                             }}
                         </div>
                         <div class="account-row-no">
-                            <template v-if="item.type == 1"
-                                >**** {{ formatTail(item.bankCard) }}</template
-                            >
-                            <template v-else
-                                >****
-                                {{ formatTail(item.walletAddress) }}</template
-                            >
+                            <template v-if="item.type == 1">
+                                **** {{ formatTail(item.bankCard) }}
+                            </template>
+                            <template v-else>
+                                **** {{ formatTail(item.walletAddress) }}
+                            </template>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="manage-link" @click="toList">
-                <!-- <van-icon name="balance-o" size="18" color="var(--theme-primary)" /> -->
-                <img src="@/static/images/bank1.png" alt="" />
+                <van-icon name="idcard" size="18" color="#3550E8" />
                 <span>{{ $t("manage_bound_accounts") }}</span>
-                <van-icon name="arrow" size="18" color="var(--theme-primary)" />
+                <van-icon name="arrow" size="18" color="#3550E8" />
             </div>
 
             <div class="section-title mt-[20px]">
                 {{ $t("withdrawal_amount") }}
             </div>
+
             <div class="amount-card">
-                <div class="currency-mark">$</div>
-                <van-field
-                    v-model="ruleForm.amount"
-                    label=""
-                    class="amount-field"
-                    placeholder="0"
-                    label-align="top"
-                    size="large"
-                    type="digit"
-                />
-                <div class="all-btn" @click="All">{{ $t("all") }}</div>
+                <div class="amount-input-wrap">
+                    <div class="currency-mark">$</div>
+                    <van-field
+                        v-model="ruleForm.amount"
+                        type="number"
+                        inputmode="decimal"
+                        input-align="left"
+                        maxlength="12"
+                        :border="false"
+                        placeholder="0.00"
+                        class="amount-field"
+                        :formatter="formatAmountInput"
+                        format-trigger="onChange"
+                    />
+                </div>
+
+                <button type="button" class="all-btn" @click="All">
+                    {{ $t("all") }}
+                </button>
             </div>
 
             <div class="tip-card tip-card--password">
                 <div class="tip-card__icon tip-card__icon--lock">
-                    <img src="@/static/images/lockp.png" alt="" />
-                    <!-- <van-icon name="lock" size="16" color="var(--theme-primary)" /> -->
+                    <van-icon name="lock" size="16" color="#3550E8" />
                 </div>
-                <span
-                    >A withdrawal password is required to confirm the
-                    transaction</span
-                >
+                <span>{{ $t("auto_a_withdrawal_password_is_required_to_confi") }}</span>
             </div>
-
-            <!-- <div class="tip-card tip-card--info">
-        <div class="tip-card__icon tip-card__icon--info">
-          <van-icon name="info-o" size="15" color="#51A4F4" />
-        </div>
-        <span>{{ $t('you_will_receive_your_withdrawal_within_an_hour') }}</span>
-      </div> -->
 
             <div v-if="false" class="withdraw-password-card mt-[20px]">
                 <div class="withdraw-password-header">
@@ -158,8 +140,6 @@
                             size="22"
                             color="var(--theme-green-defalut)"
                         />
-
-                        <img src="@/static/images/locks.png" alt="" />
                     </div>
                     <div class="min-w-0 flex-1">
                         <div class="withdraw-password-title">
@@ -186,9 +166,6 @@
                     </div>
                 </div>
 
-                <!-- 原来的交易密码样式先保留在这里，后续需要可以恢复：
-        <van-password-input :value="ruleForm.tradePassword" :gutter="10" />
-        -->
                 <div class="password-input-row">
                     <van-field
                         :model-value="tradePasswordInputValue"
@@ -211,8 +188,7 @@
             <div class="mt-[20px]">
                 <van-button class="submit-btn" block @click="getWithdrawal">
                     <span class="submit-btn__inner">
-                        <!-- <van-icon name="lock" size="18" color="#ffffff" /> -->
-                        <img src="@/static/images/locks.png" alt="" />
+                        <van-icon name="lock" size="18" color="#ffffff" />
                         <span>{{ $t("submit_withdrawal") }}</span>
                     </span>
                 </van-button>
@@ -268,7 +244,6 @@
                     </div>
                 </div>
 
-                <!-- ：<van-password-input :value="ruleForm.tradePassword" :gutter="10" /> -->
                 <div class="password-input-row">
                     <van-field
                         :model-value="tradePasswordInputValue"
@@ -317,6 +292,7 @@
         />
     </div>
 </template>
+
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import {
@@ -341,6 +317,13 @@ const isMobile = ref(false);
 const showPasswordPopup = ref(false);
 const showTradePassword = ref(false);
 const withdrawSubmitting = ref(false);
+
+const ruleForm = reactive({
+    amount: "",
+    tradePassword: "",
+    walletId: "",
+});
+
 const tradePasswordInputValue = computed(() => ruleForm.tradePassword);
 
 const formatTail = (card) => {
@@ -352,6 +335,24 @@ const formatTail = (card) => {
 const formatMoney = (value) => {
     const num = Number(value || 0);
     return num.toFixed(2);
+};
+
+const toAmountString = (value) => {
+    if (value === null || value === undefined || value === "") return "";
+    const num = Number(value);
+    if (!Number.isFinite(num)) return "";
+    return num.toFixed(2);
+};
+
+const formatAmountInput = (value) => {
+    return String(value || "")
+        .replace(/[^\d.]/g, "")
+        .replace(/^\./, "0.")
+        .replace(/\.{2,}/g, ".")
+        .replace(".", "#")
+        .replace(/\./g, "")
+        .replace("#", ".")
+        .replace(/^(\d+)(\.\d{0,2})?.*$/, "$1$2");
 };
 
 function handleFocus() {
@@ -384,12 +385,6 @@ const onClickLeft = () => {
     }
 };
 
-const ruleForm = reactive({
-    amount: 0,
-    tradePassword: "",
-    walletId: "",
-});
-
 const addType = (type) => {
     if (type == 1) {
         router.push({
@@ -406,7 +401,7 @@ const addType = (type) => {
 };
 
 const All = () => {
-    ruleForm.amount = amount.value;
+    ruleForm.amount = toAmountString(userInfo.value?.balance ?? amount.value);
 };
 
 const validateWithdrawalBase = () => {
@@ -420,14 +415,20 @@ const validateWithdrawalBase = () => {
         });
         return false;
     }
-    if (!ruleForm.amount) {
+
+    const amountValue = Number(ruleForm.amount);
+
+    if (!ruleForm.amount || !Number.isFinite(amountValue) || amountValue <= 0) {
         showToast(t("please_enter_the_amount"));
         return false;
     }
-    const min = userInfo.value?.userLevel?.minWithdrawAmount;
-    const max = userInfo.value?.userLevel?.maxWithdrawAmount;
-    if (min == null || max == null) return false;
-    if (ruleForm.amount < min || ruleForm.amount > max) {
+
+    const min = Number(userInfo.value?.userLevel?.minWithdrawAmount);
+    const max = Number(userInfo.value?.userLevel?.maxWithdrawAmount);
+
+    if (!Number.isFinite(min) || !Number.isFinite(max)) return false;
+
+    if (amountValue < min || amountValue > max) {
         showToast(
             t("rechargeLimit", {
                 min: userInfo.value.userLevel.minWithdrawAmount,
@@ -436,6 +437,7 @@ const validateWithdrawalBase = () => {
         );
         return false;
     }
+
     return true;
 };
 
@@ -476,17 +478,18 @@ const confirmWithdrawal = async () => {
         }
 
         ruleForm.walletId = Number(bankItem.value.id);
+        ruleForm.amount = toAmountString(ruleForm.amount);
         withdrawSubmitting.value = true;
 
-        await withdrawal(ruleForm);
+        await withdrawal({
+            ...ruleForm,
+            amount: ruleForm.amount,
+        });
+
         showPasswordPopup.value = false;
         showSuccessToast(t("withdrawal_successful"));
         await refresh();
     } catch (error) {
-        // 接口业务错误已由 src/api/index.js 根据 showMsg 统一弹出提示。
-        // 这里必须完整吞掉 Promise reject，否则 Vue 会打印黄色警告：
-        // [Vue warn]: Unhandled error during execution of component event handler
-        // 同时控制台还会出现 Uncaught (in promise)。
         if (import.meta.env.DEV) {
             console.debug("[withdraw] handled withdrawal error:", error);
         }
@@ -496,7 +499,6 @@ const confirmWithdrawal = async () => {
 };
 
 const handleConfirmWithdrawal = () => {
-    // 不把 async Promise 直接返回给 Vue 的 click 事件，避免任何漏掉的 reject 触发黄色 Vue Warning。
     confirmWithdrawal().catch((error) => {
         if (import.meta.env.DEV) {
             console.debug("[withdraw] confirm click handled:", error);
@@ -517,9 +519,11 @@ const tradeConfig = async () => {
 
 const bankItem = ref("");
 const bankWallet = ref([]);
+
 const getgetUserBankWallet = async () => {
     let res = await getUserBankWallet();
     bankWallet.value = res.data || [];
+
     if (
         userStore.userWallerType &&
         typeof userStore.userWallerType === "object" &&
@@ -537,11 +541,15 @@ const selectAccount = (item) => {
     userStore.setuserWallerType(item);
 };
 
-const refresh = () => {
-    tradeConfig();
-    getgetUserBankWallet();
-    ruleForm.amount = 0;
+const refresh = async () => {
+    await tradeConfig();
+    await getgetUserBankWallet();
+    ruleForm.amount = "";
     ruleForm.tradePassword = "";
+
+    const res = await userGetInfo();
+    amount.value = res.data.balance;
+    userInfo.value = res.data;
 };
 
 const toList = () => {
@@ -569,11 +577,13 @@ onUnmounted(() => {
     window.removeEventListener("resize", update);
 });
 </script>
+
 <style>
 .withdraw .el-input__wrapper {
     border: 1px solid #666;
 }
 </style>
+
 <style scoped>
 .withdraw-page :deep(.van-nav-bar) {
     background: #ffffff;
@@ -594,8 +604,8 @@ onUnmounted(() => {
 }
 
 .history-text {
-    color: #24352d;
-    font-size: 16px;
+    color: #ffffff;
+    font-size: 12px;
     font-weight: 500;
 }
 
@@ -604,24 +614,38 @@ onUnmounted(() => {
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
-    padding: 18px 22px 20px;
-    border-radius: 18px;
-    background: var(--theme-button-gradient-background);
-    /*box-shadow: 0 10px 24px var(--theme-button-shadow);*/
+    padding: 17px 14px 26px;
+    height: 105.5px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background: url(@/static/images/wallet-amount-card-bg.png) no-repeat;
+    background-size: 100% 100%;
 }
 
 .balance-label {
-    color: rgba(255, 255, 255, 0.88);
-    font-size: 14px;
-    line-height: 20px;
+    position: relative;
+    z-index: 1;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .balance-value {
-    margin-top: 8px;
+    position: relative;
+    z-index: 1;
+    margin-top: 12px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 26px;
     color: #ffffff;
-    font-size: 24px;
-    line-height: 32px;
-    font-weight: 700;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .min-tag {
@@ -640,17 +664,17 @@ onUnmounted(() => {
 }
 
 .section-title {
-    color: #708a76;
-    font-size: 15px;
-    line-height: 22px;
+    color: #101217;
+    font-size: 20px;
+    line-height: 28px;
     font-weight: 500;
 }
 
 .empty-account-card {
     margin-top: 12px;
     padding: 18px;
-    border: 1px dashed #9ed5ad;
-    border-radius: 16px;
+    border: 1px dashed #b6c7f3;
+    border-radius: 18px;
     background: #ffffff;
     display: flex;
     align-items: center;
@@ -661,28 +685,28 @@ onUnmounted(() => {
     width: 42px;
     height: 42px;
     border-radius: 12px;
-    background: #eff7f1;
+    background: #eef3ff;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .empty-account-title {
-    color: #24352d;
+    color: #111827;
     font-size: 15px;
     font-weight: 600;
 }
 
 .empty-account-desc {
     margin-top: 4px;
-    color: #8aa291;
+    color: #7c879d;
     font-size: 13px;
 }
 
 .account-select-card {
     margin-top: 12px;
-    border: 1px solid #cfe5d5;
-    border-radius: 16px;
+    border: 1px solid #d8e0ee;
+    border-radius: 18px;
     overflow: hidden;
     background: #ffffff;
 }
@@ -695,11 +719,11 @@ onUnmounted(() => {
 }
 
 .row-selected {
-    background: #edf7ef;
+    background: #f1f5ff;
 }
 
 .row-divider {
-    border-bottom: 1px solid #dbe9df;
+    border-bottom: 1px solid #e5ebf6;
 }
 
 .radio-wrap {
@@ -713,7 +737,7 @@ onUnmounted(() => {
     width: 19px;
     height: 19px;
     border-radius: 50%;
-    border: 2px solid #b7d7bf;
+    border: 2px solid #c7d3eb;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -721,27 +745,28 @@ onUnmounted(() => {
 }
 
 .radio-circle.active {
-    border-color: var(--theme-green-defalut);
+    border-color: #3550e8;
 }
 
 .radio-dot {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: var(--theme-green-defalut);
+    background: #3550e8;
 }
 
 .account-row-icon {
     width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+}
 
-    img {
-        width: 16px;
-        height: 16px;
-    }
+.account-row-icon--blue {
+    border-radius: 6px;
+    background: #eef3ff;
 }
 
 .account-row-info {
@@ -750,7 +775,7 @@ onUnmounted(() => {
 }
 
 .account-row-name {
-    color: #24352d;
+    color: #111827;
     font-size: 14px;
     line-height: 20px;
     font-weight: 600;
@@ -759,7 +784,7 @@ onUnmounted(() => {
 
 .account-row-no {
     margin-top: 2px;
-    color: #8aa291;
+    color: #7c879d;
     font-size: 12px;
     line-height: 18px;
 }
@@ -768,13 +793,13 @@ onUnmounted(() => {
     margin-top: 12px;
     height: 48px;
     padding: 0 14px;
-    border: 1px dashed #7acc90;
+    border: 1px dashed #9fb4ff;
     border-radius: 14px;
-    background: #f3fbf5;
+    background: #f3f6ff;
     display: flex;
     align-items: center;
     gap: 10px;
-    color: var(--theme-green-defalut);
+    color: #3550e8;
     font-size: 15px;
     font-weight: 500;
 }
@@ -784,63 +809,78 @@ onUnmounted(() => {
 }
 
 .amount-card {
-    position: relative;
-    margin-top: 12px;
-    border: 1.5px solid #24aa4d;
-    border-radius: 18px;
-    background: #ffffff;
-    min-height: 84px;
     display: flex;
     align-items: center;
-    padding: 0 64px 0 22px;
+    height: 48px;
+    overflow: hidden;
+    margin-top: 12px;
+    padding: 0 24px;
+    border: 1px solid #d8e0ee;
+    border-radius: 12px;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.amount-input-wrap {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 .currency-mark {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--theme-green-defalut);
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1;
+    flex-shrink: 0;
+    margin-right: 8px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    color: #78828a;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .amount-field {
-    width: 100%;
-    padding-left: 20px;
-    background: transparent;
-}
-
-.withdraw-page :deep(.amount-field .van-cell) {
+    min-width: 0;
+    flex: 1;
     padding: 0;
     background: transparent;
 }
 
-.withdraw-page :deep(.amount-field .van-field__body) {
-    align-items: center;
+.withdraw-page :deep(.amount-field.van-cell) {
+    padding: 0;
+    background: transparent;
+}
+
+.withdraw-page :deep(.amount-field .van-field__body),
+.withdraw-page :deep(.amount-field .van-field__control) {
+    min-height: 48px;
 }
 
 .withdraw-page :deep(.amount-field .van-field__control) {
-    color: #24352d;
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.2;
+    font-family: Montserrat, Montserrat;
+    font-weight: 600;
+    font-size: 16px;
+    color: #78828a;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .withdraw-page :deep(.amount-field .van-field__control::placeholder) {
-    color: #7f8c84;
-    font-weight: 600;
+    color: #7b8597;
+    opacity: 1;
 }
 
 .all-btn {
-    position: absolute;
-    right: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--theme-green-defalut);
+    flex-shrink: 0;
+    margin-left: 12px;
+    border: 0;
+    background: transparent;
+    color: #3550e8;
     font-size: 15px;
     font-weight: 500;
+    padding: 0;
 }
 
 .tip-card {
@@ -857,8 +897,8 @@ onUnmounted(() => {
 }
 
 .tip-card--password {
-    background: #edf7ef;
-    border: 1px solid #d8eadc;
+    background: #f3f6ff;
+    border: 1px solid #dce4f3;
 }
 
 .tip-card--info {
@@ -873,6 +913,10 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+}
+
+.tip-card__icon--lock {
+    color: #3550e8;
 }
 
 .withdraw-password-popup {
@@ -1060,14 +1104,14 @@ onUnmounted(() => {
 }
 
 .submit-btn {
-    height: 52px;
+    padding: 15px 40px;
     border: none;
     border-radius: 14px;
-    background: var(--theme-primary);
+    background: linear-gradient(90deg, #3b45df 0%, #3a4be7 100%);
     color: #ffffff;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: 0 10px 24px var(--theme-button-shadow);
+    box-shadow: none;
 }
 
 .submit-btn__inner {
@@ -1075,6 +1119,10 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     gap: 8px;
+}
+
+.submit-btn__inner .van-icon {
+    flex-shrink: 0;
 }
 
 @media (max-width: 380px) {

@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-[#f8f8f8] h-[100vh]">
-    <div class="relative">
+  <div class="service-page min-h-[100vh]">
+    <div class="service-page__hero relative">
       <div class="topfpnts">
         <div class="titles">{{$t('customer_service_center')}}</div>
         <div class="casftr">{{$t('online_customer_service_time')}}: {{ TradeInfor?.workTimeStart || "--:--" }} -
@@ -8,10 +8,10 @@
       </div>
       <img src="@/static/images/servicebg.png" alt="" />
     </div>
-    <div class="flex flex-col rounded mt-[10px]">
+    <div class="service-page__menu flex flex-col rounded mt-[10px]">
       <div
         @click="customer"
-        class="flex items-center justify-between p-4 box-border bg-[#fff]"
+        class="service-page__menu-item flex items-center justify-between p-4 box-border bg-[#fff]"
       >
         <div class="flex items-center">
           <!-- <img src="@/static/images/setting.png" class="w-4 h-4 mr-2" alt="" /> -->
@@ -21,7 +21,7 @@
       </div>
       <div
         @click="help"
-        class="flex items-center justify-between p-4 box-border mt-[10px] bg-[#fff]"
+        class="service-page__menu-item flex items-center justify-between p-4 box-border mt-[10px] bg-[#fff]"
       >
         <div class="flex items-center">
           <!-- <img src="@/static/images/setting.png" class="w-4 h-4 mr-2" alt="" /> -->

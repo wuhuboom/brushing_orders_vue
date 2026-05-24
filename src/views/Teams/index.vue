@@ -1,22 +1,8 @@
 <template>
-    <div class="w-full min-h-[100vh] bg-[#F9FAFB] mb-[10px]">
+    <div class="team-page w-full min-h-[100vh] bg-[#F9FAFB] mb-[10px]">
+        <PageTopBar :title="$t('team')" show-back @click-left="onClickLeft" />
         <div
-            class="relative bg-gradient-to-r from-[#a04149] to-[#6a4d52] flex items-center justify-center h-[56px] px-[16px]"
-        >
-            <div class="absolute left-[16px]">
-                <van-icon
-                    name="arrow-left"
-                    color="#fff"
-                    size="22px"
-                    @click="onClickLeft"
-                />
-            </div>
-            <div class="text-base text-[#FFFFFF] font-medium">
-                {{ $t("team") }}
-            </div>
-        </div>
-        <div
-            class="bg-gradient-to-r from-[#a04149] to-[#6a4d52] px-[15px] mt-[-2px] pb-[10px]"
+            class="team-page__hero bg-gradient-to-r from-[#a04149] to-[#6a4d52] px-[15px] mt-[-2px] pb-[10px]"
         >
             <!-- <div class="text-[14px] text-[#fff] pt-[10px]">{{$t('team_amount')}}</div>
         <div class="text-[28px] text-[#fff] pt-[20px]">000</div> -->
@@ -161,7 +147,7 @@
         <div class="w-full">
             <!-- 顶部导航 -->
             <div
-                class="flex justify-between items-center px-[16px] bg-white sticky top-0 z-10"
+                class="team-page__tabs flex justify-between items-center px-[16px] bg-white sticky top-0 z-10"
             >
                 <div
                     v-for="(tab, index) in tabs"
@@ -186,7 +172,7 @@
           @load="onLoad"
         >
           <van-cell v-for="item in list" :key="item" :title="item"> -->
-        <div class="bg-[#fff] px-[15px] pb-[15px]" v-for="item in levelUsers">
+        <div class="team-page__member-card bg-[#fff] px-[15px] pb-[15px]" v-for="item in levelUsers">
             <div
                 class="flex justify-between py-[15px]"
                 style="border-bottom: 0.02667rem solid rgb(246, 246, 246)"
@@ -240,6 +226,7 @@
     </div>
 </template>
 <script setup>
+import PageTopBar from "@/components/PageTopBar.vue";
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { getTeamInfo } from "../../api/apis";
 import { useUserStore } from "../../store/modules/user";

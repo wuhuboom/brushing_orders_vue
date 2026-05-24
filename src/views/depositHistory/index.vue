@@ -6,20 +6,17 @@
             @click-left="onClickLeft"
         />
 
-        <div class="px-[20px] pt-[84px] pb-[28px]">
+        <div class="px-[20px] pt-[14px] pb-[28px]">
             <van-pull-refresh
-              v-model="refreshing"
-              :pulling-text="' '"
-              :loosing-text="' '"
-              :loading-text="' '"
-              :success-text="' '"
-              @refresh="onRefresh"
+                v-model="refreshing"
+                :disabled="!pullRefreshEnabled"
+                :pulling-text="' '"
+                :loosing-text="' '"
+                :loading-text="' '"
+                @refresh="onRefresh"
+                @touchstart.passive="onRefreshTouchStart"
+                @touchmove.passive="onRefreshTouchMove"
             >
-              <template #normal></template>
-              <template #pulling></template>
-              <template #loosing></template>
-              <template #loading></template>
-              <template #success></template>
                 <van-list
                     v-model:loading="loading"
                     :finished="finished"
@@ -63,7 +60,15 @@
                             'data-list-loading--inline': list.length,
                         }"
                     >
-                        <span class="data-list-loading__dot"></span>
+                        <div class="data-list-loading__wave" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </div>
                 </van-list>
             </van-pull-refresh>
@@ -72,16 +77,44 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { onBeforeUnmount, onMounted, reactive, ref } from "vue";
 import { useUserStore } from "@/store/modules/user";
 import { getDeposit } from "../../api/apis";
 import { formatWithTimezone } from "../../util/utils";
 
 const userStore = useUserStore();
 const refreshing = ref(false);
+const pullRefreshEnabled = ref(false);
 const finished = ref(false);
 const loading = ref(false);
 const list = ref([]);
+
+const getRootScrollTop = () => {
+    const app = document.getElementById("app");
+    return Math.max(
+        window.pageYOffset || 0,
+        document.documentElement?.scrollTop || 0,
+        document.body?.scrollTop || 0,
+        app?.scrollTop || 0,
+    );
+};
+
+const isAtPageTop = () => getRootScrollTop() <= 1;
+
+const syncPullRefreshState = () => {
+    pullRefreshEnabled.value = isAtPageTop() && !loading.value;
+};
+
+const onRefreshTouchStart = () => {
+    pullRefreshEnabled.value = isAtPageTop() && !loading.value;
+};
+
+const onRefreshTouchMove = () => {
+    if (!isAtPageTop()) {
+        pullRefreshEnabled.value = false;
+    }
+};
+
 const query = reactive({
     pageNum: 1,
     pageSize: 10,
@@ -102,7 +135,15 @@ const reloadList = async (showRefresh = false) => {
     }
 };
 
-const onRefresh = () => reloadList(true);
+const onRefresh = async () => {
+    if (!isAtPageTop()) {
+        refreshing.value = false;
+        pullRefreshEnabled.value = false;
+        return;
+    }
+    await reloadList(true);
+    pullRefreshEnabled.value = false;
+};
 
 const onLoad = async () => {
     if (finished.value) return;
@@ -130,24 +171,22 @@ const loadData = async () => {
 const onClickLeft = () => history.back();
 
 onMounted(() => {
+    syncPullRefreshState();
+    window.addEventListener("scroll", syncPullRefreshState, { passive: true });
+    document.getElementById("app")?.addEventListener("scroll", syncPullRefreshState, { passive: true });
     reloadList(false);
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener("scroll", syncPullRefreshState);
+    document.getElementById("app")?.removeEventListener("scroll", syncPullRefreshState);
 });
 </script>
 
 <style scoped>
-
-.deposit-history-page :deep(.van-pull-refresh__head),
-.deposit-history-page :deep(.van-pull-refresh__loading),
-.deposit-history-page :deep(.van-pull-refresh__text) {
-    display: none !important;
-    height: 0 !important;
-    line-height: 0 !important;
-    opacity: 0 !important;
-    overflow: hidden !important;
-}
-
-.deposit-history-page :deep(.van-pull-refresh__track) {
-    transform: translate3d(0, 0, 0) !important;
+.deposit-history-page :deep(.van-pull-refresh__head) {
+    color: #9aa5b5;
+    font-size: 13px;
 }
 
 .deposit-history-page :deep(.van-list__loading) {
@@ -177,66 +216,97 @@ onMounted(() => {
     min-height: 72px;
 }
 
-.data-list-loading__dot {
+.data-list-loading__wave {
     position: relative;
-    display: block;
-    width: 12px;
-    height: 12px;
-    border-radius: 999px;
-    background: var(--theme-primary);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    width: 68px;
+    height: 44px;
+    padding-bottom: 6px;
 }
 
-.data-list-loading__dot::before,
-.data-list-loading__dot::after {
-    position: absolute;
-    inset: 0;
+.data-list-loading__wave::before {
     content: "";
-    border-radius: inherit;
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 4px;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(
+        90deg,
+        rgba(138, 243, 255, 0.06) 0%,
+        rgba(75, 151, 255, 0.18) 50%,
+        rgba(53, 67, 236, 0.06) 100%
+    );
 }
 
-.data-list-loading__dot::before {
-    background: var(--theme-loading-pulse);
-    animation: data-list-loading-pulse 1.05s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+.data-list-loading__wave span {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 4px;
+    height: 16px;
+    border-radius: 999px;
+    background: linear-gradient(
+        180deg,
+        #8af3ff 0%,
+        #4b97ff 34%,
+        #2f7bff 68%,
+        #3543ec 100%
+    );
+    box-shadow: 0 5px 12px rgba(47, 123, 255, 0.22);
+    transform-origin: center bottom;
+    animation: data-list-loading-wave 1s ease-in-out infinite;
 }
 
-.data-list-loading__dot::after {
-    background: var(--theme-primary);
-    transform: scale(0.62);
-    animation: data-list-loading-core 1.05s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+.data-list-loading__wave span:nth-child(1) {
+    height: 12px;
+    animation-delay: -0.36s;
 }
 
-@keyframes data-list-loading-pulse {
-    0% {
-        transform: scale(0.55);
-        opacity: 0.95;
-    }
-    38% {
-        transform: scale(2.35);
-        opacity: 0.72;
-    }
-    72% {
-        transform: scale(2.95);
-        opacity: 0.12;
-    }
-    100% {
-        transform: scale(0.55);
-        opacity: 0.95;
-    }
+.data-list-loading__wave span:nth-child(2) {
+    height: 18px;
+    animation-delay: -0.24s;
 }
 
-@keyframes data-list-loading-core {
+.data-list-loading__wave span:nth-child(3) {
+    height: 26px;
+    animation-delay: -0.12s;
+}
+
+.data-list-loading__wave span:nth-child(4) {
+    width: 5px;
+    height: 34px;
+    animation-delay: 0s;
+}
+
+.data-list-loading__wave span:nth-child(5) {
+    height: 26px;
+    animation-delay: 0.12s;
+}
+
+.data-list-loading__wave span:nth-child(6) {
+    height: 18px;
+    animation-delay: 0.24s;
+}
+
+.data-list-loading__wave span:nth-child(7) {
+    height: 12px;
+    animation-delay: 0.36s;
+}
+
+@keyframes data-list-loading-wave {
     0%,
     100% {
-        transform: scale(0.58);
-        opacity: 0.98;
+        transform: scaleY(0.58);
+        opacity: 0.5;
     }
-    45% {
-        transform: scale(0.42);
-        opacity: 0.78;
-    }
-    70% {
-        transform: scale(0.1);
-        opacity: 0.35;
+    50% {
+        transform: scaleY(1.16);
+        opacity: 1;
     }
 }
 
@@ -335,8 +405,19 @@ onMounted(() => {
     text-align: right;
     flex-shrink: 0;
 }
-</style>
 
+
+.deposit-history-page :deep(.page-top-bar) {
+    position: sticky;
+    top: 0;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    transform: none !important;
+}
+
+</style>
 
 <style>
 .deposit-history-page .van-list__loading,

@@ -2,3 +2,92 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Global request loading: keep the same audio-wave animation as Records list loading. */
+.app-wave-loading-mask,
+.app-wave-loading-mask.el-loading-mask {
+  background: #ffffff !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.app-wave-loading-mask .el-loading-spinner {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 68px !important;
+  height: 44px !important;
+  margin: -22px 0 0 -34px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: none !important;
+}
+
+.app-wave-loading-mask .el-loading-spinner svg,
+.app-wave-loading-mask .el-loading-spinner .circular,
+.app-wave-loading-mask .el-loading-spinner .path,
+.app-wave-loading-mask .el-loading-spinner .el-icon-loading,
+.app-wave-loading-mask .el-loading-spinner i {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.app-request-loading__wave {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  width: 68px;
+  height: 44px;
+  padding-bottom: 6px;
+}
+
+.app-request-loading__wave::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 4px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(138, 243, 255, 0.06) 0%, rgba(75, 151, 255, 0.18) 50%, rgba(53, 67, 236, 0.06) 100%);
+}
+
+.app-request-loading__wave span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 4px;
+  height: 16px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #8af3ff 0%, #4b97ff 34%, #2f7bff 68%, #3543ec 100%);
+  box-shadow: 0 5px 12px rgba(47, 123, 255, 0.22);
+  transform-origin: center bottom;
+  animation: app-request-loading-wave 1s ease-in-out infinite !important;
+}
+
+.app-request-loading__wave span:nth-child(1) { height: 12px; animation-delay: -0.36s !important; }
+.app-request-loading__wave span:nth-child(2) { height: 18px; animation-delay: -0.24s !important; }
+.app-request-loading__wave span:nth-child(3) { height: 26px; animation-delay: -0.12s !important; }
+.app-request-loading__wave span:nth-child(4) { width: 5px; height: 34px; animation-delay: 0s !important; }
+.app-request-loading__wave span:nth-child(5) { height: 26px; animation-delay: 0.12s !important; }
+.app-request-loading__wave span:nth-child(6) { height: 18px; animation-delay: 0.24s !important; }
+.app-request-loading__wave span:nth-child(7) { height: 12px; animation-delay: 0.36s !important; }
+
+@keyframes app-request-loading-wave {
+  0%, 100% {
+    transform: scaleY(0.58);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scaleY(1.16);
+    opacity: 1;
+  }
+}
+
+.app-wave-loading-mask .el-loading-spinner::before {
+  content: none !important;
+  display: none !important;
+}

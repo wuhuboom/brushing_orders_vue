@@ -1,23 +1,29 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-[fff]">
+  <div class="profile-page min-h-screen bg-[#eef2fb]">
     <AppLoadingScreen :visible="isUploading" />
     <PageTopBar :title="$t('modify_information')" show-back @click-left="onClickLeft" />
-    <div class="w-full pl-6 pr-6 pt-[77px] box-border flex flex-col">
-      <div class="w-full flex flex-col">
-        <div class="w-full flex flex-col items-center justify-center mt-20">
-          <van-uploader v-model="fileList" :after-read="afterRead" reupload max-count="1" />
-          <div class="text-[#666] text-sm mt-2 flex items-center">
-            <div class="mr-1 text-[var(--theme-primary)]">{{ $t("click_to_change") }}</div>
-            <van-icon name="edit" />
-          </div>
-          <div class="text-[#666666] text-[14px] pt-[15px]">{{ $t("profile.str") }}</div>
-          <div class="pc-fixed-bottom fixed bottom-4 left-1/2 -translate-x-1/2 w-[90%]">
-            <van-button class="w-full" style="background: var(--theme-button-gradient); color: #fff" @click="updateAvatarMethods">
-              {{ $t("update") }}
-            </van-button>
-          </div>
+
+    <div class="profile-page__body">
+      <section class="profile-page__card">
+        <div class="profile-page__avatar-wrap">
+          <van-uploader
+            v-model="fileList"
+            :after-read="afterRead"
+            reupload
+            max-count="1"
+            class="profile-page__uploader"
+          />
         </div>
-      </div>
+        <div class="profile-page__action">
+          <span>{{ $t("click_to_change") }}</span>
+          <van-icon name="edit" size="16" />
+        </div>
+        <div class="profile-page__desc">{{ $t("profile.str") }}</div>
+      </section>
+
+      <van-button class="profile-page__submit" block @click="updateAvatarMethods">
+        {{ $t("update") }}
+      </van-button>
     </div>
   </div>
 </template>
@@ -81,3 +87,73 @@ onMounted(() => {
   });
 });
 </script>
+
+<style scoped>
+.profile-page__body {
+  padding: 92px 20px 36px;
+}
+
+.profile-page__card {
+  padding: 36px 20px 28px;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(18, 25, 38, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-page__avatar-wrap {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #edf2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-page__uploader :deep(.van-uploader__upload),
+.profile-page__uploader :deep(.van-uploader__preview),
+.profile-page__uploader :deep(.van-uploader__preview-image) {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-page__uploader :deep(.van-uploader__upload) {
+  margin: 0;
+  background: #edf2ff;
+}
+
+.profile-page__action {
+  margin-top: 16px;
+  color: #3550e8;
+  font-size: 15px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-page__desc {
+  margin-top: 14px;
+  color: #7a8496;
+  font-size: 14px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.profile-page__submit {
+  margin-top: 26px;
+  height: 58px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #3b45df 0%, #3a4be7 100%);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+</style>

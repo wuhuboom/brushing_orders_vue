@@ -1,33 +1,26 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f8f8f8] px-[20px]">
-    <div class="container w-full mb-[100px] bg-white">
-      <PageTopBar :title="$t('invite_friends')" show-back @click-left="onClickLeft" />
-    </div>
-    <div class="flex flex-col items-center mt-[200px]">
-        <div class="text-[#999] text-[12px]">{{$t('my_invitation_code')}}</div>
-        <div class="text-[27px] font-bold mt-[10px] mb-[30px]">{{route.query.code}}</div>
-        <!-- <img class="w-[124px] h-[124px]" src="@/static/images/cunkuan.png" alt=""> -->
-        <!-- <vue-qrcode
-            :value="address"
-            :options="{ width: 124, margin: 0 }"
-            class="p-0"
-          /> -->
-           <img
-            v-if="qrImg"
-            :src="qrImg"
-            width="124"
-            height="124"
-        />
-        <div class="text-[#f37335] text-[10px] pt-[10px]">{{$t('long_press_to_save_the_qr_code')}}</div>
-    </div>
-    <div class="bg-[#fff] p-[20px] mt-[20px]">
-        <div class="flex justify-between text-[12px]">
-            <div class="text-[#333]">{{$t('share_link')}}</div>
-            <div class="text-[#f37335]" @click="copyContent(address)">{{$t('copy')}}</div>
+  <div class="invite-page min-h-screen bg-[#eef2fb]">
+    <PageTopBar :title="$t('invite_friends')" show-back @click-left="onClickLeft" />
+
+    <div class="invite-page__body">
+      <section class="invite-page__hero">
+        <div class="invite-page__label">{{ $t('my_invitation_code') }}</div>
+        <div class="invite-page__code">{{ route.query.code }}</div>
+        <div class="invite-page__qr-wrap">
+          <img v-if="qrImg" :src="qrImg" width="124" height="124" />
         </div>
-        <div class="bg-[#f6f6f6] h-[52px] flex items-center pl-[5px] text-[10px] mt-[15px]">
-            {{address}}
+        <div class="invite-page__tip">{{ $t('long_press_to_save_the_qr_code') }}</div>
+      </section>
+
+      <section class="invite-page__link-card">
+        <div class="invite-page__link-head">
+          <div>{{ $t('share_link') }}</div>
+          <button type="button" class="invite-page__copy" @click="copyContent(address)">
+            {{ $t('copy') }}
+          </button>
         </div>
+        <div class="invite-page__link-box">{{ address }}</div>
+      </section>
     </div>
   </div>
 </template>
@@ -65,3 +58,83 @@ watchEffect(async () => {
 
 const onClickLeft = () => history.back();
 </script>
+
+<style scoped>
+.invite-page__body {
+  padding: 92px 20px 32px;
+}
+
+.invite-page__hero,
+.invite-page__link-card {
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(18, 25, 38, 0.04);
+}
+
+.invite-page__hero {
+  padding: 28px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.invite-page__label {
+  color: #7a8496;
+  font-size: 13px;
+}
+
+.invite-page__code {
+  margin-top: 10px;
+  color: #121826;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.invite-page__qr-wrap {
+  margin-top: 24px;
+  padding: 14px;
+  border-radius: 18px;
+  background: #f6f8ff;
+}
+
+.invite-page__tip {
+  margin-top: 12px;
+  color: #f37335;
+  font-size: 12px;
+}
+
+.invite-page__link-card {
+  margin-top: 18px;
+  padding: 20px;
+}
+
+.invite-page__link-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #121826;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.invite-page__copy {
+  border: 0;
+  background: transparent;
+  color: #3550e8;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.invite-page__link-box {
+  margin-top: 14px;
+  padding: 16px 12px;
+  border-radius: 14px;
+  background: #f5f7fb;
+  color: #6b7486;
+  font-size: 12px;
+  line-height: 1.6;
+  word-break: break-all;
+}
+</style>

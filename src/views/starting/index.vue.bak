@@ -1,0 +1,1247 @@
+<template>
+    <div class="starting-page algofy-starting-page">
+        <div class="algofy-starting-shell">
+            <header class="algofy-starting-header">
+                <div class="algofy-starting-header__status">
+                    <div class="algofy-starting-header__time">9:41 AM</div>
+                    <div class="algofy-starting-header__status-icons" aria-hidden="true">
+                        <div class="algofy-starting-header__signal">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                        <div class="algofy-starting-header__wifi"></div>
+                        <div class="algofy-starting-header__battery">
+                            <span class="algofy-starting-header__battery-level"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="algofy-starting-header__title">VIP</div>
+            </header>
+
+            <section class="algofy-user-strip">
+                <div class="algofy-user-avatar-wrap">
+                    <img
+                        v-if="avatarUrl"
+                        class="algofy-user-avatar"
+                        :src="avatarUrl"
+                        alt=""
+                    />
+                    <img
+                        v-else
+                        class="algofy-user-avatar"
+                        src="@/static/images/vip_design/avatar.png"
+                        alt=""
+                    />
+                </div>
+                <div class="algofy-user-copy">
+                    <div class="algofy-user-welcome">Welcome Back,</div>
+                    <div class="algofy-user-name">{{ displayName }}</div>
+                </div>
+                <img class="algofy-user-vip" src="@/static/images/vip_design/vip1.png" alt="" />
+            </section>
+
+            <main class="algofy-starting-content">
+                <section class="algofy-product-section">
+                    <div class="algofy-product-gallery">
+                        <div class="algofy-product-thumbs algofy-product-thumbs--left">
+                            <div class="algofy-thumb-card">
+                                <img
+                                    v-if="galleryGoods[0]?.coverUrl"
+                                    :src="getBlindBoxCoverUrl(galleryGoods[0])"
+                                    alt=""
+                                />
+                            </div>
+                            <div class="algofy-thumb-card">
+                                <img
+                                    v-if="galleryGoods[1]?.coverUrl"
+                                    :src="getBlindBoxCoverUrl(galleryGoods[1])"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+
+                        <div class="algofy-product-main-img">
+                            <img
+                                v-if="featuredGoods?.coverUrl"
+                                :src="getBlindBoxCoverUrl(featuredGoods)"
+                                alt=""
+                            />
+                        </div>
+
+                        <div class="algofy-product-thumbs algofy-product-thumbs--right">
+                            <div class="algofy-thumb-card">
+                                <img
+                                    v-if="galleryGoods[3]?.coverUrl"
+                                    :src="getBlindBoxCoverUrl(galleryGoods[3])"
+                                    alt=""
+                                />
+                            </div>
+                            <div class="algofy-thumb-card algofy-thumb-card--dark">
+                                <img
+                                    v-if="galleryGoods[4]?.coverUrl"
+                                    :src="getBlindBoxCoverUrl(galleryGoods[4])"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 class="algofy-product-title">
+                        {{ featuredGoods.goodsName || "NIKE Dunk Low Retro Men's Shoe" }}
+                    </h1>
+                    <div class="algofy-product-rating">
+                        <span class="algofy-rating-star">★</span>
+                        <strong>{{ productScoreText }}</strong>
+                        <span>{{ productReviewText }}</span>
+                    </div>
+                    <div class="algofy-product-price">
+                        <span>Price:</span>
+                        <strong>USD {{ productPriceText }}</strong>
+                    </div>
+                    <button
+                        type="button"
+                        class="algofy-start-btn"
+                        :disabled="!isBlindBoxReady"
+                        @click="handleClick"
+                    >
+                        START NOW ({{ userInfo.dealCount || 0 }}/{{ orderCount || 0 }})
+                    </button>
+                </section>
+
+                <section class="algofy-balance-card">
+                    <img class="algofy-commission-icon" src="@/static/images/starting-design/commission-icon.png" alt="" />
+                    <div class="algofy-commission-label">Today's Commission</div>
+                    <div class="algofy-commission-amount">
+                        USD {{ userInfo.commission || "456.78" }}
+                    </div>
+                    <div class="algofy-commission-desc">
+                        The Displayed Amount Reflects The<br />Commissions Earned Today As An Indication.
+                    </div>
+                    <div class="algofy-balance-grid">
+                        <div class="algofy-mini-balance">
+                            <img src="@/static/images/starting-design/wallet-icon.png" alt="" />
+                            <div class="algofy-mini-title">Account Balance</div>
+                            <div class="algofy-mini-amount">USD {{ userInfo.balance || "123.45" }}</div>
+                            <p>
+                                The Total Balance Reflects<br />Both The Deposited<br />Amount And<br />Commissions Earned.
+                            </p>
+                        </div>
+                        <div class="algofy-mini-balance">
+                            <img src="@/static/images/starting-design/freeze-icon.png" alt="" />
+                            <div class="algofy-mini-title">Freeze Amount</div>
+                            <div class="algofy-mini-amount">
+                                USD {{ userInfo.freezeAmount || userInfo.frozenAmount || "1,234.56" }}
+                            </div>
+                            <p>
+                                Pinned Balance<br />Where There Is A<br />Pending Combination<br />Product In Process.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="algofy-notice-card">
+                    <h2>Important Notice:</h2>
+                    <p>
+                        Online Support Hours {{ TradeInfor?.workTimeStart || "10:00" }} - {{ TradeInfor?.workTimeEnd || "23:00" }}<br />
+                        Please contact online support for your assistance!
+                    </p>
+                </section>
+
+                <footer class="algofy-copyright-card">
+                    <img src="@/static/images/starting-design/footer-logo.png" alt="" />
+                    <p>Copyright © 2025 ALGOFY Company.</p>
+                    <p>All Rights Reserved.</p>
+                </footer>
+            </main>
+
+            <TaskOrderDialog
+                v-model="showCenter"
+                :title="$t('complete_the_order')"
+                :step="currentStep"
+                :step-labels="taskStepLabels"
+                :product-name="goods.goodsName"
+                :cover-url="goods.coverUrl ? url + goods.coverUrl : ''"
+                :amount-label="$t('order_amount')"
+                :amount-text="`$${goods.price || '0.00'}`"
+                :commission-label="$t('commission')"
+                :commission-text="`+$${goods.commission || '0.00'}`"
+                :success-message="taskSuccessMessage"
+                :show-warning="currentStep === 2 && showInsufficientWarning"
+                :warning-text="$t('insufficient_balance_please')"
+                :warning-action-text="$t('recharge')"
+                :action-text="
+                    currentStep === 1
+                        ? $t('accept_task')
+                        : currentStep === 2
+                          ? $t('complete_the_order')
+                          : $t('continue_tasks')
+                "
+                :action-loading="currentStep === 2 && isTaskSubmitting"
+                :action-disabled="currentStep === 2 && isTaskSubmitting"
+                @back="handleDialogBack"
+                @closed="resetDialogState"
+                @warning-action="goRecharge"
+                @primary="
+                    currentStep === 1
+                        ? goToOrderStep()
+                        : currentStep === 2
+                          ? submitForm()
+                          : handleContinueTasks()
+                "
+            >
+                <template #panel="{ step }">
+                    <div v-if="step === 1" class="task-panel">
+                        <div class="task-panel__title task-panel__title--warn">
+                            <van-icon name="warning-o" size="20" color="#e39a1a" />
+                            <span>{{ $t("task_instructions") }}</span>
+                        </div>
+                        <div class="task-panel__instructions">
+                            {{ $t("task_instruction_1") }}<br />
+                            {{ $t("task_instruction_2") }}<br />
+                            {{ $t("task_instruction_3") }}<br />
+                            {{ $t("task_instruction_4") }}
+                        </div>
+                    </div>
+
+                    <div v-else-if="step === 2" class="task-panel">
+                        <div class="task-panel__heading">
+                            {{ $t("place_order") }}
+                        </div>
+                        <div class="task-order-card">
+                            <div class="task-order-card__label">
+                                {{ $t("order_id") }}
+                            </div>
+                            <div class="task-order-card__id">
+                                #{{ goods.orderNo }}
+                            </div>
+                        </div>
+                        <div class="task-order-card__time">
+                            {{ $t("creation_at_colon") }}
+                            {{
+                                formatWithTimezone(
+                                    goods.createTime,
+                                    userStore.zoneActive.tzName,
+                                )
+                            }}
+                        </div>
+                    </div>
+                </template>
+            </TaskOrderDialog>
+
+            <van-popup
+                v-model:show="showImg"
+                class="lucky-draw-van-popup"
+                overlay-class="lucky-draw-popup-overlay"
+                :style="{ background: 'transparent' }"
+            >
+                <div class="lucky-draw-popup" @click="closeImg">
+                    <img
+                        class="lucky-draw-popup__panel"
+                        src="@/static/images/popup-design/lucky-draw-panel.png"
+                        alt=""
+                    />
+                    <div class="lucky-draw-popup__content">
+                        <div class="lucky-draw-popup__title">
+                            <span
+                                v-for="(line, index) in luckyDrawTitleLines"
+                                :key="index"
+                            >
+                                {{ line }}
+                            </span>
+                        </div>
+                        <div class="lucky-draw-popup__desc">
+                            {{ $t("lucky_draw_desc_before") }}
+                            <span class="lucky-draw-popup__amount">
+                                {{ $t("lucky_draw_amount") }}
+                            </span>
+                        </div>
+                        <div class="lucky-draw-popup__claim">
+                            {{ $t("lucky_draw_claim_text") }}
+                        </div>
+                        <div class="lucky-draw-popup__disclaimer">
+                            {{ $t("lucky_draw_disclaimer") }}
+                        </div>
+                    </div>
+                </div>
+            </van-popup>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { computed, onMounted, ref, onUnmounted } from "vue";
+import {
+    showLoadingToast,
+    closeToast,
+    showToast,
+    showSuccessToast,
+} from "@/util/message";
+import { useI18n } from "vue-i18n";
+import TaskOrderDialog from "@/components/TaskOrderDialog.vue";
+import {
+    getGoodsListTwo,
+    createOrder,
+    submitOrder,
+    getTradeConfig,
+} from "../../api/apis";
+import { formatWithTimezone } from "../../util/utils";
+import { useUserStore } from "@/store/modules/user";
+import { useRouter } from "vue-router";
+import { errorMessages } from "../../api/errorCodeMap";
+
+const url = window.g.VITE_API_IMG_URL;
+const userStore = useUserStore();
+const router = useRouter();
+const { t } = useI18n();
+
+const userInfo = ref({});
+const avatarUrl = ref("");
+let timer = null;
+
+const goodsList = ref([]);
+const visibleGoodsSource = ref([]);
+const showCenter = ref(false);
+const showImg = ref(false);
+const goods = ref({});
+const totalCount = ref(0);
+const currentStep = ref(1);
+const showInsufficientWarning = ref(false);
+const isTaskSubmitting = ref(false);
+const taskSuccessMessage = ref(t("task_completed_successfully"));
+const taskStepLabels = computed(() => [
+    t("accept_task"),
+    t("place_order"),
+    t("submit_proof"),
+]);
+
+const blindBoxAnimationClass = ref("blind-box-item--anim-rise");
+const blindBoxRenderSeed = ref(0);
+const blindBoxAnimationClasses = [
+    "blind-box-item--anim-rise",
+    "blind-box-item--anim-pop",
+    "blind-box-item--anim-flip",
+    "blind-box-item--anim-slide-left",
+    "blind-box-item--anim-slide-right",
+    "blind-box-item--anim-zoom",
+    "blind-box-item--anim-swing",
+    "blind-box-item--anim-rotate",
+    "blind-box-item--anim-drop",
+    "blind-box-item--anim-blur",
+];
+let blindBoxAnimationQueue = [];
+
+const shuffleBlindBoxAnimations = () => {
+    const pool = [...blindBoxAnimationClasses];
+    for (let i = pool.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    return pool;
+};
+
+const nextBlindBoxAnimationClass = () => {
+    if (!blindBoxAnimationQueue.length) {
+        blindBoxAnimationQueue = shuffleBlindBoxAnimations();
+    }
+
+    const nextClass = blindBoxAnimationQueue.shift();
+    if (
+        nextClass === blindBoxAnimationClass.value &&
+        blindBoxAnimationQueue.length
+    ) {
+        blindBoxAnimationQueue.push(nextClass);
+        return blindBoxAnimationQueue.shift();
+    }
+
+    return nextClass || blindBoxAnimationClasses[0];
+};
+
+const displayName = computed(() => {
+    return userInfo.value.username || userStore.userInfo?.username || "--";
+});
+
+const displayInitial = computed(() => {
+    const name = `${displayName.value || "?"}`.trim();
+    return name ? name.charAt(0).toUpperCase() : "?";
+});
+
+const BLIND_BOX_VISIBLE_COUNT = 9;
+const isBlindBoxReady = ref(false);
+let blindBoxPreloadToken = 0;
+let lastBlindBoxGoodsKey = "";
+let isStartingPageUnmounted = false;
+
+const normalizeBlindBoxList = (list) => {
+    return (Array.isArray(list) ? list : []).slice(0, BLIND_BOX_VISIBLE_COUNT);
+};
+
+const getBlindBoxCoverUrl = (item) => {
+    return item?.coverUrl ? `${url}${item.coverUrl}` : "";
+};
+
+const getBlindBoxItemKey = (item, index) => {
+    const baseKey =
+        item?.id || item?.orderNo || item?.coverUrl || `placeholder-${index}`;
+    return `${blindBoxRenderSeed.value}-${baseKey}-${index}`;
+};
+
+const getBlindBoxGoodsKey = (list) => {
+    return normalizeBlindBoxList(list)
+        .map((item, index) =>
+            [
+                item?.id || "",
+                item?.orderNo || "",
+                item?.coverUrl || "",
+                index,
+            ].join("|"),
+        )
+        .join("||");
+};
+
+const visibleGoods = computed(() => {
+    const list = [...(visibleGoodsSource.value || [])].slice(
+        0,
+        BLIND_BOX_VISIBLE_COUNT,
+    );
+    while (list.length < BLIND_BOX_VISIBLE_COUNT) {
+        list.push({ id: `placeholder-${list.length}` });
+    }
+    return list;
+});
+
+const galleryGoods = computed(() =>
+    normalizeBlindBoxList(visibleGoodsSource.value).filter((item) => item?.coverUrl),
+);
+
+const featuredGoods = computed(() => galleryGoods.value[2] || galleryGoods.value[0] || {});
+
+const productPriceText = computed(() => {
+    const amount = Number(featuredGoods.value?.price || goods.value?.price || 0);
+    return amount.toFixed(2);
+});
+
+const productScoreText = computed(
+    () => featuredGoods.value?.score || featuredGoods.value?.rate || "4.9",
+);
+
+const productReviewText = computed(() => {
+    const reviewCount =
+        featuredGoods.value?.reviewCount ??
+        featuredGoods.value?.commentCount ??
+        featuredGoods.value?.saleCount ??
+        123;
+    return `${reviewCount} Reviews`;
+});
+
+const loadBlindBoxImage = (src) => {
+    return new Promise((resolve) => {
+        if (!src) {
+            resolve();
+            return;
+        }
+
+        const image = new Image();
+        let settled = false;
+        const done = () => {
+            if (settled) return;
+            settled = true;
+            resolve();
+        };
+
+        image.onload = async () => {
+            try {
+                if (typeof image.decode === "function") {
+                    await image.decode();
+                }
+            } catch (error) {
+                // decode 失败时仍然继续渲染，避免坏图阻塞九宫格。
+            }
+            done();
+        };
+        image.onerror = done;
+        image.src = src;
+    });
+};
+
+const preloadBlindBoxImages = async (list) => {
+    const normalizedList = normalizeBlindBoxList(list);
+    const nextGoodsKey = getBlindBoxGoodsKey(normalizedList);
+
+    if (isBlindBoxReady.value && nextGoodsKey === lastBlindBoxGoodsKey) {
+        return;
+    }
+
+    const nextToken = ++blindBoxPreloadToken;
+    const imageUrls = Array.from(
+        new Set(normalizedList.map(getBlindBoxCoverUrl).filter(Boolean)),
+    );
+
+    await Promise.all(imageUrls.map(loadBlindBoxImage));
+
+    if (nextToken !== blindBoxPreloadToken || isStartingPageUnmounted) return;
+
+    blindBoxAnimationClass.value = nextBlindBoxAnimationClass();
+    blindBoxRenderSeed.value += 1;
+    visibleGoodsSource.value = normalizedList;
+    lastBlindBoxGoodsKey = nextGoodsKey;
+    isBlindBoxReady.value = true;
+};
+
+const getList = async () => {
+    try {
+        const res = await getGoodsListTwo();
+        const nextList = Array.isArray(res.data) ? res.data : [];
+        goodsList.value = nextList;
+        await preloadBlindBoxImages(nextList);
+    } catch (e) {
+        console.error("获取商品列表失败:", e);
+    } finally {
+        if (!isStartingPageUnmounted) {
+            timer = setTimeout(getList, 10000);
+        }
+    }
+};
+
+const toLogin = () => {
+    router.replace({ path: "/projectspage" });
+};
+
+const getImageByIndex = (i) => {
+    if (i === 4) return null;
+    const realIndex = i < 5 ? i : i - 1;
+    return goodsList.value[realIndex]?.coverUrl || "";
+};
+
+const handleClick = () => {
+    doCreateOrder();
+};
+
+const closeImg = () => {
+    showImg.value = false;
+};
+
+const resetDialogState = () => {
+    currentStep.value = 1;
+    showInsufficientWarning.value = false;
+    isTaskSubmitting.value = false;
+    taskSuccessMessage.value = t("task_completed_successfully");
+};
+
+const goToOrderStep = () => {
+    currentStep.value = 2;
+    showInsufficientWarning.value = false;
+};
+
+const handleDialogBack = () => {
+    if (isTaskSubmitting.value) return;
+
+    if (currentStep.value === 2) {
+        currentStep.value = 1;
+        showInsufficientWarning.value = false;
+        return;
+    }
+
+    if (currentStep.value >= 3) {
+        showCenter.value = false;
+        resetDialogState();
+        return;
+    }
+
+    showCenter.value = false;
+};
+
+const handleContinueTasks = () => {
+    showCenter.value = false;
+    resetDialogState();
+};
+
+const goRecharge = () => {
+    router.push("/deposit");
+};
+
+const doCreateOrder = () => {
+    showLoadingToast({
+        message: t("creating"),
+        forbidClick: true,
+        duration: 0,
+    });
+
+    createOrder()
+        .then((res) => {
+            closeToast();
+            showCenter.value = true;
+            currentStep.value = 1;
+            showInsufficientWarning.value = false;
+            userGetInfoMethods({ force: true });
+            goods.value = res.data;
+        })
+        .catch((err) => {
+            closeToast();
+            if (err.code == 2000) {
+                showImg.value = true;
+                setTimeout(() => {
+                    showImg.value = false;
+                }, 15000);
+            } else if (err.code == 909) {
+                showToast(
+                    `User has filled in ${err.data} pieces of data. please contact Customer Service to apply for resetting account`,
+                );
+            } else {
+                showToast(t(errorMessages[err.code]));
+            }
+        });
+};
+
+const submitForm = () => {
+    if (isTaskSubmitting.value) return;
+
+    showInsufficientWarning.value = false;
+    isTaskSubmitting.value = true;
+    submitOrder(goods.value.id)
+        .then((res) => {
+            closeToast();
+            userGetInfoMethods({ force: true });
+            if (res.code == 201) {
+                goods.value = res.data;
+            }
+            showSuccessToast(t("mission_submitted_completed"));
+            taskSuccessMessage.value = t("mission_submitted_completed");
+            currentStep.value = 3;
+        })
+        .catch((err) => {
+            if (err.code == 916) {
+                showInsufficientWarning.value = true;
+                return;
+            }
+            if (err.code == 906) {
+                if (userInfo.value.balance <= 0) {
+                    showToast(t("transaction_failed"));
+                } else {
+                    showToast(t(errorMessages[err.code] || "creation_failed"));
+                }
+            } else {
+                showToast(t(errorMessages[err.code] || "creation_failed"));
+            }
+        })
+        .finally(() => {
+            isTaskSubmitting.value = false;
+        });
+};
+
+const toNotice = () => {
+    router.push({ path: "/notice" });
+};
+
+const toMy = () => {
+    router.push({ path: "/my" });
+};
+
+const TradeInfor = ref({});
+const tradeConfig = async () => {
+    let res = await getTradeConfig();
+    TradeInfor.value = res.data;
+};
+
+onUnmounted(() => {
+    isStartingPageUnmounted = true;
+    blindBoxPreloadToken += 1;
+    if (timer) clearTimeout(timer);
+});
+
+const userLevel = ref("");
+const orderCount = ref(0);
+
+const syncUserInfo = (info = {}) => {
+    userInfo.value = info || {};
+    const levelInfo = info?.userLevel || {};
+    avatarUrl.value = levelInfo.icon ? `${url}${levelInfo.icon}` : "";
+    orderCount.value = levelInfo.orderCount || 0;
+    userLevel.value = levelInfo.nameEn || "";
+};
+
+const userGetInfoMethods = async (options = {}) => {
+    const info = await userStore.getUserInfo(options);
+    syncUserInfo(info);
+    return info;
+};
+
+onMounted(() => {
+    getList();
+    userGetInfoMethods();
+    tradeConfig();
+});
+</script>
+
+<style scoped>
+.algofy-starting-page {
+    min-height: 100vh;
+    background: #eef2f8;
+    color: #111111;
+}
+
+.algofy-starting-shell {
+    min-height: 100vh;
+    background: #eef2f8;
+    overflow-x: hidden;
+}
+
+.algofy-starting-header {
+    position: relative;
+    height: 100px;
+    background: #191919 url("@/static/images/auth/algofy-register-hero.png") top center / cover no-repeat;
+    color: #ffffff;
+}
+
+.algofy-starting-header__status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 44px;
+    padding: 0 16px 0 24px;
+}
+
+.algofy-starting-header__time {
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.algofy-starting-header__status-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.algofy-starting-header__signal {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+}
+
+.algofy-starting-header__signal span {
+    display: block;
+    width: 3px;
+    border-radius: 999px;
+    background: #ffffff;
+}
+
+.algofy-starting-header__signal span:nth-child(1) { height: 5px; opacity: 0.7; }
+.algofy-starting-header__signal span:nth-child(2) { height: 7px; opacity: 0.8; }
+.algofy-starting-header__signal span:nth-child(3) { height: 10px; opacity: 0.9; }
+.algofy-starting-header__signal span:nth-child(4) { height: 12px; }
+
+.algofy-starting-header__wifi {
+    position: relative;
+    width: 16px;
+    height: 11px;
+}
+
+.algofy-starting-header__wifi::before,
+.algofy-starting-header__wifi::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.algofy-starting-header__wifi::before {
+    top: 1px;
+    width: 16px;
+    height: 12px;
+}
+
+.algofy-starting-header__wifi::after {
+    top: 4px;
+    width: 9px;
+    height: 7px;
+}
+
+.algofy-starting-header__battery {
+    position: relative;
+    width: 24px;
+    height: 12px;
+    border: 1.8px solid #ffffff;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.algofy-starting-header__battery::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    right: -3px;
+    width: 2px;
+    height: 4px;
+    border-radius: 0 1px 1px 0;
+    background: #ffffff;
+}
+
+.algofy-starting-header__battery-level {
+    position: absolute;
+    inset: 2px;
+    border-radius: 1px;
+    background: #ffffff;
+}
+
+.algofy-starting-header__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.algofy-user-strip {
+    height: 93px;
+    padding: 18px 16px 16px;
+    background: linear-gradient(180deg, #3e86ff 0%, #2554de 100%);
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+.algofy-user-avatar-wrap {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 54px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #d7ecff;
+}
+
+.algofy-user-avatar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.algofy-user-copy {
+    flex: 1;
+    min-width: 0;
+    padding-left: 12px;
+}
+
+.algofy-user-welcome {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+.algofy-user-name {
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+    word-break: break-word;
+}
+
+.algofy-user-vip {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin-left: 8px;
+}
+
+.algofy-starting-content {
+    padding: 0 0 102px;
+    background: #eef2f8;
+}
+
+.algofy-product-section {
+    position: relative;
+    background: #ffffff;
+    padding: 26px 16px 24px;
+    overflow: hidden;
+}
+
+.algofy-product-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 42px;
+    background: #eef2f8;
+    clip-path: polygon(0 0, 100% 0, 100% 31%, 0 100%);
+}
+
+.algofy-product-gallery {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 85px 1fr 73px;
+    gap: 12px;
+    align-items: center;
+    min-height: 190px;
+}
+
+.algofy-product-thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.algofy-thumb-card {
+    width: 78px;
+    height: 78px;
+    border-radius: 6px;
+    background: #f3f5f8;
+    overflow: hidden;
+}
+
+.algofy-thumb-card--dark {
+    background: #111111;
+}
+
+.algofy-thumb-card img,
+.algofy-product-main-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.algofy-product-main-img {
+    height: 178px;
+    border: 2px solid #7592ff;
+    border-radius: 8px;
+    background: #f8f8f8;
+    overflow: hidden;
+}
+
+.algofy-product-title {
+    margin: 18px auto 0;
+    max-width: 345px;
+    font-size: 21px;
+    line-height: 1.2;
+    font-weight: 800;
+    text-align: center;
+    color: #080808;
+}
+
+.algofy-product-rating {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #6f7787;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.algofy-product-rating strong {
+    color: #111111;
+    font-weight: 800;
+}
+
+.algofy-rating-star {
+    color: #f5b400;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.algofy-product-price {
+    margin-top: 18px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.algofy-product-price strong {
+    color: #2f5cf2;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.algofy-start-btn {
+    width: 100%;
+    height: 52px;
+    margin-top: 25px;
+    border: 0;
+    border-radius: 8px;
+    background: #3344e8;
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+.algofy-start-btn:disabled {
+    opacity: 0.72;
+}
+
+.algofy-balance-card {
+    margin: 0 16px;
+    padding: 28px 18px 26px;
+    border-radius: 8px;
+    background: #243f90;
+    color: #ffffff;
+    text-align: center;
+}
+
+.algofy-commission-icon {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+    margin: 0 auto 12px;
+}
+
+.algofy-commission-label {
+    color: #ffcf17;
+    font-size: 18px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.algofy-commission-amount {
+    margin-top: 12px;
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+}
+
+.algofy-commission-desc {
+    margin-top: 22px;
+    color: rgba(255, 255, 255, 0.77);
+    font-size: 15px;
+    line-height: 1.25;
+    font-weight: 500;
+}
+
+.algofy-balance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 31px;
+}
+
+.algofy-mini-balance img {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    margin: 0 auto 10px;
+}
+
+.algofy-mini-title {
+    color: #ffcf17;
+    font-size: 18px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.algofy-mini-amount {
+    margin-top: 13px;
+    font-size: 23px;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.algofy-mini-balance p {
+    margin: 18px 0 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 15px;
+    line-height: 1.16;
+    font-weight: 500;
+}
+
+.algofy-notice-card {
+    margin: 16px 16px 0;
+    padding: 18px 12px 20px;
+    border-radius: 7px;
+    background: #e2e5ea;
+    text-align: center;
+}
+
+.algofy-notice-card h2 {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1.15;
+    font-weight: 800;
+    color: #111111;
+}
+
+.algofy-notice-card p {
+    margin: 13px 0 0;
+    color: #5f6877;
+    font-size: 15px;
+    line-height: 1.25;
+    font-weight: 500;
+}
+
+.algofy-copyright-card {
+    margin-top: 18px;
+    padding: 26px 16px 26px;
+    background: #111827;
+    color: #ffffff;
+    text-align: center;
+}
+
+.algofy-copyright-card img {
+    display: block;
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin: 0 auto 12px;
+}
+
+.algofy-copyright-card p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.task-panel {
+    padding: 20px 18px;
+    border-radius: 18px;
+    background: #ffffff;
+}
+
+.task-panel__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.task-panel__title--warn {
+    color: #bf7d1d;
+}
+
+.task-panel__instructions {
+    margin-top: 18px;
+    color: #516b53;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.task-panel__heading {
+    text-align: center;
+    color: #1c261d;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.task-order-card {
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid #b8debf;
+    border-radius: 16px;
+    background: #f3fbf5;
+    text-align: center;
+}
+
+.task-order-card__label {
+    color: #495e4b;
+    font-size: 16px;
+}
+
+.task-order-card__id {
+    margin-top: 12px;
+    color: #17a445;
+    font-size: 17px;
+    font-weight: 600;
+    word-break: break-all;
+}
+
+.task-order-card__time {
+    margin-top: 22px;
+    text-align: center;
+    color: #6a7e6b;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.lucky-draw-van-popup {
+    background: transparent;
+    overflow: visible;
+}
+
+:deep(.lucky-draw-popup-overlay) {
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.lucky-draw-popup {
+    position: relative;
+    width: 286px;
+    text-align: center;
+}
+
+.lucky-draw-popup__panel {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.lucky-draw-popup__content {
+    position: absolute;
+    inset: 152px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.lucky-draw-popup__title {
+    margin: 0;
+    max-width: 224px;
+    color: #ffffff;
+    font-size: 17px;
+    line-height: 1.28;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+
+.lucky-draw-popup__title span {
+    display: block;
+}
+
+.lucky-draw-popup__desc,
+.lucky-draw-popup__claim,
+.lucky-draw-popup__disclaimer {
+    margin: 12px 0 0;
+    color: #ffffff;
+    font-size: 10.5px;
+    line-height: 1.42;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.lucky-draw-popup__desc {
+    max-width: 224px;
+}
+
+.lucky-draw-popup__claim {
+    max-width: 218px;
+    margin-top: 12px;
+}
+
+.lucky-draw-popup__disclaimer {
+    max-width: 236px;
+    margin-top: 10px;
+    padding-bottom: 6px;
+    font-size: 8.5px;
+    line-height: 1.25;
+}
+
+.lucky-draw-popup__amount {
+    color: #ffe52d;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+</style>

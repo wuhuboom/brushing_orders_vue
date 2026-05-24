@@ -1,11 +1,11 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#ffff]">
-    <div class="container w-full min-h-[100vh] bg-white">
-      <PageTopBar :title="$t(route.query.id)" show-back @click-left="onClickLeft" />
-      <div class="w-full pt-[88px] p-6 box-border flex flex-col font-montserrat text-[#333]">
-        <!-- <div v-html="">{{  }}</div> -->
-         {{route.query.name}}
-      </div>
+  <div class="productmsg-page min-h-screen bg-[#eef2fb]">
+    <PageTopBar :title="$t(route.query.id)" show-back @click-left="onClickLeft" />
+
+    <div class="productmsg-page__body">
+      <section class="productmsg-page__card">
+        {{ route.query.name }}
+      </section>
     </div>
   </div>
 </template>
@@ -32,3 +32,19 @@ onMounted(() =>{
 
 const onClickLeft = () => history.back();
 </script>
+
+<style scoped>
+.productmsg-page__body {
+  padding: 92px 20px 32px;
+}
+
+.productmsg-page__card {
+  padding: 22px 18px;
+  border-radius: 22px;
+  background: #ffffff;
+  color: #121826;
+  font-size: 16px;
+  line-height: 1.7;
+  box-shadow: 0 10px 30px rgba(18, 25, 38, 0.04);
+}
+</style>

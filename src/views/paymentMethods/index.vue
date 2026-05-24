@@ -1,89 +1,72 @@
 <template>
-  <div class="payment-method-page min-h-screen bg-[#F5F8F7]">
-    <PageTopBar :title="$t('payment_method')" show-back @click-left="onClickLeft" />
+  <div class="payment-method-page min-h-screen bg-[#eef2fb]">
+    <PageTopBar :title="$t('wallet_management')" show-back :right-text="$t('history')" @click-left="onClickLeft" @click-right="goHistory" />
 
-    <div class="pt-[78px] pb-[36px]">
-      <div class="hero-card">
-        <div class="hero-icon-wrap">
-          <van-icon name="balance-o" size="34" color="#fff" />
-        </div>
-        <div class="hero-content">
-          <div class="hero-title">{{ $t("bind_withdrawal_account") }}</div>
-          <div class="hero-desc">
-            {{
-              $t(
-                'dear_user_please_enter_your_btc_20_eth_20_address_do_not_enter_your_bank_account_information_or_password'
-              )
-            }}
-          </div>
-        </div>
-      </div>
+    <div class="payment-method-page__body">
+      <section class="payment-method-page__amount-card">
+        <div class="payment-method-page__amount-label">{{ $t("account_amount") }}</div>
+        <div class="payment-method-page__amount-value">{{ accountAmountText }}</div>
+      </section>
 
-      <div class="px-[26px] mt-[26px]">
+      <div class="payment-method-page__form">
         <div class="field-group">
-          <div class="field-label">
-            <van-icon name="coupon-o" size="16" />
-            <span>{{ $t('wallet') }}</span>
+          <div class="field-title">{{ $t("wallet_name") }}</div>
+          <div class="field-box field-box--select">
+            <van-field
+              v-model="form.withdrawName"
+              label=""
+:placeholder="$t('please_enter_wallet_name')"
+              label-align="top"
+              class="custom-field"
+            />
+            <img class="select-arrow" src="@/static/images/wallet-select-arrow.png" alt="" />
           </div>
-          <van-field
-            v-model="form.withdrawName"
-            label=""
-            :placeholder="$t('wallet')"
-            label-align="top"
-            class="custom-field"
-          />
         </div>
 
         <div class="field-group">
-          <div class="field-label">
-            <van-icon name="contact-o" size="16" />
-            <span>{{ $t('network') }}</span>
+          <div class="field-title">{{ $t("network") }}</div>
+          <div class="field-box">
+            <van-field
+              v-model="form.withdrawType"
+              label=""
+:placeholder="$t('please_enter_network')"
+              label-align="top"
+              class="custom-field"
+            />
           </div>
-          <van-field
-            v-model="form.withdrawType"
-            label=""
-            :placeholder="$t('network')"
-            label-align="top"
-            class="custom-field"
-          />
         </div>
 
         <div class="field-group">
-          <div class="field-label">
-            <van-icon name="balance-list-o" size="16" />
-            <span>{{ $t('address') }}</span>
-          </div>
-          <van-field
-            v-model="form.withdrawAddress"
-            label=""
-            :placeholder="$t('address')"
-            label-align="top"
-            class="custom-field"
-          />
-        </div>
-
-        <div class="notice-card">
-          <van-icon name="shield-o" size="18" color="#C0A34A" />
-          <div class="notice-text">
-            {{ $t("account_encrypted_notice") }}
+          <div class="field-title">{{ $t("wallet_address") }}</div>
+          <div class="field-box">
+            <van-field
+              v-model="form.withdrawAddress"
+              label=""
+:placeholder="$t('please_enter_wallet_address')"
+              label-align="top"
+              class="custom-field"
+            />
           </div>
         </div>
 
-        <div class="mt-[30px]">
-          <van-button
-            class="submit-btn"
-            :class="{ 'submit-btn--active': isFormReady }"
-            block
-            @click="submitForm"
-          >
-            {{ $t("confirm") }}
-          </van-button>
+        <div class="notice-text">
+          {{ $t("withdrawal_within_hour") }}
         </div>
+
+        <van-button
+          class="submit-btn"
+          :class="{ 'submit-btn--active': isFormReady }"
+          block
+          @click="submitForm"
+        >
+          {{ $t("confirm") }}
+        </van-button>
       </div>
     </div>
   </div>
 </template>
 <script setup>
+import PageTopBar from "@/components/PageTopBar.vue";
 import { computed, onMounted, reactive } from "vue";
 import { addWithdrawalMethod } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
@@ -98,6 +81,10 @@ const form = reactive({
   withdrawAddress: "",
   withdrawType: "",
 });
+const accountAmountText = computed(() => {
+  const amount = Number(userStore.userInfo?.balance || 0);
+  return amount.toFixed(2);
+});
 const isFormReady = computed(
   () =>
     !!String(form.withdrawName || "").trim() &&
@@ -106,15 +93,18 @@ const isFormReady = computed(
 );
 const submitForm = async () => {
   if (!form.withdrawName) return showToast(t("please_enter_wallet_name"));
-  if (!form.withdrawAddress) return showToast(t("please_enter_network"));
+  if (!form.withdrawType) return showToast(t("please_enter_network"));
   if (!form.withdrawAddress) return showToast(t("please_enter_address"));
-  let res = await addWithdrawalMethod(form);
+  await addWithdrawalMethod(form);
   showToast(t("added_successfully"));
   router.push({ path: "/my" });
 };
 
 const onClickLeft = () => {
   router.push({ path: "/my" });
+};
+const goHistory = () => {
+  router.push({ path: "/withdrawHistory" });
 };
 onMounted(async () => {
   await userStore.getUserInfo();
@@ -125,123 +115,215 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.payment-method-page :deep(.van-nav-bar) {
-  background: #ffffff;
+.payment-method-page {
+  min-height: 100vh;
+  background: #eef2fb;
+  color: #0f1115;
 }
 
-.payment-method-page :deep(.van-nav-bar__title) {
-  color: #24352d;
-  font-size: 20px;
-  font-weight: 500;
+.wallet-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 80px;
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) 74px;
+  align-items: center;
+  background: #000;
+  color: #fff;
 }
 
-.payment-method-page :deep(.van-nav-bar .van-icon) {
-  color: var(--theme-primary);
+@media (min-width: 768px) {
+  .wallet-header {
+    left: 50%;
+    right: auto;
+    width: var(--app-pc-max-width, 375px);
+    transform: translateX(-50%);
+  }
 }
 
-.payment-method-page :deep(.van-nav-bar::after) {
-  border-bottom: 1px solid #dbe9df;
+.wallet-back,
+.wallet-history {
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  padding: 0;
 }
 
-.hero-card {
-  background: linear-gradient(135deg, #1e9c48 0%, #16863d 100%);
-  padding: 30px 28px 24px;
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-}
-
-.hero-icon-wrap {
-  width: 62px;
-  height: 62px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.18);
+.wallet-back {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
 }
 
-.hero-content {
+.wallet-back span {
+  width: 21px;
+  height: 21px;
+  border-left: 4px solid #fff;
+  border-bottom: 4px solid #fff;
+  transform: rotate(45deg);
+  border-radius: 2px;
+  margin-left: 8px;
+}
+
+.wallet-title {
   min-width: 0;
-  flex: 1;
+  text-align: center;
+  color: #fff;
+  font-size: 21px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.hero-title {
-  color: #ffffff;
-  font-size: 18px;
-  line-height: 25px;
-  font-weight: 500;
+.wallet-history {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.hero-desc {
-  margin-top: 8px;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 14px;
-  line-height: 22px;
+.payment-method-page__body {
+  padding: 100px 19px 40px;
+}
+
+.payment-method-page__amount-card {
+  position: relative;
+  overflow: hidden;
+  height: 126px;
+  padding: 22px 18px;
+  border-radius: 8px;
+  background: #2d5ddb url("@/static/images/wallet-amount-card-bg.png") center / cover no-repeat;
+  box-sizing: border-box;
+}
+
+.payment-method-page__amount-label,
+.payment-method-page__amount-value {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+}
+
+.payment-method-page__amount-label {
+  font-size: 21px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.payment-method-page__amount-value {
+  margin-top: 19px;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.payment-method-page__form {
+  margin-top: 28px;
 }
 
 .field-group + .field-group {
-  margin-top: 18px;
+  margin-top: 22px;
 }
 
-.field-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #4f9664;
-  font-size: 14px;
-  line-height: 20px;
+.field-title {
   margin-bottom: 10px;
-}
-
-.custom-field {
-  border: 1px solid #cfe5d5;
-  border-radius: 16px;
-  background: #ffffff;
-  padding: 14px 16px;
-}
-
-.payment-method-page :deep(.custom-field .van-field__control) {
-  color: #24352d;
-  font-size: 16px;
-  min-height: 24px;
-}
-
-.payment-method-page :deep(.custom-field .van-field__control::placeholder) {
-  color: #98a39d;
-}
-
-.notice-card {
-  margin-top: 34px;
-  padding: 18px 20px;
-  border-radius: 16px;
-  background: #e8f3eb;
-  border: 1px solid #cfe5d5;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.notice-text {
-  color: #6f8f78;
-  font-size: 14px;
-  line-height: 24px;
-}
-
-.submit-btn {
-  height: 56px;
-  border: none;
-  border-radius: 16px;
-  background: #cfe8d5;
-  color: #5c9369;
-  font-size: 16px;
+  color: #0f1115;
+  font-size: 19px;
+  line-height: 1.2;
   font-weight: 500;
 }
 
+.field-box {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 0 16px;
+  border: 1px solid #d8e0ee;
+  border-radius: 9px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.field-box--select {
+  padding-right: 18px;
+}
+
+.select-arrow {
+  width: 18px;
+  height: 12px;
+  object-fit: contain;
+  flex: 0 0 auto;
+  margin-left: 10px;
+}
+
+.custom-field {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.payment-method-page :deep(.custom-field.van-cell) {
+  padding: 0;
+  background: transparent;
+}
+
+.payment-method-page :deep(.custom-field.van-cell::after) {
+  display: none;
+}
+
+.payment-method-page :deep(.custom-field .van-field__body) {
+  min-height: 58px;
+}
+
+.payment-method-page :deep(.custom-field .van-field__control) {
+  width: 100%;
+  color: #111827;
+  font-size: 19px;
+  line-height: 1.2;
+  min-height: 24px;
+  font-weight: 400;
+}
+
+.payment-method-page :deep(.custom-field .van-field__control::placeholder) {
+  color: #596375;
+  opacity: 1;
+}
+
+.notice-text {
+  margin: 35px 4px 0;
+  color: #2f63f3;
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+.submit-btn {
+  margin-top: 31px;
+  height: 58px;
+  border: none;
+  border-radius: 9px;
+  background: #3442e6;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
 .submit-btn--active {
-  background: var(--theme-button-gradient-vertical);
-  box-shadow: 0 14px 24px var(--theme-button-shadow);
-  color: #ffffff;
+  background: #3442e6;
+  box-shadow: none;
+  color: #fff;
 }
 </style>

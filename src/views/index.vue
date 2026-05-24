@@ -3,40 +3,6 @@
         <div class="mx-auto flex w-full flex-col">
             <SkyeOdellHome>
                 <template #reward>
-                    <HomeWalletCard
-                        class="skye-slot-wallet"
-                        :title="$t('home_my_wallet')"
-                        :balance-label="$t('home_balance_usdt')"
-                        :today-label="$t('home_today_s_earnings')"
-                        :total-label="$t('home_total_earnings')"
-                        :vip-label="vipLabel"
-                        :balance="walletBalance"
-                        :today-earnings="todayEarnings"
-                        :total-earnings="totalEarnings"
-                    />
-
-                    <section class="home-ticker skye-slot-ticker">
-                        <div class="home-ticker__icon">
-                            <img :src="noticeVolumeIcon" alt="" />
-                        </div>
-                        <div class="home-ticker__content">
-                            <div
-                                class="home-ticker__marquee"
-                                v-if="noticeMarqueeText"
-                            >
-                                <span class="home-ticker__marquee-text">{{
-                                    noticeMarqueeText
-                                }}</span>
-                                <span
-                                    class="home-ticker__marquee-text"
-                                    aria-hidden="true"
-                                    >{{ noticeMarqueeText }}</span
-                                >
-                            </div>
-                            <div class="home-ticker__marquee" v-else></div>
-                        </div>
-                    </section>
-
                     <section class="home-link-grid skye-slot-grid">
                         <button
                             v-for="item in quickLinks"
@@ -124,11 +90,12 @@ const quickLinks = [
         route: "/guide",
         icon: quickIconIncome,
     },
+    { key: "event", label: "event", route: "/event", icon: quickIconEvent },
     {
-        key: "service",
-        label: "service",
-        route: "/customer",
-        icon: quickIconService,
+        key: "withdraw",
+        label: "withdrawal",
+        route: "/withdraw",
+        icon: quickIconWithdraw,
     },
     {
         key: "deposit",
@@ -143,28 +110,17 @@ const quickLinks = [
         icon: quickIconTerms,
     },
     {
-        key: "event",
-        label: "event",
-        route: "/event",
-        icon: quickIconEvent,
-    },
-    {
         key: "certificate",
         label: "certificate",
         route: "/cert",
         icon: quickIconCertificate,
     },
+    { key: "faqs", label: "faqs", route: "/faqs", icon: quickIconFaqs },
     {
-        key: "withdraw",
-        label: "withdrawal",
-        route: "/withdraw",
-        icon: quickIconWithdraw,
-    },
-    {
-        key: "faqs",
-        label: "faqs",
-        route: "/faqs",
-        icon: quickIconFaqs,
+        key: "service",
+        label: "service",
+        route: "/customer",
+        icon: quickIconService,
     },
 ];
 const parLang = computed(() => {
@@ -253,101 +209,25 @@ onMounted(async () => {
 
 <style scoped>
 .home-page {
-    background: #ffffff;
-}
-
-.skye-slot-wallet {
-    margin: 0;
-}
-
-.skye-slot-ticker,
-.skye-slot-grid {
-    margin-top: 12px;
-}
-
-.home-ticker {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    overflow: hidden;
-    border: 1px solid #d4ecd8;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.72);
-    padding: 0 11px 0 8px;
-    box-shadow: 0 8px 22px rgba(34, 125, 58, 0.06);
-}
-
-.home-ticker__icon {
-    display: flex;
-    flex: 0 0 22px;
-    width: 22px;
-    height: 22px;
-    align-items: center;
-    justify-content: center;
-}
-
-.home-ticker__icon img {
-    display: block;
-    height: 18px;
-    width: 22px;
-    object-fit: contain;
-}
-
-.home-ticker__content {
-    position: relative;
-    display: flex;
-    height: 33px;
-    align-items: center;
-    min-width: 0;
-    flex: 1;
-    overflow: hidden;
-}
-
-.home-ticker__marquee {
-    display: inline-flex;
-    align-items: center;
-    min-width: max-content;
-    white-space: nowrap;
-    gap: 40px;
-    color: #133d21;
-    font-size: 12px;
-    animation: home-ticker-marquee 20s linear infinite;
-    will-change: transform;
-}
-
-.home-ticker__marquee-text {
-    display: inline-flex;
-    align-items: center;
-    flex: 0 0 auto;
-    white-space: nowrap;
-}
-
-@keyframes home-ticker-marquee {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(calc(-50% - 20px));
-    }
+    background: #f4f7ff;
 }
 
 .home-link-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 18px 10px;
-    border: 1px solid #d4ecd8;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.86);
-    padding: 18px 10px 17px;
-    box-shadow: 0 8px 22px rgba(34, 125, 58, 0.06);
+    gap: 23px 6px;
+    border: 0;
+    border-radius: 0;
+    background: #fff;
+    padding: 8px 0 3px;
+    box-shadow: none;
 }
 
 .home-link-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
     min-width: 0;
     border: 0;
     background: transparent;
@@ -356,37 +236,38 @@ onMounted(async () => {
 
 .home-link-icon {
     display: flex;
-    height: 44px;
-    width: 44px;
+    height: 54px;
+    width: 54px;
     align-items: center;
     justify-content: center;
-    border-radius: 14px;
 }
 
 .home-link-icon img {
     display: block;
-    height: 44px;
-    width: 44px;
+    height: 54px;
+    width: 54px;
     object-fit: contain;
 }
 
 .home-link-label {
-    color: #121f16;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1.1;
+    color: #0f172a;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.08;
     text-align: center;
+    letter-spacing: -0.02em;
 }
 
 @media (max-width: 360px) {
     .home-link-grid {
-        gap: 16px 8px;
-        padding-left: 8px;
-        padding-right: 8px;
+        gap: 21px 4px;
     }
-
+    .home-link-icon {
+        width: 50px;
+        height: 50px;
+    }
     .home-link-label {
-        font-size: 11px;
+        font-size: 13px;
     }
 }
 </style>

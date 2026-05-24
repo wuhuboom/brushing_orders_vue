@@ -1,71 +1,33 @@
 <template>
-    <div class="profile-item-page min-h-screen bg-[#F5F8F7]">
+    <div class="profile-item-page min-h-screen">
         <AppLoadingScreen :visible="isUploading" />
+
         <PageTopBar
             :title="$t('modify_information')"
             show-back
+            :back-aria-label="$t('back')"
             @click-left="onClickLeft"
         />
 
-        <div class="px-[22px] pt-[75px] pb-[32px]">
-            <div class="flex flex-col items-center pt-[8px]">
-                <div class="relative" @click="triggerUploader">
-                    <div class="avatar-wrap">
-                        <img
-                            :src="previewAvatar"
-                            alt="avatar"
-                            class="avatar-img"
-                            @error="(e) => (e.target.src = userImg)"
-                        />
-                    </div>
-                    <div class="avatar-camera">
-                        <!-- <van-icon name="photograph" size="14" color="#fff" /> -->
-                        <img src="@/static/images/auth/camer.png" alt="" />
-                    </div>
-                    <van-uploader
-                        ref="uploaderRef"
-                        v-model="fileList"
-                        :after-read="afterRead"
-                        reupload
-                        max-count="1"
-                        class="hidden-uploader"
-                    />
-                </div>
+        <main class="profile-content">
+            <van-uploader
+                ref="uploaderRef"
+                v-model="fileList"
+                :after-read="afterRead"
+                reupload
+                max-count="1"
+                class="hidden-uploader"
+            />
 
-                <div
-                    class="mt-[12px] text-[28px] leading-[34px] text-[#1D2B24] font-medium"
-                >
-                    {{
-                        userStore.userInfo.username || userInfo.username || "--"
-                    }}
-                </div>
-                <div class="vip-badge mt-[10px]">VIP1</div>
-            </div>
-
-            <div class="security-card mt-[28px]">
-                <div class="security-icon">
-                    <img src="@/static/images/auth/securityic.png" alt="" />
-                </div>
-                <div class="ml-[12px] flex-1 min-w-0">
-                    <div
-                        class="text-[16px] leading-[22px] text-white font-medium"
-                    >
-                        {{ $t("account_security") }}
-                    </div>
-                    <div
-                        class="mt-[4px] text-[12px] leading-[17px] text-white/85"
-                    >
-                        {{ $t("keep_account_updated_secure") }}
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-card mt-[20px]">
+            <section class="info-card">
                 <div class="info-row">
                     <div class="row-icon">
-                        <img src="@/static/images/auth/celllist1.png" alt="" />
+                        <img
+                            src="@/static/images/profile-item/profile-user.png"
+                            alt=""
+                        />
                     </div>
-                    <div class="flex-1 min-w-0">
+                    <div class="row-content">
                         <div class="row-title">{{ $t("username") }}</div>
                         <div class="row-subtitle">
                             {{
@@ -75,16 +37,29 @@
                             }}
                         </div>
                     </div>
+                    <!-- <img
+                        class="row-arrow"
+                        src="@/static/images/profile-item/arrow1.png"
+                        alt=""
+                    /> -->
                 </div>
 
                 <div class="info-row">
                     <div class="row-icon">
-                        <img src="@/static/images/auth/celllist2.png" alt="" />
+                        <img
+                            src="@/static/images/profile-item/profile-phone.png"
+                            alt=""
+                        />
                     </div>
-                    <div class="flex-1 min-w-0">
+                    <div class="row-content">
                         <div class="row-title">{{ $t("phone") }}</div>
                         <div class="row-subtitle">{{ maskedPhone }}</div>
                     </div>
+                    <!-- <img
+                        class="row-arrow"
+                        src="@/static/images/profile-item/arrow1.png"
+                        alt=""
+                    /> -->
                 </div>
 
                 <div
@@ -92,15 +67,22 @@
                     @click="toPage('/updatePassword')"
                 >
                     <div class="row-icon">
-                        <img src="@/static/images/auth/celllist3.png" alt="" />
+                        <img
+                            src="@/static/images/profile-item/profile-password.png"
+                            alt=""
+                        />
                     </div>
-                    <div class="flex-1 min-w-0">
+                    <div class="row-content">
                         <div class="row-title">{{ $t("update_password") }}</div>
                         <div class="row-subtitle">
                             {{ $t("change_login_password") }}
                         </div>
                     </div>
-                    <van-icon name="arrow" color="#7BA78A" size="18" />
+                    <img
+                        class="row-arrow"
+                        src="@/static/images/profile-item/arrow1.png"
+                        alt=""
+                    />
                 </div>
 
                 <div
@@ -108,9 +90,12 @@
                     @click="toPage('/updateTransactionPassword')"
                 >
                     <div class="row-icon">
-                        <img src="@/static/images/auth/celllist4.png" alt="" />
+                        <img
+                            src="@/static/images/profile-item/profile-trade.png"
+                            alt=""
+                        />
                     </div>
-                    <div class="flex-1 min-w-0">
+                    <div class="row-content">
                         <div class="row-title">
                             {{ $t("update_transaction_password") }}
                         </div>
@@ -118,14 +103,19 @@
                             {{ $t("change_transaction_pin") }}
                         </div>
                     </div>
-                    <van-icon name="arrow" color="#7BA78A" size="18" />
+                    <img
+                        class="row-arrow"
+                        src="@/static/images/profile-item/arrow1.png"
+                        alt=""
+                    />
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
     </div>
 </template>
 
 <script setup>
+import PageTopBar from "@/components/PageTopBar.vue";
 import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../../store/modules/user";
@@ -143,8 +133,8 @@ const userInfo = ref({});
 const avatarUrl = ref("");
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 const user4 = new URL("@/static/images/user4.png", import.meta.url).href;
-const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
 const isUploading = ref(false);
+
 const previewAvatar = computed(() => {
     if (fileList.value?.[0]?.url) return fileList.value[0].url;
     return userStore.userInfo?.avatar || userInfo.value?.avatar || user4;
@@ -211,57 +201,58 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.profile-item-page :deep(.van-nav-bar) {
-    background: #ffffff;
+.profile-item-page {
+    min-height: 100vh;
+    background: #eef2fa;
+    color: #111111;
 }
 
-.profile-item-page :deep(.van-nav-bar__title) {
-    color: #24352d;
-    font-size: 22px;
-    font-weight: 500;
+.profile-header {
+    height: 52px;
+    background: #000000;
+    color: #ffffff;
 }
 
-.profile-item-page :deep(.van-nav-bar .van-icon) {
-    color: var(--theme-primary);
-    font-size: 20px;
+.profile-nav {
+    height: 52px;
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) 64px;
+    align-items: center;
 }
 
-.profile-item-page :deep(.van-nav-bar::after) {
-    border-bottom: 1px solid #dbe9df;
+.profile-title {
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
 }
 
-.avatar-wrap {
-    width: 86px;
-    height: 86px;
-    border-radius: 50%;
-    border: 3px solid #d6efe0;
-    background: var(--theme-primary);
-    overflow: hidden;
+.profile-back {
+    width: 64px;
+    height: 52px;
+    border: none;
+    outline: none;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 10px rgba(35, 164, 85, 0.12);
+    padding: 0;
 }
 
-.avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.profile-back span {
+    width: 16px;
+    height: 16px;
+    border-left: 4px solid #ffffff;
+    border-bottom: 4px solid #ffffff;
+    transform: rotate(45deg);
+    border-radius: 2px;
+    margin-left: 8px;
 }
 
-.avatar-camera {
-    position: absolute;
-    right: -2px;
-    bottom: 2px;
-    width: 24px;
-    height: 24px;
-    /*border-radius: 50%;
-    background: var(--theme-primary);
-    border: 2px solid #ffffff;
-    box-shadow: 0 2px 8px rgba(35, 164, 85, 0.2);*/
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.profile-content {
+    padding: 18px 20px 32px;
 }
 
 .hidden-uploader {
@@ -278,50 +269,19 @@ onMounted(() => {
     overflow: hidden;
 }
 
-.vip-badge {
-    min-width: 50px;
-    height: 24px;
-    padding: 0 12px;
-    border-radius: 999px;
-    background: #dcefe1;
-    color: #5ba06f;
-    font-size: 13px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.security-card {
-    display: flex;
-    align-items: center;
-    min-height: 62px;
-    padding: 0 16px;
-    border-radius: 16px;
-    background: var(--theme-button-gradient);
-}
-
-.security-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .info-card {
     background: #ffffff;
-    border: 1px solid #d5e7da;
-    border-radius: 18px;
+    border-radius: 15px;
     overflow: hidden;
+    box-shadow: none;
 }
 
 .info-row {
-    min-height: 72px;
-    padding: 0 16px;
+    min-height: 91px;
+    padding: 0 28px 0 14px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #dbe9df;
+    border-bottom: 1px solid #eef1f6;
 }
 
 .info-row.no-border {
@@ -331,25 +291,49 @@ onMounted(() => {
 .row-icon {
     width: 40px;
     height: 40px;
-    border-radius: 12px;
-    background: #e3f2e8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
+    margin-right: 16px;
     flex-shrink: 0;
 }
 
+.row-icon img {
+    width: 40px;
+    height: 40px;
+    display: block;
+    object-fit: contain;
+}
+
+.row-content {
+    flex: 1;
+    min-width: 0;
+}
+
 .row-title {
-    color: #24352d;
-    font-size: 16px;
-    line-height: 22px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+    line-height: 23px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
 }
 
 .row-subtitle {
-    margin-top: 4px;
-    color: #7ba78a;
-    font-size: 13px;
-    line-height: 18px;
+    margin-top: 8px;
+    font-family: Montserrat, Montserrat;
+    font-weight: 500;
+    font-size: 12px;
+    color: #6b7280;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.row-arrow {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-left: 12px;
+    flex-shrink: 0;
 }
 </style>

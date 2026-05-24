@@ -1,50 +1,46 @@
 <template>
-    <div class="relative z-50 w-full">
-        <div v-if="showSpacer" class="h-[88px]"></div>
-        <div class="pc-fixed-footer footer-bar fixed bottom-0 left-0 right-0">
-            <div
-                class="footer-active-indicator"
-                :class="{ 'footer-active-indicator--visible': showIndicator }"
-                :style="{
-                    transform: `translateX(${indicatorTranslateIndex * 100}%)`,
-                }"
-            ></div>
+    <div class="footer-wrap">
+        <div v-if="showSpacer" class="footer-spacer"></div>
+        <nav
+            class="pc-fixed-footer algofy-footer fixed bottom-0 left-0 right-0"
+            :style="footerStyle"
+        >
+            <svg
+                class="algofy-footer__bg"
+                viewBox="0 0 375 96"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+            >
+                <path class="algofy-footer__bg-fill" :d="footerShapePath" />
+                <path class="algofy-footer__top-shadow" :d="footerTopPath" />
+                <path class="algofy-footer__top-stroke" :d="footerTopPath" />
+            </svg>
             <div
                 v-for="menu in menus"
                 :key="menu.url"
-                class="footer-item"
+                class="algofy-footer__item"
                 :class="{
-                    'footer-item--center': menu.center,
-                    'footer-item--active': isVisualActive(menu),
-                    'footer-item--pressed': pressedUrl === menu.url,
+                    'algofy-footer__item--center': menu.center,
+                    'algofy-footer__item--active': isVisualActive(menu),
+                    'algofy-footer__item--pressed': pressedUrl === menu.url,
                 }"
                 @click="onClickMenu(menu)"
             >
-                <div
-                    class="footer-icon-shell"
-                    :class="{
-                        'footer-icon-shell--active':
-                            isVisualActive(menu) && !menu.center,
-                        'footer-icon-shell--center': menu.center,
-                    }"
-                >
-                    <img
-                        :src="getMenuIcon(menu)"
-                        :alt="menu.title"
-                        class="footer-icon"
-                        :class="{ 'footer-icon--center': menu.center }"
-                    />
-                </div>
+                <img
+                    :src="getMenuIcon(menu)"
+                    :alt="menu.title"
+                    class="algofy-footer__icon"
+                />
                 <span
-                    class="footer-label"
+                    class="algofy-footer__label"
                     :class="{
-                        'footer-label--active': isVisualActive(menu),
+                        'algofy-footer__label--active': isVisualActive(menu),
                     }"
                 >
                     {{ menu.title }}
                 </span>
             </div>
-        </div>
+        </nav>
     </div>
 </template>
 
@@ -53,22 +49,22 @@ import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
-import footerHome from "@/static/images/footer/home.png";
-import footerHomeActive from "@/static/images/footer/home-active.png";
-import footerVip from "@/static/images/footer/vip.png";
-import footerVipActive from "@/static/images/footer/vip-active.png";
-import footerStarting from "@/static/images/footer/starting-active.png";
-import footerOrders from "@/static/images/footer/orders.png";
-import footerOrdersActive from "@/static/images/footer/orders-active.png";
-import footerMe from "@/static/images/footer/me.png";
-import footerMeActive from "@/static/images/footer/me-active.png";
+import footerHome from "@/static/images/footer-design/home.png";
+import footerHomeActive from "@/static/images/footer-design/home-active.png";
+import footerVip from "@/static/images/footer-design/vip.png";
+import footerVipActive from "@/static/images/footer-design/vip-active.png";
+import footerStarting from "@/static/images/footer-design/starting-outline.png";
+import footerStartingActive from "@/static/images/footer-design/starting-fill.png";
+import footerOrders from "@/static/images/footer-design/orders.png";
+import footerOrdersActive from "@/static/images/footer-design/orders-active.png";
+import footerMe from "@/static/images/footer-design/me.png";
+import footerMeActive from "@/static/images/footer-design/me-active.png";
 
 const router = useRouter();
 const pressedUrl = ref("");
-const displayedIndicatorIndex = ref(-1);
-const lastIndicatorIndex = ref(0);
 const visualActiveUrl = ref("");
-const pendingVisualActiveUrl = ref("");
+const FIXED_BUMP_INDEX = 2;
+const animatedBumpIndex = ref(FIXED_BUMP_INDEX);
 const props = defineProps({
     name: String,
     showSpacer: {
@@ -95,7 +91,7 @@ const menus = computed(() => [
         title: t("starting"),
         url: "/starting",
         icon: footerStarting,
-        activeIcon: footerStarting,
+        activeIcon: footerStartingActive,
         center: true,
     },
     {
@@ -108,31 +104,52 @@ const menus = computed(() => [
 ]);
 
 const activeIndicatorIndex = computed(() =>
-    menus.value.findIndex((menu) => !menu.center && props.name === menu.url),
-);
-const showIndicator = computed(() => displayedIndicatorIndex.value >= 0);
-const indicatorTranslateIndex = computed(() =>
-    displayedIndicatorIndex.value >= 0
-        ? displayedIndicatorIndex.value
-        : lastIndicatorIndex.value,
+    menus.value.findIndex((menu) => props.name === menu.url),
 );
 
-function getMenuIndex(menu) {
-    if (menu.center) return -1;
-    return menus.value.findIndex((item) => item.url === menu.url);
+const footerStyle = computed(() => ({
+    "--footer-bump-center-x": `${(animatedBumpIndex.value + 0.5) * 20}%`,
+}));
+
+const footerContour = computed(() => {
+    const centerX = (animatedBumpIndex.value + 0.5) * 75;
+    const start = centerX - 60;
+    const end = centerX + 60;
+    const left = Math.min(0, start);
+    const right = Math.max(375, end);
+
+    const top = [
+        `M${left} 31`,
+        start > left ? `H${start}` : "",
+        `C${start + 14} 31 ${start + 21} 30 ${start + 28} 27`,
+        `C${start + 39} 22 ${start + 44} 13 ${start + 60} 13`,
+        `C${start + 76} 13 ${start + 81} 22 ${start + 92} 27`,
+        `C${start + 99} 30 ${start + 106} 31 ${end} 31`,
+        end < right ? `H${right}` : "",
+    ]
+        .filter(Boolean)
+        .join(" ");
+
+    return { top, left, right };
+});
+
+const footerTopPath = computed(() => footerContour.value.top);
+
+const footerShapePath = computed(() => {
+    const { top, left, right } = footerContour.value;
+    return `${top} V96 H${left} Z`;
+});
+
+function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+}
+
+function setBumpIndex() {
+    animatedBumpIndex.value = FIXED_BUMP_INDEX;
 }
 
 function syncIndicatorToCurrent() {
-    pendingVisualActiveUrl.value = "";
-    const currentIndex = activeIndicatorIndex.value;
-    if (currentIndex < 0) {
-        displayedIndicatorIndex.value = -1;
-        visualActiveUrl.value = props.name;
-        return;
-    }
-
-    displayedIndicatorIndex.value = currentIndex;
-    lastIndicatorIndex.value = currentIndex;
+    setBumpIndex();
     visualActiveUrl.value = props.name;
 }
 
@@ -140,16 +157,8 @@ onMounted(() => {
     syncIndicatorToCurrent();
 });
 
-watch(activeIndicatorIndex, (index) => {
-    if (index < 0) {
-        pendingVisualActiveUrl.value = "";
-        displayedIndicatorIndex.value = -1;
-        visualActiveUrl.value = props.name;
-        return;
-    }
-    displayedIndicatorIndex.value = index;
-    lastIndicatorIndex.value = index;
-    pendingVisualActiveUrl.value = "";
+watch(activeIndicatorIndex, () => {
+    setBumpIndex();
     visualActiveUrl.value = props.name;
 });
 
@@ -158,7 +167,6 @@ function isVisualActive(menu) {
 }
 
 function getMenuIcon(menu) {
-    if (menu.center) return isVisualActive(menu) ? menu.activeIcon : menu.icon;
     return isVisualActive(menu) ? menu.activeIcon : menu.icon;
 }
 
@@ -176,16 +184,8 @@ async function onClickMenu(menu) {
     if (props.name === menu.url) return;
 
     pressedUrl.value = menu.url;
-    if (menu.center) {
-        displayedIndicatorIndex.value = -1;
-        visualActiveUrl.value = menu.url;
-    } else {
-        const targetIndex = getMenuIndex(menu);
-        displayedIndicatorIndex.value = targetIndex;
-        lastIndicatorIndex.value = targetIndex;
-        pendingVisualActiveUrl.value = "";
-        visualActiveUrl.value = menu.url;
-    }
+    setBumpIndex();
+    visualActiveUrl.value = menu.url;
 
     await waitForPaint();
 
@@ -203,114 +203,173 @@ async function onClickMenu(menu) {
 </script>
 
 <style scoped>
-.footer-bar {
-    z-index: 50;
-    display: flex;
-    align-items: flex-end;
-    width: 100%;
-    height: 61px;
-    padding: 10px 14px 12px;
-    box-sizing: border-box;
-    background: #fff;
-    border-top: 1px solid #e5efe7;
-    box-shadow: 0 -8px 24px rgba(26, 92, 44, 0.06);
-}
-
-.footer-active-indicator {
-    position: absolute;
-    left: 14px;
-    bottom: 24px;
-    width: calc((100% - 28px) / 5);
-    height: 32px;
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform, opacity;
-}
-
-.footer-active-indicator--visible {
-    opacity: 1;
-}
-
-.footer-active-indicator::before {
-    content: "";
-    display: block;
-    width: 32px;
-    height: 32px;
-    margin: 0 auto;
-    border-radius: 10px;
-    background: #dff9e8;
-}
-
-.footer-item {
+.footer-wrap {
     position: relative;
-    z-index: 1;
-    flex: 1;
+    z-index: 80;
+    width: 100%;
+    height: 0;
+    background: transparent;
+}
+
+.footer-spacer {
+    height: 96px;
+}
+
+.algofy-footer {
+    z-index: 80;
+    left: 50%;
+    right: auto;
+    bottom: 0;
+    width: 100%;
+    max-width: var(--app-pc-max-width, 375px);
+    height: 96px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: start;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: visible;
+    background: transparent !important;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none !important;
+    transform: translateX(-50%);
+}
+
+.algofy-footer__bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.algofy-footer__bg-fill {
+    fill: #ffffff;
+    stroke: none;
+}
+
+.algofy-footer__top-shadow {
+    fill: none;
+    stroke: rgba(112, 128, 150, 0.08);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: blur(0.6px);
+}
+
+.algofy-footer__top-stroke {
+    fill: none;
+    stroke: #edf2f8;
+    stroke-width: 0.85;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.algofy-footer::before,
+.algofy-footer::after {
+    display: none !important;
+    content: none !important;
+}
+
+.algofy-footer__item {
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+    height: 96px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    /*gap: 10px;*/
-    min-width: 0;
+    justify-content: flex-start;
+    color: #8d99a8;
+    padding-top: 38px;
+    box-sizing: border-box;
+    transform: translateZ(0);
 }
 
-.footer-item--center {
-    margin-top: -34px;
+.algofy-footer__item--center {
+    padding-top: 0;
 }
 
-.footer-icon-shell {
-    width: 32px;
-    height: 32px;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
+.algofy-footer__item--pressed {
+    opacity: 0.82;
 }
 
-.footer-icon-shell--active {
-    background: transparent;
-}
-
-.footer-icon-shell--center {
-    /*width: 42px;
-    height: 42px;*/
-    width: 64px;
-    height: 48px;
-    border-radius: 9999px;
-    /*background: #fff;
-    box-shadow:
-        0 0 0 4px #ffffff,
-        0 10px 22px rgba(30, 167, 76, 0.26);*/
-}
-
-.footer-icon {
-    width: 32px;
-    height: 32px;
+.algofy-footer__icon {
+    width: 26px;
+    height: 26px;
+    display: block;
     object-fit: contain;
+    transition:
+        width 0.22s ease,
+        height 0.22s ease,
+        margin-top 0.22s ease;
 }
 
-.footer-icon--center {
-    /*width: 42px;
-    height: 42px;*/
-    width: 84px;
-    height: 84px;
+.algofy-footer__item--center .algofy-footer__icon {
+    width: 50px;
+    height: 50px;
+    margin-top: 25px;
 }
 
-.footer-label {
-    color: #719474;
-    font-size: 11px;
-    line-height: 1.1;
-    text-align: center;
-    transition: color 0.2s ease;
-}
-
-.footer-label--active {
-    color: #1ea74c;
-    font-weight: 600;
-}
-
-.footer-item--center .footer-label {
+.algofy-footer__label {
+    display: block;
+    margin-top: 8px;
+    color: #7f8a99;
+    font-family: "Montserrat", "Poppins", sans-serif;
     font-size: 12px;
+    line-height: 1;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
 }
+
+.algofy-footer__item--center .algofy-footer__label {
+    display: none;
+}
+
+.algofy-footer__label--active {
+    color: #2f4ff0;
+    font-weight: 500;
+}
+
+@media (max-width: 767px) {
+    .algofy-footer.fixed {
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        max-width: none !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .algofy-footer.fixed {
+        left: 50% !important;
+        right: auto !important;
+        bottom: 0 !important;
+        width: var(--app-pc-max-width, 375px) !important;
+        max-width: var(--app-pc-max-width, 375px) !important;
+        margin: 0 !important;
+        transform: translateX(-50%) !important;
+    }
+}
+@media (max-width: 767px) {
+    .algofy-footer {
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        transform: none !important;
+    }
+}
+
 </style>

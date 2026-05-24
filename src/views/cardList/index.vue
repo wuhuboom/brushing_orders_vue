@@ -3,12 +3,15 @@
         <PageTopBar :title="pageTitle" show-back @click-left="onClickLeft">
             <template #right>
                 <div class="nav-help" @click.stop="goCustomerPage">
-                    <img src="@/static/images/serv.png" alt="" />
+                    <!-- <img
+                        src="@/static/images/my-design/my-menu-message.png"
+                        alt=""
+                    /> -->
                 </div>
             </template>
         </PageTopBar>
 
-        <div class="px-[22px] pt-[76px] pb-[120px]">
+        <div class="px-[22px] pt-[16px] pb-[120px]">
             <div class="summary-card">
                 <div class="summary-left">
                     <div class="summary-label">{{ $t("bound_accounts") }}</div>
@@ -71,7 +74,11 @@
                     </div>
 
                     <div class="action-btn" @click.stop="editAccount(item)">
-                        <van-icon name="edit" size="20" color="var(--theme-primary)" />
+                        <van-icon
+                            name="edit"
+                            size="20"
+                            color="var(--theme-primary)"
+                        />
                     </div>
                 </div>
             </div>
@@ -116,7 +123,11 @@
                     </div>
 
                     <div class="action-btn" @click.stop="editAccount(item)">
-                        <van-icon name="edit" size="20" color="var(--theme-primary)" />
+                        <van-icon
+                            name="edit"
+                            size="20"
+                            color="var(--theme-primary)"
+                        />
                     </div>
                 </div>
             </div>
@@ -269,7 +280,8 @@ const getCardListReturnQuery = () => {
     const query = {};
     if (route.query.type != null) query.type = route.query.type;
     if (route.query.fromType != null) query.fromType = route.query.fromType;
-    if (route.query.sourceType != null) query.sourceType = route.query.sourceType;
+    if (route.query.sourceType != null)
+        query.sourceType = route.query.sourceType;
     return query;
 };
 
@@ -365,21 +377,21 @@ onMounted(async () => {
 
 <style scoped>
 .card-list-page :deep(.van-nav-bar) {
-    background: #ffffff;
+    background: #000000;
 }
 
 .card-list-page :deep(.van-nav-bar__title) {
-    color: #22362c;
+    color: #ffffff;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .card-list-page :deep(.van-nav-bar .van-icon) {
-    color: var(--theme-primary);
+    color: #ffffff;
 }
 
 .card-list-page :deep(.van-nav-bar::after) {
-    border-bottom: 1px solid #dbe9df;
+    border-bottom: none;
 }
 
 .nav-help {
@@ -395,16 +407,21 @@ onMounted(async () => {
 }
 
 .summary-card {
+    position: relative;
+    overflow: hidden;
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    padding: 20px 22px;
-    border-radius: 16px;
-    box-shadow: 0px 4px 16px 0px rgba(34, 160, 80, 0.22);
-    background: var(--theme-button-gradient-background);
+    padding: 24px 24px;
+    box-shadow: 0 12px 28px rgba(34, 79, 196, 0.18);
+    border-radius: 8px;
+    background: url(@/static/images/wallet-amount-card-bg.png) no-repeat;
+    background-size: 100% 100%;
 }
 
 .summary-left {
+    position: relative;
+    z-index: 1;
     min-width: 110px;
 }
 
@@ -425,6 +442,8 @@ onMounted(async () => {
 }
 
 .summary-right {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex: 1;
     justify-content: flex-end;
@@ -464,10 +483,11 @@ onMounted(async () => {
 }
 
 .section-title {
-    color: #24352d;
+    color: #121826;
     font-size: 15px;
     line-height: 22px;
     letter-spacing: 0.08em;
+    font-weight: 600;
 }
 
 .section-badge {
@@ -475,8 +495,8 @@ onMounted(async () => {
     height: 24px;
     padding: 0 8px;
     border-radius: 999px;
-    background: #e7f4ea;
-    color: #8bb396;
+    background: #eef4ff;
+    color: #3550e8;
     font-size: 13px;
     display: inline-flex;
     align-items: center;
@@ -490,10 +510,10 @@ onMounted(async () => {
     justify-content: space-between;
     gap: 12px;
     padding: 16px;
-    border: 1px solid #cae5d2;
+    border: 1px solid #edf0f8;
     border-radius: 22px;
     background: #ffffff;
-    box-shadow: 0 6px 18px rgba(40, 88, 55, 0.05);
+    box-shadow: 0 10px 24px rgba(18, 25, 38, 0.04);
 }
 
 .account-card + .account-card {
@@ -501,8 +521,8 @@ onMounted(async () => {
 }
 
 .account-card.selected {
-    border-color: #7ecb96;
-    box-shadow: 0 8px 24px rgba(35, 164, 85, 0.1);
+    border-color: #cfd8ff;
+    box-shadow: 0 10px 24px rgba(53, 80, 232, 0.08);
 }
 
 .account-main {
@@ -524,15 +544,15 @@ onMounted(async () => {
 }
 
 .icon-green {
-    background: var(--theme-primary);
+    background: linear-gradient(135deg, #3550e8 0%, #5f7cf5 100%);
 }
 
 .icon-red {
-    background: #ea4335;
+    background: linear-gradient(135deg, #ff7c6a 0%, #ff5252 100%);
 }
 
 .icon-blue {
-    background: #61aef0;
+    background: linear-gradient(135deg, #3f8dff 0%, #6cb3ff 100%);
 }
 
 .account-info {
@@ -541,7 +561,7 @@ onMounted(async () => {
 }
 
 .account-name {
-    color: #24352d;
+    color: #121826;
     font-size: 16px;
     line-height: 22px;
     font-weight: 500;
@@ -550,14 +570,14 @@ onMounted(async () => {
 
 .account-user {
     margin-top: 6px;
-    color: #648c6e;
+    color: #7a8496;
     font-size: 14px;
     line-height: 20px;
 }
 
 .account-no {
     margin-top: 6px;
-    color: #24352d;
+    color: #121826;
     font-size: 16px;
     line-height: 22px;
     letter-spacing: 0.18em;
@@ -571,8 +591,8 @@ onMounted(async () => {
     width: 52px;
     height: 52px;
     border-radius: 16px;
-    border: 1px solid #cfe5d5;
-    background: #f6fbf7;
+    border: 1px solid #edf0f8;
+    background: #f7f9ff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -588,22 +608,22 @@ onMounted(async () => {
     max-width: calc(var(--app-pc-max-width, 375px) - 44px);
     z-index: 9;
     padding-top: 14px;
-    border-top: 1px solid #dbe9df;
-    background: #f5f8f7;
+    border-top: 1px solid #e7ebf4;
+    background: #eef2fb;
 }
 
 .action-button {
     height: 58px;
     border: none;
     border-radius: 16px;
-    background: var(--theme-button-gradient);
+    background: linear-gradient(90deg, #3b45df 0%, #3a4be7 100%);
     color: #ffffff;
     font-size: 16px;
-    box-shadow: 0 10px 24px var(--theme-button-shadow);
+    box-shadow: none;
 }
 
 .action-button--secondary {
-    background: var(--theme-primary);
+    background: linear-gradient(90deg, #3b45df 0%, #3a4be7 100%);
     color: #fff;
     box-shadow: none;
 }

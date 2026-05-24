@@ -35,6 +35,15 @@ const i18n = createI18n({
   locale: 'en', // setting默认语言
   fallbackLocale: 'en', // setting备用语言
   messages, // setting语言包
+  // Locale files contain trusted, static marketing/guide copy with simple HTML
+  // tags that are rendered by the app. Disable vue-i18n's HTML-message
+  // development warning so the console no longer floods with:
+  // [intlify] Detected HTML in ... Recommend not using HTML messages to avoid XSS.
+  // `warnHtmlMessage` is used by vue-i18n v9/v10; `warnHtmlInMessage` keeps
+  // compatibility with older option handling and cached dependency builds.
+  warnHtmlMessage: false,
+  warnHtmlInMessage: 'off',
+  escapeParameterHtml: true,
 });
 
 export default i18n;

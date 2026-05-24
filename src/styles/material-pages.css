@@ -1,0 +1,1274 @@
+:root {
+    --material-bg: #f1f3f8;
+    --material-card: #ffffff;
+    --material-text: #111111;
+    --material-muted: #7b8494;
+    --material-line: #e6eaf2;
+    --material-blue: #2556f4;
+    --material-blue-soft: #eef3ff;
+    --material-blue-gradient: linear-gradient(135deg, #4d93ff 0%, #235df0 100%);
+    --material-danger: #eb5641;
+}
+
+html,
+body,
+#app {
+    background: #e9edf5 !important;
+}
+
+.app-frame {
+    width: 100%;
+    max-width: none;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--material-bg) !important;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.app-route-view {
+    background: var(--material-bg) !important;
+    color: var(--material-text) !important;
+}
+
+.page-top-bar:not(.page-top-bar--legacy) {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 500 !important;
+    height: 52px !important;
+    padding-top: 0 !important;
+    background: #050505 !important;
+    color: #fff !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.page-top-bar:not(.page-top-bar--legacy) + * {
+    margin-top: 52px !important;
+}
+
+.page-top-bar:not(.page-top-bar--legacy) .page-top-bar__content {
+    height: 52px !important;
+}
+
+.page-top-bar:not(.page-top-bar--legacy) .page-top-bar__title {
+    height: 52px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-family: Montserrat, Montserrat;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    color: #ffffff !important;
+    font-style: normal !important;
+    text-transform: none !important;
+}
+
+@media (min-width: 768px) {
+    .app-frame {
+        max-width: var(--app-pc-max-width, 375px);
+        margin: 0 auto;
+    }
+
+    .page-top-bar:not(.page-top-bar--legacy) {
+        left: 50% !important;
+        right: auto !important;
+        width: 100% !important;
+        max-width: var(--app-pc-max-width, 375px) !important;
+        transform: translateX(-50%) !important;
+    }
+}
+
+.page-top-bar .van-icon,
+.page-top-bar__right-text,
+.history-text {
+    color: #fff !important;
+}
+
+.van-button--primary,
+.submit-btn,
+.vip-level-button,
+.grab-btn,
+.wallet-btn--primary,
+.logout-sheet__confirm {
+    background: var(--material-blue) !important;
+    border-color: var(--material-blue) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+}
+
+.van-field,
+.custom-field,
+.amount-field,
+.deposit-field {
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+.payment-method-page,
+.withdraw-page,
+.deposit-page,
+.withdraw-history-page,
+.deposit-history-page,
+.card-list-page,
+.faqs-page,
+.guide-page,
+.clause-page,
+.customer-page,
+.notice-page,
+.profile-page,
+.profile-item-page,
+.my-page,
+.records-page,
+.starting-page,
+.vip-page,
+.setting-page,
+.language-page,
+.about-page,
+.address-page,
+.deposit-legacy-page,
+.invite-page,
+.productmsg-page,
+.notice-detail-page {
+    background: var(--material-bg) !important;
+    color: var(--material-text) !important;
+}
+
+.payment-method-page .hero-title,
+.withdraw-page .balance-label,
+.deposit-page .balance-label {
+    color: #fff !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    font-weight: 800 !important;
+}
+
+.payment-method-page .hero-desc {
+    color: rgba(255, 255, 255, 0.86) !important;
+    font-size: 10px !important;
+    line-height: 14px !important;
+}
+
+.payment-method-page .hero-icon-wrap {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.18) !important;
+}
+
+.payment-method-page .hero-icon-wrap img {
+    width: 24px !important;
+    height: 24px !important;
+    object-fit: contain !important;
+}
+
+.payment-method-page .px-\[16px\],
+.withdraw-page .px-\[20px\],
+.deposit-page .px-\[20px\] {
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
+
+.payment-method-page .field-label,
+.withdraw-page .section-title {
+    margin-bottom: 6px !important;
+    color: #111 !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+}
+
+.payment-method-page .field-label img {
+    display: none !important;
+}
+
+.payment-method-page .custom-field,
+.withdraw-page .amount-card,
+.withdraw-page .account-select-card,
+.withdraw-page .empty-account-card {
+    border: 0 !important;
+    border-radius: 3px !important;
+    box-shadow: none !important;
+}
+
+.payment-method-page .custom-field,
+.withdraw-page .amount-card {
+    min-height: 40px !important;
+}
+
+.payment-method-page .notice-card {
+    font-size: 10px !important;
+    line-height: 14px !important;
+}
+
+.withdraw-page .balance-value,
+.deposit-page .balance-value {
+    color: #fff !important;
+    font-size: 21px !important;
+    line-height: 24px !important;
+    font-weight: 800 !important;
+}
+
+.withdraw-history-page .record-card,
+.deposit-history-page .record-card {
+    margin-bottom: 9px !important;
+    padding: 10px 12px !important;
+    border-radius: 3px !important;
+    background: #fff !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.card-list-page .summary-label,
+.card-list-page .summary-item-label {
+    color: rgba(255, 255, 255, 0.84) !important;
+    font-size: 9px !important;
+    text-transform: uppercase !important;
+}
+
+.card-list-page .summary-count,
+.card-list-page .summary-item-count {
+    margin-top: 6px !important;
+    color: #fff !important;
+    font-size: 22px !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+}
+
+.card-list-page .section-title-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.card-list-page .section-icon {
+    width: 26px !important;
+    height: 26px !important;
+    border-radius: 50% !important;
+    background: #e9efff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.card-list-page .section-icon img {
+    width: 15px !important;
+    height: 15px !important;
+}
+
+.card-list-page .section-title {
+    color: #111 !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+}
+
+.card-list-page .section-badge {
+    margin-left: auto !important;
+    min-width: 18px !important;
+    height: 18px !important;
+    padding: 0 6px !important;
+    border-radius: 999px !important;
+    background: var(--material-blue) !important;
+    color: #fff !important;
+    font-size: 9px !important;
+    line-height: 18px !important;
+}
+
+.card-list-page .account-card {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    padding: 12px !important;
+    margin-bottom: 8px !important;
+    background: #fff !important;
+    border: 1px solid var(--material-line) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+}
+
+.card-list-page .account-card.selected {
+    border-color: #a8c0ff !important;
+    background: #f7f9ff !important;
+}
+
+.card-list-page .account-main {
+    display: flex !important;
+    align-items: center !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+}
+
+.card-list-page .account-icon {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 10px !important;
+    background: var(--material-blue-gradient) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.card-list-page .account-icon img {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.card-list-page .action-btn {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50% !important;
+    background: var(--material-blue-soft) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.card-list-page .fixed-action-wrap {
+    padding: 12px 13px 16px !important;
+    background: linear-gradient(
+        180deg,
+        rgba(241, 243, 248, 0) 0%,
+        #f1f3f8 28%,
+        #f1f3f8 100%
+    ) !important;
+}
+
+.card-list-page .action-button {
+    height: 34px !important;
+    border-radius: 4px !important;
+    border: 0 !important;
+    background: var(--material-blue) !important;
+    color: #fff !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
+}
+
+.card-list-page .action-button--secondary {
+    background: #fff !important;
+    color: var(--material-blue) !important;
+    border: 1px solid var(--material-blue) !important;
+}
+
+.faqs-page .faqs-body,
+.guide-page .guide-body,
+.clause-page .clause-body,
+.about-page .pt-\[85px\],
+.notice-detail-page .pt-\[65px\],
+.productmsg-page .pt-\[88px\] {
+    padding: 82px 18px 32px !important;
+}
+
+.faqs-page .faqs-hero {
+    display: none !important;
+}
+
+.faqs-page .faqs-card,
+.guide-page .guide-section-card,
+.clause-page .rich-content,
+.about-page .font-montserrat,
+.notice-detail-page .font-montserrat,
+.productmsg-page .font-montserrat {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.faqs-page .faqs-card__icon {
+    display: none !important;
+}
+
+.faqs-page .faqs-card__title,
+.guide-page .guide-section__title {
+    color: #111 !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+}
+
+.faqs-page .rich-content :where(p, li, div),
+.guide-page .guide-section__content,
+.clause-page .rich-content,
+.tc-page .rich-content,
+.about-page .font-montserrat,
+.notice-detail-page .font-montserrat,
+.productmsg-page .font-montserrat {
+    color: #111 !important;
+    font-size: 12px !important;
+    line-height: 1.65 !important;
+}
+
+.my-page main {
+    padding-top: 120px !important;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
+
+.my-page .profile-hero {
+    border-radius: 0 !important;
+    background: var(--material-blue-gradient) !important;
+    box-shadow: none !important;
+}
+
+.my-page .info-card,
+.my-page .menu-card,
+.records-page .task-card,
+.starting-page .blind-box-panel,
+.vip-page .vip-card {
+    border-radius: 4px !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    border: 0 !important;
+}
+
+.starting-page .hero-card,
+.vip-page .vip-hero {
+    background: var(--material-blue-gradient) !important;
+    box-shadow: none !important;
+}
+
+.vip-page .vip-hero {
+    border-radius: 0 !important;
+}
+
+.language-page .flex.flex-col.gap-4 {
+    margin-top: 82px !important;
+    padding: 0 13px 24px !important;
+    gap: 8px !important;
+}
+
+.language-page .flex.items-center.gap-4.border {
+    border: 0 !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+.language-page .h-16 {
+    height: 44px !important;
+}
+
+.language-page .text-lg {
+    color: #111 !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+}
+
+.language-page img.w-\[24px\] {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 12px !important;
+}
+
+.setting-page > .relative,
+.address-page > .relative {
+    height: 67px !important;
+    padding-top: 21px !important;
+    box-sizing: border-box !important;
+    background: #050505 !important;
+    color: #fff !important;
+}
+
+.setting-page > .relative .text-base,
+.address-page > .relative .text-\[18px\] {
+    color: #fff !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+}
+
+.setting-page > .relative .van-icon,
+.address-page > .relative .van-icon {
+    color: #fff !important;
+}
+
+.setting-page > .pt-\[10px\] {
+    padding: 13px !important;
+}
+
+.setting-page .border-b-\[1px\] {
+    min-height: 49px !important;
+    margin-bottom: 8px !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+}
+
+.setting-page > .w-full.h-\[50px\] {
+    width: auto !important;
+    height: 40px !important;
+    margin: 4px 13px 0 !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+}
+
+.profile-page .pl-6.pr-6.pt-\[77px\] {
+    padding: 82px 13px 28px !important;
+}
+
+.profile-page :deep(.van-uploader__wrapper) {
+    justify-content: center !important;
+}
+
+.profile-page :deep(.van-uploader__upload),
+.profile-page :deep(.van-uploader__preview) {
+    width: 88px !important;
+    height: 88px !important;
+    margin: 0 !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    background: #e9edf5 !important;
+    border: 3px solid #fff !important;
+    box-shadow: 0 6px 18px rgba(36, 93, 240, 0.12) !important;
+}
+
+.profile-page .pc-fixed-bottom {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    margin-top: 22px !important;
+}
+
+.profile-page .van-button {
+    height: 34px !important;
+    border-radius: 4px !important;
+    border: 0 !important;
+    background: var(--material-blue) !important;
+    color: #fff !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
+}
+
+.profile-item-page .avatar-camera {
+    width: 22px !important;
+    height: 22px !important;
+    right: -2px !important;
+    bottom: 0 !important;
+    border-radius: 50% !important;
+    background: var(--material-blue) !important;
+    border: 2px solid #fff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.profile-item-page .avatar-camera img {
+    width: 11px !important;
+    height: 11px !important;
+}
+
+.profile-item-page .security-icon {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.16) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.profile-item-page .security-icon img {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.add-card-page {
+    min-height: 100vh !important;
+    padding: 82px 13px 34px !important;
+    box-sizing: border-box !important;
+}
+
+.add-card-page > .text-\[16px\] {
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+    color: #111 !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+}
+
+.add-card-page > .text-\[\#4B5563\] {
+    margin-top: 0 !important;
+    margin-bottom: 6px !important;
+    padding-left: 0 !important;
+    color: #111 !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+}
+
+.add-card-page > .text-\[\#4B5563\] + div {
+    margin-top: 0 !important;
+    margin-bottom: 13px !important;
+    border: 0 !important;
+    border-radius: 3px !important;
+    background: #fff !important;
+}
+
+.add-card-page :deep(.van-field__control) {
+    color: #111 !important;
+    font-size: 11px !important;
+}
+
+.add-card-page .van-button {
+    height: 34px !important;
+    border-radius: 4px !important;
+    border: 0 !important;
+    background: var(--material-blue) !important;
+    color: #fff !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
+}
+
+.address-page .px-\[18px\] {
+    padding: 18px 13px 32px !important;
+}
+
+.address-page .warning-banner {
+    border-radius: 4px !important;
+    background: #fff1ea !important;
+    color: #f26b2e !important;
+    font-size: 10px !important;
+    line-height: 14px !important;
+}
+
+.address-page .mt-\[14px\].rounded-\[20px\] {
+    margin-top: 12px !important;
+    padding: 14px 13px !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+.address-page .qr-panel {
+    width: 208px !important;
+    padding: 14px !important;
+    border-radius: 4px !important;
+    background: #050505 !important;
+}
+
+.invite-page {
+    padding: 0 13px 24px !important;
+    box-sizing: border-box !important;
+}
+
+.invite-page .flex.flex-col.items-center.mt-\[200px\] {
+    margin-top: 100px !important;
+    padding: 20px 14px !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+}
+
+.invite-page .bg-\[\#fff\].p-\[20px\] {
+    margin-top: 12px !important;
+    padding: 14px !important;
+    border-radius: 4px !important;
+}
+
+.invite-page .bg-\[\#f6f6f6\].h-\[52px\] {
+    min-height: 44px !important;
+    height: auto !important;
+    padding: 10px !important;
+    border-radius: 4px !important;
+    color: #111 !important;
+    font-size: 10px !important;
+    line-height: 15px !important;
+    word-break: break-all !important;
+}
+
+.deposit-legacy-page .px-\[15px\].bg-\[\#fff\] {
+    margin: 10px 13px 0 !important;
+    padding: 0 13px 12px !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+}
+
+.deposit-legacy-page .text-\[15px\].text-\[\#333\].font-bold {
+    padding: 12px 0 !important;
+    margin-bottom: 10px !important;
+    color: #111 !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+}
+
+.deposit-legacy-page .pl-5.pr-5 {
+    padding: 0 13px !important;
+}
+
+.footer-bar {
+    height: 58px !important;
+    padding: 7px 16px 8px !important;
+    background: #fff !important;
+    border-top: 1px solid #e8edf3 !important;
+    box-shadow: none !important;
+}
+
+.footer-label {
+    color: #7a8494 !important;
+    font-size: 10px !important;
+}
+
+.footer-label--active {
+    color: var(--material-blue) !important;
+}
+
+.starting-page,
+.starting-shell {
+    background: #e9edf5 !important;
+}
+
+.starting-page .top-welcome {
+    height: 68px !important;
+    padding: 21px 16px 0 !important;
+    background: #121212 url("@/static/images/auth/auth-hero.png") center top /
+        cover no-repeat !important;
+}
+
+.starting-page .top-welcome::before {
+    display: none !important;
+}
+
+.starting-page .top-icon-btn {
+    width: 34px !important;
+    height: 34px !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.starting-page .starting-content {
+    padding-top: 76px !important;
+}
+
+.starting-page .hero-card {
+    margin: 0 16px !important;
+    border-radius: 0 0 22px 22px !important;
+    background: linear-gradient(135deg, #4f93ff 0%, #245cf0 100%) !important;
+    box-shadow: none !important;
+}
+
+.starting-page .hero-card__bubble {
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.starting-page .hero-card__name,
+.starting-page .hero-card__welcome,
+.starting-page .hero-stat__value,
+.starting-page .hero-stat__meta,
+.starting-page .hero-stat__label span {
+    color: #fff !important;
+}
+
+.starting-page .hero-stat {
+    background: transparent !important;
+    border: 0 !important;
+}
+
+.starting-page .blind-box-panel {
+    margin: 0 16px !important;
+    border-radius: 0 0 22px 22px !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+.starting-page .blind-box-panel__title,
+.starting-page .opened-progress,
+.starting-page .support-card__title {
+    color: #141a25 !important;
+}
+
+.starting-page .blind-box-start-btn {
+    height: 58px !important;
+    border-radius: 16px !important;
+    background: #3552ea !important;
+    color: #fff !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+}
+
+.starting-page .support-card {
+    margin: 16px 16px 0 !important;
+    border-radius: 18px !important;
+    background: #f1f3f8 !important;
+    border: 0 !important;
+}
+
+.records-page {
+    background: #edf1f9 !important;
+}
+
+.records-page main {
+    padding-top: 114px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+}
+
+.records-page .task-summary {
+    display: none !important;
+}
+
+.records-page .record-tab {
+    height: 48px !important;
+    border-radius: 16px !important;
+    background: #fff !important;
+    color: #6b7893 !important;
+    font-size: 14px !important;
+    flex: 1 !important;
+    font-weight: 600 !important;
+}
+
+.records-page .record-tab--active {
+    background: #3552ea !important;
+    color: #fff !important;
+}
+
+.records-page .task-card {
+    display: block !important;
+    padding: 18px 17px 18px !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06) !important;
+}
+
+.records-page .status-dot {
+    display: none !important;
+}
+
+.records-page .grab-btn {
+    min-width: 72px !important;
+    height: 44px !important;
+    border-radius: 16px !important;
+    font-size: 14px !important;
+    align-self: end !important;
+    font-weight: 600 !important;
+}
+
+.records-page .grab-btn--pending {
+    background: #3552ea !important;
+}
+
+.records-page .grab-btn--completed {
+    background: #3d4ce4 !important;
+}
+
+.profile-item-page {
+    background: #edf1f9 !important;
+}
+
+.profile-item-page .px-\[22px\] {
+    padding: 86px 16px 24px !important;
+}
+
+.profile-item-page .avatar-wrap {
+    width: 96px !important;
+    height: 96px !important;
+    border: 4px solid rgba(255, 255, 255, 0.45) !important;
+    background: linear-gradient(135deg, #4f93ff 0%, #245cf0 100%) !important;
+    box-shadow: 0 12px 24px rgba(37, 70, 196, 0.16) !important;
+}
+
+.profile-item-page .vip-badge {
+    height: 30px !important;
+    padding: 0 16px !important;
+    border-radius: 999px !important;
+    background: #eaf0ff !important;
+    color: #3552ea !important;
+    font-size: 9px !important;
+    line-height: 20px !important;
+    font-weight: 800 !important;
+}
+
+.profile-item-page .security-card {
+    display: flex !important;
+    align-items: center !important;
+    padding: 14px !important;
+    border-radius: 20px !important;
+    background: linear-gradient(135deg, #4f93ff 0%, #245cf0 100%) !important;
+    box-shadow: none !important;
+}
+
+.profile-item-page .info-card {
+    overflow: hidden !important;
+    border-radius: 22px !important;
+    background: #fff !important;
+    border: 0 !important;
+    box-shadow: 0 10px 24px rgba(17, 28, 56, 0.06) !important;
+}
+
+.profile-item-page .info-row {
+    min-height: 90px !important;
+    padding: 0 16px !important;
+    border-bottom: 1px solid #edf1f7 !important;
+    background: #fff !important;
+}
+
+.profile-item-page .row-icon {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 999px !important;
+    background: #edf4ff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.notice-page {
+    background: #edf1f9 !important;
+}
+
+.notice-page .notice-row {
+    box-shadow: none !important;
+}
+
+.deposit-page,
+.withdraw-page,
+.payment-method-page {
+    background: #edf1f9 !important;
+}
+
+.withdraw-page .section-title,
+.payment-method-page .field-label {
+    color: #121826 !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 22px !important;
+}
+
+.withdraw-page .amount-card,
+.payment-method-page .custom-field,
+.withdraw-page .account-select-card,
+.withdraw-page .empty-account-card {
+    border-radius: 18px !important;
+    border: 1px solid #d7dfef !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+}
+
+.deposit-page .quick-amounts {
+    gap: 10px !important;
+}
+
+.deposit-page .quick-amount-item.active {
+    background: #3552ea !important;
+    color: #fff !important;
+}
+
+.payment-method-page .service-item,
+.withdraw-page .account-row {
+    min-height: 74px !important;
+    border-radius: 18px !important;
+}
+
+.deposit-page .service-item.active {
+    border-color: #3552ea !important;
+}
+
+.deposit-page .service-radio.active,
+.withdraw-page .radio-circle.active,
+.payment-method-page .submit-btn--active {
+    border-color: #3552ea !important;
+}
+
+.deposit-page .service-radio__dot,
+.withdraw-page .radio-dot {
+    background: #3552ea !important;
+}
+
+.cert-page,
+.service-page,
+.project-menu-page,
+.team-page {
+    background: var(--material-bg) !important;
+    color: var(--material-text) !important;
+}
+
+.cert-page .cert-body,
+.service-page,
+.project-menu-page,
+.team-page,
+.deposit-legacy-page,
+.deposit-history-page,
+.withdraw-history-page {
+    min-height: 100vh !important;
+    background: var(--material-bg) !important;
+}
+
+.cert-page .page-top-bar,
+.deposit-history-page .page-top-bar,
+.withdraw-history-page .page-top-bar,
+.deposit-legacy-page .page-top-bar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 50% !important;
+    z-index: 20 !important;
+    width: 100% !important;
+    max-width: var(--app-pc-max-width, 375px) !important;
+    transform: translateX(-50%) !important;
+}
+
+.cert-page .cert-body,
+.service-page,
+.project-menu-page,
+.deposit-legacy-page {
+    padding-top: 67px !important;
+}
+
+.cert-page .cert-hero,
+.team-page__hero {
+    margin: 0 13px 16px !important;
+    padding: 16px !important;
+    border-radius: 4px !important;
+    background: var(--material-blue-gradient) !important;
+    box-shadow: none !important;
+}
+
+.cert-page .cert-hero__title,
+.cert-page .cert-hero__desc,
+.cert-page .cert-stat strong,
+.cert-page .cert-stat span {
+    color: #fff !important;
+}
+
+.cert-page .cert-overview,
+.cert-page .cert-content-card {
+    margin: 0 13px 16px !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.cert-page .cert-content {
+    padding: 0 0 13px !important;
+}
+
+.cert-page .cert-content__preview-image {
+    width: calc(100% - 26px) !important;
+    margin: 0 13px !important;
+    border-radius: 4px !important;
+}
+
+.service-page__hero {
+    overflow: hidden !important;
+    background: #050505 !important;
+}
+
+.service-page__hero img {
+    display: block !important;
+    width: 100% !important;
+    min-height: 176px !important;
+    object-fit: cover !important;
+    opacity: 0.42 !important;
+}
+
+.service-page .topfpnts {
+    top: 67px !important;
+    z-index: 2 !important;
+    padding: 22px 24px 0 !important;
+}
+
+.service-page .titles {
+    margin: 0 0 10px !important;
+    color: #fff !important;
+    font-size: 20px !important;
+    line-height: 26px !important;
+    font-weight: 800 !important;
+}
+
+.service-page .casftr {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 11px !important;
+    line-height: 16px !important;
+}
+
+.service-page__menu {
+    margin: -32px 13px 0 !important;
+    position: relative !important;
+    z-index: 3 !important;
+    gap: 10px !important;
+}
+
+.service-page__menu-item {
+    min-height: 56px !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+}
+
+.project-menu-page__header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 50% !important;
+    z-index: 20 !important;
+    width: 100% !important;
+    max-width: var(--app-pc-max-width, 375px) !important;
+    transform: translateX(-50%) !important;
+    height: 67px !important;
+    padding-top: 21px !important;
+    background: #050505 !important;
+}
+
+.project-menu-page__title {
+    color: #fff !important;
+    font-size: 11px !important;
+    line-height: 15px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+}
+
+.project-menu-page .van-tabs {
+    position: sticky !important;
+    top: 67px !important;
+    z-index: 15 !important;
+    background: #fff !important;
+}
+
+.project-menu-page .van-tabs__wrap {
+    height: 42px !important;
+}
+
+.project-menu-page__list {
+    height: auto !important;
+    max-height: none !important;
+    margin-top: 12px !important;
+    padding: 0 13px 88px !important;
+}
+
+.project-menu-page__card {
+    align-items: center !important;
+    gap: 14px !important;
+    margin-bottom: 10px !important;
+    padding: 12px !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+}
+
+.project-menu-page__card img {
+    border-radius: 4px !important;
+    object-fit: cover !important;
+}
+
+.project-menu-page__card-title {
+    color: #111 !important;
+    font-size: 16px !important;
+    line-height: 22px !important;
+    font-weight: 800 !important;
+}
+
+.project-menu-page__vip-tag {
+    width: auto !important;
+    min-width: 46px !important;
+    height: 20px !important;
+    padding: 0 8px !important;
+    align-items: center !important;
+    border-radius: 999px !important;
+    font-size: 10px !important;
+    line-height: 20px !important;
+}
+
+.project-menu-page__card-desc,
+.project-menu-page__card-meta {
+    margin-top: 4px !important;
+    line-height: 16px !important;
+}
+
+.team-page {
+    padding-bottom: 88px !important;
+}
+
+.team-page__header {
+    height: 67px !important;
+    padding-top: 21px !important;
+    background: #050505 !important;
+}
+
+.team-page__hero {
+    margin-top: 0 !important;
+}
+
+.team-page__tabs {
+    margin: 0 13px 12px !important;
+    border-radius: 4px !important;
+    padding: 0 8px !important;
+    position: sticky !important;
+    top: 0 !important;
+    box-shadow: none !important;
+}
+
+.team-page__member-card {
+    margin: 0 13px 10px !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+}
+
+.deposit-legacy-page > .container {
+    margin-bottom: 0 !important;
+    background: transparent !important;
+}
+
+.deposit-legacy-page > .px-\[15px\],
+.deposit-legacy-page > .px-\[16px\],
+.deposit-legacy-page > .w-full.pl-5 {
+    margin: 0 13px 12px !important;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+}
+
+.deposit-legacy-page > .px-\[15px\] .text-\[\#333\].text-\[15px\] {
+    color: #111 !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+}
+
+.deposit-legacy-page .van-button {
+    height: 32px !important;
+    border-radius: 3px !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
+    border: 0 !important;
+}
+
+.withdraw-history-page > .px-\[20px\] {
+    padding-top: 84px !important;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+    padding-bottom: 88px !important;
+}
+
+.withdraw-history-page .tab-bar-wrap {
+    padding: 12px 13px 0 !important;
+    background: var(--material-bg) !important;
+    position: sticky !important;
+    top: 67px !important;
+    z-index: 15 !important;
+}
+
+.withdraw-history-page .tab-bar {
+    display: flex !important;
+    gap: 4px !important;
+    padding: 4px !important;
+    background: #fff !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+}
+
+.deposit-history-page .record-card,
+.withdraw-history-page .record-card {
+    margin-bottom: 10px !important;
+    padding: 13px !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
