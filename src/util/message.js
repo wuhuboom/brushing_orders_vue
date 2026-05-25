@@ -7,7 +7,7 @@ message.config({
   // Keep global toast/message under the fixed top bar on both H5 and PC.
   top: "72px",
   duration: 2,
-  maxCount: 3,
+  maxCount: 1,
 });
 
 const getContent = (options) => {
@@ -83,6 +83,43 @@ const ensureInviteCopyStack = () => {
   return stack;
 };
 
+const prepareInviteCopyToastEnter = (toast) => {
+  toast.style.transition = "none";
+  toast.style.opacity = "0";
+  toast.style.transform = "translateY(10px) scale(0.96)";
+};
+
+const freezeInviteCopyStackShift = (stack) => {
+  Array.from(stack.children).forEach((node) => {
+    node.dataset.inviteCopyInlineTransition = node.style.transition || "";
+    node.style.transition = "none";
+  });
+};
+
+const restoreInviteCopyStackShift = (stack) => {
+  window.requestAnimationFrame(() => {
+    Array.from(stack.children).forEach((node) => {
+      const savedTransition = node.dataset.inviteCopyInlineTransition || "";
+      if (savedTransition) {
+        node.style.transition = savedTransition;
+      } else {
+        node.style.removeProperty("transition");
+      }
+      delete node.dataset.inviteCopyInlineTransition;
+    });
+  });
+};
+
+const startInviteCopyToastEnter = (toast, stack) => {
+  window.requestAnimationFrame(() => {
+    restoreInviteCopyStackShift(stack);
+    void toast.offsetWidth;
+    toast.style.removeProperty("transition");
+    toast.style.removeProperty("opacity");
+    toast.style.removeProperty("transform");
+  });
+};
+
 const removeInviteCopyToast = (toast) => {
   toast.classList.add("invite-copy-stack-toast--leaving");
   window.setTimeout(() => {
@@ -118,7 +155,10 @@ export const showInviteCopySuccessToast = (options) => {
 
   toast.appendChild(icon);
   toast.appendChild(text);
+  prepareInviteCopyToastEnter(toast);
+  freezeInviteCopyStackShift(stack);
   stack.prepend(toast);
+  startInviteCopyToastEnter(toast, stack);
 
   while (stack.children.length > 5) {
     stack.lastElementChild?.remove();

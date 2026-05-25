@@ -15,12 +15,31 @@
 import PageTopBar from "@/components/PageTopBar.vue";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-const { t } = useI18n();
-const faqSections = computed(() => [
-  { title: t("faq_mission_title"), items: [t("faq_mission_1"), t("faq_mission_2"), t("faq_mission_3")] },
-  { title: t("withdrawal"), items: [t("faq_withdraw_1"), t("faq_withdraw_2"), t("faq_withdraw_3"), t("faq_withdraw_4"), t("faq_withdraw_5")] },
-  { title: t("faq_funds_title"), items: [t("faq_funds_1"), t("faq_funds_2")] },
-]);
+const { t, tm } = useI18n();
+
+const htmlToTextList = (value) => {
+  if (!value) return [];
+  return String(value)
+    .match(/<p[\s\S]*?<\/p>/gi)
+    ?.map((item) => item.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim())
+    .filter(Boolean) || [];
+};
+
+const faqSections = computed(() => {
+  const sections = tm("faq_sections");
+  if (Array.isArray(sections) && sections.length) {
+    return sections.map((section) => ({
+      title: section.title,
+      items: htmlToTextList(section.content),
+    }));
+  }
+
+  return [
+    { title: t("faq_mission_title"), items: [t("faq_mission_1"), t("faq_mission_2"), t("faq_mission_3")] },
+    { title: t("withdrawal"), items: [t("faq_withdraw_1"), t("faq_withdraw_2"), t("faq_withdraw_3"), t("faq_withdraw_4"), t("faq_withdraw_5")] },
+    { title: t("faq_funds_title"), items: [t("faq_funds_1"), t("faq_funds_2")] },
+  ];
+});
 const onClickLeft = () => {
   history.back();
 };

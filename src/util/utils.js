@@ -25,7 +25,6 @@ export const copyContent = (content, options = {}) => {
   input.value = content;
   document.body.appendChild(input);
   input.select();
-  // 使用 Clipboard API 的 writeText 方法copy文本
   navigator.clipboard
     .writeText(input.value)
     .then(() => {
@@ -105,13 +104,15 @@ export const formatWithTimezone = (timestamp, tzName) => {
 
   let parts;
   try {
-    parts = new Intl.DateTimeFormat("zh-CN", options).formatToParts(new Date(timestamp));
+    parts = new Intl.DateTimeFormat("zh-CN", options).formatToParts(
+      new Date(timestamp),
+    );
   } catch (err) {
     console.warn(`[formatWithTimezone] Invalid timezone: ${tzName}`);
     return ""; // ❌ 时区非法，直接back空字符串
   }
 
-  const get = (type) => parts.find(p => p.type === type)?.value || "";
+  const get = (type) => parts.find((p) => p.type === type)?.value || "";
   return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
 };
 
@@ -157,7 +158,9 @@ export const checkWorkTimeLocal = (workTimeStart, workTimeEnd, tzName) => {
     hours = parts.find((p) => p.type === "hour").value;
     minutes = parts.find((p) => p.type === "minute").value;
   } catch (err) {
-    console.warn(`[checkWorkTimeWithTimezone] 无效时区 ${tzName}，回退到本地时间`);
+    console.warn(
+      `[checkWorkTimeWithTimezone] 无效时区 ${tzName}，回退到本地时间`,
+    );
     const now = new Date();
     hours = String(now.getHours()).padStart(2, "0");
     minutes = String(now.getMinutes()).padStart(2, "0");
@@ -177,4 +180,3 @@ export const checkWorkTimeLocal = (workTimeStart, workTimeEnd, tzName) => {
 
   return nowMinutes >= startMinutes && nowMinutes <= endMinutes;
 };
-

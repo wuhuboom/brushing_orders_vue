@@ -5,16 +5,10 @@
             <section class="algofy-user-strip">
                 <div class="algofy-user-avatar-wrap">
                     <img
-                        v-if="avatarUrl"
                         class="algofy-user-avatar"
-                        :src="avatarUrl"
+                        :src="displayAvatar"
                         alt=""
-                    />
-                    <img
-                        v-else
-                        class="algofy-user-avatar"
-                        src="@/static/images/vip_design/avatar.png"
-                        alt=""
+                        @error="(e) => (e.target.src = defaultAvatar)"
                     />
                 </div>
                 <div class="algofy-user-copy">
@@ -25,7 +19,7 @@
                 </div>
                 <img
                     class="algofy-user-vip"
-                    src="@/static/images/vip_design/vip1.png"
+                    :src="currentVipBadgeIcon"
                     alt=""
                 />
             </section>
@@ -200,9 +194,14 @@
                         {{ $t("today") }} {{ $t("commission") }}
                     </div>
                     <div class="algofy-commission-amount">
-                        USD {{ userInfo.commission || "456.78" }}
+                        USD {{ commissionAmountText }}
                     </div>
-                    <div class="algofy-commission-desc">{{ $t("auto_the_displayed_amount_reflects_the") }}<br />{{ $t("auto_commissions_earned_today_as_an_indication") }}</div>
+                    <div class="algofy-commission-desc">
+                        {{ $t("auto_the_displayed_amount_reflects_the")
+                        }}<br />{{
+                            $t("auto_commissions_earned_today_as_an_indication")
+                        }}
+                    </div>
                     <div class="algofy-balance-grid">
                         <div class="algofy-mini-balance">
                             <img
@@ -213,25 +212,33 @@
                                 {{ $t("balance") }}
                             </div>
                             <div class="algofy-mini-amount">
-                                USD {{ userInfo.balance || "123.45" }}
+                                USD {{ balanceAmountText }}
                             </div>
-                            <p>{{ $t("auto_the_total_balance_reflects") }}<br />{{ $t("auto_both_the_deposited") }}<br />{{ $t("auto_amount_and") }}<br />{{ $t("auto_commissions_earned") }}</p>
+                            <p>
+                                {{ $t("auto_the_total_balance_reflects")
+                                }}<br />{{ $t("auto_both_the_deposited")
+                                }}<br />{{ $t("auto_amount_and") }}<br />{{
+                                    $t("auto_commissions_earned")
+                                }}
+                            </p>
                         </div>
                         <div class="algofy-mini-balance">
                             <img
                                 src="@/static/images/starting-design/freeze-icon.png"
                                 alt=""
                             />
-                            <div class="algofy-mini-title">{{ $t("auto_freeze_amount") }}</div>
-                            <div class="algofy-mini-amount">
-                                USD
-                                {{
-                                    userInfo.freezeAmount ||
-                                    userInfo.frozenAmount ||
-                                    "1,234.56"
-                                }}
+                            <div class="algofy-mini-title">
+                                {{ $t("auto_freeze_amount") }}
                             </div>
-                            <p>{{ $t("auto_pinned_balance") }}<br />{{ $t("auto_where_there_is_a") }}<br />{{ $t("auto_pending_combination") }}<br />{{ $t("auto_product_in_process") }}</p>
+                            <div class="algofy-mini-amount">
+                                USD {{ frozenBalanceAmountText }}
+                            </div>
+                            <p>
+                                {{ $t("auto_pinned_balance") }}<br />{{
+                                    $t("auto_where_there_is_a")
+                                }}<br />{{ $t("auto_pending_combination")
+                                }}<br />{{ $t("auto_product_in_process") }}
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -361,7 +368,27 @@ const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL
     ? window.g.VITE_API_IMG_URL
     : import.meta.env.VITE_API_IMG_URL;
 const url = VITE_API_IMG_URL;
-const avatarUrl = ref("");
+const defaultAvatar = new URL(
+    "@/static/images/my-design/my-default-avatar.png",
+    import.meta.url,
+).href;
+
+const startingVipIcons = {
+    level1: new URL("@/static/images/vip_design/vip1.png", import.meta.url)
+        .href,
+    level2: new URL("@/static/images/vip_design/vip2.png", import.meta.url)
+        .href,
+    level3: new URL("@/static/images/vip_design/vip3.png", import.meta.url)
+        .href,
+    level4: new URL("@/static/images/vip_design/vip4.png", import.meta.url)
+        .href,
+    level5: new URL("@/static/images/vip_design/vip5.png", import.meta.url)
+        .href,
+    levelDefault: new URL(
+        "@/static/images/my-design/my-vip-badge.png",
+        import.meta.url,
+    ).href,
+};
 let timer = null;
 let luckyDrawTimer = null;
 
@@ -417,6 +444,45 @@ const nextBlindBoxAnimationClass = () => {
 const displayName = computed(() => {
     return userInfo.value.username || userStore.userInfo?.username || "--";
 });
+
+const displayAvatar = computed(
+    () => userInfo.value?.avatar || userStore.userInfo?.avatar || defaultAvatar,
+);
+
+const currentVipLevelNumber = computed(() => {
+    const matched =
+        `${userLevel.value || userInfo.value?.userLevel?.nameEn || ""}`.match(
+            /\d+/,
+        );
+    return matched ? Number(matched[0]) : 0;
+});
+
+const currentVipBadgeIcon = computed(() => {
+    const iconKey = `level${currentVipLevelNumber.value}`;
+    return startingVipIcons[iconKey] || startingVipIcons.levelDefault;
+});
+
+const formatMoneyText = (value) => {
+    const amount = Number(value ?? 0);
+    return Number.isFinite(amount)
+        ? amount.toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+          })
+        : "0.00";
+};
+
+const commissionAmountText = computed(() =>
+    formatMoneyText(userInfo.value?.commission),
+);
+
+const balanceAmountText = computed(() =>
+    formatMoneyText(userInfo.value?.balance),
+);
+
+const frozenBalanceAmountText = computed(() =>
+    formatMoneyText(userInfo.value?.frozenBalance),
+);
 
 const BLIND_BOX_VISIBLE_COUNT = 9;
 const isBlindBoxReady = ref(false);
@@ -743,13 +809,6 @@ const syncUserInfo = (info = {}) => {
     userInfo.value = info || {};
 
     const levelInfo = userInfo.value?.userLevel || {};
-    // console.log("userInfo.value", userInfo.value);
-    // console.log("userInfo.value.avatar", userInfo.value.avatar);
-    avatarUrl.value = userInfo.value.avatar
-        ? userInfo.value.avatar
-        : levelInfo.icon
-          ? `${url}${levelInfo.icon}`
-          : "";
     orderCount.value = levelInfo.orderCount || 0;
     userLevel.value = levelInfo.nameEn || "";
 };

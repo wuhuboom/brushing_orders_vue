@@ -1,6 +1,6 @@
 <template>
   <div class="terms-page">
-    <PageTopBar :title="$t('terms_and_conditions')" show-back @click-left="onClickLeft" />
+    <PageTopBar :title="$t('tc_page_title')" show-back @click-left="onClickLeft" />
 
     <main class="terms-content">
       <p v-for="item in termsItems" :key="item">{{ item }}</p>
@@ -12,8 +12,35 @@
 import PageTopBar from "@/components/PageTopBar.vue";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-const { t } = useI18n();
-const termsItems = computed(() => Array.from({ length: 10 }, (_, index) => t(`terms_p${index + 1}`)));
+const { t, tm } = useI18n();
+
+const htmlToText = (value) => {
+  return String(value || "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .trim();
+};
+
+const listValue = (value) => Array.isArray(value) ? value : [];
+
+const termsItems = computed(() => {
+  const intro = listValue(tm("tc_hero_intro")).map(htmlToText).filter(Boolean);
+  const notice = listValue(tm("tc_hero_notice")).map(htmlToText).filter(Boolean);
+  const sections = listValue(tm("tc_terms_sections"));
+
+  if (intro.length || notice.length || sections.length) {
+    return [
+      ...intro,
+      ...notice,
+      ...sections.flatMap((section, index) => [
+        `${index + 1}. ${section.title}`.replace(/\s+/g, " ").trim(),
+        ...listValue(section.items).map((item) => `${item.no} ${htmlToText(item.content)}`.trim()),
+      ]),
+    ].filter(Boolean);
+  }
+
+  return Array.from({ length: 10 }, (_, index) => t(`terms_p${index + 1}`));
+});
 const onClickLeft = () => {
   history.back();
 };

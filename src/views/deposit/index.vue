@@ -11,7 +11,9 @@
         <div class="px-[20px] pt-[16px] pb-[34px]">
             <div class="balance-card">
                 <div>
-                    <div class="balance-label">{{ $t("auto_account_amount") }}</div>
+                    <div class="balance-label">
+                        {{ $t("auto_account_amount") }}
+                    </div>
                     <div class="balance-value">
                         {{ formatMoney(userInfo.balance) }}
                     </div>
@@ -231,31 +233,44 @@ const refreshPage = async () => {
 // };
 
 const submitDepositServer = async () => {
-    const selectedService = customerServices.value[selectedServiceIndex.value];
+    const services = customerServices.value || [];
+    const selectedService = services[selectedServiceIndex.value] || services[0];
     const serviceUrl = selectedService?.linkUrl || selectedService?.url;
-    if (serviceUrl) {
-        const finalUrl = buildKefuUrl(serviceUrl, userInfo.value?.username);
-        window.open(finalUrl);
-        return;
-    }
 
-    const rechargeUrl = rechargeAddressInfo.value?.url;
-    if (rechargeUrl) {
-        router.push({ path: "/address" });
-        return;
-    }
-
-    const time = checkWorkTimeLocal(
-        tradeInfo.value.workTimeStart,
-        tradeInfo.value.workTimeEnd,
-        userStore.zoneActive.tzName,
-    );
-
-    if (time) {
-        ContactUsRef.value?.open();
-    } else {
+    if (!serviceUrl) {
         showToast(t("supportHours"));
+        return;
     }
+
+    const finalUrl = buildKefuUrl(serviceUrl, userInfo.value?.username);
+    window.open(finalUrl, "_blank");
+
+    // const selectedService = customerServices.value[selectedServiceIndex.value];
+    // const serviceUrl = selectedService?.linkUrl || selectedService?.url;
+    // if (serviceUrl) {
+    //     const finalUrl = buildKefuUrl(serviceUrl, userInfo.value?.username);
+    //     window.open(finalUrl);
+    //     return;
+    // }
+
+    // const rechargeUrl = rechargeAddressInfo.value?.url;
+    // console.log("rechargeUrl", rechargeUrl);
+    // if (rechargeUrl) {
+    //     router.push({ path: "/address" });
+    //     return;
+    // }
+
+    // const time = checkWorkTimeLocal(
+    //     tradeInfo.value.workTimeStart,
+    //     tradeInfo.value.workTimeEnd,
+    //     userStore.zoneActive.tzName,
+    // );
+
+    // if (time) {
+    //     ContactUsRef.value?.open();
+    // } else {
+    //     showToast(t("supportHours"));
+    // }
 };
 
 const handlePrimaryAction = () => {

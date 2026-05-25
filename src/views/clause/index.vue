@@ -12,8 +12,28 @@
 import PageTopBar from "@/components/PageTopBar.vue";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-const { t } = useI18n();
-const termsItems = computed(() => Array.from({ length: 10 }, (_, index) => t(`terms_p${index + 1}`)));
+const { t, tm } = useI18n();
+
+const htmlToTextList = (value) => {
+  if (!value) return [];
+  return String(value)
+    .match(/<p[\s\S]*?<\/p>/gi)
+    ?.map((item) => item.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim())
+    .filter(Boolean) || [];
+};
+
+const termsItems = computed(() => {
+  const sections = tm("clause_sections");
+  if (Array.isArray(sections) && sections.length) {
+    return sections.flatMap((section, index) => [
+      `${index + 1}. ${section.title}`.replace(/\s+/g, " ").trim(),
+      ...htmlToTextList(section.content),
+    ]);
+  }
+
+  return Array.from({ length: 10 }, (_, index) => t(`terms_p${index + 1}`));
+});
+
 const onClickLeft = () => {
   history.back();
 };
