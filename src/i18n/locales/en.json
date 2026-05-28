@@ -796,23 +796,23 @@
     },
     {
       "title": "Misuse of Accounts",
-      "content": "Legal action will be taken against any misuse or fraudulent activity involving user accounts."
+      "content": "<p>Legal action will be taken against any misuse or fraudulent activity involving user accounts.</p>"
     },
     {
       "title": "Advance Requirements",
-      "content": "Each product within a mission may come from a different merchant. No advance may remain pending for more than 10 minutes, and each advance must be confirmed with online service to verify the merchant’s details."
+      "content": "<p>Each product within a mission may come from a different merchant. No advance may remain pending for more than 10 minutes, and each advance must be confirmed with online service to verify the merchant’s details.</p>"
     },
     {
       "title": "Incorrect Advance Information",
-      "content": "The platform is not responsible for any losses caused by advance made to incorrect or unverified account details."
+      "content": "<p>The platform is not responsible for any losses caused by advance made to incorrect or unverified account details.</p>"
     },
     {
       "title": "Completion Time Requirements",
-      "content": "Each set of enhancement mission must be completed within 24 hours. Failure to do so may result in merchant complaints, and users will bear any resulting breach-of-contract liabilities."
+      "content": "<p>Each set of enhancement mission must be completed within 24 hours. Failure to do so may result in merchant complaints, and users will bear any resulting breach-of-contract liabilities.</p>"
     },
     {
       "title": "Credit Score Deduction",
-      "content": "If a merchant files a complaint, the system will deduct the user’s credit score. Accounts with a credit score below 98 are not eligible for withdrawal. The system will automatically recalculate the credit score after each completed set of missions."
+      "content": "<p>If a merchant files a complaint, the system will deduct the user’s credit score. Accounts with a credit score below 98 are not eligible for withdrawal. The system will automatically recalculate the credit score after each completed set of missions.</p>"
     }
   ],
   "faq_sections": [

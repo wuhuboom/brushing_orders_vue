@@ -1,11 +1,15 @@
 <template>
-  <div class="terms-page">
-    <PageTopBar :title="$t('terms_and_conditions')" show-back @click-left="onClickLeft" />
+    <div class="terms-page">
+        <PageTopBar
+            :title="$t('terms_and_conditions')"
+            show-back
+            @click-left="onClickLeft"
+        />
 
-    <main class="terms-content">
-      <p v-for="item in termsItems" :key="item">{{ item }}</p>
-    </main>
-  </div>
+        <main class="terms-content">
+            <p v-for="item in termsItems" :key="item">{{ item }}</p>
+        </main>
+    </div>
 </template>
 
 <script setup>
@@ -15,57 +19,82 @@ import { useI18n } from "vue-i18n";
 const { t, tm } = useI18n();
 
 const htmlToTextList = (value) => {
-  if (!value) return [];
-  return String(value)
-    .match(/<p[\s\S]*?<\/p>/gi)
-    ?.map((item) => item.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim())
-    .filter(Boolean) || [];
+    if (!value) return [];
+    return (
+        String(value)
+            .match(/<p[\s\S]*?<\/p>/gi)
+            ?.map((item) =>
+                item
+                    .replace(/<[^>]*>/g, "")
+                    .replace(/&nbsp;/g, " ")
+                    .trim(),
+            )
+            .filter(Boolean) || []
+    );
 };
 
 const termsItems = computed(() => {
-  const sections = tm("clause_sections");
-  if (Array.isArray(sections) && sections.length) {
-    return sections.flatMap((section, index) => [
-      `${index + 1}. ${section.title}`.replace(/\s+/g, " ").trim(),
-      ...htmlToTextList(section.content),
-    ]);
-  }
+    const sections = tm("clause_sections");
+    if (Array.isArray(sections) && sections.length) {
+        return sections.flatMap((section, index) => [
+            `${index + 1}. ${section.title}`.replace(/\s+/g, " ").trim(),
+            ...htmlToTextList(section.content),
+        ]);
+    }
 
-  return Array.from({ length: 10 }, (_, index) => t(`terms_p${index + 1}`));
+    return Array.from({ length: 10 }, (_, index) => t(`terms_p${index + 1}`));
 });
 
 const onClickLeft = () => {
-  history.back();
+    history.back();
 };
 </script>
 
 <style scoped>
 .terms-page {
-  min-height: 100vh;
-  background: #eef2f8;
-  color: #050505;
-  font-family: inherit;
+    min-height: 100vh;
+    background: #eef2f8;
+    color: #050505;
+    font-family: inherit;
 }
 
 .terms-content {
-  padding: 20px 20px 30px;
+    padding: 20px 20px 30px;
 }
 
 .terms-content p {
-  margin: 0 0 30px;
-  font-size: 15px;
-  line-height: 1.27;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+    margin: 0 0 30px;
+    font-size: 15px;
+    line-height: 1.27;
+    font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
-.terms-content p:nth-child(1) { margin-bottom: 24px; }
-.terms-content p:nth-child(2) { margin-bottom: 52px; }
-.terms-content p:nth-child(3) { margin-bottom: 34px; }
-.terms-content p:nth-child(4) { margin-bottom: 34px; }
-.terms-content p:nth-child(5) { margin-bottom: 34px; }
-.terms-content p:nth-child(6) { margin-bottom: 34px; }
-.terms-content p:nth-child(7) { margin-bottom: 34px; }
-.terms-content p:nth-child(8) { margin-bottom: 34px; }
-.terms-content p:nth-child(9) { margin-bottom: 34px; }
+.terms-content p:nth-child(1) {
+    margin-bottom: 24px;
+}
+.terms-content p:nth-child(2) {
+    margin-bottom: 52px;
+}
+.terms-content p:nth-child(3) {
+    margin-bottom: 34px;
+}
+.terms-content p:nth-child(4) {
+    margin-bottom: 34px;
+}
+.terms-content p:nth-child(5) {
+    margin-bottom: 34px;
+}
+.terms-content p:nth-child(6) {
+    margin-bottom: 34px;
+}
+.terms-content p:nth-child(7) {
+    margin-bottom: 34px;
+}
+.terms-content p:nth-child(8) {
+    margin-bottom: 34px;
+}
+.terms-content p:nth-child(9) {
+    margin-bottom: 34px;
+}
 </style>
