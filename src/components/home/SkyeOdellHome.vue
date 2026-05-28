@@ -1,12 +1,12 @@
 <template>
     <section class="algofy-home">
-        <div class="algofy-top-promo">
+        <!-- <div class="algofy-top-promo">
             <img
                 src="@/static/images/algofy-assets/topflash.svg"
                 class="mr-[15px]"
             />
             <span> {{ t("skye.promo") }}</span>
-        </div>
+        </div> -->
 
         <header class="algofy-header">
             <div
@@ -442,7 +442,7 @@
             </div>
         </section>
 
-        <section class="pricing-section">
+        <!-- <section class="pricing-section">
             <div class="pricing-card">
                 <h2>
                     {{ t("skye.pricing_title_line1") }}<br />{{
@@ -548,7 +548,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <section class="stellar-section">
             <div class="stellar-visual">
@@ -559,7 +559,7 @@
                     draggable="false"
                 />
             </div>
-            <div class="stellar-copy">
+            <!-- <div class="stellar-copy">
                 <h2>
                     {{ t("skye.stellar_title_line1") }}<br />{{
                         t("skye.stellar_title_line2")
@@ -575,7 +575,7 @@
                     <p>✓ {{ t("skye.stellar_mean_3") }}</p>
                     <p>✓ {{ t("skye.stellar_mean_4") }}</p>
                 </div>
-            </div>
+            </div> -->
         </section>
 
         <section class="clutch-section">
@@ -1230,16 +1230,16 @@ const ecommerceServices = computed(() => [
         copy: t("skye.ecommerce_service_2_copy"),
         image: ecommerceCreative,
     },
-    {
-        title: t("skye.ecommerce_service_3_title"),
-        copy: t("skye.ecommerce_service_3_copy"),
-        image: ecommercePaidMedia,
-    },
-    {
-        title: t("skye.ecommerce_service_4_title"),
-        copy: t("skye.ecommerce_service_4_copy"),
-        image: ecommerceEmailSms,
-    },
+    // {
+    //     title: t("skye.ecommerce_service_3_title"),
+    //     copy: t("skye.ecommerce_service_3_copy"),
+    //     image: ecommercePaidMedia,
+    // },
+    // {
+    //     title: t("skye.ecommerce_service_4_title"),
+    //     copy: t("skye.ecommerce_service_4_copy"),
+    //     image: ecommerceEmailSms,
+    // },
 ]);
 
 const channelItems = computed(() => [
