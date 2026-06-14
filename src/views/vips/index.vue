@@ -272,11 +272,26 @@ const vipIcons = {
 };
 
 const levelFallbacks = [
-    { nameEn: "VIP1", commissionRatio: 0.5, orderCount: 80, price: 50 },
-    { nameEn: "VIP2", commissionRatio: 1, orderCount: 90, price: 200 },
-    { nameEn: "VIP3", commissionRatio: 1.5, orderCount: 100, price: 500 },
-    { nameEn: "VIP4", commissionRatio: 2, orderCount: 110, price: 1500 },
-    { nameEn: "VIP5", commissionRatio: 2.5, orderCount: 120, price: 5000 },
+    {
+        nameEn: "VIP1",
+        commissionRatio: 0.5,
+        orderCount: 80,
+        price: "$100- 499",
+    },
+    { nameEn: "VIP2", commissionRatio: 1, orderCount: 90, price: "$500- 1599" },
+    {
+        nameEn: "VIP3",
+        commissionRatio: 1.5,
+        orderCount: 100,
+        price: "$1600- 5499",
+    },
+    {
+        nameEn: "VIP4",
+        commissionRatio: 2,
+        orderCount: 110,
+        price: "$5500- 9999",
+    },
+    { nameEn: "VIP5", commissionRatio: 2.5, orderCount: 120, price: "$10000" },
 ];
 
 const designLevelStats = [
@@ -739,11 +754,11 @@ function levelStats(item, index) {
             value: formatRate(item, index),
             label: t("rebate_task"),
         },
-        {
-            icon: iconSet?.stats?.[1] || vipIcons.rocket,
-            value: `$ ${formatProductCount(item, index)}`,
-            label: t("product_income"),
-        },
+        // {
+        //     icon: iconSet?.stats?.[1] || vipIcons.rocket,
+        //     value: `$ ${formatProductCount(item, index)}`,
+        //     label: t("product_income"),
+        // },
         {
             icon: iconSet?.stats?.[2] || vipIcons.user,
             value: formatTaskCount(item, index),
@@ -1134,6 +1149,9 @@ onMounted(() => {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .vip-head-stat__label {

@@ -55,7 +55,7 @@ const { locale } = useI18n();
 const dialogVisible = ref(false);
 const commonStore = useCommonStore();
 const { setLocale } = useLocale();
-const AUTH_VISIBLE_LANG_CODES = ["en", "th", "ko"];
+const AUTH_VISIBLE_LANG_CODES = ["en", "es", "ko"];
 
 const LANGS_OBJ = computed(() =>
     AUTH_VISIBLE_LANG_CODES.map((code) => LANGS[code])

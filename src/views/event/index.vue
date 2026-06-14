@@ -1,6 +1,10 @@
 <template>
     <div class="algofy-event-page">
-        <PageTopBar :title="$t('event_title')" show-back @click-left="onClickLeft" />
+        <PageTopBar
+            :title="$t('event_title')"
+            show-back
+            @click-left="onClickLeft"
+        />
 
         <section class="event-hero">
             <div class="hero-overlay">
@@ -71,121 +75,45 @@ const onClickLeft = () => {
 </script>
 
 <style scoped>
-.algofy-event-page {
-    min-height: 100vh;
-    background: #f0f2f8;
-    color: #111;
-    font-family: inherit;
-}
-
-.design-topbar {
-    position: sticky;
-    top: 0;
-    z-index: 30;
-    height: 52px;
-    display: grid;
-    grid-template-columns: 56px 1fr 56px;
-    align-items: center;
-    background: #030303;
-    color: #fff;
-}
-
-.design-title {
-    text-align: center;
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-}
-
-.design-back {
-    width: 52px;
-    height: 52px;
-    border: 0;
-    background: transparent;
-    position: relative;
-}
-
-.design-back::before {
-    content: "";
-    position: absolute;
-    left: 19px;
-    top: 18px;
-    width: 13px;
-    height: 13px;
-    border-left: 3px solid #fff;
-    border-bottom: 3px solid #fff;
-    transform: rotate(45deg);
-    border-radius: 1px;
-}
-
 .event-hero {
-    height: 210px;
-    background: #111 url("@/static/images/event-vip-hero-bg.png") center
-        center / cover no-repeat;
+    height: 215px;
+    background-image: url("@/static/images/event-vip-hero-bg.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100% auto;
     position: relative;
     overflow: visible;
 }
 
+/* 设计稿 hero 文案已经在背景图里，这里隐藏原来的文字层 */
 .hero-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 47px 44px 16px;
-    color: #fff;
-    background: linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.48),
-        rgba(0, 0, 0, 0.12)
-    );
-}
-
-.hero-overlay h1 {
-    margin: 0 0 22px;
-    font-family: Montserrat, Montserrat;
-    font-weight: 600;
-    font-size: 22px;
-    color: #ffffff;
-    text-align: left;
-    font-style: normal;
-    text-transform: none;
-}
-
-.hero-overlay p {
-    margin: 0;
-    font-family: Montserrat, Montserrat;
-    font-weight: 500;
-    font-size: 14px;
-    color: #ffffff;
-    text-align: left;
-    font-style: normal;
-    text-transform: none;
+    display: none;
 }
 
 .event-content {
-    padding: 0 16px 34px;
+    padding: 0 18px 47px;
+    margin-top: 5px;
 }
 
 .vip-table-card {
     position: relative;
     z-index: 2;
-    margin-top: -62px;
+    margin-top: -27px;
     overflow: hidden;
-    border-radius: 7px;
+    border-radius: 8px;
     background: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.09);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .vip-table-head {
-    height: 65px;
+    height: 76px;
     display: grid;
-    grid-template-columns: 0.95fr 1.18fr 0.84fr 1.42fr;
+    grid-template-columns: 0.95fr 1.1fr 0.9fr 1.35fr;
     align-items: center;
-    background: linear-gradient(135deg, #263e99 0%, #4290ff 100%);
-
-    border: 1px solid rgba(255, 255, 255, 0.82);
-    border-radius: 7px;
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.86);
+    border-radius: 8px;
 
     font-family: Montserrat, Montserrat;
     font-weight: 500;
@@ -197,10 +125,10 @@ const onClickLeft = () => {
 }
 
 .vip-table-row {
-    min-height: 78px;
-    margin: 0 12px;
+    min-height: 94px;
+    margin: 0 18px;
     display: grid;
-    grid-template-columns: 0.95fr 1.18fr 0.84fr 1.42fr;
+    grid-template-columns: 0.95fr 1.1fr 0.9fr 1.35fr;
     align-items: center;
 
     border-bottom: 1px solid #dedede;
@@ -228,22 +156,20 @@ const onClickLeft = () => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
-    line-height: 18px;
+    font-family: Montserrat, Montserrat;
     font-weight: 500;
-}
-
-.requirement b {
-    font-size: 15px;
-    line-height: 17px;
-    font-weight: 900;
+    font-size: 13px;
+    line-height: 15px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
 }
 
 .notice-card {
-    margin-top: 24px;
-    padding: 24px 16px 21px;
+    margin-top: 20px;
+    padding: 20px 20px 29px;
     border-radius: 8px;
-    background: #e3f2fd;
+    background: #ffffff;
 }
 
 .notice-card h2 {
@@ -269,12 +195,12 @@ const onClickLeft = () => {
 }
 
 .event-upgrade {
-    width: 100%;
+    width: calc(100% - 10px);
     height: 48px;
-    margin-top: 34px;
+    margin: 33px 5px 0;
     border: 0;
-    border-radius: 6px;
-    background: #3445f3;
+    border-radius: 8px;
+    background: #3043e3;
     font-family: Montserrat, Montserrat;
     font-weight: 600;
     font-size: 16px;

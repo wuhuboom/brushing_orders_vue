@@ -3,6 +3,10 @@ export const LANGS = {
     name: "English",
     code: "en",
   },
+  es: {
+    name: "España",
+    code: "es",
+  },
   zh: {
     name: "\u4e2d\u6587",
     code: "zh",

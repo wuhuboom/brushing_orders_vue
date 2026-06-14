@@ -340,6 +340,10 @@ const customer = async () => {
     background-image: url("@/static/images/lang/th.png");
 }
 
+.auth-shell--lang-es .auth-lang__flag {
+    background-image: url("@/static/images/lang/es.png");
+}
+
 .auth-shell--lang-ko .auth-lang__flag {
     background:
         radial-gradient(

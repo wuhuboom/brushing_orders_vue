@@ -369,7 +369,7 @@
   "home_upgrade_vip_to_unlock_more_tasks": "VIP를 업그레이드하여 더 많은 작업 잠금 해제",
   "home_higher_level_higher_earnings": "레벨이 높을수록 수익도 증가",
   "home_featured_partner": "추천 파트너",
-  "home_partner_company": "Skye O'Dell (SO Services)",
+  "home_partner_company": "Algofy (SO Services)",
   "home_partner_tagline": "당신의 비전, 아름답게 실현합니다.",
   "home_partner_description": "브랜드 구축과 웹사이트 개발부터 전면적인 마케팅까지 제공하는 원스톱 디지털 크리에이티브 및 마케팅 에이전시로, 온라인과 오프라인에서 브랜드의 차별화된 성장을 돕습니다.",
   "home_content_creation": "콘텐츠 제작",
@@ -476,7 +476,7 @@
   "bind_wallet_account": "지갑 계정 연결",
   "account_encrypted_notice": "계정 정보는 암호화되어 보호됩니다. 제3자와 공유되지 않습니다.",
   "our_certifications": "인증 정보",
-  "certifications_desc": "Skye O'Dell은 사용자 보호를 위해 필요한 모든 라이선스와 보안 인증을 갖춘 엄격한 규제 준수 하에 운영됩니다.",
+  "certifications_desc": "Algofy은 사용자 보호를 위해 필요한 모든 라이선스와 보안 인증을 갖춘 엄격한 규제 준수 하에 운영됩니다.",
   "documents": "문서",
   "images": "이미지",
   "sections": "섹션",
@@ -519,7 +519,7 @@
   "frequently_asked_questions": "자주 묻는 질문",
   "find_instant_answers": "자주 묻는 질문에 대한 즉시 답변 찾기",
   "terms_last_updated": "최종 업데이트: 2025년 1월 15일. 서비스 이용 전 반드시 주의 깊게 읽어주세요.",
-  "terms_continue_notice": "Skye O'Dell을 계속 사용함으로써 본 문서에 명시된 모든 약관을 읽고 이해했으며 이에 동의하고 구속됨을 인정하는 것입니다.",
+  "terms_continue_notice": "Algofy을 계속 사용함으로써 본 문서에 명시된 모든 약관을 읽고 이해했으며 이에 동의하고 구속됨을 인정하는 것입니다.",
   "table_of_contents": "목차",
   "terms_update_alert": "본 약관은 2025년 1월 15일에 마지막으로 업데이트되었습니다. 업데이트 이후에도 플랫폼을 계속 사용하는 경우 개정된 약관에 동의한 것으로 간주됩니다. 문의 사항은 support{'@'}shopreward.com으로 연락해 주세요.",
   "vip_five_star_title": "SUG 5성 VIP",
@@ -848,7 +848,7 @@
       "tag": "ACTIVE",
       "icon": "⚡",
       "title": "3주년 감사 피드백 이벤트",
-      "summary": "Skye O'Dell 프로모션 이벤트 – 리셋 보너스 리워드",
+      "summary": "Algofy 프로모션 이벤트 – 리셋 보너스 리워드",
       "reward": "USD 10 - USD 2,400 추가 리워드",
       "progress": "",
       "time": "기간 한정 기념 이벤트",
@@ -871,26 +871,26 @@
       "content": "<div class=\"event-section-block\"><h4>일일 누적 선지급 리워드</h4><div class=\"event-bonus-grid\"><div><strong>1,500 - 9,999</strong><span>지급</span><b>4% 선지급 보너스</b></div><div><strong>10,000 - 19,999</strong><span>지급</span><b>8% 선지급 보너스</b></div><div><strong>20,000 - 49,999</strong><span>지급</span><b>12% 선지급 보너스</b></div><div><strong>50,000 이상</strong><span>지급</span><b>20% 선지급 보너스</b></div></div></div>"
     }
   ],
-  "event_footer_line1": "Skye O'Dell은 최종 해석 권한을 보유합니다.",
-  "event_footer_line2": "© 2022 Skye O'Dell. All rights reserved.",
+  "event_footer_line1": "Algofy은 최종 해석 권한을 보유합니다.",
+  "event_footer_line2": "© 2022 Algofy. All rights reserved.",
   "tc_page_title": "이용 약관",
   "tc_hero_title": "사용자 등록 계약서",
   "tc_hero_intro": [
-    "<strong>Skye O'Dell</strong> 및 해당 서비스에 오신 것을 환영합니다.",
+    "<strong>Algofy</strong> 및 해당 서비스에 오신 것을 환영합니다.",
     "본 웹사이트 및 제작자의 소프트웨어 “Software Use and Services”의 보안을 위해, 아래의 소프트웨어 및 서비스 라이선스(“소프트웨어” 또는 “계약”)를 주의 깊게 검토해 주시기 바랍니다. 귀하는 본 약관, 특히 서비스 제공 조건, 제한 사항 및 추가 계약 조항을 충분히 이해해야 하며, 이에 따른 책임을 인정하고 동의해야 합니다."
   ],
   "tc_hero_notice": [
     "본 사이트에 접속하거나 서비스를 이용함으로써, 귀하는 만 18세 이상임을 확인하며, 본 계약 및 관련 약관을 읽고 이해하고 이에 동의함을 인정합니다. 해당 조건을 충족하지 않는 경우 서비스 다운로드 또는 이용이 허용되지 않습니다."
   ],
   "tc_table_of_contents": "목차",
-  "tc_update_alert": "Skye O'Dell은 언제든지 본 계약을 수정하거나 업데이트할 권리를 가지며, 웹사이트에 게시된 최신 버전이 우선합니다.",
+  "tc_update_alert": "Algofy은 언제든지 본 계약을 수정하거나 업데이트할 권리를 가지며, 웹사이트에 게시된 최신 버전이 우선합니다.",
   "tc_terms_sections": [
     {
       "title": "사용자 개인정보 보호",
       "items": [
         {
           "no": "1.1",
-          "content": "<p>사용자의 개인정보 및 제작자의 정보를 보호하는 것은 본 웹사이트의 핵심 원칙입니다. Skye O'Dell은 모든 정보를 보호하기 위해 전문 수준의 암호화 저장 및 안전한 전송 방식을 사용합니다. 원본 제공자의 승인 없이 정보가 유출될 경우, 본 사이트는 법적 조치를 취할 수 있습니다.</p>"
+          "content": "<p>사용자의 개인정보 및 제작자의 정보를 보호하는 것은 본 웹사이트의 핵심 원칙입니다. Algofy은 모든 정보를 보호하기 위해 전문 수준의 암호화 저장 및 안전한 전송 방식을 사용합니다. 원본 제공자의 승인 없이 정보가 유출될 경우, 본 사이트는 법적 조치를 취할 수 있습니다.</p>"
         },
         {
           "no": "1.2",
@@ -902,11 +902,11 @@
         },
         {
           "no": "1.4",
-          "content": "<p>Skye O'Dell은 다양한 보안 기술, 운영 절차 및 강력한 관리 시스템을 통해 사용자 정보를 보호합니다. 무단 사용, 접근 또는 유출 시 법적 처벌을 받을 수 있습니다. Skye O'Dell 계정에 등록된 최종 휴대폰 번호 및 기존 계정 번호는 임의로 변경할 수 없습니다.</p>"
+          "content": "<p>Algofy은 다양한 보안 기술, 운영 절차 및 강력한 관리 시스템을 통해 사용자 정보를 보호합니다. 무단 사용, 접근 또는 유출 시 법적 처벌을 받을 수 있습니다. Algofy 계정에 등록된 최종 휴대폰 번호 및 기존 계정 번호는 임의로 변경할 수 없습니다.</p>"
         },
         {
           "no": "1.5",
-          "content": "<p>어떠한 경우에도 Skye O'Dell은 사용자의 명시적 동의 없이 외부 회사 또는 조직에 사용자 정보를 공개하지 않습니다.</p>"
+          "content": "<p>어떠한 경우에도 Algofy은 사용자의 명시적 동의 없이 외부 회사 또는 조직에 사용자 정보를 공개하지 않습니다.</p>"
         },
         {
           "no": "1.6",
@@ -962,7 +962,7 @@
     }
   ],
   "sk_social_label": "소셜 링크",
-  "sk_logo_alt": "Skye O'Dell",
+  "sk_logo_alt": "Algofy",
   "sk_menu": "메뉴",
   "sk_contact": "프로젝트가 있으신가요? 문의하세요!",
   "sk_topics": "서비스 항목",
@@ -1064,7 +1064,7 @@
   "sk_recommended": "추천받는",
   "sk_by_locals": "지역 사용자들에게",
   "sk_on_alignable": "Alignable에서",
-  "sk_copyright": "© 2016 - 2026 • Skye O'Dell / SO Services, LLC / SO Services 제휴 파트너 • 모든 권리 보유",
+  "sk_copyright": "© 2016 - 2026 • Algofy / SO Services, LLC / SO Services 제휴 파트너 • 모든 권리 보유",
   "sk_team_l1_pre": "우리는",
   "sk_team_l1_em": "디자이너,",
   "sk_team_l2_em": "개발자 및 전략가로 구성된 팀이며",
