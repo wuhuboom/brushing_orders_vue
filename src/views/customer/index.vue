@@ -1,58 +1,70 @@
 <template>
     <div class="customer-page">
-        <PageTopBar :title="$t('service')" show-back @click-left="onClickLeft" />
-
-        <section class="service-hero">
-            <img :src="serviceHero" :alt="$t('help_center')" />
-        </section>
+        <PageTopBar
+            :title="$t('service')"
+            show-back
+            @click-left="onClickLeft"
+        />
 
         <main class="customer-body">
-            <div class="customer-list">
+            <div class="customer-body__title">
+                Contact Customer Service Center
+            </div>
+            <div class="customer-body__subtitle">
+                We provide professional support anytime
+            </div>
+
+            <div class="service-card-list">
                 <div
                     v-for="(item, index) in serviceCards"
                     :key="item.linkUrl || item.name || index"
-                    class="customer-card"
+                    class="service-card"
                     @click="jump(item, index)"
                 >
-                    <img
-                        class="customer-card__avatar"
-                        :src="item.avatar"
-                        alt=""
-                    />
-                    <div class="customer-card__main">
-                        <div class="customer-card__title">
-                            {{ item.displayName }}
-                        </div>
-                        <div class="customer-card__time">
-                            {{ item.displayTime }}
-                        </div>
+                    <img class="service-card__image" :src="item.icon" alt="" />
+
+                    <div class="service-card__title">
+                        {{ item.displayName }}
                     </div>
-                    <button class="customer-card__button" type="button">
-                        {{ $t("chat") }}
-                    </button>
+
+                    <div class="service-card__desc">
+                        Solve problems in real-time with customer service
+                        representatives
+                    </div>
+
+                    <div class="service-card__footer">
+                        <button class="service-card__button" type="button">
+                            Consult Now
+                            <van-icon name="arrow" />
+                        </button>
+                    </div>
                 </div>
 
                 <div
                     v-if="emailAddressInfo && !serviceCards.length"
-                    class="customer-card"
+                    class="service-card"
                     @click="copyContent(emailAddressInfo)"
                 >
-                    <div
-                        class="customer-card__avatar customer-card__avatar--email"
-                    >
-                        @
+                    <img
+                        class="service-card__image"
+                        :src="serviceOnlineIcon"
+                        alt=""
+                    />
+
+                    <div class="service-card__title">
+                        {{ $t("email_support") }}
                     </div>
-                    <div class="customer-card__main">
-                        <div class="customer-card__title">
-                            {{ $t("email_support") }}
-                        </div>
-                        <div class="customer-card__time email-text">
-                            {{ emailAddressInfo }}
-                        </div>
+
+                    <div class="service-card__desc email-text">
+                        {{ emailAddressInfo }}
                     </div>
-                    <button class="customer-card__button" type="button">
-                        {{ $t("copy") }}
-                    </button>
+
+                    <div class="service-card__footer">
+                        <button class="service-card__button" type="button">
+                            {{ $t("copy") }}
+                            <van-icon name="arrow" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </main>
@@ -94,6 +106,7 @@
                     </div>
                     <van-icon name="arrow" class="customer-card__arrow" />
                 </div>
+
                 <div
                     v-if="emailAddressInfo"
                     class="customer-dialog__item"
@@ -135,20 +148,21 @@ import { showToast } from "@/util/message";
 import { errorMessages } from "@/api/errorCodeMap";
 import md5 from "crypto-js/md5";
 import { copyContent } from "@/util/utils";
-import cusmessIcon from "@/static/images/cusmess.png";
-import cusserveIcon from "@/static/images/user-service.png";
-import serviceHero from "@/static/images/service/service-hero.png";
-import serviceAvatar1 from "@/static/images/service/service-avatar-1.png";
-import serviceAvatar2 from "@/static/images/service/service-avatar-2.png";
+
+import serviceOnlineIcon from "@/static/images/service/service-online.png";
+import serviceTelegramIcon from "@/static/images/service/service-telegram.png";
+
 const showCenter = ref(false);
 const router = useRouter();
 const route = useRoute();
 const userStore = useUserStore();
 const commonStore = useCommonStore();
 const { t } = useI18n();
+
 const customerList = ref([]);
 const emailAddressInfo = ref("");
 const userInfo = ref({});
+const TradeInfor = ref({});
 
 const parLang = computed(() => {
     const mapped = commonStore.getValueByKey(commonStore.lang);
@@ -189,7 +203,9 @@ const open = async () => {
     await loadCustomerService();
 };
 
-const close = () => (showCenter.value = false);
+const close = () => {
+    showCenter.value = false;
+};
 
 const emailAddress = async () => {
     const res = await getEmailAddress();
@@ -225,10 +241,12 @@ function buildKefuUrl(baseUrl, username) {
     try {
         const visitorId = md5(username || "").toString();
         const url = new URL(value);
+
         if (userStore.token) {
             url.searchParams.set("visitor_id", visitorId);
             url.searchParams.set("visitor_name", username || "");
         }
+
         return url.toString();
     } catch (error) {
         return value;
@@ -249,9 +267,9 @@ const getUserGetInfo = async () => {
 const onClickLeft = () => {
     history.back();
 };
-const TradeInfor = ref({});
+
 const tradeConfig = async () => {
-    let res = await getTradeConfig();
+    const res = await getTradeConfig();
     TradeInfor.value = res.data;
 };
 
@@ -265,9 +283,11 @@ const workTimeText = computed(() => {
 const serviceCards = computed(() =>
     (customerList.value || []).map((item, index) => ({
         ...item,
-        displayName: item?.name || (index === 0 ? "Nnan" : "Linda"),
-        displayTime: index === 0 ? "AM9:00-20:00" : "PM20:00-9:00",
-        avatar: index === 0 ? serviceAvatar1 : serviceAvatar2,
+        displayName:
+            index === 0
+                ? "Online Customer Service"
+                : "Telegram Customer Service",
+        icon: index === 0 ? serviceOnlineIcon : serviceTelegramIcon,
     })),
 );
 
@@ -287,131 +307,115 @@ defineExpose({
 <style scoped>
 .customer-page {
     min-height: 100vh;
-    background: #f1f4fb;
+    min-height: 100dvh;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
     color: #0a0a0a;
-}
-
-.algofy-topbar {
-    position: relative;
-    height: 80px;
-    background: #050505;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-}
-
-.algofy-topbar__back {
-    position: absolute;
-    left: 22px;
-    top: 50%;
-    width: 22px;
-    height: 22px;
-    border: 0;
-    background: transparent;
-    transform: translateY(-50%) rotate(45deg);
-    border-left: 4px solid #fff;
-    border-bottom: 4px solid #fff;
-    border-radius: 2px;
-}
-
-.algofy-topbar__title {
-    font-size: 24px;
-    line-height: 1;
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: 1px;
-}
-
-.service-hero {
-    width: 100%;
-    height: 209px;
-    overflow: hidden;
-    background: #9eb4ff;
-}
-
-.service-hero img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    flex-direction: column;
 }
 
 .customer-body {
-    padding: 15px 20px 40px;
+    flex: 1;
+    min-height: 0;
+    padding: 38px 22px 40px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    box-sizing: border-box;
 }
 
-.customer-list {
+.customer-body__title {
+    font-family: Inter_700wght, Inter_700wght;
+    font-weight: normal;
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 32px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.customer-body__subtitle {
+    margin-top: 20px;
+    font-family: Inter-Regular, Inter-Regular;
+    font-weight: normal;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 24px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.service-card-list {
+    margin-top: 23px;
     display: flex;
     flex-direction: column;
-    gap: 11px;
+    gap: 18px;
 }
 
-.customer-card {
-    display: grid;
-    grid-template-columns: 49px minmax(0, 1fr) 114px;
-    align-items: center;
-    gap: 14px;
-    min-height: 73px;
-    border-radius: 8px;
+.service-card {
+    min-height: 158px;
+    padding: 12px 16px 11px 26px;
+    border-radius: 12px;
     background: #fff;
-    padding: 12px 15px 12px 21px;
-    box-shadow: none;
+    box-sizing: border-box;
 }
 
-.customer-card__avatar {
-    width: 49px;
-    height: 49px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
+.service-card__image {
+    display: block;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
 }
 
-.customer-card__avatar--email {
+.service-card__title {
+    margin-top: 9px;
+    font-family: Inter_700wght, Inter_700wght;
+    font-weight: normal;
+    font-size: 16px;
+    color: #000000;
+    line-height: 28px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.service-card__desc {
+    margin-top: 13px;
+    font-family: Inter-Regular, Inter-Regular;
+    font-weight: normal;
+    font-size: 12px;
+    color: #000000;
+    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+}
+
+.service-card__footer {
+    margin-top: 5px;
     display: flex;
+    justify-content: flex-end;
+}
+
+.service-card__button {
+    height: 38px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 10px;
+    background: #3b82f6;
+    font-family: Inter-Regular, Inter-Regular;
+    font-weight: normal;
+    font-size: 12px;
+    color: #ffffff;
+    line-height: 24px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #e9f0ff;
-    color: #2f46e8;
-    font-size: 28px;
-    font-weight: 800;
-}
-
-.customer-card__main {
-    min-width: 0;
-}
-
-.customer-card__title {
-    color: #050505;
-    font-size: 14px;
-    line-height: 19px;
-    font-weight: 800;
+    gap: 7px;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.customer-card__time {
-    margin-top: 1px;
-    color: #00a94f;
-    font-size: 13px;
-    line-height: 17px;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-.customer-card__button {
-    width: 114px;
-    height: 37px;
-    border: 0;
-    border-radius: 999px;
-    background: #3444e8;
-    color: #fff;
-    font-size: 15px;
-    line-height: 1;
-    font-weight: 500;
-    white-space: nowrap;
-    padding: 0;
 }
 
 .customer-card__icon {
@@ -433,6 +437,16 @@ defineExpose({
 .customer-card__icon.is-email {
     background: #e8f0fb;
     color: #347ff6;
+}
+
+.customer-card__title {
+    color: #050505;
+    font-size: 14px;
+    line-height: 19px;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .customer-card__desc {
@@ -481,5 +495,4 @@ defineExpose({
 .email-text {
     word-break: break-all;
 }
-
 </style>
