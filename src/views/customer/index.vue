@@ -24,7 +24,7 @@
                     <img class="service-card__image" :src="item.icon" alt="" />
 
                     <div class="service-card__title">
-                        {{ item.displayName || item.name }}
+                        {{ item.name }}
                     </div>
 
                     <div class="service-card__desc">
