@@ -295,11 +295,11 @@ const levelFallbacks = [
 ];
 
 const designLevelStats = [
-    { deposit: 50, rate: 0.5, product: 40, tasks: 80, quota: 90 },
-    { deposit: 200, rate: 1, product: 45, tasks: 90, quota: 90 },
-    { deposit: 500, rate: 1.5, product: 50, tasks: 100, quota: 100 },
-    { deposit: 1500, rate: 2, product: 55, tasks: 110, quota: 100 },
-    { deposit: 5000, rate: 2.5, product: 60, tasks: 120, quota: 120 },
+    { deposit: "100-499", rate: 0.5, product: 40, tasks: 80, quota: 90 },
+    { deposit: "500-1599", rate: 1, product: 45, tasks: 90, quota: 90 },
+    { deposit: "1600-5499", rate: 1.5, product: 50, tasks: 100, quota: 100 },
+    { deposit: "5500-9999", rate: 2, product: 55, tasks: 110, quota: 100 },
+    { deposit: "10000", rate: 2.5, product: 60, tasks: 120, quota: 120 },
 ];
 
 const designFeatureGroups = computed(() => [

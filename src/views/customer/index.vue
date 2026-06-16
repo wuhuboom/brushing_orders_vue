@@ -8,10 +8,10 @@
 
         <main class="customer-body">
             <div class="customer-body__title">
-                Contact Customer Service Center
+                {{ $t("customer_service_center_title") }}
             </div>
             <div class="customer-body__subtitle">
-                We provide professional support anytime
+                {{ $t("customer_service_center_subtitle") }}
             </div>
 
             <div class="service-card-list">
@@ -24,17 +24,16 @@
                     <img class="service-card__image" :src="item.icon" alt="" />
 
                     <div class="service-card__title">
-                        {{ item.displayName }}
+                        {{ item.displayName || item.name }}
                     </div>
 
                     <div class="service-card__desc">
-                        Solve problems in real-time with customer service
-                        representatives
+                        {{ $t("customer_service_card_desc") }}
                     </div>
 
                     <div class="service-card__footer">
                         <button class="service-card__button" type="button">
-                            Consult Now
+                            {{ $t("customer_service_consult_now") }}
                             <van-icon name="arrow" />
                         </button>
                     </div>
@@ -97,7 +96,7 @@
                         </div>
                         <div>
                             <div class="customer-card__title">
-                                {{ item.name }}
+                                {{ getCustomerDisplayName(item, index) }}
                             </div>
                             <div class="customer-card__desc">
                                 {{ $t("customer.str4") }}
@@ -280,13 +279,22 @@ const workTimeText = computed(() => {
     return `${start} - ${end}`;
 });
 
+const getCustomerDisplayName = (item, index = 0) => {
+    if (index === 0) {
+        return t("online_customer_service");
+    }
+
+    if (index === 1) {
+        return t("telegram_customer_service");
+    }
+
+    return item?.name || "";
+};
+
 const serviceCards = computed(() =>
     (customerList.value || []).map((item, index) => ({
         ...item,
-        displayName:
-            index === 0
-                ? "Online Customer Service"
-                : "Telegram Customer Service",
+        displayName: getCustomerDisplayName(item, index),
         icon: index === 0 ? serviceOnlineIcon : serviceTelegramIcon,
     })),
 );

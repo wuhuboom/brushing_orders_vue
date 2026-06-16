@@ -1412,5 +1412,11 @@
   "orders": "Orders",
   "copyright_2025_algofy_company": "Copyright (c) 2025 ALGOFY Company.",
   "skye.stellar_visual_alt": "Stellar and Algofy performance partner visual",
-  "skye.clutch_logo_alt": "Clutch logo"
+  "skye.clutch_logo_alt": "Clutch logo",
+  "customer_service_center_title": "Centro de atención al cliente",
+  "customer_service_center_subtitle": "Ofrecemos soporte profesional en todo momento",
+  "customer_service_card_desc": "Resuelve problemas en tiempo real con representantes de atención al cliente",
+  "customer_service_consult_now": "Consultar ahora",
+  "online_customer_service": "Atención al cliente en línea",
+  "telegram_customer_service": "Atención al cliente por Telegram"
 }
