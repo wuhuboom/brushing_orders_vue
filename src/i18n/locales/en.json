@@ -628,27 +628,27 @@
           {
             "name": "Sign in",
             "days": "2working days",
-            "amount": "USD130"
+            "amount": "USD120"
           },
           {
             "name": "Sign in",
-            "days": "4working days",
-            "amount": "USD1,200"
+            "days": "5working days",
+            "amount": "USD1,300"
           },
           {
             "name": "Sign in",
-            "days": "7working days",
-            "amount": "USD1,500"
+            "days": "10working days",
+            "amount": "USD1,600"
           },
           {
             "name": "Sign in",
             "days": "15working days",
-            "amount": "USD1,800"
+            "amount": "USD1,900"
           },
           {
             "name": "Sign in",
             "days": "30working days",
-            "amount": "USD2,370"
+            "amount": "USD2,500"
           }
         ],
         "howTitle": "How It Works:",
@@ -1087,15 +1087,15 @@
   "guide_salary_scheme_subtitle": "Sign In . Show Up . Get Paid",
   "guide_salary_sign_in": "Sign in",
   "guide_salary_2_days": "2 working days",
-  "guide_salary_4_days": "4 working days",
-  "guide_salary_7_days": "7 working days",
+  "guide_salary_4_days": "5 working days",
+  "guide_salary_7_days": "10 working days",
   "guide_salary_15_days": "15 working days",
   "guide_salary_30_days": "30 working days",
-  "guide_salary_amount_130": "USD130",
-  "guide_salary_amount_1200": "USD1,200",
-  "guide_salary_amount_1500": "USD1,500",
-  "guide_salary_amount_1800": "USD1,800",
-  "guide_salary_amount_2370": "USD2,370",
+  "guide_salary_amount_130": "USD120",
+  "guide_salary_amount_1200": "USD1,300",
+  "guide_salary_amount_1500": "USD1,600",
+  "guide_salary_amount_1800": "USD1,900",
+  "guide_salary_amount_2370": "USD2,500",
   "guide_salary_how_title": "How It Works:",
   "guide_salary_how_text": "For monthly pay, sign in and maintain your profit, you can gain guaranteed income!",
   "guide_salary_earn_text": "The more you active up, the more you earn. Invite to Start!",
