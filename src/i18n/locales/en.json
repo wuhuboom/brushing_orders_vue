@@ -620,7 +620,7 @@
     {
       "title": "1) Basic Salary",
       "image": "",
-      "content": "<p>The company employs a cumulative sign-in mechanism as part of its salary distribution structure, designed to encourage users to complete their daily missions consistently. Although the basic salary amount is fixed, it is <strong>not</strong> paid as a lump sum. Instead, the salary is released after a designated number of working days, such as 2 days, 4 days, or 7 days, to encourage consistent daily mission completion. Once users complete the required number of working days, the company will pay them accordingly.</p>",
+      "content": "<p>The company employs a cumulative sign-in mechanism as part of its salary distribution structure, designed to encourage users to complete their daily missions consistently. Although the basic salary amount is fixed, it is <strong>not</strong> paid as a lump sum. Instead, the salary is released after a designated number of working days, such as 2 days, 5 days, or 10 days, to encourage consistent daily mission completion. Once users complete the required number of working days, the company will pay them accordingly.</p>",
       "salaryScheme": {
         "title": "Salary Scheme",
         "subtitle": "Sign In . Show Up . Get Paid",

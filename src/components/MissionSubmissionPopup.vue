@@ -86,11 +86,28 @@
                                 </div>
                             </div>
 
+                            <div
+                                v-if="showSubmitCountdown"
+                                class="mission-card__countdown"
+                            >
+                                <span
+                                    v-for="item in countdownSegmentCount"
+                                    :key="`desktop-countdown-${item}`"
+                                    class="mission-card__countdown-segment"
+                                    :style="getCountdownSegmentStyle(item)"
+                                >
+                                    <span
+                                        class="mission-card__countdown-segment-fill"
+                                    ></span>
+                                </span>
+                            </div>
+
                             <button
                                 type="button"
                                 class="mission-card__submit"
-                                :disabled="submitting"
-                                @click="emit('submit')"
+                                :class="{ 'mission-card__submit--countdown': !isSubmitCountdownReady && !submitting }"
+                                :disabled="submitting || !isSubmitCountdownReady"
+                                @click="handleSubmitClick"
                             >
                                 <span
                                     v-if="submitting"
@@ -191,11 +208,28 @@
                         </div>
                     </div>
 
+                    <div
+                        v-if="showSubmitCountdown"
+                        class="mission-card__countdown"
+                    >
+                        <span
+                            v-for="item in countdownSegmentCount"
+                            :key="`mobile-countdown-${item}`"
+                            class="mission-card__countdown-segment"
+                            :style="getCountdownSegmentStyle(item)"
+                        >
+                            <span
+                                class="mission-card__countdown-segment-fill"
+                            ></span>
+                        </span>
+                    </div>
+
                     <button
                         type="button"
                         class="mission-card__submit"
-                        :disabled="submitting"
-                        @click="emit('submit')"
+                        :class="{ 'mission-card__submit--countdown': !isSubmitCountdownReady && !submitting }"
+                        :disabled="submitting || !isSubmitCountdownReady"
+                        @click="handleSubmitClick"
                     >
                         <span
                             v-if="submitting"
@@ -274,6 +308,51 @@ const emit = defineEmits(["update:modelValue", "back", "submit"]);
 const popupContentRef = ref(null);
 const isPc = ref(false);
 let mediaQueryList = null;
+let submitCountdownTimer = null;
+
+const parseCountdownSeconds = (value) => {
+    const seconds = Number(value);
+    return Number.isFinite(seconds) && seconds > 0 ? seconds : 0;
+};
+
+const getSubmitCountdownSeconds = () => {
+    const envSeconds = import.meta.env.VITE_MISSION_SUBMIT_COUNTDOWN_SECONDS;
+    const runtimeSeconds = window.g?.VITE_MISSION_SUBMIT_COUNTDOWN_SECONDS;
+    const configValue = import.meta.env.DEV
+        ? envSeconds ?? runtimeSeconds
+        : runtimeSeconds ?? envSeconds;
+
+    return parseCountdownSeconds(configValue ?? 50);
+};
+
+const submitCountdownSeconds = ref(getSubmitCountdownSeconds());
+const countdownSegmentCount = 5;
+const submitCountdownStartedAt = ref(0);
+const submitCountdownProgress = ref(
+    submitCountdownSeconds.value > 0 ? 0 : 1,
+);
+const isSubmitCountdownReady = computed(
+    () =>
+        submitCountdownSeconds.value <= 0 || submitCountdownProgress.value >= 1,
+);
+const showSubmitCountdown = computed(() => submitCountdownSeconds.value > 0);
+
+function getCountdownSegmentStyle(item) {
+    if (!showSubmitCountdown.value) {
+        return { "--segment-green-width": "100%" };
+    }
+
+    const remainingSegments =
+        (1 - submitCountdownProgress.value) * countdownSegmentCount;
+    const segmentGreenRatio = Math.min(
+        1,
+        Math.max(0, remainingSegments - (item - 1)),
+    );
+
+    return {
+        "--segment-green-width": `${segmentGreenRatio * 100}%`,
+    };
+}
 
 const visible = computed({
     get: () => props.modelValue,
@@ -298,8 +377,59 @@ function handleOpened() {
     });
 }
 
+function clearSubmitCountdownTimer() {
+    if (!submitCountdownTimer) return;
+    clearInterval(submitCountdownTimer);
+    submitCountdownTimer = null;
+}
+
+function updateSubmitCountdownProgress() {
+    if (submitCountdownSeconds.value <= 0 || !submitCountdownStartedAt.value) {
+        submitCountdownProgress.value = 1;
+        clearSubmitCountdownTimer();
+        return;
+    }
+
+    const elapsedSeconds =
+        (Date.now() - submitCountdownStartedAt.value) / 1000;
+    submitCountdownProgress.value = Math.min(
+        1,
+        elapsedSeconds / submitCountdownSeconds.value,
+    );
+
+    if (submitCountdownProgress.value >= 1) {
+        clearSubmitCountdownTimer();
+    }
+}
+
+function startSubmitCountdown() {
+    clearSubmitCountdownTimer();
+
+    submitCountdownSeconds.value = getSubmitCountdownSeconds();
+
+    if (submitCountdownSeconds.value <= 0) {
+        submitCountdownStartedAt.value = 0;
+        submitCountdownProgress.value = 1;
+        return;
+    }
+
+    submitCountdownStartedAt.value = Date.now();
+    submitCountdownProgress.value = 0;
+    submitCountdownTimer = setInterval(updateSubmitCountdownProgress, 100);
+}
+
+function handleSubmitClick() {
+    if (!isSubmitCountdownReady.value || props.submitting) return;
+    emit("submit");
+}
+
 watch(visible, (isOpen) => {
-    if (!isOpen) return;
+    if (!isOpen) {
+        clearSubmitCountdownTimer();
+        return;
+    }
+
+    startSubmitCountdown();
 
     nextTick(() => {
         resetPopupScroll();
@@ -319,6 +449,8 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+    clearSubmitCountdownTimer();
+
     if (!mediaQueryList) return;
 
     if (typeof mediaQueryList.removeEventListener === "function") {
@@ -533,6 +665,33 @@ onUnmounted(() => {
     margin-top: 14px;
 }
 
+.mission-card__countdown {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    margin: 14px 0 12px;
+}
+
+.mission-card__countdown-segment {
+    position: relative;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.28);
+    overflow: hidden;
+}
+
+.mission-card__countdown-segment-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--segment-green-width, 100%);
+    border-radius: inherit;
+    background: #58c186;
+    transition: width 0.1s linear;
+}
+
 .mission-card__submit {
     position: relative;
     display: flex;
@@ -540,7 +699,7 @@ onUnmounted(() => {
     justify-content: center;
     width: 100%;
     height: 56px;
-    margin-top: 30px;
+    margin-top: 0;
     border: 0;
     border-radius: 14px;
     background: #3b48e8;
@@ -555,7 +714,12 @@ onUnmounted(() => {
 }
 
 .mission-card__submit:disabled {
-    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.mission-card__submit--countdown {
+    background: #7f8796;
+    color: rgba(255, 255, 255, 0.75);
 }
 
 .mission-card__submit-spinner {

@@ -62,7 +62,12 @@ export const userGetInfo = (params) =>
   getApi().get("/user/getInfo", { params, loading: false, showMsg: false });
 
 export const reqBeedPhone = (params) =>
-  getApi().get("/config/needPhone", { params, loading: false, showMsg: false });
+  getApi().get("/config/needPhone", {
+    params,
+    loading: false,
+    showMsg: false,
+    skipUnauthorizedRedirect: true,
+  });
 
 export const getCustomerService = (params) =>
   getApi().get("/config/getCustomerService", {

@@ -81,6 +81,10 @@ function isUnauthorizedResponse(data, status) {
   return Number(status) === 401 || Number(getResponseCode(data)) === 401;
 }
 
+function shouldSkipUnauthorizedRedirect(config = {}) {
+  return config.skipUnauthorizedRedirect === true;
+}
+
 function getResponseMessage(data, fallback = "") {
   return data?.message || data?.msg || fallback;
 }
@@ -178,7 +182,9 @@ export function initAPI() {
         const status = response.status;
 
         if (isUnauthorizedResponse(result, status)) {
-          handleUnauthorized();
+          if (!shouldSkipUnauthorizedRedirect(config)) {
+            handleUnauthorized();
+          }
           return Promise.reject(result || response);
         }
 
@@ -204,7 +210,9 @@ export function initAPI() {
         const status = response.status ?? error.status;
 
         if (isUnauthorizedResponse(result, status)) {
-          handleUnauthorized();
+          if (!shouldSkipUnauthorizedRedirect(config)) {
+            handleUnauthorized();
+          }
           return Promise.reject(result || error);
         }
 

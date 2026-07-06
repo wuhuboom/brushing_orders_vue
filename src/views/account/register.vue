@@ -124,11 +124,12 @@
                                     }}</span>
                                     <span>{{ $t("male") }}</span>
                                 </span>
-                                <span
+                                <van-icon
                                     v-if="ruleForm.sex === 1"
+                                    name="success"
                                     class="auth-gender-select__check"
-                                    >{{ $t("auto_ok") }}</span
-                                >
+                                    size="18"
+                                />
                             </button>
                             <button
                                 type="button"
@@ -145,11 +146,12 @@
                                     }}</span>
                                     <span>{{ $t("female") }}</span>
                                 </span>
-                                <span
+                                <van-icon
                                     v-if="ruleForm.sex === 2"
+                                    name="success"
                                     class="auth-gender-select__check"
-                                    >{{ $t("auto_ok") }}</span
-                                >
+                                    size="18"
+                                />
                             </button>
                         </div>
                     </div>
@@ -655,6 +657,14 @@ onMounted(() => {
     margin-top: 117px;
 }
 
+@media (max-width: 767px) {
+    .auth-shell--register .auth-hero {
+        left: 0;
+        width: 100%;
+        transform: none;
+    }
+}
+
 .auth-hero__image {
     width: 100%;
     height: 87px;
@@ -988,9 +998,10 @@ onMounted(() => {
 
 .auth-submit--disabled {
     pointer-events: none;
-    background: #3547e8;
+    background: #7f838c;
     box-shadow: none;
     color: #ffffff;
+    cursor: not-allowed;
 }
 
 .auth-footer {
