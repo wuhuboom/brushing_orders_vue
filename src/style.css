@@ -22,9 +22,10 @@
 }
 
 .el-input__wrapper {
-  box-shadow: 0 0 0 2px #3d3d3d !important;
+  box-shadow: 0 0 0 1px #e6e6e6 !important;
+  border-radius: 0!important;
+  background-color: #f9f9f9 !important;;
 }
-
 html {
   overflow: hidden;
 }
@@ -66,7 +67,8 @@ input {
 }
 
 .bg {
-  background-image: url(@/static/images/bg.jpg);
+  /* background-image: url(@/static/images/bg.jpg); */
+  background-color: #f8f8f8;
 }
 
 .bg-blue {
@@ -95,7 +97,7 @@ input {
 }
 
 .text-main-bg {
-  color: #007513;
+  color: #000;
 }
 
 .text-up {
@@ -116,10 +118,10 @@ input {
   background-color: var(--down) !important;
 }
 
-.el-input__wrapper {
+/* .el-input__wrapper {
   box-shadow: none !important;
 
-}
+} */
 .el-input__inner {
   font-weight: initial;
 }
@@ -134,3 +136,4 @@ input {
   height: 100%;
   overflow-y: auto;
 }
+
