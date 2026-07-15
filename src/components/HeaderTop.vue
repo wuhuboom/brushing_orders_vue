@@ -38,7 +38,7 @@ const toMy = ()=>{
 router.push({ path: "/my" });
 }
 const jump = () => {
-  router.replace('/')
+  router.replace('/home')
   
 }
 </script>

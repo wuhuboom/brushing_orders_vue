@@ -1,23 +1,48 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-white">
-    <div
-      class="w-full p-6 box-border flex flex-col font-montserrat text-[#666]"
-    >
+  <div class="w-full min-h-[100vh] bg-[#e6e6e6]" @scroll="handleScroll">
+    <van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
       <van-nav-bar
         :title="$t('员工等级')"
         fixed
         left-arrow
         @click-left="onClickLeft"
-      />
-      <div class="w-full mt-10 box-border flex flex-col">
-        <div class="w-full mb-4 p-4 rounded-lg bg-[#e8f7ec] flex items-center" v-for="item in levelList">
+      >
+    	<template #left>
+      	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
+        </template>
+      </van-nav-bar>
+    </van-sticky>
+    <HeaderTop></HeaderTop>
+    <van-nav-bar
+      class="pos"
+      :title="$t('员工等级')"
+      fixed
+      left-arrow
+      @click-left="onClickLeft"
+    >
+      <template #left>
+    	<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
+      </template>
+    </van-nav-bar>
+	<div
+      class="w-full p-6 box-border flex flex-col font-montserrat text-[#666]"
+    >
+     <!-- <van-nav-bar
+        :title="$t('员工等级')"
+        fixed
+        left-arrow
+        @click-left="onClickLeft"
+      /> -->
+	  
+      <div class="w-full  box-border flex flex-col">
+        <div class="w-full mb-4 p-4 rounded-lg bg-[#fff] flex items-center" v-for="item in levelList">
             <div class="flex mr-4 w-20">
                 <img :src="bgMapStart[item.nameEn]" alt="">
             </div>
             <div class="flex flex-col flex-1">
-                <div class="flex items-center">
+                <div class="flex justify-between">
                     <div class="text-base text-[#000] font-semibold mr-2">{{item.nameEn}}</div>
-                    <van-tag round type="primary" color="#007513" v-if="userStore.userInfo.levelId == item.id">{{$t('当前等级')}}</van-tag>
+                    <van-tag  type="primary" color="#007513" v-if="userStore.userInfo.levelId == item.id">{{$t('当前等级')}}</van-tag>
                      <div class="text-sm text-[var(--main-color)] font-semibold mr-2 underline" @click="toUpgrade" v-if="userStore.userInfo.levelId != item.id">{{$t('立即升级')}}</div>
                 </div>
                 <div class="mt-2 text-[var(--main-color)] text-sm font-semibold">
@@ -35,11 +60,13 @@
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { getLevel } from "../../api/apis";
+import HeaderTop from "@/components/HeaderTop.vue";
 import { useUserStore } from '../../store/modules/user';
 import { showToast } from 'vant';
 import { useI18n } from "vue-i18n";
 const userStore = useUserStore()
 const { t } = useI18n();
+const navBarShow = ref(false);
 const bgMapStart = {
   VIP1: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png',
   VIP2: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png',
@@ -68,6 +95,15 @@ onMounted(() => {
   console.log(userStore.userInfo)
 });
 const onClickLeft = () => history.back();
+function handleScroll(e) { 
+  const scrollTop = e.target.scrollTop
+  console.log(scrollTop)
+  if(scrollTop> 90){
+	  navBarShow.value = true
+  }else{
+	  navBarShow.value = false
+  }
+}
 </script>
 <style>
 .small-dot {

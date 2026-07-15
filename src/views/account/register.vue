@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-3">
-    <div class="flex flex-col items-center mt-5 pb-3">
+    <div class="flex flex-col items-center pb-1">
      <!-- <img
         src="@/static/images/account-lang.png"
         alt=""

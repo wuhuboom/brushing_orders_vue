@@ -15,7 +15,7 @@
       </div>
     </div> -->
 
-    <div class="flex flex-col items-center  mt-5 pb-3">
+    <div class="flex flex-col items-center  pb-1">
       <div class="text-2xl text-main-bg text-center py-6 pt-12">
 		  {{ $t("欢迎") }}
 	  </div>
@@ -209,7 +209,7 @@ const submitErr= () => {
 }
 
 const submitJump= () => {
-	router.push({ path: "/" });
+	router.push({ path: "/home" });
 	showSuccess.value = false;
 }
 

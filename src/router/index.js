@@ -12,11 +12,11 @@ const routes = Object.entries(modules).map(([path, component]) => {
     .replace('../views', '')
     .replace(/\.vue$/, '')
     .replace(/\/index$/, '') || '/'
-  
+  console.log(routePath)
   return {
     path: routePath,
     component,
-    name: routePath.split('/').filter(Boolean).join('-') || 'home'
+    name: routePath.split('/').filter(Boolean).join('-') || 'start'
   }
 }).filter(Boolean)  // 过滤掉null值
 console.log(routes, 'routes')
