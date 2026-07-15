@@ -1,7 +1,30 @@
 <template>
-  <div class="w-full h-[100vh] overflow-y-scroll bg-white flex flex-col pb-6">
-    <HeaderTop></HeaderTop>
-    <div class="w-full py-6">
+  <div class="w-full h-[100vh] overflow-y-scroll bg-white flex flex-col pb-6" @scroll="handleScroll">
+    <van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
+      <van-nav-bar
+        :title="$t('我的')"
+        fixed
+        left-arrow
+        @click-left="onClickLeft"
+      >
+		<template #left>
+	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
+	    </template>
+	  </van-nav-bar>
+    </van-sticky>
+	<HeaderTop></HeaderTop>
+	<van-nav-bar
+	  class="pos"
+	  :title="$t('我的')"
+	  fixed
+	  left-arrow
+	  @click-left="onClickLeft"
+	>
+	  <template #left>
+		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
+	  </template>
+	</van-nav-bar>
+    <div class="w-full py-3">
       <div class="w-[90%] mx-auto">
         <div class="w-[12rem] mx-auto relative" style="z-index: 19">
           <img
@@ -236,6 +259,7 @@ import { userGetInfo, checkTradePassword } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { showConfirmDialog } from "vant";
+import NavBar from "@/components/NavBar.vue";
 const langRef = ref(null);
 const { t } = useI18n();
 const ContactUsRef = ref(null);
@@ -252,6 +276,7 @@ const url = window.g.VITE_API_IMG_URL;
 const router = useRouter();
 const userInfo = ref({});
 const avatarUrl = ref("");
+const navBarShow = ref(false);
 
 const bgMapStart = [
   "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
@@ -305,6 +330,16 @@ function handleChangeLang() {
 const copy = (text) => {
 
 }
+const onClickLeft = () => history.back();
+function handleScroll(e) { 
+  const scrollTop = e.target.scrollTop
+  console.log(scrollTop)
+  if(scrollTop> 90){
+	  navBarShow.value = true
+  }else{
+	  navBarShow.value = false
+  }
+}
 onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
@@ -313,3 +348,9 @@ onMounted(() => {
   });
 });
 </script>
+
+<style scoped>
+/* .pos{
+	position: inherit !important;
+} */
+</style>

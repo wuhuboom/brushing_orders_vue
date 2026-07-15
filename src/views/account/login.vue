@@ -102,6 +102,43 @@
     </div>
     <Lang ref="langRef"></Lang>
     <ContactUs ref="ContactUsRef"></ContactUs>
+	<van-dialog v-model:show="showError" closeable :title="''" :show-confirm-button="false">
+	    <div class="text-center py-8 px-4">
+			<img class="w-[24%] lg:w-[300px] mx-auto pb-5" src="@/static/images/login/icon-1.png"/>
+			<div class="text-2xl font-semibold">
+				{{ $t("认证失败")}}
+			</div>
+			<div class="text-sm pb-8">
+				{{ $t("失败理由")}}
+			</div>
+			<div @click="submitErr()" class="w-[100%] px-[15%]" size="large" round>
+			  <div
+			    class="w-full text-white text-xl font-semibold mx-auto py-3 rounded flex items-center justify-center bg-black"
+			  >
+			    <div>{{ $t("再试一次") }}</div>
+			  </div>
+			</div>
+		</div>
+	</van-dialog>
+	
+	<van-dialog v-model:show="showSuccess" closeable :title="''" :show-confirm-button="false">
+	    <div class="text-center py-8 px-4">
+			<img class="w-[24%] lg:w-[300px] mx-auto pb-5" src="@/static/images/login/icon-2.png"/>
+			<div class="text-2xl font-semibold">
+				{{ $t("认证成功")}}
+			</div>
+			<div class="text-sm pb-8">
+				{{ $t("成功理由")}}
+			</div>
+			<div @click="submitJump()" class="w-[100%] px-[15%]" size="large" round>
+			  <div
+			    class="w-full text-white text-xl font-semibold mx-auto py-3 rounded flex items-center justify-center bg-black"
+			  >
+			    <div>{{ $t("继续") }}</div>
+			  </div>
+			</div>
+		</div>
+	</van-dialog>
   </div>
 </template>
 <script setup>
@@ -122,6 +159,11 @@ const ContactUsRef = ref(null);
 
 onMounted(() => {
   document.getElementById("app").style.background = "#fff";
+  checked.value = localStorage.getItem("checked")=='false'? false:true
+  if(checked.value){
+	  ruleForm.username = localStorage.getItem('username')
+	  ruleForm.password = localStorage.getItem('password')
+  }
 });
 
 onUnmounted(() => {
@@ -134,6 +176,8 @@ const ruleFormRef = ref(null);
 const checked = ref(true);
 const userStore = useUserStore();
 const langRef = ref(null);
+const showError = ref(false);
+const showSuccess = ref(false);
 const ruleForm = reactive({
   email: "",
   password: "",
@@ -153,11 +197,29 @@ function toRegister() {
   router.push({ path: "/account/register" });
 }
 
+const submit = (item) => {
+    goodsData.value = item;
+    show.value = true
+}
+
+const submitErr= () => {
+	ruleForm.username = '';
+	ruleForm.password = '';
+	showError.value = false;
+}
+
+const submitJump= () => {
+	router.push({ path: "/" });
+	showSuccess.value = false;
+}
+
 function submitForm(formEl) {
   // if (!ruleForm.email) return accountType.value === 1 ? ElMessage.error(t("请输入邮箱")) : ElMessage.error(t("请输入手机号"));
   // 统一清除空格
   if (!ruleForm.username) return showToast(t('请输入用户名/电话'));
   if (!ruleForm.password) return showToast(t('请输入密码'));
+  
+  
   formEl.validate((valid) => {
     if (valid) {
       let data = {
@@ -165,12 +227,30 @@ function submitForm(formEl) {
         password: ruleForm.password,
       };
       login(data).then((res) => {
-        userStore.setToken(`Bearer ${res.data.token}`);
-        userStore.setUserInfo(res.data.info);
-        // setUserRemind();
-        router.push({ path: "/" });
+		let info = {
+			name: ruleForm.username
+		}
+		if(checked.value){
+			localStorage.setItem('checked', true)
+			localStorage.setItem('username', ruleForm.username)
+			localStorage.setItem('password', ruleForm.password)
+		}else{
+			localStorage.setItem('checked', false)
+			localStorage.setItem('username', '')
+			localStorage.setItem('password', '')
+		}
+		if(res.code == 200){
+			userStore.setToken(`Bearer ${res.data.token}`);
+			userStore.setUserInfo(res.data.info);
+			showSuccess.value = true
+		}else{
+			showError.value = true
+		}
+		  
+        // userStore.setToken(`Bearer ${res.data.token}`);
+        // userStore.setUserInfo(res.data.info);
+        // router.push({ path: "/" });
       });
-      //   if (this)
     } else {
       console.log("error submit!");
     }
@@ -216,9 +296,12 @@ const customer = () => {
 :deep(.el-form-item__label){
 	padding: 0 0;
 }
+:deep(.van-popup__close-icon--top-right) {
+  display: none !important;
+}
 .panel{
 	background-color: #fff;
-	margin: 60px 0px 20px 0;
+	margin: 60px 0px 0px 0;
 	width: 100%;
 	padding: 20px;
 }

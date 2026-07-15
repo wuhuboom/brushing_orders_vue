@@ -127,7 +127,9 @@ input {
 }
 
 .van-nav-bar .van-icon,.van-nav-bar__title{
-  color: #007513 !important;
+  color: #000 !important;
+  font-size: 18px !important;
+  font-weight: bold;
 }
 .van-cell,.van-cell-group {
   background: transparent !important;
@@ -137,3 +139,7 @@ input {
   overflow-y: auto;
 }
 
+.pos{
+	position: inherit !important;
+	margin-top: 10px !important;
+}

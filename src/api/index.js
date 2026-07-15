@@ -70,7 +70,9 @@ api.interceptors.response.use(
       }else if (result.code == 401) {
         useUserStore().logout();
         return Promise.reject(result);
-      } else {
+      }else if (result.code == 601 || result.code == 602) {
+        return result;
+      }  else {
         console.log(config.showMsg)
         if (config.showMsg) ElMessage({ message: i18n.global.t(errorMessages[result.code])|| result.msg , type: "error" });
         return Promise.reject(result);

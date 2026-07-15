@@ -1,7 +1,7 @@
 <template>
     <div class="w-full relative z-50">
         <div class="h-[65px]"></div> <!-- 占位 -->
-        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[65px] w-full bg-[#007513] " style="bottom: -1px;">
+        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[65px] w-full bg-[#000] " style="bottom: -1px;">
             <div v-for="menu in menus" :key="menu.title"
                 class="flex-1 flex flex-col items-center text-xs gap-1 font-light"  @click="onClickMenu(menu)">
                 <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}.png`)"

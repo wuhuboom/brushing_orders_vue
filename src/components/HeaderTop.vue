@@ -1,7 +1,7 @@
 <template>
     <van-sticky type="primary">
       <div
-        class="w-full flex justify-between shadow-md items-center p-2 py-4 box-border bg-white"
+        class="w-full flex justify-between shadow-md items-center p-2 py-4 box-border bg-black"
       >
         <div class="w-[var(--header-logo-width)]" @click="jump">
           <img class="w-full" src="@/static/images/logo.png" alt="" />
@@ -9,7 +9,7 @@
         <div class="flex justify-start items-center">
           <div
           @click="customer"
-            class="text-white bg-[var(--main-color)] mr-2 text-xs px-3 py-1 rounded-full"
+            class="text-black font-semibold bg-white mr-2 text-xs px-3 py-1 rounded-full"
           >
             {{ $t("联系") }}
           </div>
@@ -42,3 +42,8 @@ const jump = () => {
   
 }
 </script>
+<style scoped>
+:deep(.van-sticky--fixed){
+	position: inherit !important;
+}
+</style>

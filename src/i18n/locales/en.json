@@ -118,7 +118,7 @@
   "其他": "Other",
   "客服": "Customer",
   "联系":"CONTACT",
-  "开始": "Starting",
+  "开始": "Get Starting",
   "记录": "Records",
   "首页": "Home",
   "查看更多": "View more",
@@ -200,5 +200,12 @@
   "用户余额不足（联系管理员，常用于冻结金额不足）": "Insufficient user balance (contact administrator, often due to insufficient frozen funds)",
   
   "欢迎": "Welcome to",
-  "记住密码": "Remember Password"
+  "记住密码": "Remember Password",
+  "认证失败": "Wrong credentials",
+  "失败理由": "please try again, Invalid Username or password",
+  "认证成功": "Success!",
+  "成功理由": "Your account has been successfully created. please log in with your credentials to get started!",
+  "再试一次": "Try again!",
+  "继续": "Continue",
+  "我的": "My Profile"
 }

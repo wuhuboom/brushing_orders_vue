@@ -258,7 +258,7 @@ const jump = () =>{
 }
 .panel{
 	background-color: #fff;
-	margin: 60px 0px 20px 0;
+	margin: 60px 0px 0px 0;
 	width: 100%;
 	padding: 20px;
 }
