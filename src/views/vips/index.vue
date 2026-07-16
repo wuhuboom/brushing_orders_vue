@@ -42,10 +42,10 @@
             <div class="flex flex-col flex-1">
                 <div class="flex justify-between">
                     <div class="text-base text-[#000] font-semibold mr-2">{{item.nameEn}}</div>
-                    <van-tag  type="primary" color="#007513" v-if="userStore.userInfo.levelId == item.id">{{$t('当前等级')}}</van-tag>
-                     <div class="text-sm text-[var(--main-color)] font-semibold mr-2 underline" @click="toUpgrade" v-if="userStore.userInfo.levelId != item.id">{{$t('立即升级')}}</div>
+                    <van-tag  type="primary" color="#000" v-if="userStore.userInfo.levelId == item.id">{{$t('当前等级')}}</van-tag>
+                     <div class="text-sm text-black font-semibold mr-2 underline" @click="toUpgrade" v-if="userStore.userInfo.levelId != item.id">{{$t('立即升级')}}</div>
                 </div>
-                <div class="mt-2 text-[var(--main-color)] text-sm font-semibold">
+                <div class="mt-2 text-black text-sm font-semibold">
                     {{item.price}}{{$t('美元')}}
                 </div>
                 <div class="mt-2 text-xs text-[#000] font-light" v-html="item.descriptionEn">
