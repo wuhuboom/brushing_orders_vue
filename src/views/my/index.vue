@@ -29,7 +29,7 @@
         <div class="w-[12rem] mx-auto relative" style="z-index: 19">
           <img
             :src="userInfo.avatar ==null?userImg:userInfo.avatar"
-            class="w-[6rem] h-[6rem] mx-auto rounded-full"
+            class="w-[6rem] h-[6rem] mx-auto rounded-full border-[2px] border-[#000]"
             alt=""
           />
         </div>

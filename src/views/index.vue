@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-3">
  
-    <div class="flex flex-col items-center  pb-1 mt-[10vh]">
+    <div class="flex flex-col items-center  pb-1 py-5">
 	  <img
         src="@/static/images/login_logo.png"
         alt=""
-        class="w-[40%] lg:w-[300px] "
+        class="w-[40%] lg:w-[300px] mt-10 pt-20"
       />
-	  <div class="text-2xl text-main-bg text-center py-6 pt-16">
+	  <div class="text-2xl text-main-bg text-center py-6 pt-24">
 	  		  {{ $t("企业名") }}
 	  </div>
 	  <div class="text-sm pb-8">
@@ -16,17 +16,17 @@
 	  
 	  
     </div>
-	<div class="fixed bottom-4 left-0 right-0 py-8 w-[90%] ml-[5%]">
+	<div class=" py-6 w-[90%] ml-[5%]">
 			  <div @click="toRegister()" class="w-full" size="large" round>
 			    <div
-			      class="w-full text-white text-2xl font-semibold mx-auto py-5 rounded-lg flex items-center justify-center bg-black"
+			      class="w-full text-white text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-black"
 			    >
 			      <div>{{ $t("创建账户") }}</div>
 			    </div>
 			  </div>
 			  <div @click="toLogin()" class="w-full" size="large" round>
 			    <div
-			      class="w-full text-black text-2xl font-semibold mx-auto py-5 rounded-lg flex items-center justify-center my-4 bg-white border border-[#000]"
+			      class="w-full text-black text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center my-4 bg-white border border-[#000]"
 			    >
 			      <div>{{ $t("登录") }}</div>
 			    </div>
