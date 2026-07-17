@@ -12,7 +12,6 @@ const routes = Object.entries(modules).map(([path, component]) => {
     .replace('../views', '')
     .replace(/\.vue$/, '')
     .replace(/\/index$/, '') || '/'
-  console.log(routePath)
   return {
     path: routePath,
     component,

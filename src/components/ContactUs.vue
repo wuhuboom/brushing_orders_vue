@@ -4,7 +4,7 @@
     v-model:show="showCenter"
     :showConfirmButton="false"
     show-cancel-button
-    cancelButtonColor="#005713"
+    cancelButtonColor="#000"
   >
     <div class="flex flex-col rounded-xl overflow-hidden bg-white">
       <div

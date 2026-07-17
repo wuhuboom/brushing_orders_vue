@@ -17,20 +17,20 @@
 	  
     </div>
 	<div class=" py-6 w-[90%] ml-[5%]">
-			  <div @click="toRegister()" class="w-full" size="large" round>
-			    <div
-			      class="w-full text-white text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-black"
-			    >
-			      <div>{{ $t("创建账户") }}</div>
-			    </div>
-			  </div>
-			  <div @click="toLogin()" class="w-full" size="large" round>
-			    <div
-			      class="w-full text-black text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center my-4 bg-white border border-[#000]"
-			    >
-			      <div>{{ $t("登录") }}</div>
-			    </div>
-			  </div>
+	  <div @click="toRegister()" class="w-full" size="large" round>
+	    <div
+	      class="w-full text-white text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-black"
+	    >
+	      <div>{{ $t("创建账户") }}</div>
+	    </div>
+	  </div>
+	  <div @click="toLogin()" class="w-full" size="large" round>
+	    <div
+	      class="w-full text-black text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center my-4 bg-white border border-[#000]"
+	    >
+	      <div>{{ $t("登录") }}</div>
+	    </div>
+	  </div>		  
 	</div>
   </div>
 </template>

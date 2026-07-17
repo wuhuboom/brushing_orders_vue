@@ -1,14 +1,30 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-white">
-    <van-sticky type="primary">
-      <van-nav-bar
-        :title="$t('修改信息')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
-      />
-    </van-sticky>
-    <div class="w-full pl-6 pr-6 mt-6 box-border flex flex-col">
+  <div class="container w-full min-h-[100vh] bg-[#ecf7ff]" @scroll="handleScroll">
+	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
+	  <van-nav-bar
+	    :title="$t('修改信息')"
+	    fixed
+	    left-arrow
+	    @click-left="onClickLeft"
+	  >
+		<template #left>
+	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
+	    </template>
+	  </van-nav-bar>
+	</van-sticky>
+	<HeaderTop></HeaderTop>
+	<van-nav-bar
+	  class="pos"
+	  :title="$t('修改信息')"
+	  fixed
+	  left-arrow
+	  @click-left="onClickLeft"
+	>
+	  <template #left>
+		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
+	  </template>
+	</van-nav-bar>
+    <div class="w-full pl-6 pr-6 mt-4 box-border flex flex-col">
       <div class="w-full flex flex-col">
         <div class="w-full flex flex-col items-center justify-center mt-20">
           <van-uploader v-model="fileList" :after-read="afterRead" reupload max-count="1" />
@@ -18,7 +34,7 @@
           </div>
 
            <div class="w-full mt-4">
-                <van-button color="#007513" class="w-full" @click="updateAvatarMethods">{{$t('更新')}}</van-button>
+                <van-button color="#000" class="w-full" @click="updateAvatarMethods">{{$t('更新')}}</van-button>
             </div>
         </div>
       </div>
@@ -39,6 +55,7 @@ const { t } = useI18n();
 const userInfo = ref({})
 const fileList = ref([]);
 const avatarUrl = ref('')
+const navBarShow = ref(false);
 
 const afterRead = async (file) => {
   try {
@@ -76,4 +93,12 @@ onMounted(() => {
     console.log(fileList.value)
   });
 });
+function handleScroll(e) { 
+  const scrollTop = e.target.scrollTop
+  if(scrollTop> 90){
+	  navBarShow.value = true
+  }else{
+	  navBarShow.value = false
+  }
+}
 </script>

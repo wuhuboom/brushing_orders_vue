@@ -31,7 +31,8 @@ import ContactUs from "@/components/ContactUs.vue";
 const ContactUsRef = ref(null);
 
 const customer = () => {
-  ContactUsRef.value.open();
+  // ContactUsRef.value.open();
+  router.push({ path: "/contact" });
 };
 const router = useRouter();
 const toMy = ()=>{

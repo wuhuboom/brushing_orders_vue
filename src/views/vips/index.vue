@@ -97,7 +97,6 @@ onMounted(() => {
 const onClickLeft = () => history.back();
 function handleScroll(e) { 
   const scrollTop = e.target.scrollTop
-  console.log(scrollTop)
   if(scrollTop> 90){
 	  navBarShow.value = true
   }else{

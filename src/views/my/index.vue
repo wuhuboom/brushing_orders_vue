@@ -205,7 +205,7 @@
       <div class="flex flex-col rounded-xl bg-[#fff]">
 		<div
 		  class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5"
-		  @click="customer"
+		  @click="toPage('/contact')"
 		>
 		  <div class=" w-full flex items-center justify-between">
 		    <div class="flex items-center justify-between">
@@ -233,7 +233,7 @@
 		</div>
 		<div
 		  class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5 mt-2"
-		  @click="handleChangeLang"
+		  @click="toPage('/lang')"
 		>
 		  <div class=" w-full flex items-center justify-between">
 		    <div class="flex items-center justify-between">
@@ -248,7 +248,7 @@
 		
 		<div
 		  class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5 mt-2"
-		  @click="logout"
+		  @click="toPage('/account/logout')"
 		>
 		  <div class=" w-full flex items-center justify-between">
 		    <div class="flex items-center justify-between">
@@ -371,7 +371,6 @@ const copy = (text) => {
 const onClickLeft = () => history.back();
 function handleScroll(e) { 
   const scrollTop = e.target.scrollTop
-  console.log(scrollTop)
   if(scrollTop> 90){
 	  navBarShow.value = true
   }else{

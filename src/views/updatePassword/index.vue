@@ -1,55 +1,108 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-white">
-    <van-sticky type="primary">
-      <van-nav-bar
-        :title="$t('更新密码')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
-      />
-    </van-sticky>
+  <div class="container w-full min-h-[100vh] bg-[#ecf7ff]" @scroll="handleScroll">
+	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
+	  <van-nav-bar
+	    :title="$t('更新密码')"
+	    fixed
+	    left-arrow
+	    @click-left="onClickLeft"
+	  >
+		<template #left>
+	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
+	    </template>
+	  </van-nav-bar>
+	</van-sticky>
+	<HeaderTop></HeaderTop>
+	<van-nav-bar
+	  class="pos"
+	  :title="$t('更新密码')"
+	  fixed
+	  left-arrow
+	  @click-left="onClickLeft"
+	>
+	  <template #left>
+		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
+	  </template>
+	</van-nav-bar>
     <div class="w-full pl-6 mt-6 pr-6 box-border flex flex-col">
-      <div class="w-full mt-12 flex flex-col">
-        <div class="w-full overflow-hidden bg-[#e8f7ec] py-2">
+	  <div class="font-bold text-base text-black py-3">
+	    {{ $t("登陆密码") }}  
+	  </div>
+      <div class="w-full mt-2 flex flex-col">
+        <div class="w-full overflow-hidden bg-[#f9f9f9]  border-[1px] border-[#e6e6e6] py-1 pt-4">
+		  <div class="ml-7.5 font-bold text-base">
+			 {{$t('旧密码') }}
+		  </div>
           <van-cell-group inset>
             <van-field
-              label-width="150"
-              type="password"
+			  :type="isPwd1 ? 'password' : 'text'"
               v-model="ruleForm.oldPassword"
-              :label="$t('旧密码')"
               :placeholder="$t('旧密码')"
-              input-align="right"
-            />
+            >
+			  <template #right-icon>
+			      <van-icon
+				    size = "28px"
+			        :name="isPwd1 ? 'eye' : 'eye-o'"
+			        @click="isPwd1 = !isPwd1"
+			      />
+			  </template>
+			</van-field>
           </van-cell-group>
         </div>
-        <div class="w-full mt-2 overflow-hidden bg-[#e8f7ec] py-2">
-          <van-cell-group inset>
+        <div class="w-full mt-4 overflow-hidden bg-[#f9f9f9] border-[1px] border-[#e6e6e6] py-1 pt-4">
+          <div class="ml-7.5 font-bold text-base">
+            {{$t('新密码') }}
+          </div>
+		  <van-cell-group inset>
             <van-field
-              label-width="150"
               v-model="ruleForm.newPassword"
-              :label="$t('新密码')"
-              type="password"
+			  :type="isPwd2 ? 'password' : 'text'"
               :placeholder="$t('新密码')"
-              input-align="right"
-            />
+            >
+              <template #right-icon>
+                  <van-icon
+				    size = "28px"
+                    :name="isPwd2 ? 'eye' : 'eye-o'"
+                    @click="isPwd2 = !isPwd2"
+                  />
+              </template>
+            </van-field>
           </van-cell-group>
         </div>
-        <div class="w-full mt-2 overflow-hidden bg-[#e8f7ec] py-2">
-          <van-cell-group inset>
+        <div class="w-full mt-4 overflow-hidden bg-[#f9f9f9] border-[1px] border-[#e6e6e6] py-1 pt-4">
+          <div class="ml-7.5 font-bold text-base">
+          	{{$t('确认密码') }}
+          </div>
+		  <van-cell-group inset>
             <van-field
-              label-width="150"
               v-model="agentNewPassword"
-              :label="$t('确认密码')"
-              type="password"
+			  :type="isPwd3 ? 'password' : 'text'"
               :placeholder="$t('确认密码')"
-              input-align="right"
-            />
+            >
+              <template #right-icon>
+                  <van-icon
+				    size = "28px"
+                    :name="isPwd3 ? 'eye' : 'eye-o'"
+                    @click="isPwd3 = !isPwd3"
+                  />
+              </template>
+            </van-field>
           </van-cell-group>
         </div>
       </div>
-      <div class="w-full mt-4">
-        <van-button color="#007513" class="w-full" @click="submitForm">{{ $t("更新") }}</van-button>
-      </div>
+	  <div class="text-xs text-[#4b4c5a] mt-1">
+		{{ $t("修改密码说明") }}  
+	  </div>
+      <div class="w-full mt-6">
+        <!-- <van-button color="#000" class="w-full py-6 text-xl" @click="submitForm">{{ $t("更新") }}</van-button> -->
+        <div @click="submitForm()" class="w-full" size="large" round>
+          <div
+            class="w-full text-white text-xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center my-4 bg-black border border-[#000]"
+          >
+            <div>{{ $t("更新") }}</div>
+          </div>
+        </div>
+	  </div>
     </div>
   </div>
 </template>
@@ -63,6 +116,10 @@ const router = useRouter();
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 const agentNewPassword = ref('');
+const navBarShow = ref(false);
+const isPwd1 = ref(true)
+const isPwd2 = ref(true)
+const isPwd3 = ref(true)
 const ruleForm = reactive({
   oldPassword: "",
   newPassword: "",
@@ -81,4 +138,12 @@ const submitForm = async () => {
   showSuccessToast(t("修改成功"));
   router.push({ path: "/profileItem" });
 };
+function handleScroll(e) { 
+  const scrollTop = e.target.scrollTop
+  if(scrollTop> 90){
+	  navBarShow.value = true
+  }else{
+	  navBarShow.value = false
+  }
+}
 </script>
