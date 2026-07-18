@@ -18,7 +18,7 @@ const routes = Object.entries(modules).map(([path, component]) => {
     name: routePath.split('/').filter(Boolean).join('-') || 'start'
   }
 }).filter(Boolean)  // 过滤掉null值
-console.log(routes, 'routes')
+// console.log(routes, 'routes')
 
 const router = createRouter({
   history: createWebHashHistory(),

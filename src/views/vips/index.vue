@@ -37,7 +37,8 @@
       <div class="w-full  box-border flex flex-col">
         <div class="w-full mb-4 p-4 rounded-lg bg-[#fff] flex items-center" v-for="item in levelList">
             <div class="flex mr-4 w-20">
-                <img :src="bgMapStart[item.nameEn]" alt="">
+                <!-- <img :src="bgMapStart[item.nameEn]" alt=""> -->
+                <img :src="url + item.icon" alt="">
             </div>
             <div class="flex flex-col flex-1">
                 <div class="flex justify-between">
@@ -75,6 +76,8 @@ const bgMapStart = {
   VIP5: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png',
 };
 const levelList = ref([]);
+
+const url = window.g.VITE_API_IMG_URL;
 const level = async () => {
   let res = await getLevel();
   levelList.value = res.data;

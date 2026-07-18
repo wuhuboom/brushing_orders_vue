@@ -42,7 +42,8 @@
           style="background: #1d6cfd"
         >
           <div class="text-black text-center absolute top-5 right-5">
-            <img :src="bgMapStart[userInfo.levelId-1]" class="w-12" alt="" />
+            <!-- <img :src="bgMapStart[userInfo.levelId-1]" class="w-12" alt="" /> -->
+            <img :src="url + userInfo.userLevel.icon" class="w-12" alt="" />
             <p class="text-[#000] text-sm font-semibold">
               VIP{{ userInfo.levelId }}
             </p>

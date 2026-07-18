@@ -1,10 +1,10 @@
 <template>
   <div>
     <HeaderTop></HeaderTop>
-    <div class="w-full bg-[#f8f8f8] relative">
-      <div class="w-full h-full py-5">
+    <div class="w-full bg-[#fff4f3] relative">
+      <div class="w-full h-full pt-5">
         <div
-          class="flex w-[90%] mx-auto justify-between mt-4 mb-4 items-center"
+          class="flex w-[90%] mx-auto justify-between mt-4 items-center"
         >
           <div class="flex">
             <img
@@ -12,165 +12,144 @@
               src="@/static/images/user2.png"
               alt=""
             />
-            <div class="flex items-center pl-2">
-              <div class="text-black font-semibold">
-                Hi, {{ userInfo.username }}
+            <div class=" pl-2">
+              <div class="text-black text-base font-semibold">
+                Hi, 
               </div>
+			  <div class="text-black text-xl font-bold">
+			    {{ userInfo.username }}
+			  </div>
             </div>
           </div>
-          <div class="text-black font-semibold">VIP{{ userInfo.levelId }}</div>
+		  <div class="text-black text-center flex justify-between items-end top-5 right-5">
+		    <p class="text-[#000] text-xl font-semibold">
+		      VIP{{ userInfo.levelId }}
+		    </p>
+			<img :src="avatarUrl" class="w-12" alt="" />
+		  </div>
         </div>
       </div>
-      <div class="w-[100%] px-4 mx-auto">
-        <div class="grid grid-cols-1 gap-3">
-          <div
-            class="w-full col-span-1 flex p-3 box-border rounded-xl bg-[#fff] border-[1px] border-[#EDEDEE]"
-          >
-            <div class="w-full flex justify-between">
-              <div class="flex items-center">
-                <img
-                  class="w-10 h-10 mr-3"
-                  src="@/static/images/icon-21.png"
-                  alt=""
-                />
-                <div class="flex flex-col justify-around">
-                  <div class="text-[#000] text-sm font-bold mb-1">
-                    {{ $t("钱包余额") }}
-                  </div>
-                  <div class="text-[#999] text-[10px]">
-                    {{ $t("佣金将在此处添加") }}
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[var(--main-color)] font-bold mb-1">
-                  {{ userInfo.balance }}
-                </div>
-                <div class="text-[#999] text-xs">USD</div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="w-full col-span-1 flex p-3 box-border rounded-xl bg-[#fff] border-[1px] border-[#EDEDEE]"
-          >
-            <div class="w-full flex justify-between">
-              <div class="flex items-center">
-                <img
-                  class="w-10 h-10 mr-3"
-                  src="@/static/images/icon-22.png"
-                  alt=""
-                />
-                <div class="flex flex-col justify-around">
-                  <div class="text-[#000] text-sm font-bold mb-1">
-                    {{ $t("持有金额") }}
-                  </div>
-                  <div class="text-[#999] text-[10px]">
-                    {{ $t("如有疑问，请联系客服") }}
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[var(--main-color)] font-bold mb-1">
-                  {{ userInfo.frozenBalance }}
-                </div>
-                <div class="text-[#999] text-xs">USD</div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="w-full col-span-1 flex p-3 box-border rounded-xl bg-[#fff] border-[1px] border-[#EDEDEE]"
-          >
-            <div class="w-full flex justify-between">
-              <div class="flex items-center">
-                <img
-                  class="w-10 h-10 mr-3"
-                  src="@/static/images/icon-20.png"
-                  alt=""
-                />
-                <div class="flex flex-col justify-around">
-                  <div class="text-[#000] text-sm font-bold mb-1">
-                    {{ $t("当日佣金") }}
-                  </div>
-                  <div class="text-[#999] text-[10px]">
-                    {{ $t("每日赚取佣金") }}
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-col justify-end text-right">
-                <div class="text-sm text-[var(--main-color)] font-bold mb-1">
-                  {{ userInfo.commission }}
-                </div>
-                <div class="text-[#999] text-xs">USD</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="mt-5 flex justify-between text-black font-bold text-base">
-          <div>Start Optimization</div>
-          <div>
-            <span class="text-[var(--main-color)]">{{ userInfo.dealCount }}</span>/<span>{{orderCount}}</span>
-          </div>
-        </div>
-        <div class="mt-5 flex flex-col p-4 box-border bg-[#f1f1f1] rounded-xl">
-          <div class="mt-5 flex flex-col box-border bg-[#f1f1f1] rounded-xl">
-            <div class="w-full grid grid-cols-3 gap-6">
-              <template v-for="(item, index) in totalCount" :key="index">
-                <div
-                  v-if="index === 4"
-                  class="grid-span-1 text-center text-xs font-normal"
-                  @click="handleClick"
-                >
-                  <div
-                    class="flex items-center justify-center overflow-hidden rounded-xl bg-cover text-lg text-white font-medium relative"
-                  >
-                    <div class="overflow-hidden">
-                      <img
-                        src="@/static/images/start-button.png"
-                        class="w-[100%] shadow"
-                        alt=""
-                      />
-                      <div class="absolute"></div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                v-else
-                  class="grid-span-1 text-[#666666] text-center text-xs font-normal"
-                >
-                  <div
-                    class="p-2 overflow-hidden"
-                    style="
-                      background-image: radial-gradient(
-                        circle at 100% 0%,
-                        rgb(247, 247, 247) 0%,
-                        rgb(252, 252, 252) 106%
-                      );
-                      border-radius: 8px;
-                    "
-                  >
-                    <div class="overflow-hidden">
-                      <!-- <img
-                        :src="`${url}${getImageByIndex(index)}`"
-                        class="w-[100px] h-[100px] lg:w-[296px] lg:h-[296px]"
-                        alt=""
-                      /> -->
-                      <van-image
-                        fit="contain"
-                        :src="`${url}${getImageByIndex(index)}`"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </template>
-            </div>
-          </div>
-        </div>
+      <div class="w-[100%] px-2 mx-auto">
+		<div class="page mx-auto p-2">
+		  <!-- 轮播可视容器 -->
+		  <div
+		    class="carousel-wrap"
+		    @touchstart="onTouchStart"
+		    @touchmove="onTouchMove"
+		    @touchend="onTouchEnd"
+		  >
+		    <div
+		      class="card-box"
+		      :style="{
+		        transform: `translateX(${translateX + dragX}px)`,
+		        transition: dragging ? 'none' : 'transform 0.3s ease-out'
+		      }"
+		    >
+		      <!-- 渲染5张卡片，保证前后永远有可露出项 -->
+		      <div
+		        class="card-item"
+		        v-for="(item, idx) in goodsList"
+		        :key="idx"
+		        :class="{active: idx === current}"
+		      >
+		        <div class="card">
+		          <div class="product-card">
+		            <div class="img-box">
+		              <img :src="url + item.coverUrl" alt="" />
+		            </div>
+		            <div v-if="idx == current">
+						<p class="title text-[#000] text-sm font-semibold whitespace-nowrap  text-ellipsis overflow-hidden">{{ item.name }}</p>
+						<div class="">
+						    <div class="">
+						        <van-icon name="star" color="#f99d25"></van-icon>
+							  4.9
+						    </div>
+						</div>
+						<p class="price text-xl">
+						  <span class="text-base mr-2">
+							{{ $t("当前价格") }}
+						  </span>
+						  <span class="text-xl font-bold mr-2">
+						  	{{ item.price }}
+						  </span>
+						  <span class="text-sm">
+						  	{{ $t("美元") }}
+						  </span>
+						</p>
+					</div>
+		          </div> 	
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		
+		</div>  
+		  
+		 
+		 <div @click="handleClick" class="w-full" size="large" round>
+		   <div
+		     class="w-full text-white text-base font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-[#fb001b]"
+		   >
+		     <div>{{ $t("现在开始") }} ({{ userInfo.dealCount }}/{{orderCount}})</div>
+		   </div>
+		 </div>
+		  
       </div>
-      <div class="w-[90%] mx-auto pt-5">
-        <div class="mt-4 rounded-lg bg-[#f5f5f5]">
-          <div class="flex flex-col p-4 box-border relative rounded-xl">
+	  <div class="w-[100%] mx-auto p-2">
+	    <div class="mt-4 p-8 rounded-lg bg-[#ffffff] border-[#eaeaea] border-[1px]">
+	      <div class="flex flex-col box-border text-center relative rounded-xl">
+	        <div class="mb-2 text-base font-bold  mx-auto relative" style="color: black;">
+				<img 
+				  class="w-[4rem] h-[4rem] mx-auto "
+				  src="@/static/images/base/icon-32.png"/>
+				<div class=" mt-3 text-[16px] font-bold" style="color: black;">
+					{{ $t("当日佣金") }}
+				</div>
+				<div class="text-[#000] text-[18px] font-bold ">
+				  {{ userInfo.commission }} {{ $t("美元") }}
+				</div>
+				<div class="text-[#000] mt-2 text-[13px]">
+				  {{ $t("每日赚取佣金") }}
+				</div>
+			</div>
+			<div class="flex items-center justify-between mt-6 px-1">
+				<div class="mb-2 text-base font-bold" style="color: black;">
+					<img
+					 class="w-[4rem] h-[4rem] mx-auto "
+					 src="@/static/images/base/icon-33.png"/>
+					<div class=" mt-3 text-[16px] font-bold" style="color: black;">
+						{{ $t("钱包余额") }}
+					</div>
+					<div class="text-[#000] text-[18px] font-bold ">
+					  {{ userInfo.balance }} {{ $t("美元") }}
+					</div>
+					<div class="text-[#000] mt-2 text-[13px]">
+					  {{ $t("佣金将在此处添加") }}
+					</div>
+				</div>
+				<div class="mb-2 text-base font-bold" style="color: black;">
+					<img
+					 class="w-[4rem] h-[4rem] mx-auto "
+					 src="@/static/images/base/icon-34.png"/>
+					<div class=" mt-3 text-[16px] font-bold" style="color: black;">
+						{{ $t("持有金额") }}
+					</div>
+					<div class="text-[#000] text-[18px] font-bold ">
+					  {{ userInfo.frozenBalance }} {{ $t("美元") }}
+					</div>
+					<div class="text-[#000] mt-2  text-[13px] ">
+					  {{ $t("如有疑问，请联系客服") }}
+					</div>
+				</div>
+			</div>
+	      </div>
+	    </div>
+	  </div>
+      <div class="w-[100%] mx-auto px-2">
+        <div class="mb-8 rounded-lg bg-[#ffffff] border-[#eaeaea] border-[1px]">
+          <div class="flex flex-col p-4 box-border text-center relative rounded-xl">
             <div class="mb-2  text-base font-bold" style="color: black;">Notice</div>
-            <div class="text-black text-sm ">
+            <div class="text-[#000] text-sm ">
               Online Support Hours 10:00 - 22:59 <br />
               Please contact online support for your assistance!
             </div>
@@ -181,65 +160,6 @@
     </div>
     <Footer name="/starting"></Footer>
     <van-popup
-      v-model:show="showCenter"
-      round
-      closeable
-      :style="{ width:'80%' }"
-    >
-      <div class="w-[5rem] mx-auto mt-6">
-        <van-image
-          width="6rem"
-          height="6rem"
-          fit="contain"
-          :src="url+goods.coverUrl"
-        />
-      </div>
-      <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
-        <div class="w-[100%] mx-auto text-center text-sm font-semibold">
-          {{goods.goodsName}}
-        </div>
-        <div class="flex w-full items-center pt-4 pb-4 mt-4">
-          <div
-            class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
-          >
-            <div class="text-[#000] font-semibold">{{$t('价格')}}</div>
-            <div class="text-xs text-[#000] mt-1">
-              <span class="text-sm mr-1 text-[#000] font-semibold">{{goods.price}}</span>
-              USD
-            </div>
-          </div>
-          <div
-            class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
-          >
-            <div class="text-[#000] font-semibold">{{ $t('佣金') }}</div>
-            <div class="text-xs text-[#000] mt-1">
-              <span class="text-sm mr-1 text-[#000] font-semibold">{{goods.commission}}</span>
-              USD
-            </div>
-          </div>
-        </div>
-        <div class="bg-[#d8d8d8] p-4">
-          <div class="flex justify-between items-center box-border">
-            <div class="text-[#000] text-sm">{{$t('创建时间')}}</div>
-            <div class="text-[#000] text-sm font-bold">{{ formatWithTimezone(goods.createTime,userStore.zoneActive.tzName)  }}</div>
-          </div>
-          <div class="flex justify-between items-center box-border mt-2">
-            <div class="whitespace-nowrap text-[#000] text-sm">
-              {{$t('编号')}}
-            </div>
-            <div class="text-[#000] text-xs font-bold">
-              {{goods.orderNo}}
-            </div>
-          </div>
-        </div>
-        <div class="w-full mt-4">
-          <van-button color="#007513" class="w-full" @click="submitForm">{{
-            $t("提交")
-          }}</van-button>
-        </div>
-      </div>
-    </van-popup>
-    <van-popup
       v-model:show="showImg"
       round
       :style="{ width:'80%',background: 'transparent' }"
@@ -249,11 +169,12 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref, onUnmounted } from "vue";
+import { onMounted, ref, onUnmounted, computed } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
+import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast } from 'vant';
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 import {formatWithTimezone}  from '../../util/utils'
 import {
   userGetInfo,
@@ -263,14 +184,14 @@ import {
 } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 const userStore = useUserStore();
+const router = useRouter();
 const url = window.g.VITE_API_IMG_URL;
 const { t } = useI18n();
 const userInfo = ref({});
 const avatarUrl = ref("");
 const showImg = ref(false);
 
-
-let timer = null;
+// let timer = null;
 const goodsList = ref([]);
 const showCenter = ref(false);
 const goods = ref({});
@@ -286,7 +207,7 @@ const getList = async () => {
     console.error("获取商品列表失败:", e);
   } finally {
     // 每次请求完成后再等 10 秒再发下一次，避免堆积
-    timer = setTimeout(getList, 10000);
+    // timer = setTimeout(getList, 10000);
   }
 };
 
@@ -304,13 +225,12 @@ const handleClick = () => {
     // 2. 延时 2 秒后关闭图片，并继续创建订单
     setTimeout(() => {
       showImg.value = false;
-      doCreateOrder();
     }, 2000);
-
+	doCreateOrder()
     return;
   }
   // 不满足条件时，直接创建订单
-  doCreateOrder();
+  doCreateOrder()
 };
 
 const doCreateOrder = () => {
@@ -319,13 +239,14 @@ const doCreateOrder = () => {
     forbidClick: true,
     duration: 0,
   });
-
+  
   createOrder()
     .then((res) => {
       closeToast();
       showToast(t("创建成功"));
       showCenter.value = true;
       goods.value = res.data;
+	  toPage('/productInfo', {id: res.data.id})
     })
     .catch((err) => {
       console.log(err);
@@ -334,29 +255,244 @@ const doCreateOrder = () => {
     });
 };
 
-const submitForm = () => {
-  submitOrder(goods.value.id).then((res)=>{
-        showSuccessToast(t("提交成功"));
-        if(res.code == 201) {
-           goods.value =  res.data
-        } else {
-            showCenter.value = false;
-        }
-    })
-};
-
-onUnmounted(() => {
-  // 清除定时器，防止组件卸载后还在请求
-  if (timer) clearTimeout(timer);
-});
 
 const orderCount = ref(0)
 onMounted(() => {
   getList();
+  startTimer()
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     orderCount.value = res.data.userLevel.orderCount
   });
 });
+
+const toPage = (path, param) => {
+  router.push({
+    path: path,
+	query: param
+  });
+};
+
+// 基础配置
+const cardW = 260
+const gap = 10
+// 容器左右留白，用来露出左右卡片
+const sidePad = 80
+// 两侧卡片缩放比例
+const smallScale = 0.8
+// 滑动翻页阈值
+const threshold = 50
+
+// 渲染5张卡片，滑动前后都有相邻卡片
+const cardList = ref([1,2,3,4,5,6,7])
+// 默认选中第2项作为中间主卡片（索引从0开始：0 1 【2】 3 4）
+const current = ref(2)
+
+// 拖拽变量
+const startX = ref(0)
+const dragX = ref(0)
+const dragging = ref(false)
+
+// 核心位移公式：强制让current卡片居中，左边露出前一张、右边露出后一张
+const translateX = computed(()=>{
+  // 目标：让current卡片对齐容器可视中心
+  // 整体左移 = 当前索引 * (卡片宽+间距)
+  const moveLeft = current.value * (cardW + gap)
+  // 向右偏移容器左侧留白，实现左右双向露出
+  return sidePad - moveLeft - 35
+})
+
+// 触摸事件
+const onTouchStart = e=>{
+  dragging.value = true
+  startX.value = e.touches[0].clientX
+}
+const onTouchMove = e=>{
+  dragX.value = e.touches[0].clientX - startX.value
+}
+const onTouchEnd = ()=>{
+  dragging.value = false
+  const dis = dragX.value
+  // 右滑 上一页
+  if(dis > threshold && current.value > 0){
+    current.value--
+  }
+  // 左滑 下一页
+  else if(dis < -threshold && current.value < cardList.value.length -1){
+    current.value++
+  }
+  dragX.value = 0
+}
+
+let timer = null
+const AUTO_DELAY = 3000
+// 自动轮播逻辑
+const autoPlay = () => {
+  // 到达最后一项回到第二项，实现无缝循环
+  if(current.value >= cardList.value.length ){
+    current.value = 0
+  }else{
+    current.value++
+  }
+}
+// 开启定时器
+const startTimer = () => {
+  clearInterval(timer)
+  timer = setInterval(autoPlay, AUTO_DELAY)
+}
+
+// 页面销毁清除定时器，防止后台持续轮播
+onUnmounted(()=>{
+  clearInterval(timer)
+})
+
 </script>
+
+<style scoped>
+.page{
+  /* width:100vw; */
+  /* min-height:100vh; */
+  padding:0px 0;
+  overflow-x:hidden;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  padding:0 24px;
+  margin-bottom:40px;
+}
+.user p{
+  font-size:30px;
+}
+.user h2{
+  font-size:52px;
+  line-height:1;
+}
+.vip{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:8px;
+}
+.vip span{
+  font-size:34px;
+  font-weight:bold;
+}
+.vip-circle{
+  width:76px;
+  height:76px;
+  border-radius:50%;
+  background:#FFD046;
+  border:3px solid #fff;
+}
+
+/* 轮播容器：左右padding完全一致，两侧同时露出卡片 */
+.carousel-wrap{
+  width:100%;
+  overflow:hidden;
+  padding:20px var(--pad);
+  --pad:10px;
+}
+.card-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  will-change:transform;
+}
+
+/* 默认所有卡片缩小 */
+.card-item{
+  width:260px;
+  flex-shrink:0;
+  transform:scale(.9);
+  transition:transform 0.3s ease;
+}
+/* 当前居中卡片还原原尺寸，层级置顶 */
+.card-item.active{
+  transform:scale(1);
+  z-index:2;
+}
+
+.card{
+  width:100%;
+  height:380px;
+  /* background:#fff; */
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card img{
+  width:68%;
+}
+
+/* 商品文字左对齐 */
+.info{
+  padding:0 26px;
+  margin-top:45px;
+}
+.title{
+  font-size:30px;
+  line-height:1.6;
+}
+.star{
+  font-size:28px;
+  margin:20px 0;
+}
+.price{
+  font-size:32px;
+}
+
+/* 底部按钮 */
+.btn{
+  width:calc(100% - 48px);
+  margin:60px auto 0;
+  background:#000;
+  color:#FFD046;
+  text-align:center;
+  font-size:38px;
+  font-weight:bold;
+  padding:26px 0;
+  border-radius:10px;
+}
+.product-card {
+  width: 100%; /* 调小这个值，左右露出更多 */
+  margin: 0 auto;
+  height: 100%;
+  /* background-color: #ffd149; */
+  border-radius: 14px;
+  /* padding: 16px; */
+  box-sizing: border-box;
+  text-align: center;
+}
+.img-box {
+  /* background: #ffffff; */
+  border-radius: 8px;
+  padding: 10px;
+  /* height: 70%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-box img {
+ /* width: 200px;
+  height: 200px; */
+  width: 100%; 
+  aspect-ratio: 1 / 1; 
+  object-fit: cover;
+  border: 15px solid #eaeaea;
+  border-radius: 10px;
+}
+.title {
+  font-size: 18px;
+  margin: 0px 0 6px;
+}
+.price {
+  font-size: 22px;
+  font-weight: bold;
+}
+</style>

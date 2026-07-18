@@ -277,7 +277,7 @@ function handleScroll(e) {
 	margin-left: 0 !important;
 }
 .withdraw .van-tab--card:last-child{
-	margin-left: 0 !important;
+	margin-right: 0 !important;
 }
 .withdraw .van-tab--card.van-tab--active{
 	background-color: #5d9c5d !important;
