@@ -33,6 +33,7 @@
 		<div class="page mx-auto p-2">
 		  <!-- 轮播可视容器 -->
 		  <div
+		    ref="carouselRef"
 		    class="carousel-wrap"
 		    @touchstart="onTouchStart"
 		    @touchmove="onTouchMove"
@@ -169,7 +170,7 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref, onUnmounted, computed } from "vue";
+import { onMounted, ref, onUnmounted, computed, nextTick } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast } from 'vant';
@@ -259,7 +260,8 @@ const doCreateOrder = () => {
 const orderCount = ref(0)
 onMounted(() => {
   getList();
-  startTimer()
+  startTimer();
+  getContainerWidth();
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
@@ -275,9 +277,12 @@ const toPage = (path, param) => {
 };
 
 // 基础配置
-const cardW = 260
-const gap = 10
+const innerWidth = window.innerWidth
+// const cardW = 260
+const cardW = innerWidth * 0.7
+const gap = 0
 // 容器左右留白，用来露出左右卡片
+// const sidePad = 60* innerWidth / 390
 const sidePad = 80
 // 两侧卡片缩放比例
 const smallScale = 0.8
@@ -288,6 +293,8 @@ const threshold = 50
 const cardList = ref([1,2,3,4,5,6,7])
 // 默认选中第2项作为中间主卡片（索引从0开始：0 1 【2】 3 4）
 const current = ref(2)
+const carouselRef = ref(null)
+const containerWidth = ref(0)
 
 // 拖拽变量
 const startX = ref(0)
@@ -296,13 +303,25 @@ const dragging = ref(false)
 
 // 核心位移公式：强制让current卡片居中，左边露出前一张、右边露出后一张
 const translateX = computed(()=>{
-  // 目标：让current卡片对齐容器可视中心
-  // 整体左移 = 当前索引 * (卡片宽+间距)
-  const moveLeft = current.value * (cardW + gap)
-  // 向右偏移容器左侧留白，实现左右双向露出
-  return sidePad - moveLeft - 35
+  // // 目标：让current卡片对齐容器可视中心
+  // // 整体左移 = 当前索引 * (卡片宽+间距)
+  // const moveLeft = current.value * (cardW + gap)
+  // // 向右偏移容器左侧留白，实现左右双向露出
+  // return sidePad - moveLeft 
+  if(!containerWidth.value) return 0
+  const baseMove = current.value * (cardW + gap)
+    // 2. 居中偏移：容器一半宽度 - 半张卡片宽度，让卡片精准居中
+    const centerOffset = containerWidth.value / 2 - cardW / 2
+    // 3. 最终位移 = 居中位置 - 卡片整体左移量
+    return centerOffset - baseMove + 10
 })
-
+// 读取容器宽度，窗口变化时重新赋值
+const getContainerWidth = async ()=>{
+  await nextTick()
+  if(carouselRef.value){
+    containerWidth.value = carouselRef.value.clientWidth
+  }
+}
 // 触摸事件
 const onTouchStart = e=>{
   dragging.value = true
@@ -374,7 +393,7 @@ onUnmounted(()=>{
 .vip{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
   margin-top:8px;
 }
 .vip span{
@@ -394,7 +413,7 @@ onUnmounted(()=>{
   width:100%;
   overflow:hidden;
   padding:20px var(--pad);
-  --pad:10px;
+  --pad:0px;
 }
 .card-box{
   display:flex;
@@ -405,7 +424,8 @@ onUnmounted(()=>{
 
 /* 默认所有卡片缩小 */
 .card-item{
-  width:260px;
+  /* width:260px; */
+  width:70%;
   flex-shrink:0;
   transform:scale(.9);
   transition:transform 0.3s ease;
