@@ -64,13 +64,13 @@
 										    </div>
 										</div>
 										
-										<div class="grid grid-cols-4 mt-2">
+										<div class="grid grid-cols-5 mt-2">
 										    <div class="col-span-2 w-[80%] flex items-center justify-between">
-										        <van-icon name="star" color="#f99d25"></van-icon>
-										        <van-icon name="star" color="#f99d25"></van-icon>
-										        <van-icon name="star" color="#f99d25"></van-icon>
-										        <van-icon name="star" color="#f99d25"></van-icon>
-										        <van-icon name="star" color="#f99d25"></van-icon>
+										        <van-icon name="star" size='18' color="#f99d25"></van-icon>
+										        <van-icon name="star" size='18' color="#f99d25"></van-icon>
+										        <van-icon name="star" size='18' color="#f99d25"></van-icon>
+										        <van-icon name="star" size='18' color="#f99d25"></van-icon>
+										        <van-icon name="star" size='18' color="#f99d25"></van-icon>
 										    </div>
 										</div>
 							        </div>
