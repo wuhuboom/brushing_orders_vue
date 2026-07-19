@@ -291,11 +291,34 @@ const getCustomerDisplayName = (item, index = 0) => {
     return item?.name || "";
 };
 
+const buildServiceIconUrl = (iconUrl, name = "") => {
+    const normalizedName = `${name || ""}`.trim().toLowerCase();
+    const fallbackIcon = normalizedName.includes("telegram")
+        ? serviceTelegramIcon
+        : serviceOnlineIcon;
+    const value = `${iconUrl || ""}`.trim();
+
+    if (!value) return fallbackIcon;
+
+    // 接口偶尔可能直接返回完整地址，此时不再重复拼接图片域名。
+    if (/^(https?:)?\/\//i.test(value) || /^(data|blob):/i.test(value)) {
+        return value;
+    }
+
+    const imageBaseUrl = `${
+        window.g?.VITE_API_IMG_URL || import.meta.env.VITE_API_IMG_URL || ""
+    }`.replace(/\/+$/, "");
+
+    if (!imageBaseUrl) return value;
+
+    return `${imageBaseUrl}/${value.replace(/^\/+/, "")}`;
+};
+
 const serviceCards = computed(() =>
     (customerList.value || []).map((item, index) => ({
         ...item,
         displayName: getCustomerDisplayName(item, index),
-        icon: index === 0 ? serviceOnlineIcon : serviceTelegramIcon,
+        icon: buildServiceIconUrl(item?.iconUrl, item?.name),
     })),
 );
 
