@@ -78,7 +78,7 @@
 							</div>	
 							<div>
 							  <div class="flex items-center justify-between mt-4">
-							  	<div class="flex items-center justify-between">
+							  	<div class="flex items-center justify-between w-[60%]">
 							  	    <div class="">
 							  	        <div class="text-xs text-[#666] font-medium">
 							  	            {{$t('总金额')}}
@@ -96,7 +96,7 @@
 							  	        </div>
 							  	    </div>						  
 							  	</div>
-								<div class="flex justify-end" v-if="item.status == '2'">
+								<div class="flex justify-end w-[40%]" v-if="item.status == '2'">
 								  <van-button icon="arrow" icon-position="right" color="#000" @click="submit(item)" size="small">{{$t("提交订单")}}</van-button>
 								</div>
 							  </div>
