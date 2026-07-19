@@ -52,11 +52,11 @@
 							            <div class="text-[#000] text-sm font-semibold whitespace-nowrap  text-ellipsis overflow-hidden">
 							            {{item.goodsName}}
 										</div>
-										<div class="grid grid-cols-4 mt-1">
-										    <div class="col-span-2 flex flex-col">
+										<div class=" mt-1">
+										    <div class=" flex flex-col">
 										       
 										        <div class="mt-1 text-xl text-black font-semibold">
-										            {{item.price}} 
+										            {{item.price}}
 													<span class="text-sm">
 														{{$t('美元')}}
 													</span>
@@ -77,7 +77,7 @@
 							    </div>
 							</div>	
 							<div>
-							  <div class="flex items-center justify-between mt-2">
+							  <div class="flex items-center justify-between mt-4">
 							  	<div class="flex items-center justify-between">
 							  	    <div class="">
 							  	        <div class="text-xs text-[#666] font-medium">
@@ -159,8 +159,10 @@ import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'va
 import { useI18n } from "vue-i18n";
 import {formatWithTimezone}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
+import { useRouter } from "vue-router";
 const userStore = useUserStore();
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
+const router = useRouter();
 const { t } = useI18n();
 const active = ref(0);
 const list =  ref([]);
@@ -205,9 +207,17 @@ const loadData = async () => {
   }
 };
 const submit = (item) => {
-    goodsData.value = item;
-    show.value = true
+    // goodsData.value = item;
+    // show.value = true
+	toPage('/productInfo', {id: item.id})
 }
+
+const toPage = (path, param) => {
+  router.push({
+    path: path,
+	query: param
+  });
+};
 
 const submitVal = () =>{
     submitOrder(goodsData.value.id).then((res)=>{
@@ -244,19 +254,19 @@ onMounted(() =>{
 <style scoped>
 .info-left{
 	float: left;
-	width: 90px;
-	height: 90px;
+	width: 100px;
+	height: 100px;
 }
 .info-img{
 	width: 100%;
-	height: 90px;
+	height: 100px;
 	/* aspect-ratio: 1 / 1; */
 	/* object-fit: cover; */
 }
 .info-right{
 	float: left;
 	margin-left: 10px;
-	width: calc(100% - 100px);
+	width: calc(100% - 110px);
 }
 :deep(.van-tab){
 	margin: 0px 10px !important;
