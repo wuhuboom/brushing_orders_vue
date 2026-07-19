@@ -1,11 +1,32 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path';
+import fs from 'fs';
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import ElementPlus from 'unplugin-element-plus/vite'
 import NutUIResolver from '@nutui/auto-import-resolver'
+
+function removeConfigJs() {
+  let resolvedOutDir = resolve(process.cwd(), 'dist');
+
+  return {
+    name: 'remove-config-js',
+    apply: 'build',
+    configResolved(config) {
+      resolvedOutDir = resolve(config.root, config.build?.outDir || 'dist');
+    },
+    closeBundle() {
+      const configPath = resolve(resolvedOutDir, 'config.js');
+
+      if (fs.existsSync(configPath)) {
+        fs.unlinkSync(configPath);
+        console.log('[remove-config-js] removed:', configPath);
+      }
+    },
+  };
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -22,6 +43,7 @@ export default defineConfig({
       // 指定需要导入的样式，可以是'css'或'sass'
       useSource: true
     }),
+    removeConfigJs(),
   ],
   resolve: {
     alias: {
