@@ -31,7 +31,7 @@
 	      class="flex flex-col justify-between py-4 px-8  box-border bg-[#5d9c5d] rounded-2.5"
 	    >
 	      <div class="text-black text-base font-bold">
-	        {{ $t("总金额") }}
+	        {{ $t("总余额") }}
 	      </div>
 	      <div class="flex mt-4">
 	        <div class="text-black text-2xl  flex items-center">
