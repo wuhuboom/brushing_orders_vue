@@ -153,3 +153,22 @@ export const formatWithTimezone = (timestamp, tzName) => {
   return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
 };
 
+export const formatTargetDate = (timestamp) => {
+  let ms = timestamp;
+    // 10位秒时间戳 转 毫秒
+    if (String(timestamp).length === 10) ms = timestamp * 1000;
+    const date = new Date(ms);
+    if (isNaN(date.getTime())) return '--';
+  
+    // 英文月份缩写数组
+    const monthList = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = monthList[date.getMonth()]
+    const year = date.getFullYear()
+    const h = String(date.getHours()).padStart(2, '0')
+    const m = String(date.getMinutes()).padStart(2, '0')
+    const s = String(date.getSeconds()).padStart(2, '0')
+  
+    return `${day} ${month} ${year} | ${h}:${m}:${s}`
+}

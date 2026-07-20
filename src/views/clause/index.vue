@@ -2,7 +2,7 @@
   <div class="w-full min-h-[100vh] bg-[#e6e6e6]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
-	    :title="$t('条款')"
+	    :title="$t('条款及细则')"
 	    fixed
 	    left-arrow
 	    @click-left="onClickLeft"
@@ -15,7 +15,7 @@
 	<HeaderTop></HeaderTop>
 	<van-nav-bar
 	  class="pos"
-	  :title="$t('条款')"
+	  :title="$t('条款及细则')"
 	  fixed
 	  left-arrow
 	  @click-left="onClickLeft"
@@ -35,11 +35,13 @@
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import {getGlobalConfig} from "../../api/apis"
+import { useCommonStore } from "../../store/modules/common";
+const commonStore = useCommonStore();
 const termsEn = ref('')
 const navBarShow = ref(false);
 const getGetGlobalConfig = async() =>{
-    let res = await getGlobalConfig();
-    termsEn.value = res.data.termsEn
+    let res = await getGlobalConfig({lang: commonStore.clientLang});
+    termsEn.value = res.data.terms
 }
 onMounted(() =>{
     getGetGlobalConfig();

@@ -36,20 +36,20 @@
 	  
       <div class="w-full  box-border flex flex-col">
         <div class="w-full mb-4 p-4 rounded-lg bg-[#fff] flex items-center" v-for="item in levelList">
-            <div class="flex mr-4 w-20">
+            <div class="flex mr-4 w-[60px]">
                 <!-- <img :src="bgMapStart[item.nameEn]" alt=""> -->
                 <img :src="url + item.icon" alt="">
             </div>
             <div class="flex flex-col flex-1">
                 <div class="flex justify-between">
-                    <div class="text-base text-[#000] font-semibold mr-2">{{item.nameEn}}</div>
+                    <div class="text-base text-[#000] font-semibold mr-2">{{item.name}}</div>
                     <van-tag  type="primary" color="#000" v-if="userStore.userInfo.levelId == item.id">{{$t('当前等级')}}</van-tag>
-                     <div class="text-sm text-black font-semibold mr-2 underline" @click="toUpgrade" v-if="userStore.userInfo.levelId != item.id">{{$t('立即升级')}}</div>
+                     <!-- <div class="text-sm text-black font-semibold mr-2 underline" @click="toUpgrade" v-if="userStore.userInfo.levelId != item.id">{{$t('立即升级')}}</div> -->
                 </div>
                 <div class="mt-2 text-black text-sm font-semibold">
                     {{item.price}}{{$t('美元')}}
                 </div>
-                <div class="mt-2 text-xs text-[#000] font-light" v-html="item.descriptionEn">
+                <div class="mt-2 text-xs text-[#000] font-light" v-html="item.description">
                     
                 </div>
             </div>
@@ -63,9 +63,11 @@ import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { getLevel } from "../../api/apis";
 import HeaderTop from "@/components/HeaderTop.vue";
 import { useUserStore } from '../../store/modules/user';
+import { useCommonStore } from "../../store/modules/common";
 import { showToast } from 'vant';
 import { useI18n } from "vue-i18n";
 const userStore = useUserStore()
+const commonStore = useCommonStore();
 const { t } = useI18n();
 const navBarShow = ref(false);
 const bgMapStart = {
@@ -79,7 +81,7 @@ const levelList = ref([]);
 
 const url = window.g.VITE_API_IMG_URL;
 const level = async () => {
-  let res = await getLevel();
+  let res = await getLevel({lang: commonStore.clientLang});
   levelList.value = res.data;
   levelList.value.forEach(item => {
      if (item.descriptionEn) {

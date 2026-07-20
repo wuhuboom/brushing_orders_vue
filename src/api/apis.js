@@ -20,13 +20,13 @@ export const upload = (params) => getApi().post(`/config/upload`, params, { load
 export const updateAvatar = (params) => getApi().post(`/user/updateAvatar`, params, { loading: true, showMsg: true, })// 上传头像
 export const userGetInfo = (params) => getApi().get('/user/getInfo', { params: params, loading: false, showMsg: false, })// 获取交易配置
 
-export const getCustomerService = (params) => getApi().get('/config/getCustomerService', { params: params, loading: false, showMsg: false, })// 获取交易配置
+export const getCustomerService = (params) => getApi().get('/config/getCustomerServiceByLang', { params: params, loading: false, showMsg: false, })// 获取交易配置
 
-export const getGlobalConfig = (params) => getApi().get('/config/getGlobalConfig', { params: params, loading: false, showMsg: false, })// 获取基本配置
+export const getGlobalConfig = (params) => getApi().get('/config/getConfigByLang', { params: params, loading: false, showMsg: false, })// 获取基本配置
 
-export const getNoticeList = (params) => getApi().get('/config/getNoticeList', { params: params, loading: false, showMsg: false, })// 获取公告配置
+export const getNoticeList = (params) => getApi().get('/config/getNoticeListByLang', { params: params, loading: false, showMsg: false, })// 获取公告配置
 
-export const getLevel = (params) => getApi().get('/config/getLevel', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
+export const getLevel = (params) => getApi().get('/config/getLevelByLang', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
 
 export const getDeposit = (params) => getApi().get('/account/getDeposit', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
 
@@ -45,7 +45,7 @@ export const getGoodsInfo = (params) => getApi().get(`/order/getOrderInfo/${para
 export const getTradeConfig = (params) => getApi().get(`/config/getTradeConfig`, { params: params, loading: false, showMsg: false, })// 提交订单
 
 
-export const getNotice = (params) => getApi().get(`/config/getNotice/`+params.id, { params: params, loading: false, showMsg: false, })// 提交订单
+export const getNotice = (params) => getApi().get(`/config/getNoticeByLang/`+params.id, { params: params, loading: false, showMsg: false, })// 提交订单
 
 export const getZoneActive = (params) => getApi().get(`/config/getZoneActive`, { params: params, loading: false, showMsg: false, })// 获取时区
 

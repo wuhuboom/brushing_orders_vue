@@ -58,6 +58,8 @@ import { useRouter } from "vue-router";
 import { useUserStore } from '../../store/modules/user';
 import { computed, onMounted, ref } from 'vue';
 import { getCustomerService } from '../../api/apis';
+import { useCommonStore } from "../../store/modules/common";
+const commonStore = useCommonStore();
 const userStore = useUserStore()
 const router = useRouter();
 const navBarShow = ref(false);
@@ -72,7 +74,7 @@ onMounted(() => {
   getCustomer()
 })
 const getCustomer = async() =>{
-  let res = await getCustomerService();
+  let res = await getCustomerService({lang: commonStore.clientLang});
   customerList.value = res.data
   console.log(customerList.value)
 }

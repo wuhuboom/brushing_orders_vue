@@ -32,13 +32,40 @@
 		  >
 			<div class="font-semibold pb-2">{{ $t("用户名") }}</div>
 		    <el-form-item label="" prop="username" label-position="top">
-		      <el-input
+		      <!-- <el-input
 		        v-model="ruleForm.username"
 		        type="text"
 		        autocomplete="off"
 		        size="large"
 		      >
-		      </el-input>
+		      </el-input> -->
+			  <div class="border-[1px] border el-input pl-2 bg-[#f9f9f9]">
+				<div class="bg-[#f9f9f9] w-[50px] h-[50px] flex items-center justify-center" @click.stop="togglePopup">
+					<img :src="selectedCountry.flag" class="flag-img" alt="">
+						<img v-if="showPopup" src="@/static/images/base/top.png" style="width:12px" />
+						<img v-else class="rotate-90" src="@/static/images/base/right.png" style="width:12px" />
+				</div>
+				<input type="text" v-model="ruleForm.username" @input=""
+				  class="flex-1 bg-[#f9f9f9] h-[50px]  pl-4 text-base"  />  
+			  </div>
+			  
+				
+			  <div v-if="showPopup" class="country-popup" ref="popupRef">
+			        <!-- 过滤后的完整国家列表 -->
+			        <div class="country-scroll">
+			          <div
+			            class="country-item"
+			            v-for="item in allCountryList"
+			            :key="item.dial"
+			            @click="selectCountry(item)"
+			          >
+			            <img class="item-flag" :src="item.flag" alt="">
+			            <span class="name">{{ item.name }}</span>
+			            <span class="code">+{{ item.dial }}</span>
+			          </div>
+			        </div>
+			  </div>
+			  
 		    </el-form-item>
 			<div class="font-semibold pb-2">{{ $t("密码") }}</div>
 		    <el-form-item label="" prop="password" label-position="top">
@@ -180,9 +207,91 @@ const ruleForm = reactive({
   sex: null,
   inviteCode: "",
 });
+
+// 弹窗DOM
+const popupRef = ref(null)
+// 弹窗显示状态
+const showPopup = ref(false)
+// 密码显隐
+const pwdVisible = ref(false)
+
+// 默认选中：日本
+const selectedCountry = ref({
+  name: 'Japan',
+  dial: '81',
+  flag: 'https://flagcdn.com/w40/jp.png'
+})
+
+// ====================== 完整全球国家/地区区号数据 ======================
+const allCountryList = ref([
+  // 亚洲
+  { name: 'China', dial: '86', flag: 'https://flagcdn.com/w40/cn.png' },
+  { name: 'Japan', dial: '81', flag: 'https://flagcdn.com/w40/jp.png' },
+  { name: 'South Korea', dial: '82', flag: 'https://flagcdn.com/w40/kr.png' },
+  { name: 'Thailand', dial: '66', flag: 'https://flagcdn.com/w40/th.png' },
+  { name: 'Singapore', dial: '65', flag: 'https://flagcdn.com/w40/sg.png' },
+  { name: 'Malaysia', dial: '60', flag: 'https://flagcdn.com/w40/my.png' },
+  { name: 'Vietnam', dial: '84', flag: 'https://flagcdn.com/w40/vn.png' },
+  { name: 'Indonesia', dial: '62', flag: 'https://flagcdn.com/w40/id.png' },
+  { name: 'Philippines', dial: '63', flag: 'https://flagcdn.com/w40/ph.png' },
+  { name: 'India', dial: '91', flag: 'https://flagcdn.com/w40/in.png' },
+  { name: 'Pakistan', dial: '92', flag: 'https://flagcdn.com/w40/pk.png' },
+  { name: 'United Arab Emirates', dial: '971', flag: 'https://flagcdn.com/w40/ae.png' },
+  { name: 'Saudi Arabia', dial: '966', flag: 'https://flagcdn.com/w40/sa.png' },
+  { name: 'Turkey', dial: '90', flag: 'https://flagcdn.com/w40/tr.png' },
+  { name: 'Israel', dial: '972', flag: 'https://flagcdn.com/w40/il.png' },
+  // 欧洲
+  { name: 'United Kingdom', dial: '44', flag: 'https://flagcdn.com/w40/gb.png' },
+  { name: 'Germany', dial: '49', flag: 'https://flagcdn.com/w40/de.png' },
+  { name: 'France', dial: '33', flag: 'https://flagcdn.com/w40/fr.png' },
+  { name: 'Italy', dial: '39', flag: 'https://flagcdn.com/w40/it.png' },
+  { name: 'Spain', dial: '34', flag: 'https://flagcdn.com/w40/es.png' },
+  { name: 'Portugal', dial: '351', flag: 'https://flagcdn.com/w40/pt.png' },
+  { name: 'Russia', dial: '7', flag: 'https://flagcdn.com/w40/ru.png' },
+  { name: 'Malta', dial: '356', flag: 'https://flagcdn.com/w40/mt.png' },
+  // 非洲（截图内全部地区）
+  { name: 'Mali', dial: '223', flag: 'https://flagcdn.com/w40/ml.png' },
+  { name: 'Mauritania (موريتانيا)', dial: '222', flag: 'https://flagcdn.com/w40/mr.png' },
+  { name: 'Mauritius (Moris)', dial: '230', flag: 'https://flagcdn.com/w40/mu.png' },
+  { name: 'Mayotte', dial: '262', flag: 'https://flagcdn.com/w40/yt.png' },
+  // 大洋洲 & 海岛领地
+  { name: 'Marshall Islands', dial: '692', flag: 'https://flagcdn.com/w40/mh.png' },
+  { name: 'Martinique', dial: '596', flag: 'https://flagcdn.com/w40/mq.png' },
+  { name: 'Australia', dial: '61', flag: 'https://flagcdn.com/w40/au.png' },
+  { name: 'New Zealand', dial: '64', flag: 'https://flagcdn.com/w40/nz.png' },
+  // 美洲
+  { name: 'United States', dial: '1', flag: 'https://flagcdn.com/w40/us.png' },
+  { name: 'Canada', dial: '1', flag: 'https://flagcdn.com/w40/ca.png' },
+  { name: 'Brazil', dial: '55', flag: 'https://flagcdn.com/w40/br.png' },
+  { name: 'Mexico', dial: '52', flag: 'https://flagcdn.com/w40/mx.png' },
+  { name: 'Argentina', dial: '54', flag: 'https://flagcdn.com/w40/ar.png' },
+  { name: 'Chile', dial: '56', flag: 'https://flagcdn.com/w40/cl.png' },
+  { name: 'Colombia', dial: '57', flag: 'https://flagcdn.com/w40/co.png' }
+])
+
+// 切换下拉弹窗
+const togglePopup = () => {
+  showPopup.value = !showPopup.value
+}
+
+// 选中国家
+const selectCountry = (item) => {
+  selectedCountry.value = item
+  showPopup.value = false
+}
+
+// 点击空白区域关闭弹窗
+const closePopupByBlank = (e) => {
+  if (showPopup.value && popupRef.value && !popupRef.value.contains(e.target)) {
+
+    showPopup.value = false
+  }
+}
+
 const rules = computed(() => {
   return {};
 });
+
 function toLogin() {
   router.push("/account/login");
 }
@@ -198,6 +307,8 @@ function sendCode() {
     return showToast(t("请输入正确电话号码"));
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));
+
+  ruleForm.username = selectedCountry.value.dial + ruleForm.username
   register(ruleForm).then((res) => {
     showToast(t("注册成功"))
     router.push({
@@ -214,6 +325,13 @@ const jump = () =>{
       path: "/tc",
     });
 }
+
+onMounted(() => {
+  document.addEventListener('click', closePopupByBlank)
+})
+onUnmounted(() => {
+  document.removeEventListener('click', closePopupByBlank)
+})
 </script>
 
 <style scoped>
@@ -263,4 +381,122 @@ const jump = () =>{
 	padding: 20px;
 }
 /* 这里需要修改id为123的盒子的父级盒子的宽度 */
+
+
+.page-wrap {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FFD046;
+  padding: 40px 20px;
+}
+
+/* 手机号输入外层容器 */
+.phone-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 4px;
+  margin-bottom: 32px;
+}
+.country-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 12px;
+  border-right: 1px solid #eeeeee;
+  cursor: pointer;
+}
+.flag-img {
+  width: 34px;
+  margin-right: 4px;
+  height: 21px;
+  object-fit: cover;
+}
+.arrow {
+  font-size: 12px;
+  color: #666666;
+}
+.phone-input {
+  flex: 1;
+  padding: 16px 14px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+.phone-input::placeholder {
+  color: #999999;
+}
+
+/* 国家下拉弹窗 */
+.country-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+  z-index: 999;
+}
+.search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-bottom: 1px solid #eee;
+  outline: none;
+  font-size: 18px;
+}
+.country-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+}
+.country-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.country-item:hover {
+  background-color: #f6f6f6;
+}
+.item-flag {
+  width: 30px;
+  height: 22px;
+  object-fit: cover;
+}
+.name {
+  flex: 1;
+}
+.code {
+  color: #333333;
+}
+
+/* 密码输入框 */
+.pwd-input-wrap {
+  position: relative;
+  background: #ffffff;
+  border-radius: 4px;
+}
+.pwd-input {
+  width: 100%;
+  padding: 16px 14px;
+  padding-right: 55px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+.pwd-input::placeholder {
+  color: #999999;
+}
+.eye-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 26px;
+  color: #666;
+  cursor: pointer;
+}
 </style>

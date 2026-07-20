@@ -31,7 +31,7 @@
       <div class="w-full mt-2 flex flex-col">
         <div class="w-full overflow-hidden bg-[#f9f9f9] border-[1px] border-[#e6e6e6] py-1 pt-4">
 		  <div class="ml-7.5 font-bold text-base">
-		  	{{$t('旧密码') }}
+		  	{{$t('旧密码') }}<span class="text-red ml-1">*</span>
 		  </div>
           <van-cell-group inset>
             <van-field
@@ -51,7 +51,7 @@
         </div>
         <div class="w-full mt-2 overflow-hidden bg-[#f9f9f9] border-[1px] border-[#e6e6e6] py-1 pt-4">
 	      <div class="ml-7.5 font-bold text-base">
-	        {{$t('新密码') }}
+	        {{$t('新密码') }}<span class="text-red ml-1">*</span>
 	      </div>
           <van-cell-group inset>
             <van-field
@@ -71,7 +71,7 @@
         </div>
         <div class="w-full mt-2 overflow-hidden bg-[#f9f9f9]  border-[1px] border-[#e6e6e6] py-1 pt-4">
 		  <div class="ml-7.5 font-bold text-base">
-		  	{{$t('确认密码') }}
+		  	{{$t('确认密码') }}<span class="text-red ml-1">*</span>
 		  </div>
           <van-cell-group inset>
             <van-field

@@ -18,12 +18,15 @@
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import {getGlobalConfig} from "../../api/apis"
+import { useCommonStore } from "../../store/modules/common";
+const commonStore = useCommonStore();
 const onClickLeft = () => history.back();
 const registerProtocolEn = ref('');
 const getGetGlobalConfig = async() =>{
-    let res = await getGlobalConfig();
-    registerProtocolEn.value = res.data.registerProtocolEn
-    console.log(res)
+	console.log(commonStore.clientLang)
+    let res = await getGlobalConfig({lang: commonStore.clientLang});
+    registerProtocolEn.value = res.data.registerProtocol
+    // console.log(res)
 }
 onMounted(() =>{
     getGetGlobalConfig();

@@ -64,7 +64,9 @@ import { getNoticeList } from "../../api/apis";
 import { useRouter } from "vue-router";
 import {formatWithTimezone}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
+import { useCommonStore } from "../../store/modules/common";
 const userStore = useUserStore();
+const commonStore = useCommonStore();
 const router = useRouter();
 const list = ref([]);
 const loading = ref(false);
@@ -72,13 +74,16 @@ const finished = ref(false);
 const refreshing = ref(false);
 const navBarShow = ref(false);
 const query = reactive({
-  pageNum: 1,
-  pageSize: 10,
+  dto: {
+  	  pageNum: 1,
+  	  pageSize: 10,
+  },
+  lang: commonStore.clientLang
 });
 const onRefresh = async () => {
   refreshing.value = true;
   finished.value = false;
-  query.pageNum = 1;
+  query.dto.pageNum = 1;
   list.value = [];
   await loadData();
   refreshing.value = false;
@@ -95,10 +100,10 @@ const loadData = async () => {
     const res = await getNoticeList(query); // 你自己的接口
     console.log(res);
     const data = res.rows;
-    if (data.length < query.pageSize) {
+    if (data.length < query.dto.pageSize) {
       finished.value = true;
     } else {
-      query.pageNum++;
+      query.dto.pageNum++;
     }
 
     list.value.push(...data);

@@ -8,18 +8,18 @@ export const LANGS = {
         name: 'English',
         code: 'en'
     },
-    fr: {
-        name: 'Français',
-        code: 'fr'
-    },
-    de: {
-        name: 'Deutsch',
-        code: 'de'
-    },
-    it: {
-        name: 'Italiano',
-        code: 'it'
-    },
+    // fr: {
+    //     name: 'Français',
+    //     code: 'fr'
+    // },
+    // de: {
+    //     name: 'Deutsch',
+    //     code: 'de'
+    // },
+    // it: {
+    //     name: 'Italiano',
+    //     code: 'it'
+    // },
     // vi: {
     //     name: 'Tiếng Việt',
     //     code: 'vi'
@@ -28,6 +28,10 @@ export const LANGS = {
     //     name: 'ไทย',
     //     code: 'th'
     // },
+	es: {
+	    name: 'España',
+	    code: 'es'
+	},
     ko: {
         name: '한국어',
         code: 'ko'
@@ -36,12 +40,12 @@ export const LANGS = {
     //     name: '日本語',
     //     code: 'ja'
     // },
-    zh: {
-        name: '中文简体',
-        code: 'zh'
-    },
-    id: {
-        name: 'Bahasa Indonesia',
-        code: 'id'
-    },
+    // zh: {
+    //     name: '中文简体',
+    //     code: 'zh'
+    // },
+    // id: {
+    //     name: 'Bahasa Indonesia',
+    //     code: 'id'
+    // },
 }

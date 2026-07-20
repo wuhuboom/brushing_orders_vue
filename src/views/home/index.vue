@@ -131,10 +131,14 @@
 import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import tradePassword from "@/components/tradePassword.vue";
+import { useCommonStore } from "../../store/modules/common";
 import { onMounted, ref ,reactive,computed } from "vue";
-import { getLevel,getNoticeList } from "../../api/apis";
+import { getLevel,getNoticeList, userGetInfo } from "../../api/apis";
+
 import { useRouter } from "vue-router";
+const commonStore = useCommonStore();
 const tradePasswordRef = ref(null);
+const userInfo = ref({});
 
 const bgMap = {
   VIP1: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
@@ -172,12 +176,12 @@ const items = [
   {
     name: "提款",
     icon: new URL("@/static/images/home/icon-5.png", import.meta.url).href,
-    route: "/notifications",
+    route: "/withdraw",
   },
   {
     name: "定金",
     icon: new URL("@/static/images/home/icon-6.png", import.meta.url).href,
-    route: "/profile",
+    route: "/deposit",
   },
   {
     name: "条款及细则", // 用于 $t('收入指南')
@@ -235,10 +239,19 @@ const content = [
 ];
 
 function goTo(path) {
-  if (path == "/notifications") {
-    tradePasswordRef.value.open(2);
-  } else if (path == "/profile") {
-    tradePasswordRef.value.open(3);
+	
+  if (path == "/withdraw") {
+	if(tradePassword.value){
+	  router.push(path);	  
+	}else{
+	  tradePasswordRef.value.open(2);
+	}  
+  } else if (path == "/deposit") {
+	if(tradePassword.value){
+	  router.push(path);	  
+	}else{
+      tradePasswordRef.value.open(3);
+	}
   } else {
     router.push(path);
   }
@@ -259,14 +272,17 @@ const level = async () => {
 };
 
 const query = reactive({
-  pageNum: 1,
-  pageSize: 10,
+  dto: {
+	  pageNum: 1,
+	  pageSize: 10,
+  },
+  lang: commonStore.clientLang
 });
 const noticeContent  = ref('')
 
 const getData = async () => {
   const res = await getNoticeList(query); // 你自己的接口
-  console.log(res)
+  // console.log(res)
   noticeContent.value = res.rows.length>0? res.rows[0].noticeContent :'';
   
 
@@ -282,7 +298,10 @@ const pureNoticeContent = computed(() => {
 
 onMounted(() => {
   level();
-  getData()
+  getData();
+  userGetInfo().then((res) => {
+    tradePassword.value = res.data.tradePassword;
+  });
 });
 </script>
 <style>

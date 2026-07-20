@@ -34,12 +34,14 @@
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import {getGlobalConfig} from "../../api/apis"
+import { useCommonStore } from "../../store/modules/common";
+const commonStore = useCommonStore();
 const latestEventEn = ref('')
 const navBarShow = ref(false);
 const getGetGlobalConfig = async() =>{
-    let res = await getGlobalConfig();
-    latestEventEn.value = res.data.latestEventEn
-    console.log(latestEventEn.value)
+    let res = await getGlobalConfig({lang: commonStore.clientLang});
+    latestEventEn.value = res.data.latestEvent
+    // console.log(latestEvent.value)
 }
 onMounted(() =>{
     getGetGlobalConfig();

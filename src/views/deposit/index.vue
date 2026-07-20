@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-white min-h-[100vh] h-full bg-[#f3fdf4]" @scroll="handleScroll">
+  <div class="w-full  min-h-[100vh] h-full bg-[#f3fdf4]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('定金')"
@@ -31,7 +31,7 @@
 	      class="flex flex-col justify-between py-4 px-8  box-border bg-[#5d9c5d] rounded-2.5"
 	    >
 	      <div class="text-black text-base font-bold">
-	        {{ $t("账户金额") }}
+	        {{ $t("总金额") }}
 	      </div>
 	      <div class="flex mt-4">
 	        <div class="text-black text-2xl  flex items-center">
@@ -72,7 +72,8 @@
 					    {{ $t('定金文案4') }} {{ item.code }}
 					</div>
 					<div class="text-sm font-normal text-[#7b7b7b]">
-					    {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
+						{{formatTargetDate(item.createTime)}}
+					    <!-- {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }} -->
 					</div>
 				  </div>
 		          
@@ -100,7 +101,7 @@ const active = ref(0);
 const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
-import {formatWithTimezone}  from '../../util/utils'
+import {formatWithTimezone, formatTargetDate}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
 const userStore = useUserStore();
 const ContactUsRef = ref(null);

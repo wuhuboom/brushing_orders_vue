@@ -33,16 +33,19 @@
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import {getNotice} from "../../api/apis"
+import { useCommonStore } from "../../store/modules/common";
 import { useRouter ,useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
+const commonStore = useCommonStore();
 
 console.log(route)
 const incomeGuide = ref({})
 const navBarShow = ref(false);
 const getGetGlobalConfig = async() =>{
     let params = {
-        id:route.query.id
+        id:route.query.id,
+		lang: commonStore.clientLang
     }
     let res = await getNotice(params);
     incomeGuide.value = res.data

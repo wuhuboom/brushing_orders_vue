@@ -348,7 +348,13 @@ const logout = () => {
 
 const payMethod = () => {
   // show.value = true;
-  tradePasswordRef.value.open(1);
+  if(userInfo.value.tradePassword){
+    router.push({
+      path: "/paymentMethods",
+    });
+  }else{
+    tradePasswordRef.value.open(1);
+  }
 };
 const submitTradePassword = async () => {
   if (!tradePassword.value) return ElMessage.error(t("请输入交易密码"));

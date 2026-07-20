@@ -2,7 +2,7 @@
   <div class="container w-full min-h-[100vh] bg-[#ecf7ff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
-	    :title="$t('客服')"
+	    :title="$t('语言')"
 	    fixed
 	    left-arrow
 	    @click-left="onClickLeft"
@@ -15,7 +15,7 @@
 	<HeaderTop></HeaderTop>
 	<van-nav-bar
 	  class="pos"
-	  :title="$t('客服')"
+	  :title="$t('语言')"
 	  fixed
 	  left-arrow
 	  @click-left="onClickLeft"
