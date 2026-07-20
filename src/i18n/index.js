@@ -8,6 +8,7 @@ import it from './locales/it.json';
 import fr from './locales/fr.json';
 import de from './locales/de.json';
 import id from './locales/id.json';
+import es from './locales/es.json';
 
 // 定义语言包
 const messages = {
@@ -16,6 +17,7 @@ const messages = {
   de,
   zh,
   ko,
+  es,
   // ja,
   it,
   id

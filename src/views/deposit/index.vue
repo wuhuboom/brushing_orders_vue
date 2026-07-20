@@ -44,7 +44,7 @@
 	        </div>
 	      </div>
 		  <div class="w-full flex justify-end mt-6">
-			  <div class="bg-black w-[120px] text-center text-white fl rounded-[6px] py-1 px-4" @click="customer">
+			  <div class="bg-black text-center text-white fl rounded-[6px] py-1 px-4" @click="customer">
 				  {{ $t("定金文案1") }}
 			  </div>
 		  </div>

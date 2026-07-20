@@ -388,7 +388,7 @@ onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
-    console.log(userInfo.value);
+    // console.log(userInfo.value);
   });
 });
 </script>

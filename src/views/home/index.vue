@@ -121,7 +121,8 @@
 	    </div>
 	  </div>
 	</div>
-
+	
+	<WelcomeSummary ref="WelcomeSummaryRef"></WelcomeSummary>
     <!-- 行情结束 -->
     <Footer name="/"></Footer>
     <tradePassword ref="tradePasswordRef"></tradePassword>
@@ -136,6 +137,9 @@ import { onMounted, ref ,reactive,computed } from "vue";
 import { getLevel,getNoticeList, userGetInfo } from "../../api/apis";
 
 import { useRouter } from "vue-router";
+import WelcomeSummary from "@/components/WelcomeSummary.vue";
+
+const WelcomeSummaryRef = ref(null);
 const commonStore = useCommonStore();
 const tradePasswordRef = ref(null);
 const userInfo = ref({});
@@ -297,6 +301,12 @@ const pureNoticeContent = computed(() => {
 
 
 onMounted(() => {
+  let round = localStorage.getItem('round')
+  if(round == 0){
+	WelcomeSummaryRef.value.open();
+	localStorage.setItem('round', 1)
+  }
+  
   level();
   getData();
   userGetInfo().then((res) => {

@@ -178,6 +178,7 @@ import { useI18n } from "vue-i18n";
 import { useRouter, useRoute } from "vue-router";
 import {formatWithTimezone}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
+import { errorMessages } from "../../api/errorCodeMap";
 import {
   userGetInfo,
   getGoodsInfo,
@@ -216,6 +217,24 @@ const submitForm = () => {
 			onClickLeft()
         }
     })
+	.catch((err) => {
+	    if (err.code == 916) {
+	        showToast(t("insufficient_balance_please"));
+	        return;
+	    }
+	    if (err.code == 906) {
+	        if (userInfo.value.balance <= 0) {
+	            showToast(t("transaction_failed"));
+	        } else {
+	            showToast(t(errorMessages[err.code] || "创建失败"));
+	        }
+	    } else {
+	        showToast(t(errorMessages[err.code] || "创建失败"));
+	    }
+	})
+	.finally(() => {
+	    isMissionSubmitting.value = false;
+	});
 };
 onMounted(() => {
   getList();

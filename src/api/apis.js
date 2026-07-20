@@ -26,6 +26,8 @@ export const getGlobalConfig = (params) => getApi().get('/config/getConfigByLang
 
 export const getNoticeList = (params) => getApi().get('/config/getNoticeListByLang', { params: params, loading: false, showMsg: false, })// 获取公告配置
 
+export const getSplashAdImage = (params) => getApi().get('/config/getSplashAdImage', { params: params, loading: false, showMsg: false, })// 获取公告配置
+
 export const getLevel = (params) => getApi().get('/config/getLevelByLang', { params: params, loading: false, showMsg: false, })// 获取vip等级配置
 
 export const getDeposit = (params) => getApi().get('/account/getDeposit', { params: params, loading: false, showMsg: false, })// 获取vip等级配置

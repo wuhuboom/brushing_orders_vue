@@ -210,6 +210,7 @@ const submitErr= () => {
 
 const submitJump= () => {
 	router.push({ path: "/home" });
+	localStorage.setItem('round', 0)
 	showSuccess.value = false;
 }
 
@@ -246,11 +247,19 @@ function submitForm(formEl) {
 		}else{
 			showError.value = true
 		}
+		
 		  
         // userStore.setToken(`Bearer ${res.data.token}`);
         // userStore.setUserInfo(res.data.info);
         // router.push({ path: "/" });
-      });
+      })
+	  .catch((err) => {
+	      showFailToast(
+	          err?.msg || err?.message || t("network_error"),
+	      );
+	  })
+	  .finally(() => {
+	  });;
     } else {
       console.log("error submit!");
     }

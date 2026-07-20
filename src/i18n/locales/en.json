@@ -254,5 +254,9 @@
   "产品详情": "Products Details",
   "语言": "Lang",
   "总余额":"Total Balance",
-  "3": "Security"
+  "network_error": "Network error",
+  "insufficient_balance_please": "Insufficient Balance, Please",
+  "transaction_failed": "Transaction failed",
+  "insufficient_balance": "Insufficient balance",
+  "hi": "hi"
 }

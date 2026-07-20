@@ -14,7 +14,7 @@
             />
             <div class=" pl-2">
               <div class="text-black text-base font-semibold">
-                Hi, 
+                {{ $t("hi") }}, 
               </div>
 			  <div class="text-black text-xl font-bold">
 			    {{ userInfo.username }}
@@ -177,6 +177,7 @@ import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast } 
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import {formatWithTimezone}  from '../../util/utils'
+import { errorMessages } from "../../api/errorCodeMap";
 import {
   userGetInfo,
   getGoodsList,
@@ -250,9 +251,8 @@ const doCreateOrder = () => {
 	  toPage('/productInfo', {id: res.data.id})
     })
     .catch((err) => {
-      console.log(err);
       closeToast();
-      showToast(err.msg || "创建失败");
+      showToast(t(errorMessages[err.code] || "创建失败"));
     });
 };
 
@@ -338,7 +338,7 @@ const onTouchEnd = ()=>{
     current.value--
   }
   // 左滑 下一页
-  else if(dis < -threshold && current.value < cardList.value.length -1){
+  else if(dis < -threshold && current.value < goodsList.value.length -1){
     current.value++
   }
   dragX.value = 0
@@ -349,7 +349,7 @@ const AUTO_DELAY = 3000
 // 自动轮播逻辑
 const autoPlay = () => {
   // 到达最后一项回到第二项，实现无缝循环
-  if(current.value >= cardList.value.length ){
+  if(current.value >= goodsList.value.length -1 ){
     current.value = 0
   }else{
     current.value++

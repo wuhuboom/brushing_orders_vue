@@ -202,7 +202,6 @@ const ruleForm = reactive({
 });
 
 const toPage = (path) => {
-	console.log(22222)
   router.push({
     path: path,
   });
