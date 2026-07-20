@@ -25,7 +25,7 @@
 	  </template>
 	</van-nav-bar>
     <div class=" bg-[#ffffff] relative border-[1px] border-[#e6e6e6] m-2 rounded-[10px]">
-      <div class="w-[50%] mx-auto mt-6 box-shadow border-[4px] border-[#c2c2c2] rounded-[10px]">
+      <div class="w-[50%] h-[213px] mx-auto mt-6 box-shadow border-[4px] border-[#c2c2c2] rounded-[10px]">
         <van-image
           width="100%"
 		  radius="20"

@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="w-[100%] px-2 mx-auto">
-		<div class="page mx-auto p-2">
+		<div class="page mx-auto p-2 h-[420px]">
 		  <!-- 轮播可视容器 -->
 		  <div
 		    ref="carouselRef"
