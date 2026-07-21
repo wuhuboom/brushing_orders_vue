@@ -101,72 +101,15 @@
       </div>
     </div>
     <Footer name="/starting"></Footer>
-   <!-- <van-popup
-      v-model:show="showCenter"
-      round
-      closeable
-      :style="{ width:'80%' }"
-    >
-      <div class="w-[5rem] mx-auto mt-6">
-        <van-image
-          width="6rem"
-          height="6rem"
-          fit="contain"
-          :src="url+goods.coverUrl"
-        />
-      </div>
-      <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
-        <div class="w-[100%] mx-auto text-center text-sm font-semibold">
-          {{goods.goodsName}}
-        </div>
-        <div class="flex w-full items-center pt-4 pb-4 mt-4">
-          <div
-            class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
-          >
-            <div class="text-[#000] font-semibold">{{$t('价格')}}</div>
-            <div class="text-xs text-[#000] mt-1">
-              <span class="text-sm mr-1 text-[#000] font-semibold">{{goods.price}}</span>
-              USD
-            </div>
-          </div>
-          <div
-            class="w-[50%] mr-2 flex flex-col py-4 bg-[#d8d8d8] justify-center items-center"
-          >
-            <div class="text-[#000] font-semibold">{{ $t('佣金') }}</div>
-            <div class="text-xs text-[#000] mt-1">
-              <span class="text-sm mr-1 text-[#000] font-semibold">{{goods.commission}}</span>
-              USD
-            </div>
-          </div>
-        </div>
-        <div class="bg-[#d8d8d8] p-4">
-          <div class="flex justify-between items-center box-border">
-            <div class="text-[#000] text-sm">{{$t('创建时间')}}</div>
-            <div class="text-[#000] text-sm font-bold">{{ formatWithTimezone(goods.createTime,userStore.zoneActive.tzName)  }}</div>
-          </div>
-          <div class="flex justify-between items-center box-border mt-2">
-            <div class="whitespace-nowrap text-[#000] text-sm">
-              {{$t('编号')}}
-            </div>
-            <div class="text-[#000] text-xs font-bold">
-              {{goods.orderNo}}
-            </div>
-          </div>
-        </div>
-        <div class="w-full mt-4">
-          <van-button color="#007513" class="w-full" @click="submitForm">{{
-            $t("提交")
-          }}</van-button>
-        </div>
-      </div>
-    </van-popup> -->
-   <!-- <van-popup
-      v-model:show="showImg"
-      round
-      :style="{ width:'80%',background: 'transparent' }"
-    >
-      <img class="w-[100%]" src="../../static/images/super.png" alt="">
-    </van-popup> -->
+	<van-dialog
+	  v-model:show="showCenter"
+	  :showConfirmButton="false"
+		close-on-click-overlay
+	>
+	  <div class="flex flex-col rounded-xl overflow-hidden bg-white">
+	    <img src="@/static/images/base/submit.gif"/>
+	  </div>
+	</van-dialog>
   </div>
 </template>
 <script setup>
@@ -186,6 +129,7 @@ import {
   submitOrder,
 } from "../../api/apis";
 const userStore = useUserStore();
+const showCenter = ref(false);
 const url = window.g.VITE_API_IMG_URL;
 const { t } = useI18n();
 const avatarUrl = ref("");
@@ -209,32 +153,37 @@ const getList =  () => {
 
 
 const submitForm = () => {
-  submitOrder(order.value.id).then((res)=>{
-        showSuccessToast(t("提交成功"));
-        if(res.code == 201) {
-           // goods.value =  res.data
-        } else {
-			onClickLeft()
-        }
-    })
-	.catch((err) => {
-	    if (err.code == 916) {
-	        showToast(t("insufficient_balance_please"));
-	        return;
-	    }
-	    if (err.code == 906) {
-	        if (userInfo.value.balance <= 0) {
-	            showToast(t("transaction_failed"));
-	        } else {
-	            showToast(t(errorMessages[err.code] || "创建失败"));
-	        }
-	    } else {
-	        showToast(t(errorMessages[err.code] || "创建失败"));
-	    }
-	})
-	.finally(() => {
-	    isMissionSubmitting.value = false;
-	});
+  showCenter.value = true
+  setTimeout(function() {
+	  showCenter.value = false
+	  submitOrder(order.value.id).then((res)=>{
+	    showSuccessToast(t("提交成功"));
+	      if(res.code == 201) {
+	         // goods.value =  res.data
+	      } else {
+	  		onClickLeft()
+	      }
+	  })
+	  .catch((err) => {
+	      if (err.code == 916) {
+	          showToast(t("insufficient_balance_please"));
+	          return;
+	      }
+	      if (err.code == 906) {
+	          if (userInfo.value.balance <= 0) {
+	              showToast(t("transaction_failed"));
+	          } else {
+	              showToast(t(errorMessages[err.code] || "创建失败"));
+	          }
+	      } else {
+	          showToast(t(errorMessages[err.code] || "创建失败"));
+	      }
+	  })
+	  .finally(() => {
+	      isMissionSubmitting.value = false;
+	  });
+  }, 3000);
+  
 };
 onMounted(() => {
   getList();
@@ -257,4 +206,8 @@ const onClickLeft = () => history.back();
 </script>
 
 <style scoped>
+:deep(.van-dialog){
+  width: 90%;
+  background-color: transparent;
+}
 </style>

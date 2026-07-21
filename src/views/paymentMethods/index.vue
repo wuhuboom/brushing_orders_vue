@@ -115,9 +115,7 @@ const submitForm = async () => {
   router.push({ path: "/my" });
 };
 
-const onClickLeft = () => {
-  router.push({ path: "/my" });
-};
+const onClickLeft = () => history.back();
 onMounted(async () => {
   await userStore.getUserInfo();
   form.withdrawName = userStore.userInfo.withdrawName;

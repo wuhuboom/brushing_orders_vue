@@ -252,5 +252,6 @@
   "insufficient_balance_please": "잔액이 부족합니다.",
   "transaction_failed": "거래 실패",
   "insufficient_balance": "잔액 부족",
-  "hi": "안녕"
+  "hi": "안녕",
+  "available": "가용 잔액"
 }

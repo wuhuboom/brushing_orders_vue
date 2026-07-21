@@ -253,5 +253,6 @@
   "insufficient_balance_please": "Saldo insuficiente, por favor",
   "transaction_failed": "Transacción fallida",
   "insufficient_balance": "Saldo insuficiente",
-  "hi": "Hola"
+  "hi": "Hola",
+  "available": "Saldo disponible"
 }

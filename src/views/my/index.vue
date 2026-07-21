@@ -358,7 +358,7 @@ const payMethod = () => {
 };
 const submitTradePassword = async () => {
   if (!tradePassword.value) return ElMessage.error(t("请输入交易密码"));
-  console.log(tradePassword.value);
+
   let ruleForm = {
     tradePassword: tradePassword.value,
   };

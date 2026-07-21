@@ -286,10 +286,8 @@ const noticeContent  = ref('')
 
 const getData = async () => {
   const res = await getNoticeList(query); // 你自己的接口
-  // console.log(res)
   noticeContent.value = res.rows.length>0? res.rows[0].noticeContent :'';
   
-
 }
 
 // 计算属性，去除所有HTML标签
@@ -308,7 +306,7 @@ onMounted(() => {
   }
   
   level();
-  getData();
+  // getData();
   userGetInfo().then((res) => {
     tradePassword.value = res.data.tradePassword;
   });
