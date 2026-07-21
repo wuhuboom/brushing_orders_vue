@@ -160,13 +160,22 @@
       <div class="mt-6 pb-4"></div>
     </div>
     <Footer name="/starting"></Footer>
-    <van-popup
+    <van-dialog
       v-model:show="showImg"
       round
-      :style="{ width:'80%',background: 'transparent' }"
+	  :showConfirmButton="false"
+	  close-on-click-overlay
+      :style="{ width:'90%',background: 'transparent' }"
     >
-      <img class="w-[100%]" src="../../static/images/super.png" alt="">
-    </van-popup>
+      <img class="w-[100%]" src="../../static/images/super.jpg" alt="">
+	  <div @click="toPage('/contact')" class="w-full" size="large" round>
+	    <div
+	      class="w-full text-white text-2xl font-semibold mx-auto py-5  flex items-center justify-center bg-black"
+	    >
+	      <div>{{ $t("联系客服") }}</div>
+	    </div>
+	  </div>
+    </van-dialog>
   </div>
 </template>
 <script setup>
@@ -192,6 +201,7 @@ const { t } = useI18n();
 const userInfo = ref({});
 const avatarUrl = ref("");
 const showImg = ref(false);
+let luckyDrawTimer = null;
 
 // let timer = null;
 const goodsList = ref([]);
@@ -222,17 +232,25 @@ const getImageByIndex = (i) => {
 
 // 抢单
 const handleClick = () => {
-  if(userInfo.value.cardNumber == userInfo.value.dealCount && userInfo.value.cardNumber !=0) {
-    showImg.value = true;
-    // 2. 延时 2 秒后关闭图片，并继续创建订单
-    setTimeout(() => {
-      showImg.value = false;
-    }, 2000);
-	doCreateOrder()
-    return;
-  }
+ //  if(userInfo.value.cardNumber == userInfo.value.dealCount && userInfo.value.cardNumber !=0) {
+ //    showImg.value = true;
+ //    // 2. 延时 2 秒后关闭图片，并继续创建订单
+ //    setTimeout(() => {
+ //      showImg.value = false;
+ //    }, 2000);
+	// doCreateOrder()
+ //    return;
+ //  }
   // 不满足条件时，直接创建订单
   doCreateOrder()
+};
+
+const closeImg = () => {
+    showImg.value = false;
+    if (luckyDrawTimer) {
+        clearTimeout(luckyDrawTimer);
+        luckyDrawTimer = null;
+    }
 };
 
 const doCreateOrder = () => {
@@ -241,7 +259,6 @@ const doCreateOrder = () => {
     forbidClick: true,
     duration: 0,
   });
-  
   createOrder()
     .then((res) => {
       closeToast();
@@ -251,8 +268,21 @@ const doCreateOrder = () => {
 	  toPage('/productInfo', {id: res.data.id})
     })
     .catch((err) => {
-      closeToast();
-      showToast(t(errorMessages[err.code] || "创建失败"));
+	  closeToast();
+	  if (err.code == 2000) {
+	      showImg.value = true;
+	      // if (luckyDrawTimer) clearTimeout(luckyDrawTimer);
+	      // luckyDrawTimer = setTimeout(() => {
+	      //     showImg.value = false;
+	      //     luckyDrawTimer = null;
+	      // }, 15000);
+	  } else if (err.code == 909) {
+	      showToast(
+	          `User has filled in ${err.data} pieces of data. please contact Customer Service to apply for resetting account`,
+	      );
+	  } else {
+	      showToast(t(errorMessages[err.code] || "creation_failed"));
+	  }
     });
 };
 
@@ -364,6 +394,7 @@ const startTimer = () => {
 // 页面销毁清除定时器，防止后台持续轮播
 onUnmounted(()=>{
   clearInterval(timer)
+  if (luckyDrawTimer) clearTimeout(luckyDrawTimer);
 })
 
 </script>
