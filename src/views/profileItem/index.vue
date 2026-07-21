@@ -117,5 +117,5 @@ function handleScroll(e) {
 	  navBarShow.value = false
   }
 }
-  const onClickLeft = () => router.replace('/my');
+  const onClickLeft = () => history.back();
 </script>

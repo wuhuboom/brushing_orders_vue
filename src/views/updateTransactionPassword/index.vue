@@ -125,7 +125,7 @@ const ruleForm = reactive({
   oldTradePassword: "",
   newTradePassword: "",
 });
-const onClickLeft = () => router.replace('/profileItem');
+const onClickLeft = () => history.back();;
 const submitForm = async () => {
   if (!ruleForm.oldTradePassword) return showFailToast(t("请输入旧密码"));
   if (!ruleForm.newTradePassword) return showFailToast(t("请输入新密码"));

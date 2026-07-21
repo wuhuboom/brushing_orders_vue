@@ -108,7 +108,7 @@
 </template>
 <script setup>
 import { onMounted, ref,reactive } from "vue";
-const onClickLeft = () => router.replace('/profileItem');
+const onClickLeft = () => history.back();;
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
 import { editPassword } from "../../api/apis";
 import { useRouter } from "vue-router";

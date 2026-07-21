@@ -98,8 +98,8 @@ function handleScroll(e) {
 	  navBarShow.value = false
   }
 }
-  // const onClickLeft = () => history.back();
-  const onClickLeft = () => router.back();
+  const onClickLeft = () => history.back();
+  // const onClickLeft = () => router.back();
   
 </script>
 

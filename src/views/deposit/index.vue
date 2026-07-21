@@ -295,9 +295,7 @@ const toPage = (path, param) => {
 	query: param
   });
 };
-const onClickLeft = () => {
-	toPage('/my')
-}
+const onClickLeft = () => history.back();
 </script>
 <style scoped>
 .info-left{
