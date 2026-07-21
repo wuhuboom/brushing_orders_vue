@@ -287,7 +287,7 @@ const doCreateOrder = () => {
 	      showToast(
 	          `t("staring4") ${err.data} t("staring5")`,
 	      );
-	  } else if (err.code == 90700) {
+	  } else if (err.code == 907) {
 	      toPage('/productInfo', {id: err.data.id})
 	  } else {
 	      showToast(t(errorMessages[err.code] || "creation_failed"));
