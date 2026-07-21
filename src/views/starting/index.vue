@@ -149,10 +149,12 @@
       <div class="w-[100%] mx-auto px-2">
         <div class="mb-8 rounded-lg bg-[#ffffff] border-[#eaeaea] border-[1px]">
           <div class="flex flex-col p-4 box-border text-center relative rounded-xl">
-            <div class="mb-2  text-base font-bold" style="color: black;">Notice</div>
+            <div class="mb-2  text-base font-bold" style="color: black;">{{ $t("staring3") }}</div>
             <div class="text-[#000] text-sm ">
-              Online Support Hours 10:00 - 22:59 <br />
-              Please contact online support for your assistance!
+              {{ $t("staring1") }}
+              {{ TradeInfor?.workTimeStart || "10:00" }} -
+              {{ TradeInfor?.workTimeEnd || "23:00" }}<br />
+              {{ $t("staring2") }}
             </div>
           </div>
         </div>
@@ -179,7 +181,7 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref, onUnmounted, computed, nextTick } from "vue";
+import { onMounted, ref, onUnmounted, computed, nextTick, defineOptions } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast } from 'vant';
@@ -192,8 +194,13 @@ import {
   getGoodsList,
   createOrder,
   submitOrder,
+  getTradeConfig
 } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
+
+defineOptions({
+  name: 'Starting' 
+})
 const userStore = useUserStore();
 const router = useRouter();
 const url = window.g.VITE_API_IMG_URL;
@@ -278,8 +285,10 @@ const doCreateOrder = () => {
 	      // }, 15000);
 	  } else if (err.code == 909) {
 	      showToast(
-	          `User has filled in ${err.data} pieces of data. please contact Customer Service to apply for resetting account`,
+	          `t("staring4") ${err.data} t("staring5")`,
 	      );
+	  } else if (err.code == 90700) {
+	      toPage('/productInfo', {id: err.data.id})
 	  } else {
 	      showToast(t(errorMessages[err.code] || "creation_failed"));
 	  }
@@ -290,6 +299,7 @@ const doCreateOrder = () => {
 const orderCount = ref(0)
 onMounted(() => {
   getList();
+  tradeConfig();
   startTimer();
   getContainerWidth();
   userGetInfo().then((res) => {
@@ -330,6 +340,12 @@ const containerWidth = ref(0)
 const startX = ref(0)
 const dragX = ref(0)
 const dragging = ref(false)
+
+const TradeInfor = ref({});
+const tradeConfig = async () => {
+    const res = await getTradeConfig();
+    TradeInfor.value = res.data;
+};
 
 // 核心位移公式：强制让current卡片居中，左边露出前一张、右边露出后一张
 const translateX = computed(()=>{

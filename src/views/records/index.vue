@@ -153,13 +153,16 @@
 
 <script setup>
 import HeaderTop from "@/components/HeaderTop.vue";
-import { onMounted, ref ,reactive} from "vue";
+import { onMounted, ref ,reactive, defineOptions} from "vue";
 import {getOrderInfos,submitOrder} from "../../api/apis";
 import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
 import { useI18n } from "vue-i18n";
 import {formatWithTimezone}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
+defineOptions({
+  name: 'Records' 
+})
 const userStore = useUserStore();
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 const router = useRouter();

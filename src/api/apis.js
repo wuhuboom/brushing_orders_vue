@@ -51,3 +51,6 @@ export const getNotice = (params) => getApi().get(`/config/getNoticeByLang/`+par
 
 export const getZoneActive = (params) => getApi().get(`/config/getZoneActive`, { params: params, loading: false, showMsg: false, })// 获取时区
 
+export const getUnreadNoticeCount = (params) => getApi().get(`/config/getUnreadNoticeCount`, { params: params, loading: false, showMsg: false, })// 获取未读通知
+
+export const markNoticeRead = (params) => getApi().post(`config/markNoticeRead/${params}`, params, { loading: true, showMsg: true, })// 验证交易密码

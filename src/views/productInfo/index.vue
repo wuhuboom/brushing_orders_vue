@@ -64,7 +64,7 @@
             <div class="text-[#000] font-semibold">{{$t('价格')}}</div>
             <div class="text-xs text-[#000] mt-1">
               <span class="text-sm mr-1 text-[#000] font-semibold">{{order.price}}</span>
-              USD
+             {{ $t("美元") }}
             </div>
           </div>
           <div
@@ -73,7 +73,7 @@
             <div class="text-[#000] font-semibold">{{ $t('佣金') }}</div>
             <div class="text-xs text-[#000] mt-1">
               <span class="text-sm mr-1 text-[#000] font-semibold">{{order.commission}}</span>
-              USD
+             {{ $t("美元") }}
             </div>
           </div>
         </div>

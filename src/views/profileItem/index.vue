@@ -60,7 +60,9 @@
 		  <div class="flex items-center text-black text-base font-bold">
 		    {{ $t("性别") }}
 		  </div>
-		  <div class="text-[#666] text-sm font-medium">{{userStore.userInfo.sex}}</div>
+		  <div class="text-[#666] text-sm font-medium">
+			  {{userStore.userInfo.sex == 2? $t("女"): $t("男")}}
+		  </div>
 		</div>
       </div>
 	  <div class="py-4 mt-4 text-base font-bold text-black">

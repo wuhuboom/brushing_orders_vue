@@ -72,7 +72,7 @@
 		  </div>
 		</div>
 		
-		<!-- <div class="mt-4 bg-white">
+		<div class="mt-4 bg-white">
 			<van-cell v-for="item in orderList" :key="item" :title="item">
 			    <div class="w-full flex flex-col mb-2 bg-[#ffffff] border-[0px] border-[#eee] p-4 box-border rounded-[6px]">
 			        <div class="w-full flex justify-between items-center mb-4">
@@ -144,12 +144,12 @@
 					</div>   
 			    </div>
 			</van-cell>
-		</div> -->
+		</div>
 		
-		<div class="text-black mt-10 text-base font-bold">
+		<div class="text-black mt-8 text-base font-bold">
 		  {{ $t("定金文案2") }}
 		</div>
-		<div class="w-full px-2 pt-6 box-border flex flex-col">
+		<div class="w-full px-2 pt-4 box-border flex flex-col">
 		  <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
 		   <van-list
 		      v-model:loading="loading"
@@ -200,6 +200,8 @@ const finished = ref(false);
 const loading = ref(false);
 import {formatWithTimezone, formatTargetDate}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const userStore = useUserStore();
 const ContactUsRef = ref(null);
 const userInfo = ref({})
@@ -219,11 +221,18 @@ const query = reactive({
   pageSize: 10,
 });
 
+const queryOrder = reactive({
+  pageNum: 1,
+  pageSize: 10,
+  status: 2
+});
+
 const getOrderInfo = async() => {
-	let res = await getOrderInfos(query);
+	let res = await getOrderInfos(queryOrder);
 	const data = res.rows;
 	orderList.value = data
 }
+
 const onRefresh = async () => {
   refreshing.value = true;
   finished.value = false;
@@ -272,7 +281,22 @@ function handleScroll(e) {
 	  navBarShow.value = false
   }
 }
-const onClickLeft = () => history.back();
+
+const submit = (item) => {
+    // goodsData.value = item;
+    // show.value = true
+	toPage('/productInfo', {id: item.id})
+}
+
+const toPage = (path, param) => {
+  router.push({
+    path: path,
+	query: param
+  });
+};
+const onClickLeft = () => {
+	toPage('/my')
+}
 </script>
 <style scoped>
 .info-left{

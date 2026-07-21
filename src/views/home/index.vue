@@ -133,16 +133,19 @@ import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import { useCommonStore } from "../../store/modules/common";
-import { onMounted, ref ,reactive,computed } from "vue";
+import { onMounted, ref ,reactive,computed, defineOptions } from "vue";
 import { getLevel,getNoticeList, userGetInfo } from "../../api/apis";
 
 import { useRouter } from "vue-router";
 import WelcomeSummary from "@/components/WelcomeSummary.vue";
-
+defineOptions({
+  name: 'Home' // 和 Layout keep-alive include 里名称完全一致
+})
 const WelcomeSummaryRef = ref(null);
 const commonStore = useCommonStore();
 const tradePasswordRef = ref(null);
 const userInfo = ref({});
+
 
 const bgMap = {
   VIP1: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
@@ -276,10 +279,8 @@ const level = async () => {
 };
 
 const query = reactive({
-  dto: {
-	  pageNum: 1,
-	  pageSize: 10,
-  },
+  pageNum: 1,
+  pageSize: 10,
   lang: commonStore.clientLang
 });
 const noticeContent  = ref('')

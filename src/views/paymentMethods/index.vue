@@ -49,11 +49,23 @@
 	   	 {{$t('网络') }}
 	     </div>
 	     <van-cell-group inset>
-	       <van-field
-	   	  type="text"
+	      <!-- <van-field
+			type="text"
 	         v-model="form.withdrawType"
 	         :placeholder="$t('网络')"
-	       />
+	       /> -->
+			<el-select
+			  v-model="form.withdrawType"
+			  size="large"
+			  :placeholder="$t('网络')"
+			 >
+			<el-option
+			  v-for="item in typeRef"
+			  :key="item.value"
+			  :label="item.label"
+			  :value="item.value">
+			</el-option>
+			 </el-select>
 	     </van-cell-group>
 	   </div>
 	   <div class="w-full mt-4 overflow-hidden bg-[#f9f9f9]  border-[1px] border-[#e6e6e6] py-1 pt-4">
@@ -105,6 +117,13 @@ const form = reactive({
   withdrawAddress: "",
   withdrawType: "",
 });
+
+const typeRef = reactive([
+	{value: "BTC",label: 'BTC'},
+	{value: "ETH",label: 'ETH'},
+	{value: "ERC-USDT ",label: 'ERC-USDT '},
+	{value: "TRC-USDT",label: 'TRC-USDT'}
+])
 const navBarShow = ref(false);
 const submitForm = async () => {
   if (!form.withdrawName) return showToast(t("请输入钱包名称"));
@@ -136,5 +155,11 @@ function handleScroll(e) {
 <style scoped>
 :deep(.van-cell){
 	padding: 6px 8px !important;
+}
+:deep(.el-select--large .el-select__wrapper){
+	padding: 8px 8px;
+	border: 0px;
+	box-shadow: 0px 0px 0px 0px;
+	background: #f8f8f8;
 }
 </style>

@@ -32,7 +32,7 @@
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import {getNotice} from "../../api/apis"
+import {getNotice, markNoticeRead} from "../../api/apis"
 import { useCommonStore } from "../../store/modules/common";
 import { useRouter ,useRoute } from "vue-router";
 const router = useRouter();
@@ -50,6 +50,9 @@ const getGetGlobalConfig = async() =>{
     let res = await getNotice(params);
     incomeGuide.value = res.data
 }
+const setNoticeRead = async() =>{
+    let res = await markNoticeRead(route.query.id);
+}
 function handleScroll(e) { 
   const scrollTop = e.target.scrollTop
   if(scrollTop> 90){
@@ -60,6 +63,7 @@ function handleScroll(e) {
 }
 onMounted(() =>{
     getGetGlobalConfig();
+	setNoticeRead();
 })
 const onClickLeft = () => history.back();
 </script>

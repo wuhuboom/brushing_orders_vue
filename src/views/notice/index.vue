@@ -38,7 +38,10 @@
               @click="goDetail(item)"
             >
               <div class="flex justify-between">
-                <div class="text-base font-bold text-[#333]">{{item.noticeTitle}}</div>
+                <div class="text-base font-bold text-[#333]">
+				{{item.noticeTitle}}
+				<span v-if="!item.isRead" class="text-[#ff0000] dot">●</span>
+				</div>
               </div>
               <div
                 class="flex text-sm text-[#000] items-center mt-1"
@@ -74,16 +77,14 @@ const finished = ref(false);
 const refreshing = ref(false);
 const navBarShow = ref(false);
 const query = reactive({
-  dto: {
-  	  pageNum: 1,
-  	  pageSize: 10,
-  },
+  pageNum: 1,
+  pageSize: 10,
   lang: commonStore.clientLang
 });
 const onRefresh = async () => {
   refreshing.value = true;
   finished.value = false;
-  query.dto.pageNum = 1;
+  query.pageNum = 1;
   list.value = [];
   await loadData();
   refreshing.value = false;
@@ -100,10 +101,10 @@ const loadData = async () => {
     const res = await getNoticeList(query); // 你自己的接口
     console.log(res);
     const data = res.rows;
-    if (data.length < query.dto.pageSize) {
+    if (data.length < query.pageSize) {
       finished.value = true;
     } else {
-      query.dto.pageNum++;
+      query.pageNum++;
     }
 
     list.value.push(...data);
@@ -153,4 +154,9 @@ const onClickLeft = () => history.back();
 	  background: #000;
 	  border-radius: 50%; /* 圆形 */
 	}
+.dot{
+    position: absolute;
+    margin-top: -8px;
+    margin-left: 5px;
+}
 </style>

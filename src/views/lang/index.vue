@@ -73,7 +73,7 @@ const toPage = (path) => {
 };
 onMounted(() => {
   userStore.getUserInfo()
-  getCustomer()
+  // getCustomer()
 })
 const getCustomer = async() =>{
   let res = await getCustomerService();
@@ -98,7 +98,9 @@ function handleScroll(e) {
 	  navBarShow.value = false
   }
 }
-  const onClickLeft = () => history.back();
+  // const onClickLeft = () => history.back();
+  const onClickLeft = () => router.back();
+  
 </script>
 
 <style scoped>

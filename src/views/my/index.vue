@@ -224,7 +224,10 @@
 		>
 		  <div class=" w-full flex items-center justify-between">
 		    <div class="flex items-center justify-between">
-				<img class="w-8 mr-2" style="float: left;" src="@/static/images/my/icon-5.png"/>
+				<img v-if="unread == 0" class="w-8 mr-2" style="float: left;" src="@/static/images/my/icon-5.png"/>
+				<el-badge v-else :value="unread" class="badge-wrap text-sm ">
+				    <img class="w-8 mr-2" src="@/static/images/my/icon-5.png" />
+				</el-badge>
 				<div class="text-[#000] text-base font-bold" style="float: left;">
 				  {{ $t("通知") }}
 				</div>
@@ -295,7 +298,7 @@
 import ContactUs from "@/components/ContactUs.vue";
 import tradePassword from "@/components/tradePassword.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
-import { userGetInfo, checkTradePassword } from "../../api/apis";
+import { userGetInfo, checkTradePassword, getUnreadNoticeCount } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { showConfirmDialog } from "vant";
@@ -307,15 +310,20 @@ const userImg = new URL("@/static/images/userImg.png", import.meta.url)
   .href;
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url)
   .href;
-import { onMounted, ref } from "vue";
+import { onMounted, ref, defineOptions } from "vue";
 import { useRouter } from "vue-router";
 import { copyContent } from '../../util/utils';
+defineOptions({
+  name: 'My' 
+})
+
 const userStore = useUserStore();
 const url = window.g.VITE_API_IMG_URL;
 const router = useRouter();
 const userInfo = ref({});
 const avatarUrl = ref("");
 const navBarShow = ref(false);
+const unread = ref(0);
 
 const bgMapStart = [
   "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
@@ -390,8 +398,15 @@ onMounted(() => {
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     // console.log(userInfo.value);
   });
+  
+  getUnreadNoticeCount().then((res) => {
+    unread.value = res.data.unreadCount;
+  });
 });
 </script>
 
 <style scoped>
+:deep(.el-badge__content.is-fixed){
+  right: calc(10px + var(--el-badge-size) / 2);
+}
 </style>
