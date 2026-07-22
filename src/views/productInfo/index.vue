@@ -161,7 +161,8 @@ const submitForm = () => {
 	      if(res.code == 201) {
 	         // goods.value =  res.data
 	      } else {
-	  		onClickLeft()
+	  		// onClickLeft()
+			toPage("/starting");
 	      }
 	  })
 	  .catch((err) => {
@@ -172,12 +173,12 @@ const submitForm = () => {
 	      }
 	      if (err.code == 906) {
 	          if (userInfo.value.balance <= 0) {
-	              showToast(t("transaction_failed"));
+	              // showToast(t("transaction_failed"));
 	          } else {
-	              showToast(t(errorMessages[err.code] || "创建失败"));
+	              // showToast(t(errorMessages[err.code] || "创建失败"));
 	          }
 	      } else {
-	          showToast(t(errorMessages[err.code] || "创建失败"));
+	          // showToast(t(errorMessages[err.code] || "创建失败"));
 	      }
 	  })
 	  .finally(() => {
