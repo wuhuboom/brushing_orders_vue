@@ -158,12 +158,12 @@ const submitForm = () => {
 	  showCenter.value = false
 	  submitOrder(order.value.id).then((res)=>{
 	    showSuccessToast(t("提交成功"));
-	      if(res.code == 201) {
-	         // goods.value =  res.data
-	      } else {
+	    //   if(res.code == 201) {
+	    //      goods.value =  res.data
+	    //   } else {
 	  		// onClickLeft()
-			toPage("/starting");
-	      }
+	    //   }
+		  toPage("/starting");
 	  })
 	  .catch((err) => {
 	      if (err.code == 916) {
@@ -171,6 +171,10 @@ const submitForm = () => {
 			  toPage("/deposit");
 	          return;
 	      }
+		  if (err.code == 918) {
+		  	  toPage("/starting");
+		      return;
+		  }
 	      if (err.code == 906) {
 	          if (userInfo.value.balance <= 0) {
 	              // showToast(t("transaction_failed"));

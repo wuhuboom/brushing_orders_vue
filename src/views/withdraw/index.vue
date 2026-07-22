@@ -243,7 +243,9 @@ const getWithdrawal = () => {
   ruleForm.walletId = walletInfo.value.id;
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
-    router.push({ path: "/my" });
+	ruleForm.amount = ''
+	ruleForm.tradePassword = ''
+    // router.push({ path: "/my" });
   });
 };
 const TradeInfor = ref({});

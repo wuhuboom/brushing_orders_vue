@@ -1,6 +1,7 @@
 <template>
   <div>
     <van-dialog
+	v-if="ready"
     v-model:show="showCenter"
     :showConfirmButton="false"
     show-cancel-button
@@ -27,6 +28,7 @@
 import { onMounted, ref } from "vue";
 import { tr } from "element-plus/es/locales.mjs";
 import { getCustomerService } from '../api/apis';
+const ready = ref(false) 
 const url = window.g.VITE_API_IMG_URL;
 const showCenter = ref(false);
 const customerList = ref([])
@@ -35,7 +37,8 @@ const open = async() =>{
   showCenter.value = true
   let res = await getCustomerService();
   customerList.value = res.data
-  console.log(customerList.value)
+  ready.value = true
+  // console.log(customerList.value)
 }
 const close = () => (showCenter.value = false);
 
