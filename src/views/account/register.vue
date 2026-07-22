@@ -309,9 +309,10 @@ function sendCode() {
     return showToast(t("请输入正确电话号码"));
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));
-
-  ruleForm.phone = selectedCountry.value.dial + ruleForm.phone
-  register(ruleForm).then((res) => {
+  let param = JSON.parse(JSON.stringify(ruleForm))
+  param.phone = selectedCountry.value.dial + ruleForm.phone
+  // ruleForm.phone = selectedCountry.value.dial + ruleForm.phone
+  register(param).then((res) => {
     showToast(t("注册成功"))
     router.push({
       path: "/account/login",
