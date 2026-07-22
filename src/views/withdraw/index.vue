@@ -285,7 +285,10 @@ const walletInfo = ref({
 
 const getUserWallet = async () => {
     let res = await getWallet();
-	walletInfo.value = res.data
+	if(res.data){
+		walletInfo.value = res.data
+	}
+	
 	ready.value = true;
     // bankWallet.value = res.data || [];
 };

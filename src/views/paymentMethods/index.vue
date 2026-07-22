@@ -139,10 +139,12 @@ const submitForm = async () => {
 const onClickLeft = () => history.back();
 onMounted(() => {
   getWallet().then((res) => {
-	form.wallet = res.data.wallet;
-	form.address = res.data.address;
-	form.network = res.data.network;
-	form.id = res.data.id;
+	if(res.data){
+		form.wallet = res.data.wallet;
+		form.address = res.data.address;
+		form.network = res.data.network;
+		form.id = res.data.id;
+	}
 	ready.value = true;
   });
   // await userStore.getUserInfo();
