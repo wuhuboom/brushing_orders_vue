@@ -166,7 +166,8 @@ const submitForm = () => {
 	  })
 	  .catch((err) => {
 	      if (err.code == 916) {
-	          showToast(t("insufficient_balance_please"));
+	          // showToast(t("insufficient_balance_please"));
+			  toPage("/deposit");
 	          return;
 	      }
 	      if (err.code == 906) {

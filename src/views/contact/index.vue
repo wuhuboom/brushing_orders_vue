@@ -24,33 +24,35 @@
 		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
 	  </template>
 	</van-nav-bar>
-    <div class="w-full p-6 box-border flex flex-col ">
-	  <div class="py-2 text-center text-xl font-bold text-black">
-	  	 {{ $t("客服文案1") }}
-	  </div>
-	  <div class="text-xs text-center text-[#4b4c5a] mt-1">
-		 {{ $t("客服文案2") }} 
-	  </div>
-      <div class=" flex flex-col mt-4">
-        <div
-		  v-for="item in customerList"
-		  @click="jump(item.linkUrl)"
-          class="flex items-center rounded-2.5 justify-between p-4 my-1 box-border border-[1px] border-[#e6e6e6] bg-[#000]"
-        >
-          <div class="flex items-center text-white text-base font-medium">
-            {{ item.name }}
-          </div>
-		  <img class="" src="@/static/images/base/right-white.png" style="width:22px" />
-        </div>
-      </div>
-	  <div class="py-1 mt-6 text-xl font-bold text-black ">
-	  	 {{ $t("客服文案3") }}
-	  </div>
-	  
-	  <div class="text-xs text-[#4b4c5a] mt-1">
-	    {{ $t("客服文案4") }} 
-	  </div>
-    </div>
+	<div v-if="ready">
+		<div class="w-full p-6 box-border flex flex-col ">
+		  <div class="py-2 text-center text-xl font-bold text-black">
+		  	 {{ $t("客服文案1") }}
+		  </div>
+		  <div class="text-xs text-center text-[#4b4c5a] mt-1">
+			 {{ $t("客服文案2") }} 
+		  </div>
+		  <div class=" flex flex-col mt-4">
+		    <div
+			  v-for="item in customerList"
+			  @click="jump(item.linkUrl)"
+		      class="flex items-center rounded-2.5 justify-between p-4 my-1 box-border border-[1px] border-[#e6e6e6] bg-[#000]"
+		    >
+		      <div class="flex items-center text-white text-base font-medium">
+		        {{ item.name }}
+		      </div>
+			  <img class="" src="@/static/images/base/right-white.png" style="width:22px" />
+		    </div>
+		  </div>
+		  <div class="py-1 mt-6 text-xl font-bold text-black ">
+		  	 {{ $t("客服文案3") }}
+		  </div>
+		  
+		  <div class="text-xs text-[#4b4c5a] mt-1">
+		    {{ $t("客服文案4") }} 
+		  </div>
+		</div>
+	</div>
   </div>
 </template>
 <script setup>
@@ -64,6 +66,7 @@ const userStore = useUserStore()
 const router = useRouter();
 const navBarShow = ref(false);
 const customerList = ref([])
+const ready = ref(false) 
 const toPage = (path) => {
   router.push({
     path: path,
@@ -76,7 +79,8 @@ onMounted(() => {
 const getCustomer = async() =>{
   let res = await getCustomerService({lang: commonStore.clientLang});
   customerList.value = res.data
-  console.log(customerList.value)
+  ready.value = true
+  // console.log(customerList.value)
 }
 
 const jump = (url) =>{

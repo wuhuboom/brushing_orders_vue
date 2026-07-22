@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#ecf7ff]" @scroll="handleScroll">
+  <div v-if="ready" class="w-full min-h-[100vh] bg-[#ecf7ff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('付款方式')"
@@ -39,7 +39,7 @@
 	     <van-cell-group inset>
 	       <van-field
 	   	  type="text"
-	         v-model="form.withdrawName"
+	         v-model="form.wallet"
 	         :placeholder="$t('钱包')"
 	       />
 	     </van-cell-group>
@@ -55,7 +55,7 @@
 	         :placeholder="$t('网络')"
 	       /> -->
 			<el-select
-			  v-model="form.withdrawType"
+			  v-model="form.network"
 			  size="large"
 			  :placeholder="$t('网络')"
 			 >
@@ -75,7 +75,7 @@
 	     <van-cell-group inset>
 	       <van-field
 	   	  type="text"
-	         v-model="form.withdrawAddress"
+	         v-model="form.address"
 	         :placeholder="$t('地址')"
 	       />
 	     </van-cell-group>
@@ -102,7 +102,7 @@
 </template>
 <script setup>
 import { onMounted, ref, reactive } from "vue";
-import { addWithdrawalMethod } from "../../api/apis";
+import { addWithdrawalMethod, getWallet, addWallet } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -112,10 +112,12 @@ import {
 const userStore = useUserStore();
 const router = useRouter();
 const { t } = useI18n();
+const ready = ref(false); 
 const form = reactive({
-  withdrawName: "",
-  withdrawAddress: "",
-  withdrawType: "",
+  id: null,
+  wallet: "",
+  address: "",
+  network: "",
 });
 
 const typeRef = reactive([
@@ -126,20 +128,27 @@ const typeRef = reactive([
 ])
 const navBarShow = ref(false);
 const submitForm = async () => {
-  if (!form.withdrawName) return showToast(t("请输入钱包名称"));
-  if (!form.withdrawAddress) return showToast(t("请输入网络"));
-  if (!form.withdrawAddress) return showToast(t("请输入地址"));
-  let res = await addWithdrawalMethod(form);
+  if (!form.wallet) return showToast(t("请输入钱包名称"));
+  if (!form.network) return showToast(t("请输入网络"));
+  if (!form.address) return showToast(t("请输入地址"));
+  let res = await addWallet(form);
   showToast(t("添加成功"))
   router.push({ path: "/my" });
 };
 
 const onClickLeft = () => history.back();
-onMounted(async () => {
-  await userStore.getUserInfo();
-  form.withdrawName = userStore.userInfo.withdrawName;
-  form.withdrawAddress = userStore.userInfo.withdrawAddress;
-  form.withdrawType = userStore.userInfo.withdrawType;
+onMounted(() => {
+  getWallet().then((res) => {
+	form.wallet = res.data.wallet;
+	form.address = res.data.address;
+	form.network = res.data.network;
+	form.id = res.data.id;
+	ready.value = true;
+  });
+  // await userStore.getUserInfo();
+  // form.withdrawName = userStore.userInfo.withdrawName;
+  // form.withdrawAddress = userStore.userInfo.withdrawAddress;
+  // form.withdrawType = userStore.userInfo.withdrawType;
 });
 
 function handleScroll(e) { 

@@ -76,6 +76,7 @@ const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
 const navBarShow = ref(false);
+const ready = ref(false) 
 const query = reactive({
   pageNum: 1,
   pageSize: 10,
@@ -99,8 +100,8 @@ const onLoad = async () => {
 const loadData = async () => {
   try {
     const res = await getNoticeList(query); // 你自己的接口
-    console.log(res);
     const data = res.rows;
+	ready.value = true
     if (data.length < query.pageSize) {
       finished.value = true;
     } else {

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-[100vh] h-full withdraw  bg-[#f3fdf4]" @scroll="handleScroll">
+  <div v-if="ready" class="w-full min-h-[100vh] h-full withdraw  bg-[#f3fdf4]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('提取')"
@@ -100,7 +100,31 @@
 	    label-width="auto"
 	    class="w-full  px-4"
 	  >
-	  
+		<el-form-item
+		  :label="$t('withdrawalAccount')"
+		  prop="amount"
+		  label-position="top"
+		  class="p-4 bg-[#f9f9f9] border-[#e9ebe9] border-[1px] font-bold"
+		>
+		  <div v-if="walletInfo.id" @click="toPage('/paymentMethods')" class="w-full">
+			  <p class="text-xl text-[#5d9c5d]">{{walletInfo.network}}</p>
+			  <p>{{$t('钱包') }}: {{walletInfo.wallet}}</p>
+			  <p>{{$t('地址') }}: {{walletInfo.address}}</p>
+		  </div>
+		  <el-input
+		    v-else
+		    type="number"
+		    autocomplete="off"
+		    size="large"
+			readonly
+			@click="toPage('/paymentMethods')"
+		  >
+		    <template #suffix>
+		      
+			  <img style="float: right;" class="w-[20px]" src="@/static/images/base/right.png"/>
+		    </template>
+		  </el-input>
+		</el-form-item>
 	    <el-form-item
 	      :label="$t('提款金额')"
 	      prop="amount"
@@ -164,7 +188,7 @@
 <script setup>
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import { getWithdrawals, withdrawal, getTradeConfig,userGetInfo } from "../../api/apis";
+import { getWithdrawals, withdrawal, getTradeConfig,userGetInfo, getWallet } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
 import {formatWithTimezone} from '../../util/utils'
 import {
@@ -188,6 +212,7 @@ const totalBalance = ref("");
 const frozenBalance = ref("");
 const isPwd = ref(true)
 const userStore = useUserStore();
+const ready = ref(false);
 const { t } = useI18n();
 const query = reactive({
   pageNum: 1,
@@ -199,6 +224,7 @@ const onClickLeft = () => history.back();
 const ruleForm = reactive({
   amount: "",
   tradePassword: "",
+  walletId: null
 });
 
 const toPage = (path) => {
@@ -208,12 +234,13 @@ const toPage = (path) => {
 };
 
 const All = () => {
-  console.log(amount.value);
+  // console.log(amount.value);
   ruleForm.amount = amount.value;
 };
 const getWithdrawal = () => {
   if (!ruleForm.amount) return showToast(t('请输入金额'));
   if (!ruleForm.tradePassword) return showToast(t('请输入交易密码'));
+  ruleForm.walletId = walletInfo.value.id;
   withdrawal(ruleForm).then((res) => {
     showSuccessToast(t("提现成功"));
     router.push({ path: "/my" });
@@ -226,6 +253,11 @@ const tradeConfig = async () => {
   TradeInfor.value = res.data;
 };
 
+// const walletInfo = ref({
+// 	withdrawName:null,
+// 	withdrawAddress:null,
+// 	withdrawType:null
+// });
 onMounted( () => {
   tradeConfig();
   userGetInfo().then((res) => {
@@ -233,8 +265,30 @@ onMounted( () => {
     ruleForm.amount = amount.value;
 	frozenBalance.value = res.data.frozenBalance;
 	totalBalance.value = res.data.totalBalance;
+	
+	// walletInfo.withdrawName = res.data.withdrawName;
+	// walletInfo.withdrawAddress = res.data.withdrawAddress;
+	// walletInfo.withdrawType = res.data.withdrawType;
+	
   });
+  getUserWallet();
 });
+
+// const bankItem = ref("");
+// const bankWallet = ref([]);
+const walletInfo = ref({
+	id: null,
+	wallet: "",
+	address: "",
+	network: "",
+});
+
+const getUserWallet = async () => {
+    let res = await getWallet();
+	walletInfo.value = res.data
+	ready.value = true;
+    // bankWallet.value = res.data || [];
+};
 
 function handleScroll(e) { 
   const scrollTop = e.target.scrollTop

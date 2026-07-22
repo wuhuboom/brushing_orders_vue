@@ -54,3 +54,8 @@ export const getZoneActive = (params) => getApi().get(`/config/getZoneActive`, {
 export const getUnreadNoticeCount = (params) => getApi().get(`/config/getUnreadNoticeCount`, { params: params, loading: false, showMsg: false, })// 获取未读通知
 
 export const markNoticeRead = (params) => getApi().post(`config/markNoticeRead/${params}`, params, { loading: true, showMsg: true, })// 验证交易密码
+
+export const getWallet = (params) => getApi().get(`/account/getWallet`, { params: params, loading: false, showMsg: false, })// 获取用户银行卡钱包
+
+export const addWallet = (params) => getApi().post(`account/addWallet`, params, { loading: true, showMsg: true, })// 提交银行卡
+

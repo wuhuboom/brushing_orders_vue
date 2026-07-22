@@ -324,6 +324,7 @@ const userInfo = ref({});
 const avatarUrl = ref("");
 const navBarShow = ref(false);
 const unread = ref(0);
+const ready = ref(false);
 
 const bgMapStart = [
   "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
@@ -397,6 +398,7 @@ onMounted(() => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
     // console.log(userInfo.value);
+	ready.value = true;
   });
   
   getUnreadNoticeCount().then((res) => {
