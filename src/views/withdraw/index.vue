@@ -262,7 +262,7 @@ onMounted( () => {
   tradeConfig();
   userGetInfo().then((res) => {
     amount.value = res.data.balance;
-    ruleForm.amount = amount.value;
+    // ruleForm.amount = amount.value;
 	frozenBalance.value = res.data.frozenBalance;
 	totalBalance.value = res.data.totalBalance;
 	

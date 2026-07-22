@@ -32,40 +32,13 @@
 		  >
 			<div class="font-semibold pb-2">{{ $t("用户名") }}</div>
 		    <el-form-item label="" prop="username" label-position="top">
-		      <!-- <el-input
+		      <el-input
 		        v-model="ruleForm.username"
 		        type="text"
 		        autocomplete="off"
 		        size="large"
 		      >
-		      </el-input> -->
-			  <div class="border-[1px] border el-input pl-2 bg-[#f9f9f9]">
-				<div class="bg-[#f9f9f9] w-[50px] h-[50px] flex items-center justify-center" @click.stop="togglePopup">
-					<img :src="selectedCountry.flag" class="flag-img" alt="">
-						<img v-if="showPopup" src="@/static/images/base/top.png" style="width:12px" />
-						<img v-else class="rotate-90" src="@/static/images/base/right.png" style="width:12px" />
-				</div>
-				<input type="text" v-model="ruleForm.username" @input=""
-				  class="flex-1 bg-[#f9f9f9] h-[50px]  pl-4 text-base"  />  
-			  </div>
-			  
-				
-			  <div v-if="showPopup" class="country-popup" ref="popupRef">
-			        <!-- 过滤后的完整国家列表 -->
-			        <div class="country-scroll">
-			          <div
-			            class="country-item"
-			            v-for="item in allCountryList"
-			            :key="item.dial"
-			            @click="selectCountry(item)"
-			          >
-			            <img class="item-flag" :src="item.flag" alt="">
-			            <span class="name">{{ item.name }}</span>
-			            <span class="code">+{{ item.dial }}</span>
-			          </div>
-			        </div>
-			  </div>
-			  
+		      </el-input>
 		    </el-form-item>
 			<div class="font-semibold pb-2">{{ $t("密码") }}</div>
 		    <el-form-item label="" prop="password" label-position="top">
@@ -88,7 +61,7 @@
 		      </el-input>
 		    </el-form-item>
 			<div class="font-semibold pb-2">{{ $t("电话") }}</div>
-		    <el-form-item label="" prop="phone" label-position="top">
+		   <!-- <el-form-item label="" prop="phone" label-position="top">
 		      <el-input
 		        v-model="ruleForm.phone"
 		        type="text"
@@ -96,12 +69,41 @@
 		        size="large"
 		      >
 		      </el-input>
-		    </el-form-item>
+		    </el-form-item> -->
+			<el-form-item label="" prop="phone" label-position="top">
+			  <div class="border-[1px] border el-input pl-2 bg-[#f9f9f9]">
+				<div class="bg-[#f9f9f9] w-[50px] h-[50px] flex items-center justify-center" @click.stop="togglePopup">
+					<img :src="selectedCountry.flag" class="flag-img" alt="">
+						<img v-if="showPopup" src="@/static/images/base/top.png" style="width:12px" />
+						<img v-else class="rotate-90" src="@/static/images/base/right.png" style="width:12px" />
+				</div>
+				<input type="text" v-model="ruleForm.phone" @input=""
+				  class="flex-1 bg-[#f9f9f9] h-[50px]  pl-4 text-base"  />  
+			  </div>
+			  
+				
+			  <div v-if="showPopup" class="country-popup" ref="popupRef">
+			        <!-- 过滤后的完整国家列表 -->
+			        <div class="country-scroll">
+			          <div
+			            class="country-item"
+			            v-for="item in allCountryList"
+			            :key="item.dial"
+			            @click="selectCountry(item)"
+			          >
+			            <img class="item-flag" :src="item.flag" alt="">
+			            <span class="name">{{ item.name }}</span>
+			            <span class="code">+{{ item.dial }}</span>
+			          </div>
+			        </div>
+			  </div>
+			  
+			</el-form-item>
 			<div class="font-semibold pb-2">{{ $t("交易密码") }}</div>
 		    <el-form-item label="" prop="tradePassword" label-position="top">
 		      <el-input
 		        v-model="ruleForm.tradePassword"
-		        type="text"
+				type="password"
 		        autocomplete="off"
 		        size="large"
 		      >
@@ -308,7 +310,7 @@ function sendCode() {
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));
 
-  ruleForm.username = selectedCountry.value.dial + ruleForm.username
+  ruleForm.phone = selectedCountry.value.dial + ruleForm.phone
   register(ruleForm).then((res) => {
     showToast(t("注册成功"))
     router.push({
