@@ -133,7 +133,8 @@ const submitForm = async () => {
   if (!form.address) return showToast(t("请输入地址"));
   let res = await addWallet(form);
   showToast(t("添加成功"))
-  router.push({ path: "/my" });
+  // router.push({ path: "/my" });
+  // history.back()
 };
 
 const onClickLeft = () => history.back();
