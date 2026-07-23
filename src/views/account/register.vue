@@ -228,11 +228,11 @@ const showPopup = ref(false)
 // 密码显隐
 const pwdVisible = ref(false)
 
-// 默认选中：日本
+// 默认选中：加拿大
 const selectedCountry = ref({
-  name: 'Japan',
-  dial: '81',
-  flag: 'https://flagcdn.com/w40/jp.png'
+  name: 'Canada',
+  dial: '1',
+  flag: 'https://flagcdn.com/w40/ca.png'
 })
 
 // ====================== 完整全球国家/地区区号数据 ======================

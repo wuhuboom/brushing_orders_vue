@@ -243,7 +243,9 @@ function submitForm(formEl) {
 		if(res.code == 200){
 			userStore.setToken(`Bearer ${res.data.token}`);
 			userStore.setUserInfo(res.data.info);
-			showSuccess.value = true
+			// 不需要展示成功提示，直接进入界面
+			// showSuccess.value = true
+			submitJump()
 		}else{
 			showError.value = true
 		}
