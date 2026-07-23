@@ -249,6 +249,8 @@
   "产品详情": "Detalles del producto",
   "语言": "Idioma",
   "总余额": "Saldo total",
+  "邮箱":"Correo",
+  "请输入正确邮箱": "Ingresa un correo electrónico válido",
   "network_error": "Error de red",
   "insufficient_balance_please": "Saldo insuficiente, por favor",
   "transaction_failed": "Transacción fallida",

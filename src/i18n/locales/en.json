@@ -254,6 +254,8 @@
   "产品详情": "Products Details",
   "语言": "Language",
   "总余额":"Total Balance",
+  "邮箱":"Email",
+  "请输入正确邮箱": "Please enter a valid email address",
   "network_error": "Network error",
   "insufficient_balance_please": "Insufficient Balance, Please",
   "transaction_failed": "Transaction failed",

@@ -99,6 +99,16 @@
 			  </div>
 			  
 			</el-form-item>
+			<div class="font-semibold pb-2">{{ $t("邮箱") }}</div>
+			<el-form-item label="" prop="email" label-position="top">
+			  <el-input
+			    v-model="ruleForm.email"
+			    type="text"
+			    autocomplete="off"
+			    size="large"
+			  >
+			  </el-input>
+			</el-form-item>
 			<div class="font-semibold pb-2">{{ $t("交易密码") }}</div>
 		    <el-form-item label="" prop="tradePassword" label-position="top">
 		      <el-input
@@ -208,6 +218,7 @@ const ruleForm = reactive({
   phone: "",
   sex: null,
   inviteCode: "",
+  email: ""
 });
 
 // 弹窗DOM
@@ -297,16 +308,19 @@ const rules = computed(() => {
 function toLogin() {
   router.push("/account/login");
 }
-
+const emailReg = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 function sendCode() {
   if (!ruleForm.username) return showToast(t("请输入用户名"));
   if (!ruleForm.password) return showToast(t("请输入密码"));
+  if (!agentPassword.value) return showToast(t("请输入确认密码"));
   if (!agentPassword.value) return showToast(t("请输入确认密码"));
   if (agentPassword.value != ruleForm.password)
     return showToast(t("两次密码不一致"));
   // if (!ruleForm.phone) return ElMessage.error(t("请输入电话"));
   if (!/^[0-9]*$/.test(ruleForm.phone))
     return showToast(t("请输入正确电话号码"));
+  if (!/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(ruleForm.email))
+    return showToast(t("请输入正确邮箱"));
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));
   let param = JSON.parse(JSON.stringify(ruleForm))
