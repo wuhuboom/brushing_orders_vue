@@ -300,6 +300,7 @@ const pureNoticeContent = computed(() => {
 
 
 onMounted(() => {
+	console.log(8887)
   let round = localStorage.getItem('round')
   if(round == 0){
 	WelcomeSummaryRef.value.open();

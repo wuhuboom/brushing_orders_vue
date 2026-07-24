@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-3">
+  <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-3"  v-if="ready">
  
     <div class="flex flex-col items-center  pb-1 py-5">
 	  <img
@@ -44,9 +44,17 @@ import { useCommonStore } from '@/store/modules/common';
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 const ContactUsRef = ref(null);
+const ready = ref(false) 
+const userStore = useUserStore();
 
 onMounted(() => {
   document.getElementById("app").style.background = "#fff";
+
+	if( userStore.token){
+		router.push({ path: "/home" });
+	}else{
+		ready.value = true
+	}
 });
 
 onUnmounted(() => {

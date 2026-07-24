@@ -1,6 +1,7 @@
 // router/index.js
 import { createRouter, createWebHashHistory } from 'vue-router'
 
+
 // 自动导入views目录下所有vue文件作为路由
 const modules = import.meta.glob('../views/**/*.vue')
 
@@ -28,6 +29,7 @@ const router = createRouter({
 // 更新路由拦截
 router.beforeEach((to, from, next) => {
   const isAuthenticated = true
+  
   if (to.path !== '/account/login' && !isAuthenticated) {
     next('/account/login')
   } else {
