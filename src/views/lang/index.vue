@@ -34,13 +34,13 @@
         >
           <div 
 		    v-if="commonStore.clientLang === item.code"
-			class="text-center text-white text-base font-medium"
+			class="text-center text-white text-xl font-medium"
 		  >
             {{ item.name }}
           </div>
 		  <div 
 		    v-else
-			class="text-center text-black text-base font-medium"
+			class="text-center text-black text-xl font-medium"
 		  >
 		    {{ item.name }}
 		  </div>
