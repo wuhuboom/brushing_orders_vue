@@ -251,6 +251,7 @@
   "总余额": "Całkowite saldo",
   "邮箱": "E-mail",
   "请输入正确邮箱": "Proszę podać prawidłowy adres e-mail",
+  "cencel": "Anulować",
   "network_error": "Błąd sieci",
   "insufficient_balance_please": "Proszę o niewystarczające saldo",
   "transaction_failed": "Transakcja nie powiodła się",

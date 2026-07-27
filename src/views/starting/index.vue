@@ -266,6 +266,10 @@ const doCreateOrder = () => {
     forbidClick: true,
     duration: 0,
   });
+  // let str = t("staring4") + 40 + t("staring5");
+  // showToast(
+  //     str
+  // );
   createOrder()
     .then((res) => {
       closeToast();
@@ -284,8 +288,9 @@ const doCreateOrder = () => {
 	      //     luckyDrawTimer = null;
 	      // }, 15000);
 	  } else if (err.code == 909) {
+	      let str = t("staring4") + err.data + t("staring5");
 	      showToast(
-	          `t("staring4") ${err.data} t("staring5")`,
+	          str
 	      );
 	  } else if (err.code == 907) {
 	      toPage('/productInfo', {id: err.data.id})

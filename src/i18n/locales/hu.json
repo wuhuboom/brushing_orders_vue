@@ -251,6 +251,7 @@
   "总余额": "Teljes egyenleg",
   "邮箱": "E-mail",
   "请输入正确邮箱": "Kérjük, adjon meg egy érvényes e-mail címet",
+  "cencel": "Lemond",
   "network_error": "Hálózati hiba",
   "insufficient_balance_please": "Elégtelen egyenleg, kérem",
   "transaction_failed": "A tranzakció sikertelen",

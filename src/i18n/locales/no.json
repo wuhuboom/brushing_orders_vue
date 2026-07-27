@@ -251,6 +251,7 @@
   "总余额": "Total balanse",
   "邮箱": "E-post",
   "请输入正确邮箱": "Vennligst skriv inn en gyldig e-postadresse",
+  "cencel": "Avbryte",
   "network_error": "Nettverksfeil",
   "insufficient_balance_please": "Utilstrekkelig balanse, takk",
   "transaction_failed": "Transaksjonen mislyktes",

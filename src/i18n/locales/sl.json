@@ -251,6 +251,7 @@
   "总余额": "Skupno stanje",
   "邮箱": "E-pošta",
   "请输入正确邮箱": "Vnesite veljaven e-poštni naslov",
+  "cencel": "Preklicati",
   "network_error": "Omrežna napaka",
   "insufficient_balance_please": "Nezadostno stanje, prosim",
   "transaction_failed": "Transakcija ni uspela",

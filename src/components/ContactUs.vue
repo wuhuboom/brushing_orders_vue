@@ -5,6 +5,7 @@
     v-model:show="showCenter"
     :showConfirmButton="false"
     show-cancel-button
+	:cancelButtonText= "$t('cencel')"
     cancelButtonColor="#000"
   >
     <div class="flex flex-col rounded-xl overflow-hidden bg-white">
