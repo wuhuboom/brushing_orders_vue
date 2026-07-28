@@ -45,7 +45,7 @@
             <!-- <img :src="bgMapStart[userInfo.levelId-1]" class="w-12" alt="" /> -->
 			<img :src="avatarUrl" class="w-12" alt="" />
             <p class="text-[#000] text-sm font-semibold">
-              VIP{{ userInfo.levelId }}
+              {{ avatarLevelStr }}
             </p>
           </div>
           <div class="w-full  mt-[1rem]">
@@ -322,6 +322,7 @@ const url = window.g.VITE_API_IMG_URL;
 const router = useRouter();
 const userInfo = ref({});
 const avatarUrl = ref("");
+const avatarLevelStr = ref("");
 const navBarShow = ref(false);
 const unread = ref(0);
 const ready = ref(false);
@@ -397,6 +398,7 @@ onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
+	avatarLevelStr.value = res.data.userLevel.nameEn;
     // console.log(userInfo.value);
 	ready.value = true;
   });
