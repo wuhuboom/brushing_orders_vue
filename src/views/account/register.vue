@@ -319,8 +319,11 @@ function sendCode() {
   // if (!ruleForm.phone) return ElMessage.error(t("请输入电话"));
   if (!/^[0-9]*$/.test(ruleForm.phone))
     return showToast(t("请输入正确电话号码"));
-  if (!/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(ruleForm.email))
-    return showToast(t("请输入正确邮箱"));
+  if(ruleForm.email){
+	if (!/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(ruleForm.email))
+	  return showToast(t("请输入正确邮箱"));
+  }
+ 
   if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
   if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));
   let param = JSON.parse(JSON.stringify(ruleForm))
