@@ -1,4 +1,5 @@
 :root {
+  --app-max-width: 1000px;
   /* font-family: PingFangSC-Medium; */
   font-weight: 400;
   background-color: #242424;
@@ -38,7 +39,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #FFF;
+  background: #f2f2f2;
   height: 100%;
   width: 100%;
   font-weight: 400;
@@ -49,12 +50,34 @@ body {
 #app {
   height: 100%;
   width: 100%;
+  max-width: var(--app-max-width);
   overflow-y: auto;
-  margin: 0;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #fff;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.08);
   /* text-align: center; */
+}
+
+/*
+ * Vant fixed navigation bars are positioned relative to the browser viewport,
+ * not #app. Keep them aligned with the centered application on desktop.
+ */
+.van-nav-bar--fixed {
+  right: auto !important;
+  left: 50% !important;
+  width: min(100%, var(--app-max-width));
+  transform: translateX(-50%);
+}
+
+/* Some pages reuse a Vant "fixed" nav bar as an in-flow title via .pos. */
+.van-nav-bar--fixed.pos {
+  right: auto !important;
+  left: auto !important;
+  width: 100%;
+  transform: none;
 }
 
 input {

@@ -49,6 +49,10 @@ function onClickMenu(menu) {
 <style>
 .bar-shadow {
     box-shadow: 0px -1px 4px 0px #0000000D;
+    right: auto !important;
+    left: 50% !important;
+    width: min(100%, var(--app-max-width)) !important;
+    transform: translateX(-50%);
 }
 .starting {
     margin-top: -2.7rem;

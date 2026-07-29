@@ -24,10 +24,12 @@
 		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
 	  </template>
 	</van-nav-bar>
-    <div class=" bg-[#ffffff] relative border-[1px] border-[#e6e6e6] m-2 rounded-[10px]">
-      <div class="w-[50%] h-[213px] mx-auto mt-6 box-shadow border-[4px] border-[#c2c2c2] rounded-[10px]">
+    <div class="product-content bg-[#ffffff] relative border-[1px] border-[#e6e6e6] m-2 rounded-[10px]">
+      <div class="product-image-frame w-[50%] h-[213px] mx-auto mt-6">
         <van-image
+          class="product-image"
           width="100%"
+          height="100%"
 		  radius="20"
           fit="contain"
           :src="url+goods.coverUrl"
@@ -91,9 +93,9 @@
             </div>
           </div>
         </div>
-		<div @click="submitForm" class="w-full mt-16 mb-6" size="large" round>
+		<div @click="submitForm" class="submit-dock" size="large" round>
 		  <div
-		    class="w-full text-white text-xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-[#000]"
+		    class="submit-button"
 		  >
 		    <div>{{ $t("提交") }}</div>
 		  </div>
@@ -102,12 +104,13 @@
     </div>
     <Footer name="/starting"></Footer>
 	<van-dialog
+	  class="submit-dialog"
 	  v-model:show="showCenter"
 	  :showConfirmButton="false"
 		close-on-click-overlay
 	>
-	  <div class="flex flex-col rounded-xl overflow-hidden bg-white">
-	    <img src="@/static/images/base/submit.gif"/>
+	  <div class="submit-animation">
+	    <img class="submit-animation-image" src="@/static/images/base/submit.gif" alt="Submitting"/>
 	  </div>
 	</van-dialog>
   </div>
@@ -212,8 +215,82 @@ const onClickLeft = () => history.back();
 </script>
 
 <style scoped>
-:deep(.van-dialog){
-  width: 90%;
-  background-color: transparent;
+.product-content {
+  padding-bottom: 82px;
+}
+
+.product-image-frame {
+  overflow: hidden;
+  border: 4px solid #c2c2c2;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
+}
+
+.product-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+:deep(.product-image .van-image__img) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.submit-dock {
+  position: fixed;
+  right: auto;
+  bottom: calc(112px + env(safe-area-inset-bottom));
+  left: 50%;
+  width: min(100%, var(--app-max-width));
+  transform: translateX(-50%);
+  z-index: 60;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #000;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.submit-button:active {
+  opacity: 0.85;
+}
+
+:deep(.submit-dialog.van-dialog) {
+  width: min(68vw, 260px);
+  max-width: 260px;
+  border-radius: 18px;
+  background: transparent;
+  overflow: hidden;
+}
+
+.submit-animation {
+  padding: 8px;
+  background: #fff;
+  border-radius: 18px;
+}
+
+.submit-animation-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 42vh;
+  object-fit: contain;
+  border-radius: 12px;
 }
 </style>

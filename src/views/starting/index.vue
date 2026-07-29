@@ -23,7 +23,7 @@
           </div>
 		  <div class="text-black text-center flex justify-between items-end top-5 right-5">
 		    <p class="text-[#000] text-xl font-semibold">
-		      VIP{{ userInfo.levelId }}
+		      {{ userInfo.userLevel?.nameEn }}
 		    </p>
 			<img :src="avatarUrl" class="w-12" alt="" />
 		  </div>
@@ -307,6 +307,7 @@ onMounted(() => {
   tradeConfig();
   startTimer();
   getContainerWidth();
+  window.addEventListener('resize', getContainerWidth);
   userGetInfo().then((res) => {
     userInfo.value = res.data;
     avatarUrl.value = `${url}${res.data.userLevel.icon}`;
@@ -322,9 +323,6 @@ const toPage = (path, param) => {
 };
 
 // 基础配置
-const innerWidth = window.innerWidth
-// const cardW = 260
-const cardW = innerWidth * 0.7
 const gap = 0
 // 容器左右留白，用来露出左右卡片
 // const sidePad = 60* innerWidth / 390
@@ -340,6 +338,7 @@ const cardList = ref([1,2,3,4,5,6,7])
 const current = ref(2)
 const carouselRef = ref(null)
 const containerWidth = ref(0)
+const cardW = computed(() => containerWidth.value * 0.7)
 
 // 拖拽变量
 const startX = ref(0)
@@ -360,9 +359,9 @@ const translateX = computed(()=>{
   // // 向右偏移容器左侧留白，实现左右双向露出
   // return sidePad - moveLeft 
   if(!containerWidth.value) return 0
-  const baseMove = current.value * (cardW + gap)
+  const baseMove = current.value * (cardW.value + gap)
     // 2. 居中偏移：容器一半宽度 - 半张卡片宽度，让卡片精准居中
-    const centerOffset = containerWidth.value / 2 - cardW / 2
+    const centerOffset = containerWidth.value / 2 - cardW.value / 2
     // 3. 最终位移 = 居中位置 - 卡片整体左移量
     return centerOffset - baseMove + 10
 })
@@ -415,6 +414,7 @@ const startTimer = () => {
 // 页面销毁清除定时器，防止后台持续轮播
 onUnmounted(()=>{
   clearInterval(timer)
+  window.removeEventListener('resize', getContainerWidth)
   if (luckyDrawTimer) clearTimeout(luckyDrawTimer);
 })
 
