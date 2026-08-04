@@ -171,6 +171,7 @@
                 </div>
             </div>
         </main>
+        <AppLoadingScreen :visible="isMissionOpening" />
         <MissionSubmissionPopup
             v-model="show"
             :product-name="
@@ -199,6 +200,7 @@ import { useI18n } from "vue-i18n";
 
 import MainTabTopBar from "@/components/MainTabTopBar.vue";
 import MissionSubmissionPopup from "@/components/MissionSubmissionPopup.vue";
+import AppLoadingScreen from "@/components/AppLoadingScreen.vue";
 import { getOrderInfos, submitOrder } from "@/api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { errorMessages } from "@/api/errorCodeMap";
@@ -209,9 +211,21 @@ const userStore = useUserStore();
 const VITE_API_IMG_URL = window.g?.VITE_API_IMG_URL || "";
 const { t } = useI18n();
 
+const missionOpenLoadingSeconds = Number(
+    import.meta.env.PROD
+        ? window.g?.VITE_MISSION_OPEN_LOADING_SECONDS
+        : import.meta.env.VITE_MISSION_OPEN_LOADING_SECONDS,
+);
+const missionOpenLoadingDuration =
+    Number.isFinite(missionOpenLoadingSeconds) &&
+    missionOpenLoadingSeconds >= 0
+        ? missionOpenLoadingSeconds * 1000
+        : 3000;
+
 const active = ref(-1);
 const list = ref([]);
 const show = ref(false);
+const isMissionOpening = ref(false);
 const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
@@ -227,6 +241,7 @@ let touchStartY = 0;
 let pullRefreshReady = false;
 let routeScrollElement = null;
 let listLoadToken = 0;
+let missionOpeningTimer = null;
 
 const query = reactive({
     pageNum: 1,
@@ -447,7 +462,12 @@ function submit(item) {
     goodsData.value = item;
     submitStep.value = 2;
     showInsufficientWarning.value = false;
-    show.value = true;
+    isMissionOpening.value = true;
+    missionOpeningTimer = setTimeout(() => {
+        isMissionOpening.value = false;
+        show.value = true;
+        missionOpeningTimer = null;
+    }, missionOpenLoadingDuration);
 }
 
 function isOrderSubmittable(status) {
@@ -512,6 +532,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+    if (missionOpeningTimer) clearTimeout(missionOpeningTimer);
     routeScrollElement?.removeEventListener("scroll", handleRouteScroll);
     window.removeEventListener("scroll", handleRouteScroll);
 });

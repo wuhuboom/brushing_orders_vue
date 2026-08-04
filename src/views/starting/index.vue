@@ -277,6 +277,8 @@
                 </footer>
             </main>
 
+            <AppLoadingScreen :visible="isMissionOpening" />
+
             <MissionSubmissionPopup
                 v-model="showMissionDialog"
                 :product-name="missionProductTitle"
@@ -354,10 +356,22 @@ import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";
 import MissionSubmissionPopup from "@/components/MissionSubmissionPopup.vue";
+import AppLoadingScreen from "@/components/AppLoadingScreen.vue";
 
 const userStore = useUserStore();
 const router = useRouter();
 const { t, te, locale } = useI18n();
+
+const missionOpenLoadingSeconds = Number(
+    import.meta.env.PROD
+        ? window.g?.VITE_MISSION_OPEN_LOADING_SECONDS
+        : import.meta.env.VITE_MISSION_OPEN_LOADING_SECONDS,
+);
+const missionOpenLoadingDuration =
+    Number.isFinite(missionOpenLoadingSeconds) &&
+    missionOpenLoadingSeconds >= 0
+        ? missionOpenLoadingSeconds * 1000
+        : 3000;
 
 const translateWithFallback = (key, fallback) => {
     return te(key) ? t(key) : fallback;
@@ -391,10 +405,12 @@ const startingVipIcons = {
 };
 let timer = null;
 let luckyDrawTimer = null;
+let missionOpeningTimer = null;
 
 const goodsList = ref([]);
 const visibleGoodsSource = ref([]);
 const showMissionDialog = ref(false);
+const isMissionOpening = ref(false);
 const showImg = ref(false);
 const goods = ref({});
 const isMissionSubmitting = ref(false);
@@ -741,7 +757,12 @@ const doCreateOrder = () => {
         .then((res) => {
             closeToast();
             goods.value = res.data || {};
-            showMissionDialog.value = true;
+            isMissionOpening.value = true;
+            missionOpeningTimer = setTimeout(() => {
+                isMissionOpening.value = false;
+                showMissionDialog.value = true;
+                missionOpeningTimer = null;
+            }, missionOpenLoadingDuration);
             userGetInfoMethods({ force: true });
         })
         .catch((err) => {
@@ -824,6 +845,7 @@ onUnmounted(() => {
     blindBoxPreloadToken += 1;
     if (timer) clearTimeout(timer);
     if (luckyDrawTimer) clearTimeout(luckyDrawTimer);
+    if (missionOpeningTimer) clearTimeout(missionOpeningTimer);
 });
 
 onMounted(() => {
