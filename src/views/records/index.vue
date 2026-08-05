@@ -171,7 +171,9 @@
                 </div>
             </div>
         </main>
-        <AppLoadingScreen :visible="isMissionOpening" />
+        <MissionGifLoadingScreen
+            :visible="isMissionOpening || isMissionSubmitLoading"
+        />
         <MissionSubmissionPopup
             v-model="show"
             :product-name="
@@ -200,7 +202,7 @@ import { useI18n } from "vue-i18n";
 
 import MainTabTopBar from "@/components/MainTabTopBar.vue";
 import MissionSubmissionPopup from "@/components/MissionSubmissionPopup.vue";
-import AppLoadingScreen from "@/components/AppLoadingScreen.vue";
+import MissionGifLoadingScreen from "@/components/MissionGifLoadingScreen.vue";
 import { getOrderInfos, submitOrder } from "@/api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { errorMessages } from "@/api/errorCodeMap";
@@ -221,11 +223,41 @@ const missionOpenLoadingDuration =
     missionOpenLoadingSeconds >= 0
         ? missionOpenLoadingSeconds * 1000
         : 3000;
+const missionSubmitLoadingSeconds = Number(
+    import.meta.env.PROD
+        ? window.g?.VITE_MISSION_SUBMIT_LOADING_SECONDS
+        : import.meta.env.VITE_MISSION_SUBMIT_LOADING_SECONDS,
+);
+const missionSubmitLoadingDuration =
+    Number.isFinite(missionSubmitLoadingSeconds) &&
+    missionSubmitLoadingSeconds >= 0
+        ? missionSubmitLoadingSeconds * 1000
+        : 3000;
+const missionOpenGifLoadingEnabled = !["false", "0", "off", "no"].includes(
+    String(
+        import.meta.env.PROD
+            ? window.g?.VITE_MISSION_OPEN_GIF_LOADING_ENABLED ?? "true"
+            : import.meta.env.VITE_MISSION_OPEN_GIF_LOADING_ENABLED ?? "true",
+    ).toLowerCase(),
+);
+const missionSubmitGifLoadingEnabled = ![
+    "false",
+    "0",
+    "off",
+    "no",
+].includes(
+    String(
+        import.meta.env.PROD
+            ? window.g?.VITE_MISSION_SUBMIT_GIF_LOADING_ENABLED ?? "true"
+            : import.meta.env.VITE_MISSION_SUBMIT_GIF_LOADING_ENABLED ?? "true",
+    ).toLowerCase(),
+);
 
 const active = ref(-1);
 const list = ref([]);
 const show = ref(false);
 const isMissionOpening = ref(false);
+const isMissionSubmitLoading = ref(false);
 const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
@@ -242,6 +274,7 @@ let pullRefreshReady = false;
 let routeScrollElement = null;
 let listLoadToken = 0;
 let missionOpeningTimer = null;
+let missionSubmitLoadingTimer = null;
 
 const query = reactive({
     pageNum: 1,
@@ -462,6 +495,10 @@ function submit(item) {
     goodsData.value = item;
     submitStep.value = 2;
     showInsufficientWarning.value = false;
+    if (!missionOpenGifLoadingEnabled) {
+        show.value = true;
+        return;
+    }
     isMissionOpening.value = true;
     missionOpeningTimer = setTimeout(() => {
         isMissionOpening.value = false;
@@ -480,30 +517,42 @@ function handleOrderAction(item) {
     submit(item);
 }
 
+async function executeSubmit() {
+    showInsufficientWarning.value = false;
+    try {
+        const res = await submitOrder(goodsData.value.id);
+        showSuccessToast(t("mission_submitted_completed"));
+        await resetAndLoad();
+        if (res.code == 201) {
+            goodsData.value = res.data;
+        }
+        show.value = false;
+    } catch (err) {
+        if (err.code == 916) {
+            showInsufficientWarning.value = true;
+        } else {
+            showFailToast(t(errorMessages[err.code]));
+        }
+    } finally {
+        isSubmitting.value = false;
+    }
+}
+
 async function submitVal() {
     if (isSubmitting.value) return;
-    showInsufficientWarning.value = false;
     isSubmitting.value = true;
 
-    setTimeout(async () => {
-        try {
-            const res = await submitOrder(goodsData.value.id);
-            showSuccessToast(t("mission_submitted_completed"));
-            await resetAndLoad();
-            if (res.code == 201) {
-                goodsData.value = res.data;
-            }
-            show.value = false;
-        } catch (err) {
-            if (err.code == 916) {
-                showInsufficientWarning.value = true;
-            } else {
-                showFailToast(t(errorMessages[err.code]));
-            }
-        } finally {
-            isSubmitting.value = false;
-        }
-    }, 1000);
+    if (!missionSubmitGifLoadingEnabled) {
+        executeSubmit();
+        return;
+    }
+
+    isMissionSubmitLoading.value = true;
+    missionSubmitLoadingTimer = setTimeout(() => {
+        isMissionSubmitLoading.value = false;
+        missionSubmitLoadingTimer = null;
+        executeSubmit();
+    }, missionSubmitLoadingDuration);
 }
 
 function resetSubmitDialog() {
@@ -533,6 +582,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     if (missionOpeningTimer) clearTimeout(missionOpeningTimer);
+    if (missionSubmitLoadingTimer) clearTimeout(missionSubmitLoadingTimer);
     routeScrollElement?.removeEventListener("scroll", handleRouteScroll);
     window.removeEventListener("scroll", handleRouteScroll);
 });

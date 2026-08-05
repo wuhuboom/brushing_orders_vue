@@ -277,7 +277,9 @@
                 </footer>
             </main>
 
-            <AppLoadingScreen :visible="isMissionOpening" />
+            <MissionGifLoadingScreen
+                :visible="isMissionOpening || isMissionSubmitLoading"
+            />
 
             <MissionSubmissionPopup
                 v-model="showMissionDialog"
@@ -356,7 +358,7 @@ import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";
 import MissionSubmissionPopup from "@/components/MissionSubmissionPopup.vue";
-import AppLoadingScreen from "@/components/AppLoadingScreen.vue";
+import MissionGifLoadingScreen from "@/components/MissionGifLoadingScreen.vue";
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -372,6 +374,35 @@ const missionOpenLoadingDuration =
     missionOpenLoadingSeconds >= 0
         ? missionOpenLoadingSeconds * 1000
         : 3000;
+const missionSubmitLoadingSeconds = Number(
+    import.meta.env.PROD
+        ? window.g?.VITE_MISSION_SUBMIT_LOADING_SECONDS
+        : import.meta.env.VITE_MISSION_SUBMIT_LOADING_SECONDS,
+);
+const missionSubmitLoadingDuration =
+    Number.isFinite(missionSubmitLoadingSeconds) &&
+    missionSubmitLoadingSeconds >= 0
+        ? missionSubmitLoadingSeconds * 1000
+        : 3000;
+const missionOpenGifLoadingEnabled = !["false", "0", "off", "no"].includes(
+    String(
+        import.meta.env.PROD
+            ? window.g?.VITE_MISSION_OPEN_GIF_LOADING_ENABLED ?? "true"
+            : import.meta.env.VITE_MISSION_OPEN_GIF_LOADING_ENABLED ?? "true",
+    ).toLowerCase(),
+);
+const missionSubmitGifLoadingEnabled = ![
+    "false",
+    "0",
+    "off",
+    "no",
+].includes(
+    String(
+        import.meta.env.PROD
+            ? window.g?.VITE_MISSION_SUBMIT_GIF_LOADING_ENABLED ?? "true"
+            : import.meta.env.VITE_MISSION_SUBMIT_GIF_LOADING_ENABLED ?? "true",
+    ).toLowerCase(),
+);
 
 const translateWithFallback = (key, fallback) => {
     return te(key) ? t(key) : fallback;
@@ -406,11 +437,13 @@ const startingVipIcons = {
 let timer = null;
 let luckyDrawTimer = null;
 let missionOpeningTimer = null;
+let missionSubmitLoadingTimer = null;
 
 const goodsList = ref([]);
 const visibleGoodsSource = ref([]);
 const showMissionDialog = ref(false);
 const isMissionOpening = ref(false);
+const isMissionSubmitLoading = ref(false);
 const showImg = ref(false);
 const goods = ref({});
 const isMissionSubmitting = ref(false);
@@ -757,6 +790,11 @@ const doCreateOrder = () => {
         .then((res) => {
             closeToast();
             goods.value = res.data || {};
+            if (!missionOpenGifLoadingEnabled) {
+                showMissionDialog.value = true;
+                userGetInfoMethods({ force: true });
+                return;
+            }
             isMissionOpening.value = true;
             missionOpeningTimer = setTimeout(() => {
                 isMissionOpening.value = false;
@@ -784,9 +822,7 @@ const doCreateOrder = () => {
         });
 };
 
-const submitForm = () => {
-    if (isMissionSubmitting.value || !goods.value?.id) return;
-    isMissionSubmitting.value = true;
+const executeMissionSubmit = () => {
     submitOrder(goods.value.id)
         .then((res) => {
             closeToast();
@@ -815,6 +851,23 @@ const submitForm = () => {
         .finally(() => {
             isMissionSubmitting.value = false;
         });
+};
+
+const submitForm = () => {
+    if (isMissionSubmitting.value || !goods.value?.id) return;
+    isMissionSubmitting.value = true;
+
+    if (!missionSubmitGifLoadingEnabled) {
+        executeMissionSubmit();
+        return;
+    }
+
+    isMissionSubmitLoading.value = true;
+    missionSubmitLoadingTimer = setTimeout(() => {
+        isMissionSubmitLoading.value = false;
+        missionSubmitLoadingTimer = null;
+        executeMissionSubmit();
+    }, missionSubmitLoadingDuration);
 };
 
 const TradeInfor = ref({});
@@ -846,6 +899,7 @@ onUnmounted(() => {
     if (timer) clearTimeout(timer);
     if (luckyDrawTimer) clearTimeout(luckyDrawTimer);
     if (missionOpeningTimer) clearTimeout(missionOpeningTimer);
+    if (missionSubmitLoadingTimer) clearTimeout(missionSubmitLoadingTimer);
 });
 
 onMounted(() => {
