@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-[#ecf7ff]" @scroll="handleScroll">
+  <div class="container w-full min-h-[100vh] bg-[#fff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('更新密码')"
@@ -7,9 +7,6 @@
 	    left-arrow
 	    @click-left="onClickLeft"
 	  >
-		<template #left>
-	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
 	  </van-nav-bar>
 	</van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,9 +17,6 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
-		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
 	</van-nav-bar>
     <div class="w-full pl-6 mt-6 pr-6 box-border flex flex-col">
 	  <div class="font-bold text-base text-black py-3">
@@ -97,7 +91,7 @@
         <!-- <van-button color="#000" class="w-full py-6 text-xl" @click="submitForm">{{ $t("更新") }}</van-button> -->
         <div @click="submitForm()" class="w-full" size="large" round>
           <div
-            class="w-full text-white text-xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center my-4 bg-black border border-[#000]"
+            class="w-full text-white text-xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center my-4 bg-[#ff8100]"
           >
             <div>{{ $t("更新") }}</div>
           </div>

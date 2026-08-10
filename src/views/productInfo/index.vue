@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-[#fff4f3]">
+  <div class="w-full bg-[#fff]">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('产品详情')"
@@ -24,12 +24,10 @@
 		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
 	  </template>
 	</van-nav-bar>
-    <div class="product-content bg-[#ffffff] relative border-[1px] border-[#e6e6e6] m-2 rounded-[10px]">
-      <div class="product-image-frame w-[50%] h-[213px] mx-auto mt-6">
+    <div class="product-content bg-[#e6e6e6]  pt-6 pl-4 pr-4">
+      <div class=" bg-[#e6e6e6] product-image-frame w-[50%] h-[213px] mx-auto ">
         <van-image
           class="product-image"
-          width="100%"
-          height="100%"
 		  radius="20"
           fit="contain"
           :src="url+goods.coverUrl"
@@ -61,34 +59,38 @@
 		</div>
         <div class="flex w-full items-center pt-4 pb-4 mt-4">
           <div
-            class="w-[50%] mr-2 flex flex-col py-4 bg-[#fff4f3] border-[#000] border-[1px] rounded-[10px] justify-center items-center"
+            class="w-[50%] mr-2 flex flex-col py-4 bg-[#11284e] border-[#000] border-[1px] justify-center items-center"
           >
-            <div class="text-[#000] font-semibold">{{$t('价格')}}</div>
-            <div class="text-xs text-[#000] mt-1">
-              <span class="text-sm mr-1 text-[#000] font-semibold">{{order.price}}</span>
-             {{ $t("美元") }}
+            <div class="text-[#fff] font-semibold">{{$t('价格')}}</div>
+            <div class="text-xs text-[#fff] mt-1">
+              <span class="text-sm mr-1 text-[#fff] font-semibold">{{order.price}}</span>
             </div>
+			<div class="text-sm mr-1 text-[#fff] font-semibold">
+			  {{ $t("美元") }}
+			</div>
           </div>
           <div
-            class="w-[50%] mr-2 flex flex-col py-4 bg-[#fff4f3] border-[#000] border-[1px] rounded-[10px] justify-center items-center"
+            class="w-[50%] flex flex-col py-4 bg-[#11284e] border-[#000] border-[1px] justify-center items-center"
           >
-            <div class="text-[#000] font-semibold">{{ $t('佣金') }}</div>
-            <div class="text-xs text-[#000] mt-1">
-              <span class="text-sm mr-1 text-[#000] font-semibold">{{order.commission}}</span>
-             {{ $t("美元") }}
+            <div class="text-[#fff] font-semibold">{{ $t('佣金') }}</div>
+            <div class="text-xs text-[#fff] mt-1">
+              <span class="text-sm mr-1 text-[#fff] font-semibold">{{order.commission}}</span>
             </div>
+			<div class="text-sm mr-1 text-[#fff] font-semibold">
+			  {{ $t("美元") }}
+			</div>
           </div>
         </div>
-        <div class="bg-[#fff4f3] border-[#000] border-[1px] rounded-[10px] p-4">
+        <div class="bg-[#11284e] border-[#000] border-[1px] p-4">
           <div class="flex justify-between items-center box-border">
-            <div class="text-[#000] text-sm">{{$t('创建时间')}}</div>
-            <div class="text-[#000] text-sm font-bold" v-if="order.createTime">{{ formatWithTimezone(goods.createTime,userStore.zoneActive.tzName)  }}</div>
+            <div class="text-[#fff] text-sm">{{$t('创建时间')}}</div>
+            <div class="text-[#fff] text-sm font-bold" v-if="order.createTime">{{ formatWithTimezone(goods.createTime,userStore.zoneActive.tzName)  }}</div>
           </div>
           <div class="flex justify-between items-center box-border mt-2">
-            <div class="whitespace-nowrap text-[#000] text-sm">
+            <div class="whitespace-nowrap text-[#fff] text-sm">
               {{$t('编号')}}
             </div>
-            <div class="text-[#000] text-xs font-bold">
+            <div class="text-[#fff] text-xs font-bold">
               {{order.orderNo}}
             </div>
           </div>
@@ -247,9 +249,10 @@ const onClickLeft = () => history.back();
   width: min(100%, var(--app-max-width));
   transform: translateX(-50%);
   z-index: 60;
-  padding: 8px 10px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  padding: 8px 20px;
+  height: 80px;
+/*  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08); */
 }
 
 .submit-button {
@@ -257,10 +260,10 @@ const onClickLeft = () => history.back();
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 48px;
+  min-height: 58px;
   padding: 10px 16px;
   border-radius: 8px;
-  background: #000;
+  background: #ff8100;
   color: #fff;
   font-size: 18px;
   font-weight: 600;

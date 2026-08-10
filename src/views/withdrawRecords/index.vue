@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-[100vh] h-full withdraw bg-[#f3fdf4]" @scroll="handleScroll">
+  <div class="w-full min-h-[100vh] h-full withdraw bg-[#ffffff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('提取')"
@@ -7,9 +7,6 @@
 	    left-arrow
 	    @click-left="onClickLeft"
 	  >
-		<template #left>
-	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
 	  </van-nav-bar>
 	</van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,9 +17,6 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
-		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
 	</van-nav-bar>
 
     <div class="mt-2">
@@ -47,7 +41,7 @@
         >
           <van-cell v-for="item in list" :key="item" :title="item">
             <div
-              class="item flex items-center justify-between mb-1 bg-[#f3fdf4]  p-4 border-b-[1px] border-[#000] mx-4 mb-1"
+              class="item flex items-center justify-between mb-1 bg-[#fff]  p-4 border-b-[1px] border-[#000] mx-4 mb-1"
             >
               <div >
             	<div class="text-base font-bold text-[#000]">
@@ -271,7 +265,8 @@ function handleScroll(e) {
 .withdraw .van-tab--card{
 	border: 0px !important;
 	margin: 0 10px !important;
-	background-color: #bcd7bc !important;
+	background-color: #aaaaaa !important;
+	font-weight: 100;
 }
 .withdraw .van-tab--card:first-child{
 	margin-left: 0 !important;
@@ -280,6 +275,8 @@ function handleScroll(e) {
 	margin-right: 0 !important;
 }
 .withdraw .van-tab--card.van-tab--active{
-	background-color: #5d9c5d !important;
+	background-color: #aaaaaa !important;
+	font-weight: bold;
+	font-size: 15px;
 }
 </style>

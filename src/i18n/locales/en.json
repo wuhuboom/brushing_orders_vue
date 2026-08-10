@@ -233,10 +233,6 @@
   "修改密码说明": "Note: If you forget your fund password, please seek assistance from Customer Support.",
   "登陆密码": "Login Password",
   "基金密码": "Fund Password",
-  "客服文案1": "Let’s Talk",
-  "客服文案2": "Whether you’re ready to start a project or just have a few questions, we’re here to listen and help. No pressure, no jargon — just clear answers and honest advice.",
-  "客服文案3": "Get In Touch",
-  "客服文案4": "We know your time is valuable. That’s why we respond quickly and keep things straightforward. Fill out the form and let’s explore how we can help your business grow online.",
   "退出文案1": "Log out?",
   "退出文案2": "Are you sure you want to leave this page?",
   "退出文案3": "Stay",
@@ -322,5 +318,7 @@
   "user_has_ongoing_orders_returning_new_order_information": "User has ongoing orders, returning new order information",
   "insufficient_user_balance_contact_administrator_often_due_to_insufficient_frozen_funds": "Insufficient user balance (contact administrator, often due to insufficient frozen funds)",
   "lottery_not_enabled": "Lottery not enabled",
-  "no_lottery_attempts_remaining": "No lottery attempts remaining"
+  "no_lottery_attempts_remaining": "No lottery attempts remaining",
+  "客服文案1": "We Make Things Happen For Our Clients",
+  "客服文案2": "One 10 Media is an eCommerce growth agency specializing in paid social, email marketing, and SMS for DTC brands. We put data first to deliver cohesive experiences for brands ready to scale."
 }

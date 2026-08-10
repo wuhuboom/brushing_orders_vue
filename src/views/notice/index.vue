@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-full bg-[#ecf4ff] min-h-[100vh]" @scroll="handleScroll">
+  <div class="container w-full bg-[#ffffff] min-h-[100vh]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('通知')"
@@ -7,9 +7,6 @@
 	    left-arrow
 	    @click-left="onClickLeft"
 	  >
-		<template #left>
-	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
 	  </van-nav-bar>
 	</van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,9 +17,6 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
-		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
 	</van-nav-bar>
     <div class="pl-3 pr-3  pt-5">
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">

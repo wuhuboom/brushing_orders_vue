@@ -1,35 +1,19 @@
 <template>
   <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-3">
-   <!-- <div class="fixed top-2 right-5 h-9 flex items-center justify-center">
-      <div
-        class="flex items-center ml-2 overflow-hidden bg-[var(--main-color)] px-3 py-2 rounded-full box-border text-white leading-none"
-        style="line-height: 1"
-      >
-        <img
-          src="@/static/images/lang-white.png"
-          alt=""
-          class="w-5 h-5 block object-contain"
-          @click="handleChangeLang"
-        />
-        <div class="ml-2 uppercase font-bold leading-none" style="margin-top: -2px;">{{lang}}</div>
-      </div>
-    </div> -->
-
-    <div class="flex flex-col items-center  pb-1">
+    <div class="flex flex-col items-center mt-6 pb-1">
       <div class="text-2xl text-main-bg text-center py-6 pt-12">
 		  {{ $t("欢迎") }}
 	  </div>
 	  <img
-        src="@/static/images/login_logo.png"
+        src="@/static/images/logo.png"
         alt=""
-        class="w-[24%] lg:w-[300px] mx-auto"
+        class="w-[70%] lg:w-[300px] mx-auto"
       />
-	  
       <div class="panel">
-		  <div class="text-3xl text-main-bg font-semibold  py-4">
+		  <div class="text-3xl text-main-bg font-semibold text-center  py-4">
 		    {{ $t("登入") }}
 		  </div>
-		  <div class="text-sm text-main-bg pb-4">
+		  <div class="text-sm text-main-bg pb-4 text-center text-[#828794]">
 		    {{ $t("输入您的用户名和密码以访问") }}
 		  </div>
 		  
@@ -39,7 +23,7 @@
 		    status-icon
 		    :rules="rules"
 		    label-width="auto"
-		    class="w-full mt-4"
+		    class="w-full mt-4 mb-[60px]"
 		  >
 			<div class="font-semibold pb-2">{{ $t("用户名/电话") }}</div>
 		    <el-form-item prop="" label-position="top">
@@ -82,7 +66,7 @@
 		  </el-form>
 		  <div @click="submitForm(ruleFormRef)" class="w-full" size="large" round>
 		    <div
-		      class="w-full text-white text-2xl font-semibold mx-auto py-5 rounded-lg flex items-center justify-center bg-black"
+		      class="w-full text-white text-2xl font-semibold mx-auto py-5 rounded-xl flex items-center justify-center bg-[#ff8100]"
 		    >
 		      <div>{{ $t("登录") }}</div>
 		    </div>
@@ -93,7 +77,7 @@
 		      }} <span class="underline font-semibold">{{ $t("立即注册") }}</span>
 		    </p>
 		  
-		    <div class="text-sm text-center w-full pt-12" @click="customer">
+		    <div class="text-sm text-center w-full pt-2" @click="customer">
 		      {{ $t("无法登录?")
 		      }} <span class="underline font-bold">{{ $t("请联系我们的用户支持") }}</span>
 		    </div>
@@ -103,7 +87,7 @@
     <Lang ref="langRef"></Lang>
     <ContactUs ref="ContactUsRef"></ContactUs>
 	<van-dialog v-model:show="showError" closeable :title="''" :show-confirm-button="false">
-	    <div class="text-center py-8 px-4">
+	    <div class="text-center py-8 px-4 bg-[#10284d] text-white">
 			<img class="w-[24%] lg:w-[300px] mx-auto pb-5" src="@/static/images/login/icon-1.png"/>
 			<div class="text-2xl font-semibold">
 				{{ $t("认证失败")}}
@@ -113,7 +97,7 @@
 			</div>
 			<div @click="submitErr()" class="w-[100%] px-[15%]" size="large" round>
 			  <div
-			    class="w-full text-white text-xl font-semibold mx-auto py-3 rounded flex items-center justify-center bg-black"
+			    class="w-full text-white text-xl font-semibold mx-auto py-3 rounded flex items-center justify-center bg-[#ff8100]"
 			  >
 			    <div>{{ $t("再试一次") }}</div>
 			  </div>
@@ -122,7 +106,7 @@
 	</van-dialog>
 	
 	<van-dialog v-model:show="showSuccess" closeable :title="''" :show-confirm-button="false">
-	    <div class="text-center py-8 px-4">
+	    <div class="text-center py-8 px-4 bg-[#10284d] text-white">
 			<img class="w-[24%] lg:w-[300px] mx-auto pb-5" src="@/static/images/login/icon-2.png"/>
 			<div class="text-2xl font-semibold">
 				{{ $t("认证成功")}}
@@ -132,7 +116,7 @@
 			</div>
 			<div @click="submitJump()" class="w-[100%] px-[15%]" size="large" round>
 			  <div
-			    class="w-full text-white text-xl font-semibold mx-auto py-3 rounded flex items-center justify-center bg-black"
+			    class="w-full text-white text-xl font-semibold mx-auto py-3 rounded flex items-center justify-center bg-[#ff8100]"
 			  >
 			    <div>{{ $t("继续") }}</div>
 			  </div>
@@ -311,9 +295,25 @@ const customer = () => {
   display: none !important;
 }
 .panel{
-	background-color: #fff;
-	margin: 60px 0px 0px 0;
+	/* background-color: #fff; */
+	margin: 30px 0px 0px 0;
 	width: 100%;
 	padding: 20px;
+}
+/deep/ .el-input{
+	border-color: #000000;
+	border-radius: 6px !important;
+}
+/deep/ .el-input__wrapper{
+	border-color: #000000;
+	border: 1px solid #000;
+	box-shadow: inherit !important;
+	border-radius: 6px !important;
+}
+/deep/ .el-input__icon{
+	color: #000;
+}
+/deep/.van-dialog{
+	border-radius: 0;
 }
 </style>

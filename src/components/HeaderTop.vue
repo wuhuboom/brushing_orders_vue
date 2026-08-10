@@ -1,7 +1,7 @@
 <template>
     <van-sticky type="primary">
       <div
-        class="w-full flex justify-between shadow-md items-center p-2 py-4 box-border bg-black"
+        class="w-full flex justify-between shadow-md items-center p-2 py-4 box-border bg-white"
       >
         <div class="w-[var(--header-logo-width)]" @click="jump">
           <img class="w-full" src="@/static/images/logo.png" alt="" />
@@ -9,7 +9,7 @@
         <div class="flex justify-start items-center">
           <div
           @click="customer"
-            class="text-black font-semibold bg-white mr-2 text-xs px-3 py-1 rounded-full"
+            class="text-white font-semibold bg-[#ff8100] mr-2 text-xs px-3 py-1 rounded-[6px]"
           >
             {{ $t("联系") }}
           </div>

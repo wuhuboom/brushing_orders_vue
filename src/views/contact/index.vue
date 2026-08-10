@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-[#ecf7ff]" @scroll="handleScroll">
+  <div class="container w-full min-h-[100vh] bg-[#fffff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('客服')"
@@ -7,9 +7,9 @@
 	    left-arrow
 	    @click-left="onClickLeft"
 	  >
-		<template #left>
+	<!-- 	<template #left>
 	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
+	    </template> -->
 	  </van-nav-bar>
 	</van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,15 +20,15 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
+	 <!-- <template #left>
 		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
+	  </template> -->
 	</van-nav-bar>
 	<div v-if="ready">
+		<div class="bg-[#000c30] p-5 text-center text-base font-bold text-white">
+			 {{ $t("客服文案1") }}
+		</div>
 		<div class="w-full p-6 box-border flex flex-col ">
-		  <div class="py-2 text-center text-xl font-bold text-black">
-		  	 {{ $t("客服文案1") }}
-		  </div>
 		  <div class="text-xs text-center text-[#4b4c5a] mt-1">
 			 {{ $t("客服文案2") }} 
 		  </div>
@@ -36,21 +36,22 @@
 		    <div
 			  v-for="item in customerList"
 			  @click="jump(item.linkUrl)"
-		      class="flex items-center rounded-2.5 justify-between p-4 my-1 box-border border-[1px] border-[#e6e6e6] bg-[#000]"
+		      class="flex items-center rounded-2.5 justify-between p-4 my-1 box-border border-[1px] border-[#e6e6e6] bg-[#ff8100]"
 		    >
 		      <div class="flex items-center text-white text-base font-medium">
 		        {{ item.name }}
 		      </div>
-			  <img class="" src="@/static/images/base/right-white.png" style="width:22px" />
+			  <!-- <img class="" src="@/static/images/base/right-white.png" style="width:22px" /> -->
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
 		    </div>
 		  </div>
-		  <div class="py-1 mt-6 text-xl font-bold text-black ">
+		<!--  <div class="py-1 mt-6 text-xl font-bold text-black ">
 		  	 {{ $t("客服文案3") }}
 		  </div>
 		  
 		  <div class="text-xs text-[#4b4c5a] mt-1">
 		    {{ $t("客服文案4") }} 
-		  </div>
+		  </div> -->
 		</div>
 	</div>
   </div>

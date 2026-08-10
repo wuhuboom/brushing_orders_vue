@@ -1,14 +1,14 @@
 <template>
     <div class="w-full relative z-50">
         <div class="h-[65px]"></div> <!-- 占位 -->
-        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[65px] w-full bg-[#000] " style="bottom: -1px;">
+        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[65px] w-full bg-[#fff] " style="bottom: -1px;">
             <div v-for="menu in menus" :key="menu.title"
                 class="flex-1 flex flex-col items-center text-xs gap-1 font-light"  @click="onClickMenu(menu)">
                 <!-- <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}.png`)"
                     alt="" class="h-7 w-7" :class="menu.title == $t('开始')?'starting':''"> -->
 				<img :src="getStaticImageUrl(`${menu.icon}.png`)" class="h-7 w-7"
 				:class="menu.title == $t('开始')?'starting':''"/>
-                <span  class="leading-normal text-[10px] text-white" style="font-size: 12px;">
+                <span  class="leading-normal text-[10px] text-black" style="font-size: 12px;">
                     {{ menu.title }}
                 </span>
             </div>
@@ -59,7 +59,7 @@ function onClickMenu(menu) {
     width: 4rem;
     height: 4rem;
 	border-radius: 50%;
-	border: 3px solid #000;
+	border: 3px solid #ff8100;
 	background-color: #fff;
 }
 </style>

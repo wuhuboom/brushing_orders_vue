@@ -1,5 +1,5 @@
 <template>
-  <div v-if="ready" class="w-full min-h-[100vh] h-full withdraw  bg-[#f3fdf4]" @scroll="handleScroll">
+  <div v-if="ready" class="w-full min-h-[100vh] h-full withdraw  bg-[#ffffff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('提取')"
@@ -7,9 +7,6 @@
 	    left-arrow
 	    @click-left="onClickLeft"
 	  >
-		<template #left>
-	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
 	  </van-nav-bar>
 	</van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,22 +17,19 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
-		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
 	</van-nav-bar>
 
     <div class="mt-2">
 	  <div class="p-4 box-border mb-2 flex flex-col">
 	    <div
-	      class="flex flex-col justify-between p-4 pl-8 box-border bg-[#5d9c5d] box-shadow rounded-[6px]"
+	      class="flex flex-col justify-between p-4 pl-8 box-border bg-[#6a8abb] box-shadow rounded-[6px]"
 	    >
 	      <div class="w-full flex items-center justify-between">
 			<div class="text-black text-base font-bold">
 			  {{ $t("账户金额") }}
 			</div>
 			<div class="flex items-center justify-between" @click="toPage('/withdrawRecords')">
-			  <img class="w-6 mr-1" style="float: left;" src="@/static/images/base/icon-25.png"/>
+			  <img class="w-6 mr-1" style="float: left;" src="@/static/images/base/icon-23.png"/>
 			  <div class="text-[#000] text-base font-bold underline" style="float: left;">
 			    {{ $t("历史") }}
 			  </div>
@@ -55,14 +49,14 @@
 	        </div>
 	      </div>
 	      <div
-	        class="text-black opacity-70 text-xs font-semibold pt-8 pb-2"
+	        class="text-white opacity-70 text-xs font-semibold pt-8 pb-2"
 	      >
 	        {{ $t("您将在一小时内收到提款") }}
 	      </div>
 	    </div>
 	  </div>
 	  
-	  <div class="mx-4 bg-[#5d9c5d] py-1 rounded-[6px]">
+	  <div class="mx-4 bg-[#6a8abb] py-1 rounded-[6px]">
 		<div class="py-2 px-6  border-b-[1px] border-[#fff]">
 			<div class="py-2 flex items-center justify-between">
 			  <div class="flex items-center justify-between">
@@ -107,7 +101,7 @@
 		  class="p-4 bg-[#f9f9f9] border-[#e9ebe9] border-[1px] font-bold"
 		>
 		  <div v-if="walletInfo.id" @click="toPage('/paymentMethods')" class="w-full">
-			  <p class="text-xl text-[#5d9c5d]">{{walletInfo.network}}</p>
+			  <p class="text-xl text-[#ff8100]">{{walletInfo.network}}</p>
 			  <p>{{$t('钱包') }}: {{walletInfo.wallet}}</p>
 			  <p>{{$t('地址') }}: {{walletInfo.address}}</p>
 		  </div>
@@ -176,7 +170,7 @@
 	  <div class="w-full pl-5 pr-5 mt-8 mb-12">
 		<div @click="getWithdrawal" class="w-full" size="large" round>
 		  <div
-		    class="w-full text-white text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-black"
+		    class="w-full text-white text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-[#ff8100]"
 		  >
 		    <div>{{ $t("提取") }}</div>
 		  </div>
@@ -316,7 +310,8 @@ function handleScroll(e) {
 }
 .all{
 	border-radius: 0;
-	background-color: #000;
+	background-color: #ff8100;
+	border-color: #ff8100;
 	padding: 0px 10px;
 	height: 24px;
 }

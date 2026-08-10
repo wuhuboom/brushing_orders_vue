@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full  min-h-[100vh] h-full bg-[#f3fdf4]" @scroll="handleScroll">
+  <div class="w-full  min-h-[100vh] h-full bg-[#ffffff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('定金')"
@@ -7,9 +7,6 @@
 	    left-arrow
 	    @click-left="onClickLeft"
 	  >
-		<template #left>
-	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
 	  </van-nav-bar>
 	</van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,15 +17,12 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
-		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
 	</van-nav-bar>
 
     <div class="mt-2">
 	  <div class="p-4 box-border flex flex-col">
 	    <div
-	      class="flex flex-col justify-between py-4 px-8  box-border bg-[#5d9c5d] rounded-2.5"
+	      class="flex flex-col justify-between py-4 px-8  box-border bg-[#6a8abb] rounded-2.5"
 	    >
 	      <div class="text-black text-base font-bold">
 	        {{ $t("available") }}
@@ -44,14 +38,14 @@
 	        </div>
 	      </div>
 		  <div class="w-full flex justify-end mt-6">
-			  <div class="bg-black text-center text-white fl rounded-[6px] py-1 px-4" @click="customer">
+			  <div class="bg-[#ff8100] text-center text-white fl rounded-[6px] py-1 px-4" @click="customer">
 				  {{ $t("定金文案1") }}
 			  </div>
 		  </div>
 	    </div>
 		
 		<div
-		  class="flex flex-col justify-between py-4 mt-6 px-8  box-border bg-[#5d9c5d] rounded-2.5"
+		  class="flex flex-col justify-between py-4 mt-6 px-8  box-border bg-[#6a8abb] rounded-2.5"
 		>
 		  <div class="text-black text-base font-bold">
 		    {{ $t("总余额") }}
@@ -74,7 +68,7 @@
 		
 		<div class="mt-4 bg-white">
 			<van-cell v-for="item in orderList" :key="item" :title="item">
-			    <div class="w-full flex flex-col mb-2 bg-[#ffffff] border-[0px] border-[#eee] p-4 box-border rounded-[6px]">
+			    <div class="w-full flex flex-col mb-2 bg-[#e0e0e0] border-[0px] border-[#e0e0e0] p-4 box-border rounded-[6px]">
 			        <div class="w-full flex justify-between items-center mb-4">
 			          <div class="text-[#666] text-sm font-medium">
 						  <van-icon name="calendar" />
@@ -138,7 +132,15 @@
 					  	    </div>						  
 					  	</div>
 						<div class="flex justify-end w-[40%]" v-if="item.status == '2'">
-						  <van-button icon="arrow" icon-position="right" color="#000" @click="submit(item)" size="small">{{$t("提交订单")}}</van-button>
+						  <!-- <van-button icon="arrow" icon-position="right" color="#000" @click="submit(item)" size="small">{{$t("提交订单")}}</van-button> -->
+						  <van-button class="btn" icon-position="right" color="#ff8100" @click="submit(item)" size="small">{{$t("提交订单")}}
+						    <template #icon>
+						        <img
+						            src="@/static/images/base/keyboard_backspace.png"
+						            style="width: 18px; height: 18px; margin-right: 4px;"
+						        />
+						    </template>
+						  </van-button>
 						</div>
 					  </div>	
 					</div>   
@@ -159,7 +161,7 @@
 		    >
 		      <van-cell v-for="item in list" :key="item" :title="item">
 		        <div
-		          class="item flex items-center justify-between  w-full mb-1 bg-[#f3fdf4]  p-3 border-b-[1px] border-[#000]"
+		          class="item flex items-center justify-between  w-full mb-1  p-3 border-b-[1px] border-[#000]"
 		        >
 				  <div >
 					<div class="text-base font-bold text-[#000]">

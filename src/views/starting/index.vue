@@ -1,8 +1,8 @@
 <template>
   <div>
     <HeaderTop></HeaderTop>
-    <div class="w-full bg-[#fff4f3] relative">
-      <div class="w-full h-full pt-5">
+    <div class="w-full bg-[#ffffff] relative">
+      <div class="w-full h-full mt-8">
         <div
           class="flex w-[90%] mx-auto justify-between mt-4 items-center"
         >
@@ -23,7 +23,7 @@
           </div>
 		  <div class="text-black text-center flex justify-between items-end top-5 right-5">
 		    <p class="text-[#000] text-xl font-semibold">
-		      {{ userInfo.userLevel?.nameEn }}
+				{{ userInfo.userLevel?.nameEn }}
 		    </p>
 			<img :src="avatarUrl" class="w-12" alt="" />
 		  </div>
@@ -89,7 +89,7 @@
 		 
 		 <div @click="handleClick" class="w-full" size="large" round>
 		   <div
-		     class="w-full text-white text-base font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-[#fb001b]"
+		     class="w-full text-white text-base font-semibold mx-auto py-4  flex items-center justify-center bg-[#11284e] rounded-full"
 		   >
 		     <div>{{ $t("现在开始") }} ({{ userInfo.dealCount }}/{{orderCount}})</div>
 		   </div>
@@ -97,48 +97,48 @@
 		  
       </div>
 	  <div class="w-[100%] mx-auto p-2">
-	    <div class="mt-4 p-8 rounded-lg bg-[#ffffff] border-[#eaeaea] border-[1px]">
+	    <div class="mt-4 p-8 bg-[#0b1836]">
 	      <div class="flex flex-col box-border text-center relative rounded-xl">
-	        <div class="mb-2 text-base font-bold  mx-auto relative" style="color: black;">
+	        <div class="mb-2 text-base font-bold  mx-auto relative" style="color: white;">
 				<img 
-				  class="w-[4rem] h-[4rem] mx-auto "
+				  class="w-[3.5rem] h-[3.5rem] mx-auto "
 				  src="@/static/images/base/icon-32.png"/>
-				<div class=" mt-3 text-[16px] font-bold" style="color: black;">
+				<div class=" mt-6 text-[16px] font-bold" style="color: white;">
 					{{ $t("当日佣金") }}
 				</div>
-				<div class="text-[#000] text-[18px] font-bold ">
+				<div class="text-[#fff] text-[18px] font-bold ">
 				  {{ userInfo.commission }} {{ $t("美元") }}
 				</div>
-				<div class="text-[#000] mt-2 text-[13px]">
+				<div class="text-[#576f96] mt-2 text-[13px]">
 				  {{ $t("每日赚取佣金") }}
 				</div>
 			</div>
 			<div class="flex items-center justify-between mt-6 px-1">
-				<div class="mb-2 text-base font-bold" style="color: black;">
+				<div class="mb-2 text-base font-bold" style="color: white;">
 					<img
-					 class="w-[4rem] h-[4rem] mx-auto "
+					 class="w-[2.5rem] h-[2.5rem] mx-auto"
 					 src="@/static/images/base/icon-33.png"/>
-					<div class=" mt-3 text-[16px] font-bold" style="color: black;">
+					<div class=" mt-6 text-[16px] font-bold" style="color: white;">
 						{{ $t("钱包余额") }}
 					</div>
-					<div class="text-[#000] text-[18px] font-bold ">
+					<div class="text-[#fff] text-[18px] font-bold ">
 					  {{ userInfo.balance }} {{ $t("美元") }}
 					</div>
-					<div class="text-[#000] mt-2 text-[13px]">
+					<div class="text-[#576f96] mt-2 text-[13px]">
 					  {{ $t("佣金将在此处添加") }}
 					</div>
 				</div>
 				<div class="mb-2 text-base font-bold" style="color: black;">
 					<img
-					 class="w-[4rem] h-[4rem] mx-auto "
+					 class="w-[2.5rem] h-[2.5rem] mx-auto "
 					 src="@/static/images/base/icon-34.png"/>
-					<div class=" mt-3 text-[16px] font-bold" style="color: black;">
+					<div class=" mt-6 text-[16px] font-bold" style="color: white;">
 						{{ $t("持有金额") }}
 					</div>
-					<div class="text-[#000] text-[18px] font-bold ">
+					<div class="text-[#fff] text-[18px] font-bold ">
 					  {{ userInfo.frozenBalance }} {{ $t("美元") }}
 					</div>
-					<div class="text-[#000] mt-2  text-[13px] ">
+					<div class="text-[#576f96] mt-2  text-[13px] ">
 					  {{ $t("如有疑问，请联系客服") }}
 					</div>
 				</div>
@@ -147,10 +147,10 @@
 	    </div>
 	  </div>
       <div class="w-[100%] mx-auto px-2">
-        <div class="mb-8 rounded-lg bg-[#ffffff] border-[#eaeaea] border-[1px]">
-          <div class="flex flex-col p-4 box-border text-center relative rounded-xl">
-            <div class="mb-2  text-base font-bold" style="color: black;">{{ $t("staring3") }}</div>
-            <div class="text-[#000] text-sm ">
+        <div class="mb-8 rounded-lg bg-[#11284e]">
+          <div class="flex flex-col p-4 box-border text-center relative">
+            <div class="mb-2  text-base font-bold" style="color: white;">{{ $t("staring3") }}</div>
+            <div class="text-[#fff] text-sm ">
               {{ $t("staring1") }}
               {{ TradeInfor?.workTimeStart || "10:00" }} -
               {{ TradeInfor?.workTimeEnd || "23:00" }}<br />
@@ -360,10 +360,10 @@ const translateX = computed(()=>{
   // return sidePad - moveLeft 
   if(!containerWidth.value) return 0
   const baseMove = current.value * (cardW.value + gap)
-    // 2. 居中偏移：容器一半宽度 - 半张卡片宽度，让卡片精准居中
-    const centerOffset = containerWidth.value / 2 - cardW.value / 2
+    // 2. 居中偏移：容器一半宽度 - 半张卡片宽度，让卡片精准居中 
+  const centerOffset = containerWidth.value / 2 - cardW.value / 2
     // 3. 最终位移 = 居中位置 - 卡片整体左移量
-    return centerOffset - baseMove + 10
+  return centerOffset - baseMove - 10 * current.value
 })
 // 读取容器宽度，窗口变化时重新赋值
 const getContainerWidth = async ()=>{

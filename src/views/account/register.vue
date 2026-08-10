@@ -1,25 +1,19 @@
 <template>
   <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-3">
-    <div class="flex flex-col items-center pb-1">
-     <!-- <img
-        src="@/static/images/account-lang.png"
-        alt=""
-        class="w-5 h-5 self-end mb-4"
-        @click="handleChangeLang"
-      /> -->
+    <div class="flex flex-col items-center mt-6 pb-1">
 	  <div class="text-2xl text-main-bg text-center py-6 pt-12">
 	  		  {{ $t("欢迎") }}
 	  </div>
 	  <img
-	    src="@/static/images/login_logo.png"
+	    src="@/static/images/logo.png"
 	    alt=""
-	    class="w-[24%] lg:w-[300px] mx-auto"
+	    class="w-[70%] lg:w-[300px] mx-auto"
 	  />
 	  <div class="panel">
-		  <div class="text-3xl text-main-bg font-semibold  py-4">
+		  <div class="text-3xl text-center text-main-bg font-semibold  py-4">
 		    {{ $t("登入") }}
 		  </div>
-		  <div class="text-sm text-main-bg pb-4">
+		  <div class="text-sm text-center text-main-bg pb-4 text-[#828794]">
 		    {{ $t("输入您的用户名和密码以访问") }}
 		  </div>
 		  <el-form
@@ -78,7 +72,7 @@
 						<img v-else class="rotate-90" src="@/static/images/base/right.png" style="width:12px" />
 				</div>
 				<input type="text" v-model="ruleForm.phone" @input=""
-				  class="flex-1 bg-[#f9f9f9] h-[50px]  pl-4 text-base"  />  
+				  class="flex-1  h-[50px]  pl-4 text-base"  />  
 			  </div>
 			  
 				
@@ -163,7 +157,7 @@
 		  </van-checkbox>
 		  <div @click="sendCode" class="w-full" size="large" round>
 		    <div
-		      class="w-full text-white text-2xl font-semibold mx-auto py-5 rounded flex items-center justify-center bg-black"
+		      class="w-full text-white text-2xl font-semibold mx-auto py-5 rounded-xl flex items-center justify-center bg-[#ff8100]"
 		    >
 		      <div>{{ $t("登记") }}</div>
 		    </div>
@@ -395,8 +389,8 @@ onUnmounted(() => {
 	line-height: 40px !important;
 }
 .panel{
-	background-color: #fff;
-	margin: 60px 0px 0px 0;
+	/* background-color: #fff; */
+	margin: 30px 0px 0px 0;
 	width: 100%;
 	padding: 20px;
 }
@@ -518,5 +512,24 @@ onUnmounted(() => {
   font-size: 26px;
   color: #666;
   cursor: pointer;
+}
+/deep/ .el-input{
+	border-color: #000000;
+	border-radius: 6px !important;
+}
+/deep/ .el-input__wrapper{
+	border-color: #000000;
+	border: 1px solid #000;
+	box-shadow: inherit !important;
+	border-radius: 6px !important;
+}
+/deep/ .el-select__wrapper{
+	border-color: #000000;
+	border: 1px solid #000;
+	box-shadow: inherit !important;
+	border-radius: 6px !important;
+}
+/deep/ .el-select__caret{
+	color: #000;
 }
 </style>

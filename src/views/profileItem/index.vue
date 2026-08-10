@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-[#ecf7ff]" @scroll="handleScroll">
+  <div class="container w-full min-h-[100vh] bg-[#fff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('修改信息')"
@@ -7,9 +7,6 @@
 	    left-arrow
 	    @click-left="onClickLeft"
 	  >
-		<template #left>
-	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
 	  </van-nav-bar>
 	</van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,9 +17,6 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
-		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
 	</van-nav-bar>
     <div class="w-full p-6 box-border flex flex-col ">
 	  <div class="py-4 text-base font-bold text-black">
@@ -76,8 +70,8 @@
           <div class="flex items-center text-black text-base font-medium">
             {{ $t("更新密码") }}
           </div>
-          <!-- <van-icon name="arrow" size="18px" /> -->
-		  <img class="" src="@/static/images/base/right.png" style="width:22px" />
+		  <!-- <img class="" src="@/static/images/base/right.png" style="width:22px" /> -->
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
         </div>
         <div
           class="flex items-center justify-between p-4 mt-4 box-border border-[1px] border-[#e6e6e6] bg-[#f9f9f9]"
@@ -86,8 +80,8 @@
           <div class="flex items-center text-black text-base font-medium">
             {{ $t("更新交易密码") }}
           </div>
-          <!-- <van-icon name="arrow" size="18px" /> -->
-		  <img class="" src="@/static/images/base/right.png" style="width:22px" />
+		  <!-- <img class="" src="@/static/images/base/right.png" style="width:22px" /> -->
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-[#ecf7ff]" @scroll="handleScroll">
+  <div class=" w-full min-h-[100vh] h-full bg-[#fff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('语言')"
@@ -7,9 +7,6 @@
 	    left-arrow
 	    @click-left="onClickLeft"
 	  >
-		<template #left>
-	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
 	  </van-nav-bar>
 	</van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,16 +17,13 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
-		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
 	</van-nav-bar>
     <div class="w-full p-6 box-border flex flex-col ">
       <div class=" flex flex-col mt-4">
         <div
 		  v-for="item in LANGS"
 		  @click="handleChangeLang(item)"
-          class="text-center p-[20px] my-1.5 box-border border-[1px] border-[#000] bg-[#fff]"
+          class="text-center p-[20px] my-1.5 box-border rounded-xl bg-[#6e7482]"
 		  :class="commonStore.clientLang === item.code?'current':''"
         >
           <div 
@@ -40,7 +34,7 @@
           </div>
 		  <div 
 		    v-else
-			class="text-center text-black text-xl font-medium"
+			class="text-center text-white text-xl font-medium"
 		  >
 		    {{ item.name }}
 		  </div>
@@ -105,6 +99,6 @@ function handleScroll(e) {
 
 <style scoped>
 .current{
-	background-color: #000;
+	background-color: #11284e;
 }
 </style>

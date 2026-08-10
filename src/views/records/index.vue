@@ -36,10 +36,10 @@
                     <van-cell v-for="item in list" :key="item" :title="item">
                         <div class="w-full flex flex-col mb-6 bg-[#ffffff] border-[1px] border-[#eee] p-4 box-border rounded-[6px]">
                             <div class="w-full flex justify-between items-center mb-4">
-                              <div class="text-[#666] text-sm font-medium">
+                              <div class="text-[#000] text-sm font-medium font-bold">
                                   {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
                               </div>
-                              <div class="text-white text-xs p-1 px-3  font-medium " :class="item.status == '2'?'bg-[#fb001b]':item.status == '1'?'bg-[#fb001b]':'bg-[#006bdc]'">
+                              <div class="text-white text-xs p-1 px-3 rounded-lg font-medium " :class="item.status == '2'?'bg-[#fb001b]':item.status == '1'?'bg-[#fb001b]':'bg-[#006bdc]'">
                                   {{item.status=='0'? $t('已完成'): item.status == '1'?$t('冻结'): $t('待提交')}}
                               </div>  
                             </div>   
@@ -97,7 +97,14 @@
 							  	    </div>						  
 							  	</div>
 								<div class="flex justify-end w-[40%]" v-if="item.status == '2'">
-								  <van-button icon="arrow" icon-position="right" color="#000" @click="submit(item)" size="small">{{$t("提交订单")}}</van-button>
+								  <van-button class="btn" icon-position="right" color="#ff8100" @click="submit(item)" size="small">{{$t("提交订单")}}
+								    <template #icon>
+								        <img
+								            src="@/static/images/base/keyboard_backspace.png"
+								            style="width: 18px; height: 18px; margin-right: 4px;"
+								        />
+								    </template>
+								  </van-button>
 								</div>
 							  </div>
 							  
@@ -270,6 +277,9 @@ onMounted(() =>{
 	float: left;
 	margin-left: 10px;
 	width: calc(100% - 110px);
+}
+.btn{
+	border-radius: 999px;
 }
 :deep(.van-tab){
 	margin: 0px 10px !important;

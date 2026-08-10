@@ -1,5 +1,5 @@
 <template>
-  <div v-if="ready" class="w-full min-h-[100vh] bg-[#ecf7ff]" @scroll="handleScroll">
+  <div v-if="ready" class="w-full min-h-[100vh] bg-[#fff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('付款方式')"
@@ -7,9 +7,6 @@
 	    left-arrow
 	    @click-left="onClickLeft"
 	  >
-		<template #left>
-	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
 	  </van-nav-bar>
 	</van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,9 +17,6 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
-		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
 	</van-nav-bar>
    <div class="p-4 box-border mb-2 flex flex-col">
 	   <div class="text-xs pl-5 pr-5 text-[#333] mb-4 mt-8">
@@ -92,7 +86,7 @@
 	<div class="w-full pl-4 pr-4 mt-10 mb-12">
 	  <div @click="submitForm" class="w-full" size="large" round>
 	    <div
-	      class="w-full text-white text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-black"
+	      class="w-full text-white text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-[#ff8100]"
 	    >
 	      <div>{{ $t("更新") }}</div>
 	    </div>

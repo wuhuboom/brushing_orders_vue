@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-[100vh] overflow-y-scroll bg-[#ecf7ff] flex flex-col pb-6" @scroll="handleScroll">
+  <div class="w-full h-[100vh] overflow-y-scroll bg-[#ffffff] flex flex-col pb-6" @scroll="handleScroll">
     <van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
       <van-nav-bar
         :title="$t('我的')"
@@ -7,9 +7,6 @@
         left-arrow
         @click-left="onClickLeft"
       >
-		<template #left>
-	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
 	  </van-nav-bar>
     </van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,9 +17,6 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
-		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
 	</van-nav-bar>
     <div class="w-full py-3">
       <div class="w-[90%] mx-auto">
@@ -39,21 +33,21 @@
 		</div>
         <div
           class="w-full p-4 mt-[1rem] pb-10 relative"
-          style="background: #1d6cfd"
+          style="background: #11284e"
         >
-          <div class="text-black text-center absolute top-5 right-5">
+          <div class="text-white text-center absolute top-5 right-5">
             <!-- <img :src="bgMapStart[userInfo.levelId-1]" class="w-12" alt="" /> -->
 			<img :src="avatarUrl" class="w-12" alt="" />
-            <p class="text-[#000] text-sm font-semibold">
+            <p class="text-[#fff] text-sm font-semibold">
               {{ avatarLevelStr }}
             </p>
           </div>
           <div class="w-full  mt-[1rem]">
-            <div class="flex text-black text-lg flex-col">
-				<p class="text-xl  text-black">
+            <div class="flex text-white text-lg flex-col">
+				<p class="text-xl  text-white">
 				  {{ $t("你好") }}
 				</p>
-              <p class="text-2xl font-bold text-black">
+              <p class="text-2xl font-bold text-white">
                 {{ userInfo.username }}
               </p>
             </div>
@@ -63,10 +57,10 @@
             class="w-full flex items-center pt-4 pb-4 text-center box-border overflow-hidden mt-4"
           >
 			<div class="w-[50%] flex flex-col justify-center items-center">
-			  <div class="text-[#000] text-[12px]">
+			  <div class="text-[#fff] text-[12px]">
 			    {{ $t("邀请码") }}
 			  </div>
-			  <div class="text-xs text-[#000] mt-1">
+			  <div class="text-xs text-[#fff] mt-1">
 			    <span class="text-base font-semibold">{{
 			      userInfo.inviteCode
 			    }}</span>
@@ -78,25 +72,25 @@
 				/>
 			  </div>
 			</div>
-			<div class="w-[1px] h-8 bg-[#000]"></div>
+			<div class="w-[1px] h-8 bg-[#fff]"></div>
             <div class="w-[50%] flex flex-col justify-center items-center">
-              <div class="text-[#000] text-[12px]">
+              <div class="text-[#fff] text-[12px]">
                 {{ $t("钱包余额") }}
                 <div>(USD)</div>
               </div>
-              <div class="text-xs text-[#000] mt-1">
+              <div class="text-xs text-[#fff] mt-1">
                 <span class="text-base font-semibold">{{
                   userInfo.totalBalance
                 }}</span>
               </div>
             </div>
-            <div class="w-[1px] h-8 bg-[#000]"></div>
+            <div class="w-[1px] h-8 bg-[#fff]"></div>
             <div class="w-[50%] flex flex-col justify-center items-center">
-              <div class="text-[#000] text-[12px]">
+              <div class="text-[#fff] text-[12px]">
                 {{ $t("当日佣金") }}
                 <div>(USD)</div>
               </div>
-              <div class="text-xs text-[#000] mt-1">
+              <div class="text-xs text-[#fff] mt-1">
                 <span class="text-base font-semibold">{{
                   userInfo.commission
                 }}</span>
@@ -106,16 +100,16 @@
 		  <div
 		    class="w-full mt-3 flex justify-start items-center pl-1 pr-1 text-black"
 		  >
-		    <div class="text-[10px] mr-2">{{ $t("信用评分") }}:</div>
+		    <div class="text-[10px] mr-2 text-white">{{ $t("信用评分") }}:</div>
 		    <div class="flex-auto">
 		      <van-progress
-		        color="rgb(0, 0, 0)"
+		        color="rgb(255, 129, 0)"
 		        :percentage="userInfo.creditScore"
 		        :show-pivot="false"
 		        stroke-width="8"
 		      />
 		    </div>
-		    <div class="text-black text-[10px] ml-1">
+		    <div class="text-white text-[10px] ml-1">
 		      {{ userInfo.creditScore }}%
 		    </div>
 		  </div>
@@ -130,7 +124,7 @@
       </div>
       <div class="flex flex-col rounded-xl bg-[#fff]">
         <div
-          class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5"
+          class="flex items-center justify-between p-4 pl-2 bg-[#f3f3f3] rounded-2.5"
           @click="toPage('/profileItem')"
         >
           <div class=" w-full flex items-center justify-between">
@@ -140,11 +134,11 @@
 				  {{ $t("个人信息") }}
 				</div>
 			</div>
-			<img style="float: right;" class="w-[20px]" src="@/static/images/base/right.png"/>
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
           </div>
         </div>
         <div
-          class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5 mt-2"
+          class="flex items-center justify-between p-4 pl-2 bg-[#f3f3f3] rounded-2.5 mt-2"
           @click="payMethod"
         >
           <div class=" w-full flex items-center justify-between">
@@ -154,7 +148,7 @@
 				  {{ $t("付款方式") }}
 				</div>
 			</div>
-            <img style="float: right;" class="w-[20px]" src="@/static/images/base/right.png"/>
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
           </div>
         </div>
       </div>
@@ -167,7 +161,7 @@
       </div>
       <div class="flex flex-col rounded-xl bg-[#fff]">
 		<div
-		  class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5"
+		  class="flex items-center justify-between p-4 pl-2 bg-[#f3f3f3] rounded-2.5"
 		  @click="toPage('/deposit')"
 		>
 		  <div class=" w-full flex items-center justify-between">
@@ -177,11 +171,11 @@
 				  {{ $t("定金") }}
 				</div>
 			</div>
-			<img style="float: right;" class="w-[20px]" src="@/static/images/base/right.png"/>
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
 		  </div>
 		</div>
 		<div
-		  class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5 mt-2"
+		  class="flex items-center justify-between p-4 pl-2 bg-[#f3f3f3] rounded-2.5 mt-2"
 		  @click="toPage('/withdraw')"
 		>
 		  <div class=" w-full flex items-center justify-between">
@@ -191,7 +185,7 @@
 				  {{ $t("提取") }}
 				</div>
 			</div>
-			<img style="float: right;" class="w-[20px]" src="@/static/images/base/right.png"/>
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
 		  </div>
 		</div>
       </div>
@@ -204,8 +198,8 @@
         {{ $t("其他") }}
       </div>
       <div class="flex flex-col rounded-xl bg-[#fff]">
-		<div
-		  class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5"
+		<!-- <div
+		  class="flex items-center justify-between p-4 pl-2 bg-[#f3f3f3] rounded-2.5"
 		  @click="toPage('/contact')"
 		>
 		  <div class=" w-full flex items-center justify-between">
@@ -215,11 +209,11 @@
 				  {{ $t("联系我们") }}
 				</div>
 			</div>
-			<img style="float: right;" class="w-[20px]" src="@/static/images/base/right.png"/>
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
 		  </div>
-		</div>
+		</div> -->
 		<div
-		  class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5 mt-2"
+		  class="flex items-center justify-between p-4 pl-2 bg-[#f3f3f3] rounded-2.5 mt-2"
 		  @click="toPage('/notice')"
 		>
 		  <div class=" w-full flex items-center justify-between">
@@ -232,11 +226,11 @@
 				  {{ $t("通知") }}
 				</div>
 			</div>
-			<img style="float: right;" class="w-[20px]" src="@/static/images/base/right.png"/>
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
 		  </div>
 		</div>
 		<div
-		  class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5 mt-2"
+		  class="flex items-center justify-between p-4 pl-2 bg-[#f3f3f3] rounded-2.5 mt-2"
 		  @click="toPage('/lang')"
 		>
 		  <div class=" w-full flex items-center justify-between">
@@ -246,12 +240,12 @@
 				  {{ $t("更改语言") }}
 				</div>
 			</div>
-			<img style="float: right;" class="w-[20px]" src="@/static/images/base/right.png"/>
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
 		  </div>
 		</div>
 		
 		<div
-		  class="flex items-center justify-between p-4 pl-2 bg-[#1d6cfd] rounded-2.5 mt-2"
+		  class="flex items-center justify-between p-4 pl-2 bg-[#f3f3f3] rounded-2.5 mt-2"
 		  @click="toPage('/account/logout')"
 		>
 		  <div class=" w-full flex items-center justify-between">
@@ -261,7 +255,7 @@
 				  {{ $t("登出") }}
 				</div>
 			</div>
-			<img style="float: right;" class="w-[20px]" src="@/static/images/base/right.png"/>
+			<van-icon class="w-[20px]" style="float: left;" name="arrow" size='22'></van-icon>
 		  </div>
 		</div>
       </div>
