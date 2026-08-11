@@ -1,5 +1,5 @@
 <template>
-  <div class="container bg-[#fff] w-full min-h-[100vh]" @scroll="handleScroll">
+  <div class="container bg-[#fff] w-full h-full min-h-[100vh]" @scroll="handleScroll">
     <van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
       <van-nav-bar
         :title="incomeGuide.noticeTitle"

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f4f4f5]" @scroll="handleScroll">
+  <div class="w-full min-h-[100vh] h-full bg-[#f4f4f5]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('证书')"
@@ -7,9 +7,6 @@
 	    left-arrow
 	    @click-left="onClickLeft"
 	  >
-		<template #left>
-	  	  <img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	    </template>
 	  </van-nav-bar>
 	</van-sticky>
 	<HeaderTop></HeaderTop>
@@ -20,9 +17,6 @@
 	  left-arrow
 	  @click-left="onClickLeft"
 	>
-	  <template #left>
-		<img class="rotate-180" src="@/static/images/base/right.png" style="width:22px" />
-	  </template>
 	</van-nav-bar>
     <div class="container w-full min-h-[100vh] bg-[#f4f4f5]">
       <div class="w-full p-6 box-border flex flex-col font-montserrat text-[#333] mt-10">

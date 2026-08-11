@@ -1,5 +1,5 @@
 <template>
-  <div v-if="ready" class="w-full min-h-[100vh] bg-[#fff]" @scroll="handleScroll">
+  <div v-if="ready" class="w-full min-h-[100vh] h-full bg-[#fff]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('付款方式')"

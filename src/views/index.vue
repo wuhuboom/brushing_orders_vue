@@ -1,32 +1,31 @@
 <template>
-  <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-3"  v-if="ready">
+  <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center"  v-if="ready">
  
-    <div class="flex flex-col items-center  pb-1 py-5">
+    <div class="flex flex-col items-center  pb-1 py-5 my-20">
 	  <img
-        src="@/static/images/login_logo.png"
+        src="@/static/images/logo.png"
         alt=""
-        class="w-[40%] lg:w-[300px] mt-10 pt-20"
+        class="w-[70%] lg:w-[300px] py-5"
       />
-	  <div class="text-2xl text-main-bg text-center py-6 pt-24">
-	  		  {{ $t("企业名") }}
-	  </div>
-	  <div class="text-sm pb-8">
-	  	{{ $t("开始创建你的账户")}}
-	  </div>
-	  
-	  
     </div>
-	<div class=" py-6 w-[90%] ml-[5%]">
-	  <div @click="toRegister()" class="w-full" size="large" round>
+	<div class=" py-6 w-full  headBg inline-block text-center text-[#fff]">
+      <div class="text-[20px] leading-tight m-8 mt-20 ">
+		  {{ $t("index_label1") }}
+	  </div>
+	  <div class="text-xs m-6 ">
+	    {{ $t("index_label2") }}
+	  </div>	  
+	
+	  <div @click="toRegister()" class="w-[80%] ml-[10%]  mt-20 " size="large" round>
 	    <div
-	      class="w-full text-white text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-black"
+	      class="w-full text-white text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center bg-[#ff8100]"
 	    >
 	      <div>{{ $t("创建账户") }}</div>
 	    </div>
 	  </div>
-	  <div @click="toLogin()" class="w-full" size="large" round>
+	  <div @click="toLogin()" class="w-[80%] ml-[10%] mb-8" size="large" round>
 	    <div
-	      class="w-full text-black text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center my-4 bg-white border border-[#000]"
+	      class="w-full text-white text-2xl font-semibold mx-auto py-4 rounded-lg flex items-center justify-center my-4 bg-[#6e7482]"
 	    >
 	      <div>{{ $t("登录") }}</div>
 	    </div>
@@ -78,4 +77,11 @@ const toLogin= () => {
 </script>
 
 <style scoped>
+.headBg{
+	/* background-image: linear-gradient(to right, #243c5e, #0d1f3b, #243c5e); */
+	
+  background-image: url(@/static/images/home/Frame-68.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 </style>

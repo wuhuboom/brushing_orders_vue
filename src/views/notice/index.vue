@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-full bg-[#ffffff] min-h-[100vh]" @scroll="handleScroll">
+  <div class="container w-full bg-[#ffffff] h-full min-h-[100vh]" @scroll="handleScroll">
 	<van-sticky type="primary" style="z-index: 999" v-show="navBarShow">
 	  <van-nav-bar
 	    :title="$t('通知')"
