@@ -24,7 +24,7 @@
 		    label-width="auto"
 		    class="w-full mt-4"
 		  >
-			<div class="font-semibold pb-2">{{ $t("用户名") }}</div>
+			<div class="font-semibold pb-2">{{ $t("用户名") }}<span class="ml-1">*</span></div>
 		    <el-form-item label="" prop="username" label-position="top">
 		      <el-input
 		        v-model="ruleForm.username"
@@ -34,7 +34,7 @@
 		      >
 		      </el-input>
 		    </el-form-item>
-			<div class="font-semibold pb-2">{{ $t("密码") }}</div>
+			<div class="font-semibold pb-2">{{ $t("密码") }}<span class="ml-1">*</span></div>
 		    <el-form-item label="" prop="password" label-position="top">
 		      <el-input
 		        v-model="ruleForm.password"
@@ -44,7 +44,7 @@
 		      >
 		      </el-input>
 		    </el-form-item>
-			<div class="font-semibold pb-2">{{ $t("确认密码") }}</div>
+			<div class="font-semibold pb-2">{{ $t("确认密码") }}<span class="ml-1">*</span></div>
 		    <el-form-item label="" prop="agentPassword" label-position="top">
 		      <el-input
 		        v-model="agentPassword"
@@ -54,7 +54,7 @@
 		      >
 		      </el-input>
 		    </el-form-item>
-			<div class="font-semibold pb-2">{{ $t("电话") }}</div>
+			<div class="font-semibold pb-2">{{ $t("电话") }}<span class="ml-1">*</span></div>
 		   <!-- <el-form-item label="" prop="phone" label-position="top">
 		      <el-input
 		        v-model="ruleForm.phone"
@@ -93,7 +93,7 @@
 			  </div>
 			  
 			</el-form-item>
-			<div class="font-semibold pb-2">{{ $t("邮箱") }}</div>
+			<div class="font-semibold pb-2">{{ $t("邮箱") }}<span class="ml-1">*</span></div>
 			<el-form-item label="" prop="email" label-position="top">
 			  <el-input
 			    v-model="ruleForm.email"
@@ -103,7 +103,7 @@
 			  >
 			  </el-input>
 			</el-form-item>
-			<div class="font-semibold pb-2">{{ $t("交易密码") }}</div>
+			<div class="font-semibold pb-2">{{ $t("交易密码") }}<span class="ml-1">*</span></div>
 		    <el-form-item label="" prop="tradePassword" label-position="top">
 		      <el-input
 		        v-model="ruleForm.tradePassword"
@@ -114,7 +114,7 @@
 		      </el-input>
 		    </el-form-item>
 			
-			<div class="font-semibold pb-2">{{ $t("性别") }}</div>
+			<div class="font-semibold pb-2">{{ $t("性别") }}<span class="ml-1">*</span></div>
 			<el-form-item label="" prop="sex" label-position="top">
 			  <el-select
 			    v-model="ruleForm.sex"
