@@ -319,8 +319,6 @@
   "insufficient_user_balance_contact_administrator_often_due_to_insufficient_frozen_funds": "Insufficient user balance (contact administrator, often due to insufficient frozen funds)",
   "lottery_not_enabled": "Lottery not enabled",
   "no_lottery_attempts_remaining": "No lottery attempts remaining",
-  "客服文案1": "We Make Things Happen For Our Clients",
-  "客服文案2": "One 10 Media is an eCommerce growth agency specializing in paid social, email marketing, and SMS for DTC brands. We put data first to deliver cohesive experiences for brands ready to scale.",
   "home_company_1": "We help ambitious DTC brands accelerate their growth through paid media and lifecycle marketing.",
   "home_company_2": "For 7 and 8-figure DTC brands stuck at a revenue plateau their internal team or current agency can’t break through.",
   "home_company_3": "See Case Studies",
@@ -349,7 +347,8 @@
   "home_label20": "We're an 8-figure brand that had grown organically, but previous agencies spent without regard for profitability. One 10 was different from day one. We aligned on attribution before launching anything. In our first full year, they drove a PROFITABLE $5mm in growth, clearly tracked back properly. These guys are sharp and execute.",
   "home_label21": "Adam Wolfe",
   "home_label22": "Founder, Boost Auto Parts",
+  "客服文案1": "We Make Things Happen For Our Clients",
+  "客服文案2": "One 10 Media is an eCommerce growth agency specializing in paid social, email marketing, and SMS for DTC brands. We put data first to deliver cohesive experiences for brands ready to scale.",
   "index_label1": "We help ambitious DTC brands accelerate their growth through paid media and lifecycle marketing.",
-  "index_label2": "For 7 and 8-figure DTC brands stuck at a revenue plateau their internal team or current agency can’t break through.",
-  "home_label25": ""
+  "index_label2": "For 7 and 8-figure DTC brands stuck at a revenue plateau their internal team or current agency can’t break through."
 }
