@@ -8,7 +8,7 @@
         class="w-[70%] lg:w-[300px] py-5"
       />
     </div>
-	<div class=" py-6 w-full  headBg inline-block text-center text-[#fff]">
+	<div class=" py-6 w-full mt-[0px] lg:mt-[120px]  headBg inline-block text-center text-[#fff]">
       <div class="text-[20px] leading-tight m-8 mt-20 ">
 		  {{ $t("index_label1") }}
 	  </div>

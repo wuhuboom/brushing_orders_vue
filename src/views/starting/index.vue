@@ -165,11 +165,16 @@
     <van-dialog
       v-model:show="showImg"
       round
+	  class="welcome-dialog"
 	  :showConfirmButton="false"
 	  close-on-click-overlay
       :style="{ width:'90%',background: 'transparent' }"
     >
-      <img class="w-[100%]" src="../../static/images/super.png" alt="">
+	  
+	  <div class="welcome-dialog-image-wrap">
+	    <img class="welcome-dialog-image" src="../../static/images/super.png" alt="Welcome"/>
+	  </div>
+      <!-- <img class="w-[100%]" src="../../static/images/super.png" alt=""> -->
 	  <div @click="toPage('/contact')" class="w-full" size="large" round>
 	    <div
 	      class="w-full text-white text-2xl font-semibold mx-auto py-5  flex items-center justify-center bg-black"
@@ -566,5 +571,33 @@ onUnmounted(()=>{
 .price {
   font-size: 22px;
   font-weight: bold;
+}
+:deep(.welcome-dialog.van-dialog){
+  display: flex;
+  flex-direction: column;
+  width: min(90vw, 560px);
+  max-width: 560px;
+  max-height: calc(100dvh - 32px);
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.welcome-dialog-image-wrap {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 0 0 14px 14px;
+}
+
+.welcome-dialog-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100dvh - 68px);
+  object-fit: contain;
 }
 </style>
