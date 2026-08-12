@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-[#ffffff] h-full">
     <HeaderTop></HeaderTop>
     <div class="w-full bg-[#ffffff] relative">
       <div class="w-full h-full mt-8">
