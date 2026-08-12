@@ -309,7 +309,7 @@
   "order_has_been_completed": "注文が完了しました",
   "order_status_does_not_allow_submission": "注文ステータスでは送信が許可されていません",
   "we_ll_be_happy_to_help_and_get_back_to_you_once_we_re_online": "オンラインになりましたら、喜んでご連絡させていただきます",
-  "supportHours": "カスタマー サービスは現在オフラインです。オンラインの営業時間にご注意ください。",
+  "supportHours": "カスタマーサービスの営業時間外です。",
   "please_contact_customer_service_to_enable_the_task": "タスクを有効にするには、カスタマー サービスにお問い合わせください。",
   "no_new_orders_order_submitted_successfully": "新しい注文はありません。注文は正常に送信されました",
   "user_has_ongoing_orders_returning_new_order_information": "ユーザーには進行中の注文があり、新しい注文情報が返されます",

@@ -309,7 +309,7 @@
   "order_has_been_completed": "A rendelés elkészült",
   "order_status_does_not_allow_submission": "A rendelés állapota nem teszi lehetővé a benyújtást",
   "we_ll_be_happy_to_help_and_get_back_to_you_once_we_re_online": "Szívesen segítünk, és felvesszük Önnel a kapcsolatot, ha már online leszünk",
-  "supportHours": "Az ügyfélszolgálat jelenleg offline állapotban van, kérjük, ügyeljen az online nyitva tartásra.",
+  "supportHours": "Az ügyfélszolgálat munkaidőn kívül van.",
   "please_contact_customer_service_to_enable_the_task": "A feladat engedélyezéséhez forduljon az ügyfélszolgálathoz",
   "no_new_orders_order_submitted_successfully": "Nincs új rendelés, a rendelés sikeresen elküldve",
   "user_has_ongoing_orders_returning_new_order_information": "A felhasználónak folyamatban lévő rendelései vannak, új rendelési információkat küld vissza",

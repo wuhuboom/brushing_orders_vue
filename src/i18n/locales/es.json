@@ -309,7 +309,7 @@
   "order_has_been_completed": "El pedido ya fue completado",
   "order_status_does_not_allow_submission": "El estado del pedido no permite el envío",
   "we_ll_be_happy_to_help_and_get_back_to_you_once_we_re_online": "Estaremos encantados de ayudarte y responderemos en cuanto estemos en línea",
-  "supportHours": "El servicio de atención al cliente está desconectado, preste atención al horario en línea.",
+  "supportHours": "El servicio de atención al cliente está fuera del horario laboral.",
   "please_contact_customer_service_to_enable_the_task": "Por favor contacte con el servicio de atención al cliente para habilitar la tarea",
   "no_new_orders_order_submitted_successfully": "Sin pedidos nuevos, pedido enviado correctamente",
   "user_has_ongoing_orders_returning_new_order_information": "El usuario tiene pedidos en curso, devolviendo los datos del nuevo pedido",

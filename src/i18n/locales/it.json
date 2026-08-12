@@ -309,7 +309,7 @@
   "order_has_been_completed": "L'ordine è stato completato",
   "order_status_does_not_allow_submission": "Lo stato dell'ordine non consente l'invio",
   "we_ll_be_happy_to_help_and_get_back_to_you_once_we_re_online": "Saremo felici di aiutarti e di ricontattarti una volta che saremo online",
-  "supportHours": "Il servizio clienti è attualmente offline, ti preghiamo di prestare attenzione agli orari online.",
+  "supportHours": "Il servizio clienti è fuori dall'orario di lavoro.",
   "please_contact_customer_service_to_enable_the_task": "Si prega di contattare il servizio clienti per abilitare l'attività",
   "no_new_orders_order_submitted_successfully": "Nessun nuovo ordine, ordine inviato con successo",
   "user_has_ongoing_orders_returning_new_order_information": "L'utente ha ordini in corso, restituendo informazioni sul nuovo ordine",

@@ -309,7 +309,7 @@
   "order_has_been_completed": "Заказ выполнен",
   "order_status_does_not_allow_submission": "Статус заказа не позволяет отправить",
   "we_ll_be_happy_to_help_and_get_back_to_you_once_we_re_online": "Мы будем рады помочь и свяжемся с вами, как только будем онлайн.",
-  "supportHours": "Служба поддержки клиентов в настоящее время не в сети, пожалуйста, обратите внимание на часы работы онлайн.",
+  "supportHours": "Служба поддержки вне рабочего времени.",
   "please_contact_customer_service_to_enable_the_task": "Пожалуйста, свяжитесь со службой поддержки клиентов, чтобы активировать задачу.",
   "no_new_orders_order_submitted_successfully": "Новых заказов нет, заказ успешно отправлен",
   "user_has_ongoing_orders_returning_new_order_information": "У пользователя есть текущие заказы, возвращается информация о новом заказе.",

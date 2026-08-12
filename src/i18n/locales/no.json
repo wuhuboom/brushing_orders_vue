@@ -311,7 +311,7 @@
   "order_has_been_completed": "Bestillingen er fullført",
   "order_status_does_not_allow_submission": "Ordrestatus tillater ikke innsending",
   "we_ll_be_happy_to_help_and_get_back_to_you_once_we_re_online": "Vi hjelper deg gjerne og kommer tilbake til deg når vi er online",
-  "supportHours": "Kundeservice er for øyeblikket offline, vær oppmerksom på netttidene.",
+  "supportHours": "Kundeservice er utenfor arbeidstid.",
   "please_contact_customer_service_to_enable_the_task": "Ta kontakt med kundeservice for å aktivere oppgaven",
   "no_new_orders_order_submitted_successfully": "Ingen nye bestillinger, bestillingen ble sendt",
   "user_has_ongoing_orders_returning_new_order_information": "Brukeren har pågående bestillinger, returnerer ny ordreinformasjon",

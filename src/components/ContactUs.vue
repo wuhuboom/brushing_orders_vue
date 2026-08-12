@@ -10,6 +10,7 @@
   >
     <div class="flex flex-col rounded-xl overflow-hidden bg-white">
       <div
+	    v-if="!errorMsg"
         v-for="item in customerList"
         @click="jump(item.linkUrl)"
         class="flex items-center justify-between p-4 box-border border-b-[1px] border-[#eef2f4]"
@@ -21,6 +22,9 @@
         </div>
         <van-icon name="arrow" size="18px" />
       </div>
+	  <div v-else class="flex text-center  p-4 box-border border-b-[1px] border-[#eef2f4]">
+		  {{errorMsg}}
+	  </div>
     </div>
   </van-dialog>
   </div>
@@ -29,17 +33,31 @@
 import { onMounted, ref } from "vue";
 import { tr } from "element-plus/es/locales.mjs";
 import { getCustomerService } from '../api/apis';
+import { errorMessages } from "../api/errorCodeMap";
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 const ready = ref(false) 
 const url = window.g.VITE_API_IMG_URL;
 const showCenter = ref(false);
 const customerList = ref([])
+const errorMsg = ref('')
 // 更符合Vue3习惯的暴露方式
 const open = async() =>{
   showCenter.value = true
-  let res = await getCustomerService();
-  customerList.value = res.data
-  ready.value = true
-  // console.log(customerList.value)
+  // let res = await getCustomerService();
+  // customerList.value = res.data
+  // ready.value = true
+   await getCustomerService()
+    .then((res) => {
+		customerList.value = res.data
+		ready.value = true
+    })
+    .catch((err) => {
+  	  if (err.code == 920) {
+		  errorMsg.value = t(errorMessages[err.code])
+		  ready.value = true
+  	  }
+    });
 }
 const close = () => (showCenter.value = false);
 

@@ -309,7 +309,7 @@
   "order_has_been_completed": "La commande a été complétée",
   "order_status_does_not_allow_submission": "Le statut de la commande ne permet pas la soumission",
   "we_ll_be_happy_to_help_and_get_back_to_you_once_we_re_online": "Nous serons heureux de vous aider et de vous répondre une fois en ligne",
-  "supportHours": "Le service client est actuellement hors ligne, veuillez faire attention aux horaires de connexion.",
+  "supportHours": "Le service client est en dehors des heures de travail.",
   "please_contact_customer_service_to_enable_the_task": "Veuillez contacter le service client pour activer la tâche",
   "no_new_orders_order_submitted_successfully": "Aucune nouvelle commande, commande soumise avec succès",
   "user_has_ongoing_orders_returning_new_order_information": "L'utilisateur a des commandes en cours et renvoie de nouvelles informations de commande",
