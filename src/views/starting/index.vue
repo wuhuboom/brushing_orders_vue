@@ -169,7 +169,7 @@
 	  close-on-click-overlay
       :style="{ width:'90%',background: 'transparent' }"
     >
-      <img class="w-[100%]" src="../../static/images/super.jpg" alt="">
+      <img class="w-[100%]" src="../../static/images/super.png" alt="">
 	  <div @click="toPage('/contact')" class="w-full" size="large" round>
 	    <div
 	      class="w-full text-white text-2xl font-semibold mx-auto py-5  flex items-center justify-center bg-black"
