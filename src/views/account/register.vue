@@ -222,11 +222,11 @@ const showPopup = ref(false)
 // 密码显隐
 const pwdVisible = ref(false)
 
-// 默认选中：加拿大
+// 默认选中：美国
 const selectedCountry = ref({
-  name: 'Canada',
+  name: 'United States',
   dial: '1',
-  flag: 'https://flagcdn.com/w40/ca.png'
+  flag: 'https://flagcdn.com/w40/us.png'
 })
 
 // ====================== 完整全球国家/地区区号数据 ======================
