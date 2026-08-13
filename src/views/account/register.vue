@@ -202,8 +202,8 @@ const langRef = ref(null);
 const agentPassword = ref("");
 const checked = ref(true)
 const sexRef = reactive([
-	{value: 1,label: t("男")},
-	{value: 2,label: t("女")}
+	{value: 0,label: t("男")},
+	{value: 1,label: t("女")}
 ])
 const ruleForm = reactive({
   username: "",

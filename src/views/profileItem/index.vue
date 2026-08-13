@@ -55,7 +55,7 @@
 		    {{ $t("性别") }}
 		  </div>
 		  <div class="text-[#666] text-sm font-medium">
-			  {{userStore.userInfo.sex == 2? $t("女"): $t("男")}}
+			  {{userStore.userInfo.sex == 1? $t("女"): $t("男")}}
 		  </div>
 		</div>
       </div>
