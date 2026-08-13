@@ -108,6 +108,11 @@ const getCustomer = async() =>{
 }
 
 const jump = (url) =>{
+  if(url.includes('chatIndex') && url.includes('kefu_id')){
+  	if(userStore.userInfo.username){
+  	  url += "&visitor_name=" + userStore.userInfo.username + "&visitor_id=" + userStore.userInfo.id
+  	}
+  }
   window.open(url)
 }
 

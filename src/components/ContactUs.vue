@@ -31,10 +31,12 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
+import { useUserStore } from "@/store/modules/user";
 import { tr } from "element-plus/es/locales.mjs";
 import { getCustomerService } from '../api/apis';
 import { errorMessages } from "../api/errorCodeMap";
 import { useI18n } from 'vue-i18n';
+const userStore = useUserStore();
 const { t } = useI18n();
 const ready = ref(false) 
 const url = window.g.VITE_API_IMG_URL;
@@ -44,6 +46,7 @@ const errorMsg = ref('')
 // 更符合Vue3习惯的暴露方式
 const open = async() =>{
   showCenter.value = true
+  userStore.getUserInfo()
   // let res = await getCustomerService();
   // customerList.value = res.data
   // ready.value = true
@@ -62,7 +65,14 @@ const open = async() =>{
 const close = () => (showCenter.value = false);
 
 const jump = (url) =>{
-  window.open(url)
+  if(url.includes('chatIndex') && url.includes('kefu_id')){
+	  if(userStore.userInfo.username){
+		 url += "&visitor_name=" + userStore.userInfo.username + "&visitor_id=" + userStore.userInfo.id
+	  }
+	  window.open(url)
+  }else{
+	  window.open(url)
+  }
 }
 
 defineExpose({
