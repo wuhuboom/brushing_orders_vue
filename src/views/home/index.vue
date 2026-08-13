@@ -85,8 +85,8 @@
 	  	  :key="index"
 	  	>
 	  	  <div class=" w-full flex items-center justify-start">
-	  		<img class="w-[25px] pl-2" src="../../static/images/home/close.png"/>
-	  	    <div class="ml-2 text-left">
+	  		<!-- <img class="w-[25px] pl-2" src="../../static/images/home/close.png"/> -->
+	  	    <div class=" text-left">
 	  			<div class=" mx-auto text-xs mt-1 ">
 	  				{{$t(item.name)}}
 	  			</div> 
@@ -140,12 +140,12 @@
 	  
 	  <div class="bg-white rounded-lg text-sm text-[#6e7482] p-4 mb-4">
 	  		"{{ $t("home_label20") }}"  
-			<div class="mt-4 text-[#6e7482] text-base">
+			<!-- <div class="mt-4 text-[#6e7482] text-base">
 				{{ $t("home_label21") }}
 			</div>
 			<div>
 				{{ $t("home_label22") }}
-			</div>
+			</div> -->
 	  </div>
 	</div>
 	

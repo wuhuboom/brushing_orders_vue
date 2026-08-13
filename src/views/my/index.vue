@@ -22,7 +22,7 @@
       <div class="w-[90%] mx-auto">
         <div class="w-[12rem] mx-auto relative" style="z-index: 19">
           <img
-            :src="userInfo.avatar ==null?userImg:userInfo.avatar"
+            :src="userInfo.avatar ==null?(userInfo.sex == 2?userImg_g:userImg):userInfo.avatar"
             class="w-[6rem] h-[6rem] mx-auto rounded-full border-[2px] border-[#000]"
             alt=""
           />
@@ -300,8 +300,8 @@ const langRef = ref(null);
 const { t } = useI18n();
 const ContactUsRef = ref(null);
 const tradePasswordRef = ref(null);
-const userImg = new URL("@/static/images/userImg.png", import.meta.url)
-  .href;
+const userImg = new URL("@/static/images/userImg.png", import.meta.url).href;
+const userImg_g = new URL("@/static/images/userImg_g.png", import.meta.url).href;
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url)
   .href;
 import { onMounted, ref, defineOptions } from "vue";
