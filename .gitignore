@@ -35,3 +35,4 @@ coverage/
 # 本地开发配置
 .local-*
 .zip
+*.zip

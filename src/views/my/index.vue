@@ -20,8 +20,9 @@
 	</van-nav-bar>
     <div class="w-full py-3">
       <div class="w-[90%] mx-auto">
-        <div class="w-[12rem] mx-auto relative" style="z-index: 19">
+        <div class="w-[12rem] h-[6rem] mx-auto relative" style="z-index: 19">
           <img
+            v-if="ready"
             :src="userInfo.avatar || (Number(userInfo.sex) === 1 ? userImg_g : userImg)"
             class="w-[6rem] h-[6rem] mx-auto rounded-full border-[2px] border-[#000]"
             alt=""
