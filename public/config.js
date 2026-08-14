@@ -1,5 +1,5 @@
 window.g = {
-  VITE_API_BASE_URL: "https://api-shuadan.pigk.xyz/api",
-  VITE_API_IMG_URL: "https://api-shuadan.pigk.xyz",
+  VITE_API_BASE_URL: "https://api.one10other.cc/api",
+  VITE_API_IMG_URL: "https://api.one10other.cc",
   VITE_TITLE: "WEBW",
 };

@@ -24,6 +24,7 @@ import BigNumber from 'bignumber.js';
 import { useScrollStore } from '@/util/scroll';
 import { useRoute } from 'vue-router'
 import { onUnmounted, ref, onMounted, watch } from 'vue';
+import { useLocale } from '@/util/useLocale';
 // 在文件顶部添加BigNumber全局配置
 BigNumber.config({
   DECIMAL_PLACES: 10, // 全局设置保留10位小数
@@ -36,13 +37,17 @@ BigNumber.config({
 // import webSocket from '@/common/webSocket'; // socket启动
 const userStore = useUserStore();
 const commonStore = useCommonStore();
+const { setLocale } = useLocale();
 // commonStore.getSystemConfig();
 const { locale } = useI18n();
 if (userStore.token){
   userStore.getUserInfo();
 } 
 userStore.getZone();
-if (commonStore.lang) locale.value = commonStore.lang;
+if (commonStore.lang) {
+  locale.value = commonStore.lang;
+  setLocale(commonStore.lang);
+}
 
 const route = useRoute()
 const scrollStore = useScrollStore()

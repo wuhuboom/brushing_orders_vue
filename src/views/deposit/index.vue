@@ -80,7 +80,7 @@
 			        </div>   
 					<div class="w-full flex h-[95px]">
 					    <div class="  info-left" >
-					        <img class="info-img" :src="VITE_API_IMG_URL+item.coverUrl" alt="">
+					        <img class="info-img" :src="getImageUrl(item.coverUrl)" alt="">
 					    </div>
 					    <div class=" info-right flex flex-col h-[3rem] justify-between">
 					        <div>
@@ -196,12 +196,11 @@
 const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { onMounted, reactive, ref } from "vue";
 import { getDeposit,userGetInfo, getOrderInfos } from "../../api/apis";
+import { getImageUrl } from "@/util/imageUrl";
 const active = ref(0);
 const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
-const VITE_API_IMG_URL = "";
-// const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 import {formatWithTimezone, formatTargetDate}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";

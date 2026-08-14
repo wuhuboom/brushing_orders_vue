@@ -56,7 +56,7 @@
 		        <div class="card">
 		          <div class="product-card">
 		            <div class="img-box">
-		              <img :src="url + item.coverUrl" alt="" />
+		              <img :src="getImageUrl(item.coverUrl)" alt="" />
 		            </div>
 		            <div v-if="idx == current">
 						<p class="title text-[#000] text-sm font-semibold whitespace-nowrap  text-ellipsis overflow-hidden">{{ item.name }}</p>
@@ -202,14 +202,13 @@ import {
   getTradeConfig
 } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
+import { getImageUrl } from "@/util/imageUrl";
 
 defineOptions({
   name: 'Starting' 
 })
 const userStore = useUserStore();
 const router = useRouter();
-// const url = window.g.VITE_API_IMG_URL;
-const url = "";
 const { t } = useI18n();
 const userInfo = ref({});
 const avatarUrl = ref("");
@@ -316,7 +315,7 @@ onMounted(() => {
   window.addEventListener('resize', getContainerWidth);
   userGetInfo().then((res) => {
     userInfo.value = res.data;
-    avatarUrl.value = `${url}${res.data.userLevel.icon}`;
+    avatarUrl.value = getImageUrl(res.data.userLevel?.icon);
     orderCount.value = res.data.userLevel.orderCount
   });
 });

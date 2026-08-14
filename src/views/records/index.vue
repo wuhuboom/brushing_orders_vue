@@ -42,7 +42,7 @@
                             </div>   
 							<div class="w-full flex h-[95px]">
 							    <div class="  info-left" >
-							        <img class="info-img" :src="VITE_API_IMG_URL+item.coverUrl" alt="">
+							        <img class="info-img" :src="getImageUrl(item.coverUrl)" alt="">
 							    </div>
 							    <div class=" info-right flex flex-col h-[3rem] justify-between">
 							        <div>
@@ -121,7 +121,7 @@
 
     <van-dialog v-model:show="show" closeable :title="''" :show-confirm-button="false">
         <div class="w-[5rem] mx-auto pt-10" style="width: 6rem; z-index: 999;">
-            <img :src="VITE_API_IMG_URL+goodsData.coverUrl" alt="">
+            <img :src="getImageUrl(goodsData.coverUrl)" alt="">
         </div>
         <div class="w-full mt-[-3rem] pt-[4rem] text-[#000] p-4 rounded-lg">
             <div class="w-[100%] mx-auto text-center text-sm font-semibold">
@@ -163,13 +163,12 @@ import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'va
 import { useI18n } from "vue-i18n";
 import {formatWithTimezone}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
+import { getImageUrl } from "@/util/imageUrl";
 import { useRouter } from "vue-router";
 defineOptions({
   name: 'Records' 
 })
 const userStore = useUserStore();
-// const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
-const VITE_API_IMG_URL = "";
 const router = useRouter();
 const { t } = useI18n();
 const active = ref(0);

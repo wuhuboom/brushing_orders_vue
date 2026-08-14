@@ -295,6 +295,7 @@ import tradePassword from "@/components/tradePassword.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import { userGetInfo, checkTradePassword, getUnreadNoticeCount } from "../../api/apis";
 import { useUserStore } from "@/store/modules/user";
+import { getImageUrl } from "@/util/imageUrl";
 import { useI18n } from "vue-i18n";
 import { showConfirmDialog } from "vant";
 const langRef = ref(null);
@@ -391,7 +392,7 @@ function handleScroll(e) {
 onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
-	avatarUrl.value = res.data.userLevel?.icon || '';
+	avatarUrl.value = getImageUrl(res.data.userLevel?.icon);
 	avatarLevelStr.value = res.data.userLevel.nameEn;
     // console.log(userInfo.value);
 	ready.value = true;

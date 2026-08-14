@@ -30,7 +30,7 @@
           class="product-image"
 		  radius="20"
           fit="contain"
-          :src="goods.coverUrl"
+          :src="getImageUrl(goods.coverUrl)"
         />
       </div>
       <div class="w-full mt-[-3rem] text-center pt-[4rem] text-[#000] p-4 rounded-lg">
@@ -126,6 +126,7 @@ import { useI18n } from "vue-i18n";
 import { useRouter, useRoute } from "vue-router";
 import {formatWithTimezone}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
+import { getImageUrl } from "@/util/imageUrl";
 import { errorMessages } from "../../api/errorCodeMap";
 import {
   userGetInfo,

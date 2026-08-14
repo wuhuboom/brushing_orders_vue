@@ -12,11 +12,6 @@ import { Calendar,CountDown,NoticeBar,NavBar,Image as VanImage,List,Tab, Tabs,Bu
 import 'vant/lib/index.css';
 import { Locale } from 'vant';
 import enUS from 'vant/es/locale/lang/en-US';
-import frFR from 'vant/es/locale/lang/fr-FR';
-import deDE from 'vant/es/locale/lang/de-DE';
-import itIT from 'vant/es/locale/lang/it-IT';
-import koKR from 'vant/es/locale/lang/ko-KR';
-import idID from 'vant/es/locale/lang/id-ID';
 async function loadConfig() {
   if (!window.g) {
     await new Promise((resolve, reject) => {
@@ -43,11 +38,6 @@ async function bootstrap() {
   }
 
   Locale.use('en-US', enUS);
-  Locale.use('fr-FR', frFR);
-  Locale.use('de-DE', deDE);
-  Locale.use('it-IT', itIT);
-  Locale.use('ko-KR', koKR);
-  Locale.use('id-ID', idID);
 
 
 
