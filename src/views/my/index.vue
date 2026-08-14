@@ -22,8 +22,7 @@
       <div class="w-[90%] mx-auto">
         <div class="w-[12rem] mx-auto relative" style="z-index: 19">
           <img
-		    v-if="userInfo.sex"
-            :src="userInfo.avatar ==null?(userInfo.sex == 1?userImg_g:userImg):userInfo.avatar"
+            :src="userInfo.avatar || (Number(userInfo.sex) === 1 ? userImg_g : userImg)"
             class="w-[6rem] h-[6rem] mx-auto rounded-full border-[2px] border-[#000]"
             alt=""
           />
@@ -313,7 +312,6 @@ defineOptions({
 })
 
 const userStore = useUserStore();
-const url = window.g.VITE_API_IMG_URL;
 const router = useRouter();
 const userInfo = ref({});
 const avatarUrl = ref("");
@@ -392,7 +390,7 @@ function handleScroll(e) {
 onMounted(() => {
   userGetInfo().then((res) => {
     userInfo.value = res.data;
-    avatarUrl.value = `${url}${res.data.userLevel.icon}`;
+	avatarUrl.value = res.data.userLevel?.icon || '';
 	avatarLevelStr.value = res.data.userLevel.nameEn;
     // console.log(userInfo.value);
 	ready.value = true;

@@ -30,7 +30,7 @@
           class="product-image"
 		  radius="20"
           fit="contain"
-          :src="url+goods.coverUrl"
+          :src="goods.coverUrl"
         />
       </div>
       <div class="w-full mt-[-3rem] text-center pt-[4rem] text-[#000] p-4 rounded-lg">
@@ -135,7 +135,6 @@ import {
 } from "../../api/apis";
 const userStore = useUserStore();
 const showCenter = ref(false);
-const url = window.g.VITE_API_IMG_URL;
 const { t } = useI18n();
 const avatarUrl = ref("");
 const router = useRouter();
