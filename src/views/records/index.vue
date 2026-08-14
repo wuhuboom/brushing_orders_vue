@@ -168,7 +168,8 @@ defineOptions({
   name: 'Records' 
 })
 const userStore = useUserStore();
-const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
+// const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
+const VITE_API_IMG_URL = "";
 const router = useRouter();
 const { t } = useI18n();
 const active = ref(0);

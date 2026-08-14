@@ -200,7 +200,8 @@ const active = ref(0);
 const refreshing = ref(false);
 const finished = ref(false);
 const loading = ref(false);
-const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
+const VITE_API_IMG_URL = "";
+// const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;
 import {formatWithTimezone, formatTargetDate}  from '../../util/utils'
 import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";

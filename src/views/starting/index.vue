@@ -208,7 +208,8 @@ defineOptions({
 })
 const userStore = useUserStore();
 const router = useRouter();
-const url = window.g.VITE_API_IMG_URL;
+// const url = window.g.VITE_API_IMG_URL;
+const url = "";
 const { t } = useI18n();
 const userInfo = ref({});
 const avatarUrl = ref("");
