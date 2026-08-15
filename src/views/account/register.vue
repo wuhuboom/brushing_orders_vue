@@ -1,266 +1,701 @@
 <template>
-  <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-3">
-    <div class="flex flex-col items-center mt-5 pb-3">
-     <!-- <img
-        src="@/static/images/account-lang.png"
-        alt=""
-        class="w-5 h-5 self-end mb-4"
-        @click="handleChangeLang"
-      /> -->
-	  <div class="text-2xl text-main-bg text-center py-6 pt-12">
-	  		  {{ $t("欢迎") }}
-	  </div>
-	  <img
-	    src="@/static/images/login_logo.png"
-	    alt=""
-	    class="w-[24%] lg:w-[300px] mx-auto"
-	  />
-	  <div class="panel">
-		  <div class="text-3xl text-main-bg font-semibold  py-4">
-		    {{ $t("登入") }}
-		  </div>
-		  <div class="text-sm text-main-bg pb-4">
-		    {{ $t("输入您的用户名和密码以访问") }}
-		  </div>
-		  <el-form
-		    ref="ruleFormRef"
-		    :model="ruleForm"
-		    status-icon
-		    :rules="rules"
-		    label-width="auto"
-		    class="w-full mt-4"
-		  >
-			<div class="font-semibold pb-2">{{ $t("用户名") }}</div>
-		    <el-form-item label="" prop="username" label-position="top">
-		      <el-input
-		        v-model="ruleForm.username"
-		        type="text"
-		        autocomplete="off"
-		        size="large"
-		      >
-		      </el-input>
-		    </el-form-item>
-			<div class="font-semibold pb-2">{{ $t("密码") }}</div>
-		    <el-form-item label="" prop="password" label-position="top">
-		      <el-input
-		        v-model="ruleForm.password"
-		        type="password"
-		        autocomplete="off"
-		        size="large"
-		      >
-		      </el-input>
-		    </el-form-item>
-			<div class="font-semibold pb-2">{{ $t("确认密码") }}</div>
-		    <el-form-item label="" prop="agentPassword" label-position="top">
-		      <el-input
-		        v-model="agentPassword"
-		        type="password"
-		        autocomplete="off"
-		        size="large"
-		      >
-		      </el-input>
-		    </el-form-item>
-			<div class="font-semibold pb-2">{{ $t("电话") }}</div>
-		    <el-form-item label="" prop="phone" label-position="top">
-		      <el-input
-		        v-model="ruleForm.phone"
-		        type="text"
-		        autocomplete="off"
-		        size="large"
-		      >
-		      </el-input>
-		    </el-form-item>
-			<div class="font-semibold pb-2">{{ $t("交易密码") }}</div>
-		    <el-form-item label="" prop="tradePassword" label-position="top">
-		      <el-input
-		        v-model="ruleForm.tradePassword"
-		        type="text"
-		        autocomplete="off"
-		        size="large"
-		      >
-		      </el-input>
-		    </el-form-item>
-			
-			<div class="font-semibold pb-2">{{ $t("性别") }}</div>
-			<el-form-item label="" prop="sex" label-position="top">
-			  <el-select
-			    v-model="ruleForm.sex"
-				size="large"
-				placeholder=''
-			  >
-				<el-option
-			        v-for="item in sexRef"
-			        :key="item.value"
-			        :label="item.label"
-			        :value="item.value">
-				</el-option>
-			<!--  <el-option :value="1">{{ $t("男") }}</el-option>
-			  <el-option :value="2">{{ $t("女") }}</el-option> -->
-			  </el-select>
-			</el-form-item>
-		  <!--  <div
-		      class="w-full flex items-center justify-between p-4 mb-4 py-3 bg-[#fff] rounded-md"
-		    >
-		      <div class="text-sm pl-2 text-[#999]">{{ $t("性别") }}</div>
-		      <van-radio-group v-model="ruleForm.sex" direction="horizontal">
-		        <van-radio :name="1" checked-color="#000">{{ $t("男") }}</van-radio>
-		        <van-radio :name="2" checked-color="#000">{{ $t("女") }}</van-radio>
-		      </van-radio-group>
-		    </div> -->
-			<div class="font-semibold pb-2">{{ $t("邀请码") }}</div>
-		    <el-form-item label="" prop="inviteCode" label-position="top">
-		      <el-input
-		        v-model="ruleForm.inviteCode"
-		        type="text"
-		        autocomplete="off"
-		        size="large"
-		      >
-		      </el-input>
-		    </el-form-item>
-		  </el-form>
-		  <van-checkbox checked-color='#000' class='pb-6' v-model="checked">
-		    <span class='text-[#000] font-semibold text-sm'>{{$t('我同意')}}</span>
-		    <span class="ml-2 text-[#000] text-sm underline font-bold" @click='jump'>{{$t('条款和条件')}}</span>
-		  </van-checkbox>
-		  <div @click="sendCode" class="w-full" size="large" round>
-		    <div
-		      class="w-full text-white text-2xl font-semibold mx-auto py-5 rounded flex items-center justify-center bg-black"
-		    >
-		      <div>{{ $t("登记") }}</div>
-		    </div>
-		  </div>
-		  
-		  <div
-		    class="w-full mt-4 text-sm text-black text-center pt-2"
-		    @click="toLogin"
-		  >
-		    <p class="text-sm text-center w-full pb-2" @click="toRegister">
-		      {{ $t("已有账户?")
-		      }} <span class="text-black underline">{{ $t("立即登录") }}</span>
-		    </p>
-		  </div>
-	  </div>
-    </div>
-    <Lang ref="langRef"></Lang>
-  </div>
+  <main class="register-screen das-page">
+    <header class="register-top">
+      <img src="@/static/das/wordmark-cream.png" alt="DAS" />
+    </header>
+    <form class="register-form" novalidate @invalid.capture.prevent @submit.prevent="submit">
+      <p class="register-kicker">{{ $t("das.auth.signUp") }}</p>
+      <h1>
+        {{ $t("das.auth.requestLead") }}
+        <em>{{ $t("das.auth.requestAccent") }}</em>
+      </h1>
+      <p class="register-hint">{{ $t("das.auth.registerHint") }}</p>
+      <div class="register-fields">
+        <label class="required"
+          ><span>{{ $t("das.auth.username") }}</span
+          ><input
+            v-model.trim="form.username"
+            aria-required="true"
+            autocomplete="username"
+            :placeholder="$t('das.auth.username')"
+        /></label>
+
+        <div class="register-field required">
+          <span>{{ $t("das.auth.phone") }}</span>
+          <div ref="phoneFieldRef" class="phone-field">
+            <button
+              class="phone-country-button"
+              type="button"
+              :aria-label="$t('das.auth.phoneCountry')"
+              aria-haspopup="listbox"
+              :aria-expanded="phonePickerOpen"
+              @click.stop="phonePickerOpen = !phonePickerOpen"
+            >
+              <img
+                :src="selectedCountry.flag"
+                class="phone-country-flag"
+                :alt="selectedCountry.name"
+              />
+              <span class="phone-country-chevron" aria-hidden="true">⌄</span>
+            </button>
+            <div class="phone-number-control">
+              <span class="phone-country-code">+{{ selectedCountry.dial }}</span>
+              <input
+                v-model="localPhone"
+                aria-required="true"
+                inputmode="tel"
+                :maxlength="selectedPhoneRule.pattern.length"
+                autocomplete="tel-national"
+                :placeholder="phonePlaceholder"
+                @input="sanitizePhone"
+              />
+            </div>
+            <div
+              v-if="phonePickerOpen"
+              class="phone-country-menu"
+              role="listbox"
+              :aria-label="$t('das.auth.phoneCountry')"
+            >
+              <button
+                v-for="country in allCountryList"
+                :key="`${country.name}-${country.dial}`"
+                type="button"
+                role="option"
+                :aria-selected="country.name === selectedCountry.name"
+                :class="{ 'is-selected': country.name === selectedCountry.name }"
+                @click="selectCountry(country)"
+              >
+                <img :src="country.flag" class="phone-country-flag" :alt="country.name" />
+                <span>{{ country.name }}</span>
+                <strong>+{{ country.dial }}</strong>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- <label class="required"
+          ><span>{{ $t("das.auth.birthday") }}</span
+          ><input
+            v-model="birthday"
+            aria-required="true"
+            inputmode="numeric"
+            maxlength="10"
+            :placeholder="$t('das.auth.birthdayPlaceholder')"
+            @input="sanitizeBirthday"
+        /></label> -->
+
+        <div class="register-field gender-group required">
+          <div class="gender-field">
+            <span class="gender-field__title">{{ $t("das.auth.gender") }}</span>
+            <div class="gender-field__options">
+              <label>
+                <input v-model="form.gender" type="radio" value="0" aria-required="true" />
+                <span>{{ $t("das.auth.male") }}</span>
+              </label>
+              <label>
+                <input v-model="form.gender" type="radio" value="1" aria-required="true" />
+                <span>{{ $t("das.auth.female") }}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <label class="required"
+          ><span>{{ $t("das.auth.password") }}</span
+          ><input
+            v-model="form.password"
+            aria-required="true"
+            type="password"
+            autocomplete="new-password"
+            placeholder="••••••••" /></label
+        ><label class="required"
+          ><span>{{ $t("das.auth.confirmPassword") }}</span
+          ><input
+            v-model="confirmPassword"
+            aria-required="true"
+            type="password"
+            autocomplete="new-password"
+            placeholder="••••••••" /></label
+        ><label class="required"
+          ><span>{{ $t("das.auth.tradePassword") }}</span
+          ><input
+            v-model="form.tradePassword"
+            aria-required="true"
+            type="password"
+            inputmode="numeric"
+            autocomplete="new-password"
+            placeholder="••••••••" /></label
+        ><label
+          ><span>{{ $t("das.auth.inviteCode") }}</span
+          ><input
+            v-model.trim="form.inviteCode"
+            :placeholder="$t('das.auth.optional')"
+        /></label>
+      </div>
+      <label class="register-agree"
+        ><input v-model="agreed" type="checkbox" /><span
+          >{{ $t("das.auth.agree") }}
+          <button type="button" @click="safePush(router, '/tc')">
+            {{ $t("das.auth.terms") }}
+          </button></span
+        ></label
+      ><button class="register-submit" type="submit" :disabled="submitting">
+        {{ $t("das.common.submit") }}
+      </button>
+      <p class="register-switch">
+        {{ $t("das.auth.haveAccount") }}
+        <button type="button" @click="safeReplace(router, '/account/login')">
+          {{ $t("das.auth.loginNow") }}
+        </button>
+      </p>
+      <p class="register-legal">
+        {{ $t("das.auth.signupAgreementPrefix") }}
+        <button type="button" @click="safePush(router, '/tc')">
+          {{ $t("das.auth.terms") }}
+        </button>
+      </p>
+      <p class="register-copyright">{{ $t("das.common.copyright") }}</p>
+    </form>
+    <van-dialog
+      v-model:show="showSuccess"
+      class="das-status-dialog"
+      :show-confirm-button="false"
+      ><div class="status-dialog">
+        <span class="status-dialog__icon"><img src="@/static/das/icons/status-success.png" alt="" /></span>
+        <h2>{{ $t("das.auth.registerSuccess") }}</h2>
+        <p>{{ $t("das.auth.registerSuccessHint") }}</p>
+        <button @click="safeReplace(router, '/account/login')">
+          {{ $t("das.auth.continue") }}
+        </button>
+      </div></van-dialog
+    >
+  </main>
 </template>
 <script setup>
-import Lang from "@/components/Lang.vue";
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import Tabs from "@/components/Tabs.vue";
-import { register } from "../../api/apis";
-import { areas } from "@/config/area";
-import { formatPhoneNumber } from "../../util/utils";
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
-onMounted(() => {
-  document.getElementById("app").style.background = "#fff";
-});
+import { showToast } from "vant";
+import { register } from "@/api/apis";
+import { safePush, safeReplace } from "@/utils/navigation";
 
-onUnmounted(() => {
-  document.getElementById("app").style.background = "transparent";
-});
-
-const router = useRouter();
-const { t } = useI18n();
-const ruleFormRef = ref(null);
-const langRef = ref(null);
-const agentPassword = ref("");
-const checked = ref(true)
-const sexRef = reactive([
-	{value: 1,label: t("男")},
-	{value: 2,label: t("女")}
-])
-const ruleForm = reactive({
-  username: "",
-  password: "",
-  tradePassword: "",
-  phone: "",
-  sex: null,
-  inviteCode: "",
-});
-const rules = computed(() => {
-  return {};
-});
-function toLogin() {
-  router.push("/account/login");
-}
-
-function sendCode() {
-  if (!ruleForm.username) return showToast(t("请输入用户名"));
-  if (!ruleForm.password) return showToast(t("请输入密码"));
-  if (!agentPassword.value) return showToast(t("请输入确认密码"));
-  if (agentPassword.value != ruleForm.password)
-    return showToast(t("两次密码不一致"));
-  // if (!ruleForm.phone) return ElMessage.error(t("请输入电话"));
-  if (!/^[0-9]*$/.test(ruleForm.phone))
-    return showToast(t("请输入正确电话号码"));
-  if (!ruleForm.tradePassword) return showToast(t("请输入交易密码"));
-  if (!ruleForm.inviteCode) return showToast(t("请输入邀请码"));
-  register(ruleForm).then((res) => {
-    showToast(t("注册成功"))
-    router.push({
-      path: "/account/login",
-    });
+const router = useRouter(),
+  { t } = useI18n(),
+  phonePickerOpen = ref(false),
+  phoneFieldRef = ref(),
+  localPhone = ref(""),
+  birthday = ref(""),
+  confirmPassword = ref(""),
+  agreed = ref(false),
+  submitting = ref(false),
+  showSuccess = ref(false),
+  form = reactive({
+    username: "",
+    password: "",
+    tradePassword: "",
+    gender: "",
+    inviteCode: "",
   });
-}
 
-function handleChangeLang() {
-  langRef.value.open();
-}
-const jump = () =>{
-  router.push({
-      path: "/tc",
+const selectedCountry = ref({
+  name: "Canada",
+  dial: "1",
+  flag: "https://flagcdn.com/w40/ca.png",
+});
+
+const allCountryList = ref([
+  { name: "China", dial: "86", flag: "https://flagcdn.com/w40/cn.png" },
+  { name: "Japan", dial: "81", flag: "https://flagcdn.com/w40/jp.png" },
+  { name: "South Korea", dial: "82", flag: "https://flagcdn.com/w40/kr.png" },
+  { name: "Thailand", dial: "66", flag: "https://flagcdn.com/w40/th.png" },
+  { name: "Singapore", dial: "65", flag: "https://flagcdn.com/w40/sg.png" },
+  { name: "Malaysia", dial: "60", flag: "https://flagcdn.com/w40/my.png" },
+  { name: "Vietnam", dial: "84", flag: "https://flagcdn.com/w40/vn.png" },
+  { name: "Indonesia", dial: "62", flag: "https://flagcdn.com/w40/id.png" },
+  { name: "Philippines", dial: "63", flag: "https://flagcdn.com/w40/ph.png" },
+  { name: "India", dial: "91", flag: "https://flagcdn.com/w40/in.png" },
+  { name: "Pakistan", dial: "92", flag: "https://flagcdn.com/w40/pk.png" },
+  { name: "United Arab Emirates", dial: "971", flag: "https://flagcdn.com/w40/ae.png" },
+  { name: "Saudi Arabia", dial: "966", flag: "https://flagcdn.com/w40/sa.png" },
+  { name: "Turkey", dial: "90", flag: "https://flagcdn.com/w40/tr.png" },
+  { name: "Israel", dial: "972", flag: "https://flagcdn.com/w40/il.png" },
+  { name: "United Kingdom", dial: "44", flag: "https://flagcdn.com/w40/gb.png" },
+  { name: "Germany", dial: "49", flag: "https://flagcdn.com/w40/de.png" },
+  { name: "France", dial: "33", flag: "https://flagcdn.com/w40/fr.png" },
+  { name: "Italy", dial: "39", flag: "https://flagcdn.com/w40/it.png" },
+  { name: "Spain", dial: "34", flag: "https://flagcdn.com/w40/es.png" },
+  { name: "Portugal", dial: "351", flag: "https://flagcdn.com/w40/pt.png" },
+  { name: "Russia", dial: "7", flag: "https://flagcdn.com/w40/ru.png" },
+  { name: "Malta", dial: "356", flag: "https://flagcdn.com/w40/mt.png" },
+  { name: "Mali", dial: "223", flag: "https://flagcdn.com/w40/ml.png" },
+  { name: "Mauritania (موريتانيا)", dial: "222", flag: "https://flagcdn.com/w40/mr.png" },
+  { name: "Mauritius (Moris)", dial: "230", flag: "https://flagcdn.com/w40/mu.png" },
+  { name: "Mayotte", dial: "262", flag: "https://flagcdn.com/w40/yt.png" },
+  { name: "Marshall Islands", dial: "692", flag: "https://flagcdn.com/w40/mh.png" },
+  { name: "Martinique", dial: "596", flag: "https://flagcdn.com/w40/mq.png" },
+  { name: "Australia", dial: "61", flag: "https://flagcdn.com/w40/au.png" },
+  { name: "New Zealand", dial: "64", flag: "https://flagcdn.com/w40/nz.png" },
+  { name: "United States", dial: "1", flag: "https://flagcdn.com/w40/us.png" },
+  { name: "Canada", dial: "1", flag: "https://flagcdn.com/w40/ca.png" },
+  { name: "Brazil", dial: "55", flag: "https://flagcdn.com/w40/br.png" },
+  { name: "Mexico", dial: "52", flag: "https://flagcdn.com/w40/mx.png" },
+  { name: "Argentina", dial: "54", flag: "https://flagcdn.com/w40/ar.png" },
+  { name: "Chile", dial: "56", flag: "https://flagcdn.com/w40/cl.png" },
+  { name: "Colombia", dial: "57", flag: "https://flagcdn.com/w40/co.png" },
+]);
+
+const phoneRules = {
+  1: { pattern: "(###) ###-####", min: 10, max: 10 },
+  7: { pattern: "(###) ###-##-##", min: 10, max: 10 },
+  33: { pattern: "# ## ## ## ##", min: 9, max: 9 },
+  34: { pattern: "### ### ###", min: 9, max: 9 },
+  39: { pattern: "### ### ####", min: 9, max: 10 },
+  44: { pattern: "#### ### ####", min: 10, max: 10 },
+  49: { pattern: "### #### ####", min: 10, max: 11 },
+  52: { pattern: "### ### ####", min: 10, max: 10 },
+  54: { pattern: "## ####-####", min: 10, max: 10 },
+  55: { pattern: "(##) #####-####", min: 10, max: 11 },
+  56: { pattern: "# #### ####", min: 9, max: 9 },
+  57: { pattern: "### ### ####", min: 10, max: 10 },
+  60: { pattern: "##-####-####", min: 9, max: 10 },
+  61: { pattern: "# #### ####", min: 9, max: 9 },
+  62: { pattern: "###-####-#####", min: 9, max: 12 },
+  63: { pattern: "###-###-####", min: 10, max: 10 },
+  64: { pattern: "## ### ####", min: 8, max: 9 },
+  65: { pattern: "#### ####", min: 8, max: 8 },
+  66: { pattern: "##-###-####", min: 9, max: 9 },
+  81: { pattern: "##-####-####", min: 9, max: 10 },
+  82: { pattern: "##-####-####", min: 9, max: 10 },
+  84: { pattern: "##-###-####", min: 9, max: 9 },
+  86: { pattern: "### #### ####", min: 11, max: 11 },
+  90: { pattern: "### ### ## ##", min: 10, max: 10 },
+  91: { pattern: "#####-#####", min: 10, max: 10 },
+  92: { pattern: "###-#######", min: 10, max: 10 },
+  222: { pattern: "## ## ## ##", min: 8, max: 8 },
+  223: { pattern: "## ## ## ##", min: 8, max: 8 },
+  230: { pattern: "#### ####", min: 8, max: 8 },
+  262: { pattern: "### ## ## ##", min: 9, max: 9 },
+  351: { pattern: "### ### ###", min: 9, max: 9 },
+  356: { pattern: "#### ####", min: 8, max: 8 },
+  596: { pattern: "### ## ## ##", min: 9, max: 9 },
+  692: { pattern: "### ####", min: 7, max: 7 },
+  966: { pattern: "##-###-####", min: 9, max: 9 },
+  971: { pattern: "##-###-####", min: 9, max: 9 },
+  972: { pattern: "##-###-####", min: 8, max: 9 },
+};
+const defaultPhoneRule = { pattern: "### ### ####", min: 6, max: 10 };
+const selectedPhoneRule = computed(
+  () => phoneRules[selectedCountry.value.dial] || defaultPhoneRule,
+);
+const phonePlaceholder = computed(
+  () => selectedPhoneRule.value.pattern.replace(/#/g, "_"),
+);
+
+const selectCountry = (country) => {
+  const phone = localPhoneDigits(localPhone.value);
+  selectedCountry.value = country;
+  localPhone.value = formatPhoneNumber(phone, selectedPhoneRule.value);
+  phonePickerOpen.value = false;
+};
+
+const closePhonePickerOnOutside = (event) => {
+  if (phoneFieldRef.value && !phoneFieldRef.value.contains(event.target)) {
+    phonePickerOpen.value = false;
+  }
+};
+
+onMounted(() => document.addEventListener("pointerdown", closePhonePickerOnOutside));
+onBeforeUnmount(() =>
+  document.removeEventListener("pointerdown", closePhonePickerOnOutside),
+);
+
+const localPhoneDigits = (value) => String(value || "").replace(/\D/g, "");
+const phoneDigitCount = (rule) => (rule.pattern.match(/#/g) || []).length;
+const formatPhoneNumber = (value, rule = selectedPhoneRule.value) => {
+  const digits = localPhoneDigits(value).slice(0, phoneDigitCount(rule));
+  if (!digits) return "";
+  let result = "";
+  let digitIndex = 0;
+  for (const token of rule.pattern) {
+    if (token === "#") {
+      if (digitIndex >= digits.length) break;
+      result += digits[digitIndex];
+      digitIndex += 1;
+      continue;
+    }
+    if (digitIndex === 0 || digitIndex < digits.length) result += token;
+  }
+  return result;
+};
+const sanitizePhone = (event) => {
+  const value = formatPhoneNumber(event.target.value);
+  localPhone.value = value;
+  event.target.value = value;
+};
+const isValidPhone = (phone, dial, rule = selectedPhoneRule.value) => {
+  if (!/^[0-9]+$/.test(phone)) return false;
+  const internationalNumber = `${dial}${phone}`;
+  return phone.length === phoneDigitCount(rule) && internationalNumber.length <= 15;
+};
+const sanitizeBirthday = (e) =>
+  (birthday.value = e.target.value.replace(/[^0-9/\s-]/g, ""));
+const isValidBirthday = (value) => {
+  const m = value.match(/^\s*(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})\s*$/);
+  if (!m) return false;
+  const month = +m[1],
+    day = +m[2],
+    year = +m[3],
+    date = new Date(year, month - 1, day);
+  return (
+    year >= 1900 &&
+    date <= new Date() &&
+    date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day
+  );
+};
+const submit = async () => {
+  const phone = localPhoneDigits(localPhone.value);
+  if (!isValidPhone(phone, selectedCountry.value.dial))
+    return showToast(t("das.auth.invalidPhone"));
+  if (
+    !form.username ||
+    form.gender === "" ||
+    !form.password ||
+    !confirmPassword.value ||
+    !form.tradePassword
+  )
+    return showToast(t("das.auth.required"));
+  if (birthday.value && !isValidBirthday(birthday.value))
+    return showToast(t("das.auth.invalidBirthday"));
+  if (form.password !== confirmPassword.value)
+    return showToast(t("das.auth.passwordMismatch"));
+  if (!agreed.value) return showToast(t("das.auth.agreeRequired"));
+  submitting.value = true;
+  try {
+    await register({
+      ...form,
+      phoneNumber: `+${selectedCountry.value.dial}${phone}`,
     });
-}
+    showSuccess.value = true;
+  } finally {
+    submitting.value = false;
+  }
+};
 </script>
-
 <style scoped>
-.earn-bg {
-  background-image: url(@/static/images/earn-bg.png);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+.register-screen {
+  min-height: 100%;
+  padding: 42px clamp(28px, 7vw, 72px) 40px;
+  background: #0d241c;
+  color: #f7f5ec;
+}
+.register-top {
+  height: 82px;
+  display: flex;
+  align-items: flex-start;
+}
+.register-top img {
+  width: 45px;
+  height: 70px;
+  object-fit: contain;
+}
+.register-form {
+  max-width: 760px;
+  margin: 22px auto 0;
+}
+.register-kicker {
+  margin: 0 0 16px;
+  color: rgba(247, 245, 236, 0.58);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+.register-form h1 {
+  margin: 0;
+  font-size: clamp(36px, 6.5vw, 60px);
+  font-weight: 400;
+}
+.register-form h1 em {
+  color: #ed9b87;
+  font-style: normal;
+}
+.register-hint {
+  margin: 18px 0 35px;
+  color: rgba(247, 245, 236, 0.58);
+  font-size: 14px;
+}
+.register-fields {
+  display: grid;
+  gap: 22px;
+}
+.register-fields label > span,
+.register-field > span {
+  display: block;
+  margin-bottom: 10px;
+  color: rgba(247, 245, 236, 0.58);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.required > span::after,
+.gender-group.required .gender-field__title::after {
+  content: " *";
+  color: #ed9b87;
+}
+.register-fields > label input,
+.register-fields > label select {
+  width: 100%;
+  height: 58px;
+  padding: 0 20px;
+  border: 1px solid rgba(247, 245, 236, 0.28);
+  border-radius: 999px;
+  background: rgba(247, 245, 236, 0.07);
+  color: #f7f5ec;
+}
+.register-fields input::placeholder {
+  color: rgba(247, 245, 236, 0.32);
+}
+.phone-field {
+  position: relative;
+  height: 58px;
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  border: 1px solid rgba(247, 245, 236, 0.28);
+  border-radius: 999px;
+  background: rgba(247, 245, 236, 0.07);
+}
+.phone-country-button {
+  min-width: 0;
+  height: 100%;
+  padding: 0 8px 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 0;
+  background: transparent;
+  color: #f7f5ec;
+}
+.phone-country-code {
+  color: rgba(247, 245, 236, 0.58);
+  font-size: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.phone-country-flag {
+  width: 24px;
+  height: 16px;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(247, 245, 236, 0.12);
+}
+.phone-country-chevron {
+  color: rgba(247, 245, 236, 0.7);
+  font-size: 13px;
+  transform: translateY(-1px);
+}
+.phone-number-control {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.phone-number-control > input {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  padding: 0 18px 0 0;
+  border: 0;
+  background: transparent;
+  color: #f7f5ec;
+}
+.phone-country-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  max-height: 230px;
+  overflow-y: auto;
+  padding: 7px;
+  border: 1px solid rgba(247, 245, 236, 0.26);
+  border-radius: 18px;
+  background: #17382d;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
+}
+.phone-country-menu button {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 11px;
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: rgba(247, 245, 236, 0.82);
+  text-align: left;
+  font-size: 13px;
+}
+.phone-country-menu button strong {
+  color: #f7f5ec;
+  font-weight: 700;
+}
+.phone-country-menu button.is-selected,
+.phone-country-menu button:hover {
+  background: rgba(247, 245, 236, 0.09);
+}
+.gender-group > span {
+  display: none;
+}
+.gender-field {
+  min-height: 58px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid rgba(247, 245, 236, 0.28);
+  border-radius: 999px;
+  background: rgba(247, 245, 236, 0.07);
+}
+.gender-field__title {
+  color: #f7f5ec;
+  font-size: 14px;
+}
+.gender-field__options {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.gender-field__options label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #f7f5ec;
+  font-size: 14px;
+}
+.gender-field__options label > span {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.gender-field__options input {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: #f7f5ec;
+}
+.register-agree {
+  margin: 26px 0 24px;
+  display: flex;
+  gap: 11px;
+  color: rgba(247, 245, 236, 0.62);
+  font-size: 12px;
+}
+.register-agree > input {
+  width: 22px;
+  height: 22px;
+}
+.register-agree button,
+.register-switch button,
+.register-legal button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #f7f5ec;
+  text-decoration: underline;
+  font-weight: 700;
+}
+.register-submit {
+  width: 100%;
+  height: 64px;
+  border: 0;
+  border-radius: 999px;
+  background: #f7f5ec;
+  color: #17382d;
+  font-size: 17px;
+  font-weight: 800;
+}
+.register-switch,
+.register-legal,
+.register-copyright {
+  text-align: center;
+  color: rgba(247, 245, 236, 0.55);
+  font-size: 12px;
+}
+.register-switch {
+  margin: 8px 0 0;
+}
+.register-legal {
+  margin: 18px 0 0;
+}
+.register-copyright {
+  margin-top: 38px;
+  font-size: 10px;
+}
+.status-dialog {
+  padding: 34px 28px 30px;
+  text-align: center;
+  color: #17382d;
+}
+.status-dialog__icon {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  border: 3px solid #17382d;
+  border-radius: 50%;
+  font-size: 30px;
+}
+.status-dialog__icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
-:deep(.el-input-group__append) {
-  background-color: #3040f0 !important;
-  color: #fff !important;
+.status-dialog h2 {
+  margin: 22px 0 10px;
+  font-size: 23px;
 }
-
-.button-bg {
-  background-image: url(@/static/images/block-bg.png);
-  background-size: 100% auto;
-  background-repeat: no-repeat;
+.status-dialog p {
+  margin: 0;
+  color: #747c76;
+  font-size: 13px;
 }
-
-:deep(.el-input-group__prepend) {
-  box-shadow: none !important;
-  background-color: transparent !important;
-  box-shadow: 0 0 0 2px #3d3d3d !important;
+.status-dialog button {
+  width: 100%;
+  height: 50px;
+  margin-top: 24px;
+  border: 0;
+  border-radius: 999px;
+  background: #14392c;
+  color: white;
+  font-weight: 700;
 }
-
-:deep(.el-select__wrapper) {
-/*  box-shadow: none !important;
-  background-color: transparent !important; */
-  line-height: 45px !important;
-  height: 45px !important;
-  box-shadow: 0 0 0 1px #e6e6e6 !important;
-  border-radius: 0!important;
-  background-color: #f9f9f9 !important;
+:global(.das-status-dialog.van-dialog) {
+  width: min(84%, 380px);
+  border-radius: 24px;
+  background: #f7f5ec;
 }
-:deep(.el-form-item__label){
-	padding: 0 0;
+@media (max-width: 420px) {
+  .gender-field {
+    padding-inline: 16px;
+  }
+  .gender-field__options {
+    gap: 12px;
+  }
+  .gender-field__options label {
+    gap: 5px;
+    font-size: 13px;
+  }
 }
-:deep(.el-select--large){
-    height: 40px !important;
-	line-height: 40px !important;
-}
-.panel{
-	background-color: #fff;
-	margin: 60px 0px 0px 0;
-	width: 100%;
-	padding: 20px;
-}
-/* 这里需要修改id为123的盒子的父级盒子的宽度 */
 </style>

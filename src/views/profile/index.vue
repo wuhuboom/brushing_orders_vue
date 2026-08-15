@@ -1,79 +1,102 @@
 <template>
-  <div class="container w-full min-h-[100vh] bg-white">
-    <van-sticky type="primary">
-      <van-nav-bar
-        :title="$t('修改信息')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
+  <main class="das-page profile-edit">
+    <DasPageHeader title-key="das.page.profile" />
+    <section>
+      <van-uploader
+        v-model="files"
+        :after-read="uploadFile"
+        :max-count="1"
+        :deletable="false"
+        reupload
       />
-    </van-sticky>
-    <div class="w-full pl-6 pr-6 mt-6 box-border flex flex-col">
-      <div class="w-full flex flex-col">
-        <div class="w-full flex flex-col items-center justify-center mt-20">
-          <van-uploader v-model="fileList" :after-read="afterRead" reupload max-count="1" />
-          <div class="text-[#666] text-sm mt-2 flex items-center">
-            <div class="mr-1">{{$t('点击更改')}}</div>
-            <van-icon name="edit" />
-          </div>
-
-           <div class="w-full mt-4">
-                <van-button color="#007513" class="w-full" @click="updateAvatarMethods">{{$t('更新')}}</van-button>
-            </div>
-        </div>
-      </div>
-    </div>
-    
-  </div>
+      <p>{{ $t("das.profile.changeAvatar") }}</p>
+      <button type="button" :disabled="!selected || saving" @click="save">
+        {{ $t("das.common.save") }}
+      </button>
+    </section>
+  </main>
 </template>
 <script setup>
-import HeaderTop from "@/components/HeaderTop.vue";
 import { onMounted, ref } from "vue";
-import {updateAvatar,upload,userGetInfo} from "../../api/apis";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast   } from 'vant';
-const router = useRouter();
-const onClickLeft = () => router.replace('/profileItem');
-const { t } = useI18n();
-const userInfo = ref({})
-const fileList = ref([]);
-const avatarUrl = ref('')
-
-const afterRead = async (file) => {
+import { showSuccessToast, showToast } from "vant";
+import { useUserStore } from "@/store/modules/user";
+import { updateAvatar, userGetInfo } from "@/api/apis";
+import DasPageHeader from "@/components/DasPageHeader.vue";
+import avatarFallback from "@/static/das/avatar-profile-composed.png";
+import { safeBack } from "@/utils/navigation";
+const base = window.g?.VITE_API_IMG_URL || import.meta.env.VITE_API_IMG_URL || "";
+const router = useRouter(),
+  { t } = useI18n(),
+  userStore = useUserStore(),
+  files = ref([]),
+  selected = ref(),
+  saving = ref(false);
+const uploadFile = (entry) => {
+  const item = Array.isArray(entry) ? entry[0] : entry;
+  selected.value = item?.file instanceof Blob ? item.file : undefined;
+};
+const save = async () => {
+  if (!selected.value || saving.value) return;
+  saving.value = true;
   try {
-    // 1. 先上传文件
-    const formData = new FormData()
-    console.log(file.file)
-    const uploadRes = await upload({file:file.file})
-    if (uploadRes.code !== 200) {
-      showSuccessToast(uploadRes.msg || t('图片上传失败'))
-      return
-    }
-    avatarUrl.value = uploadRes.url
+    await updateAvatar(selected.value);
+    const updatedUser = (await userGetInfo()).data || {};
+    userStore.setUserInfo(updatedUser);
+    showSuccessToast(t("das.common.success"));
+    safeBack(router, "/my");
   } catch (error) {
-    showSuccessToast(t('网络错误'))
+    showToast(error?.msg || error?.message || t("das.common.requestFailed"));
+  } finally {
+    saving.value = false;
   }
-}
-
-const updateAvatarMethods = async () => {
-    const updateRes = await updateAvatar({ avatar: avatarUrl.value })
-    if (updateRes.code === 200) {
-      showSuccessToast(t('头像更新成功'))
-      router.push({
-        path: '/profileItem',
-      });
-    } else {
-      showSuccessToast(updateRes.msg || t('头像更新失败'))
-    }
-}
-onMounted(() => {
-  userGetInfo().then((res) => {
-    userInfo.value = res.data;
-    console.log(userInfo.value.avatar)
-    fileList.value.push({ url: userInfo.value.avatar });
-    avatarUrl.value = userInfo.value.avatar;
-    console.log(fileList.value)
-  });
+};
+onMounted(async () => {
+  try {
+    const u = (await userGetInfo()).data || {};
+    const url = u.avatar
+      ? /^https?:/i.test(u.avatar)
+        ? u.avatar
+        : `${base}${u.avatar}`
+      : avatarFallback;
+    files.value = [{ url, isImage: true }];
+  } catch (_) {
+    files.value = [{ url: avatarFallback, isImage: true }];
+  }
 });
 </script>
+<style scoped>
+.profile-edit {
+  min-height: 100%;
+  background: #f7f5ec;
+  color: #17382d;
+}
+.profile-edit section {
+  padding: 70px 24px;
+  text-align: center;
+}
+.profile-edit :deep(.van-uploader__upload),
+.profile-edit :deep(.van-uploader__preview-image) {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.profile-edit p {
+  color: #7b827c;
+}
+.profile-edit button {
+  width: min(100%, 420px);
+  height: 50px;
+  margin-top: 25px;
+  border: 0;
+  border-radius: 999px;
+  background: #14392c;
+  color: white;
+  font-weight: 700;
+}
+.profile-edit button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+</style>

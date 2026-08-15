@@ -1,31 +1,72 @@
 <template>
-    <div class="flex flex-col">
-        <Header :title="$t('切换语言')"></Header>
-        <div class="flex-1 overflow-auto px-4 flex flex-col gap-3">
-            <div v-for="lang in langs" class="flex justify-between items-center" @click="onClickLang(lang.code)">
-                <div>{{ lang.title }}</div>
-                <img :src="langCode === lang.code ? getStaticImageUrl('lang-active.png') : getStaticImageUrl('lang-unactive.png')"
-                    alt="" class="h-4">
-            </div>
-        </div>
-    </div>
+  <main class="das-page language-page">
+    <DasPageHeader title-key="das.page.language" />
+    <section class="language-body">
+      <button
+        v-for="item in visibleLanguages"
+        :key="item.code"
+        :class="{ active: selected === item.code }"
+        @click="selected = item.code"
+      >
+        {{ item.name }}</button
+      ><button class="confirm" @click="confirm">
+        {{ $t("das.common.confirm") }}
+      </button>
+    </section>
+    <p class="das-page-copyright">{{ $t("das.common.copyright") }}</p>
+  </main>
 </template>
 <script setup>
-import Header from '@/components/Header.vue'
-import { computed } from 'vue';
-import { getStaticImageUrl } from '@/util/utils.js'
-import { useI18n } from 'vue-i18n';
-import { useCommonStore } from '@/store/modules/common';
-const {  locale } = useI18n()
-const langs = [
-    { title: '中文', code: 'zh' },
-    { title: 'English', code: 'en' }
-]
-const commonStore = useCommonStore()
-const langCode = computed(() => commonStore.lang)
-
-function onClickLang(val) {
-    commonStore.updateLang(val);
-    locale.value = val;
-}
+import { ref } from "vue";
+import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
+import { LANGS } from "@/config/lang";
+import { useCommonStore } from "@/store/modules/common";
+import { useLocale } from "@/util/useLocale";
+import DasPageHeader from "@/components/DasPageHeader.vue";
+import { safeBack } from "@/utils/navigation";
+const commonStore = useCommonStore(),
+  router = useRouter(),
+  { locale } = useI18n(),
+  { setLocale } = useLocale(),
+  selected = ref(commonStore.clientLang || "en"),
+  visibleLanguages = LANGS,
+  confirm = () => {
+    commonStore.updateLang(selected.value);
+    locale.value = selected.value;
+    setLocale(selected.value);
+    safeBack(router, "/my");
+  };
 </script>
+<style scoped>
+.language-page {
+  min-height: 100%;
+  background: #f7f5ec;
+  color: #17382d;
+}
+.language-body {
+  max-width: 760px;
+  margin: auto;
+  padding: 22px 30px 36px;
+}
+.language-body button {
+  width: 100%;
+  height: 58px;
+  margin-bottom: 13px;
+  border: 1px solid #d8dad4;
+  border-radius: 16px;
+  background: #fff;
+  color: #17382d;
+  font-weight: 800;
+}
+.language-body button.active,
+.language-body .confirm {
+  border-color: #14392c;
+  background: #14392c;
+  color: #fff;
+}
+.language-body .confirm {
+  margin-top: 13px;
+  border-radius: 999px;
+}
+</style>

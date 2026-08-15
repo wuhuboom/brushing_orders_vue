@@ -1,308 +1,346 @@
 <template>
-  <div class="flex flex-col w-full h-[100vh] bg bg-cover bg-center p-3">
-   <!-- <div class="fixed top-2 right-5 h-9 flex items-center justify-center">
-      <div
-        class="flex items-center ml-2 overflow-hidden bg-[var(--main-color)] px-3 py-2 rounded-full box-border text-white leading-none"
-        style="line-height: 1"
+  <main class="auth-screen das-page">
+    <header class="auth-top">
+      <img src="@/static/das/wordmark-cream.png" alt="DAS" />
+      <button
+        class="language-button"
+        type="button"
+        @click="safePush(router, '/setting/language')"
       >
-        <img
-          src="@/static/images/lang-white.png"
-          alt=""
-          class="w-5 h-5 block object-contain"
-          @click="handleChangeLang"
-        />
-        <div class="ml-2 uppercase font-bold leading-none" style="margin-top: -2px;">{{lang}}</div>
+        {{ language.toUpperCase() }}
+      </button>
+    </header>
+    <form class="auth-form" novalidate @invalid.capture.prevent @submit.prevent="submit">
+      <p class="auth-kicker">{{ $t("das.auth.signIn") }}</p>
+      <h1>
+        <span>{{ $t("das.auth.signInLead") }}</span
+        ><em>{{ $t("das.auth.signInAccent") }}</em>
+      </h1>
+      <p class="auth-hint">{{ $t("das.auth.signInHint") }}</p>
+      <label class="required"
+        ><span>{{ $t("das.auth.username") }}</span
+        ><input v-model.trim="form.username" aria-required="true" autocomplete="username"
+      /></label>
+      <label class="required"
+        ><span>{{ $t("das.auth.password") }}</span
+        ><input
+          v-model="form.password"
+          aria-required="true"
+          type="password"
+          autocomplete="current-password"
+      /></label>
+      <div class="auth-options">
+        <button type="button" @click="customer">
+          {{ $t("das.auth.forgot") }}</button
+        ><label
+          ><input v-model="remember" type="checkbox" />
+          {{ $t("das.auth.remember") }}</label
+        >
       </div>
-    </div> -->
-
-    <div class="flex flex-col items-center  mt-5 pb-3">
-      <div class="text-2xl text-main-bg text-center py-6 pt-12">
-		  {{ $t("欢迎") }}
-	  </div>
-	  <img
-        src="@/static/images/login_logo.png"
-        alt=""
-        class="w-[24%] lg:w-[300px] mx-auto"
-      />
-	  
-      <div class="panel">
-		  <div class="text-3xl text-main-bg font-semibold  py-4">
-		    {{ $t("登入") }}
-		  </div>
-		  <div class="text-sm text-main-bg pb-4">
-		    {{ $t("输入您的用户名和密码以访问") }}
-		  </div>
-		  
-		  <el-form
-		    ref="ruleFormRef"
-		    :model="ruleForm"
-		    status-icon
-		    :rules="rules"
-		    label-width="auto"
-		    class="w-full mt-4"
-		  >
-			<div class="font-semibold pb-2">{{ $t("用户名/电话") }}</div>
-		    <el-form-item prop="" label-position="top">
-		      <el-input
-		        v-model="ruleForm.username"
-		        type="text"
-		        autocomplete="off"
-		        size="large"
-		      />
-		    </el-form-item>
-			<div class="font-semibold pb-2">{{ $t("密码") }}</div>
-		    <el-form-item class="relative w-full">
-		      <el-input
-		        v-model="ruleForm.password"
-		        type="password"
-		        autocomplete="off"
-		        size="large"
-		        show-password
-		      />
-		    </el-form-item>
-		    <el-form-item label-position="top" class="relative w-full">
-		      <template class="w-full" #label>
-		        <div class="flex items-center w-full">
-		          <div class="text-sm" @click="customer">{{ $t("忘记密码") }}</div>
-		          <div class="ml-auto " >
-		            <!-- {{ $t("记住密码") }} -->
-					<van-checkbox checked-color='#000' class='' v-model="checked">
-					  <span class='text-[#000]  text-sm'>{{$t('记住密码')}}</span>
-					</van-checkbox>
-		          </div>
-		        </div>
-		      </template>
-		    </el-form-item>
-		    <!-- <el-form-item>
-		      <div class="text-center w-full opacity-50" @click="toRegister">
-		        {{ $t("新用户?")
-		        }}<span class="text-blue-600">{{ $t("立即加入") }}</span>
-		      </div>
-		    </el-form-item> -->
-		  </el-form>
-		  <div @click="submitForm(ruleFormRef)" class="w-full" size="large" round>
-		    <div
-		      class="w-full text-white text-2xl font-semibold mx-auto py-5 rounded-lg flex items-center justify-center bg-black"
-		    >
-		      <div>{{ $t("登录") }}</div>
-		    </div>
-		  </div>
-		  <div class="w-full mt-4 text-sm  text-center pt-2">
-		    <p class="text-sm text-center w-full pb-2" @click="toRegister">
-		      {{ $t("还没有账户?")
-		      }} <span class="underline font-semibold">{{ $t("立即注册") }}</span>
-		    </p>
-		  
-		    <div class="text-sm text-center w-full pt-12" @click="customer">
-		      {{ $t("无法登录?")
-		      }} <span class="underline font-bold">{{ $t("请联系我们的用户支持") }}</span>
-		    </div>
-		  </div>
-	  </div>
-    </div>
-    <Lang ref="langRef"></Lang>
-    <ContactUs ref="ContactUsRef"></ContactUs>
-	<van-dialog v-model:show="showError" closeable :title="''" :show-confirm-button="false">
-	    <div class="text-center py-8 px-4">
-			<img class="w-[24%] lg:w-[300px] mx-auto pb-5" src="@/static/images/login/icon-1.png"/>
-			<div class="text-2xl font-semibold">
-				{{ $t("认证失败")}}
-			</div>
-			<div class="text-sm pb-8">
-				{{ $t("失败理由")}}
-			</div>
-			<div @click="submitErr()" class="w-[100%] px-[15%]" size="large" round>
-			  <div
-			    class="w-full text-white text-xl font-semibold mx-auto py-3 rounded flex items-center justify-center bg-black"
-			  >
-			    <div>{{ $t("再试一次") }}</div>
-			  </div>
-			</div>
-		</div>
-	</van-dialog>
-	
-	<van-dialog v-model:show="showSuccess" closeable :title="''" :show-confirm-button="false">
-	    <div class="text-center py-8 px-4">
-			<img class="w-[24%] lg:w-[300px] mx-auto pb-5" src="@/static/images/login/icon-2.png"/>
-			<div class="text-2xl font-semibold">
-				{{ $t("认证成功")}}
-			</div>
-			<div class="text-sm pb-8">
-				{{ $t("成功理由")}}
-			</div>
-			<div @click="submitJump()" class="w-[100%] px-[15%]" size="large" round>
-			  <div
-			    class="w-full text-white text-xl font-semibold mx-auto py-3 rounded flex items-center justify-center bg-black"
-			  >
-			    <div>{{ $t("继续") }}</div>
-			  </div>
-			</div>
-		</div>
-	</van-dialog>
-  </div>
+      <button class="auth-submit" type="submit" :disabled="submitting">
+        {{ $t("das.auth.login") }} <span>→</span>
+      </button>
+      <p class="auth-link">
+        {{ $t("das.auth.noAccount") }}
+        <button type="button" @click="safeReplace(router, '/account/register')">
+          {{ $t("das.auth.registerNow") }}
+        </button>
+      </p>
+      <p class="auth-link auth-support">
+        {{ $t("das.auth.cannotLogin") }}
+        <button type="button" @click="customer">
+          {{ $t("das.auth.support") }}
+        </button>
+      </p>
+      <p class="auth-copyright">{{ $t("das.common.copyright") }}</p>
+    </form>
+    <van-dialog
+      v-model:show="showError"
+      class="das-status-dialog"
+      :show-confirm-button="false"
+      ><div class="status-dialog">
+        <span class="status-dialog__icon"><img src="@/static/das/icons/status-error.png" alt="" /></span>
+        <h2>{{ $t("das.auth.wrongCredentials") }}</h2>
+        <p>{{ errorMessage || $t("das.auth.wrongCredentialsHint") }}</p>
+        <button @click="showError = false">
+          {{ $t("das.auth.tryAgain") }}
+        </button>
+      </div></van-dialog
+    >
+  </main>
 </template>
 <script setup>
-import Lang from "@/components/Lang.vue";
-import Tabs from "@/components/Tabs.vue";
-import { useUserStore } from "@/store/modules/user";
-import ContactUs from "@/components/ContactUs.vue";
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import { showLoadingToast,closeToast,showFailToast,showSuccessToast,showToast   } from 'vant';
-import { useCommonStore } from '@/store/modules/common';
+import { computed, onMounted, reactive, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { setUserRemind } from "../../common/remind";
-import { login } from "../../api/apis";
-import { areas } from "@/config/area";
-import { formatPhoneNumber } from "../../util/utils";
-const ContactUsRef = ref(null);
+import { useCommonStore } from "@/store/modules/common";
+import { useUserStore } from "@/store/modules/user";
+import { login } from "@/api/apis";
+import { safePush, safeReplace } from "@/utils/navigation";
+const router = useRouter(),
+  { t } = useI18n(),
+  commonStore = useCommonStore(),
+  userStore = useUserStore();
+const form = reactive({ username: "", password: "" }),
+  remember = ref(true),
+  submitting = ref(false),
+  showError = ref(false),
+  errorMessage = ref("");
+const language = computed(() => commonStore.clientLang || "en");
+const rememberKeys = {
+  enabled: "dasRemember",
+  username: "dasUsername",
+  password: "dasPassword",
+};
+
+const clearRememberedCredentials = () => {
+  localStorage.removeItem(rememberKeys.username);
+  localStorage.removeItem(rememberKeys.password);
+  localStorage.removeItem("username");
+  localStorage.removeItem("password");
+};
 
 onMounted(() => {
-  document.getElementById("app").style.background = "#fff";
-  checked.value = localStorage.getItem("checked")=='false'? false:true
-  if(checked.value){
-	  ruleForm.username = localStorage.getItem('username')
-	  ruleForm.password = localStorage.getItem('password')
+  const savedRemember = localStorage.getItem(rememberKeys.enabled);
+  const legacyRemember = localStorage.getItem("checked");
+
+  remember.value =
+    savedRemember !== null
+      ? savedRemember === "true"
+      : legacyRemember !== "false";
+
+  if (remember.value) {
+    form.username =
+      localStorage.getItem(rememberKeys.username) ||
+      localStorage.getItem("username") ||
+      "";
+    form.password =
+      localStorage.getItem(rememberKeys.password) ||
+      localStorage.getItem("password") ||
+      "";
   }
 });
 
-onUnmounted(() => {
-  document.getElementById("app").style.background = "transparent";
+watch(remember, (enabled) => {
+  localStorage.setItem(rememberKeys.enabled, String(enabled));
+  if (!enabled) clearRememberedCredentials();
 });
 
-const router = useRouter();
-const { t } = useI18n();
-const ruleFormRef = ref(null);
-const checked = ref(true);
-const userStore = useUserStore();
-const langRef = ref(null);
-const showError = ref(false);
-const showSuccess = ref(false);
-const ruleForm = reactive({
-  email: "",
-  password: "",
-});
-const commonStore = useCommonStore();
-const lang = computed(() => commonStore.clientLang);
-const select = ref("US +1");
-const rules = computed(() => {
-  return {};
-});
-
-function toForget() {
-  router.push({ path: "/account/forget", query: { type: accountType.value } });
-}
-
-function toRegister() {
-  router.push({ path: "/account/register" });
-}
-
-const submit = (item) => {
-    goodsData.value = item;
-    show.value = true
-}
-
-const submitErr= () => {
-	ruleForm.username = '';
-	ruleForm.password = '';
-	showError.value = false;
-}
-
-const submitJump= () => {
-	router.push({ path: "/" });
-	showSuccess.value = false;
-}
-
-function submitForm(formEl) {
-  // if (!ruleForm.email) return accountType.value === 1 ? ElMessage.error(t("请输入邮箱")) : ElMessage.error(t("请输入手机号"));
-  // 统一清除空格
-  if (!ruleForm.username) return showToast(t('请输入用户名/电话'));
-  if (!ruleForm.password) return showToast(t('请输入密码'));
-  
-  
-  formEl.validate((valid) => {
-    if (valid) {
-      let data = {
-        username: ruleForm.username,
-        password: ruleForm.password,
-      };
-      login(data).then((res) => {
-		let info = {
-			name: ruleForm.username
-		}
-		if(checked.value){
-			localStorage.setItem('checked', true)
-			localStorage.setItem('username', ruleForm.username)
-			localStorage.setItem('password', ruleForm.password)
-		}else{
-			localStorage.setItem('checked', false)
-			localStorage.setItem('username', '')
-			localStorage.setItem('password', '')
-		}
-		if(res.code == 200){
-			userStore.setToken(`Bearer ${res.data.token}`);
-			userStore.setUserInfo(res.data.info);
-			showSuccess.value = true
-		}else{
-			showError.value = true
-		}
-		  
-        // userStore.setToken(`Bearer ${res.data.token}`);
-        // userStore.setUserInfo(res.data.info);
-        // router.push({ path: "/" });
-      });
+const customer = () => safePush(router, "/contact");
+const submit = async () => {
+  if (!form.username || !form.password) {
+    errorMessage.value = t("das.auth.required");
+    showError.value = true;
+    return;
+  }
+  submitting.value = true;
+  try {
+    const res = await login(form);
+    userStore.setToken(`Bearer ${res.data.token}`);
+    userStore.setUserInfo(res.data.info);
+    localStorage.setItem(rememberKeys.enabled, String(remember.value));
+    if (remember.value) {
+      localStorage.setItem(rememberKeys.username, form.username);
+      localStorage.setItem(rememberKeys.password, form.password);
     } else {
-      console.log("error submit!");
+      clearRememberedCredentials();
     }
-  });
-}
-
-function handleChangeLang() {
-  langRef.value.open();
-}
-
-const customer = () => {
-  ContactUsRef.value.open();
+    localStorage.removeItem("checked");
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
+    await safeReplace(router, "/");
+  } catch (error) {
+    errorMessage.value = error?.msg || error?.message || "";
+    showError.value = true;
+  } finally {
+    submitting.value = false;
+  }
 };
 </script>
-
 <style scoped>
-.earn-bg {
-  background-image: url(@/static/images/earn-bg.png);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+.auth-screen {
+  min-height: 100%;
+  padding: 54px clamp(34px, 8vw, 76px) 38px;
+  background: #0d241c;
+  color: #f7f5ec;
 }
-
-.button-bg {
-  background-image: url(@/static/images/block-bg.png);
-  background-size: 100% auto;
-  background-repeat: no-repeat;
+.auth-top {
+  height: 88px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-
-:deep(.el-form-item__label) {
+.auth-top img {
+  width: 45px;
+  height: 70px;
+  object-fit: contain;
+}
+.language-button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(247, 245, 236, 0.35);
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 11px;
+}
+.auth-form {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.auth-kicker {
+  margin: 0 0 36px;
+  color: rgba(247, 245, 236, 0.58);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+.auth-form h1 {
+  margin: 0;
+  font-size: clamp(38px, 7vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  font-weight: 400;
+}
+.auth-form h1 span,
+.auth-form h1 em {
+  display: block;
+}
+.auth-form h1 em {
+  color: #ed9b87;
+  font-style: normal;
+}
+.auth-hint {
+  margin: 27px 0 53px;
+  color: rgba(247, 245, 236, 0.58);
+  font-size: 16px;
+}
+.auth-form > label {
+  display: block;
+  margin-top: 28px;
+}
+.auth-form > label > span {
+  display: block;
+  margin-bottom: 13px;
+  color: rgba(247, 245, 236, 0.58);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.required > span::after {
+  content: " *";
+  color: #ed9b87;
+}
+.auth-form > label input {
   width: 100%;
+  height: 61px;
+  padding: 0 24px;
+  border: 1px solid rgba(247, 245, 236, 0.28);
+  border-radius: 999px;
+  background: rgba(247, 245, 236, 0.07);
+  color: #f7f5ec;
+}
+.auth-options {
+  margin: 24px 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(247, 245, 236, 0.68);
+  font-size: 13px;
+}
+.auth-options button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+.auth-options label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.auth-options input {
+  width: 24px;
+  height: 24px;
+  accent-color: #f7f5ec;
+}
+.auth-submit {
+  width: 100%;
+  height: 67px;
+  border: 0;
+  border-radius: 999px;
+  background: #f7f5ec;
+  color: #17382d;
+  font-size: 18px;
+  font-weight: 800;
+}
+.auth-link {
+  margin: 28px 0 0;
+  text-align: center;
+  color: rgba(247, 245, 236, 0.55);
+  font-size: 13px;
+}
+.auth-link button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #f7f5ec;
+  text-decoration: underline;
+  font-weight: 800;
+}
+.auth-copyright {
+  margin: 42px 0 0;
+  text-align: center;
+  color: rgba(247, 245, 236, 0.35);
+  font-size: 10px;
+}
+.status-dialog {
+  padding: 34px 28px 30px;
+  text-align: center;
+  color: #17382d;
+}
+.status-dialog__icon {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  border: 3px solid #17382d;
+  border-radius: 50%;
+  font-size: 38px;
+  font-weight: 300;
+  line-height: 1;
+}
+.status-dialog__icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
-:deep(.el-input-group__prepend) {
-  box-shadow: none !important;
-  background-color: transparent !important;
-  box-shadow: 0 0 0 2px #3d3d3d !important;
+.status-dialog h2 {
+  margin: 22px 0 10px;
+  font-size: 23px;
 }
-
-:deep(.el-select__wrapper) {
-  box-shadow: none !important;
-  background-color: transparent !important;
+.status-dialog p {
+  margin: 0;
+  color: #79817b;
+  font-size: 13px;
+  line-height: 1.45;
 }
-:deep(.el-form-item__label){
-	padding: 0 0;
+.status-dialog button {
+  width: 100%;
+  height: 50px;
+  margin-top: 24px;
+  border: 0;
+  border-radius: 999px;
+  background: #14392c;
+  color: #fff;
+  font-weight: 700;
 }
-:deep(.van-popup__close-icon--top-right) {
-  display: none !important;
-}
-.panel{
-	background-color: #fff;
-	margin: 60px 0px 0px 0;
-	width: 100%;
-	padding: 20px;
+:global(.das-status-dialog.van-dialog) {
+  width: min(84%, 380px);
+  border-radius: 24px;
+  background: #f7f5ec;
 }
 </style>

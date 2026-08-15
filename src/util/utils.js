@@ -1,24 +1,6 @@
 import { ElMessage } from "element-plus";
 import i18n from "@/i18n";
 import BigNumber from "bignumber.js";
-const imageBaseUrl = "";
-// 动态导入图片
-const images = import.meta.glob("../static/images/*", { eager: true });
-
-export const getStaticImageUrl = (image) => {
-  // console.log('imageBaseUrl', images, image);
-  // 如果imageBaseUrl为空，直接使用相对路径
-  if (imageBaseUrl !== "") return `/static/images/${image}`;
-  // 使用image参数查找路径，确保精确匹配文件名
-  const imagePath = Object.keys(images).find((path) => {
-    // 提取文件名，包括扩展名
-    const fileName = path.split("/").pop();
-    return fileName === image;
-  });
-  // console.log('imagePath', images[imagePath]);
-  // 调用函数并处理Promise以获取模块对象，然后返回默认导出
-  return imagePath ? images[imagePath].default : null;
-};
 
 export const copyContent = (content) => {
   const input = document.createElement("input");
@@ -97,7 +79,7 @@ export const calculateLiquidation = (side, lever, price, rate, fixed) => {
       .times(
         BigNumber(1)
           .minus(BigNumber(1).div(lever))
-          .plus(BigNumber(rate).div(lever))
+          .plus(BigNumber(rate).div(lever)),
       )
       .toFixed(fixed);
   } else {
@@ -105,7 +87,7 @@ export const calculateLiquidation = (side, lever, price, rate, fixed) => {
       .times(
         BigNumber(1)
           .plus(BigNumber(1).div(lever))
-          .minus(BigNumber(rate).div(lever))
+          .minus(BigNumber(rate).div(lever)),
       )
       .toFixed(fixed);
   }
@@ -147,9 +129,10 @@ export const formatWithTimezone = (timestamp, tzName) => {
   };
 
   // 拿到 parts（数组形式，每个部分拆开）
-  const parts = new Intl.DateTimeFormat("zh-CN", options).formatToParts(new Date(timestamp));
-  const get = (type) => parts.find(p => p.type === type)?.value || "";
+  const parts = new Intl.DateTimeFormat("zh-CN", options).formatToParts(
+    new Date(timestamp),
+  );
+  const get = (type) => parts.find((p) => p.type === type)?.value || "";
 
   return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")}`;
 };
-

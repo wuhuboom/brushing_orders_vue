@@ -1,310 +1,278 @@
 <template>
-  <div class="w-full bg-white min-h-[100vh] h-full withdraw">
-    <van-sticky type="primary">
-      <van-nav-bar
-        :title="$t('提取')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
-      />
-    </van-sticky>
-
-    <div class="mt-10">
-      <van-tabs
-        color="#007513"
-        title-active-color="#007513"
-        v-model:active="active"
-        @change="swichTab"
+  <main class="das-page withdraw-page">
+    <DasPageHeader title-key="das.page.withdraw" />
+    <form class="withdraw-body" novalidate @invalid.capture.prevent @submit.prevent="send">
+      <section class="total-card">
+        <div>
+          <b>{{ $t("das.deposit.totalBalance") }}</b
+          ><button type="button" @click="safePush(router, '/withdrawRecords')">
+            <img :src="withdrawHistoryIcon" alt="" />
+            <u>{{ $t("das.withdraw.history") }}</u>
+          </button>
+        </div>
+        <strong>{{ money(user.totalBalance || user.balance) }} USD</strong>
+        <p>{{ $t("das.withdraw.processingNote") }}</p>
+      </section>
+      <section class="amounts-card">
+        <p>
+          <b>{{ $t("das.withdraw.availableAmount") }}</b
+          ><span>{{ money(user.balance) }} USD</span>
+        </p>
+        <p>
+          <b>{{ $t("das.withdraw.freezeAmount") }}</b
+          ><span>{{ money(user.frozenBalance) }} USD</span>
+        </p>
+      </section>
+      <h2>{{ $t("das.withdraw.withdrawAmount") }}</h2>
+      <label class="input-card"
+        ><input
+          v-model.number="form.amount"
+          type="number"
+          min="0"
+          step="0.01"
+          :placeholder="$t('das.withdraw.withdrawAmount')"
+        /><button
+          type="button"
+          @click="form.amount = Number(user.balance || 0)"
+        >
+          {{ $t("das.withdraw.allBalance") }}
+        </button></label
+      ><div v-if="accounts.length" class="account-select">
+        <DasSelect
+          v-model="form.withdrawalAccountId"
+          :options="accounts"
+          value-key="id"
+          :get-label="accountName"
+          :aria-label="$t('das.form.selectAccount')"
+          :placeholder="$t('das.form.selectAccount')"
+        />
+      </div
+      ><button
+        v-else
+        class="add-account"
+        type="button"
+        @click="safePush(router, '/paymentMethods')"
       >
-        <van-tab :title="$t('提取')">
-          <div class="p-4 box-border flex flex-col">
-            <div
-              class="flex flex-col justify-between p-4 box-border"
-              :style="{
-                background: `url(${bgImage}) 0 0 / 100% 100% no-repeat`,
-              }"
-            >
-              <div class="text-white opacity-70 text-sm font-semibold">
-                {{ $t("账户金额") }}
-              </div>
-              <div class="flex mt-4">
-                <div class="text-white text-3xl font-bold flex items-center">
-                  {{ amount }}
-                </div>
-                <div
-                  class="text-white text-sm font-bold flex items-center ml-2 pt-[12px]"
-                >
-                  {{ $t("美元") }}
-                </div>
-              </div>
-              <div
-                class="text-white opacity-70 text-xs font-semibold pt-4 pb-2"
-              >
-                {{ $t("您将在一小时内收到提款") }}
-              </div>
-            </div>
-          </div>
-
-          <el-form
-            ref="ruleFormRef"
-            :model="ruleForm"
-            status-icon
-            :rules="rules"
-            label-width="auto"
-            class="w-full mt-4 p-4"
+        {{ $t("das.form.addAccount") }}</button
+      ><label class="input-card"
+        ><input
+          v-model="form.tradePassword"
+          :type="tradePasswordVisible ? 'text' : 'password'"
+          :placeholder="$t('das.auth.tradePassword')" /><button
+          class="password-toggle"
+          type="button"
+          :aria-pressed="tradePasswordVisible"
+          @click="tradePasswordVisible = !tradePasswordVisible"
+        >
+          <svg
+            v-if="tradePasswordVisible"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
           >
-            <el-form-item
-              :label="$t('提款金额')"
-              prop="amount"
-              label-position="top"
-            >
-              <el-input
-                v-model="ruleForm.amount"
-                type="number"
-                :placeholder="$t('提款金额')"
-                autocomplete="off"
-                size="large"
-              >
-                <template #suffix>
-                  <el-button
-                    type="primary"
-                    style="background: #005713"
-                    @click="All"
-                    size="default"
-                    >{{ $t("全部") }}</el-button
-                  >
-                </template>
-              </el-input>
-            </el-form-item>
-            <el-form-item :label="$t('交易密码')" label-position="top">
-              <el-input
-                v-model="ruleForm.tradePassword"
-                :placeholder="$t('交易密码')"
-                type="password"
-                autocomplete="off"
-                size="large"
-                show-password
-              />
-            </el-form-item>
-          </el-form>
-
-          <div class="w-full pl-5 pr-5">
-            <van-button color="#007513" @click="getWithdrawal" class="w-full">{{
-              $t("提取")
-            }}</van-button>
-          </div>
-        </van-tab>
-        <van-tab :title="$t('历史')">
-          <van-tabs
-            v-model:active="orderActive"
-            @change="changeOrder"
-            color="#005713"
-            title-active-color="#fff"
-            type="card"
-            class="m-6"
-          >
-            <van-tab :title="$t('待审核')"></van-tab>
-            <van-tab :title="$t('审核成功')"></van-tab>
-            <van-tab :title="$t('审核拒绝')"></van-tab>
-          </van-tabs>
-          <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-            <van-list
-              v-model:loading="loading"
-              :finished="finished"
-              :finished-text="$t('没有更多了')"
-              @load="onLoad"
-            >
-              <van-cell v-for="item in list" :key="item" :title="item">
-                <div
-                  class="shadow rounded-xl bg-[#e8f7ec] text-[#666] p-3 box-border flex flex-col m-2"
-                >
-                  <div
-                    class="flex items-center justify-between font-medium pb-2 text-sm"
-                  >
-                    {{ item.code }}
-                  </div>
-                  <div class="w-full h-[1px] bg-[#EBEBEB]"></div>
-                  <div class="flex flex-col text-sm font-medium mt-2">
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("姓名") }}</div>
-                      <div class="w-[50%] break-words">
-                        ：{{ item.username }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("钱包地址") }}</div>
-                      <div class="w-[50%] break-words">
-                        ：{{ item.withdrawAddress }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("钱包名称") }}</div>
-                      <div class="w-[50%] break-words">
-                        ：{{ item.withdrawType }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("提现金额") }}</div>
-                      <div class="w-[50%] break-words">：{{ item.amount }}</div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("到账金额") }}</div>
-                      <div class="w-[50%] break-words">
-                        ：{{ item.creditedAmount }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("费率") }}</div>
-                      <div class="w-[50%] break-words">：{{ item.fee }}</div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("手续费") }}</div>
-                      <div class="w-[50%] break-words">
-                        ：
-                        {{
-                          (
-                            (item.amount * item.withdrawFee) /
-                            100
-                          ).toFixed(2)
-                        }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("状态") }}</div>
-                      <div class="w-[50%] break-words">
-                        ：{{
-                          item.status == 0
-                            ? $t("通过")
-                            : item.status == 1
-                            ? $t("待审核")
-                            : $t("拒绝")
-                        }}
-                      </div>
-                    </div>
-                    <div class="flex mt-1">
-                      <div class="w-[50%]">{{ $t("创建时间") }}</div>
-                      <div class="w-[50%] break-words">
-                        ：{{ formatWithTimezone(item.applicationTime,userStore.zoneActive.tzName)  }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </van-cell>
-            </van-list>
-          </van-pull-refresh>
-        </van-tab>
-      </van-tabs>
-    </div>
-  </div>
+            <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
+            <circle cx="12" cy="12" r="2.8" />
+          </svg>
+          <svg v-else viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 3l18 18" />
+            <path d="M10.6 6.1A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6a17 17 0 0 1-2.5 3.2" />
+            <path d="M6.2 7.2C3.8 9 2.5 12 2.5 12s3.5 6 9.5 6a10 10 0 0 0 3.1-.5" />
+            <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+          </svg></button
+        ></label
+      ><button class="confirm-button" type="submit">
+        {{ $t("das.common.confirm") }}
+      </button>
+      <p class="withdraw-copyright">{{ $t("das.common.copyright") }}</p>
+    </form>
+  </main>
 </template>
 <script setup>
-const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import { getWithdrawals, withdrawal, getTradeConfig,userGetInfo } from "../../api/apis";
-import { useUserStore } from "@/store/modules/user";
-import {formatWithTimezone} from '../../util/utils'
-import {
-  showLoadingToast,
-  closeToast,
-  showFailToast,
-  showSuccessToast,
-  showToast
-} from "vant";
+import { onMounted, reactive, ref } from "vue";
+import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-const orderActive = ref(0);
-const active = ref(0);
-const list = ref([]);
-const refreshing = ref(false);
-const finished = ref(false);
-const loading = ref(false);
-const amount = ref("");
-const userStore = useUserStore();
-const { t } = useI18n();
-const query = reactive({
-  pageNum: 1,
-  pageSize: 10,
-  status: "1",
-});
-const onRefresh = async () => {
-  refreshing.value = true;
-  finished.value = false;
-  query.pageNum = 1;
-  list.value = [];
-  await loadData();
-  refreshing.value = false;
+import { showSuccessToast, showToast } from "vant";
+import { withdrawal, getWithdrawalAccounts, userGetInfo } from "@/api/apis";
+import DasPageHeader from "@/components/DasPageHeader.vue";
+import DasSelect from "@/components/DasSelect.vue";
+import withdrawHistoryIcon from "@/static/das/icons/withdraw-history.png";
+import { safePush, safeReplace } from "@/utils/navigation";
+const router = useRouter(),
+  { t } = useI18n(),
+  user = ref({}),
+  accounts = ref([]),
+  tradePasswordVisible = ref(false),
+  form = reactive({ amount: "", tradePassword: "", withdrawalAccountId: "" });
+const money = (v) =>
+    Number(v || 0).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }),
+  accountName = (a) =>
+    a.accountName || a.walletName || a.bankName || a.account || String(a.id);
+const send = async () => {
+  if (!form.amount || !form.tradePassword)
+    return showToast(t("das.auth.required"));
+  const amount = Number(form.amount);
+  const hasValidPrecision =
+    Math.abs(amount * 100 - Math.round(amount * 100)) < 1e-8;
+  if (!Number.isFinite(amount) || amount <= 0 || !hasValidPrecision)
+    return showToast(t("das.withdraw.invalidAmount"));
+  if (!form.withdrawalAccountId)
+    return showToast(t("das.withdraw.accountRequired"));
+  await withdrawal(form);
+  showSuccessToast(t("das.withdraw.success"));
+  safeReplace(router, "/withdrawRecords");
 };
-const onLoad = async () => {
-  if (finished.value || loading.value) return;
-  loading.value = true;
-  await loadData();
-  loading.value = false;
-};
-const loadData = async () => {
-  try {
-    let res = await getWithdrawals(query);
-    const data = res.rows;
-    if (data.length < query.pageSize) {
-      finished.value = true;
-    } else {
-      query.pageNum++;
-    }
-
-    list.value.push(...data);
-  } catch (error) {
-    console.error("加载失败", error);
-    finished.value = true; // 避免无限加载
-  }
-};
-const onClickLeft = () => history.back();
-const ruleForm = reactive({
-  amount: "",
-  tradePassword: "",
-});
-
-const All = () => {
-  console.log(amount.value);
-  ruleForm.amount = amount.value;
-};
-const swichTab = () => {
-  if (active.value == 1) {
-    onRefresh();
-  }
-};
-const getWithdrawal = () => {
-  if (!ruleForm.amount) return showToast(t('请输入金额'));
-  if (!ruleForm.tradePassword) return showToast(t('请输入交易密码'));
-  withdrawal(ruleForm).then((res) => {
-    showSuccessToast(t("提现成功"));
-    router.push({ path: "/my" });
-  });
-};
-const changeOrder = () => {
-  if (orderActive.value == 0) {
-    query.status = "1";
-  } else if (orderActive.value == 1) {
-    query.status = "0";
-  } else {
-    query.status = "2";
-  }
-  onRefresh();
-};
-const TradeInfor = ref({});
-
-const tradeConfig = async () => {
-  let res = await getTradeConfig();
-  TradeInfor.value = res.data;
-};
-
-onMounted( () => {
-  tradeConfig();
-  userGetInfo().then((res) => {
-    amount.value = res.data.balance;
-    ruleForm.amount = amount.value;
-  });
+onMounted(async () => {
+  const [u, a] = await Promise.all([userGetInfo(), getWithdrawalAccounts()]);
+  user.value = u.data || {};
+  accounts.value = a.data || [];
+  form.withdrawalAccountId =
+    accounts.value.find((x) => x.isDefault)?.id || accounts.value[0]?.id || "";
 });
 </script>
-<style>
-.withdraw .el-input__wrapper {
-  border: 1px solid #005713;
+<style scoped>
+.withdraw-page {
+  min-height: 100%;
+  background: #f7f5ec;
+  color: #17382d;
+}
+.withdraw-body {
+  max-width: 760px;
+  margin: auto;
+  padding: 20px 28px 70px;
+}
+.total-card {
+  padding: 27px;
+  border-radius: 23px;
+  background: #14392c;
+  color: #f7f5ec;
+}
+.total-card > div {
+  display: flex;
+  justify-content: space-between;
+}
+.total-card button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  background: none;
+  color: #efa18e;
+}
+.total-card button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+.total-card > strong {
+  display: block;
+  margin: 25px 0;
+  font-size: 31px;
+  font-weight: 500;
+}
+.total-card p {
+  margin: 0;
+  color: rgba(247, 245, 236, 0.65);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.amounts-card {
+  margin-top: 16px;
+  border-radius: 23px;
+  background: #14392c;
+  color: #f7f5ec;
+  overflow: hidden;
+}
+.amounts-card p {
+  margin: 0;
+  padding: 22px 25px;
+  display: flex;
+  justify-content: space-between;
+}
+.amounts-card p + p {
+  border-top: 1px solid rgba(247, 245, 236, 0.15);
+}
+.withdraw-body h2 {
+  margin: 28px 5px 14px;
+  font-size: 18px;
+}
+.input-card {
+  height: 82px;
+  margin: 12px 0;
+  padding: 0 18px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  border-radius: 20px;
+  background: #fff;
+}
+.input-card input {
+  height: 54px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-weight: 700;
+}
+.input-card button {
+  height: 43px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #14392c;
+  color: #fff;
+  font-weight: 700;
+}
+.input-card img {
+  width: 22px;
+  opacity: 0.5;
+}
+.input-card .password-toggle {
+  width: 38px;
+  height: 38px;
+  padding: 7px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #53675e;
+  background: transparent;
+}
+.password-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 2.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.account-select {
+  margin: 0 0 5px;
+}
+.add-account {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #14392c;
+  border-radius: 999px;
+  background: transparent;
+  color: #14392c;
+  font-weight: 700;
+}
+.confirm-button {
+  width: 100%;
+  height: 58px;
+  margin-top: 24px;
+  border: 0;
+  border-radius: 999px;
+  background: #14392c;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+}
+.withdraw-copyright {
+  margin-top: 28px;
+  text-align: center;
+  color: #9ba19c;
+  font-size: 10px;
 }
 </style>

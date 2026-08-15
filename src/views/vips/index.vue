@@ -1,80 +1,147 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-white">
-    <div
-      class="w-full p-6 box-border flex flex-col font-montserrat text-[#666]"
-    >
-      <van-nav-bar
-        :title="$t('员工等级')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
-      />
-      <div class="w-full mt-10 box-border flex flex-col">
-        <div class="w-full mb-4 p-4 rounded-lg bg-[#e8f7ec] flex items-center" v-for="item in levelList">
-            <div class="flex mr-4 w-20">
-                <img :src="bgMapStart[item.nameEn]" alt="">
-            </div>
-            <div class="flex flex-col flex-1">
-                <div class="flex items-center">
-                    <div class="text-base text-[#000] font-semibold mr-2">{{item.nameEn}}</div>
-                    <van-tag round type="primary" color="#007513" v-if="userStore.userInfo.levelId == item.id">{{$t('当前等级')}}</van-tag>
-                     <div class="text-sm text-[var(--main-color)] font-semibold mr-2 underline" @click="toUpgrade" v-if="userStore.userInfo.levelId != item.id">{{$t('立即升级')}}</div>
-                </div>
-                <div class="mt-2 text-[var(--main-color)] text-sm font-semibold">
-                    {{item.price}}{{$t('美元')}}
-                </div>
-                <div class="mt-2 text-xs text-[#000] font-light" v-html="item.descriptionEn">
-                    
-                </div>
-            </div>
+  <main class="das-page vip-page">
+    <DasPageHeader title-key="das.page.vip" />
+    <section class="vip-list">
+      <article v-for="(item, index) in levels" :key="item.id" class="vip-card">
+        <img :src="levelIcon(item, index)" alt="" />
+        <div class="vip-card__copy">
+          <h2>{{ item.name || `VIP ${item.level || index + 1}` }}</h2>
+          <strong>{{ range(item, index) }}</strong>
+          <ul>
+            <li>
+              {{ item.orderCountPerDay || item.orderCount || 0 }}
+              {{ $t("das.vip.dataPerSet") }}
+            </li>
+            <li>{{ $t("das.vip.profitTransaction") }} {{ rate(item) }}%</li>
+            <li>{{ mergedRate(item) }}% {{ $t("das.vip.mergedProfit") }}</li>
+            <li>
+              {{ item.taskCountPerDay || 2 }} {{ $t("das.vip.tasksPerDay") }}
+            </li>
+          </ul>
         </div>
-      </div>
-    </div>
-  </div>
+        <b v-if="isCurrent(item)" class="current-badge">{{
+          $t("das.vip.current")
+        }}</b>
+      </article>
+    </section>
+    <p class="das-page-copyright">{{ $t("das.common.copyright") }}</p>
+  </main>
 </template>
+
 <script setup>
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import { getLevel } from "../../api/apis";
-import { useUserStore } from '../../store/modules/user';
-import { showToast } from 'vant';
-import { useI18n } from "vue-i18n";
-const userStore = useUserStore()
-const { t } = useI18n();
-const bgMapStart = {
-  VIP1: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png',
-  VIP2: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png',
-  VIP3: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png',
-  VIP4: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png',
-  VIP5: 'https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png',
-};
-const levelList = ref([]);
-const level = async () => {
-  let res = await getLevel();
-  levelList.value = res.data;
-  levelList.value.forEach(item => {
-     if (item.descriptionEn) {
-      // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
-      item.descriptionEn = item.descriptionEn.replace(/(●|•|&#8226;|&#9679;)/g, '<span class="small-dot">●</span>');
-    }
-  });
-  
-};
-const toUpgrade = () =>{
-showToast(t('联系客服'));
-}
-onMounted(() => {
-  userStore.getUserInfo()
-  level();
-  console.log(userStore.userInfo)
+import { onMounted, ref } from "vue";
+import { getLevel, userGetInfo } from "@/api/apis";
+import DasPageHeader from "@/components/DasPageHeader.vue";
+
+const levels = ref([]);
+const user = ref({});
+const base = window.g?.VITE_API_IMG_URL || "";
+const fallbackRanges = [
+  "100–499 USD",
+  "500–1,599 USD",
+  "1,600–5,499 USD",
+  "5,500–9,999 USD",
+  "10,000 USD or above",
+];
+const levelColors = ["#e9792b", "#65a6d3", "#e4b500", "#e72d60", "#7032cf"];
+const isCurrent = (item) =>
+  String(user.value.levelId ?? user.value.vipId) ===
+  String(item.id ?? item.level);
+const image = (value) =>
+  /^https?:/i.test(value || "") ? value : `${base}${value}`;
+const medal = (color) =>
+  `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 78"><path fill="${color}" d="M16 45 12 76l20-11 20 11-4-31z"/><circle cx="32" cy="31" r="25" fill="${color}"/><circle cx="32" cy="31" r="19" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="3"/><path fill="#fff" d="m32 18 4 8 9 1-6 7 2 9-9-5-9 5 2-9-6-7 9-1z"/></svg>`)}`;
+const levelIcon = (item, index) =>
+  item.icon ? image(item.icon) : medal(levelColors[index % levelColors.length]);
+const range = (item, index) =>
+  item.price
+    ? `${Number(item.price).toLocaleString()} USD`
+    : fallbackRanges[index] ||
+      `${Number(item.minBalance || 0).toLocaleString()} USD`;
+const rate = (item) => Number(item.minCommissionRate ?? 0).toFixed(1);
+const mergedRate = (item) =>
+  Number(
+    item.maxContinuousCommissionRate ?? item.maxCommissionRate ?? 0,
+  ).toFixed(0);
+onMounted(async () => {
+  try {
+    levels.value = (await getLevel()).data || [];
+  } catch (_) {}
+  try {
+    user.value = (await userGetInfo()).data || {};
+  } catch (_) {}
 });
-const onClickLeft = () => history.back();
 </script>
-<style>
-.small-dot {
-  font-size: 8px;       /* 调整大小 */
-  line-height: 1;
-  vertical-align: middle;
-  display: inline-block; /* 保证可以控制尺寸/对齐 */
-  /* 如需更细微缩放也可用 transform: scale(0.8); */
+
+<style scoped>
+.vip-page {
+  min-height: 100%;
+  background: #f7f5ec;
+  color: #17382d;
+}
+.vip-list {
+  max-width: 800px;
+  margin: auto;
+  padding: 22px 24px 4px;
+  display: grid;
+  gap: 14px;
+}
+.vip-card {
+  min-height: 204px;
+  padding: 28px 24px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 20px;
+  border-radius: 22px;
+  background: #fff;
+}
+.vip-card > img {
+  width: 54px;
+  height: 66px;
+  object-fit: contain;
+}
+.vip-card h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+.vip-card strong {
+  font-size: 16px;
+}
+.vip-card ul {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  color: #87908a;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.vip-card li::before {
+  content: "·";
+  margin-right: 8px;
+}
+.current-badge {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 18px;
+  border-radius: 0 21px 0 18px;
+  background: #14392c;
+  color: #f7f5ec;
+  font-size: 11px;
+}
+.das-page-copyright {
+  margin-top: 12px;
+}
+@media (min-width: 760px) {
+  .vip-list {
+    grid-template-columns: 1fr 1fr;
+  }
+  .vip-card {
+    min-height: 235px;
+  }
+  .vip-card:last-child:nth-child(odd) {
+    grid-column: 1/-1;
+  }
 }
 </style>

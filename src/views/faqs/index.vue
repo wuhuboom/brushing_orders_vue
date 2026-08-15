@@ -1,29 +1,21 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f4f4f5]">
-    <div class="container w-full min-h-[100vh] bg-white">
-      <van-nav-bar
-        :title="$t('常见问题解答')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
-      />
-      <div class="w-full mt-10 p-6 box-border flex flex-col font-montserrat text-[#333]">
-        <div v-html="faqEn"></div>
-      </div>
-    </div>
-  </div>
+  <DasContentPage
+    title-key="das.page.faqs"
+    :content="content"
+    :loading="loading"
+  />
 </template>
 <script setup>
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import {getGlobalConfig} from "../../api/apis"
-const faqEn = ref('')
-const getGetGlobalConfig = async() =>{
-    let res = await getGlobalConfig();
-    faqEn.value = res.data.faqEn
-}
-onMounted(() =>{
-    getGetGlobalConfig();
-})
-
-const onClickLeft = () => history.back();
+import { onMounted, ref } from "vue";
+import { getContentConfig } from "@/api/apis";
+import DasContentPage from "@/components/DasContentPage.vue";
+const content = ref(""),
+  loading = ref(true);
+onMounted(async () => {
+  try {
+    content.value = (await getContentConfig()).data?.helpContent || "";
+  } finally {
+    loading.value = false;
+  }
+});
 </script>

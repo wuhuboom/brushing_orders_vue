@@ -1,47 +1,11 @@
-export const LANGS = {
-    
-    // zhTW: {
-    //     name: '繁體中文',
-    //     code: 'zhTW'
-    // },
-    en: {
-        name: 'English',
-        code: 'en'
-    },
-    fr: {
-        name: 'Français',
-        code: 'fr'
-    },
-    de: {
-        name: 'Deutsch',
-        code: 'de'
-    },
-    it: {
-        name: 'Italiano',
-        code: 'it'
-    },
-    // vi: {
-    //     name: 'Tiếng Việt',
-    //     code: 'vi'
-    // },
-    // th: {
-    //     name: 'ไทย',
-    //     code: 'th'
-    // },
-    ko: {
-        name: '한국어',
-        code: 'ko'
-    },
-    // ja: {
-    //     name: '日本語',
-    //     code: 'ja'
-    // },
-    zh: {
-        name: '中文简体',
-        code: 'zh'
-    },
-    id: {
-        name: 'Bahasa Indonesia',
-        code: 'id'
-    },
-}
+export const LANGS = [
+  { code: "en", name: "English" },
+  { code: "es", name: "Español" },
+  { code: "fr", name: "Français" },
+  { code: "zh", name: "简体中文" },
+  { code: "de", name: "Deutsch" },
+  { code: "it", name: "Italiano" },
+  { code: "ko", name: "한국어" },
+  { code: "ja", name: "日本語" },
+  { code: "id", name: "Bahasa Indonesia" },
+];

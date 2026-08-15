@@ -1,104 +1,90 @@
-// api.js
 import axios from "axios";
-import { ElMessage, ElLoading } from "element-plus";
+import { ElLoading, ElMessage } from "element-plus";
 import pinia from "@/store/index.js";
 import { useUserStore } from "@/store/modules/user";
 import { useCommonStore } from "@/store/modules/common";
 import { errorMessages } from "./errorCodeMap";
-import i18n from "../i18n/index.js"; // 引入全局 i18n 实例
-// 获取 BASEPATH，确保 window.BASEPATH 存在
-const baseURL = window.VITE_API_BASE_URL ? window.VITE_API_BASE_URL :import.meta.env.VITE_API_BASE_URL; // 兜底默认值
+import i18n from "@/i18n/index.js";
 
+const runtimeConfig = window.g || {};
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: runtimeConfig.VITE_API_BASE_URL || import.meta.env.VITE_API_BASE_URL,
   timeout: 20000,
 });
+const languageMap = {
+  en: "en_US",
+  es: "es_ES",
+  zh: "zh_CN",
+  fr: "fr_FR",
+  de: "de_DE",
+  it: "it_IT",
+  ko: "ko_KR",
+  ja: "ja_JP",
+  id: "id_ID",
+};
 
-let loading = null;
+let loading;
+const closeLoading = () => {
+  loading?.close();
+  loading = null;
+};
 
-api.interceptors.request.use(
-  (config) => {
-    if (config.loading === true) {
-      if (loading) {
-        loading.close();
-        loading = null;
-      }
-      loading = ElLoading.service({ fullscreen: true });
-    }
-    const userStore = useUserStore(pinia);
-    // config.headers["authorization"] = userStore.token || "";
-    // config.headers["lang"] = useCommonStore().clientLang;
-    config.headers = {
-      ...config.headers, // 先保留已有的 headers
-      authorization: userStore.token || "",
-      lang: useCommonStore().clientLang
-    };
-
-    // 添加accountType到请求参数
-    console.log(config.url);
-    if (config.method === "get") {
-      config.params = {
-        ...config.params,
-      };
-    } else {
-      config.data = {
-        ...config.data,
-      };
-    }
-
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+api.interceptors.request.use((config) => {
+  if (config.loading) {
+    closeLoading();
+    loading = ElLoading.service({ fullscreen: true });
   }
-);
+
+  const userStore = useUserStore(pinia);
+  const commonStore = useCommonStore(pinia);
+  config.headers = config.headers || {};
+  if (userStore.token) config.headers.Authorization = userStore.token;
+  const apiLanguage =
+    languageMap[commonStore.clientLang] || commonStore.clientLang || "en_US";
+  config.headers.lang = apiLanguage;
+  config.headers["Accept-Language"] = apiLanguage.replace("_", "-");
+
+  if (config.method?.toLowerCase() === "get") {
+    config.params = { lang: apiLanguage, ...(config.params || {}) };
+  }
+  return config;
+});
 
 api.interceptors.response.use(
   (response) => {
-    console.log(response.status);
-    const config = response.config;
-    if (config.loading === true && loading) {
-      loading.close();
-      loading = null;
+    if (response.config?.loading) closeLoading();
+    if (response.status === 204) return { code: 200, msg: "", data: null };
+
+    const result = response.data;
+    if (!result || typeof result !== "object" || result.code === undefined)
+      return result;
+    if ([200, 201].includes(Number(result.code))) return result;
+
+    if (Number(result.code) === 401) useUserStore(pinia).logout(false);
+    if (response.config?.showMsg) {
+      const key = errorMessages[result.code];
+      ElMessage.error(
+        (key && i18n.global.t(key)) ||
+          result.msg ||
+          result.message ||
+          i18n.global.t("das.common.requestFailed"),
+      );
     }
-    if (response.status == 200) {
-      let result = response.data;
-      if (result.code == 200) {
-        return result;
-      } else if(result.code == 201) {
-        return result;
-      }else if (result.code == 401) {
-        useUserStore().logout();
-        return Promise.reject(result);
-      }else if (result.code == 601 || result.code == 602) {
-        return result;
-      }  else {
-        console.log(config.showMsg)
-        if (config.showMsg) ElMessage({ message: i18n.global.t(errorMessages[result.code])|| result.msg , type: "error" });
-        return Promise.reject(result);
-      }
-    }
-    else if (response.status == 401) {
-      useUserStore().logout();
-      return Promise.reject(result);
-    } else {
-      if (config.showMsg)
-        ElMessage({ message: response.status, type: "error" });
-      return Promise.reject(response);
-    }
+    return Promise.reject(result);
   },
   (error) => {
-    const config = error.config;
-    if (config.loading === true && loading) {
-      loading.close();
-      loading = null;
+    if (error.config?.loading) closeLoading();
+    if (error.response?.status === 401) useUserStore(pinia).logout(false);
+    if (error.config?.showMsg) {
+      ElMessage.error(
+        error.response?.data?.msg ||
+          error.response?.data?.message ||
+          error.message ||
+          i18n.global.t("das.common.requestFailed"),
+      );
     }
-    if (error.status) {
-      useUserStore().logout();
-    }
-    if (config.showMsg) ElMessage({ message: error.message, type: "error" });
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;

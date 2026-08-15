@@ -1,252 +1,205 @@
 <template>
-  <div>
-    <HeaderTop></HeaderTop>
-    <div class="w-full relative">
-      <div class="pb-4 pt-4 absolute top-5 w-full" style="z-index: 2">
-        <div class="w-[90%] mx-auto">
-          <div class="w-full overflow-hidden rounded-full">
-            <!-- <van-notice-bar
-              color="#fff"
-              left-icon="bell"
-              background="#007513"
-              :text="pureNoticeContent"
-            /> -->
-            <van-notice-bar
-              color="#fff"
-              background="#007513"
-              :text="pureNoticeContent"
-            >
-              <template #left-icon>
-                <img
-                  src="@/static/images/notice.png"
-                  class="w-5 h-5"
-                  alt="icon"
-                />
-              </template>
-            </van-notice-bar>
-          </div>
-        </div>
-        <div class="mx-auto pt-5">
-          <div
-            class="text-center text-2xl lg:text-5xl font-semibold text-white"
-          >
-          {{$t("我们通过数字营销")}}
-          {{$t("帮助小型企业盈利")}}
-          </div>
-        </div>
-        <div class="flex justify-center items-center mt-5">
-          <div
-            class="text-white mr-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
-          >
-            {{ $t("雇佣我们") }}
-          </div>
-          <div
-            class="text-white ml-1 px-4 py-1 bg-[var(--main-color)] text-sm text-center"
-          >
-            {{ $t("与我们合作") }}
-          </div>
+  <main class="das-page home-page">
+    <section class="home-hero">
+      <HeaderTop />
+      <div class="home-hero__copy">
+        <h1>{{ $t("das.home.heroTitle") }}</h1>
+        <p>{{ $t("das.home.heroCopy") }}</p>
+      </div>
+    </section>
+
+    <section class="home-body">
+      <div class="stack">
+        <span>{{ $t("das.home.fluent") }}</span>
+        <div>
+          <b>Meta</b><b>Google</b><b>YouTube</b><b>TikTok</b><b>Shopify Plus</b>
         </div>
       </div>
 
-      <img src="@/static/images/bg.jpg" alt="" />
-    </div>
-    <div class="relative bg-white">
-      <!-- 菜单列表 -->
-      <div class="w-[95%] rounded-xl mx-auto flex flex-col">
-        <div class="p-4 text-lg font-semibold text-black">
-          {{ $t("菜单列表") }}
-        </div>
-        <div class="w-full p-4 grid grid-cols-4 gap-4">
-          <div
-            class="flex flex-col w-full justify-center rounded-lg items-start text-center box-border text-[#000]"
-            v-for="(item, index) in items"
-            :key="index"
-            @click="goTo(item.route)"
+      <section class="shortcuts">
+        <h2>{{ $t("das.home.shortcuts") }}</h2>
+        <div class="shortcuts__grid">
+          <button
+            v-for="item in shortcuts"
+            :key="item.title"
+            type="button"
+            @click="goTo(item)"
           >
-            <div class="w-full">
-              <img class="mx-auto w-12 h-12" :src="item.icon" alt="" />
-            </div>
-            <span class="mx-auto text-center text-xs mt-1 whitespace-nowrap">
-              {{ $t(item.name) }}
-            </span>
-          </div>
+            <span><DasIcon :name="item.icon" /></span>
+            <b>{{ $t(item.title) }}</b>
+          </button>
         </div>
-      </div>
-      <div class="bg-[#e8f7ec] w-full mx-auto">
-        <div class="w-[90%] mx-auto">
-          <div
-            class="flex justify-between pt-4 pb-2 text-base text-black font-semibold"
-          >
-            <div class="w-[35%]">{{$t('员工等级')}}</div>
-            <div
-              @click="toVips"
-              class="w-[65%] font-normal text-xs text-[var(--main-color)] text-right flex justify-end items-center"
-            >
-              <div>{{$t('查看更多')}}</div>
-              <img class="w-5 ml-2" src="@/static/images/more1.png" alt="" />
-            </div>
-          </div>
-        </div>
-        <div class="items-con flex overflow-x-scroll p-4">
-          <div
-            v-for="item in levelList"
-            class="vip-item flex flex-col box-border rounded-xl p-4 bg-[#F2F7FF] mr-3"
-            :style="{
-              background: `url(${
-                bgMap[item.nameEn]
-              }) 0 0 / 100% 100% no-repeat`,
-            }"
-          >
-            <div class="flex justify-between items-start">
-              <div class="font-bold text-lg">
-                <p class="mt-4 text-[var(--main-color)]">
-                  {{ $t(item.nameZh) }}
-                </p>
-              </div>
-              <img class="w-24" :src="bgMapStart[item.nameEn]" alt="" />
-            </div>
-            <div class="w-[260px] text-xs mt-2 text-black" >
-              <p class="w-[260px] text-xs mt-2 text-black" v-html="item.descriptionEn"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <img class="w-full" src="@/static/images/a.png" alt="" />
-      <img class="w-full" src="@/static/images/b.png" alt="" />
-    </div>
+      </section>
 
-    <!-- 行情结束 -->
-    <Footer name="/"></Footer>
-    <tradePassword ref="tradePasswordRef"></tradePassword>
-  </div>
+      <section class="what-we-do">
+        <h2>{{ $t("das.home.what") }}</h2>
+        <p class="what-we-do__intro">{{ $t("das.home.whatIntro") }}</p>
+        <article v-for="item in services" :key="item.title">
+          <DasIcon :name="item.icon" />
+          <div>
+            <h3>{{ $t(item.title) }}</h3>
+            <p>{{ $t(item.description) }}</p>
+          </div>
+        </article>
+      </section>
+    </section>
+    <Footer name="/" />
+  </main>
 </template>
-<script setup>
-import Footer from "@/components/Footer.vue";
-import HeaderTop from "@/components/HeaderTop.vue";
-import tradePassword from "@/components/tradePassword.vue";
-import { onMounted, ref ,reactive,computed } from "vue";
-import { getLevel,getNoticeList } from "../api/apis";
-import { useRouter } from "vue-router";
-const tradePasswordRef = ref(null);
 
-const bgMap = {
-  VIP1: new URL("@/static/images/bg_vip1.png", import.meta.url).href,
-  VIP2: new URL("@/static/images/bg_vip2.png", import.meta.url).href,
-  VIP3: new URL("@/static/images/bg_vip3.png", import.meta.url).href,
-  VIP4: new URL("@/static/images/bg_vip4.png", import.meta.url).href,
-  VIP5: new URL("@/static/images/bg_vip5.png", import.meta.url).href,
-};
-const bgMapStart = {
-  VIP1: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232700615694005.png",
-  VIP2: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327038574353214.png",
-  VIP3: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/172232706362679225.png",
-  VIP4: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722327102801555071.png",
-  VIP5: "https://bigw-in1.oss-ap-northeast-1.aliyuncs.com/icrossing/1722342635975654072.png",
-};
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import HeaderTop from "@/components/HeaderTop.vue";
+import Footer from "@/components/Footer.vue";
+import { safePush } from "@/utils/navigation";
+import DasIcon from "@/components/DasIcon.vue";
 
 const router = useRouter();
-
-const items = [
-  {
-    name: "收入指南", // 用于 $t('收入指南')
-    icon: new URL("@/static/images/icon-0.png", import.meta.url).href,
-    route: "/guide",
-  },
-  {
-    name: "事件",
-    icon: new URL("@/static/images/icon-3.png", import.meta.url).href,
-    route: "/event",
-  },
-  {
-    name: "提款",
-    icon: new URL("@/static/images/icon-5.png", import.meta.url).href,
-    route: "/notifications",
-  },
-  {
-    name: "定金",
-    icon: new URL("@/static/images/icon-7.png", import.meta.url).href,
-    route: "/profile",
-  },
-  {
-    name: "条款及细则", // 用于 $t('收入指南')
-    icon: new URL("@/static/images/icon-2.png", import.meta.url).href,
-    route: "/clause",
-  },
-  {
-    name: "证书",
-    icon: new URL("@/static/images/icon-4.png", import.meta.url).href,
-    route: "/cert",
-  },
-  {
-    name: "常见问题解答",
-    icon: new URL("@/static/images/icon-6.png", import.meta.url).href,
-    route: "/faqs",
-  },
-  {
-    name: "关于",
-    icon: new URL("@/static/images/icon-8.png", import.meta.url).href,
-    route: "/about",
-  },
+const shortcuts = [
+  { title: "das.home.deposit", icon: "deposit", route: "/deposit" },
+  { title: "das.home.withdraw", icon: "withdraw", route: "/withdraw" },
+  { title: "das.home.faqs", icon: "faq", route: "/faqs" },
+  { title: "das.home.activities", icon: "activity", route: "/event" },
+  { title: "das.home.terms", icon: "terms", route: "/clause" },
+  { title: "das.home.vip", icon: "vip", route: "/vips" },
+  { title: "das.home.certificate", icon: "certificate", route: "/cert" },
+  { title: "das.home.about", icon: "about", route: "/about" },
 ];
-
-
-function goTo(path) {
-  if (path == "/notifications") {
-    tradePasswordRef.value.open(2);
-  } else if (path == "/profile") {
-    tradePasswordRef.value.open(3);
-  } else {
-    router.push(path);
-  }
-}
-function toVips() {
-  router.push("/vips");
-}
-const levelList = ref([]);
-const level = async () => {
-  let res = await getLevel();
-  levelList.value = res.data;
-  levelList.value.forEach(item => {
-     if (item.descriptionEn) {
-      // 把 ● 包到带 class 的 span 里（注意：这里保留了 ●）
-      item.descriptionEn = item.descriptionEn.replace(/(●|•|&#8226;|&#9679;)/g, '<span class="small-dot">●</span>');
-    }
-  });
-};
-
-const query = reactive({
-  pageNum: 1,
-  pageSize: 10,
-});
-const noticeContent  = ref('')
-
-const getData = async () => {
-  const res = await getNoticeList(query); // 你自己的接口
-  console.log(res)
-  noticeContent.value = res.rows.length>0? res.rows[0].noticeContent :'';
-  
-
-}
-
-// 计算属性，去除所有HTML标签
-const pureNoticeContent = computed(() => {
-  return noticeContent.value.replace(/<\/?[^>]+(>|$)/g, "")
-})
-
-
-
-
-onMounted(() => {
-  level();
-  getData()
-});
+const services = [
+  {
+    title: "das.home.strategy",
+    icon: "intelligence",
+    description: "das.home.strategyText",
+  },
+  {
+    title: "das.home.creative",
+    icon: "creative",
+    description: "das.home.creativeText",
+  },
+  { title: "das.home.media", icon: "media", description: "das.home.mediaText" },
+];
+const goTo = (item) => safePush(router, item.route);
 </script>
-<style>
-.small-dot {
-  font-size: 8px;       /* 调整大小 */
-  line-height: 1;
-  vertical-align: middle;
-  display: inline-block; /* 保证可以控制尺寸/对齐 */
-  /* 如需更细微缩放也可用 transform: scale(0.8); */
+
+<style scoped>
+.home-hero {
+  min-height: 346px;
+  background: #14392c;
+  color: #f7f5ec;
+}
+.home-hero__copy {
+  padding: 32px 30px 42px;
+}
+.home-hero h1 {
+  margin: 0;
+  white-space: pre-line;
+  font-size: clamp(32px, 8.5vw, 43px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+}
+.home-hero p {
+  max-width: 360px;
+  margin: 20px 0 0;
+  color: rgba(247, 245, 236, 0.72);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.home-body {
+  background: #f7f6ee;
+  color: #17382d;
+}
+.stack {
+  padding: 20px 30px 18px;
+  border-bottom: 1px solid rgba(23, 56, 45, 0.07);
+}
+.stack > span {
+  color: #9b9b92;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+}
+.stack > div {
+  margin-top: 17px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #8a8a83;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.shortcuts {
+  margin: 24px 22px 0;
+  padding: 22px 16px 25px;
+  border-radius: 26px;
+  background: #eeede3;
+}
+.shortcuts h2 {
+  margin: 0 0 20px 6px;
+  font-size: 19px;
+}
+.shortcuts__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 23px;
+}
+.shortcuts button {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: none;
+  color: #17382d;
+  font-size: 11px;
+}
+.shortcuts button > span {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+}
+.shortcuts button b {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.what-we-do {
+  padding: 38px 30px 44px;
+}
+.what-we-do h2 {
+  margin: 0;
+  font-size: 31px;
+  letter-spacing: -0.035em;
+  font-weight: 400;
+}
+.what-we-do__intro {
+  margin: 14px 0 30px;
+  color: #777b75;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.what-we-do article {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  margin: 0 0 29px;
+}
+.what-we-do article :deep(.das-icon) {
+  width: 28px;
+  height: 28px;
+  margin-top: 4px;
+}
+.what-we-do h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+}
+.what-we-do article p {
+  margin: 0;
+  color: #797d77;
+  font-size: 14px;
+  line-height: 1.48;
 }
 </style>

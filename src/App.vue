@@ -1,13 +1,20 @@
 <template>
-  <router-view class="text-white font-normal dark:text-[#303133] text-sm w-full hide-scroll overflow-scroll" id="router-view" />
+  <router-view class="hide-scroll overflow-y-auto" id="router-view" />
 </template>
 
 <script setup>
-import { useUserStore } from '@/store/modules/user';
-import { useCommonStore } from '@/store/modules/common';
-import { useI18n } from 'vue-i18n';
-import BigNumber from 'bignumber.js';
-import { onUnmounted } from 'vue';
+import { useUserStore } from "@/store/modules/user";
+import { useCommonStore } from "@/store/modules/common";
+import { useI18n } from "vue-i18n";
+import { useLocale } from "@/util/useLocale";
+import BigNumber from "bignumber.js";
+const configuredWidth = window.g?.APP_MAX_WIDTH || "960px";
+document.documentElement.style.setProperty(
+  "--das-app-max-width",
+  /^\d+$/.test(String(configuredWidth))
+    ? `${configuredWidth}px`
+    : configuredWidth,
+);
 // 在文件顶部添加BigNumber全局配置
 BigNumber.config({
   DECIMAL_PLACES: 10, // 全局设置保留10位小数
@@ -19,11 +26,15 @@ const userStore = useUserStore();
 const commonStore = useCommonStore();
 // commonStore.getSystemConfig();
 const { locale } = useI18n();
-if (userStore.token){
+const { setLocale } = useLocale();
+if (userStore.token) {
   userStore.getUserInfo();
-} 
+}
 userStore.getZone();
-if (commonStore.lang) locale.value = commonStore.lang;
+if (commonStore.lang) {
+  locale.value = commonStore.lang;
+  setLocale(commonStore.lang);
+}
 </script>
 
 <style>
@@ -73,12 +84,10 @@ if (commonStore.lang) locale.value = commonStore.lang;
 }
 
 .box-shadow {
-  box-shadow: 0px 3px 8px 0 rgba(0, 0, 0, .16);
+  box-shadow: 0px 3px 8px 0 rgba(0, 0, 0, 0.16);
 }
 
 .hide-scroll::-webkit-scrollbar {
   display: none;
 }
-
-
 </style>

@@ -1,103 +1,108 @@
 <template>
-  <div class="container w-full bg-white min-h-[100vh]">
-    <van-nav-bar
-      :title="$t('通知')"
-      fixed
-      left-arrow
-      @click-left="onClickLeft"
-    />
-    <div class="pl-3 pr-3 mt-10 pt-5">
-      <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-        <van-list
-          v-model:loading="loading"
-          :finished="finished"
-          :finished-text="$t('没有更多了')"
-          @load="onLoad"
+  <main class="das-page notice-page">
+    <DasPageHeader title-key="das.page.notifications" />
+    <section class="notice-list">
+      <van-list
+        v-model:loading="loading"
+        :finished="finished"
+        :finished-text="$t('das.common.noMore')"
+        @load="load"
+      >
+        <button
+          v-for="item in list"
+          :key="item.id"
+          type="button"
+          @click="
+            safePush(router, { path: '/noticeDetail', query: { id: item.id } })
+          "
         >
-          <van-cell v-for="item in list" :key="item" :title="item">
-            <div
-              class="w-full mb-4 shadow flex flex-col p-3 bg-[#e8f7ec] rounded-xl"
-              @click="goDetail(item)"
-            >
-              <div class="flex justify-between">
-                <div class="text-base font-semibold text-[#333]">{{item.noticeTitle}}</div>
-              </div>
-              <div
-                class="flex text-sm text-[#666666] font-semibold items-center mt-3"
-                v-html="item.noticeContent"
-              >
-               
-              </div>
-              <div class="flex justify-between mt-3">
-                <div class="text-sm font-normal text-[#999999]">{{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}</div>
-              </div>
-            </div>
-          </van-cell>
-        </van-list>
-      </van-pull-refresh>
-    </div>
-  </div>
+          <i aria-hidden="true"></i>
+          <span
+            ><b>{{ item.noticeTitle || item.title }}</b
+            ><em>{{ item.noticeContent || item.content || item.summary }}</em
+            ><small>◷&nbsp; {{ relativeDate(item.createTime) }}</small></span
+          >
+        </button>
+      </van-list>
+    </section>
+    <p class="das-page-copyright">{{ $t("das.common.copyright") }}</p>
+  </main>
 </template>
 <script setup>
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import { getNoticeList } from "../../api/apis";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import {formatWithTimezone}  from '../../util/utils'
-import { useUserStore } from "@/store/modules/user";
-const userStore = useUserStore();
-const router = useRouter();
-const list = ref([]);
-const loading = ref(false);
-const finished = ref(false);
-const refreshing = ref(false);
-const query = reactive({
-  pageNum: 1,
-  pageSize: 10,
-});
-const onRefresh = async () => {
-  refreshing.value = true;
-  finished.value = false;
-  query.pageNum = 1;
-  list.value = [];
-  await loadData();
-  refreshing.value = false;
-};
-const onLoad = async () => {
-  if (finished.value || loading.value) return;
-
+import { safePush } from "@/utils/navigation";
+import { getNoticeList } from "@/api/apis";
+import DasPageHeader from "@/components/DasPageHeader.vue";
+const router = useRouter(),
+  list = ref([]),
+  loading = ref(false),
+  finished = ref(false),
+  q = reactive({ pageNum: 1, pageSize: 10 });
+const relativeDate = (v) =>
+  String(v || "")
+    .replace("T", " ")
+    .slice(0, 16);
+const load = async () => {
+  if (finished.value) return;
   loading.value = true;
-  await loadData();
-  loading.value = false;
-};
-const loadData = async () => {
   try {
-    const res = await getNoticeList(query); // 你自己的接口
-    console.log(res);
-    const data = res.rows;
-    if (data.length < query.pageSize) {
-      finished.value = true;
-    } else {
-      query.pageNum++;
-    }
-
-    list.value.push(...data);
-  } catch (error) {
-    console.error("加载失败", error);
-    finished.value = true; // 避免无限加载
+    const r = await getNoticeList(q);
+    list.value.push(...r.rows);
+    finished.value = r.rows.length < q.pageSize;
+    if (!finished.value) q.pageNum++;
+  } finally {
+    loading.value = false;
   }
 };
-
-const goDetail = (item) =>{
-  router.push({
-    path:'/noticeDetail',
-    query:{
-      id:item.noticeId
-    }
-  })
-}
-onMounted(() => {
-  //   getgetNoticeList();
-  onLoad();
-});
-const onClickLeft = () => history.back();
 </script>
+<style scoped>
+.notice-page {
+  min-height: 100%;
+  background: #f7f5ec;
+  color: #17382d;
+}
+.notice-list {
+  max-width: 760px;
+  margin: auto;
+  padding: 20px 30px 0;
+}
+.notice-list button {
+  width: 100%;
+  min-height: 115px;
+  padding: 22px 0;
+  display: grid;
+  grid-template-columns: 12px 1fr;
+  gap: 13px;
+  border: 0;
+  border-bottom: 1px solid #d9dcd5;
+  background: transparent;
+  color: #17382d;
+  text-align: left;
+}
+.notice-list button > i {
+  width: 7px;
+  height: 7px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #14392c;
+}
+.notice-list button > span {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.notice-list b {
+  font-size: 16px;
+}
+.notice-list em {
+  color: #808983;
+  font-size: 13px;
+  line-height: 1.5;
+  font-style: normal;
+}
+.notice-list small {
+  color: #9aa19c;
+  font-size: 11px;
+}
+</style>

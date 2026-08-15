@@ -1,64 +1,86 @@
 <template>
-  <div>
-    <van-popup
-      v-model:show="show"
-      closeable
-      position="bottom"
-      class="p-5"
-      :style="{ height: '30%' }"
-    >
-      <div class="text-[#666] font-semibold text-base pl-4 mt-10">
-        {{ $t("交易密码") }}
-      </div>
-      <div class="w-full mt-2 overflow-hidden shadow">
-        <van-field
-          v-model="tradePassword"
-          label=""
-          type="password"
-          :placeholder="$t('交易密码')"
-          label-align="top"
-        />
-      </div>
-      <div class="w-full mt-4">
-        <van-button
-          color="#007513"
-          class="w-full"
-          @click="submitTradePassword"
-          >{{ $t("提交") }}</van-button
-        >
-      </div>
-    </van-popup>
-  </div>
+  <van-popup
+    v-model:show="show"
+    round
+    closeable
+    position="bottom"
+    class="trade-popup"
+    ><form class="trade-inner" novalidate @invalid.capture.prevent @submit.prevent="submit">
+      <h2>{{ $t("das.form.enterTradePassword") }}</h2>
+      <input
+        v-model="password"
+        type="password"
+        inputmode="numeric"
+        autocomplete="off"
+      /><button type="submit">{{ $t("das.form.verify") }}</button>
+    </form></van-popup
+  >
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { checkTradePassword } from "../api/apis";
-const router = useRouter();
-const show = ref(false);
-const tradePassword = ref("");
-const type = ref(null);
-// 更符合Vue3习惯的暴露方式
-const open = async (v) => {
+import { showToast } from "vant";
+import { useI18n } from "vue-i18n";
+import { checkTradePassword } from "@/api/apis";
+import { safePush } from "@/utils/navigation";
+const router = useRouter(),
+  { t } = useI18n(),
+  show = ref(false),
+  password = ref(""),
+  type = ref();
+const open = (v) => {
   type.value = v;
   show.value = true;
 };
-
-const submitTradePassword = async () => {
-  if (!tradePassword.value) return ElMessage.error(t("请输入交易密码"));
-  let ruleForm = {
-    tradePassword: tradePassword.value,
-  };
-  let res = await checkTradePassword(ruleForm);
-  let path =  type.value ==1?'/paymentMethods':type.value == 2?"withdraw":'deposit';
-  router.push({
-    path: path,
-  });
-};
 const close = () => (show.value = false);
-
-defineExpose({
-  open,
-  close, // 新增关闭方法
-});
+const submit = async () => {
+  if (!password.value) return showToast(t("das.auth.required"));
+  const res = await checkTradePassword({ tradePassword: password.value });
+  if (res.data) sessionStorage.setItem("dasWithdrawalToken", res.data);
+  password.value = "";
+  close();
+  safePush(
+    router,
+    type.value === 1
+      ? "/paymentMethods"
+      : type.value === 2
+        ? "/withdraw"
+        : "/deposit",
+  );
+};
+defineExpose({ open, close });
 </script>
+<style scoped>
+.trade-popup {
+  width: min(100%, var(--das-app-max-width));
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f7f5ec;
+}
+.trade-inner {
+  padding: 42px 28px max(30px, env(safe-area-inset-bottom));
+  color: #17382d;
+}
+.trade-inner h2 {
+  margin: 0 0 18px;
+  text-align: center;
+}
+.trade-inner input {
+  width: 100%;
+  height: 54px;
+  padding: 0 16px;
+  border: 1px solid #d7d8d0;
+  border-radius: 14px;
+  background: white;
+}
+.trade-inner button {
+  width: 100%;
+  height: 50px;
+  margin-top: 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #14392c;
+  color: white;
+  font-weight: 700;
+}
+</style>

@@ -1,27 +1,26 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f4f4f5]">
-    
-    <div class="w-full p-6 box-border flex flex-col font-montserrat text-[#666]">
-        <van-nav-bar
-        :title="$t('收入指南')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
-    />
-     <div v-html="incomeGuideEn" class="mt-10"></div>
-    </div>
-  </div>
+  <DasContentPage
+    title-key="das.page.guide"
+    :content="content"
+    :loading="loading"
+  />
 </template>
 <script setup>
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import {getGlobalConfig} from "../../api/apis"
-const incomeGuideEn = ref('')
-const getGetGlobalConfig = async() =>{
-    let res = await getGlobalConfig();
-    incomeGuideEn.value = res.data.incomeGuideEn
-}
-onMounted(() =>{
-    getGetGlobalConfig();
-})
-const onClickLeft = () => history.back();
+import { onMounted, ref } from "vue";
+import { getContentConfig } from "@/api/apis";
+import DasContentPage from "@/components/DasContentPage.vue";
+const content = ref(""),
+  loading = ref(true);
+onMounted(async () => {
+  try {
+    const d = (await getContentConfig()).data || {};
+    content.value =
+      d.usageDescription ||
+      d.orderDescription ||
+      d.transactionDescription ||
+      "";
+  } finally {
+    loading.value = false;
+  }
+});
 </script>

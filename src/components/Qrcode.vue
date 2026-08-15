@@ -6,31 +6,39 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref,defineProps, watch } from 'vue';
-import QRCode from 'qrcode';
+import { onMounted, ref, defineProps, watch } from "vue";
+import QRCode from "qrcode";
 const qrCodeCanvas = ref(null);
 const props = defineProps({
   src: {
     type: String,
-    required: true
+    required: true,
   },
   width: {
     type: Number,
-    default: 128
-  }
+    default: 128,
+  },
 });
 
-watch(() => props.src, (newVal) => {
-  if (newVal) {
-    QRCode.toCanvas(qrCodeCanvas.value, newVal, {
-      width: props.width || 128,
-      margin: 2,
-    }, function (error) {
-      if (error) console.error(error);
-      console.log('二维码生成成功！');
-    });
-  }
-});
+watch(
+  () => props.src,
+  (newVal) => {
+    if (newVal) {
+      QRCode.toCanvas(
+        qrCodeCanvas.value,
+        newVal,
+        {
+          width: props.width || 128,
+          margin: 2,
+        },
+        function (error) {
+          if (error) console.error(error);
+          console.log("二维码生成成功！");
+        },
+      );
+    }
+  },
+);
 
 // onMounted(() => {
 //   console.log('props.src:', props.src);

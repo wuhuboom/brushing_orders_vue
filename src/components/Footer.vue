@@ -1,56 +1,108 @@
 <template>
-    <div class="w-full relative z-50">
-        <div class="h-[65px]"></div> <!-- 占位 -->
-        <div class="bar-shadow flex items-center fixed bottom-0 left-0 right-0 h-[65px] w-full bg-[#000] " style="bottom: -1px;">
-            <div v-for="menu in menus" :key="menu.title"
-                class="flex-1 flex flex-col items-center text-xs gap-1 font-light"  @click="onClickMenu(menu)">
-                <img :src="name === menu.url ? getStaticImageUrl(`${menu.icon}_h.png`) : getStaticImageUrl(`${menu.icon}.png`)"
-                    alt="" class="h-7 w-7" :class="menu.title == $t('开始')?'starting':''">
-                <span  class="leading-normal text-[10px] text-white" style="font-size: 12px;">
-                    {{ menu.title }}
-                </span>
-            </div>
-        </div>
-    </div>
+  <div class="das-footer-space" aria-hidden="true"></div>
+  <nav class="das-footer" aria-label="Primary navigation">
+    <button
+      v-for="menu in menus"
+      :key="menu.url"
+      class="das-footer__item"
+      :class="{ active: isActive(menu.url), center: menu.url === '/starting' }"
+      type="button"
+      @click="safeReplace(router, menu.url)"
+    >
+      <template v-if="menu.url === '/starting'">
+        <span class="das-footer__mark"
+          ><img src="@/static/das/wordmark-cream.png" alt=""
+        /></span>
+      </template>
+      <template v-else
+        ><img class="das-footer__badge" :src="badge(menu.url)" alt=""
+      /></template>
+      <span>{{ $t(menu.title) }}</span>
+    </button>
+  </nav>
 </template>
+
 <script setup>
-import { getStaticImageUrl } from '@/util/utils.js'
-import { ref, computed, watch } from 'vue'
-import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
-
-const router = useRouter()
-const props = defineProps({
-    name: String
-})
-const { t } = useI18n()
-const active = ref(props.name)
-const menus = computed(() => [
-    { title: t('首页'), url: '/', icon: 'home' },
-    { title: t('开始'), url: '/starting', icon: 'starting' },
-     { title: t('记录'), url: '/records', icon: 'records' },
-    // { title: t('我的'), url: '/user', icon: 'user' }
-])
-
-watch(() => props.name, (val) => {
-    active.value = val
-})
-
-function onClickMenu(menu) {
-    // console.log('onClickMenu',menu.id)
-    active.value = menu.id
-    router.push({
-        path: menu.url
-    })
-}
+import { useRoute, useRouter } from "vue-router";
+import homeActive from "@/static/das/tab-home-badge-active.png";
+import homeInactive from "@/static/das/tab-home-badge-inactive.png";
+import recordsActive from "@/static/das/tab-records-badge-active.png";
+import recordsInactive from "@/static/das/tab-records-badge-inactive.png";
+import { safeReplace } from "@/utils/navigation";
+const router = useRouter();
+const route = useRoute();
+const props = defineProps({ name: String });
+const menus = [
+  { title: "das.nav.home", url: "/" },
+  { title: "das.nav.getStarted", url: "/starting" },
+  { title: "das.nav.records", url: "/records" },
+];
+const isActive = (url) => (props.name || route.path) === url;
+const badge = (url) =>
+  url === "/"
+    ? isActive(url)
+      ? homeActive
+      : homeInactive
+    : isActive(url)
+      ? recordsActive
+      : recordsInactive;
 </script>
-<style>
-.bar-shadow {
-    box-shadow: 0px -1px 4px 0px #0000000D;
+
+<style scoped>
+.das-footer-space {
+  height: 96px;
 }
-.starting {
-    margin-top: -2.7rem;
-    width: 4rem;
-    height: 4rem;
+.das-footer {
+  position: fixed;
+  z-index: 80;
+  bottom: 0;
+  left: 50%;
+  width: min(100%, var(--das-app-max-width, 960px));
+  height: 92px;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+  padding: 7px 10px max(9px, env(safe-area-inset-bottom));
+  background: #14392c;
+  box-shadow: 0 -10px 30px rgba(20, 57, 44, 0.12);
+}
+.das-footer__item {
+  position: relative;
+  height: 77px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  border: 0;
+  background: transparent;
+  color: rgba(247, 245, 236, 0.52);
+  font-size: 11px;
+}
+.das-footer__item.active {
+  color: #fff;
+  font-weight: 700;
+}
+.das-footer__badge {
+  width: 48px;
+  height: 52px;
+  object-fit: contain;
+}
+.das-footer__mark {
+  position: absolute;
+  bottom: 28px;
+  width: 68px;
+  height: 68px;
+  padding: 8px 17px;
+  display: grid;
+  place-items: center;
+  border-radius: 50% 50% 12px 12px;
+  background: #14392c;
+}
+.das-footer__mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 </style>

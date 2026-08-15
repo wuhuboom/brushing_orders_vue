@@ -1,29 +1,23 @@
 <template>
-  <div class="w-full min-h-[100vh] bg-[#f4f4f5]">
-     <van-nav-bar
-        :title="$t('事件')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
-    />
-    <div class="w-full mt-10 p-6 box-border flex flex-col font-montserrat text-[#333]">
-      <div v-html="latestEventEn"></div>
-        
-    </div>
-  </div>
+  <DasContentPage
+    title-key="das.page.activities"
+    :content="content"
+    :fallback-image="fallback"
+    :loading="loading"
+  />
 </template>
 <script setup>
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
-import {getGlobalConfig} from "../../api/apis"
-const latestEventEn = ref('')
-const getGetGlobalConfig = async() =>{
-    let res = await getGlobalConfig();
-    latestEventEn.value = res.data.latestEventEn
-    console.log(latestEventEn.value)
-}
-onMounted(() =>{
-    getGetGlobalConfig();
-})
-
-const onClickLeft = () => history.back();
+import { onMounted, ref } from "vue";
+import { getContentConfig } from "@/api/apis";
+import DasContentPage from "@/components/DasContentPage.vue";
+import fallback from "@/static/das/Das activities.jpg";
+const content = ref("");
+const loading = ref(true);
+onMounted(async () => {
+  try {
+    content.value = (await getContentConfig()).data?.eventContent || "";
+  } finally {
+    loading.value = false;
+  }
+});
 </script>

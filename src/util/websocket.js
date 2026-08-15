@@ -11,7 +11,7 @@ class WebSocketClient {
   }
 
   _init() {
-    console.log('WebSocketClient初始化');
+    console.log("WebSocketClient初始化");
     this.baseUrl = import.meta.env.VITE_WS_URL;
     this.connections = new Map(); // 存储所有的WebSocket连接
     this.heartbeatInterval = 30000;
@@ -24,16 +24,16 @@ class WebSocketClient {
     if (!symbols) return;
 
     // 将单个symbol转换为数组形式处理
-    let symbolArray = []
+    let symbolArray = [];
     if (Array.isArray(symbols)) {
-      symbols.map(item => {
-        symbolArray.push(item.symbol)
-      })
+      symbols.map((item) => {
+        symbolArray.push(item.symbol);
+      });
     } else {
       symbolArray = [symbols];
     }
 
-    symbolArray.forEach(symbol => {
+    symbolArray.forEach((symbol) => {
       // 如果该symbol已经有连接，先关闭它
       if (this.connections.has(symbol)) {
         this.closeSymbol(symbol);
@@ -52,7 +52,7 @@ class WebSocketClient {
       heartbeatTimer: null,
       reconnectTimer: null,
       isConnected: false,
-      callback
+      callback,
     };
 
     connection.ws = new WebSocket(url);
@@ -113,7 +113,7 @@ class WebSocketClient {
   startHeartbeat(connection) {
     connection.heartbeatTimer = setInterval(() => {
       if (connection.ws && connection.isConnected) {
-        connection.ws.send('ping');
+        connection.ws.send("ping");
       }
     }, this.heartbeatInterval);
   }

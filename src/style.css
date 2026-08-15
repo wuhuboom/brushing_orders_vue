@@ -1,9 +1,9 @@
 :root {
   /* font-family: PingFangSC-Medium; */
   font-weight: 400;
-  background-color: #242424;
+  background-color: #eef3fb;
   --el-color-primary: #3d3d3d !important;
-  --el-bg-color-overlay: #F6F6F7 !important;
+  --el-bg-color-overlay: #f6f6f7 !important;
   --el-border-radius-base: 10px !important;
   --el-component-size-large: 45px !important;
   --el-text-color-regular: #303133 !important;
@@ -11,7 +11,7 @@
   --down: #f05150;
   --van-font-size-md: 24px;
   --header-me-width: 50px;
-  --main-color: #007513;
+  --main-color: #14392c;
   --header-logo-width: 150px;
 }
 
@@ -23,8 +23,8 @@
 
 .el-input__wrapper {
   box-shadow: 0 0 0 1px #e6e6e6 !important;
-  border-radius: 0!important;
-  background-color: #f9f9f9 !important;;
+  border-radius: 0 !important;
+  background-color: #f9f9f9 !important;
 }
 html {
   overflow: hidden;
@@ -38,12 +38,13 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #FFF;
+  background: #fff;
   height: 100%;
   width: 100%;
   font-weight: 400;
   font-size: 16px;
-  font-family: PingFangSC-Medium !important;
+  font-family:
+    Inter, "Helvetica Neue", Arial, "PingFang SC", sans-serif !important;
 }
 
 #app {
@@ -54,6 +55,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #eef3fb;
   /* text-align: center; */
 }
 
@@ -67,7 +69,6 @@ input {
 }
 
 .bg {
-  /* background-image: url(@/static/images/bg.jpg); */
   background-color: #f8f8f8;
 }
 
@@ -79,14 +80,12 @@ input {
 }
 
 .bg-gray {
-  background-color: hsla(0, 0%, 92.9%, .46);
+  background-color: hsla(0, 0%, 92.9%, 0.46);
 }
 
 .bg-red {
   background-color: #f05150;
 }
-
-
 
 .text-blue {
   color: #0065ff !important;
@@ -108,8 +107,6 @@ input {
   color: var(--down) !important;
 }
 
-
-
 .bg-up {
   background-color: var(--up) !important;
 }
@@ -126,12 +123,67 @@ input {
   font-weight: initial;
 }
 
-.van-nav-bar .van-icon,.van-nav-bar__title{
-  color: #000 !important;
-  font-size: 18px !important;
+.van-nav-bar .van-icon,
+.van-nav-bar__title {
+  color: #17382d !important;
+  font-size: 17px !important;
   font-weight: bold;
 }
-.van-cell,.van-cell-group {
+.van-nav-bar {
+  background: #f7f6ee !important;
+}
+.van-nav-bar::after {
+  display: none;
+}
+.van-nav-bar__content {
+  height: 58px !important;
+}
+.van-button--primary,
+.van-button[style*="007513"],
+.van-button[style*="rgb(0, 117, 19)"] {
+  border-color: #14392c !important;
+  background: #14392c !important;
+}
+.van-tabs__nav {
+  background: #f7f6ee !important;
+}
+.van-tabs__line {
+  background: #14392c !important;
+}
+.van-tab--active {
+  color: #17382d !important;
+  font-weight: 700 !important;
+}
+.van-dialog,
+.van-popup--center {
+  border-radius: 24px !important;
+}
+.van-field,
+.van-cell {
+  color: #17382d !important;
+}
+
+#router-view > .container,
+#router-view > .withdraw,
+#router-view > div[class*="bg-white"],
+#router-view > div[class*="bg-[#f4f4f5]"] {
+  width: min(100%, var(--das-app-max-width, 960px)) !important;
+  margin: 0 auto !important;
+  background: #f7f6ee !important;
+  color: #17382d !important;
+}
+#router-view .bg-\[\#e8f7ec\] {
+  background-color: #eef1e6 !important;
+}
+#router-view .bg-\[\#f4f4f5\],
+#router-view .bg-\[\#f8f8f8\] {
+  background-color: #f7f6ee !important;
+}
+#router-view .text-\[\#007513\] {
+  color: #14392c !important;
+}
+.van-cell,
+.van-cell-group {
   background: transparent !important;
 }
 .van-pull-refresh {
@@ -139,7 +191,65 @@ input {
   overflow-y: auto;
 }
 
-.pos{
-	position: inherit !important;
-	margin-top: 10px !important;
+.pos {
+  position: inherit !important;
+  margin-top: 10px !important;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.das-page {
+  width: 100%;
+  max-width: var(--das-app-max-width, 960px);
+  min-height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+.das-subpage {
+  min-height: 100%;
+  background: #f7f5ec;
+  color: #17382d;
+}
+.das-content-card {
+  margin: 0 auto;
+  padding: 34px clamp(24px, 6vw, 72px) 45px;
+  max-width: 820px;
+}
+.das-content-card__image {
+  width: 100%;
+  max-height: 390px;
+  margin-bottom: 28px;
+  border-radius: 24px;
+  object-fit: cover;
+}
+.das-rich-text {
+  font-size: 15px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.das-rich-text img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+.das-empty {
+  padding: 70px 0;
+  text-align: center;
+  color: #858d87;
+}
+.das-page-copyright {
+  margin: 20px 0 0;
+  padding: 0 20px 30px;
+  color: #9aa29c;
+  font-size: 10px;
+  text-align: center;
 }

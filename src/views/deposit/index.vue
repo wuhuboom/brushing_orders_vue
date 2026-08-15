@@ -1,144 +1,168 @@
 <template>
-  <div class="w-full bg-white min-h-[100vh] h-full">
-    <van-sticky type="primary">
-      <van-nav-bar
-        :title="$t('定金')"
-        fixed
-        left-arrow
-        @click-left="onClickLeft"
-      />
-    </van-sticky>
-
-    <div class="mt-10">
-      <van-tabs color="#007513" background="#f4f4f5" @change="swichTab" v-model:active="active">
-        <van-tab :title="$t('定金')">
-          <div class="p-4 box-border flex flex-col">
-            <div
-              class="flex flex-col justify-between p-4 box-border"
-              :style="{
-                background: `url(${bgImage}) 0 0 / 100% 100% no-repeat`,
-              }"
-            >
-              <div class="text-white opacity-70 text-sm font-semibold">
-                {{ $t("账户金额") }}
-              </div>
-              <div class="flex mt-4">
-                <div class="text-white text-3xl font-bold flex items-center">
-                  {{userInfo.balance}}
-                </div>
-                <div
-                  class="text-white text-sm font-bold flex items-center ml-2 pt-[12px]"
-                >
-                  {{ $t("美元") }}
-                </div>
-              </div>
-            </div>
+  <main class="das-page deposit-page">
+    <DasPageHeader title-key="das.page.deposit" />
+    <section class="deposit-body">
+      <div class="balance-card">
+        <b>{{ $t("das.deposit.totalBalance") }}</b
+        ><strong>{{ money(user.totalBalance || user.balance) }} USD</strong
+        ><button type="button" @click="contact">
+          {{ $t("das.deposit.topUp") }}
+        </button>
+      </div>
+      <div class="recent-title">
+        <h2>{{ $t("das.deposit.recent") }}</h2>
+        <button type="button" @click="openTransactions">
+          {{ $t("das.common.seeAll") }}
+        </button>
+      </div>
+      <van-list
+        v-model:loading="loading"
+        :finished="finished"
+        :finished-text="$t('das.common.noMore')"
+        @load="load"
+        ><article v-for="item in items" :key="item.id">
+          <i></i>
+          <div>
+            <b>{{ $t("das.deposit.deposited") }}</b
+            ><small
+              >{{ $t("das.deposit.reference") }}
+              {{ item.orderNumber || item.id }}</small
+            ><small>{{ date(item.createTime) }}</small>
           </div>
-          <div class="w-full mt-2 pl-5 pr-5">
-            <van-button color="#007513" class="w-full" @click="customer">{{
-              $t("联系客服")
-            }}</van-button>
-          </div>
-        </van-tab>
-        <van-tab :title="$t('历史')">
-          <div class="w-full px-2 pt-6 box-border flex flex-col">
-            <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-              <van-list
-                v-model:loading="loading"
-                :finished="finished"
-                :finished-text="$t('没有更多了')"
-                @load="onLoad"
-              >
-                <van-cell v-for="item in list" :key="item" :title="item">
-                  <div
-                    class="w-full mb-4 bg-[#e8f7ec] rounded-lg flex flex-col p-3"
-                  >
-                    <div class="flex justify-between">
-                      <div class="text-sm font-semibold text-[#999]">
-                        {{ item.code }}
-                      </div>
-                    </div>
-                    <div
-                      class="flex text-base text-[#000] font-semibold items-center mt-3"
-                    >
-                      {{ item.amout }}{{ $t("美元") }}
-                    </div>
-                    <div class="flex justify-between mt-3">
-                      <div class="text-sm font-normal text-[#999]">
-                        {{ formatWithTimezone(item.createTime,userStore.zoneActive.tzName)  }}
-                      </div>
-                    </div>
-                  </div>
-                </van-cell>
-              </van-list>
-            </van-pull-refresh>
-          </div>
-        </van-tab>
-      </van-tabs>
-    </div>
-    <ContactUs ref="ContactUsRef"></ContactUs>
-  </div>
+          <strong>{{ money(item.receivedAmount || item.amount) }} USD</strong>
+        </article></van-list
+      >
+      <p class="deposit-copyright">{{ $t("das.common.copyright") }}</p>
+    </section>
+  </main>
 </template>
 <script setup>
-const bgImage = new URL("@/static/images/bg-3.png", import.meta.url).href;
 import { onMounted, reactive, ref } from "vue";
-import { getDeposit,userGetInfo } from "../../api/apis";
-const active = ref(0);
-const refreshing = ref(false);
-const finished = ref(false);
-const loading = ref(false);
-import {formatWithTimezone}  from '../../util/utils'
-import { useUserStore } from "@/store/modules/user";
-const userStore = useUserStore();
-const ContactUsRef = ref(null);
-const userInfo = ref({})
-const swichTab = () => {
-  if (active.value == 1) {
-    onRefresh();
-  }
-};
-const list = ref([]);
-const query = reactive({
-  pageNum: 1,
-  pageSize: 10,
-});
-const onRefresh = async () => {
-  refreshing.value = true;
-  finished.value = false;
-  query.pageNum = 1;
-  list.value = [];
-  await loadData();
-  refreshing.value = false;
-};
-const onLoad = async () => {
-  if (finished.value || loading.value) return;
-  loading.value = true;
-  await loadData();
-  loading.value = false;
-};
-const loadData = async () => {
-  try {
-    let res = await getDeposit(query);
-    const data = res.rows;
-    if (data.length < query.pageSize) {
-      finished.value = true;
-    } else {
-      query.pageNum++;
+import { useRouter } from "vue-router";
+import { getDeposit, userGetInfo } from "@/api/apis";
+import DasPageHeader from "@/components/DasPageHeader.vue";
+import { safePush } from "@/utils/navigation";
+const router = useRouter(),
+  user = ref({}),
+  items = ref([]),
+  loading = ref(false),
+  finished = ref(false),
+  query = reactive({ pageNum: 1, pageSize: 10 });
+const money = (v) =>
+    Number(v || 0).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }),
+  date = (v) =>
+    String(v || "")
+      .replace("T", " | ")
+      .slice(0, 19),
+  contact = () => safePush(router, "/contact"),
+  openTransactions = () => safePush(router, "/transactionActivity"),
+  load = async () => {
+    if (finished.value) return;
+    loading.value = true;
+    try {
+      const r = await getDeposit(query),
+        rows = r.rows || [];
+      items.value.push(...rows);
+      finished.value = rows.length < query.pageSize;
+      if (!finished.value) query.pageNum++;
+    } finally {
+      loading.value = false;
     }
-
-    list.value.push(...data);
-  } catch (error) {
-    console.error("加载失败", error);
-    finished.value = true; // 避免无限加载
-  }
-};
-const customer = () => {
-  ContactUsRef.value.open();
-};
-onMounted(() => {
-  userGetInfo().then((res) => {
-    userInfo.value = res.data;
-  });
-});
-const onClickLeft = () => history.back();
+  };
+onMounted(async () => (user.value = (await userGetInfo()).data || {}));
 </script>
+<style scoped>
+.deposit-page {
+  min-height: 100%;
+  background: #f7f5ec;
+  color: #17382d;
+}
+.deposit-body {
+  max-width: 760px;
+  margin: auto;
+  padding: 20px 28px 70px;
+}
+.balance-card {
+  min-height: 210px;
+  padding: 28px;
+  border-radius: 22px;
+  background: #14392c;
+  color: #f7f5ec;
+}
+.balance-card b {
+  font-size: 14px;
+}
+.balance-card strong {
+  display: block;
+  margin: 25px 0 20px;
+  font-size: 32px;
+  font-weight: 500;
+}
+.balance-card button {
+  float: right;
+  height: 43px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 999px;
+  background: #f7f5ec;
+  color: #17382d;
+  font-weight: 700;
+}
+.recent-title {
+  margin: 27px 0 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.recent-title h2 {
+  margin: 0;
+  font-size: 19px;
+}
+.recent-title button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #768078;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.deposit-body article {
+  min-height: 104px;
+  padding: 19px 4px;
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid #d9dcd5;
+}
+.deposit-body article i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #14392c;
+}
+.deposit-body article div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.deposit-body article div b {
+  font-size: 15px;
+}
+.deposit-body article small {
+  color: #89918c;
+  font-size: 11px;
+}
+.deposit-body article > strong {
+  font-size: 14px;
+}
+.deposit-copyright {
+  margin: 28px 0 0;
+  text-align: center;
+  color: #9ba19c;
+  font-size: 10px;
+}
+</style>
