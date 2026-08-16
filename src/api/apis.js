@@ -266,6 +266,7 @@ export const register = (params) =>
       phoneNumber: params.phoneNumber ?? params.phone,
       gender: String(params.gender ?? params.sex ?? ""),
       inviteCode: params.inviteCode,
+      email: params.email ?? "",
     },
     requestConfig({ loading: true, showMsg: true }),
   );

@@ -84,6 +84,16 @@
             @input="sanitizeBirthday"
         /></label> -->
 
+        <label
+          ><span>{{ $t("das.auth.email") }}</span
+          ><input
+            v-model.trim="form.email"
+            type="text"
+            inputmode="email"
+            autocomplete="email"
+            :placeholder="$t('das.auth.optional')"
+        /></label>
+
         <div class="register-field gender-group required">
           <div class="gender-field">
             <span class="gender-field__title">{{ $t("das.auth.gender") }}</span>
@@ -125,11 +135,12 @@
             inputmode="numeric"
             autocomplete="new-password"
             placeholder="••••••••" /></label
-        ><label
+        ><label class="required"
           ><span>{{ $t("das.auth.inviteCode") }}</span
           ><input
             v-model.trim="form.inviteCode"
-            :placeholder="$t('das.auth.optional')"
+            aria-required="true"
+            :placeholder="$t('das.auth.inviteCode')"
         /></label>
       </div>
       <label class="register-agree"
@@ -195,6 +206,7 @@ const router = useRouter(),
     tradePassword: "",
     gender: "",
     inviteCode: "",
+    email: "",
   });
 
 const selectedCountry = ref({
@@ -354,6 +366,8 @@ const isValidBirthday = (value) => {
     date.getDate() === day
   );
 };
+const emailReg = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 const submit = async () => {
   const phone = localPhoneDigits(localPhone.value);
   if (!isValidPhone(phone, selectedCountry.value.dial))
@@ -366,6 +380,9 @@ const submit = async () => {
     !form.tradePassword
   )
     return showToast(t("das.auth.required"));
+  if (form.email && !emailReg.test(form.email))
+    return showToast(t("das.auth.invalidEmail"));
+  if (!form.inviteCode) return showToast(t("das.auth.inviteRequired"));
   if (birthday.value && !isValidBirthday(birthday.value))
     return showToast(t("das.auth.invalidBirthday"));
   if (form.password !== confirmPassword.value)
