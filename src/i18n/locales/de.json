@@ -22,6 +22,10 @@
       "contact": "Kontakt"
     },
     "auth": {
+      "welcomeLead": "Verstehen Sie Ihre",
+      "welcomeAccent": "Zielgruppe®",
+      "welcomeCopy": "Der Partner für Zielgruppenentwicklung und Customer Intelligence für Einzelhandels- und E-Commerce-Unternehmen mit einem Umsatz von 15 bis über 100 Millionen US-Dollar.",
+      "createAccount": "Konto erstellen",
       "signIn": "ANMELDEN",
       "signInLead": "Ihre besten Kundengruppen",
       "signInAccent": "liegen direkt vor Ihnen.",

@@ -22,6 +22,10 @@
       "contact": "Contacto"
     },
     "auth": {
+      "welcomeLead": "Conoce a tu",
+      "welcomeAccent": "audiencia®",
+      "welcomeCopy": "El socio de desarrollo de audiencias e inteligencia de clientes para empresas minoristas y de comercio electrónico con ingresos de entre 15 y más de 100 millones de dólares.",
+      "createAccount": "Crear una cuenta",
       "signIn": "INICIAR SESIÓN",
       "signInLead": "Tus mejores segmentos de clientes",
       "signInAccent": "están a simple vista.",

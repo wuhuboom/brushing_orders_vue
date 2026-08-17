@@ -22,6 +22,10 @@
       "contact": "Contact"
     },
     "auth": {
+      "welcomeLead": "Comprenez votre",
+      "welcomeAccent": "audience®",
+      "welcomeCopy": "Le partenaire en développement d’audience et intelligence client pour les entreprises de vente au détail et de e-commerce réalisant entre 15 et plus de 100 millions de dollars de chiffre d’affaires.",
+      "createAccount": "Créer un compte",
       "signIn": "CONNEXION",
       "signInLead": "Vos meilleurs segments clients",
       "signInAccent": "sont sous vos yeux.",

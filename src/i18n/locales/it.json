@@ -22,6 +22,10 @@
       "contact": "Contatti"
     },
     "auth": {
+      "welcomeLead": "Comprendi il tuo",
+      "welcomeAccent": "pubblico®",
+      "welcomeCopy": "Il partner per lo sviluppo del pubblico e la customer intelligence per aziende retail ed e-commerce con ricavi da 15 a oltre 100 milioni di dollari.",
+      "createAccount": "Crea un account",
       "signIn": "ACCEDI",
       "signInLead": "I tuoi migliori segmenti di clienti",
       "signInAccent": "sono sotto i tuoi occhi.",

@@ -22,6 +22,12 @@ const languageMap = {
   ko: "ko_KR",
   ja: "ja_JP",
   id: "id_ID",
+  sv: "sv_SE",
+  no: "no_NO",
+  ru: "ru_RU",
+  hu: "hu_HU",
+  pl: "pl_PL",
+  sl: "sk_SK",
 };
 
 let loading;

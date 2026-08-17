@@ -8,6 +8,12 @@ import ko from "./locales/ko.json";
 import ja from "./locales/ja.json";
 import it from "./locales/it.json";
 import id from "./locales/id.json";
+import sv from "./locales/sv.json";
+import no from "./locales/no.json";
+import ru from "./locales/ru.json";
+import hu from "./locales/hu.json";
+import pl from "./locales/pl.json";
+import sl from "./locales/sl.json";
 
 const messages = {
   en,
@@ -19,6 +25,12 @@ const messages = {
   ja,
   it,
   id,
+  sv,
+  no,
+  ru,
+  hu,
+  pl,
+  sl,
 };
 
 const i18n = createI18n({

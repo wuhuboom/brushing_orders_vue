@@ -24,16 +24,45 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
-import { getCustomerService } from "@/api/apis";
+import { getCustomerService, userGetInfo } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import { useUserStore } from "@/store/modules/user";
+import {
+  buildCustomerServiceUrl,
+  customerServiceVisitor,
+} from "@/utils/customerServiceUrl";
+
+const userStore = useUserStore();
 const channels = ref([]),
   loading = ref(true);
+
 const openChannel = (url) => {
-  if (url) window.open(url, "_blank", "noopener,noreferrer");
+  const target = buildCustomerServiceUrl(url, {
+    isLoggedIn: Boolean(userStore.token),
+    user: userStore.userInfo,
+  });
+  if (target) window.open(target, "_blank", "noopener,noreferrer");
 };
+
+const ensureLoggedInUser = async () => {
+  const visitor = customerServiceVisitor(userStore.userInfo);
+  if (!userStore.token || (visitor.id !== undefined && visitor.name)) return;
+
+  try {
+    const user = (await userGetInfo()).data || {};
+    userStore.setUserInfo(user);
+  } catch (_) {
+    // 客服列表仍可使用；用户信息缺失时保持原始客服 URL。
+  }
+};
+
 onMounted(async () => {
   try {
-    channels.value = (await getCustomerService()).data || [];
+    const [response] = await Promise.all([
+      getCustomerService(),
+      ensureLoggedInUser(),
+    ]);
+    channels.value = response.data || [];
   } finally {
     loading.value = false;
   }
