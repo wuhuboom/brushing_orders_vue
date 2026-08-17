@@ -13,7 +13,9 @@
         :class="{ active: commonStore.clientLang === item.code }"
         @click="change(item.code)"
       >
-        <span>{{ item.name }}</span
+        <span class="language-label">
+          <span class="language-flag" aria-hidden="true">{{ item.flag }}</span>
+          <span>{{ item.name }}</span></span
         ><b>{{ commonStore.clientLang === item.code ? "✓" : "" }}</b>
       </button>
     </div></van-popup
@@ -70,6 +72,15 @@ defineExpose({ open, close });
 }
 .language-inner button.active {
   font-weight: 800;
+}
+.language-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+}
+.language-flag {
+  font-size: 21px;
+  line-height: 1;
 }
 .language-inner b {
   color: #d88472;

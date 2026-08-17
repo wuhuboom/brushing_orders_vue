@@ -2,22 +2,23 @@
   <main class="das-page vip-page">
     <DasPageHeader title-key="das.page.vip" />
     <section class="vip-list">
-      <article v-for="(item, index) in levels" :key="item.id" class="vip-card">
+      <article
+        v-for="(item, index) in displayLevels"
+        :key="item.id"
+        class="vip-card"
+      >
         <img :src="levelIcon(item, index)" alt="" />
         <div class="vip-card__copy">
           <h2>{{ item.name || `VIP ${item.level || index + 1}` }}</h2>
-          <strong>{{ range(item, index) }}</strong>
-          <ul>
-            <li>
-              {{ item.orderCountPerDay || item.orderCount || 0 }}
-              {{ $t("das.vip.dataPerSet") }}
-            </li>
-            <li>{{ $t("das.vip.profitTransaction") }} {{ rate(item) }}%</li>
-            <li>{{ mergedRate(item) }}% {{ $t("das.vip.mergedProfit") }}</li>
-            <li>
-              {{ item.taskCountPerDay || 2 }} {{ $t("das.vip.tasksPerDay") }}
-            </li>
-          </ul>
+          <strong>{{ item.metrics.price }}</strong>
+          <div v-if="item.descriptionLines.length" class="vip-description">
+            <p
+              v-for="(line, lineIndex) in item.descriptionLines"
+              :key="`${item.id}-description-${lineIndex}`"
+            >
+              {{ line }}
+            </p>
+          </div>
         </div>
         <b v-if="isCurrent(item)" class="current-badge">{{
           $t("das.vip.current")
@@ -29,20 +30,24 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { getLevel, userGetInfo } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import {
+  getMemberLevelDescriptionLines,
+  getMemberLevelMetrics,
+} from "@/utils/memberLevel";
 
 const levels = ref([]);
 const user = ref({});
 const base = window.g?.VITE_API_IMG_URL || "";
-const fallbackRanges = [
-  "100–499 USD",
-  "500–1,599 USD",
-  "1,600–5,499 USD",
-  "5,500–9,999 USD",
-  "10,000 USD or above",
-];
+const displayLevels = computed(() =>
+  levels.value.map((level) => ({
+    ...level,
+    metrics: getMemberLevelMetrics(level),
+    descriptionLines: getMemberLevelDescriptionLines(level.description),
+  })),
+);
 const levelColors = ["#e9792b", "#65a6d3", "#e4b500", "#e72d60", "#7032cf"];
 const isCurrent = (item) =>
   String(user.value.levelId ?? user.value.vipId) ===
@@ -53,16 +58,6 @@ const medal = (color) =>
   `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 78"><path fill="${color}" d="M16 45 12 76l20-11 20 11-4-31z"/><circle cx="32" cy="31" r="25" fill="${color}"/><circle cx="32" cy="31" r="19" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="3"/><path fill="#fff" d="m32 18 4 8 9 1-6 7 2 9-9-5-9 5 2-9-6-7 9-1z"/></svg>`)}`;
 const levelIcon = (item, index) =>
   item.icon ? image(item.icon) : medal(levelColors[index % levelColors.length]);
-const range = (item, index) =>
-  item.price
-    ? `${Number(item.price).toLocaleString()} USD`
-    : fallbackRanges[index] ||
-      `${Number(item.minBalance || 0).toLocaleString()} USD`;
-const rate = (item) => Number(item.minCommissionRate ?? 0).toFixed(1);
-const mergedRate = (item) =>
-  Number(
-    item.maxContinuousCommissionRate ?? item.maxCommissionRate ?? 0,
-  ).toFixed(0);
 onMounted(async () => {
   try {
     levels.value = (await getLevel()).data || [];
@@ -108,17 +103,14 @@ onMounted(async () => {
 .vip-card strong {
   font-size: 16px;
 }
-.vip-card ul {
+.vip-description {
   margin: 16px 0 0;
-  padding: 0;
-  list-style: none;
   color: #87908a;
   font-size: 14px;
   line-height: 1.7;
 }
-.vip-card li::before {
-  content: "·";
-  margin-right: 8px;
+.vip-description p {
+  margin: 0;
 }
 .current-badge {
   position: absolute;

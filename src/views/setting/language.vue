@@ -8,7 +8,10 @@
         :class="{ active: selected === item.code }"
         @click="selected = item.code"
       >
-        {{ item.name }}</button
+        <span class="language-option">
+          <span class="language-flag" aria-hidden="true">{{ item.flag }}</span>
+          <span>{{ item.name }}</span>
+        </span></button
       ><button class="confirm" @click="confirm">
         {{ $t("das.common.confirm") }}
       </button>
@@ -58,6 +61,15 @@ const commonStore = useCommonStore(),
   background: #fff;
   color: #17382d;
   font-weight: 800;
+}
+.language-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+}
+.language-flag {
+  font-size: 21px;
+  line-height: 1;
 }
 .language-body button.active,
 .language-body .confirm {

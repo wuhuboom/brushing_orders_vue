@@ -25,6 +25,8 @@ import { useUserStore } from "@/store/modules/user";
 import { updateAvatar, userGetInfo } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
 import avatarFallback from "@/static/das/avatar-profile-composed.png";
+import femaleAvatarFallback from "@/static/das/avatar-profile-composed-female.png";
+import { defaultAvatarForUser } from "@/utils/avatar";
 import { safeBack } from "@/utils/navigation";
 const base = window.g?.VITE_API_IMG_URL || import.meta.env.VITE_API_IMG_URL || "";
 const router = useRouter(),
@@ -55,14 +57,26 @@ const save = async () => {
 onMounted(async () => {
   try {
     const u = (await userGetInfo()).data || {};
+    const defaultAvatar = defaultAvatarForUser(u, {
+      male: avatarFallback,
+      female: femaleAvatarFallback,
+    });
     const url = u.avatar
       ? /^https?:/i.test(u.avatar)
         ? u.avatar
         : `${base}${u.avatar}`
-      : avatarFallback;
+      : defaultAvatar;
     files.value = [{ url, isImage: true }];
   } catch (_) {
-    files.value = [{ url: avatarFallback, isImage: true }];
+    files.value = [
+      {
+        url: defaultAvatarForUser(userStore.userInfo, {
+          male: avatarFallback,
+          female: femaleAvatarFallback,
+        }),
+        isImage: true,
+      },
+    ];
   }
 });
 </script>

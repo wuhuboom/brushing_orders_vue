@@ -138,7 +138,9 @@ import DasIcon from "@/components/DasIcon.vue";
 import WithdrawalPasswordDialog from "@/components/WithdrawalPasswordDialog.vue";
 import { setWithdrawalCredential } from "@/utils/withdrawalCredential";
 import { safePush, safeReplace } from "@/utils/navigation";
+import { defaultAvatarForUser } from "@/utils/avatar";
 import avatarFallback from "@/static/das/avatar-profile-composed.png";
+import femaleAvatarFallback from "@/static/das/avatar-profile-composed-female.png";
 
 const router = useRouter();
 const { t: tCopy } = useI18n();
@@ -149,6 +151,12 @@ const avatarFailed = ref(false);
 const withdrawalPasswordDialog = ref(null);
 
 const avatarPath = computed(() => String(userInfo.value.avatar ?? "").trim());
+const defaultAvatar = computed(() =>
+  defaultAvatarForUser(userInfo.value, {
+    male: avatarFallback,
+    female: femaleAvatarFallback,
+  }),
+);
 const hasCustomAvatar = computed(() => {
   const path = avatarPath.value;
   return Boolean(
@@ -160,7 +168,7 @@ const hasCustomAvatar = computed(() => {
 const avatar = computed(() => {
   const path = avatarPath.value;
   if (!hasCustomAvatar.value) {
-    return avatarFallback;
+    return defaultAvatar.value;
   }
   return /^https?:/i.test(path) ? path : `${base}${path}`;
 });
