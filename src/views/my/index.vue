@@ -31,9 +31,8 @@
           type="button"
           @click="safePush(router, '/profile')"
         >
-          <img
+          <ProfileAvatar
             :src="avatar"
-            :class="{ 'is-custom-avatar': hasCustomAvatar }"
             alt=""
             @error="avatarFailed = true"
           />
@@ -135,12 +134,13 @@ import { useI18n } from "vue-i18n";
 import { useUserStore } from "@/store/modules/user";
 import { userGetInfo } from "@/api/apis";
 import DasIcon from "@/components/DasIcon.vue";
+import ProfileAvatar from "@/components/ProfileAvatar.vue";
 import WithdrawalPasswordDialog from "@/components/WithdrawalPasswordDialog.vue";
 import { setWithdrawalCredential } from "@/utils/withdrawalCredential";
 import { safePush, safeReplace } from "@/utils/navigation";
 import { defaultAvatarForUser } from "@/utils/avatar";
-import avatarFallback from "@/static/das/avatar-profile-composed.png";
-import femaleAvatarFallback from "@/static/das/avatar-profile-composed-female.png";
+import avatarFallback from "@/static/das/avatar-profile-raw.png";
+import femaleAvatarFallback from "@/static/das/avatar-profile-raw-female.png";
 
 const router = useRouter();
 const { t: tCopy } = useI18n();
@@ -445,14 +445,6 @@ onMounted(async () => {
   border-radius: 50%;
   background: transparent;
   filter: drop-shadow(0 10px 17px rgba(8, 37, 27, 0.18));
-}
-.profile-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.profile-avatar img.is-custom-avatar {
-  border-radius: 50%;
 }
 .edit-avatar {
   margin-top: 11px;

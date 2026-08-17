@@ -104,6 +104,11 @@
       </section>
       <p class="das-copyright">{{ $t("das.common.copyright") }}</p>
     </div>
+    <BonusDialog
+      :show="bonusVisible"
+      :bonus="bonus"
+      @close="closeBonus"
+    />
     <Footer name="/starting" />
   </main>
 </template>
@@ -123,7 +128,9 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
 import DasIcon from "@/components/DasIcon.vue";
 import DasImagePlaceholder from "@/components/DasImagePlaceholder.vue";
+import BonusDialog from "@/components/BonusDialog.vue";
 import { safePush } from "@/utils/navigation";
+import { getOrderErrorMessage } from "@/utils/orderCreate";
 
 const router = useRouter();
 const { t } = useI18n();
@@ -136,6 +143,8 @@ const orderCount = ref(40);
 const current = ref(0);
 const heroMotion = ref(null);
 const dataTransition = ref(false);
+const bonus = ref({});
+const bonusVisible = ref(false);
 let refreshTimer;
 let carouselTimer;
 let dataTransitionTimer;
@@ -350,6 +359,11 @@ const openOrderDetails = (order) => {
   safePush(router, { path: "/productInfo", query: { id: order.id } });
 };
 
+const closeBonus = () => {
+  bonusVisible.value = false;
+  bonus.value = {};
+};
+
 const handleClick = async () => {
   showLoadingToast({
     message: t("das.started.creating"),
@@ -358,8 +372,13 @@ const handleClick = async () => {
   });
   try {
     const res = await createOrder();
-    const order = res.data || {};
     closeToast();
+    if (res.resultType === "BONUS") {
+      bonus.value = res.data || {};
+      bonusVisible.value = true;
+      return;
+    }
+    const order = res.data || {};
     showToast(t("das.started.created"));
     openOrderDetails(order);
   } catch (error) {
@@ -368,7 +387,7 @@ const handleClick = async () => {
       openOrderDetails(error.data);
       return;
     }
-    showToast(error?.msg || error?.message || t("das.started.unableCreate"));
+    showToast(getOrderErrorMessage(t, error, "das.started.unableCreate"));
   }
 };
 

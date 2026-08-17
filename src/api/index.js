@@ -5,6 +5,7 @@ import { useUserStore } from "@/store/modules/user";
 import { useCommonStore } from "@/store/modules/common";
 import { errorMessages } from "./errorCodeMap";
 import i18n from "@/i18n/index.js";
+import { normalizeHttpError } from "@/utils/apiError";
 
 const runtimeConfig = window.g || {};
 const api = axios.create({
@@ -73,17 +74,20 @@ api.interceptors.response.use(
     return Promise.reject(result);
   },
   (error) => {
+    const normalizedError = normalizeHttpError(error);
     if (error.config?.loading) closeLoading();
     if (error.response?.status === 401) useUserStore(pinia).logout(false);
     if (error.config?.showMsg) {
+      const key = errorMessages[normalizedError?.code];
       ElMessage.error(
-        error.response?.data?.msg ||
-          error.response?.data?.message ||
+        (key && i18n.global.t(key)) ||
+          normalizedError?.msg ||
+          normalizedError?.message ||
           error.message ||
           i18n.global.t("das.common.requestFailed"),
       );
     }
-    return Promise.reject(error);
+    return Promise.reject(normalizedError);
   },
 );
 

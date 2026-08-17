@@ -1,4 +1,5 @@
 import api from "@/api/index.js";
+import { parseCreateOrderResponse } from "@/utils/orderCreate";
 
 const requestConfig = (overrides = {}) => ({
   loading: false,
@@ -373,9 +374,10 @@ export const createOrder = () =>
       null,
       requestConfig({ headers: { "Idempotency-Key": createRequestId() } }),
     )
-    .then((response) =>
-      withData(response, normalizeGoods(unwrapData(response) || {})),
-    );
+    .then((response) => ({
+      ...response,
+      ...parseCreateOrderResponse(response, normalizeGoods),
+    }));
 
 export const submitOrder = (id) =>
   api.post(`/order/${id}/submit`, null, requestConfig({ showMsg: true }));

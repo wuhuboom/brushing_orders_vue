@@ -14,6 +14,7 @@ const koreanNamespaces = [
   "records",
   "product",
   "started",
+  "orderErrors",
   "contact",
   "deposit",
   "transaction",

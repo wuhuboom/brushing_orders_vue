@@ -58,46 +58,15 @@ import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { userGetInfo } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import { genderForUser } from "@/utils/avatar";
 import { safePush } from "@/utils/navigation";
 const router = useRouter(),
   { t } = useI18n(),
   user = ref({});
 const gender = computed(() => {
-  const label =
-    user.value.genderLabel ?? user.value.genderName ?? user.value.sexName;
-  if (label !== undefined && label !== null && label !== "") {
-    const normalized = String(label).trim().toLowerCase();
-    if (["male", "m", "man", "男"].includes(normalized)) {
-      return t("das.auth.male");
-    }
-    if (["female", "f", "woman", "女"].includes(normalized)) {
-      return t("das.auth.female");
-    }
-    return String(label);
-  }
-
-  const rawGender = user.value.rawGender;
-  if (rawGender !== undefined && rawGender !== null && rawGender !== "") {
-    const normalized = String(rawGender).trim().toLowerCase();
-    if (["0", "1", "male", "m", "man", "男"].includes(normalized)) {
-      return t("das.auth.male");
-    }
-    if (["2", "female", "f", "woman", "女"].includes(normalized)) {
-      return t("das.auth.female");
-    }
-  }
-
-  const rawSex = user.value.rawSex ?? user.value.sex;
-  if (rawSex !== undefined && rawSex !== null && rawSex !== "") {
-    const normalized = String(rawSex).trim().toLowerCase();
-    if (["0", "male", "m", "man", "男"].includes(normalized)) {
-      return t("das.auth.male");
-    }
-    if (["1", "2", "female", "f", "woman", "女"].includes(normalized)) {
-      return t("das.auth.female");
-    }
-  }
-
+  const normalized = genderForUser(user.value);
+  if (normalized === "male") return t("das.auth.male");
+  if (normalized === "female") return t("das.auth.female");
   return "—";
 });
 onMounted(async () => (user.value = (await userGetInfo()).data || {}));
