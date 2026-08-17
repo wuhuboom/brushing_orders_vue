@@ -146,7 +146,7 @@
       <label class="register-agree"
         ><input v-model="agreed" type="checkbox" /><span
           >{{ $t("das.auth.agree") }}
-          <button type="button" @click="safePush(router, '/tc')">
+          <button type="button" @click="openTerms">
             {{ $t("das.auth.terms") }}
           </button></span
         ></label
@@ -161,7 +161,7 @@
       </p>
       <p class="register-legal">
         {{ $t("das.auth.signupAgreementPrefix") }}
-        <button type="button" @click="safePush(router, '/tc')">
+        <button type="button" @click="openTerms">
           {{ $t("das.auth.terms") }}
         </button>
       </p>
@@ -188,6 +188,15 @@ import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { showToast } from "vant";
 import { register } from "@/api/apis";
+import { useRegistrationDraft } from "@/composables/useRegistrationDraft";
+import {
+  PHONE_COUNTRIES,
+  formatPhoneNumber,
+  getPhoneCountry,
+  getPhoneRule,
+  isValidPhone,
+  localPhoneDigits,
+} from "@/config/phone";
 import { safePush, safeReplace } from "@/utils/navigation";
 
 const router = useRouter(),
@@ -209,95 +218,40 @@ const router = useRouter(),
     email: "",
   });
 
-const selectedCountry = ref({
-  name: "Canada",
-  dial: "1",
-  flag: "https://flagcdn.com/w40/ca.png",
-});
+const { saveDraft, takeDraft, clearDraft } = useRegistrationDraft();
 
-const allCountryList = ref([
-  { name: "China", dial: "86", flag: "https://flagcdn.com/w40/cn.png" },
-  { name: "Japan", dial: "81", flag: "https://flagcdn.com/w40/jp.png" },
-  { name: "South Korea", dial: "82", flag: "https://flagcdn.com/w40/kr.png" },
-  { name: "Thailand", dial: "66", flag: "https://flagcdn.com/w40/th.png" },
-  { name: "Singapore", dial: "65", flag: "https://flagcdn.com/w40/sg.png" },
-  { name: "Malaysia", dial: "60", flag: "https://flagcdn.com/w40/my.png" },
-  { name: "Vietnam", dial: "84", flag: "https://flagcdn.com/w40/vn.png" },
-  { name: "Indonesia", dial: "62", flag: "https://flagcdn.com/w40/id.png" },
-  { name: "Philippines", dial: "63", flag: "https://flagcdn.com/w40/ph.png" },
-  { name: "India", dial: "91", flag: "https://flagcdn.com/w40/in.png" },
-  { name: "Pakistan", dial: "92", flag: "https://flagcdn.com/w40/pk.png" },
-  { name: "United Arab Emirates", dial: "971", flag: "https://flagcdn.com/w40/ae.png" },
-  { name: "Saudi Arabia", dial: "966", flag: "https://flagcdn.com/w40/sa.png" },
-  { name: "Turkey", dial: "90", flag: "https://flagcdn.com/w40/tr.png" },
-  { name: "Israel", dial: "972", flag: "https://flagcdn.com/w40/il.png" },
-  { name: "United Kingdom", dial: "44", flag: "https://flagcdn.com/w40/gb.png" },
-  { name: "Germany", dial: "49", flag: "https://flagcdn.com/w40/de.png" },
-  { name: "France", dial: "33", flag: "https://flagcdn.com/w40/fr.png" },
-  { name: "Italy", dial: "39", flag: "https://flagcdn.com/w40/it.png" },
-  { name: "Spain", dial: "34", flag: "https://flagcdn.com/w40/es.png" },
-  { name: "Portugal", dial: "351", flag: "https://flagcdn.com/w40/pt.png" },
-  { name: "Russia", dial: "7", flag: "https://flagcdn.com/w40/ru.png" },
-  { name: "Malta", dial: "356", flag: "https://flagcdn.com/w40/mt.png" },
-  { name: "Mali", dial: "223", flag: "https://flagcdn.com/w40/ml.png" },
-  { name: "Mauritania (موريتانيا)", dial: "222", flag: "https://flagcdn.com/w40/mr.png" },
-  { name: "Mauritius (Moris)", dial: "230", flag: "https://flagcdn.com/w40/mu.png" },
-  { name: "Mayotte", dial: "262", flag: "https://flagcdn.com/w40/yt.png" },
-  { name: "Marshall Islands", dial: "692", flag: "https://flagcdn.com/w40/mh.png" },
-  { name: "Martinique", dial: "596", flag: "https://flagcdn.com/w40/mq.png" },
-  { name: "Australia", dial: "61", flag: "https://flagcdn.com/w40/au.png" },
-  { name: "New Zealand", dial: "64", flag: "https://flagcdn.com/w40/nz.png" },
-  { name: "United States", dial: "1", flag: "https://flagcdn.com/w40/us.png" },
-  { name: "Canada", dial: "1", flag: "https://flagcdn.com/w40/ca.png" },
-  { name: "Brazil", dial: "55", flag: "https://flagcdn.com/w40/br.png" },
-  { name: "Mexico", dial: "52", flag: "https://flagcdn.com/w40/mx.png" },
-  { name: "Argentina", dial: "54", flag: "https://flagcdn.com/w40/ar.png" },
-  { name: "Chile", dial: "56", flag: "https://flagcdn.com/w40/cl.png" },
-  { name: "Colombia", dial: "57", flag: "https://flagcdn.com/w40/co.png" },
-]);
+const selectedCountry = ref(getPhoneCountry(window.g?.DEFAULT_PHONE_COUNTRY));
+const allCountryList = PHONE_COUNTRIES;
 
-const phoneRules = {
-  1: { pattern: "(###) ###-####", min: 10, max: 10 },
-  7: { pattern: "(###) ###-##-##", min: 10, max: 10 },
-  33: { pattern: "# ## ## ## ##", min: 9, max: 9 },
-  34: { pattern: "### ### ###", min: 9, max: 9 },
-  39: { pattern: "### ### ####", min: 9, max: 10 },
-  44: { pattern: "#### ### ####", min: 10, max: 10 },
-  49: { pattern: "### #### ####", min: 10, max: 11 },
-  52: { pattern: "### ### ####", min: 10, max: 10 },
-  54: { pattern: "## ####-####", min: 10, max: 10 },
-  55: { pattern: "(##) #####-####", min: 10, max: 11 },
-  56: { pattern: "# #### ####", min: 9, max: 9 },
-  57: { pattern: "### ### ####", min: 10, max: 10 },
-  60: { pattern: "##-####-####", min: 9, max: 10 },
-  61: { pattern: "# #### ####", min: 9, max: 9 },
-  62: { pattern: "###-####-#####", min: 9, max: 12 },
-  63: { pattern: "###-###-####", min: 10, max: 10 },
-  64: { pattern: "## ### ####", min: 8, max: 9 },
-  65: { pattern: "#### ####", min: 8, max: 8 },
-  66: { pattern: "##-###-####", min: 9, max: 9 },
-  81: { pattern: "##-####-####", min: 9, max: 10 },
-  82: { pattern: "##-####-####", min: 9, max: 10 },
-  84: { pattern: "##-###-####", min: 9, max: 9 },
-  86: { pattern: "### #### ####", min: 11, max: 11 },
-  90: { pattern: "### ### ## ##", min: 10, max: 10 },
-  91: { pattern: "#####-#####", min: 10, max: 10 },
-  92: { pattern: "###-#######", min: 10, max: 10 },
-  222: { pattern: "## ## ## ##", min: 8, max: 8 },
-  223: { pattern: "## ## ## ##", min: 8, max: 8 },
-  230: { pattern: "#### ####", min: 8, max: 8 },
-  262: { pattern: "### ## ## ##", min: 9, max: 9 },
-  351: { pattern: "### ### ###", min: 9, max: 9 },
-  356: { pattern: "#### ####", min: 8, max: 8 },
-  596: { pattern: "### ## ## ##", min: 9, max: 9 },
-  692: { pattern: "### ####", min: 7, max: 7 },
-  966: { pattern: "##-###-####", min: 9, max: 9 },
-  971: { pattern: "##-###-####", min: 9, max: 9 },
-  972: { pattern: "##-###-####", min: 8, max: 9 },
+const draft = takeDraft();
+if (draft) {
+  Object.assign(form, draft.form);
+  selectedCountry.value = getPhoneCountry(draft.selectedCountry?.id);
+  localPhone.value = draft.localPhone;
+  birthday.value = draft.birthday;
+  confirmPassword.value = draft.confirmPassword;
+  agreed.value = draft.agreed;
+}
+
+const openTerms = async () => {
+  saveDraft({
+    form: { ...form },
+    selectedCountry: { ...selectedCountry.value },
+    localPhone: localPhone.value,
+    birthday: birthday.value,
+    confirmPassword: confirmPassword.value,
+    agreed: agreed.value,
+  });
+  try {
+    await safePush(router, "/tc");
+  } catch (error) {
+    clearDraft();
+    throw error;
+  }
 };
-const defaultPhoneRule = { pattern: "### ### ####", min: 6, max: 10 };
+
 const selectedPhoneRule = computed(
-  () => phoneRules[selectedCountry.value.dial] || defaultPhoneRule,
+  () => getPhoneRule(selectedCountry.value),
 );
 const phonePlaceholder = computed(
   () => selectedPhoneRule.value.pattern.replace(/#/g, "_"),
@@ -321,33 +275,10 @@ onBeforeUnmount(() =>
   document.removeEventListener("pointerdown", closePhonePickerOnOutside),
 );
 
-const localPhoneDigits = (value) => String(value || "").replace(/\D/g, "");
-const phoneDigitCount = (rule) => (rule.pattern.match(/#/g) || []).length;
-const formatPhoneNumber = (value, rule = selectedPhoneRule.value) => {
-  const digits = localPhoneDigits(value).slice(0, phoneDigitCount(rule));
-  if (!digits) return "";
-  let result = "";
-  let digitIndex = 0;
-  for (const token of rule.pattern) {
-    if (token === "#") {
-      if (digitIndex >= digits.length) break;
-      result += digits[digitIndex];
-      digitIndex += 1;
-      continue;
-    }
-    if (digitIndex === 0 || digitIndex < digits.length) result += token;
-  }
-  return result;
-};
 const sanitizePhone = (event) => {
-  const value = formatPhoneNumber(event.target.value);
+  const value = formatPhoneNumber(event.target.value, selectedPhoneRule.value);
   localPhone.value = value;
   event.target.value = value;
-};
-const isValidPhone = (phone, dial, rule = selectedPhoneRule.value) => {
-  if (!/^[0-9]+$/.test(phone)) return false;
-  const internationalNumber = `${dial}${phone}`;
-  return phone.length === phoneDigitCount(rule) && internationalNumber.length <= 15;
 };
 const sanitizeBirthday = (e) =>
   (birthday.value = e.target.value.replace(/[^0-9/\s-]/g, ""));
@@ -370,7 +301,7 @@ const emailReg = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 const submit = async () => {
   const phone = localPhoneDigits(localPhone.value);
-  if (!isValidPhone(phone, selectedCountry.value.dial))
+  if (!isValidPhone(phone, selectedCountry.value.dial, selectedPhoneRule.value))
     return showToast(t("das.auth.invalidPhone"));
   if (
     !form.username ||
@@ -394,6 +325,7 @@ const submit = async () => {
       ...form,
       phoneNumber: `+${selectedCountry.value.dial}${phone}`,
     });
+    clearDraft();
     showSuccess.value = true;
   } finally {
     submitting.value = false;

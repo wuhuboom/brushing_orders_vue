@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vite --mode test",
+    "test:phone": "node --test tests/phone.test.js",
     "format": "prettier --write \"src/**/*.{vue,js,css}\" \"index.html\" \"public/**/*.js\" \"*.config.js\" \"package.json\"",
     "format:check": "prettier --check \"src/**/*.{vue,js,css}\" \"index.html\" \"public/**/*.js\" \"*.config.js\" \"package.json\""
   },

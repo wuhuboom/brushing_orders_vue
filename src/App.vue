@@ -1,8 +1,10 @@
 <template>
   <router-view class="hide-scroll overflow-y-auto" id="router-view" />
+  <WebsiteSplashAd />
 </template>
 
 <script setup>
+import WebsiteSplashAd from "@/components/WebsiteSplashAd.vue";
 import { useUserStore } from "@/store/modules/user";
 import { useCommonStore } from "@/store/modules/common";
 import { useI18n } from "vue-i18n";
