@@ -12,10 +12,10 @@ export const copyContent = (content) => {
     .writeText(input.value)
     .then(() => {
       console.log(i18n);
-      ElMessage.success(i18n.global.t("复制成功"));
+      ElMessage.success(i18n.global.t("das.profile.copySuccess"));
     })
     .catch((err) => {
-      ElMessage.success(i18n.global.t("复制失败"));
+      ElMessage.success(i18n.global.t("das.profile.copyFailed"));
     });
 
   document.body.removeChild(input);

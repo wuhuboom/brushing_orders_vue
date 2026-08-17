@@ -78,6 +78,16 @@ const services = [
     description: "das.home.creativeText",
   },
   { title: "das.home.media", icon: "media", description: "das.home.mediaText" },
+  {
+    title: "das.home.retention",
+    icon: "retention1",
+    description: "das.home.retentionText",
+  },
+  {
+    title: "das.home.aiOrchestration",
+    icon: "ai",
+    description: "das.home.aiOrchestrationText",
+  },
 ];
 const goTo = (item) => safePush(router, item.route);
 </script>

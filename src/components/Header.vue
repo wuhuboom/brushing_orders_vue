@@ -81,11 +81,11 @@ const props = defineProps({
 
 const tradeTypeList = computed(() => [
   {
-    label: t("合约"),
+    label: t("das.trade.contract"),
     value: "NORMAL",
   },
   {
-    label: t("秒合约"),
+    label: t("das.trade.secondContract"),
     value: "SECOND",
   },
 ]);

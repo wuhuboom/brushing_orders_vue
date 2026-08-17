@@ -3,12 +3,19 @@
     <DasPageHeader title-key="das.page.profile" />
     <section>
       <van-uploader
-        v-model="files"
         :after-read="uploadFile"
-        :max-count="1"
-        :deletable="false"
-        reupload
-      />
+        :preview-image="false"
+        accept="image/*"
+        class="profile-avatar-uploader"
+      >
+        <span class="profile-avatar-preview">
+          <ProfileAvatar
+            :src="displayAvatar"
+            alt=""
+            @error="handleAvatarError"
+          />
+        </span>
+      </van-uploader>
       <p>{{ $t("das.profile.changeAvatar") }}</p>
       <button type="button" :disabled="!selected || saving" @click="save">
         {{ $t("das.common.save") }}
@@ -17,28 +24,60 @@
   </main>
 </template>
 <script setup>
-import { onMounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { showSuccessToast, showToast } from "vant";
 import { useUserStore } from "@/store/modules/user";
 import { updateAvatar, userGetInfo } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
-import avatarFallback from "@/static/das/avatar-profile-composed.png";
-import femaleAvatarFallback from "@/static/das/avatar-profile-composed-female.png";
+import ProfileAvatar from "@/components/ProfileAvatar.vue";
+import avatarFallback from "@/static/das/avatar-profile-raw.png";
+import femaleAvatarFallback from "@/static/das/avatar-profile-raw-female.png";
 import { defaultAvatarForUser } from "@/utils/avatar";
 import { safeBack } from "@/utils/navigation";
+
 const base = window.g?.VITE_API_IMG_URL || import.meta.env.VITE_API_IMG_URL || "";
-const router = useRouter(),
-  { t } = useI18n(),
-  userStore = useUserStore(),
-  files = ref([]),
-  selected = ref(),
-  saving = ref(false);
+const router = useRouter();
+const { t } = useI18n();
+const userStore = useUserStore();
+const selected = ref();
+const saving = ref(false);
+const currentUser = ref(userStore.userInfo || {});
+const avatarUrl = ref("");
+let previewObjectUrl = "";
+
+const defaultAvatar = computed(() =>
+  defaultAvatarForUser(currentUser.value, {
+    male: avatarFallback,
+    female: femaleAvatarFallback,
+  }),
+);
+
+const displayAvatar = computed(() => avatarUrl.value || defaultAvatar.value);
+
+const clearObjectUrl = () => {
+  if (!previewObjectUrl) return;
+  URL.revokeObjectURL(previewObjectUrl);
+  previewObjectUrl = "";
+};
+
 const uploadFile = (entry) => {
   const item = Array.isArray(entry) ? entry[0] : entry;
-  selected.value = item?.file instanceof Blob ? item.file : undefined;
+  const file = item?.file instanceof Blob ? item.file : undefined;
+  selected.value = file;
+  if (!file) return;
+
+  clearObjectUrl();
+  previewObjectUrl = URL.createObjectURL(file);
+  avatarUrl.value = previewObjectUrl;
 };
+
+const handleAvatarError = () => {
+  if (avatarUrl.value === previewObjectUrl) return;
+  avatarUrl.value = defaultAvatar.value;
+};
+
 const save = async () => {
   if (!selected.value || saving.value) return;
   saving.value = true;
@@ -54,31 +93,23 @@ const save = async () => {
     saving.value = false;
   }
 };
+
 onMounted(async () => {
   try {
-    const u = (await userGetInfo()).data || {};
-    const defaultAvatar = defaultAvatarForUser(u, {
-      male: avatarFallback,
-      female: femaleAvatarFallback,
-    });
-    const url = u.avatar
-      ? /^https?:/i.test(u.avatar)
-        ? u.avatar
-        : `${base}${u.avatar}`
-      : defaultAvatar;
-    files.value = [{ url, isImage: true }];
+    const user = (await userGetInfo()).data || {};
+    currentUser.value = user;
+    const path = String(user.avatar || "").trim();
+    avatarUrl.value = path
+      ? /^https?:/i.test(path)
+        ? path
+        : `${base}${path}`
+      : defaultAvatar.value;
   } catch (_) {
-    files.value = [
-      {
-        url: defaultAvatarForUser(userStore.userInfo, {
-          male: avatarFallback,
-          female: femaleAvatarFallback,
-        }),
-        isImage: true,
-      },
-    ];
+    avatarUrl.value = defaultAvatar.value;
   }
 });
+
+onUnmounted(clearObjectUrl);
 </script>
 <style scoped>
 .profile-edit {
@@ -90,11 +121,15 @@ onMounted(async () => {
   padding: 70px 24px;
   text-align: center;
 }
-.profile-edit :deep(.van-uploader__upload),
-.profile-edit :deep(.van-uploader__preview-image) {
+.profile-avatar-uploader {
+  display: inline-flex;
+}
+.profile-avatar-preview {
+  display: block;
   width: 150px;
   height: 150px;
-  border-radius: 50%;
+  cursor: pointer;
+  filter: drop-shadow(0 10px 17px rgba(8, 37, 27, 0.18));
 }
 .profile-edit p {
   color: #7b827c;

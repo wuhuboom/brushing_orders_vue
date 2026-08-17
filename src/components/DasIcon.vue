@@ -12,6 +12,7 @@
 import { computed } from "vue";
 import about from "@/static/das/icons/about.png";
 import activity from "@/static/das/icons/activity.png";
+import ai from "@/static/das/icons/ai.png";
 import bell from "@/static/das/icons/bell.png";
 import certificate from "@/static/das/icons/certificate.png";
 import creative from "@/static/das/icons/creative.png";
@@ -37,6 +38,7 @@ const props = defineProps({
 const iconMap = {
   about,
   activity,
+  ai,
   bell,
   certificate,
   creative,

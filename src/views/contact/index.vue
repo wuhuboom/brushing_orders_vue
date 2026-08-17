@@ -11,15 +11,7 @@
           type="button"
           @click="openChannel(item.linkUrl)"
         >
-          <span class="contact-channel__identity">
-            <span class="contact-channel__avatar">
-              <img
-                :src="customerServiceAvatar"
-                :alt="item.name || $t('das.page.contact')"
-              />
-            </span>
-            <span>{{ item.name }}</span>
-          </span
+          <span>{{ item.name }}</span
           ><b>›</b></button
         ><span v-if="loading">{{ $t("das.common.loading") }}</span
         ><span v-else-if="!channels.length">{{ $t("das.contact.empty") }}</span>
@@ -32,41 +24,16 @@
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
-import { getCustomerService, userGetInfo } from "@/api/apis";
+import { getCustomerService } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
-import customerServiceAvatar from "@/static/das/customer service.png";
-import { useUserStore } from "@/store/modules/user";
-import {
-  buildCustomerServiceUrl,
-  customerServiceVisitor,
-} from "@/utils/customerServiceUrl";
-const userStore = useUserStore();
 const channels = ref([]),
   loading = ref(true);
 const openChannel = (url) => {
-  const target = buildCustomerServiceUrl(url, {
-    isLoggedIn: Boolean(userStore.token),
-    user: userStore.userInfo,
-  });
-  if (target) window.open(target, "_blank", "noopener,noreferrer");
-};
-const ensureLoggedInUser = async () => {
-  const visitor = customerServiceVisitor(userStore.userInfo);
-  if (!userStore.token || (visitor.id !== undefined && visitor.name)) return;
-  try {
-    const user = (await userGetInfo()).data || {};
-    userStore.setUserInfo(user);
-  } catch (_) {
-    // The customer-service list remains available if profile refresh fails.
-  }
+  if (url) window.open(url, "_blank", "noopener,noreferrer");
 };
 onMounted(async () => {
   try {
-    const [response] = await Promise.all([
-      getCustomerService(),
-      ensureLoggedInUser(),
-    ]);
-    channels.value = response.data || [];
+    channels.value = (await getCustomerService()).data || [];
   } finally {
     loading.value = false;
   }
@@ -117,31 +84,6 @@ onMounted(async () => {
 .contact-channels button b {
   font-size: 28px;
   font-weight: 300;
-}
-.contact-channel__identity {
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.contact-channel__avatar {
-  position: relative;
-  flex: 0 0 38px;
-  width: 38px;
-  height: 38px;
-  overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.88);
-  border-radius: 50%;
-  background: #edf3e7;
-}
-.contact-channel__avatar img {
-  position: absolute;
-  top: -16%;
-  left: -95%;
-  width: 215%;
-  max-width: none;
-  height: 215%;
-  object-fit: cover;
 }
 .contact-channels > span {
   text-align: center;
