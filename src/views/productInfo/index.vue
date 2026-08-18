@@ -56,11 +56,21 @@
       <p class="product-copyright">{{ $t("das.common.copyright") }}</p>
     </section>
     <Footer name="/starting" />
+    <van-dialog
+      :show="submitAnimationVisible"
+      class="submit-loading-dialog"
+      :show-confirm-button="false"
+      :close-on-click-overlay="false"
+    >
+      <div class="submit-loading-animation" role="status" :aria-label="$t('das.common.loading')">
+        <img src="@/static/das/loading-submit.gif" alt="" />
+      </div>
+    </van-dialog>
   </main>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { showSuccessToast, showToast } from "vant";
@@ -78,6 +88,9 @@ const imageBaseUrl = window.g?.VITE_API_IMG_URL || "";
 const order = ref({});
 const loading = ref(false);
 const submitting = ref(false);
+const submitAnimationVisible = ref(false);
+let submitDelayTimer;
+let pageAlive = true;
 
 const hasCover = computed(() => {
   const value = String(order.value.coverUrl ?? "").trim().toLowerCase();
@@ -139,7 +152,13 @@ const loadOrder = async () => {
 const submitForm = async () => {
   if (!order.value.id || submitting.value) return;
   submitting.value = true;
+  submitAnimationVisible.value = true;
   try {
+    await new Promise((resolve) => {
+      submitDelayTimer = setTimeout(resolve, 3000);
+    });
+    if (!pageAlive) return;
+    submitAnimationVisible.value = false;
     const res = await submitOrder(order.value.id);
     if (res?.data) order.value = { ...order.value, ...res.data };
     showSuccessToast(t("das.records.submitted"));
@@ -156,11 +175,16 @@ const submitForm = async () => {
       safeReplace(router, "/starting");
     }
   } finally {
+    submitAnimationVisible.value = false;
     submitting.value = false;
   }
 };
 
 onMounted(loadOrder);
+onBeforeUnmount(() => {
+  pageAlive = false;
+  clearTimeout(submitDelayTimer);
+});
 </script>
 
 <style scoped>
@@ -316,6 +340,25 @@ onMounted(loadOrder);
 }
 .product-submit:disabled {
   opacity: 0.58;
+}
+:deep(.submit-loading-dialog) {
+  width: min(70vw, 280px);
+  overflow: hidden;
+  border-radius: 22px;
+  background: transparent;
+}
+.submit-loading-animation {
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  border-radius: 22px;
+  background: #f7f5ec;
+}
+.submit-loading-animation img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
 }
 .product-copyright {
   margin: 18px 0 0;

@@ -3,11 +3,27 @@
     <DasPageHeader title-key="das.page.deposit" />
     <section class="deposit-body">
       <div class="balance-card">
-        <b>{{ $t("das.deposit.totalBalance") }}</b
-        ><strong>{{ money(user.totalBalance || user.balance) }} USD</strong
-        ><button type="button" @click="contact">
+        <div class="balance-card__amounts">
+          <div>
+            <b>{{ $t("das.profile.balance") }}</b>
+            <strong>{{ money(user.balance) }} USD</strong>
+          </div>
+          <div>
+            <b>{{ $t("das.deposit.totalBalance") }}</b>
+            <strong>{{ money(user.totalBalance) }} USD</strong>
+          </div>
+        </div>
+        <button type="button" @click="contact">
           {{ $t("das.deposit.topUp") }}
         </button>
+      </div>
+      <div v-if="pendingOrders.length" class="pending-orders">
+        <OrderCard
+          v-for="item in pendingOrders"
+          :key="item.id || item.orderNo"
+          :item="item"
+          @submit="openOrderDetails"
+        />
       </div>
       <div class="recent-title">
         <h2>{{ $t("das.deposit.recent") }}</h2>
@@ -20,7 +36,7 @@
         :finished="finished"
         :finished-text="$t('das.common.noMore')"
         @load="load"
-        ><article v-for="item in items" :key="item.id">
+        ><article v-for="item in items" :key="item.id" class="deposit-entry">
           <i></i>
           <div>
             <b>{{ $t("das.deposit.deposited") }}</b
@@ -37,13 +53,15 @@
   </main>
 </template>
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { onBeforeUnmount, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { getDeposit, userGetInfo } from "@/api/apis";
+import { getDeposit, getOrderInfos, userGetInfo } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import OrderCard from "@/components/OrderCard.vue";
 import { safePush } from "@/utils/navigation";
 const router = useRouter(),
   user = ref({}),
+  pendingOrders = ref([]),
   items = ref([]),
   loading = ref(false),
   finished = ref(false),
@@ -72,7 +90,36 @@ const money = (v) =>
       loading.value = false;
     }
   };
-onMounted(async () => (user.value = (await userGetInfo()).data || {}));
+
+let pendingController;
+const openOrderDetails = (item) => {
+  try {
+    sessionStorage.setItem(`dasOrder:${item.id}`, JSON.stringify(item));
+  } catch (_) {}
+  safePush(router, { path: "/productInfo", query: { id: item.id } });
+};
+const loadPendingOrders = async () => {
+  pendingController?.abort();
+  const controller = new AbortController();
+  pendingController = controller;
+  try {
+    const result = await getOrderInfos(
+      { pageNum: 1, pageSize: 10, status: "1" },
+      { signal: controller.signal },
+    );
+    if (!controller.signal.aborted) pendingOrders.value = result.rows || [];
+  } catch (_) {
+    if (!controller.signal.aborted) pendingOrders.value = [];
+  } finally {
+    if (pendingController === controller) pendingController = undefined;
+  }
+};
+
+onMounted(async () => {
+  const [userResult] = await Promise.allSettled([userGetInfo(), loadPendingOrders()]);
+  if (userResult.status === "fulfilled") user.value = userResult.value.data || {};
+});
+onBeforeUnmount(() => pendingController?.abort());
 </script>
 <style scoped>
 .deposit-page {
@@ -86,23 +133,34 @@ onMounted(async () => (user.value = (await userGetInfo()).data || {}));
   padding: 20px 28px 70px;
 }
 .balance-card {
-  min-height: 210px;
+  min-height: 225px;
   padding: 28px;
   border-radius: 22px;
   background: #14392c;
   color: #f7f5ec;
 }
+.balance-card__amounts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.balance-card__amounts > div {
+  min-width: 0;
+}
 .balance-card b {
+  display: block;
   font-size: 14px;
 }
 .balance-card strong {
   display: block;
-  margin: 25px 0 20px;
-  font-size: 32px;
+  margin-top: 18px;
+  overflow-wrap: anywhere;
+  font-size: clamp(20px, 6vw, 28px);
   font-weight: 500;
 }
 .balance-card button {
   float: right;
+  margin-top: 25px;
   height: 43px;
   padding: 0 24px;
   border: 0;
@@ -110,6 +168,9 @@ onMounted(async () => (user.value = (await userGetInfo()).data || {}));
   background: #f7f5ec;
   color: #17382d;
   font-weight: 700;
+}
+.pending-orders {
+  margin-top: 18px;
 }
 .recent-title {
   margin: 27px 0 4px;
@@ -129,7 +190,7 @@ onMounted(async () => (user.value = (await userGetInfo()).data || {}));
   font-size: 12px;
   text-decoration: underline;
 }
-.deposit-body article {
+.deposit-entry {
   min-height: 104px;
   padding: 19px 4px;
   display: grid;
@@ -138,25 +199,25 @@ onMounted(async () => (user.value = (await userGetInfo()).data || {}));
   align-items: center;
   border-bottom: 1px solid #d9dcd5;
 }
-.deposit-body article i {
+.deposit-entry i {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: #14392c;
 }
-.deposit-body article div {
+.deposit-entry div {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.deposit-body article div b {
+.deposit-entry div b {
   font-size: 15px;
 }
-.deposit-body article small {
+.deposit-entry small {
   color: #89918c;
   font-size: 11px;
 }
-.deposit-body article > strong {
+.deposit-entry > strong {
   font-size: 14px;
 }
 .deposit-copyright {

@@ -344,9 +344,12 @@ export const getGoodsList = (params) =>
       withData(response, (unwrapData(response) || []).map(normalizeGoods)),
     );
 
-export const getOrderInfos = (params) =>
+export const getOrderInfos = (params, options = {}) =>
   api
-    .get("/order", requestConfig({ params: pageParams(params) }))
+    .get(
+      "/order",
+      requestConfig({ ...options, params: pageParams(params) }),
+    )
     .then((response) => normalizeRows(response, normalizeGoods));
 
 export const getOrderInfo = async (id) => {

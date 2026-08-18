@@ -1,0 +1,94 @@
+<svg width="240" height="100" viewBox="0 0 240 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- INTELLIGENCE — Hidden → Found -->
+  <!-- Animation: Grid dots subtly breathe, warm cluster slowly pulses brighter, analyst mark draws itself, gold pulse radiates -->
+
+  <!-- Row 1: Static grid dots with dramatic opacity breathe -->
+  <circle cx="28" cy="16" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="56" cy="16" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="84" cy="16" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="3.8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="112" cy="16" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="140" cy="16" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.1s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Row 2 -->
+  <circle cx="28" cy="40" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="3.9s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="56" cy="40" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.2s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Warm cluster dots: dramatic pulse -->
+  <circle cx="84" cy="40" r="6" fill="#C67C5A" opacity="0.55">
+    <animate attributeName="opacity" values="0.55;0.25;0.55" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="6;7.2;6" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="112" cy="40" r="6.5" fill="#C67C5A" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;0.35;0.7" dur="2.8s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="6.5;8;6.5" dur="2.8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="140" cy="40" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Row 3 -->
+  <circle cx="28" cy="64" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="56" cy="64" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="3.7s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="84" cy="64" r="6" fill="#C67C5A" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0.20;0.5" dur="3.2s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="6;7;6" dur="3.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="112" cy="64" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.0s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="140" cy="64" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Row 4 -->
+  <circle cx="28" cy="88" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.1s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="56" cy="88" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="3.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="84" cy="88" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.7s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="112" cy="88" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="140" cy="88" r="5" fill="#6B7B8D" opacity="0.14">
+    <animate attributeName="opacity" values="0.14;0.04;0.14" dur="4.8s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Analyst mark: draws itself with stroke-dashoffset, then subtly breathes -->
+  <ellipse cx="94" cy="52" rx="32" ry="26" stroke="#1E3328" stroke-width="1.8" fill="none" opacity="0.5" stroke-dasharray="180" stroke-dashoffset="180">
+    <animate attributeName="stroke-dashoffset" values="180;0" dur="2s" fill="freeze" begin="0.5s"/>
+    <animate attributeName="opacity" values="0;0.5" dur="0.5s" fill="freeze" begin="0.5s"/>
+  </ellipse>
+
+  <!-- Gold pulse: fades in after analyst mark draws, then prominently radiates -->
+  <circle cx="112" cy="40" r="3" fill="#D4A853" opacity="0">
+    <animate attributeName="opacity" values="0;0.9" dur="0.4s" fill="freeze" begin="2.2s"/>
+    <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite" begin="2.6s"/>
+    <animate attributeName="opacity" values="0.9;0.5;0.9" dur="2s" repeatCount="indefinite" begin="2.6s"/>
+  </circle>
+  <!-- Gold pulse outer ring — wide pulsing -->
+  <circle cx="112" cy="40" r="6" fill="none" stroke="#D4A853" stroke-width="0.6" opacity="0">
+    <animate attributeName="opacity" values="0;0.35;0" dur="2.5s" repeatCount="indefinite" begin="2.6s"/>
+    <animate attributeName="r" values="6;14;6" dur="2.5s" repeatCount="indefinite" begin="2.6s"/>
+  </circle>
+</svg>

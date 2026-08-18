@@ -106,8 +106,8 @@
     </div>
     <BonusDialog
       :show="bonusVisible"
-      :bonus="bonus"
       @close="closeBonus"
+      @contact="openBonusContact"
     />
     <Footer name="/starting" />
   </main>
@@ -143,7 +143,6 @@ const orderCount = ref(40);
 const current = ref(0);
 const heroMotion = ref(null);
 const dataTransition = ref(false);
-const bonus = ref({});
 const bonusVisible = ref(false);
 let refreshTimer;
 let carouselTimer;
@@ -361,7 +360,11 @@ const openOrderDetails = (order) => {
 
 const closeBonus = () => {
   bonusVisible.value = false;
-  bonus.value = {};
+};
+
+const openBonusContact = () => {
+  closeBonus();
+  safePush(router, "/contact");
 };
 
 const handleClick = async () => {
@@ -374,7 +377,6 @@ const handleClick = async () => {
     const res = await createOrder();
     closeToast();
     if (res.resultType === "BONUS") {
-      bonus.value = res.data || {};
       bonusVisible.value = true;
       return;
     }
@@ -383,6 +385,10 @@ const handleClick = async () => {
     openOrderDetails(order);
   } catch (error) {
     closeToast();
+    if (Number(error?.code) === 2000) {
+      bonusVisible.value = true;
+      return;
+    }
     if (Number(error?.code) === 907 && error?.data?.id) {
       openOrderDetails(error.data);
       return;
