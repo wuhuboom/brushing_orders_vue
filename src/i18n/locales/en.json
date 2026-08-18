@@ -134,8 +134,8 @@
     },
     "profile": {
       "hello": "Hello",
-      "balance": "Account Balance",
-      "frozen": "Freeze Amount",
+      "balance": "Wallet Balance",
+      "frozen": "Frozen Amount",
       "commission": "Today's Commission",
       "tasks": "Tasks Completed",
       "credit": "Credit Score",
@@ -232,7 +232,7 @@
       "startNow": "Start Now",
       "price": "Price",
       "reviews": "reviews",
-      "todayMargin": "Today's margin recovered",
+      "todayMargin": "Commission",
       "marginHint": "The displayed amount reflects contribution margin recovered today, as an indication.",
       "balanceHint": "Deposited amount plus recovered margin.",
       "frozenHint": "Pinned while a brief is still in process.",
@@ -278,7 +278,7 @@
     },
     "deposit": {
       "recent": "Recent Activity",
-      "totalBalance": "account balance",
+      "totalBalance": "Total Balance",
       "topUp": "Top Up",
       "deposited": "Deposited",
       "reference": "Ref No.",
