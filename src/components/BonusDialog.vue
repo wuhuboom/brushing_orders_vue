@@ -15,6 +15,7 @@ const contact = () => emit("contact");
   <van-dialog
     :show="show"
     class="bonus-dialog"
+    width="min(calc(100vw - 24px), calc(var(--das-app-max-width, 960px) - 24px))"
     :show-confirm-button="false"
     close-on-click-overlay
     @update:show="(value) => !value && close()"
@@ -29,8 +30,13 @@ const contact = () => emit("contact");
 </template>
 
 <style scoped>
-:deep(.bonus-dialog) {
-  width: min(90vw, 560px);
+:global(.bonus-dialog.van-dialog) {
+  width: min(calc(100vw - 24px), calc(var(--das-app-max-width, 960px) - 24px)) !important;
+  max-width: min(calc(100vw - 24px), calc(var(--das-app-max-width, 960px) - 24px)) !important;
+  left: 50% !important;
+  right: auto !important;
+  margin: 0 !important;
+  transform: translate3d(-50%, -50%, 0) !important;
   max-height: calc(100dvh - 28px);
   overflow: hidden;
   border-radius: 22px;

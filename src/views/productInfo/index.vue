@@ -77,7 +77,7 @@ import { showSuccessToast, showToast } from "vant";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
 import DasImagePlaceholder from "@/components/DasImagePlaceholder.vue";
-import { getOrderInfo, submitOrder } from "@/api/apis";
+import { getOrderInfo, getTradeConfig, submitOrder } from "@/api/apis";
 import { formatTime } from "@/util/times";
 import { safeBack, safeReplace } from "@/utils/navigation";
 
@@ -89,7 +89,9 @@ const order = ref({});
 const loading = ref(false);
 const submitting = ref(false);
 const submitAnimationVisible = ref(false);
+const tradeInfo = ref({});
 let submitDelayTimer;
+let tradeConfigRequest;
 let pageAlive = true;
 
 const hasCover = computed(() => {
@@ -117,6 +119,21 @@ const canSubmit = computed(() => {
   const status = order.value.status;
   return Boolean(order.value.id) && (status === undefined || status === null || String(status) === "1");
 });
+
+const delayMs = (value) => {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0 ? number : 0;
+};
+
+const waitForSubmitDelay = () =>
+  new Promise((resolve) => {
+    const timeout = delayMs(tradeInfo.value.submitTaskDelayMs);
+    if (!timeout) {
+      resolve();
+      return;
+    }
+    submitDelayTimer = setTimeout(resolve, timeout);
+  });
 
 const readCachedOrder = (id) => {
   try {
@@ -149,14 +166,25 @@ const loadOrder = async () => {
   }
 };
 
+const loadTradeConfig = () => {
+  if (!tradeConfigRequest) {
+    tradeConfigRequest = getTradeConfig()
+      .then((res) => {
+        if (pageAlive) tradeInfo.value = res.data || {};
+        return res;
+      })
+      .catch(() => null);
+  }
+  return tradeConfigRequest;
+};
+
 const submitForm = async () => {
   if (!order.value.id || submitting.value) return;
   submitting.value = true;
   submitAnimationVisible.value = true;
   try {
-    await new Promise((resolve) => {
-      submitDelayTimer = setTimeout(resolve, 3000);
-    });
+    await loadTradeConfig();
+    await waitForSubmitDelay();
     if (!pageAlive) return;
     submitAnimationVisible.value = false;
     const res = await submitOrder(order.value.id);
@@ -180,7 +208,10 @@ const submitForm = async () => {
   }
 };
 
-onMounted(loadOrder);
+onMounted(() => {
+  loadOrder();
+  loadTradeConfig();
+});
 onBeforeUnmount(() => {
   pageAlive = false;
   clearTimeout(submitDelayTimer);

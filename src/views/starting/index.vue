@@ -68,7 +68,7 @@
           {{ $t("das.started.price") }}:
           <strong>{{ money(currentProduct.price, "0.00") }} USD</strong>
         </h2>
-        <button type="button" @click="handleClick">
+        <button type="button" :disabled="creatingOrder" @click="handleClick">
           {{ $t("das.started.startNow") }} ({{ userInfo.dealCount || 0 }}/{{
             orderCount || 0
           }})
@@ -109,6 +109,16 @@
       @close="closeBonus"
       @contact="openBonusContact"
     />
+    <van-dialog
+      :show="startAnimationVisible"
+      class="start-loading-dialog"
+      :show-confirm-button="false"
+      :close-on-click-overlay="false"
+    >
+      <div class="start-loading-animation" role="status" :aria-label="$t('das.common.loading')">
+        <img src="@/static/das/loading-orbit-spinner.gif" alt="" />
+      </div>
+    </van-dialog>
     <Footer name="/starting" />
   </main>
 </template>
@@ -144,9 +154,13 @@ const current = ref(0);
 const heroMotion = ref(null);
 const dataTransition = ref(false);
 const bonusVisible = ref(false);
+const creatingOrder = ref(false);
+const startAnimationVisible = ref(false);
 let refreshTimer;
 let carouselTimer;
 let dataTransitionTimer;
+let startDelayTimer;
+let tradeConfigRequest;
 let pageAlive = false;
 const AUTO_DELAY = 3000;
 const SOURCE_SLOT_ORDER = [0, 3, 7, 4, 1, 2, 6, 5];
@@ -313,6 +327,33 @@ const noticeText = computed(() =>
     : t("das.started.noticeText"),
 );
 
+const delayMs = (value) => {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0 ? number : 0;
+};
+
+const waitForStartDelay = () =>
+  new Promise((resolve) => {
+    const timeout = delayMs(tradeInfo.value.startTaskDelayMs);
+    if (!timeout) {
+      resolve();
+      return;
+    }
+    startDelayTimer = setTimeout(resolve, timeout);
+  });
+
+const loadTradeConfig = () => {
+  if (!tradeConfigRequest) {
+    tradeConfigRequest = getTradeConfig()
+      .then((res) => {
+        if (pageAlive) tradeInfo.value = res.data || {};
+        return res;
+      })
+      .catch(() => null);
+  }
+  return tradeConfigRequest;
+};
+
 const getList = async () => {
   try {
     const res = await getGoodsList();
@@ -368,12 +409,19 @@ const openBonusContact = () => {
 };
 
 const handleClick = async () => {
-  showLoadingToast({
-    message: t("das.started.creating"),
-    forbidClick: true,
-    duration: 0,
-  });
+  if (creatingOrder.value) return;
+  creatingOrder.value = true;
+  startAnimationVisible.value = true;
   try {
+    await loadTradeConfig();
+    await waitForStartDelay();
+    if (!pageAlive) return;
+    startAnimationVisible.value = false;
+    showLoadingToast({
+      message: t("das.started.creating"),
+      forbidClick: true,
+      duration: 0,
+    });
     const res = await createOrder();
     closeToast();
     if (res.resultType === "BONUS") {
@@ -394,6 +442,9 @@ const handleClick = async () => {
       return;
     }
     showToast(getOrderErrorMessage(t, error, "das.started.unableCreate"));
+  } finally {
+    startAnimationVisible.value = false;
+    creatingOrder.value = false;
   }
 };
 
@@ -402,7 +453,7 @@ onMounted(async () => {
   getList();
   const [userResult, tradeResult] = await Promise.allSettled([
     userGetInfo(),
-    getTradeConfig(),
+    loadTradeConfig(),
   ]);
   if (!pageAlive) return;
   if (userResult.status === "fulfilled") {
@@ -411,7 +462,7 @@ onMounted(async () => {
     orderCount.value = userResult.value.data?.userLevel?.orderCount || 40;
   }
   if (tradeResult.status === "fulfilled") {
-    tradeInfo.value = tradeResult.value.data || {};
+    tradeInfo.value = tradeResult.value?.data || tradeInfo.value;
   }
   startCarousel();
 });
@@ -420,6 +471,7 @@ onUnmounted(() => {
   pageAlive = false;
   clearTimeout(refreshTimer);
   clearTimeout(dataTransitionTimer);
+  clearTimeout(startDelayTimer);
   clearInterval(carouselTimer);
 });
 </script>
@@ -752,6 +804,28 @@ onUnmounted(() => {
   font-size: 17px;
   font-weight: 800;
   box-shadow: 0 13px 20px rgba(20, 57, 44, 0.2);
+}
+.product-copy button:disabled {
+  opacity: 0.65;
+}
+:deep(.start-loading-dialog) {
+  width: min(70vw, 280px);
+  overflow: hidden;
+  border-radius: 22px;
+  background: transparent;
+}
+.start-loading-animation {
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  border-radius: 22px;
+  background: #f7f5ec;
+}
+.start-loading-animation img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
 }
 .margin-card,
 .notice-card {

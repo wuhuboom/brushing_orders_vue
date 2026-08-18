@@ -5,7 +5,7 @@
       <div class="balance-card">
         <div class="balance-card__amounts">
           <div>
-            <b>{{ $t("das.profile.balance") }}</b>
+            <b>{{ $t("das.form.availableBalance") }}</b>
             <strong>{{ money(user.balance) }} USD</strong>
           </div>
           <div>
