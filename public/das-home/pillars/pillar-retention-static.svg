@@ -1,0 +1,43 @@
+<svg width="240" height="100" viewBox="0 0 240 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- RETENTION — Static final state (no animations) -->
+
+  <!-- Baseline -->
+  <line x1="16" y1="88" x2="224" y2="88" stroke="#E8DFD6" stroke-width="0.8"/>
+
+  <!-- Column 1 -->
+  <rect x="20" y="78" width="28" height="8" rx="2" fill="#C67C5A" opacity="0.08"/>
+  <rect x="20" y="72" width="28" height="4" rx="2" fill="#6B7B8D" opacity="0.1"/>
+  <rect x="20" y="64" width="28" height="4" rx="2" fill="#6B7B8D" opacity="0.08"/>
+
+  <!-- Column 2 -->
+  <rect x="60" y="82" width="28" height="4" rx="2" fill="#C67C5A" opacity="0.06"/>
+  <rect x="60" y="70" width="28" height="10" rx="2" fill="#C67C5A" opacity="0.12"/>
+  <rect x="60" y="62" width="28" height="5" rx="2" fill="#6B7B8D" opacity="0.12"/>
+  <rect x="60" y="52" width="28" height="6" rx="2" fill="#6B7B8D" opacity="0.1"/>
+  <circle cx="74" cy="52" r="2" fill="#D4A853" opacity="0.25"/>
+
+  <!-- Column 3 -->
+  <rect x="100" y="76" width="28" height="8" rx="2" fill="#C67C5A" opacity="0.1"/>
+  <rect x="100" y="60" width="28" height="14" rx="2" fill="#C67C5A" opacity="0.18"/>
+  <rect x="100" y="50" width="28" height="7" rx="2" fill="#6B7B8D" opacity="0.12"/>
+  <rect x="100" y="38" width="28" height="8" rx="2" fill="#6B7B8D" opacity="0.1"/>
+  <circle cx="114" cy="38" r="2.5" fill="#D4A853" opacity="0.35"/>
+
+  <!-- Column 4 -->
+  <rect x="140" y="68" width="28" height="14" rx="2" fill="#C67C5A" opacity="0.15"/>
+  <rect x="140" y="48" width="28" height="18" rx="2" fill="#C67C5A" opacity="0.25"/>
+  <rect x="140" y="36" width="28" height="9" rx="2" fill="#6B7B8D" opacity="0.12"/>
+  <rect x="140" y="22" width="28" height="10" rx="2" fill="#1E3328" opacity="0.08"/>
+  <circle cx="154" cy="22" r="3" fill="#D4A853" opacity="0.5"/>
+
+  <!-- Column 5 (tallest) -->
+  <rect x="180" y="80" width="32" height="6" rx="2" fill="#C67C5A" opacity="0.1"/>
+  <rect x="180" y="60" width="32" height="18" rx="2" fill="#C67C5A" opacity="0.2"/>
+  <rect x="180" y="36" width="32" height="22" rx="2" fill="#C67C5A" opacity="0.35"/>
+  <rect x="180" y="22" width="32" height="12" rx="2" fill="#1E3328" opacity="0.1"/>
+  <rect x="180" y="8" width="32" height="10" rx="2" fill="#1E3328" opacity="0.12"/>
+  <!-- Crown gold dot -->
+  <circle cx="196" cy="8" r="4" fill="#D4A853" opacity="0.7"/>
+  <!-- Crown glow ring -->
+  <circle cx="196" cy="8" r="8" fill="none" stroke="#D4A853" stroke-width="0.6" opacity="0.15"/>
+</svg>
