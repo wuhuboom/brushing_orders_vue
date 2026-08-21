@@ -48,7 +48,7 @@ router.beforeEach((to, from, next) => {
   ];
   const isAuthenticated = Boolean(useUserStore(pinia).token);
   if (!publicRoutes.includes(to.path) && !isAuthenticated)
-    next({ path: "/account/welcome", replace: true });
+    next({ path: "/account/login", replace: true });
   else next();
 });
 

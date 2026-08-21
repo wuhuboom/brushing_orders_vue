@@ -1,5 +1,39 @@
 <template>
-  <main class="auth-screen das-page">
+  <div class="auth-page">
+  <PcPublicShell class="pc-auth" ticker>
+    <section class="pc-auth__layout">
+      <div class="pc-auth__message">
+        <p>Ready to Start Work?</p>
+        <h1>Please login to access more content.</h1>
+      </div>
+      <form class="pc-auth__card" novalidate @submit.prevent="submit">
+        <h2>Enter your login information</h2>
+        <label>
+          <span>Username / Phone</span>
+          <input v-model.trim="form.username" autocomplete="username" />
+        </label>
+        <label>
+          <span>Password</span>
+          <div class="pc-auth__password">
+            <input
+              v-model="form.password"
+              :type="showPassword ? 'text' : 'password'"
+              autocomplete="current-password"
+            />
+            <button type="button" aria-label="Show password" @click="showPassword = !showPassword">
+              {{ showPassword ? '●' : '◉' }}
+            </button>
+          </div>
+        </label>
+        <button class="pc-auth__forgot" type="button" @click="customer">Forgot Password?</button>
+        <button class="pc-auth__submit" type="submit" :disabled="submitting">Login</button>
+        <p>Don't have an account?
+          <button type="button" @click="safeReplace(router, '/account/register')">Sign Up</button>
+        </p>
+      </form>
+    </section>
+  </PcPublicShell>
+  <main class="auth-screen auth-screen--mobile das-page">
     <header class="auth-top">
       <img src="@/static/das/wordmark-cream.png" alt="DAS" />
       <button
@@ -68,6 +102,7 @@
       </div></van-dialog
     >
   </main>
+  </div>
 </template>
 <script setup>
 import { computed, onMounted, reactive, ref, watch } from "vue";
@@ -77,6 +112,7 @@ import { useCommonStore } from "@/store/modules/common";
 import { useUserStore } from "@/store/modules/user";
 import { login } from "@/api/apis";
 import { safePush, safeReplace } from "@/utils/navigation";
+import PcPublicShell from "@/components/pc/PcPublicShell.vue";
 const router = useRouter(),
   { t } = useI18n(),
   commonStore = useCommonStore(),
@@ -84,6 +120,7 @@ const router = useRouter(),
 const form = reactive({ username: "", password: "" }),
   remember = ref(true),
   submitting = ref(false),
+  showPassword = ref(false),
   showError = ref(false),
   errorMessage = ref("");
 const language = computed(() => commonStore.clientLang || "en");
@@ -158,6 +195,8 @@ const submit = async () => {
 };
 </script>
 <style scoped>
+.pc-auth { display: none; }
+.auth-page { width: 100%; min-height: 100%; }
 .auth-screen {
   min-height: 100%;
   padding: 54px clamp(34px, 8vw, 76px) 38px;
@@ -342,5 +381,108 @@ const submit = async () => {
   width: min(84%, 380px);
   border-radius: 24px;
   background: #f7f5ec;
+}
+@media (min-width: 900px) {
+  .auth-screen--mobile { display: none; }
+  .pc-auth { display: block; }
+  .pc-auth__layout {
+    width: min(100% - 96px, 1200px);
+    min-height: calc(100vh - 112px);
+    margin: 0 auto;
+    padding: 76px 0 110px;
+    display: grid;
+    grid-template-columns: 1fr 550px;
+    align-items: center;
+    gap: 110px;
+  }
+  .pc-auth__message { align-self: center; }
+  .pc-auth__message p {
+    margin: 0 0 18px;
+    color: #9a9a9a;
+    font-size: 14px;
+  }
+  .pc-auth__message h1 {
+    max-width: 470px;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(42px, 4.4vw, 68px);
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -0.055em;
+  }
+  .pc-auth__card {
+    padding: 64px 58px 55px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9px;
+    background: linear-gradient(145deg, rgba(35, 35, 35, 0.94), rgba(15, 15, 15, 0.98));
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+  }
+  .pc-auth__card h2 {
+    margin: 0 0 48px;
+    font-size: 25px;
+    font-weight: 500;
+  }
+  .pc-auth__card > label {
+    display: block;
+    margin-top: 26px;
+  }
+  .pc-auth__card > label > span {
+    display: block;
+    margin-bottom: 11px;
+    color: #9b9b9b;
+    font-size: 13px;
+  }
+  .pc-auth__card input {
+    width: 100%;
+    height: 58px;
+    padding: 0 18px;
+    border: 1px solid #3f3f3f;
+    border-radius: 3px;
+    background: #202020;
+    color: #fff;
+  }
+  .pc-auth__password { position: relative; }
+  .pc-auth__password input { padding-right: 54px; }
+  .pc-auth__password button {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    color: #888;
+  }
+  .pc-auth__forgot {
+    width: 100%;
+    margin: 18px 0 34px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #aaa;
+    text-align: right;
+    font-size: 13px;
+  }
+  .pc-auth__submit {
+    width: 100%;
+    height: 58px;
+    border: 0;
+    border-radius: 3px;
+    background: #d2ff4f;
+    color: #060606;
+    font-weight: 700;
+  }
+  .pc-auth__submit:disabled { opacity: 0.6; }
+  .pc-auth__card > p {
+    margin: 30px 0 0;
+    color: #929292;
+    text-align: center;
+    font-size: 13px;
+  }
+  .pc-auth__card > p button {
+    padding: 0 0 0 5px;
+    border: 0;
+    background: transparent;
+    color: #d2ff4f;
+  }
 }
 </style>
