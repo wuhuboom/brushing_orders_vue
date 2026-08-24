@@ -72,13 +72,10 @@ export const useUserStore = defineStore("user", {
         .plus(data.value)
         .toFixed();
     },
-    async getGetGlobalConfig() {
-      try {
-        const res = await getGlobalConfig();
+    getGetGlobalConfig() {
+      getGlobalConfig().then((res) => {
         this.GlobalConfig = res.data || res;
-      } catch (_) {
-        // Public pages keep their local fallback when website configuration is unavailable.
-      }
+      });
     },
   },
 });

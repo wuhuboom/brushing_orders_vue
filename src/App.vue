@@ -9,7 +9,6 @@ import { useUserStore } from "@/store/modules/user";
 import { useCommonStore } from "@/store/modules/common";
 import { useI18n } from "vue-i18n";
 import { useLocale } from "@/util/useLocale";
-import { LANGS } from "@/config/lang";
 import BigNumber from "bignumber.js";
 const configuredWidth = window.g?.APP_MAX_WIDTH || "960px";
 document.documentElement.style.setProperty(
@@ -34,15 +33,10 @@ if (userStore.token) {
   userStore.getUserInfo();
 }
 userStore.getZone();
-userStore.getGetGlobalConfig();
-const initialLanguage = LANGS.some(({ code }) => code === commonStore.lang)
-  ? commonStore.lang
-  : "en";
-if (commonStore.lang !== initialLanguage) {
-  commonStore.updateLang(initialLanguage);
+if (commonStore.lang) {
+  locale.value = commonStore.lang;
+  setLocale(commonStore.lang);
 }
-locale.value = initialLanguage;
-setLocale(initialLanguage);
 </script>
 
 <style>

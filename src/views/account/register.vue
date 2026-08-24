@@ -1,62 +1,5 @@
 <template>
-  <div class="register-page">
-  <PcPublicShell class="pc-register">
-    <section class="pc-register__content">
-      <h1>Nice To Meet You.</h1>
-      <form class="pc-register__card" novalidate @submit.prevent="submit">
-        <div class="pc-register__grid">
-          <label><span>Username</span><input v-model.trim="form.username" autocomplete="username" /></label>
-          <div class="pc-register__field">
-            <span>Phone</span>
-            <div ref="pcPhoneFieldRef" class="pc-register__phone">
-              <button type="button" @click.stop="phonePickerOpen = !phonePickerOpen">
-                <img :src="selectedCountry.flag" :alt="selectedCountry.name" />
-                +{{ selectedCountry.dial }}⌄
-              </button>
-              <input
-                v-model="localPhone"
-                inputmode="tel"
-                :maxlength="selectedPhoneRule.pattern.length"
-                :placeholder="phonePlaceholder"
-                @input="sanitizePhone"
-              />
-              <div v-if="phonePickerOpen" class="pc-register__country-menu">
-                <button
-                  v-for="country in allCountryList"
-                  :key="`${country.name}-${country.dial}`"
-                  type="button"
-                  @click="selectCountry(country)"
-                >
-                  <img :src="country.flag" :alt="country.name" />
-                  <span>{{ country.name }}</span><strong>+{{ country.dial }}</strong>
-                </button>
-              </div>
-            </div>
-          </div>
-          <label><span>Birthday</span><input v-model="birthday" placeholder="MM / DD / YYYY" @input="sanitizeBirthday" /></label>
-          <label><span>Email</span><input v-model.trim="form.email" autocomplete="email" /></label>
-          <label><span>Transaction Password</span><input v-model="form.tradePassword" type="password" autocomplete="new-password" /></label>
-          <label><span>Login Password</span><input v-model="form.password" type="password" autocomplete="new-password" /></label>
-          <label><span>Confirm Login Password</span><input v-model="confirmPassword" type="password" autocomplete="new-password" /></label>
-          <fieldset>
-            <legend>Gender</legend>
-            <label><input v-model="form.gender" type="radio" value="0" /> Male</label>
-            <label><input v-model="form.gender" type="radio" value="1" /> Female</label>
-          </fieldset>
-          <label><span>Invite Code</span><input v-model.trim="form.inviteCode" /></label>
-        </div>
-        <label class="pc-register__agree">
-          <input v-model="agreed" type="checkbox" />
-          <span>I agree with <button type="button" @click="openTerms">Terms and Conditions</button></span>
-        </label>
-        <button class="pc-register__submit" type="submit" :disabled="submitting">Register</button>
-        <p>Already have an account?
-          <button type="button" @click="safeReplace(router, '/account/login')">Login</button>
-        </p>
-      </form>
-    </section>
-  </PcPublicShell>
-  <main class="register-screen register-screen--mobile das-page">
+  <main class="register-screen das-page">
     <header class="register-top">
       <img src="@/static/das/wordmark-cream.png" alt="DAS" />
     </header>
@@ -238,7 +181,6 @@
       </div></van-dialog
     >
   </main>
-  </div>
 </template>
 <script setup>
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from "vue";
@@ -256,13 +198,11 @@ import {
   localPhoneDigits,
 } from "@/config/phone";
 import { safePush, safeReplace } from "@/utils/navigation";
-import PcPublicShell from "@/components/pc/PcPublicShell.vue";
 
 const router = useRouter(),
   { t } = useI18n(),
   phonePickerOpen = ref(false),
   phoneFieldRef = ref(),
-  pcPhoneFieldRef = ref(),
   localPhone = ref(""),
   birthday = ref(""),
   confirmPassword = ref(""),
@@ -325,9 +265,7 @@ const selectCountry = (country) => {
 };
 
 const closePhonePickerOnOutside = (event) => {
-  const insideMobile = phoneFieldRef.value?.contains(event.target);
-  const insidePc = pcPhoneFieldRef.value?.contains(event.target);
-  if (!insideMobile && !insidePc) {
+  if (phoneFieldRef.value && !phoneFieldRef.value.contains(event.target)) {
     phonePickerOpen.value = false;
   }
 };
@@ -395,8 +333,6 @@ const submit = async () => {
 };
 </script>
 <style scoped>
-.pc-register { display: none; }
-.register-page { width: 100%; min-height: 100%; }
 .register-screen {
   min-height: 100%;
   padding: 42px clamp(28px, 7vw, 72px) 40px;
@@ -708,156 +644,6 @@ const submit = async () => {
   }
   .gender-field__options label {
     gap: 5px;
-    font-size: 13px;
-  }
-}
-@media (min-width: 900px) {
-  .register-screen--mobile { display: none; }
-  .pc-register { display: block; }
-  .pc-register__content {
-    width: min(100% - 96px, 1200px);
-    margin: 0 auto;
-    padding: 40px 0 90px;
-  }
-  .pc-register__content > h1 {
-    margin: 0 0 40px;
-    text-align: center;
-    color: #fff;
-    font-size: 46px;
-    font-weight: 400;
-    letter-spacing: -0.045em;
-  }
-  .pc-register__card {
-    width: 840px;
-    margin: 0 auto;
-    padding: 48px 54px 42px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 9px;
-    background: linear-gradient(145deg, rgba(34, 34, 34, 0.96), rgba(15, 15, 15, 0.99));
-    color: #fff;
-    box-shadow: 0 32px 90px rgba(0, 0, 0, 0.46);
-  }
-  .pc-register__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px 28px;
-  }
-  .pc-register__grid > label,
-  .pc-register__field { min-width: 0; }
-  .pc-register__grid > label > span,
-  .pc-register__field > span,
-  .pc-register__grid legend {
-    display: block;
-    margin-bottom: 10px;
-    color: #929292;
-    font-size: 12px;
-  }
-  .pc-register__grid input:not([type="radio"]),
-  .pc-register__phone {
-    width: 100%;
-    height: 52px;
-    border: 1px solid #3e3e3e;
-    border-radius: 3px;
-    background: #202020;
-    color: #fff;
-  }
-  .pc-register__grid input:not([type="radio"]) { padding: 0 15px; }
-  .pc-register__phone {
-    position: relative;
-    display: flex;
-  }
-  .pc-register__phone > button {
-    min-width: 105px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    border: 0;
-    border-right: 1px solid #3e3e3e;
-    background: transparent;
-    color: #aaa;
-  }
-  .pc-register__phone img,
-  .pc-register__country-menu img {
-    width: 22px;
-    height: 15px;
-    object-fit: cover;
-  }
-  .pc-register__phone > input { border: 0 !important; background: transparent !important; }
-  .pc-register__country-menu {
-    position: absolute;
-    z-index: 20;
-    top: 58px;
-    left: 0;
-    right: 0;
-    max-height: 230px;
-    overflow-y: auto;
-    padding: 7px;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background: #202020;
-  }
-  .pc-register__country-menu button {
-    width: 100%;
-    min-height: 38px;
-    display: grid;
-    grid-template-columns: 28px 1fr auto;
-    align-items: center;
-    gap: 8px;
-    border: 0;
-    background: transparent;
-    color: #ddd;
-    text-align: left;
-  }
-  .pc-register__country-menu button:hover { background: #303030; }
-  .pc-register__grid fieldset {
-    min-width: 0;
-    height: 76px;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    border: 0;
-  }
-  .pc-register__grid fieldset legend { transform: translateY(1px); }
-  .pc-register__grid fieldset label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #ddd;
-    font-size: 13px;
-  }
-  .pc-register__grid fieldset input { accent-color: #d2ff4f; }
-  .pc-register__agree {
-    margin: 28px 0 22px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #aaa;
-    font-size: 13px;
-  }
-  .pc-register__agree > input { width: 18px; height: 18px; accent-color: #d2ff4f; }
-  .pc-register__agree button,
-  .pc-register__card > p button {
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: #d2ff4f;
-  }
-  .pc-register__submit {
-    width: 100%;
-    height: 56px;
-    border: 0;
-    border-radius: 3px;
-    background: #d2ff4f;
-    color: #050505;
-    font-weight: 700;
-  }
-  .pc-register__card > p {
-    margin: 24px 0 0;
-    color: #929292;
-    text-align: center;
     font-size: 13px;
   }
 }

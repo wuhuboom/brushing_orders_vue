@@ -15,6 +15,7 @@ const api = axios.create({
 const languageMap = {
   en: "en_US",
   es: "es_ES",
+  zh: "zh_CN",
   fr: "fr_FR",
   de: "de_DE",
   it: "it_IT",

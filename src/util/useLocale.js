@@ -1,6 +1,7 @@
 // src/composables/useLocale.ts
 import { useI18n } from "vue-i18n";
 import { Locale } from "vant";
+import zhCN from "vant/es/locale/lang/zh-CN";
 import enUS from "vant/es/locale/lang/en-US";
 import koKR from "vant/es/locale/lang/ko-KR";
 import jaJP from "vant/es/locale/lang/ja-JP";
@@ -16,6 +17,7 @@ export function useLocale() {
   const { locale } = useI18n();
 
   const vantLocales = {
+    zh: { name: "zh-CN", pack: zhCN },
     en: { name: "en", pack: enUS },
     ko: { name: "ko", pack: koKR },
     ja: { name: "ja", pack: jaJP },
