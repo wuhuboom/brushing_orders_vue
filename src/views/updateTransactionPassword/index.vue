@@ -7,6 +7,7 @@
     note-key="das.form.fundPasswordNote"
     old-field="oldTradePassword"
     new-field="newTradePassword"
+    pc-active="transaction"
     :submitter="editTradePassword"
   />
 </template>

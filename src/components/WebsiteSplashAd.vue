@@ -56,14 +56,14 @@ watch(
     class="splash-ad"
     role="dialog"
     aria-modal="true"
-    aria-label="Advertisement"
+    :aria-label="$t('das.dmk.advertisement')"
     @click.self="close"
   >
     <div class="splash-ad__content">
       <button
         class="splash-ad__close"
         type="button"
-        aria-label="Close"
+        :aria-label="$t('das.dmk.close')"
         @click="close"
       >
         ×

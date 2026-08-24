@@ -1,146 +1,46 @@
 <template>
-  <main class="das-page profile-page">
-    <div class="profile-backdrop">
-      <span class="profile-ambient ambient-sage-left" aria-hidden="true"></span>
-      <span class="profile-ambient ambient-coral-top" aria-hidden="true"></span>
-      <span class="profile-ambient ambient-sage-right" aria-hidden="true"></span>
-      <span class="profile-ambient ambient-coral-mid" aria-hidden="true"></span>
-
-      <header class="profile-top">
-        <button
-          class="profile-brand"
-          type="button"
-          aria-label="DAS home"
-          @click="safeReplace(router, '/')"
-        >
-          <img src="@/static/das/wordmark-cream.png" alt="DAS" />
-        </button>
-        <div class="profile-top__actions">
-          <button class="profile-contact" type="button" @click="safePush(router, '/contact')">
-            {{ $t("das.nav.contact") }}
-          </button>
-          <button class="profile-initials" type="button">
-            {{ initials }}
-          </button>
+  <DmkPcAccountShell active="personal">
+    <div>
+      <div class="w-full flex justify-between items-center">
+        <div class="flex justify-start items-center">
+          <img :src="avatar" class="w-14 h-14 rounded-full overflow-hidden object-cover" alt="" @error="avatarFailed = true" />
+          <span class="text-3xl ml-4 font-semibold">{{ displayName }}</span>
         </div>
-      </header>
-
-      <section class="profile-head">
-        <button
-          class="profile-avatar"
-          type="button"
-          @click="safePush(router, '/profile')"
-        >
-          <ProfileAvatar
-            :src="avatar"
-            alt=""
-            @error="avatarFailed = true"
-          />
-        </button>
-        <button
-          class="edit-avatar"
-          type="button"
-          @click="safePush(router, '/profile')"
-        >
-          <img class="edit-avatar__icon" src="@/static/das/icons/edit-profile.png" alt="" />
-          {{ $t("das.profile.editAvatar") }}
-        </button>
-      </section>
-
-      <section class="profile-card">
-        <div class="profile-card__glow" aria-hidden="true"></div>
-        <div class="profile-card__content">
-          <div class="profile-card__heading">
-            <span class="eyebrow">{{ $t("das.profile.hello") }},</span>
-            <span class="profile-tier"><img src="@/static/das/icons/tier-star.png" alt="" /> TIER {{ userInfo.levelId || 1 }}</span>
-          </div>
-          <h1>{{ displayName }}</h1>
-          <div class="profile-stats">
-            <div>
-              <small>{{ $t("das.profile.referralCode") }}</small>
-              <div class="referral-value">
-                <strong>{{ userInfo.inviteCode || "—" }}</strong>
-                <button
-                  v-if="userInfo.inviteCode"
-                  class="copy-code"
-                  type="button"
-                  :aria-label="$t('das.profile.copyReferral')"
-                  @click="copyReferralCode"
-                >
-                  <img src="@/static/das/icons/copy.png" alt="" />
-                </button>
-              </div>
-            </div>
-            <div>
-              <small>
-                <span>{{ $t("das.profile.todayProfit") }}</span>
-                <span>(USD)</span>
-              </small>
-              <strong>{{ money(userInfo.commission) }}</strong>
-            </div>
-            <div>
-              <small>
-                <span>{{ $t("das.profile.totalBalance") }}</span>
-                <span>(USD)</span>
-              </small>
-              <strong>{{ money(userInfo.totalBalance ?? userInfo.balance) }}</strong>
-            </div>
-          </div>
-          <div class="credit">
-            <span>{{ $t("das.profile.credit") }}:</span>
-            <i class="credit-track">
-              <b
-                class="credit-fill"
-                :style="{ width: `${creditPercent}%` }"
-              ></b>
-            </i>
-            <strong>{{ creditLabel }}%</strong>
-          </div>
+        <img :src="pcLevelIcon" class="w-12" alt="" />
+      </div>
+      <div class="mt-4 text-lg">{{ $t("das.dmk.invitationCode") }}: {{ userInfo.inviteCode || "—" }}</div>
+      <div class="w-full flex justify-start items-center text-lg mt-4">
+        <div class="whitespace-nowrap">{{ $t("das.dmk.creditScore") }}:</div>
+        <div class="dmk-credit-score-bar w-full ml-2">
+          <DmkCreditRunner :percentage="creditPercent" />
         </div>
-      </section>
-
-      <section
-        v-for="section in sections"
-        :key="section.title"
-        class="profile-section"
-      >
-        <h2>{{ $t(section.title) }}</h2>
-        <button
-          v-for="item in section.items"
-          :key="item.label"
-          :class="item.tone"
-          type="button"
-          @click="openMenuItem(item)"
-        >
-          <span class="menu-icon"><DasIcon :name="item.icon" /></span>
-          <b>{{ $t(item.label) }}</b>
-          <img class="arrow" src="@/static/das/icons/chevron-right.png" alt="" />
-        </button>
-      </section>
-      <p class="profile-copyright">{{ $t("das.common.copyright") }}</p>
+      </div>
+      <div class="w-full py-4 text-lg flex justify-between items-center">
+        <div class="col-span-1"><p>{{ $t("das.dmk.walletAmount") }}</p><p class="mt-2 text-2xl">{{ money(userInfo.totalBalance ?? userInfo.balance) }} {{ $t("das.dmk.currencyUsd") }}</p></div>
+        <div class="col-span-1"><p>{{ $t("das.dmk.pendingAmount") }}</p><p class="mt-2 text-2xl">{{ money(pcPendingAmount) }} {{ $t("das.dmk.currencyUsd") }}</p></div>
+        <div class="col-span-1"><p>{{ $t("das.dmk.anniversaryBonus") }}</p><p class="mt-2 text-2xl">{{ money(pcAnniversaryBonus) }} {{ $t("das.dmk.currencyUsd") }}</p></div>
+        <div class="col-span-1"><p>{{ $t("das.dmk.commission") }}</p><p class="mt-2 text-2xl">{{ money(userInfo.commission) }} {{ $t("das.dmk.currencyUsd") }}</p></div>
+      </div>
     </div>
-    <WithdrawalPasswordDialog
-      ref="withdrawalPasswordDialog"
-      @verified="openWithdrawalAccounts"
-    />
-  </main>
+  </DmkPcAccountShell>
+  <DmkH5Layout class="dmk-mobile-current" :menu-initially-open="true" :profile-initially-open="true">
+    <DmkH5HomeContent />
+  </DmkH5Layout>
 </template>
 
 <script setup>
+import DmkPcAccountShell from "@/components/dmkPc/DmkPcAccountShell.vue";
+import DmkH5Layout from "@/components/dmkH5/DmkH5Layout.vue";
+import DmkH5HomeContent from "@/components/dmkH5/DmkH5HomeContent.vue";
+import DmkCreditRunner from "@/components/dmk/DmkCreditRunner.vue";
 import { computed, onMounted, ref } from "vue";
 import { showToast } from "vant";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useUserStore } from "@/store/modules/user";
 import { userGetInfo } from "@/api/apis";
-import DasIcon from "@/components/DasIcon.vue";
-import ProfileAvatar from "@/components/ProfileAvatar.vue";
-import WithdrawalPasswordDialog from "@/components/WithdrawalPasswordDialog.vue";
 import { setWithdrawalCredential } from "@/utils/withdrawalCredential";
-import { safePush, safeReplace } from "@/utils/navigation";
-import { defaultAvatarForUser } from "@/utils/avatar";
-import avatarFallback from "@/static/das/avatar-profile-raw.png";
-import femaleAvatarFallback from "@/static/das/avatar-profile-raw-female.png";
+import { safePush } from "@/utils/navigation";
 
 const router = useRouter();
 const { t: tCopy } = useI18n();
@@ -151,12 +51,7 @@ const avatarFailed = ref(false);
 const withdrawalPasswordDialog = ref(null);
 
 const avatarPath = computed(() => String(userInfo.value.avatar ?? "").trim());
-const defaultAvatar = computed(() =>
-  defaultAvatarForUser(userInfo.value, {
-    male: avatarFallback,
-    female: femaleAvatarFallback,
-  }),
-);
+const defaultAvatar = computed(() => "/dmk/assets/avatar.png");
 const hasCustomAvatar = computed(() => {
   const path = avatarPath.value;
   return Boolean(
@@ -196,9 +91,26 @@ const creditPercent = computed(() => {
   if (!Number.isFinite(value)) return 0;
   return Math.min(100, Math.max(0, value));
 });
-const creditLabel = computed(() => {
-  const value = creditPercent.value;
-  return Number.isInteger(value) ? String(value) : value.toFixed(1);
+const pcPendingAmount = computed(() =>
+  userInfo.value.frozenBalance ??
+  userInfo.value.pendingAmount ??
+  userInfo.value.freezeAmount ??
+  userInfo.value.frozenAmount ??
+  userInfo.value.frozen ??
+  0,
+);
+const pcAnniversaryBonus = computed(() =>
+  userInfo.value.anniversaryBonus ?? userInfo.value.bonus ?? userInfo.value.rewardAmount ?? 0,
+);
+const pcLevelIcon = computed(() => {
+  const path =
+    userInfo.value.userLevel?.icon ??
+    userInfo.value.memberLevel?.icon ??
+    userInfo.value.levelIcon ??
+    userInfo.value.vipIcon;
+  if (path) return /^https?:/i.test(String(path)) ? path : `${base}${path}`;
+  const level = Math.min(4, Math.max(1, Number(userInfo.value.levelId || userInfo.value.vipId || 1)));
+  return `/dmk/assets/vip${level}.png`;
 });
 
 
@@ -287,13 +199,17 @@ const sections = [
         label: "das.profile.logout",
         icon: "logout",
         tone: "grey",
-        path: "/account/logout",
+        action: "logout",
       },
     ],
   },
 ];
 
-const openMenuItem = (item) => {
+const openMenuItem = async (item) => {
+  if (item.action === "logout") {
+    await store.logout();
+    return;
+  }
   if (item.path === "/paymentMethods") {
     withdrawalPasswordDialog.value?.open();
     return;
@@ -316,6 +232,10 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.dmk-credit-score-bar :deep(.dmk-credit-runner__track) {
+  top: 24px;
+}
+
 .profile-page {
   background: #e9eee1;
 }

@@ -1,101 +1,100 @@
 <template>
-  <main class="das-page withdraw-page">
-    <DasPageHeader title-key="das.page.withdraw" />
-    <form class="withdraw-body" novalidate @invalid.capture.prevent @submit.prevent="send">
-      <section class="total-card">
-        <div>
-          <b>{{ $t("das.deposit.totalBalance") }}</b
-          ><button type="button" @click="safePush(router, '/withdrawRecords')">
-            <img :src="withdrawHistoryIcon" alt="" />
-            <u>{{ $t("das.withdraw.history") }}</u>
-          </button>
+  <DmkPcAccountShell>
+    <div class="w-full h-full dmk-withdraw-scope">
+      <div class="van-tabs van-tabs--line">
+        <div class="van-tabs__wrap">
+          <div class="van-tabs__nav van-tabs__nav--line" role="tablist" aria-orientation="horizontal" style="border-color: var(--main-color); background: transparent">
+            <div class="van-tab van-tab--line van-tab--active" role="tab" aria-selected="true" style="color: rgb(255,255,255)"><span class="van-tab__text van-tab__text--ellipsis">{{ $t("das.dmk.withdraw") }}</span></div>
+            <div class="van-tab van-tab--line cursor-pointer" role="tab" aria-selected="false" style="color: rgb(153,153,153)" @click="safePush(router, '/withdrawRecords')"><span class="van-tab__text van-tab__text--ellipsis">{{ $t("das.dmk.history") }}</span></div>
+            <div class="van-tabs__line" style="background-color: var(--main-color); transform: translateX(279.5px) translateX(-50%); transition-duration: .3s"></div>
+          </div>
         </div>
-        <strong>{{ money(user.totalBalance || user.balance) }} USD</strong>
-        <p>{{ $t("das.withdraw.processingNote") }}</p>
-      </section>
-      <section class="amounts-card">
-        <p>
-          <b>{{ $t("das.withdraw.availableAmount") }}</b
-          ><span>{{ money(user.balance) }} USD</span>
-        </p>
-        <p>
-          <b>{{ $t("das.withdraw.freezeAmount") }}</b
-          ><span>{{ money(user.frozenBalance) }} USD</span>
-        </p>
-      </section>
-      <h2>{{ $t("das.withdraw.withdrawAmount") }}</h2>
-      <label class="input-card"
-        ><input
-          v-model.number="form.amount"
-          type="number"
-          min="0"
-          step="0.01"
-          :placeholder="$t('das.withdraw.withdrawAmount')"
-        /><button
-          type="button"
-          @click="form.amount = Number(user.balance || 0)"
-        >
-          {{ $t("das.withdraw.allBalance") }}
-        </button></label
-      ><div v-if="accounts.length" class="account-select">
-        <DasSelect
-          v-model="form.withdrawalAccountId"
-          :options="accounts"
-          value-key="id"
-          :get-label="accountName"
-          :aria-label="$t('das.form.selectAccount')"
-          :placeholder="$t('das.form.selectAccount')"
-        />
-      </div
-      ><button
-        v-else
-        class="add-account"
-        type="button"
-        @click="safePush(router, '/paymentMethods')"
-      >
-        {{ $t("das.form.addAccount") }}</button
-      ><label class="input-card"
-        ><input
-          v-model="form.tradePassword"
-          :type="tradePasswordVisible ? 'text' : 'password'"
-          :placeholder="$t('das.auth.tradePassword')" /><button
-          class="password-toggle"
-          type="button"
-          :aria-pressed="tradePasswordVisible"
-          @click="tradePasswordVisible = !tradePasswordVisible"
-        >
-          <svg
-            v-if="tradePasswordVisible"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
-            <circle cx="12" cy="12" r="2.8" />
-          </svg>
-          <svg v-else viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M3 3l18 18" />
-            <path d="M10.6 6.1A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6a17 17 0 0 1-2.5 3.2" />
-            <path d="M6.2 7.2C3.8 9 2.5 12 2.5 12s3.5 6 9.5 6a10 10 0 0 0 3.1-.5" />
-            <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
-          </svg></button
-        ></label
-      ><button class="confirm-button" type="submit">
-        {{ $t("das.common.confirm") }}
-      </button>
-      <p class="withdraw-copyright">{{ $t("das.common.copyright") }}</p>
-    </form>
-  </main>
+        <div class="van-tabs__content">
+          <div class="van-tab__panel" role="tabpanel">
+            <form class="p-4 box-border flex flex-col" novalidate @invalid.capture.prevent @submit.prevent="send">
+              <div class="flex flex-col justify-between p-4 box-border mb-4">
+                <div class="text-white opacity-70 text-sm font-semibold">{{ $t("das.dmk.accountAmount") }}</div>
+                <div class="flex mt-4 mb-4"><div class="text-white text-center text-3xl font-bold flex items-center">{{ money(user.totalBalance || user.balance) }}</div><div class="text-white text-sm font-bold flex items-center ml-2 pt-[12px]">{{ $t("das.dmk.currencyUsd") }}</div></div>
+              </div>
+              <div class="w-full">
+                <div class="w-full mt-4 box-border flex flex-col">
+                  <div class="w-full flex flex-col">
+                    <div class="w-full flex flex-col mt-2">
+                      <div class="text-[#fff] text-base">{{ $t("das.dmk.withdrawAmount") }}</div>
+                      <div class="w-full mt-2 overflow-hidden bg-[#1a1a1a] border border-[#393939] lg:bg-[#fff] lg:border-[#fff]"><div class="van-cell van-field"><div class="van-cell__value van-field__value"><div class="van-field__body"><input v-model.number="form.amount" class="van-field__control" inputmode="decimal" :placeholder="$t('das.dmk.withdrawAmount')" type="text" /></div></div></div></div>
+                    </div>
+                    <div class="w-full flex flex-col mt-2">
+                      <div class="text-[#fff] text-base">{{ $t("das.dmk.transactionPassword") }}</div>
+                      <div class="w-full mt-2 overflow-hidden bg-[#1a1a1a] border border-[#393939] lg:bg-[#fff] lg:border-[#fff]"><div class="van-cell van-field"><div class="van-cell__value van-field__value"><div class="van-field__body"><input v-model="form.tradePassword" class="van-field__control" :placeholder="$t('das.dmk.transactionPassword')" type="password" /></div></div></div></div>
+                    </div>
+                    <div v-if="!accounts.length" class="mt-4 text-[var(--main-color)] cursor-pointer" @click="safePush(router, '/paymentMethods')">{{ $t("das.dmk.addWithdrawalAccount") }}</div>
+                    <div class="w-full mt-6"><button class="van-button van-button--default van-button--large" style="color:white;background:var(--main-color);border-color:var(--main-color)" type="submit"><div class="van-button__content"><span class="van-button__text"><span class="text-black">{{ $t("das.dmk.withdraw") }}</span></span></div></button></div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </DmkPcAccountShell>
+  <DmkH5Layout class="dmk-mobile-current">
+    <div class="w-full h-full dmk-withdraw-scope">
+      <div class="van-tabs van-tabs--line">
+        <div class="van-tabs__wrap">
+          <div class="van-tabs__nav van-tabs__nav--line" role="tablist" style="border-color: var(--main-color); background: transparent">
+            <div class="van-tab van-tab--line van-tab--active" role="tab" aria-selected="true" style="color: rgb(255, 255, 255)"><span class="van-tab__text van-tab__text--ellipsis">{{ $t("das.dmk.withdraw") }}</span></div>
+            <div class="van-tab van-tab--line cursor-pointer" role="tab" aria-selected="false" style="color: rgb(153, 153, 153)" @click="safePush(router, '/withdrawRecords')"><span class="van-tab__text van-tab__text--ellipsis">{{ $t("das.dmk.history") }}</span></div>
+            <div class="van-tabs__line" style="background-color: var(--main-color); transform: translateX(25vw) translateX(-50%); transition-duration: .3s"></div>
+          </div>
+        </div>
+        <div class="van-tabs__content">
+          <div class="van-tab__panel" role="tabpanel">
+            <form class="p-4 box-border flex flex-col" novalidate @invalid.capture.prevent @submit.prevent="send">
+              <div class="flex flex-col justify-between p-4 box-border mb-4">
+                <div class="text-white opacity-70 text-sm font-semibold">{{ $t("das.dmk.accountAmount") }}</div>
+                <div class="flex mt-4 mb-4">
+                  <div class="text-white text-center text-3xl font-bold flex items-center">{{ h5Amount(user.totalBalance || user.balance) }}</div>
+                  <div class="text-white text-sm font-bold flex items-center ml-2 pt-[12px]">{{ $t("das.dmk.currencyUsd") }}</div>
+                </div>
+              </div>
+              <div class="w-full">
+                <div class="w-full mt-4 box-border flex flex-col">
+                  <div class="w-full flex flex-col">
+                    <div class="w-full flex flex-col mt-2">
+                      <div class="text-[#fff] text-base">{{ $t("das.dmk.withdrawAmount") }}</div>
+                      <div class="w-full mt-2 overflow-hidden bg-[#1a1a1a] border border-[#393939]">
+                        <div class="van-cell van-field"><div class="van-cell__value van-field__value"><div class="van-field__body"><input v-model.number="form.amount" class="van-field__control" inputmode="decimal" :placeholder="$t('das.dmk.withdrawAmount')" type="text" /></div></div></div>
+                      </div>
+                    </div>
+                    <div class="w-full flex flex-col mt-2">
+                      <div class="text-[#fff] text-base">{{ $t("das.dmk.transactionPassword") }}</div>
+                      <div class="w-full mt-2 overflow-hidden bg-[#1a1a1a] border border-[#393939]">
+                        <div class="van-cell van-field"><div class="van-cell__value van-field__value"><div class="van-field__body"><input v-model="form.tradePassword" class="van-field__control" :placeholder="$t('das.dmk.transactionPassword')" type="password" /></div></div></div>
+                      </div>
+                    </div>
+                    <div v-if="!accounts.length" class="mt-4 text-[var(--main-color)] cursor-pointer" @click="safePush(router, '/paymentMethods')">{{ $t("das.dmk.addWithdrawalAccount") }}</div>
+                    <div class="w-full mt-6">
+                      <button class="van-button van-button--default van-button--large" style="color:white;background:var(--main-color);border-color:var(--main-color)" type="submit"><div class="van-button__content"><span class="van-button__text"><span class="text-black">{{ $t("das.dmk.withdraw") }}</span></span></div></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </DmkH5Layout>
 </template>
 <script setup>
+import DmkPcAccountShell from "@/components/dmkPc/DmkPcAccountShell.vue";
+import DmkH5Layout from "@/components/dmkH5/DmkH5Layout.vue";
 import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { showSuccessToast, showToast } from "vant";
 import { withdrawal, getWithdrawalAccounts, userGetInfo } from "@/api/apis";
-import DasPageHeader from "@/components/DasPageHeader.vue";
-import DasSelect from "@/components/DasSelect.vue";
-import withdrawHistoryIcon from "@/static/das/icons/withdraw-history.png";
 import { safePush, safeReplace } from "@/utils/navigation";
 const router = useRouter(),
   { t } = useI18n(),
@@ -106,6 +105,12 @@ const router = useRouter(),
 const money = (v) =>
     Number(v || 0).toLocaleString(undefined, {
       minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }),
+  h5Amount = (v) =>
+    Number(v || 0).toLocaleString("en-US", {
+      useGrouping: false,
+      minimumFractionDigits: 0,
       maximumFractionDigits: 2,
     }),
   accountName = (a) =>

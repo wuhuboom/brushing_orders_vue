@@ -8,7 +8,11 @@
           :aria-label="$t('das.common.close')"
           @click="cancel"
         ></button>
-        <form class="fund-dialog__card" novalidate @submit.prevent="verifyPassword">
+        <form
+          class="fund-dialog__card"
+          novalidate
+          @submit.prevent="verifyPassword"
+        >
           <button
             class="fund-dialog__close"
             type="button"
@@ -20,6 +24,9 @@
             </svg>
           </button>
 
+          <div class="fund-dialog__eyebrow" aria-hidden="true">
+            <span></span> {{ $t("das.dmk.secureAccess") }} <span></span>
+          </div>
           <span class="fund-dialog__icon" aria-hidden="true">
             <svg viewBox="0 0 32 32" fill="none">
               <rect x="5" y="12" width="22" height="15" rx="5" />
@@ -47,12 +54,21 @@
                 :aria-label="$t('das.form.togglePassword')"
                 @click="passwordVisible = !passwordVisible"
               >
-                <svg v-if="passwordVisible" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
+                <svg
+                  v-if="passwordVisible"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"
+                  />
                   <circle cx="12" cy="12" r="2.6" />
                 </svg>
                 <svg v-else viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M3 3l18 18M10.6 6.1A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6a17 17 0 0 1-2.5 3.2M6.2 7.2C3.8 9 2.5 12 2.5 12s3.5 6 9.5 6a10 10 0 0 0 3.1-.5M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+                  <path
+                    d="M3 3l18 18M10.6 6.1A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6a17 17 0 0 1-2.5 3.2M6.2 7.2C3.8 9 2.5 12 2.5 12s3.5 6 9.5 6a10 10 0 0 0 3.1-.5M9.9 9.9a3 3 0 0 0 4.2 4.2"
+                  />
                 </svg>
               </button>
             </div>
@@ -63,7 +79,9 @@
               {{ $t("das.common.cancel") }}
             </button>
             <button type="submit" :disabled="submitting || password.length < 6">
-              {{ submitting ? $t("das.common.loading") : $t("das.common.confirm") }}
+              {{
+                submitting ? $t("das.common.loading") : $t("das.common.confirm")
+              }}
             </button>
           </div>
         </form>
@@ -158,21 +176,54 @@ defineExpose({ open, close });
   width: 100%;
   height: 100%;
   border: 0;
-  background: rgba(8, 31, 23, 0.66);
-  backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.76);
+  backdrop-filter: blur(4px);
 }
 .fund-dialog__card {
   position: relative;
   z-index: 1;
-  width: min(100%, 370px);
-  padding: 30px 26px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 28px;
-  color: #17382d;
+  width: min(100%, 440px);
+  padding: 34px 32px 30px;
+  overflow: hidden;
+  border: 1px solid #41453f;
+  border-radius: 26px;
+  color: #fff;
   background:
-    radial-gradient(circle at 100% 0, rgba(242, 196, 76, 0.13), transparent 38%),
-    #f7f5ec;
-  box-shadow: 0 24px 56px rgba(5, 27, 19, 0.32);
+    linear-gradient(rgba(218, 255, 69, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(218, 255, 69, 0.022) 1px, transparent 1px),
+    radial-gradient(circle at 92% 5%, rgba(218, 255, 69, 0.13), transparent 34%),
+    #111312;
+  background-size: 30px 30px, 30px 30px, auto, auto;
+  box-shadow:
+    0 32px 90px rgba(0, 0, 0, 0.72),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.fund-dialog__card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 42px;
+  right: 42px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--main-color, #daff45), transparent);
+  box-shadow: 0 0 18px rgba(218, 255, 69, 0.42);
+}
+.fund-dialog__eyebrow {
+  margin: 2px 46px 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #c7cbb8;
+  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.fund-dialog__eyebrow span {
+  height: 1px;
+  flex: 1;
+  background: rgba(218, 255, 69, 0.42);
 }
 .fund-dialog__close {
   position: absolute;
@@ -183,8 +234,8 @@ defineExpose({ open, close });
   padding: 8px;
   border: 0;
   border-radius: 50%;
-  color: #62736a;
-  background: #e9eee4;
+  color: #a8a8a8;
+  background: #242424;
 }
 .fund-dialog__close svg,
 .fund-dialog__field button svg {
@@ -196,14 +247,16 @@ defineExpose({ open, close });
   stroke-linejoin: round;
 }
 .fund-dialog__icon {
-  width: 58px;
-  height: 58px;
+  width: 62px;
+  height: 62px;
   margin: 0 auto 16px;
   display: grid;
   place-items: center;
-  border-radius: 18px;
-  color: #173e30;
-  background: #dce9d7;
+  border: 1px solid rgba(218, 255, 69, 0.22);
+  border-radius: 19px;
+  color: var(--main-color, #daff45);
+  background: linear-gradient(145deg, rgba(218, 255, 69, 0.17), rgba(218, 255, 69, 0.06));
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
 }
 .fund-dialog__icon svg {
   width: 33px;
@@ -215,13 +268,14 @@ defineExpose({ open, close });
 }
 .fund-dialog h2 {
   margin: 0;
-  font-size: 22px;
+  font-size: 24px;
+  font-weight: 650;
   text-align: center;
 }
 .fund-dialog p {
   max-width: 280px;
   margin: 9px auto 24px;
-  color: #7c8881;
+  color: #979797;
   font-size: 13px;
   line-height: 1.55;
   text-align: center;
@@ -233,37 +287,39 @@ defineExpose({ open, close });
   font-weight: 750;
 }
 .fund-dialog__field > div {
-  height: 58px;
+  height: 62px;
   padding: 0 12px 0 18px;
   display: flex;
   align-items: center;
-  border: 1px solid #d7dbd2;
-  border-radius: 17px;
-  background: #fff;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  border: 1px solid #393939;
+  border-radius: 16px;
+  background: rgba(25, 27, 26, 0.94);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 }
 .fund-dialog__field > div:focus-within {
-  border-color: #4d806d;
-  box-shadow: 0 0 0 3px rgba(77, 128, 109, 0.12);
+  border-color: var(--main-color, #daff45);
+  box-shadow: 0 0 0 3px rgba(218, 255, 69, 0.12);
 }
 .fund-dialog__field input {
   min-width: 0;
   flex: 1;
   border: 0;
   outline: 0;
-  color: #17382d;
+  color: #fff;
   background: transparent;
   font-size: 16px;
 }
 .fund-dialog__field input::placeholder {
-  color: #a2aaa5;
+  color: #737373;
 }
 .fund-dialog__field button {
   width: 38px;
   height: 38px;
   padding: 8px;
   border: 0;
-  color: #6f7e76;
+  color: #979797;
   background: transparent;
 }
 .fund-dialog__actions {
@@ -273,18 +329,19 @@ defineExpose({ open, close });
   gap: 10px;
 }
 .fund-dialog__actions button {
-  min-height: 50px;
-  border: 1px solid #d3d8d0;
+  min-height: 54px;
+  border: 1px solid #555;
   border-radius: 999px;
-  color: #17382d;
+  color: #fff;
   background: transparent;
   font-size: 15px;
   font-weight: 750;
 }
 .fund-dialog__actions button:last-child {
-  border-color: #14392c;
-  color: #fff;
-  background: #14392c;
+  border-color: var(--main-color, #daff45);
+  color: #000;
+  background: var(--main-color, #daff45);
+  box-shadow: 0 12px 28px rgba(218, 255, 69, 0.12);
 }
 .fund-dialog__actions button:disabled {
   opacity: 0.48;
@@ -295,7 +352,9 @@ defineExpose({ open, close });
 }
 .fund-dialog-enter-active .fund-dialog__card,
 .fund-dialog-leave-active .fund-dialog__card {
-  transition: transform 220ms ease, opacity 180ms ease;
+  transition:
+    transform 220ms ease,
+    opacity 180ms ease;
 }
 .fund-dialog-enter-from,
 .fund-dialog-leave-to {
@@ -305,6 +364,21 @@ defineExpose({ open, close });
 .fund-dialog-leave-to .fund-dialog__card {
   opacity: 0;
   transform: translateY(18px) scale(0.97);
+}
+
+@media (max-width: 480px) {
+  .fund-dialog {
+    padding: 16px;
+  }
+
+  .fund-dialog__card {
+    padding: 28px 20px 22px;
+    border-radius: 20px;
+  }
+
+  .fund-dialog__actions {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
 }
 
 :global(.el-message) {

@@ -1,64 +1,114 @@
 <template>
-  <main class="das-page deposit-page">
-    <DasPageHeader title-key="das.page.deposit" />
-    <section class="deposit-body">
-      <div class="balance-card">
-        <div class="balance-card__amounts">
-          <div>
-            <b>{{ $t("das.form.availableBalance") }}</b>
-            <strong>{{ money(user.balance) }} USD</strong>
-          </div>
-          <div>
-            <b>{{ $t("das.deposit.totalBalance") }}</b>
-            <strong>{{ money(user.totalBalance) }} USD</strong>
+  <DmkPcAccountShell active="deposit">
+    <div class="w-full h-full dmk-deposit-scope">
+      <div class="h-[80vh] overflow-y-scroll">
+        <div
+          class="w-full pl-2 pr-2 pt-6 box-border flex flex-col"
+        >
+          <div class="van-list" role="feed">
+            <div v-for="item in items" :key="item.id || item.orderNumber">
+              <div
+                class="w-full mb-4 bg-[#141426] rounded-xl shadow flex flex-col p-3"
+              >
+                <div class="flex justify-between">
+                  <div
+                    class="text-sm font-semibold text-[#999]"
+                  >
+                    {{ item.orderNumber || item.id }}
+                    <div class="flex justify-between mt-3">
+                      <div
+                        class="text-sm font-normal text-[#999]"
+                      >
+                        {{ date(item.createTime) }}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex text-base text-[var(--main-color)] font-semibold items-center mt-3"
+                  >
+                    {{ $t("das.dmk.currencyUsd") }} {{ money(item.receivedAmount || item.amount) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-if="loading" class="van-list__loading">{{ $t("das.common.loading") }}</div>
+            <div v-else-if="finished" class="van-list__finished-text">
+              {{ $t("das.dmk.noMoreData") }}
+            </div>
+            <button
+              v-else
+              type="button"
+              class="w-full py-3 text-[#999]"
+              @click="load"
+            >
+              {{ $t("das.dmk.loadMore") }}
+            </button>
           </div>
         </div>
-        <button type="button" @click="contact">
-          {{ $t("das.deposit.topUp") }}
-        </button>
       </div>
-      <div v-if="pendingOrders.length" class="pending-orders">
-        <OrderCard
-          v-for="item in pendingOrders"
-          :key="item.id || item.orderNo"
-          :item="item"
-          @submit="openOrderDetails"
-        />
+    </div>
+  </DmkPcAccountShell>
+  <DmkH5Layout class="dmk-mobile-current">
+    <div class="w-full h-full dmk-deposit-scope">
+      <div class="w-[90%] pb-4 mx-auto text-3xl text-white">
+        {{ $t("das.dmk.depositHistory") }}
       </div>
-      <div class="recent-title">
-        <h2>{{ $t("das.deposit.recent") }}</h2>
-        <button type="button" @click="openTransactions">
-          {{ $t("das.common.seeAll") }}
-        </button>
-      </div>
-      <van-list
-        v-model:loading="loading"
-        :finished="finished"
-        :finished-text="$t('das.common.noMore')"
-        @load="load"
-        ><article v-for="item in items" :key="item.id" class="deposit-entry">
-          <i></i>
-          <div>
-            <b>{{ $t("das.deposit.deposited") }}</b
-            ><small
-              >{{ $t("das.deposit.reference") }}
-              {{ item.orderNumber || item.id }}</small
-            ><small>{{ date(item.createTime) }}</small>
+      <div class="h-[100vh] overflow-y-scroll">
+        <div
+          class="w-full pl-2 pr-2 pt-6 box-border flex flex-col"
+        >
+          <div class="van-list" role="feed">
+            <div v-for="item in items" :key="item.id || item.orderNumber">
+              <div
+                class="w-full mb-4 bg-[#141426] rounded-xl shadow flex flex-col p-3"
+              >
+                <div class="flex justify-between">
+                  <div
+                    class="text-sm font-semibold text-[#999]"
+                  >
+                    {{ item.orderNumber || item.id }}
+                    <div class="flex justify-between mt-3">
+                      <div
+                        class="text-sm font-normal text-[#999]"
+                      >
+                        {{ h5Date(item.createTime) }}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex text-base text-[var(--main-color)] font-semibold items-center mt-3"
+                  >
+                    {{ $t("das.dmk.currencyUsd") }} {{ h5Amount(item.receivedAmount || item.amount) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-if="loading" class="van-list__loading">{{ $t("das.common.loading") }}</div>
+            <div v-else-if="finished" class="van-list__finished-text">
+              {{ $t("das.dmk.noMoreData") }}
+            </div>
+            <button
+              v-else
+              type="button"
+              class="w-full py-3 text-[#999]"
+              @click="load"
+            >
+              {{ $t("das.dmk.loadMore") }}
+            </button>
           </div>
-          <strong>{{ money(item.receivedAmount || item.amount) }} USD</strong>
-        </article></van-list
-      >
-      <p class="deposit-copyright">{{ $t("das.common.copyright") }}</p>
-    </section>
-  </main>
+        </div>
+      </div>
+    </div>
+  </DmkH5Layout>
 </template>
 <script setup>
+import DmkPcAccountShell from "@/components/dmkPc/DmkPcAccountShell.vue";
+import DmkH5Layout from "@/components/dmkH5/DmkH5Layout.vue";
 import { onBeforeUnmount, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { getDeposit, getOrderInfos, userGetInfo } from "@/api/apis";
-import DasPageHeader from "@/components/DasPageHeader.vue";
-import OrderCard from "@/components/OrderCard.vue";
 import { safePush } from "@/utils/navigation";
+import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
 const router = useRouter(),
   user = ref({}),
   pendingOrders = ref([]),
@@ -75,7 +125,35 @@ const money = (v) =>
     String(v || "")
       .replace("T", " | ")
       .slice(0, 19),
-  contact = () => safePush(router, "/contact"),
+  h5Amount = (v) => {
+    const n = Number(v || 0);
+    return Number.isInteger(n)
+      ? String(n)
+      : n.toLocaleString("en-US", {
+          useGrouping: false,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+  },
+  h5Date = (value) => {
+    if (!value) return "—";
+    const parsed = new Date(value);
+    if (!Number.isNaN(parsed.getTime())) {
+      return parsed
+        .toLocaleString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "numeric",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        })
+        .replace(/^(\d{2})\/(\d{2})\/(\d{4}), /, "$3-$1-$2 ");
+    }
+    return String(value).replace("T", " ").slice(0, 19);
+  },
+  contact = () => openCustomerServiceDialog(),
   openTransactions = () => safePush(router, "/transactionActivity"),
   load = async () => {
     if (finished.value) return;
@@ -116,8 +194,13 @@ const loadPendingOrders = async () => {
 };
 
 onMounted(async () => {
-  const [userResult] = await Promise.allSettled([userGetInfo(), loadPendingOrders()]);
-  if (userResult.status === "fulfilled") user.value = userResult.value.data || {};
+  const [userResult] = await Promise.allSettled([
+    userGetInfo(),
+    loadPendingOrders(),
+    load(),
+  ]);
+  if (userResult.status === "fulfilled")
+    user.value = userResult.value.data || {};
 });
 onBeforeUnmount(() => pendingController?.abort());
 </script>

@@ -32,11 +32,11 @@
           </div>
           <div class="transaction-value">
             <strong :class="amountClass(item.transactionAmount)">
-              {{ signedMoney(item.transactionAmount) }} USD
+              {{ signedMoney(item.transactionAmount) }} {{ $t("das.dmk.currencyUsd") }}
             </strong>
             <small v-if="hasValue(item.balanceAfter)">
               {{ $t("das.transaction.balanceAfter") }}
-              {{ money(item.balanceAfter) }} USD
+              {{ money(item.balanceAfter) }} {{ $t("das.dmk.currencyUsd") }}
             </small>
           </div>
         </article>

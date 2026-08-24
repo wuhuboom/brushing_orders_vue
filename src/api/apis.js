@@ -44,6 +44,9 @@ const normalizeUser = (user = {}) => {
   );
   const frozenBalance = toNumberOrZero(
     user.frozenBalance,
+    user.pendingAmount,
+    user.pendingOrderAmount,
+    user.taskFrozenAmount,
     user.freezeAmount,
     user.frozenAmount,
     user.holdAmount,
@@ -74,6 +77,7 @@ const normalizeUser = (user = {}) => {
     ),
     balance,
     frozenBalance,
+    pendingAmount: frozenBalance,
     dealCount: user.taskProgress ?? user.dealCount ?? 0,
     cardNumber: user.workLimit ?? user.cardNumber ?? memberLevel.orderCount,
     totalBalance: user.totalBalance ?? balance + frozenBalance,

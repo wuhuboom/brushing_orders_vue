@@ -14,6 +14,7 @@ import ru from "./locales/ru.json";
 import hu from "./locales/hu.json";
 import pl from "./locales/pl.json";
 import sl from "./locales/sl.json";
+import { createDmkMessages } from "./dmk.messages.js";
 
 const messages = {
   en,
@@ -32,6 +33,11 @@ const messages = {
   pl,
   sl,
 };
+
+Object.entries(messages).forEach(([locale, message]) => {
+  message.das = message.das || {};
+  message.das.dmk = createDmkMessages(locale, message);
+});
 
 const i18n = createI18n({
   locale: "en",

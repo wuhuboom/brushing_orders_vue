@@ -11,19 +11,19 @@
       <img :src="imageUrl(item.coverUrl)" :alt="item.goodsName || ''" />
       <div>
         <h2>{{ item.goodsName }}</h2>
-        <strong>{{ money(item.price) }} USD</strong>
-        <p aria-label="5 stars">★★★★★</p>
+        <strong>{{ money(item.price) }} {{ $t("das.dmk.currencyUsd") }}</strong>
+        <p :aria-label="$t('das.dmk.fiveStars')">★★★★★</p>
       </div>
     </div>
 
     <footer>
       <div>
         <small>{{ $t("das.records.total") }}</small>
-        <b>{{ money(item.totalAmount ?? item.price) }} USD</b>
+        <b>{{ money(item.totalAmount ?? item.price) }} {{ $t("das.dmk.currencyUsd") }}</b>
       </div>
       <div>
         <small>{{ $t("das.records.commission") }}</small>
-        <b>{{ money(item.totalCommission ?? item.commission) }} USD</b>
+        <b>{{ money(item.totalCommission ?? item.commission) }} {{ $t("das.dmk.currencyUsd") }}</b>
       </div>
       <button
         v-if="isPending(item.status)"

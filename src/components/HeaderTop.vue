@@ -3,7 +3,7 @@
     <button
       class="das-brand"
       type="button"
-      aria-label="DAS home"
+      :aria-label="$t('das.dmk.homeAria')"
       @click="safeReplace(router, '/')"
     >
       <img src="@/static/das/wordmark-cream.png" alt="DAS" />
@@ -13,31 +13,29 @@
         {{ $t("das.nav.contact") }}
       </button>
       <button class="das-avatar" type="button" @click="safePush(router, '/my')">
-        {{ initials }}
+        <img :src="avatar" alt="" @error="avatarFailed = true" />
       </button>
     </div>
   </header>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
 import { safePush, safeReplace } from "@/utils/navigation";
+import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
 
 const router = useRouter();
 const userStore = useUserStore();
-const initials = computed(() => {
-  const name = userStore.userInfo?.username || "DL";
-  return name
-    .split(/[\s._-]+/)
-    .filter(Boolean)
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+const avatarFailed = ref(false);
+const imageBaseUrl = window.g?.VITE_API_IMG_URL || "";
+const avatar = computed(() => {
+  const path = String(userStore.userInfo?.avatar || "").trim();
+  if (!path || avatarFailed.value) return "/dmk/assets/avatar.png";
+  return /^https?:/i.test(path) ? path : `${imageBaseUrl}${path}`;
 });
-const customer = () => safePush(router, "/contact");
+const customer = () => openCustomerServiceDialog();
 </script>
 
 <style scoped>
@@ -89,9 +87,13 @@ const customer = () => safePush(router, "/contact");
   border: 1px solid rgba(247, 245, 236, 0.65);
   border-radius: 50%;
   background: transparent;
+  overflow: hidden;
   color: #f7f5ec;
-  font-size: 13px;
-  font-weight: 700;
+}
+.das-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 @media (min-width: 600px) {
   .das-header {

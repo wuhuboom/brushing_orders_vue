@@ -52,5 +52,5 @@ export const genderForUser = (user = {}) => {
 
 export const isFemaleUser = (user = {}) => genderForUser(user) === "female";
 
-export const defaultAvatarForUser = (user, avatars) =>
-  isFemaleUser(user) ? avatars.female : avatars.male;
+export const defaultAvatarForUser = (_user, avatars = {}) =>
+  avatars.default || avatars.male || avatars.female || "/dmk/assets/avatar.png";

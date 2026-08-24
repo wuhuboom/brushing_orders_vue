@@ -7,6 +7,7 @@
     note-key="das.form.loginPasswordNote"
     old-field="oldPassword"
     new-field="newPassword"
+    pc-active="login"
     :submitter="editPassword"
   />
 </template>

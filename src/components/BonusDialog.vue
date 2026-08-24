@@ -15,13 +15,13 @@ const contact = () => emit("contact");
   <van-dialog
     :show="show"
     class="bonus-dialog"
-    width="min(calc(100vw - 24px), calc(var(--das-app-max-width, 960px) - 24px))"
+    width="min(calc(100vw - 24px), calc(var(--das-app-max-width, 100%) - 24px))"
     :show-confirm-button="false"
     close-on-click-overlay
     @update:show="(value) => !value && close()"
   >
     <div class="bonus-prize">
-      <img src="@/static/das/congratulations.png" alt="Congratulations" />
+      <img src="@/static/das/congratulations.png" :alt="t('das.common.success')" />
       <button type="button" @click="contact">
         {{ t("das.auth.support") }}
       </button>
@@ -31,8 +31,8 @@ const contact = () => emit("contact");
 
 <style scoped>
 :global(.bonus-dialog.van-dialog) {
-  width: min(calc(100vw - 24px), calc(var(--das-app-max-width, 960px) - 24px)) !important;
-  max-width: min(calc(100vw - 24px), calc(var(--das-app-max-width, 960px) - 24px)) !important;
+  width: min(calc(100vw - 24px), calc(var(--das-app-max-width, 100%) - 24px)) !important;
+  max-width: min(calc(100vw - 24px), calc(var(--das-app-max-width, 100%) - 24px)) !important;
   left: 50% !important;
   right: auto !important;
   margin: 0 !important;

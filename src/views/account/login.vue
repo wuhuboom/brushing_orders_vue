@@ -1,75 +1,312 @@
 <template>
-  <main class="auth-screen das-page">
-    <header class="auth-top">
-      <img src="@/static/das/wordmark-cream.png" alt="DAS" />
-      <button
-        class="language-button"
-        type="button"
-        @click="safePush(router, '/setting/language')"
-      >
-        {{ language.toUpperCase() }}
-      </button>
-    </header>
-    <form class="auth-form" novalidate @invalid.capture.prevent @submit.prevent="submit">
-      <p class="auth-kicker">{{ $t("das.auth.signIn") }}</p>
-      <h1>
-        <span>{{ $t("das.auth.signInLead") }}</span
-        ><em>{{ $t("das.auth.signInAccent") }}</em>
-      </h1>
-      <p class="auth-hint">{{ $t("das.auth.signInHint") }}</p>
-      <label class="required"
-        ><span>{{ $t("das.auth.username") }}</span
-        ><input v-model.trim="form.username" aria-required="true" autocomplete="username"
-      /></label>
-      <label class="required"
-        ><span>{{ $t("das.auth.password") }}</span
-        ><input
-          v-model="form.password"
-          aria-required="true"
-          type="password"
-          autocomplete="current-password"
-      /></label>
-      <div class="auth-options">
-        <button type="button" @click="customer">
-          {{ $t("das.auth.forgot") }}</button
-        ><label
-          ><input v-model="remember" type="checkbox" />
-          {{ $t("das.auth.remember") }}</label
-        >
+  <div class="dmk-pc-only w-full min-h-[100vh] bg-black dmk-site-scope">
+    <div class="w-full min-h-[100vh] text-white dmk-login-scope">
+      <div class="block">
+        <div class="max-w-[1200px] mx-auto">
+          <DmkPcHeader :authenticated="false" />
+          <form
+            class="w-full my-[10vh] flex justify-between items-center relative"
+            novalidate
+            @invalid.capture.prevent
+            @submit.prevent="submit"
+          >
+            <div class="mr-36 w-[500px]">
+              <div class="text-3xl">
+                {{ $t("das.dmk.readyToStart") }}
+              </div>
+              <div class="text-5xl mt-2">
+                {{ $t("das.dmk.loginAccessCopy") }}
+              </div>
+            </div>
+            <div class="login-input flex flex-1">
+              <div class="box">
+                <div
+                  class="text-white text-lg text-center py-3 mt-4"
+                >
+                  {{ $t("das.dmk.enterLoginInformation") }}
+                </div>
+                <div class="mt-4 w-[90%] mx-auto">
+                  <div class="van-cell van-field">
+                    <div class="van-cell__value van-field__value">
+                      <div class="van-field__body">
+                        <input
+                          v-model.trim="form.username"
+                          autocomplete="username"
+                          class="van-field__control"
+                          :placeholder="$t('das.auth.usernamePhone')"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-6 w-[90%] mx-auto">
+                  <div class="van-cell van-field">
+                    <div class="van-cell__value van-field__value">
+                      <div class="van-field__body">
+                        <input
+                          v-model="form.password"
+                          autocomplete="current-password"
+                          class="van-field__control"
+                          :placeholder="$t('das.auth.password')"
+                          :type="passwordVisible ? 'text' : 'password'"
+                        />
+                        <div
+                          class="van-field__button cursor-pointer"
+                          role="button"
+                          tabindex="0"
+                          :aria-label="$t('das.form.togglePassword')"
+                          @click="passwordVisible = !passwordVisible"
+                          @keydown.enter="passwordVisible = !passwordVisible"
+                        >
+                          <img
+                            :src="
+                              passwordVisible
+                                ? '/dmk/assets/eye.png'
+                                : '/dmk/assets/eye-off.png'
+                            "
+                            class="w-6"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="mt-4 px-4 text-right text-white text-base cursor-pointer"
+                  @click="customer"
+                >
+                  {{ $t("das.dmk.forgotPassword") }}
+                </div>
+                <div class="mt-6 px-4">
+                  <button
+                    class="van-button van-button--default van-button--large van-button--block"
+                    style="
+                      color: white;
+                      background: var(--main-color);
+                      border-color: var(--main-color);
+                    "
+                    type="submit"
+                    :disabled="submitting"
+                  >
+                    <div class="van-button__content">
+                      <span class="van-button__text"
+                        ><span
+                          class="text-black font-semibold text-base"
+                          >{{ $t("das.dmk.login") }}</span
+                        ></span
+                      >
+                    </div>
+                  </button>
+                </div>
+                <div
+                  class="mt-20 text-center cursor-pointer"
+                  @click="safeReplace(router, '/account/register')"
+                >
+                  {{ $t("das.dmk.noAccount") }}<span
+                    class="text-[var(--main-color)] ml-2"
+                    >{{ $t("das.dmk.signUp") }}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <DmkAuditMarquee class="mt-20" />
       </div>
-      <button class="auth-submit" type="submit" :disabled="submitting">
-        {{ $t("das.auth.login") }} <span>→</span>
-      </button>
-      <p class="auth-link">
-        {{ $t("das.auth.noAccount") }}
-        <button type="button" @click="safeReplace(router, '/account/register')">
-          {{ $t("das.auth.registerNow") }}
-        </button>
-      </p>
-      <p class="auth-link auth-support">
-        {{ $t("das.auth.cannotLogin") }}
-        <button type="button" @click="customer">
-          {{ $t("das.auth.support") }}
-        </button>
-      </p>
-      <p class="auth-copyright">{{ $t("das.common.copyright") }}</p>
+      <van-dialog
+        v-model:show="showError"
+        class="dmk-login-error-dialog"
+        :show-confirm-button="false"
+      >
+        <div class="login-error-dialog">
+          <button
+            class="login-error-dialog__close"
+            type="button"
+            :aria-label="$t('das.common.close')"
+            @click="showError = false"
+          >
+            <span aria-hidden="true"></span>
+          </button>
+          <span class="login-error-dialog__icon"
+            ><img src="@/static/das/icons/status-error.png" alt=""
+          /></span>
+          <h2>{{ $t("das.auth.wrongCredentials") }}</h2>
+          <p>{{ errorMessage || $t("das.auth.wrongCredentialsHint") }}</p>
+          <button
+            class="login-error-dialog__action"
+            type="button"
+            @click="showError = false"
+          >
+            {{ $t("das.auth.tryAgain") }}
+          </button>
+        </div>
+      </van-dialog>
+      <DmkSupport ref="pcSupport" />
+    </div>
+  </div>
+  <div
+    class="dmk-h5-only dmk-mobile-current w-full relative bg-black text-white min-h-[100vh] dmk-login-scope"
+  >
+    <form
+      novalidate
+      @invalid.capture.prevent
+      @submit.prevent="submit"
+    >
+      <div class="w-full h-[30vh] overflow-hidden">
+        <div
+          class="w-full px-4 py-2 flex justify-between items-center"
+        >
+          <div class="w-[var(--logo-width)]">
+            <img
+              class="w-full"
+              src="/dmk/assets/logo.png"
+              alt=""
+            />
+          </div>
+          <img
+            class="w-6 cursor-pointer"
+            src="/dmk/assets/language.png"
+            alt=""
+            @click="safePush(router, '/setting/language')"
+          />
+        </div>
+        <div class="w-[92%] mx-auto p-4">
+          <div class="text-4xl text-center">
+            <p>{{ $t("das.dmk.readyToStart") }}</p>
+            <p>{{ $t("das.dmk.loginAccessCopy") }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="login-input">
+        <div class="box">
+          <div
+            class="text-white text-lg text-center py-3 mt-4"
+          >
+            {{ $t("das.dmk.enterLoginInformation") }}
+          </div>
+          <div class="mt-4 w-[90%] mx-auto">
+            <div class="van-cell van-field">
+              <div class="van-cell__value van-field__value">
+                <div class="van-field__body">
+                  <input
+                    v-model.trim="form.username"
+                    autocomplete="username"
+                    class="van-field__control"
+                    :placeholder="$t('das.auth.usernamePhone')"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 w-[90%] mx-auto">
+            <div class="van-cell van-field">
+              <div class="van-cell__value van-field__value">
+                <div class="van-field__body">
+                  <input
+                    v-model="form.password"
+                    autocomplete="current-password"
+                    class="van-field__control"
+                    :placeholder="$t('das.auth.password')"
+                    :type="passwordVisible ? 'text' : 'password'"
+                  />
+                  <div
+                    class="van-field__button cursor-pointer"
+                    role="button"
+                    tabindex="0"
+                    :aria-label="$t('das.form.togglePassword')"
+                    @click="passwordVisible = !passwordVisible"
+                    @keydown.enter="passwordVisible = !passwordVisible"
+                  >
+                    <img
+                      :src="
+                        passwordVisible
+                          ? '/dmk/assets/eye.png'
+                          : '/dmk/assets/eye-off.png'
+                      "
+                      class="w-6"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-4 px-4 text-right text-white text-base cursor-pointer"
+            @click="customer"
+          >
+            {{ $t("das.dmk.forgotPassword") }}
+          </div>
+          <div class="mt-6 px-4">
+            <button
+              class="van-button van-button--default van-button--large van-button--block"
+              style="
+                color: white;
+                background: var(--main-color);
+                border-color: var(--main-color);
+              "
+              type="submit"
+              :disabled="submitting"
+            >
+              <div class="van-button__content">
+                <span class="van-button__text"
+                  ><span
+                    class="text-black font-semibold text-base"
+                    >{{ $t("das.dmk.login") }}</span
+                  ></span
+                >
+              </div>
+            </button>
+          </div>
+          <div
+            class="mt-20 text-center cursor-pointer"
+            @click="safeReplace(router, '/account/register')"
+          >
+            {{ $t("das.dmk.noAccount") }}<span
+              class="text-[var(--main-color)] ml-2"
+              >{{ $t("das.dmk.signUp") }}</span
+            >
+          </div>
+        </div>
+      </div>
     </form>
     <van-dialog
       v-model:show="showError"
-      class="das-status-dialog"
+      class="dmk-login-error-dialog"
       :show-confirm-button="false"
-      ><div class="status-dialog">
-        <span class="status-dialog__icon"><img src="@/static/das/icons/status-error.png" alt="" /></span>
+    >
+      <div class="login-error-dialog">
+        <button
+          class="login-error-dialog__close"
+          type="button"
+          :aria-label="$t('das.common.close')"
+          @click="showError = false"
+        >
+          <span aria-hidden="true"></span>
+        </button>
+        <span class="login-error-dialog__icon"
+          ><img src="@/static/das/icons/status-error.png" alt=""
+        /></span>
         <h2>{{ $t("das.auth.wrongCredentials") }}</h2>
         <p>{{ errorMessage || $t("das.auth.wrongCredentialsHint") }}</p>
-        <button @click="showError = false">
+        <button
+          class="login-error-dialog__action"
+          type="button"
+          @click="showError = false"
+        >
           {{ $t("das.auth.tryAgain") }}
         </button>
-      </div></van-dialog
-    >
-  </main>
+      </div>
+    </van-dialog>
+  </div>
 </template>
 <script setup>
+import DmkPcHeader from "@/components/dmkPc/DmkPcHeader.vue";
+import DmkSupport from "@/components/dmk/DmkSupport.vue";
+import DmkAuditMarquee from "@/components/dmk/DmkAuditMarquee.vue";
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
@@ -85,7 +322,9 @@ const form = reactive({ username: "", password: "" }),
   remember = ref(true),
   submitting = ref(false),
   showError = ref(false),
-  errorMessage = ref("");
+  errorMessage = ref(""),
+  passwordVisible = ref(false),
+  pcSupport = ref();
 const language = computed(() => commonStore.clientLang || "en");
 const rememberKeys = {
   enabled: "dasRemember",
@@ -126,7 +365,7 @@ watch(remember, (enabled) => {
   if (!enabled) clearRememberedCredentials();
 });
 
-const customer = () => safePush(router, "/contact");
+const customer = () => pcSupport.value?.open();
 const submit = async () => {
   if (!form.username || !form.password) {
     errorMessage.value = t("das.auth.required");
@@ -295,52 +534,142 @@ const submit = async () => {
   color: rgba(247, 245, 236, 0.35);
   font-size: 10px;
 }
-.status-dialog {
-  padding: 34px 28px 30px;
+.login-error-dialog {
+  position: relative;
+  padding: 32px 30px 28px;
   text-align: center;
-  color: #17382d;
+  color: #fff;
 }
-.status-dialog__icon {
-  width: 48px;
-  height: 48px;
+.login-error-dialog::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 108px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--main-color);
+  box-shadow: 0 0 18px rgba(214, 255, 50, 0.65);
+  content: "";
+  transform: translateX(-50%);
+}
+.login-error-dialog__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.045);
+  transition: border-color 0.2s ease, background 0.2s ease,
+    transform 0.2s ease;
+}
+.login-error-dialog__close span,
+.login-error-dialog__close span::after {
+  width: 14px;
+  height: 1.5px;
+  display: block;
+  border-radius: 2px;
+  background: #c7c9c2;
+  content: "";
+  transform: rotate(45deg);
+}
+.login-error-dialog__close span::after {
+  transform: rotate(90deg);
+}
+.login-error-dialog__close:hover {
+  border-color: rgba(214, 255, 50, 0.45);
+  background: rgba(214, 255, 50, 0.08);
+  transform: rotate(4deg);
+}
+.login-error-dialog__icon {
+  width: 58px;
+  height: 58px;
   margin: auto;
   display: grid;
   place-items: center;
-  border: 3px solid #17382d;
-  border-radius: 50%;
-  font-size: 38px;
-  font-weight: 300;
-  line-height: 1;
+  border: 1px solid rgba(214, 255, 50, 0.38);
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    rgba(214, 255, 50, 0.16),
+    rgba(214, 255, 50, 0.045)
+  );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 34px rgba(0, 0, 0, 0.34),
+    0 0 28px rgba(214, 255, 50, 0.1);
 }
-.status-dialog__icon img {
-  width: 24px;
-  height: 24px;
+.login-error-dialog__icon img {
+  width: 27px;
+  height: 27px;
   object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(92%) sepia(91%) saturate(1035%)
+    hue-rotate(24deg) brightness(105%) contrast(104%);
 }
 
-.status-dialog h2 {
-  margin: 22px 0 10px;
-  font-size: 23px;
-}
-.status-dialog p {
-  margin: 0;
-  color: #79817b;
-  font-size: 13px;
-  line-height: 1.45;
-}
-.status-dialog button {
-  width: 100%;
-  height: 50px;
-  margin-top: 24px;
-  border: 0;
-  border-radius: 999px;
-  background: #14392c;
-  color: #fff;
+.login-error-dialog h2 {
+  margin: 22px 38px 9px;
+  color: #f7f8f3;
+  font-size: 24px;
   font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
 }
-:global(.das-status-dialog.van-dialog) {
-  width: min(84%, 380px);
-  border-radius: 24px;
-  background: #f7f5ec;
+.login-error-dialog p {
+  margin: 0;
+  color: #a8aca1;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.login-error-dialog__action {
+  width: 100%;
+  height: 52px;
+  margin-top: 26px;
+  border: 1px solid var(--main-color);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #d8ff36 0%, #b9ee17 100%);
+  color: #10130a;
+  box-shadow: 0 10px 30px rgba(185, 238, 23, 0.12);
+  font-size: 15px;
+  font-weight: 800;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+.login-error-dialog__action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(185, 238, 23, 0.2);
+  filter: brightness(1.035);
+}
+:global(.dmk-login-error-dialog.van-dialog) {
+  width: min(calc(100vw - 32px), 420px) !important;
+  overflow: hidden;
+  border: 1px solid rgba(214, 255, 50, 0.24) !important;
+  border-radius: 22px !important;
+  background: radial-gradient(
+      circle at 50% 0%,
+      rgba(214, 255, 50, 0.08),
+      transparent 38%
+    ),
+    linear-gradient(155deg, #191b17 0%, #0b0c0a 72%) !important;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.78),
+    0 0 0 1px rgba(255, 255, 255, 0.025),
+    0 0 46px rgba(214, 255, 50, 0.075) !important;
+}
+:global(.dmk-login-error-dialog .van-dialog__content) {
+  background: transparent !important;
+}
+@media (max-width: 640px) {
+  .login-error-dialog {
+    padding: 30px 22px 22px;
+  }
+  .login-error-dialog h2 {
+    margin-inline: 32px;
+    font-size: 21px;
+  }
+  .login-error-dialog p {
+    font-size: 13px;
+  }
 }
 </style>

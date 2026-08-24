@@ -1,5 +1,20 @@
 <template>
-  <main class="das-page info-page">
+  <DmkPcAccountShell active="edit">
+    <DmkPcEditTabs active="profile">
+      <div class="w-[50%] mx-auto mt-10">
+        <div class="w-full flex flex-col items-center justify-center">
+          <div class="w-20 h-20 ml-6 p-2 mr-6 border-2 rounded-full border-[rgba(255,255,255,.2)] cursor-pointer" @click="safePush(router, '/profile')">
+            <img :src="pcAvatar" class="w-full h-full rounded-full object-cover" alt="" />
+          </div>
+          <div class="text-[#666] text-sm mt-2 flex items-center cursor-pointer" @click="safePush(router, '/profile')"><div class="mr-1">{{ $t("das.dmk.profileImage") }}</div><i class="van-badge__wrapper van-icon van-icon-edit" style="font-size:16px"></i></div>
+        </div>
+        <div class="w-full mt-6">
+          <button class="van-button van-button--default van-button--large" style="color:white;background:var(--main-color);border-color:var(--main-color)" type="button" @click="safePush(router, '/profile')"><div class="van-button__content"><span class="van-button__text"><span class="font-oswald text-black">{{ $t("das.dmk.update") }}</span></span></div></button>
+        </div>
+      </div>
+    </DmkPcEditTabs>
+  </DmkPcAccountShell>
+  <main class="das-page info-page dmk-mobile-current">
     <DasPageHeader title-key="das.page.accountInfo" />
     <section class="info-body">
       <h2>{{ $t("das.profile.myProfile") }}</h2>
@@ -53,6 +68,8 @@
   </main>
 </template>
 <script setup>
+import DmkPcAccountShell from "@/components/dmkPc/DmkPcAccountShell.vue";
+import DmkPcEditTabs from "@/components/dmkPc/DmkPcEditTabs.vue";
 import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
@@ -68,6 +85,12 @@ const gender = computed(() => {
   if (normalized === "male") return t("das.auth.male");
   if (normalized === "female") return t("das.auth.female");
   return "—";
+});
+const pcAvatar = computed(() => {
+  const path = String(user.value.avatar || "").trim();
+  if (!path) return "/dmk/assets/avatar.png";
+  const base = window.g?.VITE_API_IMG_URL || import.meta.env.VITE_API_IMG_URL || "";
+  return /^https?:/i.test(path) ? path : `${base}${path}`;
 });
 onMounted(async () => (user.value = (await userGetInfo()).data || {}));
 </script>

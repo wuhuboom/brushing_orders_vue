@@ -31,6 +31,32 @@ const languageMap = {
 };
 
 let loading;
+let activeApiMessage = null;
+let activeApiMessageText = "";
+
+const showApiError = (message) => {
+  const text = String(message || i18n.global.t("das.common.requestFailed"));
+  if (activeApiMessage && activeApiMessageText === text) return;
+
+  activeApiMessage?.close?.();
+  activeApiMessageText = text;
+  let messageInstance;
+  messageInstance = ElMessage({
+    message: text,
+    type: "error",
+    duration: 3200,
+    offset: 22,
+    customClass: "dmk-api-message dmk-api-message--error",
+    onClose: () => {
+      if (activeApiMessage === messageInstance) {
+        activeApiMessage = null;
+        activeApiMessageText = "";
+      }
+    },
+  });
+  activeApiMessage = messageInstance;
+};
+
 const closeLoading = () => {
   loading?.close();
   loading = null;
@@ -39,7 +65,12 @@ const closeLoading = () => {
 api.interceptors.request.use((config) => {
   if (config.loading) {
     closeLoading();
-    loading = ElLoading.service({ fullscreen: true });
+    loading = ElLoading.service({
+      fullscreen: true,
+      lock: true,
+      background: "rgba(0, 0, 0, 0.72)",
+      customClass: "dmk-request-loading",
+    });
   }
 
   const userStore = useUserStore(pinia);
@@ -70,7 +101,7 @@ api.interceptors.response.use(
     if (Number(result.code) === 401) useUserStore(pinia).logout(false);
     if (response.config?.showMsg) {
       const key = errorMessages[result.code];
-      ElMessage.error(
+      showApiError(
         (key && i18n.global.t(key)) ||
           result.msg ||
           result.message ||
@@ -85,7 +116,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401) useUserStore(pinia).logout(false);
     if (error.config?.showMsg) {
       const key = errorMessages[normalizedError?.code];
-      ElMessage.error(
+      showApiError(
         (key && i18n.global.t(key)) ||
           normalizedError?.msg ||
           normalizedError?.message ||

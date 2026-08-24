@@ -1,0 +1,314 @@
+.dmk-pc-only {
+  display: none !important;
+}
+
+.dmk-pc-mode {
+  --main-color: #daff45;
+  --btn-color: #daff45;
+}
+
+html.dmk-pc-mode,
+.dmk-pc-mode body,
+.dmk-pc-mode #app,
+.dmk-pc-mode #router-view {
+  background: #000 !important;
+}
+
+.dmk-pc-mode body {
+  color: #fff;
+  font-family:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.dmk-pc-mode #app {
+  display: block !important;
+  align-items: initial !important;
+  max-width: none !important;
+  overflow-x: hidden;
+}
+
+.dmk-pc-mode #router-view {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 100vh;
+}
+
+.dmk-pc-mode #router-view > .container,
+.dmk-pc-mode #router-view > .withdraw,
+.dmk-pc-mode #router-view > div[class*="bg-white"],
+.dmk-pc-mode #router-view > div[class*="bg-[#f4f4f5]"] {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.dmk-pc-mode .dmk-pc-only {
+  display: block !important;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.dmk-pc-mode .dmk-mobile-current,
+.dmk-pc-mode .dmk-h5-only {
+  display: none !important;
+}
+
+.dmk-h5-mode .dmk-pc-only {
+  display: none !important;
+}
+
+.dmk-pc-clickable {
+  cursor: pointer;
+}
+
+.dmk-pc-mode .dmk-pc-form input,
+.dmk-pc-mode .dmk-pc-form textarea,
+.dmk-pc-mode .dmk-pc-form select {
+  outline: none;
+}
+
+.dmk-pc-mode .dmk-pc-page .van-cell,
+.dmk-pc-mode .dmk-pc-page .van-cell-group {
+  background: #fff !important;
+}
+
+.dmk-pc-mode .dmk-pc-page .van-field__control {
+  color: #323233 !important;
+}
+
+/* Restore the Vant tab skin used by the captured DMK desktop pages. */
+html.dmk-pc-mode .van-tabs--line > .van-tabs__wrap > .van-tabs__nav--line,
+html.dmk-pc-mode .van-tabs__nav--card {
+  background: transparent !important;
+}
+
+html.dmk-pc-mode .van-tabs__line {
+  background: var(--main-color) !important;
+}
+
+html.dmk-pc-mode .van-tabs__nav--line > .van-tab--active {
+  color: #fff !important;
+  font-weight: var(--van-font-bold) !important;
+}
+
+html.dmk-pc-mode .van-tabs__nav--card > .van-tab--active {
+  color: #000 !important;
+}
+
+.dmk-pc-mode .dmk-register-select,
+.dmk-pc-mode .dmk-wallet-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+.dmk-pc-mode .dmk-register-select option,
+.dmk-pc-mode .dmk-wallet-select option {
+  color: #111;
+}
+
+.dmk-native-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dmk-h5-mode .dmk-h5-register-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+.dmk-h5-mode .dmk-h5-register-select option {
+  color: #111;
+}
+
+.dmk-pc-mode .dmk-start-circle {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.dmk-pc-mode .dmk-start-circle:disabled {
+  cursor: wait;
+}
+
+html.dmk-h5-mode,
+.dmk-h5-mode body,
+.dmk-h5-mode #app,
+.dmk-h5-mode #router-view {
+  background: #000 !important;
+}
+
+.dmk-h5-mode #app {
+  align-items: stretch !important;
+  overflow-x: hidden;
+}
+
+.dmk-h5-mode #router-view {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.dmk-h5-mode .dmk-mobile-current {
+  width: 100%;
+  max-width: none !important;
+}
+
+.dmk-h5-mode .dmk-h5-start-circle {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.dmk-h5-mode .dmk-h5-start-circle:disabled {
+  cursor: wait;
+}
+
+/* H5 reference reset: prevent the legacy DAS global Vant skin from leaking into
+   the mobile HTML reference while leaving the already-built PC branch intact. */
+html.dmk-h5-mode body {
+  font-family: var(--van-base-font) !important;
+}
+
+html.dmk-h5-mode .van-nav-bar {
+  background: var(--van-nav-bar-background) !important;
+}
+
+html.dmk-h5-mode .van-nav-bar .van-icon {
+  color: var(--van-nav-bar-icon-color) !important;
+}
+
+html.dmk-h5-mode .van-nav-bar__title {
+  color: var(--van-nav-bar-title-text-color) !important;
+  font-size: var(--van-nav-bar-title-font-size) !important;
+  font-weight: var(--van-font-bold) !important;
+}
+
+html.dmk-h5-mode .van-nav-bar__content {
+  height: var(--van-nav-bar-height) !important;
+}
+
+html.dmk-h5-mode .van-tabs--line > .van-tabs__wrap > .van-tabs__nav--line,
+html.dmk-h5-mode .van-tabs__nav--card {
+  background: transparent !important;
+}
+
+html.dmk-h5-mode .van-tabs__line {
+  background: var(--main-color) !important;
+}
+
+html.dmk-h5-mode .van-tabs__nav--line > .van-tab--active {
+  color: #fff !important;
+  font-weight: var(--van-font-bold) !important;
+}
+
+html.dmk-h5-mode .van-tabs__nav--card > .van-tab--active {
+  color: #000 !important;
+}
+
+html.dmk-h5-mode .van-field,
+html.dmk-h5-mode .van-cell {
+  color: var(--van-text-color) !important;
+}
+
+html.dmk-h5-mode #router-view > .dmk-h5-only.container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* The HTML references use Tailwind's fixed 1024px `lg:` breakpoint. The app's
+   PC/H5 switch is configurable, so make the desktop-only copies obey the
+   configured mode rather than Tailwind's hard-coded viewport threshold. */
+html.dmk-pc-mode [class~="lg:block"] {
+  display: block !important;
+}
+html.dmk-pc-mode [class~="lg:flex"] {
+  display: flex !important;
+}
+html.dmk-pc-mode [class~="lg:grid-cols-2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+html.dmk-pc-mode [class~="lg:grid-cols-5"] {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+}
+html.dmk-pc-mode [class~="lg:items-center"] {
+  align-items: center !important;
+}
+html.dmk-pc-mode [class~="lg:justify-between"] {
+  justify-content: space-between !important;
+}
+html.dmk-pc-mode [class~="lg:mt-10"] {
+  margin-top: 2.5rem !important;
+}
+html.dmk-pc-mode [class~="lg:p-4"] {
+  padding: 1rem !important;
+}
+html.dmk-pc-mode [class~="lg:p-8"] {
+  padding: 2rem !important;
+}
+html.dmk-pc-mode [class~="lg:px-0"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+html.dmk-pc-mode [class~="lg:py-2"] {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+html.dmk-pc-mode [class~="lg:text-base"] {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
+html.dmk-pc-mode [class~="lg:text-lg"] {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+html.dmk-pc-mode [class~="lg:text-black"] {
+  color: rgb(0 0 0) !important;
+}
+html.dmk-pc-mode [class~="lg:text-left"] {
+  text-align: left !important;
+}
+html.dmk-pc-mode [class~="lg:w-[150px]"] {
+  width: 150px !important;
+}
+html.dmk-pc-mode [class~="lg:w-[420px]"] {
+  width: 420px !important;
+}
+html.dmk-pc-mode [class~="lg:w-[480px]"] {
+  width: 480px !important;
+}
+html.dmk-pc-mode [class~="lg:w-[60%]"] {
+  width: 60% !important;
+}
+html.dmk-pc-mode [class~="lg:w-[660px]"] {
+  width: 660px !important;
+}
+html.dmk-pc-mode [class~="lg:w-[80%]"] {
+  width: 80% !important;
+}
+html.dmk-pc-mode [class~="lg:bg-[#f0f0f0]"] {
+  background-color: rgb(240 240 240) !important;
+}
+html.dmk-pc-mode [class~="lg:bg-[#fff]"] {
+  background-color: rgb(255 255 255) !important;
+}
+html.dmk-pc-mode [class~="lg:border-[#fff]"] {
+  border-color: rgb(255 255 255) !important;
+}
+html.dmk-pc-mode [class~="md:w-16"] {
+  width: 4rem !important;
+}
+html.dmk-pc-mode [class~="md:h-16"] {
+  height: 4rem !important;
+}

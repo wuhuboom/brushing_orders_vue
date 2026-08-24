@@ -1,34 +1,17 @@
 <template>
-  <main class="welcome-page das-page">
-    <img class="welcome-logo" src="@/static/das/wordmark-cream.png" alt="DAS" />
-    <section class="welcome-copy">
-      <h1>
-        <span>{{ $t("das.auth.welcomeLead") }}</span
-        ><em>{{ $t("das.auth.welcomeAccent") }}</em>
-      </h1>
-      <p>{{ $t("das.auth.welcomeCopy") }}</p>
-    </section>
-    <section class="welcome-actions">
-      <button
-        class="welcome-primary"
-        type="button"
-        @click="safeReplace(router, '/account/register')"
-      >
-        {{ $t("das.auth.createAccount") }}</button
-      ><button
-        class="welcome-secondary"
-        type="button"
-        @click="safeReplace(router, '/account/login')"
-      >
-        {{ $t("das.auth.login") }}
-      </button>
-    </section>
-    <p class="welcome-copyright">{{ $t("das.common.copyright") }}</p>
-  </main>
+  <DmkPcLayout :authenticated="false">
+    <DmkPcHomeContent />
+  </DmkPcLayout>
+  <DmkH5Layout class="dmk-mobile-current" :authenticated="false">
+    <DmkH5HomeContent />
+  </DmkH5Layout>
 </template>
 <script setup>
+import DmkH5Layout from "@/components/dmkH5/DmkH5Layout.vue";
+import DmkH5HomeContent from "@/components/dmkH5/DmkH5HomeContent.vue";
+import DmkPcLayout from "@/components/dmkPc/DmkPcLayout.vue";
+import DmkPcHomeContent from "@/components/dmkPc/DmkPcHomeContent.vue";
 import { useRouter } from "vue-router";
-import { safeReplace } from "@/utils/navigation";
 const router = useRouter();
 </script>
 <style scoped>

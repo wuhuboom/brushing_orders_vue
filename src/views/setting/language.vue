@@ -1,5 +1,5 @@
 <template>
-  <main class="das-page language-page">
+  <main class="das-page language-page dmk-pc-only">
     <DasPageHeader title-key="das.page.language" />
     <section class="language-body">
       <button
@@ -18,6 +18,147 @@
     </section>
     <p class="das-page-copyright">{{ $t("das.common.copyright") }}</p>
   </main>
+
+  <div
+    class="dmk-h5-only dmk-mobile-current w-full relative bg-black text-white min-h-[100vh] dmk-login-scope"
+  >
+    <div class="w-full h-[30vh] overflow-hidden">
+      <div
+        class="w-full px-4 py-2 flex justify-between items-center"
+      >
+        <div class="w-[var(--logo-width)]">
+          <img
+            class="w-full"
+            src="/dmk/assets/logo.png"
+            alt=""
+          />
+        </div>
+        <img
+          class="w-6"
+          src="/dmk/assets/language.png"
+          alt=""
+        />
+      </div>
+      <div class="w-[92%] mx-auto p-4">
+        <div class="text-4xl text-center">
+          <p>{{ $t("das.dmk.readyToStart") }}</p>
+          <p>{{ $t("das.dmk.loginAccessCopy") }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="login-input">
+      <div class="box">
+        <div
+          class="text-white text-lg text-center py-3 mt-4"
+        >
+          {{ $t("das.dmk.enterLoginInformation") }}
+        </div>
+        <div class="mt-4 w-[90%] mx-auto">
+          <div class="van-cell van-field">
+            <div class="van-cell__value van-field__value">
+              <div class="van-field__body">
+                <input
+                  class="van-field__control"
+                  :placeholder="$t('das.auth.usernamePhone')"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 w-[90%] mx-auto">
+          <div class="van-cell van-field">
+            <div class="van-cell__value van-field__value">
+              <div class="van-field__body">
+                <input
+                  class="van-field__control"
+                  :placeholder="$t('das.auth.password')"
+                  type="password"
+                />
+                <div class="van-field__button">
+                  <img
+                    src="/dmk/assets/eye-off.png"
+                    class="w-6"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-4 px-4 text-right text-white text-base"
+        >
+          {{ $t("das.dmk.forgotPassword") }}
+        </div>
+        <div class="mt-6 px-4">
+          <button
+            class="van-button van-button--default van-button--large van-button--block"
+            style="
+              color: white;
+              background: var(--main-color);
+              border-color: var(--main-color);
+            "
+            type="button"
+          >
+            <div class="van-button__content">
+              <span class="van-button__text"
+                ><span
+                  class="text-black font-semibold text-base"
+                  >{{ $t("das.dmk.login") }}</span
+                ></span
+              >
+            </div>
+          </button>
+        </div>
+        <div class="mt-20 text-center">
+          {{ $t("das.dmk.noAccount") }}<span
+            class="text-[var(--main-color)] ml-2"
+            >{{ $t("das.dmk.signUp") }}</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="dmk-language-scope">
+      <div
+        class="van-overlay"
+        role="button"
+        tabindex="0"
+        style="z-index: 2005"
+        @click="safeBack(router, '/account/login')"
+      ></div>
+      <div
+        class="van-popup van-popup--right"
+        role="dialog"
+        tabindex="0"
+        style="z-index: 2005; width: 50vw; height: 100%"
+      >
+        <div
+          class="w-full h-full flex flex-col pt-14 box-border overflow-y-auto"
+        >
+          <button
+            v-for="item in h5Languages"
+            :key="item.code"
+            type="button"
+            class="w-full h-16 flex shrink-0 items-center justify-center text-white text-2xl uppercase"
+            @click="
+              selected = item.code;
+              confirm();
+            "
+          >
+            {{ item.name }}
+          </button>
+        </div>
+        <i
+          class="van-badge__wrapper van-icon van-icon-cross van-popup__close-icon van-popup__close-icon--top-right van-haptics-feedback"
+          role="button"
+          tabindex="0"
+          @click="safeBack(router, '/account/login')"
+        ></i>
+      </div>
+    </div>
+  </div>
 </template>
 <script setup>
 import { ref } from "vue";
@@ -34,6 +175,7 @@ const commonStore = useCommonStore(),
   { setLocale } = useLocale(),
   selected = ref(commonStore.clientLang || "en"),
   visibleLanguages = LANGS,
+  h5Languages = LANGS,
   confirm = () => {
     commonStore.updateLang(selected.value);
     locale.value = selected.value;

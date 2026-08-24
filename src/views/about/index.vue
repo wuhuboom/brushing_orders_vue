@@ -1,14 +1,12 @@
 <template>
-  <DasContentPage
-    title-key="das.page.about"
-    :content="content"
-    :loading="loading"
-  />
+  <DmkPcAbout />
+  <DmkH5About />
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
 import { getContentConfig } from "@/api/apis";
-import DasContentPage from "@/components/DasContentPage.vue";
+import DmkPcAbout from "@/components/dmkPc/DmkPcAbout.vue";
+import DmkH5About from "@/components/dmkH5/DmkH5About.vue";
 const content = ref(""),
   loading = ref(true);
 onMounted(async () => {

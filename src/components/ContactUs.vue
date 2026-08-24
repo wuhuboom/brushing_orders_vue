@@ -2,10 +2,8 @@
   <span class="contact-route-proxy" aria-hidden="true"></span>
 </template>
 <script setup>
-import { useRouter } from "vue-router";
-import { safePush } from "@/utils/navigation";
-const router = useRouter();
-const open = () => safePush(router, "/contact");
+import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
+const open = () => openCustomerServiceDialog();
 const close = () => undefined;
 defineExpose({ open, close });
 </script>

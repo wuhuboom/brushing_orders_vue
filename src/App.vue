@@ -1,16 +1,39 @@
 <template>
-  <router-view class="hide-scroll overflow-y-auto" id="router-view" />
+  <div id="router-view" class="hide-scroll overflow-y-auto">
+    <router-view />
+  </div>
+  <DmkSupport class="dmk-h5-only" />
+  <DmkCustomerServiceDialog v-model:show="showCustomerService" />
   <WebsiteSplashAd />
 </template>
 
 <script setup>
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import WebsiteSplashAd from "@/components/WebsiteSplashAd.vue";
+import DmkSupport from "@/components/dmk/DmkSupport.vue";
+import DmkCustomerServiceDialog from "@/components/dmk/DmkCustomerServiceDialog.vue";
+import { CUSTOMER_SERVICE_DIALOG_EVENT } from "@/utils/customerServiceDialog";
 import { useUserStore } from "@/store/modules/user";
 import { useCommonStore } from "@/store/modules/common";
-import { useI18n } from "vue-i18n";
 import { useLocale } from "@/util/useLocale";
 import BigNumber from "bignumber.js";
-const configuredWidth = window.g?.APP_MAX_WIDTH || "960px";
+const configuredWidth = window.g?.APP_MAX_WIDTH || "100%";
+const showCustomerService = ref(false);
+const handleCustomerServiceOpen = () => {
+  showCustomerService.value = true;
+};
+onMounted(() => {
+  window.addEventListener(
+    CUSTOMER_SERVICE_DIALOG_EVENT,
+    handleCustomerServiceOpen,
+  );
+});
+onBeforeUnmount(() => {
+  window.removeEventListener(
+    CUSTOMER_SERVICE_DIALOG_EVENT,
+    handleCustomerServiceOpen,
+  );
+});
 document.documentElement.style.setProperty(
   "--das-app-max-width",
   /^\d+$/.test(String(configuredWidth))
@@ -27,16 +50,13 @@ BigNumber.config({
 const userStore = useUserStore();
 const commonStore = useCommonStore();
 // commonStore.getSystemConfig();
-const { locale } = useI18n();
 const { setLocale } = useLocale();
 if (userStore.token) {
   userStore.getUserInfo();
 }
 userStore.getZone();
-if (commonStore.lang) {
-  locale.value = commonStore.lang;
-  setLocale(commonStore.lang);
-}
+const initialLocale = setLocale(commonStore.lang || "en");
+if (initialLocale !== commonStore.lang) commonStore.updateLang(initialLocale);
 </script>
 
 <style>

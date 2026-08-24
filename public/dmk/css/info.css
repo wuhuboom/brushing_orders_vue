@@ -1,0 +1,1 @@
+.box:is(.dmk-profile-info-scope,.dmk-profile-info-scope *){background:linear-gradient(180deg,hsla(0,0%,100%,.1),1%,hsla(0,0%,100%,.05));box-shadow:inset 0 4px 15px #ffffff4d;border:1px solid #9b9b9b;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}

@@ -1,6 +1,6 @@
 <template>
   <div class="das-footer-space" aria-hidden="true"></div>
-  <nav class="das-footer" aria-label="Primary navigation">
+  <nav class="das-footer" :aria-label="$t('das.dmk.primaryNavigation')">
     <button
       v-for="menu in menus"
       :key="menu.url"
@@ -57,7 +57,7 @@ const badge = (url) =>
   z-index: 80;
   bottom: 0;
   left: 50%;
-  width: min(100%, var(--das-app-max-width, 960px));
+  width: min(100%, var(--das-app-max-width, 100%));
   height: 92px;
   transform: translateX(-50%);
   display: grid;

@@ -2,6 +2,10 @@ import { createApp } from "vue";
 import "./style.css";
 import App from "./App.vue";
 import "./index.css";
+import "./dmk-pc-overrides.css";
+import { installDmkPcStyles } from "./dmkPc";
+import { installDmkH5Styles } from "./dmkH5";
+import { installResponsiveMode } from "./responsiveMode";
 import pinia from "./store"; // 导入 Pinia
 import router from "./router"; // 导入 Vue Router
 import i18n from "./i18n/index";
@@ -32,6 +36,7 @@ import {
   PullRefresh,
   Tag,
   Toast,
+  ActionSheet,
 } from "vant";
 // 2. 引入组件样式
 import "vant/lib/index.css";
@@ -43,6 +48,7 @@ import itIT from "vant/es/locale/lang/it-IT";
 import koKR from "vant/es/locale/lang/ko-KR";
 import idID from "vant/es/locale/lang/id-ID";
 installNativeFormValidationGuard();
+installResponsiveMode();
 
 const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -80,5 +86,8 @@ app.use(CheckboxGroup);
 app.use(PullRefresh);
 app.use(Tag);
 app.use(Toast);
+app.use(ActionSheet);
 // app.use(ElementPlus) // 使用 Element Plus
 app.mount("#app");
+installDmkPcStyles();
+installDmkH5Styles();
