@@ -11,7 +11,6 @@ export const LANGS = [
   { code: "hu", name: "Magyar", flag: "🇭🇺" },
   { code: "pl", name: "Polski", flag: "🇵🇱" },
   { code: "sl", name: "Slovenčina", flag: "🇸🇰" },
-  { code: "zh", name: "简体中文", flag: "🇨🇳" },
   { code: "ko", name: "한국어", flag: "🇰🇷" },
   { code: "id", name: "Bahasa Indonesia", flag: "🇮🇩" },
 ];
