@@ -117,7 +117,11 @@
                         </div>
                         <div class="flex flex-col justify-end items-center">
                           <p class="text-[10px] text-right w-full">{{ h5Date(item.createTime) }}</p>
-                          <div class="flex w-full justify-end"><div class="text-black text-xs text-right rounded p-1 bg-[var(--main-color)] font-medium">{{ h5Status(item.status) }}</div></div>
+                          <div class="flex w-full justify-end">
+                            <div class="text-black text-xs text-right rounded p-1 bg-[var(--main-color)] font-medium">
+                    {{ String(item.status) === "1" ? $t("das.common.submit") : h5Status(item.status) }}
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div class="w-full flex justify-between items-center mt-4">

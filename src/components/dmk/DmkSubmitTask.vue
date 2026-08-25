@@ -4,6 +4,8 @@
     class="dmk-submit-task-popup"
     position="bottom"
     closeable
+    teleport="body"
+    :z-index="3000"
     :close-on-click-overlay="true"
     :lock-scroll="true"
   >
