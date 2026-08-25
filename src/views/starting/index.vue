@@ -424,7 +424,7 @@
         role="status"
         :aria-label="$t('das.common.loading')"
       >
-        <div class="start-loading-animation__brand" aria-hidden="true">DMK</div>
+        <div class="start-loading-animation__brand" aria-hidden="true">Bavor</div>
         <div class="start-loading-animation__scanner" aria-hidden="true">
           <span class="start-loading-animation__ticks"></span>
           <span class="start-loading-animation__orbit"></span>

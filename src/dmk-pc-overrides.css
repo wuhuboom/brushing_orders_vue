@@ -77,7 +77,7 @@ html.dmk-pc-mode,
   color: #323233 !important;
 }
 
-/* Restore the Vant tab skin used by the captured DMK desktop pages. */
+/* Restore the Vant tab skin used by the captured desktop pages. */
 html.dmk-pc-mode .van-tabs--line > .van-tabs__wrap > .van-tabs__nav--line,
 html.dmk-pc-mode .van-tabs__nav--card {
   background: transparent !important;
