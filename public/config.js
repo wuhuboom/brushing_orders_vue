@@ -1,6 +1,6 @@
 window.g = {
-  VITE_API_BASE_URL: "https://api.dasadmin.cc/api",
-  VITE_API_IMG_URL: "https://api.dasadmin.cc",
+  VITE_API_BASE_URL: "https://api.bavordiother.it.com/api",
+  VITE_API_IMG_URL: "https://api.bavordiother.it.com",
   APP_MAX_WIDTH: "100%",
 
   APP_PC_BREAKPOINT: 1024,

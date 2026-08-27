@@ -91,14 +91,7 @@ const creditPercent = computed(() => {
   if (!Number.isFinite(value)) return 0;
   return Math.min(100, Math.max(0, value));
 });
-const pcPendingAmount = computed(() =>
-  userInfo.value.frozenBalance ??
-  userInfo.value.pendingAmount ??
-  userInfo.value.freezeAmount ??
-  userInfo.value.frozenAmount ??
-  userInfo.value.frozen ??
-  0,
-);
+const pcPendingAmount = computed(() => userInfo.value.balance ?? 0);
 const pcAnniversaryBonus = computed(() =>
   userInfo.value.anniversaryBonus ?? userInfo.value.bonus ?? userInfo.value.rewardAmount ?? 0,
 );

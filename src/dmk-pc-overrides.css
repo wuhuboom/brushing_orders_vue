@@ -1,5 +1,7 @@
 .dmk-pc-only {
   display: none !important;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .dmk-pc-mode {
@@ -41,21 +43,6 @@ html.dmk-pc-mode,
   width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
-}
-
-.dmk-pc-mode .dmk-pc-only {
-  display: block !important;
-  width: 100%;
-  min-height: 100vh;
-}
-
-.dmk-pc-mode .dmk-mobile-current,
-.dmk-pc-mode .dmk-h5-only {
-  display: none !important;
-}
-
-.dmk-h5-mode .dmk-pc-only {
-  display: none !important;
 }
 
 .dmk-pc-clickable {

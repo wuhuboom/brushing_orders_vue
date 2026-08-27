@@ -44,12 +44,7 @@ export const useDmkHeader = (props, closeOverlay = () => {}) => {
     return Number.isFinite(value) ? Math.max(0, Math.min(100, value)) : 0;
   });
   const pendingAmount = computed(
-    () =>
-      userInfo.value.frozenBalance ??
-      userInfo.value.pendingAmount ??
-      userInfo.value.freezeAmount ??
-      userInfo.value.frozenAmount ??
-      0,
+    () => userInfo.value.balance ?? 0,
   );
   const anniversaryBonus = computed(
     () => userInfo.value.anniversaryBonus ?? userInfo.value.bonus ?? 0,

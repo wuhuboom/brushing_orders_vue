@@ -34,6 +34,7 @@
                 void-icon="star"
                 void-color="#777b72"
                 :gutter="2"
+                readonly
               />
               <span>{{ rating.toFixed(1) }}/5.0</span>
               <small>({{ reviewCount }} {{ $t("das.started.reviews") }})</small>
@@ -121,6 +122,7 @@
               void-icon="star"
               void-color="#cccccc"
               :gutter="2"
+              readonly
             />
           </div>
 
@@ -156,7 +158,7 @@
 <script setup>
 import { computed, onBeforeUnmount, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
-import { Rate as VanRate, showSuccessToast } from "vant";
+import { Rate as VanRate, showSuccessToast, showToast } from "vant";
 import { submitOrder } from "@/api/apis";
 import { formatTime } from "@/util/times";
 
@@ -216,6 +218,7 @@ const profit = computed(() =>
 );
 const commissionRate = computed(() => {
   const value =
+    props.order.rebatePercentage ??
     props.order.commissionRate ??
     props.order.commission_rate ??
     props.order.rate;
@@ -223,7 +226,7 @@ const commissionRate = computed(() => {
   const text = String(value);
   if (text.includes("%")) return text;
   const number = Number(value);
-  return Number.isFinite(number) ? `${number.toFixed(2)}%` : text;
+  return Number.isFinite(number) ? `${number}%` : text;
 });
 const reviewCount = computed(() =>
   Number(
@@ -267,7 +270,12 @@ const submitForm = async () => {
     emit("update:show", false);
   } catch (error) {
     if (Number(error?.code) === 916) {
-      emit("navigate", "/deposit");
+      const isPc = document.documentElement.classList.contains("dmk-pc-mode");
+      if (isPc) {
+        showToast(t("das.orderErrors.insufficientBalance"));
+        return;
+      }
+      emit("navigate", "/records?tab=pending");
       return;
     }
     if (Number(error?.code) === 918) {

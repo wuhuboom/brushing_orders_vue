@@ -1,42 +1,7 @@
 <template>
-  <main class="das-page records-page dmk-pc-only">
-    <HeaderTop />
-    <section class="records-content">
-      <div class="records-title">
-        <button type="button" @click="safeBack(router, '/starting')">‹</button>
-        <h1>{{ $t("das.page.records") }}</h1>
-      </div>
-      <div class="records-tabs">
-        <button
-          v-for="(tab, index) in tabs"
-          :key="tab.label"
-          :class="{ active: active === index }"
-          type="button"
-          @click="switchTab(index)"
-        >
-          {{ $t(tab.label) }}
-        </button>
-      </div>
-      <van-pull-refresh v-model="refreshing" @refresh="onRefresh"
-        ><van-list
-          v-model:loading="loading"
-          :finished="finished"
-          :finished-text="$t('das.common.noMore')"
-          @load="onLoad"
-          ><OrderCard
-            v-for="item in list"
-            :key="item.id || item.orderNo"
-            :item="item"
-            @submit="openOrderDetails"
-          /></van-list
-        ></van-pull-refresh
-      >
-      <p class="records-copyright">{{ $t("das.common.copyright") }}</p>
-    </section>
-    <Footer name="/records" />
-  </main>
+  <StartingView v-if="isDesktop" />
 
-  <DmkH5Layout class="dmk-mobile-current">
+  <DmkH5Layout v-else class="dmk-mobile-current">
     <div class="w-full max-w-[1200px] mx-auto text-white">
       <div class="text-[var(--main-color)] text-lg px-4">
         <p>{{ $t("das.dmk.totalBalance") }}</p>
@@ -58,7 +23,7 @@
                 <p class="text-white text-xs">{{ $t("das.dmk.commissionHint") }}</p>
                 <div class="w-full flex flex-col mt-4">
                   <p>{{ $t("das.dmk.pendingAmount") }}</p>
-                  <p>{{ h5Amount(userInfo.frozenBalance ?? userInfo.frozenAmount) }} {{ $t("das.dmk.currencyUsd") }}</p>
+                  <p>{{ h5Amount(userInfo.balance) }} {{ $t("das.dmk.currencyUsd") }}</p>
                 </div>
               </div>
             </div>
@@ -125,7 +90,7 @@
                         </div>
                       </div>
                       <div class="w-full flex justify-between items-center mt-4">
-                        <div class="text-xs text-white"><p>{{ $t("das.dmk.commRate") }}</p><p>{{ h5Rate(item.commissionRate ?? item.rate) }}</p></div>
+                        <div class="text-xs text-white"><p>{{ $t("das.dmk.commRate") }}</p><p>{{ h5Rate(item.rebatePercentage ?? item.commissionRate ?? item.rate) }}</p></div>
                         <div class="text-xs text-white"><p>{{ $t("das.dmk.profits") }}</p><p>{{ h5Money(item.totalCommission ?? item.commission ?? item.profit) }} {{ $t("das.dmk.currencyUsd") }}</p></div>
                         <div class="text-xs text-white"><p>{{ $t("das.dmk.totalRefund") }}</p><p>{{ h5Amount(item.price ?? item.totalAmount) }} {{ $t("das.dmk.currencyUsd") }}</p></div>
                       </div>
@@ -152,17 +117,19 @@
 </template>
 <script setup>
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { getOrderInfos, userGetInfo } from "@/api/apis";
-import HeaderTop from "@/components/HeaderTop.vue";
-import Footer from "@/components/Footer.vue";
-import OrderCard from "@/components/OrderCard.vue";
+import StartingView from "@/views/starting/index.vue";
 import DmkH5Layout from "@/components/dmkH5/DmkH5Layout.vue";
 import DmkSubmitTask from "@/components/dmk/DmkSubmitTask.vue";
 import h5Placeholder from "@/static/das/image-placeholder.png";
 import { safeBack, safePush } from "@/utils/navigation";
+import { getPcBreakpoint } from "@/responsiveMode";
 import { useI18n } from "vue-i18n";
+const desktopQuery = window.matchMedia(`(min-width: ${getPcBreakpoint()}px)`);
+const isDesktop = ref(desktopQuery.matches);
 const router = useRouter(),
+  route = useRoute(),
   userInfo = ref({}),
   active = ref(0),
   list = ref([]),
@@ -209,7 +176,7 @@ const h5Rate = (value) => {
   const text = String(value);
   if (text.includes("%")) return text;
   const number = Number(value);
-  return Number.isFinite(number) ? `${number.toFixed(2)}%` : text;
+  return Number.isFinite(number) ? `${number}%` : text;
 };
 const h5Date = (value) => {
   if (!value) return "—";
@@ -310,67 +277,48 @@ const onLoad = async () => {
     }, 180);
   };
 
-onMounted(async () => {
-  if (window.matchMedia("(max-width: 1023px)").matches) {
+const syncDesktop = (event) => {
+  const matches = typeof event?.matches === "boolean"
+    ? event.matches
+    : desktopQuery.matches;
+  isDesktop.value = matches;
+  if (!matches && !list.value.length && !loading.value && !finished.value) {
     loadData({ replace: true });
   }
+};
+if (desktopQuery.addEventListener) {
+  desktopQuery.addEventListener("change", syncDesktop);
+} else {
+  desktopQuery.addListener?.(syncDesktop);
+}
+const recordsResizeObserver = typeof ResizeObserver === "undefined"
+  ? null
+  : new ResizeObserver(syncDesktop);
+recordsResizeObserver?.observe(document.documentElement);
+window.addEventListener("resize", syncDesktop, { passive: true });
+window.visualViewport?.addEventListener("resize", syncDesktop, {
+  passive: true,
+});
+
+onMounted(async () => {
+  if (route.query.tab === "pending") {
+    active.value = 1;
+    query.status = tabs[1].status;
+  }
+
+  if (!isDesktop.value) loadData({ replace: true });
 
   try { userInfo.value = (await userGetInfo()).data || {}; } catch (_) {}
 });
-onBeforeUnmount(cancelPendingRequest);
+onBeforeUnmount(() => {
+  cancelPendingRequest();
+  if (desktopQuery.removeEventListener) {
+    desktopQuery.removeEventListener("change", syncDesktop);
+  } else {
+    desktopQuery.removeListener?.(syncDesktop);
+  }
+  recordsResizeObserver?.disconnect();
+  window.removeEventListener("resize", syncDesktop);
+  window.visualViewport?.removeEventListener("resize", syncDesktop);
+});
 </script>
-<style scoped>
-.records-page {
-  min-height: 100vh;
-  background: #14392c;
-  color: #f7f5ec;
-}
-.records-content {
-  padding: 28px 24px 35px;
-}
-.records-title {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.records-title button {
-  position: absolute;
-  left: 8px;
-  border: 0;
-  background: none;
-  color: inherit;
-  font-size: 31px;
-}
-.records-title h1 {
-  margin: 0;
-  font-size: 24px;
-}
-.records-tabs {
-  margin: 24px 0 18px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 7px;
-}
-.records-tabs button {
-  height: 42px;
-  padding: 0 7px;
-  border: 1px solid rgba(247, 245, 236, 0.35);
-  border-radius: 999px;
-  background: transparent;
-  color: rgba(247, 245, 236, 0.72);
-  font-size: 12px;
-  font-weight: 700;
-}
-.records-tabs button.active {
-  border-color: #f7f5ec;
-  background: #f7f5ec;
-  color: #17382d;
-}
-.records-copyright {
-  margin: 34px 0 0;
-  text-align: center;
-  color: rgba(247, 245, 236, 0.42);
-  font-size: 9px;
-}
-</style>

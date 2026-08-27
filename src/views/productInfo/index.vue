@@ -63,6 +63,7 @@
               void-icon="star"
               void-color="#cccccc"
               :gutter="2"
+              readonly
             />
           </div>
 
@@ -135,6 +136,7 @@ const totalAmount = computed(() => money(order.value.totalAmount ?? order.value.
 const profit = computed(() => money(order.value.totalCommission ?? order.value.commission));
 const commissionRate = computed(() => {
   const value =
+    order.value.rebatePercentage ??
     order.value.commissionRate ??
     order.value.commission_rate ??
     order.value.rate;
@@ -142,7 +144,7 @@ const commissionRate = computed(() => {
   const text = String(value);
   if (text.includes("%")) return text;
   const number = Number(value);
-  return Number.isFinite(number) ? `${number.toFixed(2)}%` : text;
+  return Number.isFinite(number) ? `${number}%` : text;
 });
 const formattedCreateTime = computed(() =>
   order.value.createTime ? formatTime(order.value.createTime) : "—",

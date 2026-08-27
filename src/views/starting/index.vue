@@ -105,10 +105,7 @@
                   <p>{{ $t("das.dmk.pendingAmount") }}</p>
                   <p>
                     {{
-                      money(
-                        userInfo.frozenBalance ?? userInfo.frozenAmount,
-                        "0.00",
-                      )
+                      money(userInfo.balance, "0.00")
                     }}
                     {{ $t("das.dmk.currencyUsd") }}
                   </p>
@@ -233,7 +230,13 @@
                     >
                       <p>{{ $t("das.dmk.commRate") }}</p>
                       <p>
-                        {{ historyRate(item.commissionRate ?? item.rate) }}
+                        {{
+                          historyRate(
+                            item.rebatePercentage ??
+                              item.commissionRate ??
+                              item.rate,
+                          )
+                        }}
                       </p>
                     </div>
                     <div
@@ -327,9 +330,7 @@
                     <p>{{ $t("das.dmk.pendingAmount") }}</p>
                     <p>
                       {{
-                        h5Amount(
-                          userInfo.frozenBalance ?? userInfo.frozenAmount,
-                        )
+                        h5Amount(userInfo.balance)
                       }}
                       {{ $t("das.dmk.currencyUsd") }}
                     </p>
@@ -671,7 +672,7 @@ const historyRate = (value) => {
   const text = String(value);
   if (text.includes("%")) return text;
   const number = Number(value);
-  return Number.isFinite(number) ? `${number.toFixed(2)}%` : text;
+  return Number.isFinite(number) ? `${number}%` : text;
 };
 const historyStatus = (status) =>
   String(status) === "0"

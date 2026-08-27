@@ -523,6 +523,7 @@ const types = ref([]);
 const attachmentFiles = ref([]);
 const saving = ref(false);
 const loadingDetail = ref(false);
+const WITHDRAWAL_PASSWORD_ENABLED = false;
 const credential = ref(getWithdrawalCredential());
 const withdrawalPasswordDialog = ref(null);
 const pendingAction = ref(null);
@@ -748,11 +749,12 @@ const endH5PickerDrag = (event) => {
   }
 };
 const requestCredential = (action) => {
+  if (!WITHDRAWAL_PASSWORD_ENABLED) return;
   pendingAction.value = action;
   withdrawalPasswordDialog.value?.open();
 };
 const openCreate = () => {
-  if (!credential.value) {
+  if (WITHDRAWAL_PASSWORD_ENABLED && !credential.value) {
     requestCredential({ type: "create" });
     return;
   }
@@ -807,14 +809,15 @@ const fillForm = (data = {}) => {
 const credentialErrorCode = (error) =>
   Number(error?.code ?? error?.response?.data?.code ?? 0);
 const handleProtectedError = (error, action) => {
-  if (credentialErrorCode(error) !== 526) return false;
+  if (!WITHDRAWAL_PASSWORD_ENABLED || credentialErrorCode(error) !== 526)
+    return false;
   clearWithdrawalCredential();
   credential.value = "";
   requestCredential(action);
   return true;
 };
 const loadEdit = async (id) => {
-  if (!credential.value) {
+  if (WITHDRAWAL_PASSWORD_ENABLED && !credential.value) {
     requestCredential({ type: "edit", id });
     return;
   }
@@ -856,7 +859,7 @@ const uploadAttachment = async (entry) => {
   }
 };
 const save = async () => {
-  if (!credential.value) {
+  if (WITHDRAWAL_PASSWORD_ENABLED && !credential.value) {
     requestCredential({ type: "retry-save" });
     return;
   }
@@ -889,7 +892,7 @@ const save = async () => {
   }
 };
 const remove = async (id) => {
-  if (!credential.value) {
+  if (WITHDRAWAL_PASSWORD_ENABLED && !credential.value) {
     requestCredential({ type: "remove", id });
     return;
   }
@@ -951,7 +954,7 @@ onMounted(async () => {
   if (isEditing.value) {
     await loadEdit(route.query.id);
   }
-  if (!credential.value) {
+  if (WITHDRAWAL_PASSWORD_ENABLED && !credential.value) {
     pendingAction.value = isEditing.value
       ? { type: "edit", id: route.query.id }
       : null;
