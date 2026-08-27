@@ -409,40 +409,41 @@
       </div>
     </div>
 
-    <BonusDialog
-      :show="bonusVisible"
-      @close="closeBonus"
-      @contact="openBonusContact"
-    />
-    <van-dialog
-      :show="startAnimationVisible"
-      class="start-loading-dialog"
-      :show-confirm-button="false"
-      :close-on-click-overlay="false"
-    >
-      <div
-        class="start-loading-animation"
-        role="status"
-        :aria-label="$t('das.common.loading')"
-      >
-        <div class="start-loading-animation__brand" aria-hidden="true">Bavor</div>
-        <div class="start-loading-animation__scanner" aria-hidden="true">
-          <span class="start-loading-animation__ticks"></span>
-          <span class="start-loading-animation__orbit"></span>
-          <span class="start-loading-animation__sweep"></span>
-          <span class="start-loading-animation__core">
-            <img src="/dmk/assets/starting.png" alt="" />
-          </span>
-        </div>
-        <p class="start-loading-animation__label">
-          {{ $t("das.common.loading") }}
-        </p>
-        <div class="start-loading-animation__signal" aria-hidden="true">
-          <i></i><i></i><i></i><i></i><i></i>
-        </div>
-      </div>
-    </van-dialog>
   </DmkH5Layout>
+
+  <BonusDialog
+    :show="bonusVisible"
+    @close="closeBonus"
+    @contact="openBonusContact"
+  />
+  <van-dialog
+    :show="startAnimationVisible"
+    class="start-loading-dialog"
+    :show-confirm-button="false"
+    :close-on-click-overlay="false"
+  >
+    <div
+      class="start-loading-animation"
+      role="status"
+      :aria-label="$t('das.common.loading')"
+    >
+      <div class="start-loading-animation__brand" aria-hidden="true">Bavor</div>
+      <div class="start-loading-animation__scanner" aria-hidden="true">
+        <span class="start-loading-animation__ticks"></span>
+        <span class="start-loading-animation__orbit"></span>
+        <span class="start-loading-animation__sweep"></span>
+        <span class="start-loading-animation__core">
+          <img src="/dmk/assets/starting.png" alt="" />
+        </span>
+      </div>
+      <p class="start-loading-animation__label">
+        {{ $t("das.common.loading") }}
+      </p>
+      <div class="start-loading-animation__signal" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </div>
+  </van-dialog>
 
   <DmkSubmitTask
     v-model:show="submitTaskVisible"
