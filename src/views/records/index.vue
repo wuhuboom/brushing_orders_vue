@@ -146,15 +146,9 @@ const tabs = [
     { label: "das.records.completed", status: "0" },
   ];
 const openOrderDetails = (item) => {
-  if (String(item.status) === "1") {
-    submitTaskOrder.value = item;
-    submitTaskVisible.value = true;
-    return;
-  }
-  try {
-    sessionStorage.setItem(`dasOrder:${item.id}`, JSON.stringify(item));
-  } catch (_) {}
-  safePush(router, { path: "/productInfo", query: { id: item.id } });
+  if (String(item.status) !== "1") return;
+  submitTaskOrder.value = item;
+  submitTaskVisible.value = true;
 };
 const refreshAfterSubmit = async () => {
   cancelPendingRequest();

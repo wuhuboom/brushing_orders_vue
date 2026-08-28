@@ -20,7 +20,7 @@
             </div>
             <div
               class="ml-2 cursor-pointer"
-              @click="menuOpen = true"
+              @click="openMenu"
             >
               <img
                 src="/dmk/assets/menu.png"
@@ -80,17 +80,18 @@
                 {{ $t("das.dmk.currencyUsd") }}
               </p>
             </div>
-            <div class="col-span-1">
-              <p>{{ $t("das.dmk.pendingAmount") }}</p>
-              <p class="mt-2">
-                {{ money(pendingAmount) }} {{ $t("das.dmk.currencyUsd") }}
-              </p>
-            </div>
-            <div class="h-[20px] col-span-2"></div>
+
             <div class="col-span-1">
               <p>{{ $t("das.dmk.anniversaryBonus") }}</p>
               <p class="mt-2">
                 {{ money(anniversaryBonus) }} {{ $t("das.dmk.currencyUsd") }}
+              </p>
+            </div>
+            <div class="h-[20px] col-span-2"></div>
+            <div class="col-span-1">
+              <p>{{ $t("das.dmk.pendingAmount") }}</p>
+              <p class="mt-2">
+                {{ money(pendingAmount) }} {{ $t("das.dmk.currencyUsd") }}
               </p>
             </div>
             <div class="col-span-1">
@@ -180,6 +181,7 @@
 <script setup>
 import DmkCreditRunner from "@/components/dmk/DmkCreditRunner.vue";
 import { useDmkHeader } from "@/components/dmk/useDmkHeader.js";
+import { useUserStore } from "@/store/modules/user";
 import { ref, watch } from "vue";
 
 const props = defineProps({
@@ -190,6 +192,11 @@ const props = defineProps({
 
 const menuOpen = ref(props.menuInitiallyOpen);
 const profileExpanded = ref(props.profileInitiallyOpen);
+const store = useUserStore();
+const openMenu = () => {
+  store.getUserInfo();
+  menuOpen.value = true;
+};
 const {
   profileItems,
   services,
