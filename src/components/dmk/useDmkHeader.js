@@ -47,7 +47,7 @@ export const useDmkHeader = (props, closeOverlay = () => {}) => {
     () => userInfo.value.balance ?? 0,
   );
   const anniversaryBonus = computed(
-    () => userInfo.value.anniversaryBonus ?? userInfo.value.bonus ?? 0,
+    () => userInfo.value.luckyBonus,
   );
   const money = (value) =>
     Number(value || 0).toLocaleString("en-US", {

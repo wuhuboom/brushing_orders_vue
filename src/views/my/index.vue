@@ -93,7 +93,7 @@ const creditPercent = computed(() => {
 });
 const pcPendingAmount = computed(() => userInfo.value.balance ?? 0);
 const pcAnniversaryBonus = computed(() =>
-  userInfo.value.anniversaryBonus ?? userInfo.value.bonus ?? userInfo.value.rewardAmount ?? 0,
+  userInfo.value.luckyBonus,
 );
 const pcLevelIcon = computed(() => {
   const path =
