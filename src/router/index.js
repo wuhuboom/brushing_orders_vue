@@ -31,7 +31,7 @@ const router = createRouter({
 });
 
 // 更新路由拦截
-router.beforeEach((to, from, next) => {
+router.beforeEach((to) => {
   const authenticationRoutes = [
     "/account/welcome",
     "/account/login",
@@ -39,13 +39,15 @@ router.beforeEach((to, from, next) => {
     "/tc",
     "/setting/language",
   ];
-  const publicRoutes = ["/", "/about", "/seo", "/ppc", "/web"];
+  const publicRoutes = ["/about", "/seo", "/ppc", "/web"];
   const isAuthenticated = Boolean(useUserStore(pinia).token);
   const canVisitWithoutLogin =
     authenticationRoutes.includes(to.path) || publicRoutes.includes(to.path);
-  if (!canVisitWithoutLogin && !isAuthenticated)
-    next({ path: "/account/login", replace: true });
-  else next();
+  if (!canVisitWithoutLogin && !isAuthenticated) {
+    return { path: "/account/login", replace: true };
+  }
+
+  return true;
 });
 
 export default router;
