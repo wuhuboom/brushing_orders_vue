@@ -31,7 +31,7 @@
           >
             {{ $t(item.labelKey) }}
           </button>
-          <div class="col-span-1">support@swcpartnership.online</div>
+          <div class="col-span-1">{{ supportEmail }}</div>
         </div>
         <div
           class="w-full px-4 lg:px-0 grid grid-cols-2 lg:grid-cols-5 gap-4 mt-10 text-lg text-[var(--main-color)]"
@@ -81,6 +81,7 @@ import DmkFlagCarousel from "./DmkFlagCarousel.vue";
 const router = useRouter();
 const userStore = useUserStore();
 const isAuthenticated = computed(() => Boolean(userStore.token));
+const supportEmail = computed(() => window.g?.PUBLIC_CONTACT?.email || "");
 const publicContact = computed(() => {
   const config = window.g?.PUBLIC_CONTACT || {};
   return {

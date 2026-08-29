@@ -19,7 +19,6 @@ const allowedVisibleValues = new Set([
   "PPC",
   "SEO",
   "USD",
-  "support@swcpartnership.online",
 ]);
 
 function walk(directory) {
