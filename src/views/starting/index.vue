@@ -413,8 +413,8 @@
 
   <BonusDialog
     :show="bonusVisible"
+    :amount="bonusAmount"
     @close="closeBonus"
-    @contact="openBonusContact"
   />
   <van-dialog
     :show="startAnimationVisible"
@@ -520,6 +520,7 @@ const current = ref(0);
 const heroMotion = ref(null);
 const dataTransition = ref(false);
 const bonusVisible = ref(false);
+const bonusAmount = ref("");
 const creatingOrder = ref(false);
 const startAnimationVisible = ref(false);
 const submitTaskVisible = ref(false);
@@ -932,11 +933,6 @@ const closeBonus = () => {
   bonusVisible.value = false;
 };
 
-const openBonusContact = () => {
-  closeBonus();
-  openCustomerServiceDialog();
-};
-
 const handleClick = async () => {
   if (creatingOrder.value) return;
   creatingOrder.value = true;
@@ -954,6 +950,7 @@ const handleClick = async () => {
     const res = await createOrder();
     closeToast();
     if (res.resultType === "BONUS") {
+      bonusAmount.value = res.data?.amount ?? "";
       bonusVisible.value = true;
       return;
     }
@@ -963,6 +960,7 @@ const handleClick = async () => {
   } catch (error) {
     closeToast();
     if (Number(error?.code) === 2000) {
+      bonusAmount.value = error?.data?.amount ?? "";
       bonusVisible.value = true;
       return;
     }

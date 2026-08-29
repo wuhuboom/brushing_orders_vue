@@ -10,12 +10,12 @@ window.g = {
   PUBLIC_CONTACT: {
     title: "Contact Us",
     whatsappLabel: "WhatsApp",
-    whatsapp: "+1 111 111 1111",
+    whatsapp: "+1 919-687-7175",
     telLabel: "Tel",
-    tel: "+1 111 111 1111",
+    tel: "+1 919-687-7175",
     emailLabel: "Email",
-    email: "bavordigital@gmail.com",
+    email: "w84074296@gmail.com",
     headOfficeLabel: "Head Office",
-    headOffice: "70 E 77th St, New York, NY 10075, United States",
+    headOffice: "70 E 77th St, New York, NY 10075, USA",
   },
 };

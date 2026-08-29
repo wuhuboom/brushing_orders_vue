@@ -3,12 +3,12 @@ import { useI18n } from "vue-i18n";
 
 defineProps({
   show: { type: Boolean, default: false },
+  amount: { type: [Number, String], default: "" },
 });
-const emit = defineEmits(["close", "contact"]);
+const emit = defineEmits(["close"]);
 const { t } = useI18n();
 
 const close = () => emit("close");
-const contact = () => emit("contact");
 </script>
 
 <template>
@@ -20,62 +20,96 @@ const contact = () => emit("contact");
     close-on-click-overlay
     @update:show="(value) => !value && close()"
   >
-    <div class="bonus-prize">
-      <img src="@/static/das/congratulations.png" :alt="t('das.common.success')" />
-      <button type="button" @click="contact">
-        {{ t("das.auth.support") }}
-      </button>
+    <div class="bonus-prize" role="status" :aria-label="t('das.common.success')">
+      <img
+        class="bonus-prize__rays"
+        src="@/static/das/bonus-rays.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <div class="bonus-prize__result">
+        <img
+          class="bonus-prize__title"
+          src="@/static/das/bonus-big-win.png"
+          :alt="t('das.common.success')"
+        />
+        <strong class="bonus-prize__amount">
+          <span>{{ amount }}</span>
+        </strong>
+      </div>
     </div>
   </van-dialog>
 </template>
 
 <style scoped>
 :global(.bonus-dialog.van-dialog) {
-  width: min(calc(100vw - 48px), 560px) !important;
-  max-width: min(calc(100vw - 48px), 560px) !important;
+  width: min(calc(100vw - 32px), calc(100dvh - 32px), 720px) !important;
+  max-width: none !important;
   left: 50% !important;
   right: auto !important;
   margin: 0 !important;
   transform: translate3d(-50%, -50%, 0) !important;
-  max-height: calc(100dvh - 28px);
-  overflow: hidden;
-  border-radius: 22px;
-  background: #f7f1e7;
+  overflow: visible;
+  background: transparent;
 }
 .bonus-prize {
-  padding: 8px;
-  background: #f7f1e7;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
 }
-.bonus-prize img {
+.bonus-prize__rays {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 88%;
+  height: 88%;
+  animation: bonus-rays-spin 12s linear infinite;
+}
+.bonus-prize__result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 75%;
+  transform: translate(-50%, -45%);
+}
+.bonus-prize__title {
   display: block;
   width: 100%;
-  max-height: calc(100dvh - 112px);
-  object-fit: contain;
-  border-radius: 16px;
 }
-.bonus-prize button {
-  width: 100%;
-  min-height: 52px;
-  margin-top: 8px;
-  padding: 10px 18px;
-  border: 1px solid #c69a4b;
-  border-radius: 999px;
-  background: #14392c;
-  color: #fff8ec;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  box-shadow: 0 7px 18px rgba(20, 57, 44, 0.2);
+.bonus-prize__amount {
+  position: absolute;
+  bottom: 3%;
+  left: 47%;
+  width: 82%;
+  height: 20%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transform: translateX(-50%);
+  color: #ffdf19;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(26px, 7vw, 58px);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 3px 0 rgba(113, 53, 0, 0.5);
+  white-space: nowrap;
 }
-.bonus-prize button:active {
-  transform: translateY(1px);
-  box-shadow: 0 3px 10px rgba(20, 57, 44, 0.18);
+.bonus-prize__amount span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-@media (max-width: 1023.98px) {
-  :global(.bonus-dialog.van-dialog) {
-    width: min(calc(100vw - 24px), 430px) !important;
-    max-width: min(calc(100vw - 24px), 430px) !important;
+@keyframes bonus-rays-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 </style>

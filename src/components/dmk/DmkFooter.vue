@@ -86,23 +86,22 @@ const publicContact = computed(() => {
   return {
     title: config.title || "Contact Us",
     items: [
+      // {
+      //   label: config.whatsappLabel || "WhatsApp",
+      //   value: config.whatsapp || "+1 111 111 1111",
+      // },
       {
-        label: config.whatsappLabel || "WhatsApp",
-        value: config.whatsapp || "+1 111 111 1111",
+        label: config.telLabel,
+        value: config.tel ,
       },
       {
-        label: config.telLabel || "Tel",
-        value: config.tel || "+1 111 111 1111",
+        label: config.emailLabel,
+        value: config.email ,
       },
       {
-        label: config.emailLabel || "Email",
-        value: config.email || "bavordigital@gmail.com",
-      },
-      {
-        label: config.headOfficeLabel || "Head Office",
+        label: config.headOfficeLabel ,
         value:
-          config.headOffice ||
-          "70 E 77th St, New York, NY 10075, United States",
+          config.headOffice,
       },
     ],
   };
