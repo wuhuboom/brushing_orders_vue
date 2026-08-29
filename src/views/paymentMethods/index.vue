@@ -483,18 +483,19 @@
         </div>
       </div>
     </div>
-    <WithdrawalPasswordDialog
-      ref="withdrawalPasswordDialog"
-      @verified="handleCredentialVerified"
-      @cancel="handleCredentialCancel"
-    />
   </DmkH5Layout>
+  <WithdrawalPasswordDialog
+    ref="withdrawalPasswordDialog"
+    @verified="handleCredentialVerified"
+    @cancel="handleCredentialCancel"
+  />
 </template>
 
 <script setup>
 import DmkPcAccountShell from "@/components/dmkPc/DmkPcAccountShell.vue";
 import DmkH5Layout from "@/components/dmkH5/DmkH5Layout.vue";
-import { computed, nextTick, onMounted, reactive, ref } from "vue";
+import WithdrawalPasswordDialog from "@/components/WithdrawalPasswordDialog.vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { showSuccessToast, showToast } from "vant";
@@ -507,7 +508,6 @@ import {
   updateWithdrawalMethod,
   upload,
 } from "@/api/apis";
-import WithdrawalPasswordDialog from "@/components/WithdrawalPasswordDialog.vue";
 import {
   clearWithdrawalCredential,
   getWithdrawalCredential,
@@ -524,10 +524,9 @@ const types = ref([]);
 const attachmentFiles = ref([]);
 const saving = ref(false);
 const loadingDetail = ref(false);
-const WITHDRAWAL_PASSWORD_ENABLED = false;
 const credential = ref(getWithdrawalCredential());
 const withdrawalPasswordDialog = ref(null);
-const pendingAction = ref(null);
+const pendingWalletPicker = ref("");
 const pcPickerOpen = ref(false);
 const h5PickerOpen = ref(false);
 const h5PickerIndex = ref(0);
@@ -662,7 +661,16 @@ const pcWalletAddress = computed(() => {
   const item = pcPrimaryAccount.value;
   return item.walletAddress || item.bankAccount || "";
 });
-const pcOpenWalletEditor = () => {
+const requestWalletCredential = (picker) => {
+  credential.value = getWithdrawalCredential();
+  if (credential.value) return true;
+  pendingWalletPicker.value = picker;
+  withdrawalPasswordDialog.value?.open();
+  return false;
+};
+const pcOpenWalletEditor = async () => {
+  if (!requestWalletCredential("pc")) return;
+  if (!isFormOpen.value) await openCreate();
   const selectedIndex = pcWalletOptions.value.findIndex(
     (option) => String(option.id) === String(form.withdrawalTypeId),
   );
@@ -694,12 +702,24 @@ const h5WalletName = computed(() => {
   }
   return pcWalletName.value;
 });
-const openH5Picker = () => {
+const openH5Picker = async () => {
+  if (!requestWalletCredential("h5")) return;
+  if (!isFormOpen.value) await openCreate();
   const selectedIndex = pcWalletOptions.value.findIndex(
     (option) => String(option.id) === String(form.withdrawalTypeId),
   );
   h5PickerIndex.value = selectedIndex >= 0 ? selectedIndex : 0;
   h5PickerOpen.value = true;
+};
+const handleCredentialVerified = async (token) => {
+  credential.value = setWithdrawalCredential(token);
+  const picker = pendingWalletPicker.value;
+  pendingWalletPicker.value = "";
+  if (picker === "pc") await pcOpenWalletEditor();
+  if (picker === "h5") await openH5Picker();
+};
+const handleCredentialCancel = () => {
+  pendingWalletPicker.value = "";
 };
 const confirmH5WalletType = () => {
   const option = pcWalletOptions.value[h5PickerIndex.value];
@@ -763,18 +783,9 @@ const endH5PickerDrag = (event) => {
     }, 0);
   }
 };
-const requestCredential = (action) => {
-  if (!WITHDRAWAL_PASSWORD_ENABLED) return;
-  pendingAction.value = action;
-  withdrawalPasswordDialog.value?.open();
-};
-const openCreate = () => {
-  if (WITHDRAWAL_PASSWORD_ENABLED && !credential.value) {
-    requestCredential({ type: "create" });
-    return;
-  }
+const openCreate = async () => {
   resetForm();
-  safeReplace(router, {
+  await safeReplace(router, {
     path: "/paymentMethods",
     query: { action: "create" },
   });
@@ -830,19 +841,19 @@ const fillForm = (data = {}) => {
 };
 const credentialErrorCode = (error) =>
   Number(error?.code ?? error?.response?.data?.code ?? 0);
-const handleProtectedError = (error, action) => {
-  if (!WITHDRAWAL_PASSWORD_ENABLED || credentialErrorCode(error) !== 526)
-    return false;
+const refreshCredential = () => {
+  credential.value = getWithdrawalCredential();
+  if (credential.value) return true;
+  showToast(t("das.form.credentialMissing"));
+  return false;
+};
+const clearInvalidCredential = (error) => {
+  if (credentialErrorCode(error) !== 526) return;
   clearWithdrawalCredential();
   credential.value = "";
-  requestCredential(action);
-  return true;
 };
 const loadEdit = async (id) => {
-  if (WITHDRAWAL_PASSWORD_ENABLED && !credential.value) {
-    requestCredential({ type: "edit", id });
-    return;
-  }
+  if (!refreshCredential()) return;
   loadingDetail.value = true;
   try {
     const response = await getWithdrawalAccount(id, credential.value);
@@ -852,9 +863,8 @@ const loadEdit = async (id) => {
       query: { action: "edit", id: String(id) },
     });
   } catch (error) {
-    if (!handleProtectedError(error, { type: "edit", id })) {
-      showToast(error?.msg || error?.message || t("das.common.requestFailed"));
-    }
+    clearInvalidCredential(error);
+    showToast(error?.msg || error?.message || t("das.common.requestFailed"));
   } finally {
     loadingDetail.value = false;
   }
@@ -881,10 +891,7 @@ const uploadAttachment = async (entry) => {
   }
 };
 const save = async () => {
-  if (WITHDRAWAL_PASSWORD_ENABLED && !credential.value) {
-    requestCredential({ type: "retry-save" });
-    return;
-  }
+  if (!refreshCredential()) return;
   if (!form.withdrawalTypeId) return showToast(t("das.auth.required"));
   const invalidBank =
     isBank.value &&
@@ -906,44 +913,21 @@ const save = async () => {
     await refresh();
     await safeReplace(router, { path: "/paymentMethods" });
   } catch (error) {
-    if (!handleProtectedError(error, { type: "retry-save" })) {
-      showToast(error?.msg || error?.message || t("das.common.requestFailed"));
-    }
+    clearInvalidCredential(error);
+    showToast(error?.msg || error?.message || t("das.common.requestFailed"));
   } finally {
     saving.value = false;
   }
 };
 const remove = async (id) => {
-  if (WITHDRAWAL_PASSWORD_ENABLED && !credential.value) {
-    requestCredential({ type: "remove", id });
-    return;
-  }
+  if (!refreshCredential()) return;
   try {
     await deleteWithdrawalMethod(id, credential.value);
     await refresh();
   } catch (error) {
-    if (!handleProtectedError(error, { type: "remove", id })) {
-      showToast(error?.msg || error?.message || t("das.common.requestFailed"));
-    }
+    clearInvalidCredential(error);
+    showToast(error?.msg || error?.message || t("das.common.requestFailed"));
   }
-};
-
-const runPendingAction = async () => {
-  const action = pendingAction.value;
-  pendingAction.value = null;
-  if (!action) return;
-  if (action.type === "create") openCreate();
-  if (action.type === "edit") await loadEdit(action.id);
-  if (action.type === "remove") await remove(action.id);
-  if (action.type === "retry-save") await save();
-};
-const handleCredentialVerified = async (token) => {
-  credential.value = setWithdrawalCredential(token);
-  await runPendingAction();
-};
-const handleCredentialCancel = () => {
-  if (!credential.value && !pendingAction.value) safeBack(router, "/my");
-  pendingAction.value = null;
 };
 
 const handlePageBack = () => {
@@ -975,13 +959,6 @@ onMounted(async () => {
   resetForm();
   if (isEditing.value) {
     await loadEdit(route.query.id);
-  }
-  if (WITHDRAWAL_PASSWORD_ENABLED && !credential.value) {
-    pendingAction.value = isEditing.value
-      ? { type: "edit", id: route.query.id }
-      : null;
-    await nextTick();
-    withdrawalPasswordDialog.value?.open();
   }
 });
 </script>

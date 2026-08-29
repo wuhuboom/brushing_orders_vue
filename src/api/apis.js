@@ -1,5 +1,6 @@
 import api from "@/api/index.js";
 import { parseCreateOrderResponse } from "@/utils/orderCreate";
+import { getWithdrawalCredential } from "@/utils/withdrawalCredential";
 
 const requestConfig = (overrides = {}) => ({
   loading: false,
@@ -424,10 +425,20 @@ export const getWithdrawalAccount = (id, token) =>
   );
 export const addWithdrawalMethod = (params) => {
   const { token, ...body } = params;
+  const cachedToken =
+    typeof sessionStorage === "undefined"
+      ? ""
+      : sessionStorage.getItem("dasWithdrawalToken");
+  const credential = String(
+    firstDefined(token, getWithdrawalCredential(), cachedToken) || "",
+  ).trim();
+  if (!credential) {
+    return Promise.reject(new Error("Withdrawal credential is required"));
+  }
   return api.post(
     "/account/withdrawal-accounts",
     body,
-    requestConfig({ params: { token }, loading: true, showMsg: true }),
+    requestConfig({ params: { token: credential }, loading: true, showMsg: true }),
   );
 };
 export const updateWithdrawalMethod = (id, params) => {
