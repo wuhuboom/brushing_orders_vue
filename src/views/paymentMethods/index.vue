@@ -2,11 +2,44 @@
   <DmkPcAccountShell>
     <div class="w-full h-full dmk-payment-methods-scope">
       <div class="w-[90%] lg:w-[60%] mx-auto">
-        <div class="w-full box-border flex flex-col">
+        <div v-if="!isFormOpen" class="dmk-wallet-list-view">
+          <div v-if="accounts.length" class="dmk-wallet-list">
+            <article
+              v-for="item in accounts"
+              :key="item.id"
+              class="dmk-wallet-card"
+              role="button"
+              tabindex="0"
+              @click="openEdit(item.id)"
+              @keydown.enter="openEdit(item.id)"
+            >
+              <div class="dmk-wallet-card__copy">
+                <strong>{{ accountName(item) }}</strong>
+                <span>{{ accountAddress(item) }}</span>
+                <small v-if="item.isDefault">{{ $t("das.form.default") }}</small>
+              </div>
+              <button
+                class="dmk-wallet-card__delete"
+                type="button"
+                :aria-label="$t('das.common.close')"
+                @click.stop="remove(item.id)"
+              >
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 7h14M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v5m4-5v5" />
+                </svg>
+              </button>
+            </article>
+          </div>
+          <div v-else class="dmk-wallet-empty">{{ $t("das.form.noMoreData") }}</div>
+          <button class="dmk-wallet-create" type="button" @click="pcOpenWalletEditor">
+            <span aria-hidden="true">＋</span>{{ $t("das.form.create") }}
+          </button>
+        </div>
+        <div v-else class="w-full box-border flex flex-col">
           <div class="w-full flex flex-col">
             <div class="w-full flex flex-col mb-3">
               <div class="text-[#fff] text-base">
-                {{ $t("das.form.walletName") }}
+                {{ $t("das.form.withdrawalType") }}
               </div>
               <div
                 class="w-full mt-2 overflow-hidden bg-[#1a1a1a] border border-[#393939] lg:bg-[#fff] lg:border-[#fff]"
@@ -20,33 +53,43 @@
                   <div class="van-cell__value van-field__value">
                     <div class="van-field__body">
                       <input
-                        v-if="!isFormOpen"
-                        :value="pcWalletName"
+                        :value="walletTypeLabel(selectedType)"
                         class="van-field__control"
-                        :placeholder="$t('das.form.walletName')"
+                        :placeholder="$t('das.form.withdrawalType')"
                         readonly
                         type="text"
                       />
-                      <select
-                        v-else
-                        v-model="form.withdrawalTypeId"
-                        class="van-field__control dmk-wallet-select"
-                        @change="syncWalletNameFromType"
-                      >
-                        <option value="" disabled>{{ $t("das.form.walletName") }}</option>
-                        <option
-                          v-for="type in types"
-                          :key="type.id"
-                          :value="String(type.id)"
-                        >
-                          {{ type.typeName || type.name || type.id }}
-                        </option>
-                      </select>
                     </div>
                   </div>
                   <i
                     class="van-badge__wrapper van-icon van-icon-arrow van-cell__right-icon"
                   ></i>
+                </div>
+              </div>
+            </div>
+            <label class="dmk-wallet-default mb-3">
+              <span>{{ $t("das.form.default") }}</span>
+              <input v-model="form.isDefault" type="checkbox" />
+              <i aria-hidden="true"></i>
+            </label>
+            <div v-if="!isBank" class="w-full flex flex-col mb-3">
+              <div class="text-[#fff] text-base">
+                {{ $t("das.form.walletName") }}
+              </div>
+              <div
+                class="w-full mt-2 overflow-hidden bg-[#1a1a1a] border border-[#393939] lg:bg-[#fff] lg:border-[#fff]"
+              >
+                <div class="van-cell van-field">
+                  <div class="van-cell__value van-field__value">
+                    <div class="van-field__body">
+                      <input
+                        v-model.trim="form.walletName"
+                        class="van-field__control"
+                        :placeholder="$t('das.form.walletName')"
+                        type="text"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -61,15 +104,7 @@
                   <div class="van-cell__value van-field__value">
                     <div class="van-field__body">
                       <input
-                        v-if="!isFormOpen"
-                        :value="pcWalletAddress"
-                        class="van-field__control"
-                        :placeholder="$t('das.form.walletAddress')"
-                        readonly
-                        type="text"
-                      />
-                      <input
-                        v-else-if="!isBank"
+                        v-if="!isBank"
                         v-model.trim="form.walletAddress"
                         class="van-field__control"
                         :placeholder="$t('das.form.walletAddress')"
@@ -121,28 +156,23 @@
                 </div>
               </div>
             </template>
+            <div class="dmk-wallet-upload mb-3">
+              <strong>{{ $t("das.form.qrUpload") }}</strong>
+              <van-uploader
+                v-model="attachmentFiles"
+                :after-read="uploadAttachment"
+                :max-count="1"
+                accept="image/*"
+                @delete="form.attachment = ''"
+              >
+                <div class="dmk-wallet-upload__button">
+                  <span aria-hidden="true">＋</span>
+                  <small>{{ $t("das.form.upload") }}</small>
+                </div>
+              </van-uploader>
+            </div>
             <div class="w-full mt-3">
               <button
-                v-if="!isFormOpen"
-                class="van-button van-button--default van-button--large"
-                style="
-                  color: white;
-                  background: var(--main-color);
-                  border-color: var(--main-color);
-                "
-                type="button"
-                @click="openCustomerServiceDialog"
-              >
-                <div class="van-button__content">
-                  <span class="van-button__text"
-                    ><span class="text-black"
-                      >{{ $t("das.dmk.contactCustomerService") }}</span
-                    ></span
-                  >
-                </div>
-              </button>
-              <button
-                v-else
                 class="van-button van-button--default van-button--large"
                 style="
                   color: white;
@@ -252,11 +282,44 @@
         {{ $t("das.page.paymentMethods") }}
       </div>
       <div class="w-[90%] mx-auto">
-        <div class="w-full box-border flex flex-col">
+        <div v-if="!isFormOpen" class="dmk-wallet-list-view">
+          <div v-if="accounts.length" class="dmk-wallet-list">
+            <article
+              v-for="item in accounts"
+              :key="item.id"
+              class="dmk-wallet-card"
+              role="button"
+              tabindex="0"
+              @click="openEdit(item.id)"
+              @keydown.enter="openEdit(item.id)"
+            >
+              <div class="dmk-wallet-card__copy">
+                <strong>{{ accountName(item) }}</strong>
+                <span>{{ accountAddress(item) }}</span>
+                <small v-if="item.isDefault">{{ $t("das.form.default") }}</small>
+              </div>
+              <button
+                class="dmk-wallet-card__delete"
+                type="button"
+                :aria-label="$t('das.common.close')"
+                @click.stop="remove(item.id)"
+              >
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 7h14M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v5m4-5v5" />
+                </svg>
+              </button>
+            </article>
+          </div>
+          <div v-else class="dmk-wallet-empty">{{ $t("das.form.noMoreData") }}</div>
+          <button class="dmk-wallet-create" type="button" @click="openH5Picker">
+            <span aria-hidden="true">＋</span>{{ $t("das.form.create") }}
+          </button>
+        </div>
+        <div v-else class="w-full box-border flex flex-col">
           <div class="w-full flex flex-col">
             <div class="w-full flex flex-col mb-3">
               <div class="text-[#fff] text-base">
-                {{ $t("das.form.walletName") }}
+                {{ $t("das.form.withdrawalType") }}
               </div>
               <div
                 class="w-full mt-2 overflow-hidden bg-[#1a1a1a] border border-[#393939]"
@@ -272,7 +335,7 @@
                       <input
                         :value="h5WalletName"
                         class="van-field__control"
-                        :placeholder="$t('das.form.walletName')"
+                        :placeholder="$t('das.form.withdrawalType')"
                         readonly
                         type="text"
                       />
@@ -281,6 +344,32 @@
                   <i
                     class="van-badge__wrapper van-icon van-icon-arrow van-cell__right-icon"
                   ></i>
+                </div>
+              </div>
+            </div>
+            <label class="dmk-wallet-default mb-3">
+              <span>{{ $t("das.form.default") }}</span>
+              <input v-model="form.isDefault" type="checkbox" />
+              <i aria-hidden="true"></i>
+            </label>
+            <div v-if="!isBank" class="w-full flex flex-col mb-3">
+              <div class="text-[#fff] text-base">
+                {{ $t("das.form.walletName") }}
+              </div>
+              <div
+                class="w-full mt-2 overflow-hidden bg-[#1a1a1a] border border-[#393939]"
+              >
+                <div class="van-cell van-field">
+                  <div class="van-cell__value van-field__value">
+                    <div class="van-field__body">
+                      <input
+                        v-model.trim="form.walletName"
+                        class="van-field__control"
+                        :placeholder="$t('das.form.walletName')"
+                        type="text"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -295,15 +384,7 @@
                   <div class="van-cell__value van-field__value">
                     <div class="van-field__body">
                       <input
-                        v-if="!isFormOpen"
-                        :value="pcWalletAddress"
-                        class="van-field__control"
-                        :placeholder="$t('das.form.walletAddress')"
-                        readonly
-                        type="text"
-                      />
-                      <input
-                        v-else-if="!isBank"
+                        v-if="!isBank"
                         v-model.trim="form.walletAddress"
                         class="van-field__control"
                         :placeholder="$t('das.form.walletAddress')"
@@ -359,28 +440,23 @@
                 </div>
               </div>
             </template>
+            <div class="dmk-wallet-upload mb-3">
+              <strong>{{ $t("das.form.qrUpload") }}</strong>
+              <van-uploader
+                v-model="attachmentFiles"
+                :after-read="uploadAttachment"
+                :max-count="1"
+                accept="image/*"
+                @delete="form.attachment = ''"
+              >
+                <div class="dmk-wallet-upload__button">
+                  <span aria-hidden="true">＋</span>
+                  <small>{{ $t("das.form.upload") }}</small>
+                </div>
+              </van-uploader>
+            </div>
             <div class="w-full mt-3">
               <button
-                v-if="!isFormOpen"
-                class="van-button van-button--default van-button--large"
-                style="
-                  color: white;
-                  background: var(--main-color);
-                  border-color: var(--main-color);
-                "
-                type="button"
-                @click="openCustomerServiceDialog"
-              >
-                <div class="van-button__content">
-                  <span class="van-button__text"
-                    ><span class="text-black"
-                      >{{ $t("das.dmk.contactCustomerService") }}</span
-                    ></span
-                  >
-                </div>
-              </button>
-              <button
-                v-else
                 class="van-button van-button--default van-button--large"
                 style="
                   color: white;
@@ -513,8 +589,7 @@ import {
   getWithdrawalCredential,
   setWithdrawalCredential,
 } from "@/utils/withdrawalCredential";
-import { safeBack, safePush, safeReplace } from "@/utils/navigation";
-import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
+import { safeBack, safeReplace } from "@/utils/navigation";
 
 const router = useRouter();
 const route = useRoute();
@@ -526,7 +601,7 @@ const saving = ref(false);
 const loadingDetail = ref(false);
 const credential = ref(getWithdrawalCredential());
 const withdrawalPasswordDialog = ref(null);
-const pendingWalletPicker = ref("");
+const pendingCredentialAction = ref(null);
 const pcPickerOpen = ref(false);
 const h5PickerOpen = ref(false);
 const h5PickerIndex = ref(0);
@@ -575,9 +650,6 @@ const isBank = computed(() => {
 });
 const walletTypeLabel = (type) =>
   type?.typeName || type?.name || (type?.id == null ? "" : String(type.id));
-const syncWalletNameFromType = () => {
-  form.walletName = walletTypeLabel(selectedType.value);
-};
 
 const accountName = (item) =>
   item.accountName ||
@@ -590,10 +662,6 @@ const accountAddress = (item) => {
   if (value.length <= 14) return value || "—";
   return `${value.slice(0, 7)}••••${value.slice(-5)}`;
 };
-const pcPrimaryAccount = computed(
-  () =>
-    accounts.value.find((item) => item.isDefault) || accounts.value[0] || {},
-);
 const pcWalletOptions = computed(() => {
   if (types.value.length) {
     return types.value.map((item) => ({
@@ -652,24 +720,15 @@ const endPcPickerDrag = (event) => {
     }, 0);
   }
 };
-const pcWalletName = computed(() => {
-  const current = accountName(pcPrimaryAccount.value);
-  if (current !== "—") return current;
-  return form.withdrawalTypeId ? pcSelectedWallet.value?.label || "" : "";
-});
-const pcWalletAddress = computed(() => {
-  const item = pcPrimaryAccount.value;
-  return item.walletAddress || item.bankAccount || "";
-});
-const requestWalletCredential = (picker) => {
+const requestCredential = (action) => {
   credential.value = getWithdrawalCredential();
   if (credential.value) return true;
-  pendingWalletPicker.value = picker;
+  pendingCredentialAction.value = action;
   withdrawalPasswordDialog.value?.open();
   return false;
 };
 const pcOpenWalletEditor = async () => {
-  if (!requestWalletCredential("pc")) return;
+  if (!requestCredential({ type: "picker", picker: "pc" })) return;
   if (!isFormOpen.value) await openCreate();
   const selectedIndex = pcWalletOptions.value.findIndex(
     (option) => String(option.id) === String(form.withdrawalTypeId),
@@ -692,18 +751,9 @@ const confirmPcWalletType = () => {
   }
   pcPickerOpen.value = false;
 };
-const h5WalletName = computed(() => {
-  if (isFormOpen.value) {
-    return (
-      pcWalletOptions.value.find(
-        (option) => String(option.id) === String(form.withdrawalTypeId),
-      )?.label || ""
-    );
-  }
-  return pcWalletName.value;
-});
+const h5WalletName = computed(() => walletTypeLabel(selectedType.value));
 const openH5Picker = async () => {
-  if (!requestWalletCredential("h5")) return;
+  if (!requestCredential({ type: "picker", picker: "h5" })) return;
   if (!isFormOpen.value) await openCreate();
   const selectedIndex = pcWalletOptions.value.findIndex(
     (option) => String(option.id) === String(form.withdrawalTypeId),
@@ -713,13 +763,19 @@ const openH5Picker = async () => {
 };
 const handleCredentialVerified = async (token) => {
   credential.value = setWithdrawalCredential(token);
-  const picker = pendingWalletPicker.value;
-  pendingWalletPicker.value = "";
-  if (picker === "pc") await pcOpenWalletEditor();
-  if (picker === "h5") await openH5Picker();
+  const action = pendingCredentialAction.value;
+  pendingCredentialAction.value = null;
+  if (action?.type === "picker" && action.picker === "pc") {
+    await pcOpenWalletEditor();
+  }
+  if (action?.type === "picker" && action.picker === "h5") {
+    await openH5Picker();
+  }
+  if (action?.type === "edit") await loadEdit(action.id);
+  if (action?.type === "remove") await remove(action.id);
 };
 const handleCredentialCancel = () => {
-  pendingWalletPicker.value = "";
+  pendingCredentialAction.value = null;
 };
 const confirmH5WalletType = () => {
   const option = pcWalletOptions.value[h5PickerIndex.value];
@@ -790,11 +846,15 @@ const openCreate = async () => {
     query: { action: "create" },
   });
 };
+const normalizeAccounts = (data) => {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data?.rows)) return data.rows;
+  if (Array.isArray(data?.records)) return data.records;
+  return data?.id == null ? [] : [data];
+};
 const refresh = async () => {
   const response = await getWithdrawalAccounts();
-  accounts.value = Array.isArray(response.data)
-    ? response.data
-    : response.data?.rows || response.data?.records || [];
+  accounts.value = normalizeAccounts(response.data);
 };
 const resetForm = () => {
   const defaultType = types.value[0];
@@ -870,7 +930,9 @@ const loadEdit = async (id) => {
   }
 };
 const openEdit = (id) => {
-  if (!loadingDetail.value) loadEdit(id);
+  if (loadingDetail.value) return;
+  if (!requestCredential({ type: "edit", id })) return;
+  loadEdit(id);
 };
 const uploadAttachment = async (entry) => {
   const item = Array.isArray(entry) ? entry[0] : entry;
@@ -920,7 +982,7 @@ const save = async () => {
   }
 };
 const remove = async (id) => {
-  if (!refreshCredential()) return;
+  if (!requestCredential({ type: "remove", id })) return;
   try {
     await deleteWithdrawalMethod(id, credential.value);
     await refresh();
@@ -945,10 +1007,7 @@ onMounted(async () => {
     getWithdrawalTypes(),
   ]);
   if (accountsResult.status === "fulfilled") {
-    const data = accountsResult.value.data;
-    accounts.value = Array.isArray(data)
-      ? data
-      : data?.rows || data?.records || [];
+    accounts.value = normalizeAccounts(accountsResult.value.data);
   }
   if (typesResult.status === "fulfilled") {
     const data = typesResult.value.data;
@@ -958,12 +1017,239 @@ onMounted(async () => {
   }
   resetForm();
   if (isEditing.value) {
-    await loadEdit(route.query.id);
+    openEdit(route.query.id);
   }
 });
 </script>
 
 <style scoped>
+.dmk-wallet-list-view {
+  min-height: min(620px, calc(100vh - 210px));
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.dmk-wallet-list {
+  display: grid;
+  gap: 12px;
+}
+
+.dmk-wallet-card {
+  min-height: 92px;
+  padding: 17px 16px 17px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid #393939;
+  border-radius: 16px;
+  background: #1a1a1a;
+  color: #fff;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.dmk-wallet-card:active {
+  transform: scale(0.99);
+}
+
+.dmk-wallet-card:focus-visible {
+  outline: 2px solid var(--main-color);
+  outline-offset: 3px;
+}
+
+.dmk-wallet-card__copy {
+  min-width: 0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dmk-wallet-card__copy strong,
+.dmk-wallet-card__copy span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dmk-wallet-card__copy strong {
+  font-size: 17px;
+}
+
+.dmk-wallet-card__copy span {
+  color: #a9a9a9;
+  font-size: 14px;
+}
+
+.dmk-wallet-card__copy small {
+  width: max-content;
+  padding: 3px 9px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 999px;
+  background: var(--main-color);
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dmk-wallet-card__delete {
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #9b9b9b;
+}
+
+.dmk-wallet-card__delete svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dmk-wallet-empty {
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+  color: #8e8e8e;
+  text-align: center;
+}
+
+.dmk-wallet-create {
+  width: 100%;
+  min-height: 52px;
+  margin-top: auto;
+  border: 1px solid var(--main-color);
+  border-radius: 4px;
+  background: var(--main-color);
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.dmk-wallet-create span {
+  margin-right: 8px;
+  font-size: 21px;
+  font-weight: 400;
+  vertical-align: -1px;
+}
+
+.dmk-wallet-default {
+  position: relative;
+  min-height: 56px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #393939;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.dmk-wallet-default input {
+  position: absolute;
+  right: 14px;
+  width: 54px;
+  height: 32px;
+  opacity: 0;
+  z-index: 2;
+}
+
+.dmk-wallet-default i {
+  position: relative;
+  width: 52px;
+  height: 30px;
+  border-radius: 999px;
+  background: #555;
+  transition: background 160ms ease;
+}
+
+.dmk-wallet-default i::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 160ms ease;
+}
+
+.dmk-wallet-default input:checked + i {
+  background: var(--main-color);
+}
+
+.dmk-wallet-default input:checked + i::after {
+  transform: translateX(22px);
+}
+
+.dmk-wallet-upload {
+  padding: 16px;
+  border: 1px solid #393939;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.dmk-wallet-upload > strong {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.dmk-wallet-upload__button {
+  width: 104px;
+  height: 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px dashed #707070;
+  color: #aaa;
+}
+
+.dmk-wallet-upload__button span {
+  font-size: 26px;
+}
+
+.dmk-wallet-upload :deep(.van-uploader__preview-image) {
+  width: 104px;
+  height: 104px;
+}
+
+@media (min-width: 1024px) {
+  .dmk-wallet-card {
+    border-color: #e5e5e5;
+    background: #fff;
+    color: #161616;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+  }
+
+  .dmk-wallet-card__copy span {
+    color: #727272;
+  }
+
+  .dmk-wallet-card__delete {
+    color: #747474;
+  }
+
+  .dmk-wallet-default,
+  .dmk-wallet-upload {
+    border-color: #fff;
+    background: #fff;
+    color: #161616;
+  }
+}
+
 .method-page {
   min-height: 100%;
   display: flex;
