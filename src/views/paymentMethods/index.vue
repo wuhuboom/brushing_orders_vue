@@ -31,6 +31,7 @@
                         v-else
                         v-model="form.withdrawalTypeId"
                         class="van-field__control dmk-wallet-select"
+                        @change="syncWalletNameFromType"
                       >
                         <option value="" disabled>{{ $t("das.form.walletName") }}</option>
                         <option
@@ -573,6 +574,11 @@ const isBank = computed(() => {
   const name = String(selectedType.value?.typeName ?? "").toLowerCase();
   return code === "0" || code === "bank" || name.includes("bank");
 });
+const walletTypeLabel = (type) =>
+  type?.typeName || type?.name || (type?.id == null ? "" : String(type.id));
+const syncWalletNameFromType = () => {
+  form.walletName = walletTypeLabel(selectedType.value);
+};
 
 const accountName = (item) =>
   item.accountName ||
@@ -666,7 +672,15 @@ const pcOpenWalletEditor = () => {
 const confirmPcWalletType = () => {
   const option = pcSelectedWallet.value;
   if (option && !String(option.id).startsWith("pc-")) {
+    if (!isFormOpen.value) {
+      resetForm();
+      safeReplace(router, {
+        path: "/paymentMethods",
+        query: { action: "create" },
+      });
+    }
     form.withdrawalTypeId = String(option.id);
+    form.walletName = option.label;
   }
   pcPickerOpen.value = false;
 };
@@ -698,6 +712,7 @@ const confirmH5WalletType = () => {
       });
     }
     form.withdrawalTypeId = String(option.id);
+    form.walletName = option.label;
   }
   h5PickerOpen.value = false;
 };
@@ -771,13 +786,14 @@ const refresh = async () => {
     : response.data?.rows || response.data?.records || [];
 };
 const resetForm = () => {
+  const defaultType = types.value[0];
   Object.assign(form, {
-    withdrawalTypeId: String(types.value[0]?.id || ""),
+    withdrawalTypeId: String(defaultType?.id || ""),
     isDefault: false,
     bankName: "",
     bankAccount: "",
     accountHolder: "",
-    walletName: "",
+    walletName: walletTypeLabel(defaultType),
     walletAddress: "",
     attachment: "",
     depositType: "",
@@ -788,13 +804,19 @@ const resetForm = () => {
   attachmentFiles.value = [];
 };
 const fillForm = (data = {}) => {
+  const withdrawalTypeId = String(
+    data.withdrawalTypeId || types.value[0]?.id || "",
+  );
+  const withdrawalType = types.value.find(
+    (type) => String(type.id) === withdrawalTypeId,
+  );
   Object.assign(form, {
-    withdrawalTypeId: String(data.withdrawalTypeId || types.value[0]?.id || ""),
+    withdrawalTypeId,
     isDefault: Boolean(data.isDefault),
     bankName: data.bankName || "",
     bankAccount: data.bankAccount || "",
     accountHolder: data.accountHolder || "",
-    walletName: data.walletName || "",
+    walletName: data.walletName || walletTypeLabel(withdrawalType),
     walletAddress: data.walletAddress || "",
     attachment: data.attachment || "",
     depositType: data.depositType || "",

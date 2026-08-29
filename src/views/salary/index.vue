@@ -1,39 +1,27 @@
 <template>
   <DmkPcLayout>
     <section class="salary-page salary-page--pc">
-      <div class="salary-overview">
-        <strong>{{ workingDays }}</strong>
-        <span>{{ $t("das.dmk.workingDay") }}</span>
-        <div class="salary-level-picker" @pointerdown.stop>
-          <button
-            type="button"
-            class="salary-level"
-            :aria-expanded="levelMenuOpen"
-            @click="toggleLevelMenu"
-          >
-            {{ levelName }} {{ $t("das.dmk.member") }} <span>⌄</span>
-          </button>
-          <div v-if="levelMenuOpen" class="salary-level-options" role="menu">
-            <button
-              v-for="item in availableLevels"
-              :key="levelKey(item)"
-              type="button"
-              :class="{ active: levelKey(item) === levelKey(activeLevel) }"
-              @click="selectLevel(item)"
-            >
-              {{ levelDisplayName(item) }} {{ $t("das.dmk.member") }}
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div class="salary-milestones">
         <article v-for="item in milestones" :key="item.day">
-          <h2>{{ $t("das.dmk.dayOrdinal", { day: item.day }) }}</h2>
+          <h2>
+            {{
+              $t("das.dmk.dayOrdinal", {
+                day: item.day,
+                ordinal: englishOrdinal(item.day),
+              })
+            }}
+          </h2>
           <div class="salary-progress-track">
             <span :style="{ width: milestoneProgress(item.day) }"></span>
           </div>
-          <p>{{ $t("das.dmk.checkInDay", { day: item.day }) }}</p>
+          <p>
+            {{
+              $t("das.dmk.checkInDay", {
+                day: item.day,
+                ordinal: englishOrdinal(item.day),
+              })
+            }}
+          </p>
           <p>{{ $t("das.dmk.baseSalary") }}</p>
           <strong>{{ item.amount }} {{ $t("das.dmk.currencyUsd") }}</strong>
         </article>
@@ -55,35 +43,18 @@
 
   <DmkH5Layout class="dmk-mobile-current">
     <section class="salary-page salary-page--h5">
-      <div class="salary-h5-head">
-        <div><strong>{{ workingDays }}</strong><span>{{ $t("das.dmk.workingDay") }}</span></div>
-        <div class="salary-level-picker" @pointerdown.stop>
-          <button
-            type="button"
-            class="salary-level"
-            :aria-expanded="levelMenuOpen"
-            @click="toggleLevelMenu"
-          >
-            {{ levelName }} {{ $t("das.dmk.member") }} <span>⌄</span>
-          </button>
-          <div v-if="levelMenuOpen" class="salary-level-options" role="menu">
-            <button
-              v-for="item in availableLevels"
-              :key="levelKey(item)"
-              type="button"
-              :class="{ active: levelKey(item) === levelKey(activeLevel) }"
-              @click="selectLevel(item)"
-            >
-              {{ levelDisplayName(item) }} {{ $t("das.dmk.member") }}
-            </button>
-          </div>
-        </div>
-      </div>
       <div class="salary-h5-milestones">
         <article v-for="item in milestones" :key="item.day">
           <span :class="{ complete: workingDays >= item.day }"></span>
           <div>
-            <p>{{ $t("das.dmk.checkInDay", { day: item.day }) }}</p>
+            <p>
+              {{
+                $t("das.dmk.checkInDay", {
+                  day: item.day,
+                  ordinal: englishOrdinal(item.day),
+                })
+              }}
+            </p>
             <p>{{ $t("das.dmk.baseSalary") }}</p>
             <strong>{{ item.amount }} {{ $t("das.dmk.currencyUsd") }}</strong>
           </div>
@@ -102,8 +73,8 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
-import { getLevel, userGetInfo } from "@/api/apis";
+import { computed, onMounted, ref } from "vue";
+import { userGetInfo } from "@/api/apis";
 import { useUserStore } from "@/store/modules/user";
 import DmkPcLayout from "@/components/dmkPc/DmkPcLayout.vue";
 import DmkH5Layout from "@/components/dmkH5/DmkH5Layout.vue";
@@ -112,15 +83,21 @@ import { useI18n } from "vue-i18n";
 const store = useUserStore();
 const { t } = useI18n();
 const user = ref(store.userInfo || {});
-const levels = ref([]);
-const selectedLevelKey = ref("");
-const levelMenuOpen = ref(false);
 
 const firstValue = (...values) =>
   values.find((value) => value !== undefined && value !== null && value !== "");
 const numberValue = (...values) => {
   const value = Number(firstValue(...values));
   return Number.isFinite(value) ? value : 0;
+};
+const englishOrdinal = (value) => {
+  const number = Number(value);
+  const lastTwoDigits = number % 100;
+  const suffix =
+    lastTwoDigits >= 11 && lastTwoDigits <= 13
+      ? "th"
+      : { 1: "st", 2: "nd", 3: "rd" }[number % 10] || "th";
+  return `${number}${suffix}`;
 };
 
 const workingDays = computed(() =>
@@ -132,42 +109,13 @@ const workingDays = computed(() =>
     user.value.attendanceDays,
   ),
 );
-const level = computed(() => user.value.userLevel || user.value.memberLevel || {});
-const levelKey = (item = {}) =>
-  String(item.id ?? item.levelId ?? item.level ?? "");
-const availableLevels = computed(() =>
-  [...levels.value].sort(
-    (left, right) => Number(left.level ?? left.id) - Number(right.level ?? right.id),
-  ),
-);
-const activeLevel = computed(
-  () =>
-    availableLevels.value.find(
-      (item) => levelKey(item) === selectedLevelKey.value,
-    ) || level.value,
-);
-const levelDisplayName = (item = {}) =>
-  String(
-    item.name ||
-      item.nameEn ||
-      `VIP${item.level ?? item.id ?? item.levelId ?? 1}`,
-  ).replace(/\s+Member$/i, "");
-const levelName = computed(
-  () => levelDisplayName(activeLevel.value),
-);
-const salaryAmount = (day, fallback) =>
-  numberValue(
-    activeLevel.value[`salary${day}`],
-    activeLevel.value[`baseSalary${day}`],
-    activeLevel.value[`checkIn${day}Salary`],
-    activeLevel.value[`workingDay${day}Salary`],
-    fallback,
-  );
-const milestones = computed(() => [
-  { day: 5, amount: salaryAmount(5, 900) },
-  { day: 15, amount: salaryAmount(15, 1500) },
-  { day: 30, amount: salaryAmount(30, 3800) },
-]);
+const milestones = [
+  { day: 2, amount: 120 },
+  { day: 5, amount: 1300 },
+  { day: 10, amount: 1600 },
+  { day: 15, amount: 1900 },
+  { day: 30, amount: 2500 },
+];
 const milestoneProgress = (day) =>
   `${Math.max(0, Math.min(100, (workingDays.value / day) * 100))}%`;
 
@@ -177,40 +125,13 @@ const rules = computed(() => [
   t("das.dmk.salaryRule3"),
 ]);
 
-const toggleLevelMenu = () => {
-  if (!availableLevels.value.length) return;
-  levelMenuOpen.value = !levelMenuOpen.value;
-};
-const selectLevel = (item) => {
-  selectedLevelKey.value = levelKey(item);
-  levelMenuOpen.value = false;
-};
-const closeLevelMenu = () => {
-  levelMenuOpen.value = false;
-};
-
 onMounted(async () => {
-  document.addEventListener("pointerdown", closeLevelMenu);
-  const [userResult, levelResult] = await Promise.allSettled([
-    userGetInfo(),
-    getLevel(),
-  ]);
-  if (userResult.status === "fulfilled") {
-    const latest = userResult.value.data || {};
+  try {
+    const response = await userGetInfo();
+    const latest = response.data || {};
     user.value = latest;
     store.setUserInfo(latest);
-  }
-  if (levelResult.status === "fulfilled") {
-    const result = levelResult.value.data;
-    levels.value = Array.isArray(result) ? result : result?.list || [];
-  }
-  selectedLevelKey.value = levelKey(level.value) || String(
-    user.value.levelId ?? user.value.vipId ?? "",
-  );
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener("pointerdown", closeLevelMenu);
+  } catch (_) {}
 });
 </script>
 
@@ -226,77 +147,8 @@ onBeforeUnmount(() => {
   max-width: 1200px;
   padding: 44px 16px 72px;
 }
-.salary-overview {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 14px;
-}
-.salary-overview > strong {
-  font-size: 70px;
-  font-weight: 400;
-  line-height: 1;
-}
-.salary-overview > span {
-  padding-bottom: 7px;
-  font-size: 18px;
-}
-.salary-level {
-  width: 100%;
-  min-width: 164px;
-  min-height: 45px;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid #858585;
-  border-radius: 4px;
-  background: linear-gradient(#3b3b3b, #111);
-  box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.13);
-  color: #fff;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 16px;
-}
-.salary-level-picker {
-  position: relative;
-  z-index: 20;
-}
-.salary-level-options {
-  position: absolute;
-  z-index: 30;
-  top: calc(100% + 6px);
-  right: 0;
-  width: 100%;
-  min-width: 164px;
-  overflow: hidden;
-  border: 1px solid #858585;
-  border-radius: 4px;
-  background: #151515;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
-}
-.salary-level-options button {
-  width: 100%;
-  min-height: 42px;
-  padding: 0 15px;
-  border: 0;
-  border-bottom: 1px solid #343434;
-  color: #fff;
-  background: transparent;
-  cursor: pointer;
-  font: inherit;
-  text-align: left;
-}
-.salary-level-options button:last-child {
-  border-bottom: 0;
-}
-.salary-level-options button:hover,
-.salary-level-options button.active {
-  color: #000;
-  background: var(--main-color);
-}
 .salary-milestones {
-  margin-top: 82px;
+  margin-top: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 15%;
@@ -368,29 +220,8 @@ onBeforeUnmount(() => {
 .salary-page--h5 {
   padding: 22px 16px 42px;
 }
-.salary-h5-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-.salary-h5-head > div:first-child strong,
-.salary-h5-head > div:first-child span {
-  display: block;
-}
-.salary-h5-head > div:first-child strong {
-  font-size: 34px;
-}
-.salary-h5-head > div:first-child span {
-  margin-top: 3px;
-  font-size: 20px;
-}
-.salary-page--h5 .salary-level {
-  min-width: 0;
-  font-size: 14px;
-}
 .salary-h5-milestones {
-  margin: 40px 0 28px;
+  margin: 0 0 28px;
 }
 .salary-h5-milestones article {
   min-height: 130px;

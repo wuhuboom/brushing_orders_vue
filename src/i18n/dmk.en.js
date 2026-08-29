@@ -84,8 +84,8 @@ export default {
   taskCode: "Task Code",
   rating: "Rating",
   member: "Member",
-  checkInDay: "Check-In {day}th Day",
-  dayOrdinal: "{day}th",
+  checkInDay: "Check-In {ordinal} Day",
+  dayOrdinal: "{ordinal}",
   salaryRule1: "Users must complete two sets of data to register one working day.",
   salaryRule2:
     "Upon registering the corresponding working day, users will receive the designated basic salary.",
