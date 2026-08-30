@@ -12,7 +12,11 @@
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <script src="/config.js"></script>
+    <script>
+      document.write(
+        '<script src="/config.js?t=' + Date.now() + '"><\/script>',
+      );
+    </script>
     <title>Brainpower</title>
   </head>
   <body>
