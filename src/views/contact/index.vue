@@ -51,9 +51,12 @@
 import { onMounted, ref } from "vue";
 import { getCustomerService } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import { useUserStore } from "@/store/modules/user";
+import { buildCustomerServiceUrl } from "@/utils/customerServiceUrl";
 import liveChatIcon from "@/static/brain/contact-live-chat.png";
 import channelArrow from "@/static/brain/contact-arrow.png";
 
+const userStore = useUserStore();
 const channels = ref([]),
   loading = ref(true);
 const imageBaseUrl =
@@ -73,7 +76,11 @@ const channelPresentation = (item) => {
   };
 };
 const openChannel = (url) => {
-  if (url) window.open(url, "_blank", "noopener,noreferrer");
+  const target = buildCustomerServiceUrl(url, {
+    isLoggedIn: Boolean(userStore.token),
+    user: userStore.userInfo,
+  });
+  if (target) window.open(target, "_blank", "noopener,noreferrer");
 };
 onMounted(async () => {
   try {

@@ -15,6 +15,7 @@ export const buildCustomerServiceUrl = (
     !target ||
     !isLoggedIn ||
     !target.includes("chatIndex") ||
+    !target.includes("kefu_id") ||
     !target.includes("ent_id")
   ) {
     return target;

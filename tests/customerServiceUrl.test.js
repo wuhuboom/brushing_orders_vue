@@ -32,6 +32,8 @@ test("does not identify anonymous visitors", () => {
 test("leaves unrelated or incomplete customer-service links unchanged", () => {
   for (const url of [
     "https://example.com/chatIndex?lang=en",
+    "https://example.com/chatIndex?ent_id=2&lang=en",
+    "https://example.com/chatIndex?kefu_id=service&lang=en",
     "https://example.com/?ent_id=2",
     "https://example.com/support?ent_id=2",
   ]) {
