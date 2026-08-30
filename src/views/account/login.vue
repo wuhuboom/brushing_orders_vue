@@ -248,6 +248,7 @@ const submit = async () => {
   z-index: 1;
 }
 .auth-top {
+  z-index: 2;
   height: 177px;
   display: flex;
   justify-content: space-between;
@@ -346,7 +347,7 @@ const submit = async () => {
   top: 43px;
   right: 0;
   width: 109px;
-  max-height: 108px;
+  max-height: min(324px, calc(100vh - 80px));
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: none;
@@ -662,7 +663,7 @@ const submit = async () => {
   .language-menu {
     top: 52px;
     width: 165px;
-    max-height: 162px;
+    max-height: min(486px, calc(100vh - 96px));
   }
   .language-menu button {
     height: 54px;

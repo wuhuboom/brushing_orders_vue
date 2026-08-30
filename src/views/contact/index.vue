@@ -29,7 +29,7 @@
           />
           <span class="contact-design-channel__copy">
             <b>{{ channelPresentation(item, index).title }}</b>
-            <small>customer support</small>
+            <small>{{ item.name || "Customer service" }}</small>
           </span>
           <img
             class="contact-design-channel__arrow"
@@ -51,21 +51,27 @@
 import { onMounted, ref } from "vue";
 import { getCustomerService } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
-import telegramIcon from "@/static/brain/contact-telegram.png";
 import liveChatIcon from "@/static/brain/contact-live-chat.png";
 import channelArrow from "@/static/brain/contact-arrow.png";
 
 const channels = ref([]),
   loading = ref(true);
-const channelStyles = [
-  { title: "Telegram", icon: telegramIcon },
-  { title: "Live chat", icon: liveChatIcon },
-];
-const channelPresentation = (item, index) =>
-  channelStyles[index] || {
-    title: item.name || "Customer service",
-    icon: liveChatIcon,
+const imageBaseUrl =
+  window.g?.VITE_API_IMG_URL || import.meta.env.VITE_API_IMG_URL || "";
+const resolveImageUrl = (image) => {
+  if (!image) return liveChatIcon;
+  if (/^(?:https?:)?\/\//i.test(image) || /^(?:data|blob):/i.test(image))
+    return image;
+  return `${imageBaseUrl.replace(/\/$/, "")}/${image.replace(/^\//, "")}`;
+};
+const channelPresentation = (item) => {
+  const name = String(item.name || "").toLowerCase();
+  const isTelegram = name.includes("telegram") || name.includes("telgeram");
+  return {
+    title: isTelegram ? "Telegram" : "Live chat",
+    icon: resolveImageUrl(item.image),
   };
+};
 const openChannel = (url) => {
   if (url) window.open(url, "_blank", "noopener,noreferrer");
 };

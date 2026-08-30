@@ -2,7 +2,6 @@ export const LANGS = [
   { code: "en", name: "English", flag: "🇺🇸" },
   { code: "es", name: "Español", flag: "🇪🇸" },
   { code: "fr", name: "Français", flag: "🇫🇷" },
-  { code: "zh", name: "简体中文", flag: "🇨🇳" },
   { code: "de", name: "Deutsch", flag: "🇩🇪" },
   { code: "it", name: "Italiano", flag: "🇮🇹" },
   { code: "ko", name: "한국어", flag: "🇰🇷" },
