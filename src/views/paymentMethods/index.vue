@@ -156,7 +156,7 @@
                 </div>
               </div>
             </template>
-            <div class="dmk-wallet-upload mb-3">
+            <div v-if="qrAttachmentEnabled" class="dmk-wallet-upload mb-3">
               <strong>{{ $t("das.form.qrUpload") }}</strong>
               <van-uploader
                 v-model="attachmentFiles"
@@ -440,7 +440,7 @@
                 </div>
               </div>
             </template>
-            <div class="dmk-wallet-upload mb-3">
+            <div v-if="qrAttachmentEnabled" class="dmk-wallet-upload mb-3">
               <strong>{{ $t("das.form.qrUpload") }}</strong>
               <van-uploader
                 v-model="attachmentFiles"
@@ -596,6 +596,8 @@ const route = useRoute();
 const { t } = useI18n();
 const accounts = ref([]);
 const types = ref([]);
+// 二维码上传功能暂时停用；改为 true 可恢复显示、上传和提交。
+const qrAttachmentEnabled = false;
 const attachmentFiles = ref([]);
 const saving = ref(false);
 const loadingDetail = ref(false);
@@ -935,6 +937,7 @@ const openEdit = (id) => {
   loadEdit(id);
 };
 const uploadAttachment = async (entry) => {
+  if (!qrAttachmentEnabled) return;
   const item = Array.isArray(entry) ? entry[0] : entry;
   const file = item?.file;
   if (!(file instanceof Blob)) return;
@@ -965,6 +968,7 @@ const save = async () => {
   saving.value = true;
   try {
     const payload = { ...form, token: credential.value };
+    if (!qrAttachmentEnabled) delete payload.attachment;
     if (isEditing.value) {
       await updateWithdrawalMethod(route.query.id, payload);
     } else {

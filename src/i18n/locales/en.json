@@ -246,7 +246,8 @@
       "bonusTitle": "Bonus reward",
       "bonusOrder": "Task #{order}",
       "bonusHint": "A bonus is ready for you.",
-      "bonusContinue": "Continue"
+      "bonusContinue": "Continue",
+      "claimReward": "Congratulations! Please contact online customer service to claim your reward."
     },
     "orderErrors": {
       "server": "The service is temporarily unavailable",

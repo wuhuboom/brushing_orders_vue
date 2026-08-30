@@ -246,7 +246,8 @@
       "bonusTitle": "Recompensa de bonificación",
       "bonusOrder": "Tarea #{order}",
       "bonusHint": "Tienes una bonificación disponible.",
-      "bonusContinue": "Continuar"
+      "bonusContinue": "Continuar",
+      "claimReward": "¡Felicidades! Ponte en contacto con el servicio de atención al cliente en línea para reclamar tu recompensa."
     },
     "orderErrors": {
       "server": "El servicio no está disponible temporalmente",

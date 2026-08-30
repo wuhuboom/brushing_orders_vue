@@ -246,7 +246,8 @@
       "bonusTitle": "Bonusová odmena",
       "bonusOrder": "Úloha č. {order}",
       "bonusHint": "Máte pripravený bonus.",
-      "bonusContinue": "Nadaljuj"
+      "bonusContinue": "Nadaljuj",
+      "claimReward": "Čestitamo! Za prevzem nagrade se obrnite na spletno službo za pomoč uporabnikom."
     },
     "orderErrors": {
       "server": "Služba je dočasne nedostupná",

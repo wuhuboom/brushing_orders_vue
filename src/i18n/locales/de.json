@@ -246,7 +246,8 @@
       "bonusTitle": "Bonusprämie",
       "bonusOrder": "Aufgabe #{order}",
       "bonusHint": "Ein Bonus steht für Sie bereit.",
-      "bonusContinue": "Weiter"
+      "bonusContinue": "Weiter",
+      "claimReward": "Herzlichen Glückwunsch! Bitte wenden Sie sich an den Online-Kundendienst, um Ihre Belohnung zu erhalten."
     },
     "orderErrors": {
       "server": "Der Dienst ist vorübergehend nicht verfügbar",

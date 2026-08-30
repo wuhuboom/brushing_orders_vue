@@ -246,7 +246,8 @@
       "bonusTitle": "보너스 지급",
       "bonusOrder": "작업 #{order}",
       "bonusHint": "수령 가능한 보너스가 있습니다.",
-      "bonusContinue": "계속"
+      "bonusContinue": "계속",
+      "claimReward": "축하합니다! 보상을 받으려면 온라인 고객센터에 문의해 주세요."
     },
     "orderErrors": {
       "server": "서비스를 일시적으로 사용할 수 없습니다",

@@ -246,7 +246,8 @@
       "bonusTitle": "Premio bonus",
       "bonusOrder": "Attività #{order}",
       "bonusHint": "Hai un bonus disponibile.",
-      "bonusContinue": "Continua"
+      "bonusContinue": "Continua",
+      "claimReward": "Congratulazioni! Contatta il servizio clienti online per richiedere la tua ricompensa."
     },
     "orderErrors": {
       "server": "Il servizio non è temporaneamente disponibile",

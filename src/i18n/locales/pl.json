@@ -246,7 +246,8 @@
       "bonusTitle": "Nagroda premiowa",
       "bonusOrder": "Zadanie #{order}",
       "bonusHint": "Czeka na Ciebie premia.",
-      "bonusContinue": "Kontynuuj"
+      "bonusContinue": "Kontynuuj",
+      "claimReward": "Gratulacje! Skontaktuj się z internetową obsługą klienta, aby odebrać nagrodę."
     },
     "orderErrors": {
       "server": "Usługa jest tymczasowo niedostępna",

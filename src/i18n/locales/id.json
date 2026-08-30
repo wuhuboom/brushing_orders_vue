@@ -246,7 +246,8 @@
       "bonusTitle": "Hadiah bonus",
       "bonusOrder": "Tugas #{order}",
       "bonusHint": "Bonus telah tersedia untuk Anda.",
-      "bonusContinue": "Lanjutkan"
+      "bonusContinue": "Lanjutkan",
+      "claimReward": "Selamat! Silakan hubungi layanan pelanggan online untuk mengklaim hadiah Anda."
     },
     "orderErrors": {
       "server": "Layanan untuk sementara tidak tersedia",

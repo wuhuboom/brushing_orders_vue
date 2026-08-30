@@ -246,7 +246,8 @@
       "bonusTitle": "获得彩金",
       "bonusOrder": "任务 #{order}",
       "bonusHint": "您有一笔待展示的彩金。",
-      "bonusContinue": "继续"
+      "bonusContinue": "继续",
+      "claimReward": "联系客服领取"
     },
     "orderErrors": {
       "server": "服务暂时不可用",

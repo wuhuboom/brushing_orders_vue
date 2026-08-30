@@ -246,7 +246,8 @@
       "bonusTitle": "Récompense bonus",
       "bonusOrder": "Tâche n°{order}",
       "bonusHint": "Une prime vous attend.",
-      "bonusContinue": "Continuer"
+      "bonusContinue": "Continuer",
+      "claimReward": "Félicitations ! Veuillez contacter le service client en ligne pour réclamer votre récompense."
     },
     "orderErrors": {
       "server": "Le service est temporairement indisponible",

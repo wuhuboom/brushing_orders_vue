@@ -246,7 +246,8 @@
       "bonusTitle": "Bonusbelöning",
       "bonusOrder": "Uppgift #{order}",
       "bonusHint": "En bonus är redo för dig.",
-      "bonusContinue": "Fortsätt"
+      "bonusContinue": "Fortsätt",
+      "claimReward": "Grattis! Kontakta kundtjänsten online för att hämta din belöning."
     },
     "orderErrors": {
       "server": "Tjänsten är tillfälligt otillgänglig",

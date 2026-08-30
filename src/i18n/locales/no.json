@@ -246,7 +246,8 @@
       "bonusTitle": "Bonusbelønning",
       "bonusOrder": "Oppgave #{order}",
       "bonusHint": "En bonus er klar for deg.",
-      "bonusContinue": "Fortsett"
+      "bonusContinue": "Fortsett",
+      "claimReward": "Gratulerer! Kontakt kundeservice på nett for å kreve belønningen din."
     },
     "orderErrors": {
       "server": "Tjenesten er midlertidig utilgjengelig",

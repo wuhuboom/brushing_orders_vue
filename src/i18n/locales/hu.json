@@ -246,7 +246,8 @@
       "bonusTitle": "Bónuszjutalom",
       "bonusOrder": "Feladat #{order}",
       "bonusHint": "Bónusz vár Önre.",
-      "bonusContinue": "Folytatás"
+      "bonusContinue": "Folytatás",
+      "claimReward": "Gratulálunk! A jutalom átvételéhez lépjen kapcsolatba az online ügyfélszolgálattal."
     },
     "orderErrors": {
       "server": "A szolgáltatás átmenetileg nem érhető el",
