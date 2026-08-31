@@ -128,5 +128,9 @@ const router = useRouter();
   .welcome-copy {
     margin: 70px 0;
   }
+  .welcome-copy h1,
+  .welcome-copy p {
+    margin-inline: auto;
+  }
 }
 </style>

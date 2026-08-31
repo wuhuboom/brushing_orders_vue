@@ -186,7 +186,8 @@
       "totalCommission": "Total Commission",
       "creationTime": "Creation Time",
       "briefNo": "Brief No.",
-      "briefCover": "Brief cover"
+      "briefCover": "Brief cover",
+      "processingOrder": "Pesanan Anda sedang diproses..."
     },
     "started": {
       "startNow": "Start Now",
@@ -213,7 +214,7 @@
       "tradeConfig": "Trading configuration is unavailable",
       "outsideTradingHours": "Orders are unavailable outside trading hours",
       "userMissing": "The user account could not be found",
-      "accountRestricted": "This account is not allowed to accept orders",
+      "accountRestricted": "Silakan hubungi layanan pelanggan untuk melakukan pengaturan ulang",
       "minimumBalance": "Your balance is below the minimum required amount",
       "busy": "The system is busy. Please try again later",
       "invalidConfig": "The order configuration is invalid",

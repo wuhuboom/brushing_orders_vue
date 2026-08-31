@@ -227,7 +227,8 @@
       "totalCommission": "コミッション合計",
       "creationTime": "作成日時",
       "briefNo": "案件番号",
-      "briefCover": "案件画像"
+      "briefCover": "案件画像",
+      "processingOrder": "ご注文を処理しています..."
     },
     "started": {
       "startNow": "今すぐ開始",
@@ -254,7 +255,7 @@
       "tradeConfig": "取引設定を利用できません",
       "outsideTradingHours": "現在は取引時間外です",
       "userMissing": "ユーザーアカウントが見つかりません",
-      "accountRestricted": "現在のアカウントでは注文を受けられません",
+      "accountRestricted": "リセットするにはカスタマーサービスにお問い合わせください",
       "minimumBalance": "残高が注文の最低条件を下回っています",
       "busy": "システムが混雑しています。しばらくしてから再試行してください",
       "invalidConfig": "注文設定が無効です",

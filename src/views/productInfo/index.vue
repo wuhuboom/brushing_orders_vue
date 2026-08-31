@@ -93,17 +93,36 @@
         </button>
       </article>
     </section>
+    <van-dialog
+      :show="submitAnimationVisible"
+      class="submit-loading-dialog"
+      overlay-class="submit-loading-overlay"
+      :show-confirm-button="false"
+      :close-on-click-overlay="false"
+    >
+      <div
+        class="submit-loading-animation"
+        role="status"
+        :aria-label="$t('das.product.processingOrder')"
+      >
+        <img
+          src="@/static/brain/wired-gradient-45-clock-hover-pinch.gif"
+          alt=""
+        />
+        <p>{{ $t("das.product.processingOrder") }}</p>
+      </div>
+    </van-dialog>
   </main>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { showSuccessToast, showToast } from "vant";
 import HeaderTop from "@/components/HeaderTop.vue";
 import DasImagePlaceholder from "@/components/DasImagePlaceholder.vue";
-import { getOrderInfo, submitOrder } from "@/api/apis";
+import { getOrderInfo, getTradeConfig, submitOrder } from "@/api/apis";
 import { formatTime } from "@/util/times";
 import { safeBack, safeReplace } from "@/utils/navigation";
 
@@ -114,6 +133,11 @@ const imageBaseUrl = window.g?.VITE_API_IMG_URL || "";
 const order = ref({});
 const loading = ref(false);
 const submitting = ref(false);
+const submitAnimationVisible = ref(false);
+const tradeInfo = ref({});
+let submitDelayTimer;
+let tradeConfigRequest;
+let pageAlive = true;
 
 const hasCover = computed(() => {
   const value = String(order.value.coverUrl ?? "")
@@ -153,6 +177,21 @@ const canSubmit = computed(() => {
   );
 });
 
+const delayMs = (value) => {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0 ? number : 0;
+};
+
+const waitForSubmitDelay = () =>
+  new Promise((resolve) => {
+    const timeout = delayMs(tradeInfo.value.submitTaskDelayMs);
+    if (!timeout) {
+      resolve();
+      return;
+    }
+    submitDelayTimer = setTimeout(resolve, timeout);
+  });
+
 const readCachedOrder = (id) => {
   try {
     const cached = sessionStorage.getItem(`dasOrder:${id}`);
@@ -185,10 +224,27 @@ const loadOrder = async () => {
   }
 };
 
+const loadTradeConfig = () => {
+  if (!tradeConfigRequest) {
+    tradeConfigRequest = getTradeConfig()
+      .then((res) => {
+        if (pageAlive) tradeInfo.value = res.data || {};
+        return res;
+      })
+      .catch(() => null);
+  }
+  return tradeConfigRequest;
+};
+
 const submitForm = async () => {
   if (!order.value.id || submitting.value) return;
   submitting.value = true;
+  submitAnimationVisible.value = true;
   try {
+    await loadTradeConfig();
+    await waitForSubmitDelay();
+    if (!pageAlive) return;
+    submitAnimationVisible.value = false;
     const res = await submitOrder(order.value.id);
     if (res?.data) order.value = { ...order.value, ...res.data };
     showSuccessToast(t("das.records.submitted"));
@@ -205,11 +261,19 @@ const submitForm = async () => {
       safeReplace(router, "/starting");
     }
   } finally {
+    submitAnimationVisible.value = false;
     submitting.value = false;
   }
 };
 
-onMounted(loadOrder);
+onMounted(() => {
+  loadOrder();
+  loadTradeConfig();
+});
+onBeforeUnmount(() => {
+  pageAlive = false;
+  clearTimeout(submitDelayTimer);
+});
 </script>
 
 <style scoped>
@@ -444,6 +508,46 @@ onMounted(loadOrder);
 }
 .pd-submit:disabled {
   opacity: 0.58;
+}
+:deep(.submit-loading-dialog.van-dialog) {
+  width: min(calc(100vw - 32px), 520px) !important;
+  max-width: calc(100vw - 32px) !important;
+  overflow: hidden;
+  border: 1px solid rgba(38, 143, 255, 0.82);
+  border-radius: 28px !important;
+  background: #000;
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.68),
+    0 0 30px rgba(18, 118, 255, 0.34);
+}
+:global(.submit-loading-overlay.van-overlay) {
+  background: rgba(42, 54, 78, 0.62) !important;
+  backdrop-filter: blur(1.5px);
+}
+.submit-loading-animation {
+  width: 100%;
+  aspect-ratio: 750 / 526;
+  padding: 34px 26px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 38px;
+  border-radius: 28px;
+  background: #000;
+}
+.submit-loading-animation img {
+  display: block;
+  width: clamp(96px, 27vw, 128px);
+  height: auto;
+}
+.submit-loading-animation p {
+  margin: 0;
+  color: #ccff33;
+  font-size: clamp(18px, 5vw, 28px);
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: center;
 }
 
 @media (min-width: 760px) {

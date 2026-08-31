@@ -186,7 +186,8 @@
       "totalCommission": "Total Commission",
       "creationTime": "Creation Time",
       "briefNo": "Brief No.",
-      "briefCover": "Brief cover"
+      "briefCover": "Brief cover",
+      "processingOrder": "Votre commande est en cours de traitement..."
     },
     "started": {
       "startNow": "Start Now",
@@ -213,7 +214,7 @@
       "tradeConfig": "Trading configuration is unavailable",
       "outsideTradingHours": "Orders are unavailable outside trading hours",
       "userMissing": "The user account could not be found",
-      "accountRestricted": "This account is not allowed to accept orders",
+      "accountRestricted": "Veuillez contacter le service client pour effectuer une réinitialisation",
       "minimumBalance": "Your balance is below the minimum required amount",
       "busy": "The system is busy. Please try again later",
       "invalidConfig": "The order configuration is invalid",

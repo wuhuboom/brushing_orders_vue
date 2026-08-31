@@ -227,7 +227,8 @@
       "totalCommission": "总佣金",
       "creationTime": "创建时间",
       "briefNo": "任务编号",
-      "briefCover": "任务封面"
+      "briefCover": "任务封面",
+      "processingOrder": "您的订单正在处理中..."
     },
     "started": {
       "startNow": "立即开始",
@@ -254,7 +255,7 @@
       "tradeConfig": "系统交易配置不可用",
       "outsideTradingHours": "当前时间不在交易时段",
       "userMissing": "用户不存在",
-      "accountRestricted": "当前账号状态不允许接单",
+      "accountRestricted": "联系客服进行重置",
       "minimumBalance": "余额低于接单最低要求",
       "busy": "系统繁忙，请稍后重试",
       "invalidConfig": "交易或订单配置无效",
