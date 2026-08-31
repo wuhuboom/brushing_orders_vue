@@ -7,7 +7,7 @@
         <p class="bp-gradient-title">Welcome to BrainPower:</p>
         <h1>Complete DTC Ecosystem Growth For Online Consumer Brands.</h1>
         <button type="button" class="bp-cta" @click="goContact">
-          Book a FREE Ecosystem Evaluation Call
+          Contact Online Customer Service
         </button>
       </div>
       <div
@@ -152,7 +152,7 @@
           </div>
         </article>
         <button type="button" class="bp-cta bp-cta--center" @click="goContact">
-          Book a FREE Ecosystem Evaluation Call
+          Contact Online Customer Service
         </button>
       </section>
 
