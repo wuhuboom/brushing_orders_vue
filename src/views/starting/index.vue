@@ -287,7 +287,7 @@
     </div>
   </DmkPcLayout>
 
-  <DmkH5Layout class="dmk-mobile-current">
+  <DmkH5Layout class="dmk-mobile-current dmk-starting-mobile">
     <div class="w-full dmk-site-scope">
       <div class="w-full max-w-[1200px] mx-auto text-white">
         <div class="text-[var(--main-color)] text-lg px-4">
@@ -1007,6 +1007,20 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.dmk-starting-mobile {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  touch-action: pan-y;
+}
+
+.dmk-starting-mobile .dmk-site-scope {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .dmk-task-circle {
   --task-ring-color: #2cb949;
   --task-track-color: #5a6e1a;
