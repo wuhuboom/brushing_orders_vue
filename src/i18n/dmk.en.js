@@ -17,7 +17,7 @@ export default {
   ppcCopy: "Meet your customers when they're looking to buy.",
   webCopy: "Build a website that converts users who land on it.",
   footerCopy:
-    "An award winning SEO, PPC, Web Dev agency that specializes in search, discovery, and conversion.",
+    "Bavordigital is a growth-focused digital marketing company specializing in brand optimization, online visibility, and customer engagement. Through strategic partnerships between brands, platforms, and users, we help businesses improve brand awareness, increase product exposure, and achieve sustainable revenue growth.",
   payPerClick: "Pay-Per-Click",
   madeWith: "Made with",
   invitationCode: "Invitation Code",
