@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>NSG salary checks — no API</title><link rel="icon" href="/favicon.ico?v=nsg-20260906"></head>
+<body><div id="app"></div>
+<script type="module">
+import { createApp, h, ref, nextTick, onBeforeUnmount } from "vue";
+import "../../src/style.css";
+import "../../src/index.css";
+import "../../src/nsg16.css";
+import NsgSalaryContent from "../../src/components/dmk/NsgSalaryContent.vue";
+import i18n from "../../src/i18n/index.js";
+import salarySource from "../../src/views/salary/index.vue?raw";
+import { CUSTOMER_SERVICE_DIALOG_EVENT } from "../../src/utils/customerServiceDialog.js";
+const actual = new Function(`return ${salarySource.match(/const milestones = (\[[\s\S]*?\]);/)[1]}`)();
+const design = [{ day: 5, amount: 900 }, { day: 15, amount: 1500 }, { day: 30, amount: 3800 }];
+createApp({ setup() {
+  const mode = ref("actual"), support = ref(0), report = ref("");
+  const media = matchMedia("(max-width: 1023px)"), mobile = ref(media.matches);
+  const resize = event => { mobile.value = event.matches; };
+  media.addEventListener("change", resize);
+  onBeforeUnmount(() => media.removeEventListener("change", resize));
+  window.addEventListener(CUSTOMER_SERVICE_DIALOG_EVENT, () => { support.value++; });
+  const checkLocales = async () => {
+    const errors = [];
+    for (const locale of i18n.global.availableLocales) {
+      i18n.global.locale = locale;
+      await nextTick();
+      for (const element of document.querySelectorAll('.nsg-salary__card, .nsg-salary__chart, .nsg-salary__rules, .nsg-salary__member')) {
+        if (element.scrollWidth > element.clientWidth + 1) errors.push(`${locale}: ${element.className}`);
+      }
+      for (const selector of ['.nsg-salary__axis li', '.nsg-salary__timeline li']) {
+        const boxes = [...document.querySelectorAll(selector)].map(element => {
+          const range = document.createRange(); range.selectNodeContents(element.firstChild);
+          return range.getBoundingClientRect();
+        });
+        if (boxes.some((box, index) => index && box.left < boxes[index - 1].right - 1)) errors.push(`${locale}: overlapping ${selector}`);
+      }
+    }
+    i18n.global.locale = 'en';
+    report.value = errors.length ? errors.join('; ') : 'PASS: 15 locales without overflow or overlapping labels';
+  };
+  return () => h('main', [
+    h('nav', { class: 'salary-controls' }, [
+      h('select', { 'aria-label': 'Salary data', onChange: event => { mode.value = event.target.value; } }, [h('option', { value: 'actual' }, 'Existing 5 milestones'), h('option', { value: 'design' }, 'Design 3 milestones')]),
+      h('select', { 'aria-label': 'Language', onChange: event => { i18n.global.locale = event.target.value; } }, i18n.global.availableLocales.map(locale => h('option', { value: locale, selected: locale === 'en' }, locale))),
+      h('button', { onClick: checkLocales }, 'Check locales'),
+      h('output', `Support events: ${support.value}. ${report.value}`),
+    ]),
+    h('div', { class: 'salary-fixture' }, [h(NsgSalaryContent, { mobile: mobile.value, workingDays: 0, memberLevel: 2, milestones: mode.value === 'design' ? design : actual })]),
+  ]);
+} }).use(i18n).mount('#app');
+</script>
+<style>
+body { margin: 0; background: #000; }
+.salary-controls { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px; color: #fff; font: 12px Arial; background: #1b2337; }
+.salary-controls select, .salary-controls button { color: #fff; background: #242e48; border: 1px solid #535f87; padding: 4px; }
+.salary-fixture { box-sizing: border-box; max-width: 1280px; margin: auto; padding: 22px 32px 140px; }
+@media (max-width: 1023px) { .salary-fixture { padding: 12px 20px 140px; } }
+@media (max-width: 380px) { .salary-fixture { padding-inline: 16px; } }
+</style></body></html>

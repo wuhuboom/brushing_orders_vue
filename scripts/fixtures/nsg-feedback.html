@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>NSG feedback checks — no API</title></head>
+<body>
+<div id="app"></div>
+<script type="module">
+import { createApp, h, ref, nextTick } from "vue";
+import { Popup } from "vant";
+import { ElMessage } from "element-plus";
+import "vant/lib/index.css";
+import "element-plus/es/components/message/style/css";
+import "../../src/style.css";
+import "../../src/index.css";
+import "../../src/dmk-pc-overrides.css";
+import "../../src/nsg16.css";
+import NsgMarketingContent from "../../src/components/dmk/NsgMarketingContent.vue";
+import NsgTaskCard from "../../src/components/dmk/NsgTaskCard.vue";
+import i18n from "../../src/i18n/index.js";
+import { CUSTOMER_SERVICE_DIALOG_EVENT } from "../../src/utils/customerServiceDialog.js";
+import apiSource from "../../src/api/index.js?raw";
+import { installResponsiveMode } from "../../src/responsiveMode.js";
+
+installResponsiveMode();
+
+// Exercise the production error presenter without importing API clients or making requests.
+const snippet = apiSource.slice(apiSource.indexOf("let activeApiMessage"), apiSource.indexOf("const closeLoading"));
+const showError = new Function("ElMessage", "i18n", "document", `${snippet}; return showApiError;`)(
+  (options) => ElMessage({ ...options, duration: 0 }), i18n, document,
+);
+const app = createApp({
+  setup() {
+    const page = ref("home"), modal = ref(false), support = ref(0), report = ref("");
+    window.addEventListener(CUSTOMER_SERVICE_DIALOG_EVENT, () => { support.value++; });
+    const notify = (long = false) => {
+      modal.value = true;
+      showError(long ? "The available account balance is insufficient to complete this request. Please contact customer service for assistance." : "Insufficient balance");
+    };
+    const checkLanguages = async () => {
+      const errors = [];
+      for (const locale of i18n.global.availableLocales) {
+        i18n.global.locale = locale;
+        await nextTick();
+        const buttons = document.querySelector('.nsg-marketing-content').shadowRoot.querySelectorAll('[data-customer-service]');
+        if (![...buttons].every(b => b.textContent === i18n.global.t('das.dmk.contactCustomerService'))) errors.push(locale);
+      }
+      report.value = errors.length ? `FAIL ${errors.join(', ')}` : `PASS ${i18n.global.availableLocales.length} live locale updates`;
+      i18n.global.locale = "en";
+    };
+    return () => h("main", [
+      h("nav", { class: "feedback-controls" }, [
+        h("span", "UI fixture — no API"),
+        h("button", { onClick: () => { page.value = "home"; } }, "Home"),
+        h("button", { onClick: () => { page.value = "about"; } }, "About"),
+        h("button", { onClick: () => notify() }, "Error over modal"),
+        h("button", { onClick: () => notify(true) }, "Long error"),
+        h("button", { onClick: checkLanguages }, "Check all locales"),
+        h("output", `Support opened: ${support.value}. ${report.value}`),
+      ]),
+      h(NsgMarketingContent, { page: page.value, key: page.value }),
+      h(Popup, { show: modal.value, "onUpdate:show": v => { modal.value = v; }, class: "nsg-task-dialog", closeable: true, teleport: "body", zIndex: 3000 }, {
+        default: () => h(NsgTaskCard, { details: { name: "UI sample product", cover: "/nsg16/product-bag.png", totalAmount: "100.00", profit: "5.00", commissionRate: "5%", createdAt: "2026-09-06", code: "UI-only" }, onAction: () => notify() }),
+      }),
+    ]);
+  },
+});
+app.use(i18n).mount("#app");
+</script>
+<style>
+body { background: #000; }
+.feedback-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px; background: #141d30; color: #eef2ff; }
+.feedback-controls button { border: 1px solid #5c6691; padding: 8px 12px; border-radius: 6px; }
+</style>
+</body>
+</html>

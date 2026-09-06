@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NSG terms — isolated content checks</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      import { createApp, h, nextTick } from "vue";
+      import "../../src/nsg16.css";
+      import NsgRichDocument from "../../src/components/dmk/NsgRichDocument.vue";
+      // Exercise the observed title markup and substantive introductions separately.
+      const cases = [
+        { id: "title-only", registration: true, content: '<p><strong class="ql-size-huge">Term &amp; Condition</strong></p><p><strong>1) Section heading</strong></p><p>1.1) Body <a href="#body">link</a></p>' },
+        { id: "intro-body", registration: true, content: '<p><strong class="ql-size-huge">Agreement</strong></p><p>Introduction must remain visible.</p><p>Age requirement must remain visible.</p><p><strong>(A) Section heading</strong></p><p>1.1) Body <strong>emphasis</strong></p>' },
+        { id: "faq", registration: false, content: '<p><strong class="ql-size-huge">FAQ title</strong></p><p><strong>I. Section heading</strong></p><p>1.1) Answer</p>' },
+      ];
+      const app = createApp({ render: () => cases.map(({ id, ...props }) => h(NsgRichDocument, { ...props, id })) });
+      app.mount("#app");
+      await nextTick();
+      await nextTick();
+      for (const item of cases) {
+        const original = document.createElement("div");
+        original.innerHTML = item.content;
+        const rendered = document.getElementById(item.id);
+        console.assert(rendered.textContent === original.textContent, `${item.id}: text preserved`);
+        console.assert(rendered.querySelectorAll("a").length === original.querySelectorAll("a").length, `${item.id}: links preserved`);
+      }
+    </script>
+  </body>
+</html>

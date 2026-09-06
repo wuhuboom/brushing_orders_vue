@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>NSG prize checks — no API</title></head>
+<body>
+<div id="app"></div>
+<script type="module">
+import { createApp, h, ref, nextTick } from "vue";
+import { Dialog } from "vant";
+import { ElLoading } from "element-plus";
+import "vant/lib/index.css";
+import "element-plus/es/components/loading/style/css";
+import "../../src/style.css";
+import "../../src/index.css";
+import "../../src/dmk-pc-overrides.css";
+import "../../src/nsg16.css";
+import BonusDialog from "../../src/components/BonusDialog.vue";
+import NsgMarketingContent from "../../src/components/dmk/NsgMarketingContent.vue";
+import i18n from "../../src/i18n/index.js";
+import apiSource from "../../src/api/index.js?raw";
+import { CUSTOMER_SERVICE_DIALOG_EVENT } from "../../src/utils/customerServiceDialog.js";
+import { installResponsiveMode } from "../../src/responsiveMode.js";
+
+installResponsiveMode();
+// Reuse the production loading options, without importing or calling any API client.
+const loadingOptions = new Function(`return (${apiSource.match(/loading = ElLoading.service\((\{[\s\S]*?\})\);/)[1]});`)();
+const app = createApp({
+  setup() {
+    const show = ref(true), amount = ref("50"), support = ref(0), report = ref("");
+    let loading;
+    window.addEventListener(CUSTOMER_SERVICE_DIALOG_EVENT, () => { support.value++; });
+    const closeLoading = () => { loading?.close(); loading = null; };
+    const testLocales = async () => {
+      show.value = true;
+      const errors = [];
+      const checkText = selector => {
+        const element = document.querySelector(selector);
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        const box = element.getBoundingClientRect(), text = range.getBoundingClientRect();
+        return text.left >= box.left - 1 && text.right <= box.right + 1 && text.bottom <= box.bottom + 1;
+      };
+      for (const locale of i18n.global.availableLocales) {
+        i18n.global.locale = locale;
+        await nextTick();
+        const root = document.querySelector('.nsg-marketing-content').shadowRoot;
+        for (const title of root.querySelectorAll('[data-i18n]')) {
+          if (title.textContent !== i18n.global.t(title.dataset.i18n)) errors.push(`${locale}: heading`);
+        }
+        for (const selector of ['.bonus-prize__title', '.bonus-prize__message', '.bonus-prize__claim span']) {
+          if (!checkText(selector)) errors.push(`${locale}: ${selector}`);
+        }
+      }
+      i18n.global.locale = "en";
+      for (const value of ["0", "50", "123456.78", "9999999999.99"]) {
+        amount.value = value;
+        await nextTick();
+        if (!checkText('.bonus-prize__amount')) errors.push(`amount: ${value}`);
+      }
+      amount.value = "50";
+      report.value = errors.length ? errors.join('; ') : 'PASS: 15 locales, live titles and 4 prize amounts';
+    };
+    return () => h("main", [
+      h("nav", { class: "prize-controls" }, [
+        h("button", { onClick: () => { show.value = !show.value; } }, "Toggle prize"),
+        h("button", { onClick: () => { show.value = false; closeLoading(); loading = ElLoading.service(loadingOptions); } }, "Loading"),
+        h("button", { onClick: closeLoading }, "Stop loading"),
+        h("button", { onClick: testLocales }, "Check locales"),
+        h("select", { 'aria-label': 'Language', onChange: e => { i18n.global.locale = e.target.value; } }, i18n.global.availableLocales.map(l => h('option', {value:l,selected:l==='en'}, l))),
+        h("output", `Support events: ${support.value}. ${report.value}`),
+      ]),
+      h(NsgMarketingContent),
+      h(BonusDialog, { show: show.value, amount: amount.value, onClose: () => { show.value = false; } }),
+    ]);
+  },
+});
+app.use(i18n).use(Dialog).mount("#app");
+</script>
+<style>
+.prize-controls { position:fixed; z-index:20000; top:0; left:0; right:0; display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:6px; background:#141d30; color:#eef2ff; font-size:12px; }
+.prize-controls button, .prize-controls select { background:#202c4a; border:1px solid #616c91; border-radius:4px; padding:4px 6px; color:#fff; }
+</style>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>NSG UI regression fixture — no API</title></head>
+<body>
+  <div id="app"></div>
+  <script type="module">
+    // Isolated visual/interaction checks: synthetic records, no stores, router or API.
+    import { createApp, h, ref, nextTick } from "vue";
+    import { Image, Popup } from "vant";
+    import "vant/lib/index.css";
+    import "../../src/style.css";
+    import "../../src/nsg16.css";
+    import NsgProductRail from "../../src/components/dmk/NsgProductRail.vue";
+    import NsgTaskCard from "../../src/components/dmk/NsgTaskCard.vue";
+    import NsgWithdrawalList from "../../src/components/dmk/NsgWithdrawalList.vue";
+    import NsgDepositList from "../../src/components/dmk/NsgDepositList.vue";
+    import messages from "../../src/i18n/locales/en.json";
+    import englishDmk from "../../src/i18n/dmk.en.js";
+    messages.das.dmk = englishDmk;
+    const style = document.createElement("style");
+    style.textContent = "body{margin:0;background:#000;color:#d4daf4;font-family:'DM Sans',Arial,sans-serif}.fixture-controls{position:relative;z-index:4000;display:flex;flex-wrap:wrap;gap:12px;padding:12px;background:#111a30}.fixture-controls button{background:#34395f;border:1px solid #7264e9;color:white;padding:8px}.fixture-rail{max-width:658px;margin:30px auto;background:#050922;padding:18px}.fixture-history{max-width:1216px;margin:30px auto;background:#090c14;padding-top:1px}.fixture-report{font-size:12px;white-space:pre-wrap;padding:12px}.fixture-history .nsg-withdraw-list{margin-top:25px}";
+    document.head.appendChild(style);
+    const products = ["camera", "bag", "airpods", "watch", "tablet"].map((name, i) => ({goodsName:"UI sample " + name, coverUrl:"/nsg16/product-" + name + ".png", id:i}));
+    const tabs = [{status:"1",labelKey:"das.dmk.reviewing"},{status:"2",labelKey:"das.common.success"},{status:"3",labelKey:"das.dmk.reject"}];
+    const app = createApp({
+      setup() {
+        const current = ref(2), mode = ref("rail"), report = ref(""), popup = ref(false), active = ref("3"), busy = ref(false);
+        const date = "2026-06-30 15:54:08 PM";
+        const items = ["3", "1", "2"].map(status => ({id:status,status,orderNumber:"202606308527379847163453440",createTime:date}));
+        const rows = item => [{key:"walletAddress",label:"Wallet Address",value:"UI-only-address-for-copy-check"},{key:"walletName",label:"Wallet Name",value:"PAYPAL"},{key:"withdrawAmount",label:"Withdrawal Amount",value:"72.00"},{key:"amountReceived",label:"Amount Received",value:"72.00"},{key:"status",label:"Status",value:item.status==="2"?"Success":item.status==="3"?"Reject":"Reviewing"},{key:"createdAt",label:"Created At",value:date}];
+        const replay = async () => {
+          current.value = (current.value + 1) % 5;
+          await nextTick();
+          const started = performance.now();
+          const samples = [];
+          const sample = () => {
+            const cards = [...document.querySelectorAll(".fixture-rail .nsg-product-tile")];
+            samples.push({ms:Math.round(performance.now()-started),heights:cards.map(el=>Math.round(el.getBoundingClientRect().height))});
+            if(performance.now()-started < 1400) requestAnimationFrame(sample);
+            else {
+              const initial=samples.find(s=>s.ms<250), settled=samples.at(-1);
+              report.value=JSON.stringify({initial,peak:Math.max(...samples.flatMap(s=>s.heights)),settled,alignedInitially:initial.heights.every(v=>v===initial.heights[0]),centerLargest:settled.heights[2]>Math.max(...settled.heights.filter((_,i)=>i!==2))},null,2);
+            }
+          };
+          requestAnimationFrame(sample);
+        };
+        return () => h("div", [
+          h("div",{class:"fixture-controls"},[
+            h("span","UI fixture — no API"),
+            h("button",{onClick:()=>{mode.value="rail";popup.value=false}},"Products"),
+            h("button",{onClick:replay},"Replay and measure"),
+            h("button",{onClick:()=>{mode.value="history";popup.value=false}},"Withdrawal states"),
+            h("button",{onClick:()=>{mode.value="deposit";popup.value=false}},"Deposit states"),
+            h("button",{onClick:()=>popup.value=true},"Success modal"),
+            h("button",{onClick:()=>{popup.value=true;busy.value=!busy.value}},"Toggle modal loading"),
+            h("input", {placeholder:"Paste copied value here", "aria-label":"Clipboard verification"}),
+          ]),
+          mode.value==="rail" ? h("section",{class:"fixture-rail nsg-product-pool"},[h(NsgProductRail,{products,current:current.value,onSelect:v=>current.value=v}),h("output",{class:"fixture-report"},report.value)]) :
+            mode.value==="history" ? h("section",{class:"fixture-history"},h(NsgWithdrawalList,{items,tabs,active:active.value,rows,formatDate:()=>date,finished:true,onFilter:v=>active.value=v})) :
+            h("section",{class:"fixture-history"},h(NsgDepositList,{items:items.map(item=>({...item,amount:100,receivedAmount:item.status==='3'?0:100})),active:active.value,formatDate:()=>date,finished:true,onFilter:v=>active.value=v})),
+          h(Popup,{show:popup.value,"onUpdate:show":v=>popup.value=v,class:"nsg-task-dialog",closeable:true,teleport:"body",zIndex:3000},{default:()=>h(NsgTaskCard,{success:true,busy:busy.value,details:{name:"UI sample Apple AirPods Pro 2",cover:"/nsg16/product-airpods.png",totalAmount:"22,682.40",profit:"113.41",commissionRate:"0.5%",createdAt:date,code:"UI-only-copy-check"},onAction:()=>popup.value=false})}),
+        ]);
+      },
+    });
+    app.config.globalProperties.$t = key => key.split(".").reduce((v,k)=>v?.[k],messages)||key;
+    app.use(Image).mount("#app");
+  </script>
+</body>
+</html>

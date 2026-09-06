@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NSG login error — isolated visual check</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      // Presentation fixture only: no router, credentials, stores or API imports.
+      import { createApp, h } from "vue";
+      import { Dialog } from "vant";
+      import "vant/lib/index.css";
+      import "../../src/style.css";
+      import "../../src/nsg16.css";
+      import NsgLoginError from "../../src/components/dmk/NsgLoginError.vue";
+      import messages from "../../src/i18n/locales/en.json";
+      const app = createApp({
+        render: () => h(Dialog, { show: true, showConfirmButton: false, class: "dmk-login-error-dialog" }, {
+          default: () => h(NsgLoginError),
+        }),
+      });
+      app.config.globalProperties.$t = (key) => key.split(".").reduce((value, part) => value?.[part], messages) || key;
+      app.mount("#app");
+    </script>
+  </body>
+</html>
