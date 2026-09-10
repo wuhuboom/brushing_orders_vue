@@ -1,23 +1,43 @@
 <template>
-  <main class="das-page language-page dmk-pc-only">
-    <DasPageHeader title-key="das.page.language" />
-    <section class="language-body">
+  <DmkPcLayout :footer="false">
+    <main class="pc-language-page">
       <button
-        v-for="item in visibleLanguages"
-        :key="item.code"
-        :class="{ active: selected === item.code }"
-        @click="selected = item.code"
+        type="button"
+        class="pc-language-back"
+        @click="safeBack(router, '/my')"
       >
-        <span class="language-option">
-          <span class="language-flag" aria-hidden="true">{{ item.flag }}</span>
-          <span>{{ item.name }}</span>
-        </span></button
-      ><button class="confirm" @click="confirm">
-        {{ $t("das.common.confirm") }}
+        <van-icon name="arrow-left" />
+        {{ $t("das.common.back") }}
       </button>
-    </section>
-    <p class="das-page-copyright">{{ $t("das.common.copyright") }}</p>
-  </main>
+      <section class="pc-language-panel" aria-labelledby="pc-language-title">
+        <div class="pc-language-heading">
+          <img src="/dmk/assets/language.png" alt="" />
+          <h1 id="pc-language-title">{{ $t("das.page.language") }}</h1>
+        </div>
+        <div class="pc-language-grid">
+          <button
+            v-for="item in visibleLanguages"
+            :key="item.code"
+            type="button"
+            class="pc-language-option"
+            :class="{ active: selected === item.code }"
+            :aria-pressed="selected === item.code"
+            @click="selected = item.code"
+          >
+            <span class="pc-language-code" aria-hidden="true">{{ item.code.toUpperCase() }}</span>
+            <span>{{ item.name }}</span>
+            <van-icon v-if="selected === item.code" name="success" />
+          </button>
+        </div>
+        <div class="pc-language-actions">
+          <button type="button" class="pc-language-confirm" @click="confirm">
+            {{ $t("das.common.confirm") }}
+            <van-icon name="arrow" />
+          </button>
+        </div>
+      </section>
+    </main>
+  </DmkPcLayout>
 
   <div
     class="dmk-h5-only dmk-mobile-current w-full relative bg-black text-white min-h-[100vh] dmk-login-scope"
@@ -167,7 +187,7 @@ import { useRouter } from "vue-router";
 import { LANGS } from "@/config/lang";
 import { useCommonStore } from "@/store/modules/common";
 import { useLocale } from "@/util/useLocale";
-import DasPageHeader from "@/components/DasPageHeader.vue";
+import DmkPcLayout from "@/components/dmkPc/DmkPcLayout.vue";
 import { safeBack } from "@/utils/navigation";
 const commonStore = useCommonStore(),
   router = useRouter(),
@@ -184,43 +204,124 @@ const commonStore = useCommonStore(),
   };
 </script>
 <style scoped>
-.language-page {
-  min-height: 100%;
-  background: #f7f5ec;
-  color: #17382d;
-}
-.language-body {
-  max-width: 760px;
-  margin: auto;
-  padding: 22px 30px 36px;
-}
-.language-body button {
-  width: 100%;
-  height: 58px;
-  margin-bottom: 13px;
-  border: 1px solid #d8dad4;
-  border-radius: 16px;
-  background: #fff;
-  color: #17382d;
-  font-weight: 800;
-}
-.language-option {
-  display: inline-flex;
-  align-items: center;
-  gap: 11px;
-}
-.language-flag {
-  font-size: 21px;
-  line-height: 1;
-}
-.language-body button.active,
-.language-body .confirm {
-  border-color: #14392c;
-  background: #14392c;
+.pc-language-page {
+  width: min(100% - 64px, 1000px);
+  margin: 48px auto 80px;
   color: #fff;
 }
-.language-body .confirm {
-  margin-top: 13px;
-  border-radius: 999px;
+.pc-language-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  color: #aaa;
+  font-size: 14px;
+}
+.pc-language-back:hover {
+  color: var(--main-color);
+}
+.pc-language-panel {
+  padding: 36px;
+  border: 1px solid #303030;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #171717, #0b0b0b);
+  box-shadow: 0 24px 64px #0006;
+}
+.pc-language-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+.pc-language-heading img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.pc-language-heading h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.pc-language-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.pc-language-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 12px 16px;
+  border: 1px solid #353535;
+  border-radius: 10px;
+  background: #181818;
+  color: #e6e6e6;
+  text-align: left;
+  font-size: 15px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.pc-language-option:hover {
+  border-color: #747474;
+  background: #232323;
+}
+.pc-language-option.active {
+  border-color: var(--main-color);
+  background: #252b13;
+  color: var(--main-color);
+}
+.pc-language-code {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  background: #ffffff0a;
+  color: #999;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.pc-language-option.active .pc-language-code {
+  background: #daff451a;
+  color: var(--main-color);
+}
+.pc-language-option .van-icon {
+  margin-left: auto;
+  font-size: 18px;
+}
+.pc-language-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid #2c2c2c;
+}
+.pc-language-confirm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-width: 180px;
+  min-height: 46px;
+  padding: 10px 24px;
+  border-radius: 10px;
+  background: var(--main-color);
+  color: #101207;
+  font-size: 15px;
+  font-weight: 700;
+}
+.pc-language-confirm:hover {
+  filter: brightness(1.08);
+}
+.pc-language-page button {
+  cursor: pointer;
+}
+.pc-language-page button:focus-visible {
+  outline: 2px solid var(--main-color);
+  outline-offset: 3px;
 }
 </style>

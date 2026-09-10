@@ -11,6 +11,26 @@
           @click="openPath('/')"
         />
         <div class="flex justify-end items-center text-lg">
+          <button
+            type="button"
+            class="pc-language-link"
+            :aria-label="$t('das.page.language')"
+            :title="$t('das.page.language')"
+            @click="openPath('/setting/language')"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <ellipse cx="12" cy="12" rx="4" ry="9" />
+              <path d="M3 12h18" />
+            </svg>
+            <span>{{ commonStore.clientLang.toUpperCase() }}</span>
+          </button>
           <div
             class="ml-6 cursor-pointer"
             @click="openPath('/about')"
@@ -122,12 +142,14 @@
 
 <script setup>
 import { useDmkHeader } from "@/components/dmk/useDmkHeader.js";
+import { useCommonStore } from "@/store/modules/common";
 import { ref } from "vue";
 
 const props = defineProps({
   authenticated: { type: Boolean, default: undefined },
 });
 const profileOpen = ref(false);
+const commonStore = useCommonStore();
 const {
   profileItems,
   services,
@@ -140,3 +162,36 @@ const {
   profileOpen.value = false;
 });
 </script>
+
+<style scoped>
+.pc-language-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 13px;
+  border: 1px solid #353535;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.pc-language-link svg {
+  width: 18px;
+  height: 18px;
+}
+.pc-language-link:hover,
+.pc-language-link:focus-visible {
+  border-color: var(--main-color);
+  background: #1c2010;
+  color: var(--main-color);
+}
+.pc-language-link:focus-visible {
+  outline: 2px solid var(--main-color);
+  outline-offset: 3px;
+}
+</style>
