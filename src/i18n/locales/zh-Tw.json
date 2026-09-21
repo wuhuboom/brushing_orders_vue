@@ -277,5 +277,20 @@
   "请输入6位数字密码": "請輸入 6 位數字密碼",
   "请输入6位数字的交易密码": "請輸入 6 位數字的交易密碼",
   "deposit.btn.submit.money.text": "Submitted order amount",
-  "team.info.total.money.text": "All subordinate accounts’ total account balance summary"
+  "team.info.total.money.text": "All subordinate accounts’ total account balance summary",
+  "start.matched.title": "配對訂單",
+  "start.matched.orderId": "訂單編號",
+  "start.matched.totalPrice": "總金額",
+  "start.matched.information": "配對資訊",
+  "start.matched.profit": "獲得收益",
+  "start.matched.complete": "完成訂單",
+  "start.processing.title": "正在處理訂單",
+  "start.processing.progress": "訂單進度",
+  "start.processing.initiating": "正在建立訂單",
+  "start.processing.marketplaces": "正在搜尋交易平台",
+  "start.processing.businesses": "正在搜尋商家",
+  "start.processing.found": "已找到訂單",
+  "start.processing.success": "配對成功",
+  "默认头像": "預設頭像",
+  "用户头像": "使用者頭像"
 }

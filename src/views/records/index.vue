@@ -40,7 +40,7 @@
             :finished-text="$t('没有更多了')"
             @load="onLoad"
           >
-            <van-cell v-for="item in list" :key="item" :title="item">
+            <template v-for="item in list" :key="item.id">
               <div
                 class="w-full flex flex-col mb-6 bg-[#F3F4F6] border-[1px] border-[#eee] p-[16px] box-border rounded-xl"
               >
@@ -125,7 +125,7 @@
                   >
                 </div>
               </div>
-            </van-cell>
+            </template>
           </van-list>
         </van-pull-refresh>
       </div>
@@ -194,79 +194,12 @@
         </div>
       </div>
     </van-dialog> -->
-    <van-dialog
-        v-model:show="show"
-        :title="''"
-        closeable
-        :style="{ width: '80%', background: '#fff' }"
-        :show-confirm-button="false"
-      >
-
-        <div class="w-[100%] mx-auto text-[18px] font-semibold text-center p-[20px] pt-[60px]">
-              {{ goodsData.goodsName }}
-        </div>
-        <div class="w-[60px]  mx-auto pb-[20px]">
-          <!-- <img class="w-[56px] h-[56px]" :src="url + goodsData.coverUrl" alt="" /> -->
-           <img :src="VITE_API_IMG_URL + goodsData.coverUrl" alt="" />
-        </div>
-        <div
-          class="w-full mt-[-3rem] pt-[23px] text-[#fff]"
-        >
-          <div
-            class="flex justify-start pb-[23px]"
-          >
-            <div class=" w-[100%]">
-              <div class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
-                <div class="text-[#000] text-[12px]">{{ $t("总金额") }}</div>
-                <div class="text-[#000] text-[14px] font-bold">
-                  {{ goodsData.price }}{{ $t("美元") }}
-                </div>
-              </div>
-              <div class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
-                <div class="text-[#000] text-[12px]">{{ $t("佣金") }}</div>
-                <div class="text-[#FF9500] text-[14px] font-bold">
-                  {{ goodsData.commission }}{{ $t("美元") }}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="flex justify-start pb-[23px]"
-          >
-            <div class="w-[100%]">
-              <div class="flex justify-between w-[100%] text-[16px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
-                <div class="text-[#000] text-[12px]">{{ $t("创建时间") }}</div>
-                <div class="text-[#968E9C]  font-bold text-[12px]">
-                  {{
-                    formatWithTimezone(
-                      goodsData.createTime,
-                      userStore.zoneActive.tzName
-                    )
-                  }}
-                </div>
-              </div>
-              <div class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
-                <div class="text-[#000] text-[12px]">{{ $t("编号") }}</div>
-                <div class="text-[#968E9C] text-[12px]">
-                  {{ goodsData.orderNo }}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="w-[70%] mx-auto mt-4 pb-[20px]">
-            <van-button
-              color="#6F4D50"
-              :loading="isSubmitting"
-              :disabled="isSubmitting"
-              class="w-full"
-              round
-              @click.prevent="submitVal"
-              >{{ $t("提交") }}</van-button
-            >
-          </div>
-        </div>
-    </van-dialog>
+    <MatchedOrderDialog
+      v-model:show="show"
+      :order="goodsData"
+      :submitting="isSubmitting"
+      @submit="submitVal"
+    />
   </div>
 </template>
 
@@ -287,6 +220,7 @@ import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";
 import Footer from "@/components/Footer.vue";
+import MatchedOrderDialog from "@/components/MatchedOrderDialog.vue";
 const router = useRouter();
 const userStore = useUserStore();
 const VITE_API_IMG_URL = window.g.VITE_API_IMG_URL;

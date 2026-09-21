@@ -294,5 +294,20 @@
   "index.intro2": "プラットフォーム規則",
   "index.introText2": "入金方法は随時変更される場合があります。最低出金額は20USDTです。",
   "deposit.btn.submit.money.text": "Submitted order amount",
-  "team.info.total.money.text": "All subordinate accounts’ total account balance summary"
+  "team.info.total.money.text": "All subordinate accounts’ total account balance summary",
+  "start.matched.title": "マッチした注文",
+  "start.matched.orderId": "注文番号",
+  "start.matched.totalPrice": "合計金額",
+  "start.matched.information": "マッチング情報",
+  "start.matched.profit": "獲得利益",
+  "start.matched.complete": "注文を完了",
+  "start.processing.title": "注文を処理中",
+  "start.processing.progress": "注文の進捗",
+  "start.processing.initiating": "注文を開始中",
+  "start.processing.marketplaces": "マーケットプレイスを検索中",
+  "start.processing.businesses": "店舗を検索中",
+  "start.processing.found": "注文が見つかりました",
+  "start.processing.success": "マッチング成功",
+  "默认头像": "デフォルトのアバター",
+  "用户头像": "ユーザーのアバター"
 }

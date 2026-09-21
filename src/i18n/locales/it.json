@@ -1,1 +1,17 @@
-{}
+{
+  "start.matched.title": "Ordini abbinati",
+  "start.matched.orderId": "ID ORDINE",
+  "start.matched.totalPrice": "Prezzo totale",
+  "start.matched.information": "Informazioni di abbinamento",
+  "start.matched.profit": "Guadagno",
+  "start.matched.complete": "Completa ordine",
+  "start.processing.title": "Elaborazione ordine",
+  "start.processing.progress": "Avanzamento ordine",
+  "start.processing.initiating": "Avvio ordine",
+  "start.processing.marketplaces": "Ricerca di piattaforme",
+  "start.processing.businesses": "Ricerca di commercianti",
+  "start.processing.found": "Ordine trovato",
+  "start.processing.success": "Abbinamento riuscito",
+  "默认头像": "Avatar predefinito",
+  "用户头像": "Avatar utente"
+}

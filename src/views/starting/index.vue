@@ -270,75 +270,51 @@
         </div>
       </van-popup> -->
       <van-dialog
-        v-model:show="showCenter"
-        :title="''"
-        closeable
-        :style="{ width: '80%', background: '#fff' }"
+        v-model:show="showProcessing"
+        class="order-dialog processing-dialog"
         :show-confirm-button="false"
+        :close-on-click-overlay="false"
+        :close-on-popstate="false"
+        :aria-label="$t('start.processing.title')"
       >
-
-        <div class="w-[100%] mx-auto text-[18px] font-semibold text-center p-[20px] pt-[60px]">
-              {{ goods.goodsName }}
-        </div>
-        <div class="w-[60px]  mx-auto pb-[20px]">
-          <img class="w-[56px] h-[56px]" :src="url + goods.coverUrl" alt="" />
-        </div>
-        <div
-          class="w-full mt-[-3rem] pt-[23px] text-[#fff]"
-        >
-          <div
-            class="flex justify-start pb-[23px]"
-          >
-            <div class=" w-[100%]">
-              <div class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
-                <div class="text-[#000] text-[12px]">{{ $t("总金额") }}</div>
-                <div class="text-[#000] text-[14px] font-bold">
-                  {{ goods.price }}{{ $t("美元") }}
-                </div>
-              </div>
-              <div class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
-                <div class="text-[#000] text-[12px]">{{ $t("佣金") }}</div>
-                <div class="text-[#FF9500] text-[14px] font-bold">
-                  {{ goods.commission }}{{ $t("美元") }}
-                </div>
-              </div>
-            </div>
+        <div class="processing-content">
+          <h2 class="processing-title">
+            <span class="processing-dot" aria-hidden="true"></span>
+            {{ $t('start.processing.title') }}
+          </h2>
+          <div class="processing-progress-label">
+            <span>{{ $t('start.processing.progress') }}</span>
+            <strong>{{ processingProgress }}%</strong>
           </div>
           <div
-            class="flex justify-start pb-[23px]"
+            class="processing-progress"
+            role="progressbar"
+            :aria-label="$t('start.processing.progress')"
+            :aria-valuenow="processingProgress"
+            aria-valuemin="0"
+            aria-valuemax="100"
           >
-            <div class="w-[100%]">
-              <div class="flex justify-between w-[100%] text-[16px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
-                <div class="text-[#000] text-[12px]">{{ $t("创建时间") }}</div>
-                <div class="text-[#968E9C]  font-bold text-[12px]">
-                  {{
-                    formatWithTimezone(
-                      goods.createTime,
-                      userStore.zoneActive.tzName
-                    )
-                  }}
-                </div>
-              </div>
-              <div class="flex justify-between w-[100%] text-[16px] pt-[20px] pb-[10px] px-[18px]" style="border-bottom: 1px solid #9CA3AF">
-                <div class="text-[#000] text-[12px]">{{ $t("编号") }}</div>
-                <div class="text-[#968E9C] text-[12px]">
-                  {{ goods.orderNo }}
-                </div>
-              </div>
-            </div>
+            <div class="processing-progress-fill" :style="{ width: `${processingProgress}%` }"></div>
           </div>
-
-          <div class="w-[70%] mx-auto mt-4 pb-[20px]">
-            <van-button
-              color="#6F4D50"
-              class="w-full"
-              round
-              @click.prevent="submitForm"
-              >{{ $t("提交") }}</van-button
+          <ol class="processing-steps">
+            <li
+              v-for="(step, index) in processingSteps"
+              :key="step.label"
+              class="processing-step"
+              :class="{ 'is-active': processingStep === index }"
+              :aria-current="processingStep === index ? 'step' : undefined"
             >
-          </div>
+              <span class="processing-step-icon" aria-hidden="true">{{ step.icon }}</span>
+              <span>{{ $t(step.label) }}</span>
+            </li>
+          </ol>
         </div>
       </van-dialog>
+      <MatchedOrderDialog
+        v-model:show="showCenter"
+        :order="goods"
+        @submit="submitForm"
+      />
       <van-popup
         v-model:show="showImg"
         round
@@ -364,12 +340,11 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref, onUnmounted } from "vue";
+import { computed, onMounted, ref, onUnmounted } from "vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
+import MatchedOrderDialog from "@/components/MatchedOrderDialog.vue";
 import {
-  showLoadingToast,
-  closeToast,
   showFailToast,
   showSuccessToast,
   showToast,
@@ -385,7 +360,6 @@ import {
 } from "../../api/apis";
 const url = window.g.VITE_API_IMG_URL;
 const userStore = useUserStore();
-import { formatWithTimezone } from "../../util/utils";
 import { useUserStore } from "@/store/modules/user";
 import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";
@@ -398,6 +372,28 @@ const avatarUrl = ref("");
 let timer = null;
 const goodsList = ref([]);
 const showCenter = ref(false);
+const showProcessing = ref(false);
+const processingProgress = ref(0);
+const processingStep = computed(() => Math.min(Math.floor(processingProgress.value / 20), 4));
+const processingSteps = [
+  { icon: "⚡", label: "start.processing.initiating" },
+  { icon: "🔍", label: "start.processing.marketplaces" },
+  { icon: "🏪", label: "start.processing.businesses" },
+  { icon: "📦", label: "start.processing.found" },
+  { icon: "✅", label: "start.processing.success" },
+];
+let processingTimer = null;
+let processingFinishTimer = null;
+let orderReady = false;
+let isUnmounted = false;
+
+const stopProcessing = () => {
+  clearInterval(processingTimer);
+  clearTimeout(processingFinishTimer);
+  processingTimer = null;
+  processingFinishTimer = null;
+  showProcessing.value = false;
+};
 const showImg = ref(false);
 const goods = ref({});
 const totalCount = ref(0); // 插入一个“开始按钮”
@@ -451,22 +447,41 @@ const closeImg = () => {
 };
 
 const doCreateOrder = () => {
-  showLoadingToast({
-    message: t("创建中..."),
-    forbidClick: true,
-    duration: 0,
-  });
+  if (showProcessing.value || showCenter.value) return;
+  processingProgress.value = 0;
+  orderReady = false;
+  showProcessing.value = true;
+  processingTimer = setInterval(() => {
+    // 接口成功前停留在搜索阶段，不能提前显示找到订单或匹配成功。
+    const limit = orderReady ? 100 : 59;
+    processingProgress.value = Math.min(processingProgress.value + 1, limit);
+    if (processingProgress.value === 100) {
+      clearInterval(processingTimer);
+      processingTimer = null;
+      processingFinishTimer = setTimeout(() => {
+        stopProcessing();
+        showCenter.value = true;
+      }, 350);
+    }
+  }, 30);
 
   createOrder()
+    .catch((err) => {
+      // 907 已返回待处理订单，继续使用这笔订单完成动画和展示。
+      if (err.code == 907 && err.data?.id != null) {
+        return { data: err.data };
+      }
+      throw err;
+    })
     .then((res) => {
-      closeToast();
-      showToast(t("创建成功"));
-      showCenter.value = true;
-      userGetInfoMethods();
+      if (isUnmounted) return;
       goods.value = res.data;
+      orderReady = true;
+      userGetInfoMethods();
     })
     .catch((err) => {
-      closeToast();
+      if (isUnmounted) return;
+      stopProcessing();
       if (err.code == 2000) {
          showImg.value = true;
         // 2. 延时 2 秒后关闭图片，并继续创建订单
@@ -517,6 +532,8 @@ const tradeConfig = async () => {
 };
 
 onUnmounted(() => {
+  isUnmounted = true;
+  stopProcessing();
   // 清除定时器，防止组件卸载后还在请求
   if (timer) clearTimeout(timer);
 });
@@ -552,5 +569,110 @@ onMounted(() => {
   background-image: url(@/static/images/start.png);
   background-size: 100% 100%;
   /* margin: 0 20px 0 20px; */
+}
+:deep(.order-dialog) {
+  top: 50%;
+  width: calc(100% - 32px);
+  max-width: 420px;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  border: 1px solid #eedddd;
+  border-radius: 32px;
+  background: #fff;
+  color: #2f1d1d;
+  font-family: Arial, "PingFang SC", sans-serif;
+  box-shadow: 0 20px 48px rgba(75, 18, 18, 0.24);
+}
+.processing-content {
+  padding: 30px 22px 28px;
+}
+.processing-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.7px;
+}
+.processing-dot {
+  flex: 0 0 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #bf494d;
+}
+.processing-progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 24px 3px 8px;
+  color: #866565;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.processing-progress-label strong {
+  color: #c44b50;
+  font-weight: 600;
+}
+.processing-progress {
+  height: 8px;
+  margin: 0 2px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #f0e4e4;
+}
+.processing-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #e16b6e, #bb4549);
+  transition: width 30ms linear;
+}
+.processing-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.processing-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 12px 10px;
+  border: 1px solid #eddfdf;
+  border-radius: 14px;
+  background: #fbf8f8;
+  color: #594949;
+  font-size: 16px;
+  line-height: 1.35;
+  transition: background-color 180ms, border-color 180ms, box-shadow 180ms, color 180ms;
+}
+.processing-step.is-active {
+  border-color: #f2979c;
+  background: #fff2f3;
+  color: #aa3035;
+  box-shadow: 0 6px 15px rgba(186, 68, 73, 0.12);
+  font-weight: 600;
+}
+.processing-step-icon {
+  flex-shrink: 0;
+  font-size: 18px;
+}
+@media (max-width: 374px) {
+  .processing-content {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .processing-title {
+    font-size: 21px;
+  }
+  .processing-step {
+    font-size: 14px;
+  }
 }
 </style>

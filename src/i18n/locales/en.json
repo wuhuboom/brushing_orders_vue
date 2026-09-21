@@ -337,5 +337,20 @@
   "index.intro2": "Platform rules",
   "index.introText2": "About recharge: [The platform will change the recharge method from time to time] Each user should click the recharge interface to check the latest recharge method before recharging, so as to avoid recharge failure on the old account due to recharge. If your recharge request has not been completed, please contact the recharge customer service for consultation in time.  About withdrawal: The minimum withdrawal amount of MALL is 20USDT, and the minimum deposit amount is 10USDT. When you request a withdrawal, we will process it immediately and arrive within 24 hours. Due to the large number of users on the platform, in order to ensure that each user has a good experience and normal withdrawal, please wait patiently for the withdrawal process to complete. Please understand that,  If you do not receive the money on the withdrawal slip within 24 hours, please contact customer service in time! About freezing the order: If the order is not delivered within 10 minutes after the user places the order, or the user returns to the page after receiving the order, the order will be frozen. Just click [Home] - [Order] to send immediately. Only one account with the correct mobile number is allowed to register with MALL per identical username.If the system monitors you to register multiple accounts and IPs, you will be suspected of illegal money laundering, which will affect normal withdrawals and cause the account to be frozen.",
   "deposit.btn.submit.money.text": "Submitted order amount",
-  "team.info.total.money.text": "All subordinate accounts’ total account balance summary"
+  "team.info.total.money.text": "All subordinate accounts’ total account balance summary",
+  "start.matched.title": "Matched Orders",
+  "start.matched.orderId": "ORDER ID",
+  "start.matched.totalPrice": "Total Price",
+  "start.matched.information": "Matching Information",
+  "start.matched.profit": "Earn Profit",
+  "start.matched.complete": "Complete Order",
+  "start.processing.title": "Processing Order",
+  "start.processing.progress": "Order Progress",
+  "start.processing.initiating": "Initiating Order",
+  "start.processing.marketplaces": "Searching Marketplaces",
+  "start.processing.businesses": "Search Businesses",
+  "start.processing.found": "Order Found",
+  "start.processing.success": "Matching Successful",
+  "默认头像": "Default avatar",
+  "用户头像": "User avatar"
 }

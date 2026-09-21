@@ -278,5 +278,20 @@
   "index.intro2": "Aturan Platform",
   "index.introText2": "Metode isi ulang dapat berubah sewaktu-waktu. Penarikan minimum adalah 20 USDT dan akan diproses dalam 24 jam.",
   "deposit.btn.submit.money.text": "Submitted order amount",
-  "team.info.total.money.text": "All subordinate accounts’ total account balance summary"
+  "team.info.total.money.text": "All subordinate accounts’ total account balance summary",
+  "start.matched.title": "Pesanan yang Cocok",
+  "start.matched.orderId": "ID PESANAN",
+  "start.matched.totalPrice": "Total Harga",
+  "start.matched.information": "Informasi Pencocokan",
+  "start.matched.profit": "Keuntungan",
+  "start.matched.complete": "Selesaikan Pesanan",
+  "start.processing.title": "Memproses Pesanan",
+  "start.processing.progress": "Progres Pesanan",
+  "start.processing.initiating": "Memulai Pesanan",
+  "start.processing.marketplaces": "Mencari Marketplace",
+  "start.processing.businesses": "Mencari Penjual",
+  "start.processing.found": "Pesanan Ditemukan",
+  "start.processing.success": "Pencocokan Berhasil",
+  "默认头像": "Avatar bawaan",
+  "用户头像": "Avatar pengguna"
 }

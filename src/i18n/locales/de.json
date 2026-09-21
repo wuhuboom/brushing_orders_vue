@@ -286,5 +286,20 @@
   "index.intro2": "Plattformregeln",
   "index.introText2": "Zur Einzahlung: Die Plattform ändert die Einzahlungsmethoden von Zeit zu Zeit. Bitte überprüfen Sie vor jeder Einzahlung die neueste Methode. Zur Auszahlung: Der Mindestbetrag beträgt 20 USDT, die Mindesteinzahlung 10 USDT. Auszahlungen werden innerhalb von 24 Stunden bearbeitet. Bei Problemen wenden Sie sich bitte rechtzeitig an den Kundenservice.",
   "deposit.btn.submit.money.text": "Submitted order amount",
-  "team.info.total.money.text": "All subordinate accounts’ total account balance summary"
+  "team.info.total.money.text": "All subordinate accounts’ total account balance summary",
+  "start.matched.title": "Zugeordnete Bestellungen",
+  "start.matched.orderId": "BESTELLNUMMER",
+  "start.matched.totalPrice": "Gesamtpreis",
+  "start.matched.information": "Zuordnungsinformationen",
+  "start.matched.profit": "Gewinn",
+  "start.matched.complete": "Bestellung abschließen",
+  "start.processing.title": "Bestellung wird bearbeitet",
+  "start.processing.progress": "Bestellfortschritt",
+  "start.processing.initiating": "Bestellung wird gestartet",
+  "start.processing.marketplaces": "Marktplätze werden durchsucht",
+  "start.processing.businesses": "Händler werden gesucht",
+  "start.processing.found": "Bestellung gefunden",
+  "start.processing.success": "Zuordnung erfolgreich",
+  "默认头像": "Standardavatar",
+  "用户头像": "Benutzeravatar"
 }

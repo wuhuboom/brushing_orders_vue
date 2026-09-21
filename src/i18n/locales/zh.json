@@ -259,5 +259,20 @@
   "我的交易所": "我的交易所",
   "钱包管理": "钱包管理",
   "deposit.btn.submit.money.text": "提交订单金额",
-  "team.info.total.money.text": "所有下级账号的总账户金额汇总"
+  "team.info.total.money.text": "所有下级账号的总账户金额汇总",
+  "start.matched.title": "匹配订单",
+  "start.matched.orderId": "订单编号",
+  "start.matched.totalPrice": "总金额",
+  "start.matched.information": "匹配信息",
+  "start.matched.profit": "获得收益",
+  "start.matched.complete": "完成订单",
+  "start.processing.title": "正在处理订单",
+  "start.processing.progress": "订单进度",
+  "start.processing.initiating": "正在发起订单",
+  "start.processing.marketplaces": "正在搜索交易平台",
+  "start.processing.businesses": "正在搜索商家",
+  "start.processing.found": "已找到订单",
+  "start.processing.success": "匹配成功",
+  "默认头像": "默认头像",
+  "用户头像": "用户头像"
 }
