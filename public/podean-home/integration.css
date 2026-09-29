@@ -1,0 +1,111 @@
+/* Keep the saved page styles isolated from the application theme. */
+html,
+body {
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.body-wrapper {
+  display: flow-root;
+}
+#amplava-shortcuts-slot {
+  height: 278px;
+  margin: 0;
+}
+.podean-map-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wow {
+  visibility: visible !important;
+}
+
+/* The application renders this control above its persistent navigation. */
+#return-to-top {
+  display: none !important;
+}
+
+.podean-map-player {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+}
+.podean-map-player:not(.has-played) .podean-map-video {
+  visibility: hidden;
+}
+.podean-map-loading {
+  display: none;
+  position: absolute;
+  inset: 0;
+  place-items: center;
+  background: #21313e;
+}
+.podean-map-loading span {
+  width: 44px;
+  height: 44px;
+  border: 5px solid transparent;
+  border-left-color: #00a4bd;
+  border-bottom-color: #00a4bd;
+  border-radius: 50%;
+  animation: podean-video-loading 0.8s linear infinite;
+}
+.podean-map-player.is-loading .podean-map-loading {
+  display: grid;
+}
+.podean-map-toggle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  padding: 16px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(66, 91, 118, 0.8);
+  color: #fff;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+.podean-map-toggle svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+.podean-map-toggle:focus-visible {
+  outline: 3px solid #00a4bd;
+  outline-offset: 3px;
+}
+.podean-map-toggle:hover {
+  background: #425b76;
+}
+.podean-map-player.is-loading .podean-map-toggle {
+  visibility: hidden;
+}
+.podean-map-player.is-playing .podean-map-toggle {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  transform: none;
+}
+.podean-map-player.is-playing .podean-map-play {
+  display: none;
+}
+.hhs-foot-nav-cols.flex_nowrap > div:only-child {
+  flex: 0 0 100%;
+  max-width: 100%;
+  border: 0;
+}
+@keyframes podean-video-loading {
+  to {
+    transform: rotate(360deg);
+  }
+}

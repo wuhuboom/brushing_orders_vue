@@ -1,0 +1,69 @@
+<svg width="240" height="100" viewBox="0 0 240 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- MEDIA — Noise → Signal (via channel selection) -->
+  <!-- Animation: Source pulses, fading paths dim away, winning path draws boldly, gold pulse radiates at end -->
+
+  <!-- Source node: prominent pulse -->
+  <circle cx="16" cy="50" r="8" fill="#6B7B8D" opacity="0.15" stroke="#6B7B8D" stroke-width="1.2" stroke-opacity="0.15">
+    <animate attributeName="r" values="8;9.5;8" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.15;0.28;0.15" dur="3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Fading path 1 (top) — draws then fades away -->
+  <path d="M24,46 Q50,20 80,12 Q110,6 130,8 Q150,12 160,16" stroke="#6B7B8D" stroke-width="1.8" opacity="0" stroke-dasharray="200" stroke-dashoffset="200">
+    <animate attributeName="stroke-dashoffset" values="200;0" dur="1.5s" fill="freeze" begin="0.2s"/>
+    <animate attributeName="opacity" values="0;0.18;0.12" dur="1.5s" fill="freeze" begin="0.2s"/>
+  </path>
+  <circle cx="160" cy="16" r="3" fill="#6B7B8D" opacity="0">
+    <animate attributeName="opacity" values="0;0.08" dur="0.3s" fill="freeze" begin="1.5s"/>
+  </circle>
+
+  <!-- Fading path 2 -->
+  <path d="M24,48 Q48,30 72,26 Q96,24 116,28 Q130,32 140,36" stroke="#6B7B8D" stroke-width="1.8" opacity="0" stroke-dasharray="180" stroke-dashoffset="180">
+    <animate attributeName="stroke-dashoffset" values="180;0" dur="1.4s" fill="freeze" begin="0.4s"/>
+    <animate attributeName="opacity" values="0;0.14;0.10" dur="1.4s" fill="freeze" begin="0.4s"/>
+  </path>
+  <circle cx="140" cy="36" r="3" fill="#6B7B8D" opacity="0">
+    <animate attributeName="opacity" values="0;0.07" dur="0.3s" fill="freeze" begin="1.6s"/>
+  </circle>
+
+  <!-- Fading path 3 (bottom) -->
+  <path d="M24,54 Q50,76 80,84 Q110,90 132,86 Q148,82 158,80" stroke="#6B7B8D" stroke-width="1.8" opacity="0" stroke-dasharray="200" stroke-dashoffset="200">
+    <animate attributeName="stroke-dashoffset" values="200;0" dur="1.5s" fill="freeze" begin="0.3s"/>
+    <animate attributeName="opacity" values="0;0.14;0.10" dur="1.5s" fill="freeze" begin="0.3s"/>
+  </path>
+  <circle cx="158" cy="80" r="3" fill="#6B7B8D" opacity="0">
+    <animate attributeName="opacity" values="0;0.07" dur="0.3s" fill="freeze" begin="1.6s"/>
+  </circle>
+
+  <!-- Fading path 4 -->
+  <path d="M24,52 Q44,64 68,68 Q92,70 110,66 Q126,62 136,60" stroke="#6B7B8D" stroke-width="1.8" opacity="0" stroke-dasharray="170" stroke-dashoffset="170">
+    <animate attributeName="stroke-dashoffset" values="170;0" dur="1.3s" fill="freeze" begin="0.5s"/>
+    <animate attributeName="opacity" values="0;0.16;0.12" dur="1.3s" fill="freeze" begin="0.5s"/>
+  </path>
+  <circle cx="136" cy="60" r="3" fill="#6B7B8D" opacity="0">
+    <animate attributeName="opacity" values="0;0.08" dur="0.3s" fill="freeze" begin="1.6s"/>
+  </circle>
+
+  <!-- WINNING PATH — draws bold, stays strong -->
+  <path d="M24,50 Q56,50 88,48 Q120,44 152,40 Q180,36 208,32" stroke="#1E3328" stroke-width="2.5" opacity="0" stroke-dasharray="220" stroke-dashoffset="220">
+    <animate attributeName="stroke-dashoffset" values="220;0" dur="2s" fill="freeze" begin="0.6s"/>
+    <animate attributeName="opacity" values="0;0.5" dur="1s" fill="freeze" begin="0.6s"/>
+  </path>
+
+  <!-- Warm corridor behind winning path -->
+  <rect x="80" y="28" width="140" height="24" rx="12" fill="#C67C5A" opacity="0">
+    <animate attributeName="opacity" values="0;0.04" dur="1s" fill="freeze" begin="1.5s"/>
+  </rect>
+
+  <!-- Gold pulse at endpoint — prominent radiation -->
+  <circle cx="208" cy="32" r="6" fill="#D4A853" opacity="0">
+    <animate attributeName="opacity" values="0;0.7" dur="0.4s" fill="freeze" begin="2.4s"/>
+    <animate attributeName="r" values="6;8;6" dur="2s" repeatCount="indefinite" begin="2.8s"/>
+    <animate attributeName="opacity" values="0.7;0.35;0.7" dur="2s" repeatCount="indefinite" begin="2.8s"/>
+  </circle>
+  <!-- Gold outer ring — wide radiating ripple -->
+  <circle cx="208" cy="32" r="10" fill="none" stroke="#D4A853" stroke-width="1" opacity="0">
+    <animate attributeName="opacity" values="0;0.3;0" dur="2.5s" repeatCount="indefinite" begin="2.8s"/>
+    <animate attributeName="r" values="10;18;10" dur="2.5s" repeatCount="indefinite" begin="2.8s"/>
+  </circle>
+</svg>

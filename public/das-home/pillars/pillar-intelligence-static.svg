@@ -1,0 +1,40 @@
+<svg width="240" height="100" viewBox="0 0 240 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- INTELLIGENCE — Static final state (no animations) -->
+
+  <!-- Row 1: Grid dots at resting opacity -->
+  <circle cx="28" cy="16" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="56" cy="16" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="84" cy="16" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="112" cy="16" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="140" cy="16" r="5" fill="#6B7B8D" opacity="0.14"/>
+
+  <!-- Row 2 -->
+  <circle cx="28" cy="40" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="56" cy="40" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <!-- Warm cluster dots -->
+  <circle cx="84" cy="40" r="6" fill="#C67C5A" opacity="0.55"/>
+  <circle cx="112" cy="40" r="6.5" fill="#C67C5A" opacity="0.7"/>
+  <circle cx="140" cy="40" r="5" fill="#6B7B8D" opacity="0.14"/>
+
+  <!-- Row 3 -->
+  <circle cx="28" cy="64" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="56" cy="64" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="84" cy="64" r="6" fill="#C67C5A" opacity="0.5"/>
+  <circle cx="112" cy="64" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="140" cy="64" r="5" fill="#6B7B8D" opacity="0.14"/>
+
+  <!-- Row 4 -->
+  <circle cx="28" cy="88" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="56" cy="88" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="84" cy="88" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="112" cy="88" r="5" fill="#6B7B8D" opacity="0.14"/>
+  <circle cx="140" cy="88" r="5" fill="#6B7B8D" opacity="0.14"/>
+
+  <!-- Analyst mark: fully drawn ellipse -->
+  <ellipse cx="94" cy="52" rx="32" ry="26" stroke="#1E3328" stroke-width="1.8" fill="none" opacity="0.5" stroke-dasharray="180" stroke-dashoffset="0"/>
+
+  <!-- Gold dot visible -->
+  <circle cx="112" cy="40" r="3" fill="#D4A853" opacity="0.9"/>
+  <!-- Gold outer ring -->
+  <circle cx="112" cy="40" r="8" fill="none" stroke="#D4A853" stroke-width="0.6" opacity="0.15"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40">
+  <!-- Play button: rounded rect with triangle CUT OUT via mask (stays transparent under brightness filter) -->
+  <defs>
+    <mask id="yt-mask">
+      <rect x="0" y="2" width="56" height="36" rx="9" fill="white"/>
+      <polygon points="22,11 22,29 40,20" fill="black"/>
+    </mask>
+  </defs>
+  <rect x="0" y="2" width="56" height="36" rx="9" fill="#111" mask="url(#yt-mask)"/>
+  <!-- YouTube wordmark -->
+  <text x="64" y="30" font-family="'Roboto','Arial',sans-serif" font-size="24" font-weight="700" letter-spacing="-0.3" fill="#111">YouTube</text>
+</svg>

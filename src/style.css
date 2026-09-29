@@ -1,0 +1,296 @@
+@font-face {
+  font-family: "DM Sans";
+  src: url("/das-home/fonts/dm-sans-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/das-home/fonts/inter-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/das-home/fonts/jetbrains-mono-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("/das-home/fonts/libre-baskerville-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Libre Baskerville";
+  src: url("/das-home/fonts/libre-baskerville-italic-latin.woff2")
+    format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  /* font-family: PingFangSC-Medium; */
+  font-weight: 400;
+  background-color: #eef3fb;
+  --el-color-primary: #3d3d3d !important;
+  --el-bg-color-overlay: #f6f6f7 !important;
+  --el-border-radius-base: 10px !important;
+  --el-component-size-large: 45px !important;
+  --el-text-color-regular: #303133 !important;
+  --up: #0065ff;
+  --down: #f05150;
+  --van-font-size-md: 24px;
+  --header-me-width: 50px;
+  --main-color: #14392c;
+  --header-logo-width: 150px;
+}
+
+.el-input {
+  --el-input-border-color: #3d3d3d !important;
+  font-weight: 800 !important;
+  font-size: 15px !important;
+}
+
+.el-input__wrapper {
+  box-shadow: 0 0 0 1px #e6e6e6 !important;
+  border-radius: 0 !important;
+  background-color: #f9f9f9 !important;
+}
+html {
+  overflow: hidden;
+}
+
+.el-popover {
+  --el-popover-padding: 24px !important;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  font-family:
+    Inter, "Helvetica Neue", Arial, "PingFang SC", sans-serif !important;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #eef3fb;
+  /* text-align: center; */
+}
+
+input {
+  background-color: transparent;
+  outline: none;
+}
+
+.hidden-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.bg {
+  background-color: #f8f8f8;
+}
+
+.bg-blue {
+  background-color: #0065ff !important;
+}
+.bg-green {
+  background-color: #007513 !important;
+}
+
+.bg-gray {
+  background-color: hsla(0, 0%, 92.9%, 0.46);
+}
+
+.bg-red {
+  background-color: #f05150;
+}
+
+.text-blue {
+  color: #0065ff !important;
+}
+
+.text-red {
+  color: #f05150 !important;
+}
+
+.text-main-bg {
+  color: #000;
+}
+
+.text-up {
+  color: var(--up) !important;
+}
+
+.text-down {
+  color: var(--down) !important;
+}
+
+.bg-up {
+  background-color: var(--up) !important;
+}
+
+.bg-down {
+  background-color: var(--down) !important;
+}
+
+/* .el-input__wrapper {
+  box-shadow: none !important;
+
+} */
+.el-input__inner {
+  font-weight: initial;
+}
+
+.van-nav-bar .van-icon,
+.van-nav-bar__title {
+  color: #17382d !important;
+  font-size: 17px !important;
+  font-weight: bold;
+}
+.van-nav-bar {
+  background: #f7f6ee !important;
+}
+.van-nav-bar::after {
+  display: none;
+}
+.van-nav-bar__content {
+  height: 58px !important;
+}
+.van-button--primary,
+.van-button[style*="007513"],
+.van-button[style*="rgb(0, 117, 19)"] {
+  border-color: #14392c !important;
+  background: #14392c !important;
+}
+.van-tabs__nav {
+  background: #f7f6ee !important;
+}
+.van-tabs__line {
+  background: #14392c !important;
+}
+.van-tab--active {
+  color: #17382d !important;
+  font-weight: 700 !important;
+}
+.van-dialog,
+.van-popup--center {
+  border-radius: 24px !important;
+}
+.van-field,
+.van-cell {
+  color: #17382d !important;
+}
+
+#router-view > .container,
+#router-view > .withdraw,
+#router-view > div[class*="bg-white"],
+#router-view > div[class*="bg-[#f4f4f5]"] {
+  width: min(100%, var(--das-app-max-width, 960px)) !important;
+  margin: 0 auto !important;
+  background: #f7f6ee !important;
+  color: #17382d !important;
+}
+#router-view .bg-\[\#e8f7ec\] {
+  background-color: #eef1e6 !important;
+}
+#router-view .bg-\[\#f4f4f5\],
+#router-view .bg-\[\#f8f8f8\] {
+  background-color: #f7f6ee !important;
+}
+#router-view .text-\[\#007513\] {
+  color: #14392c !important;
+}
+.van-cell,
+.van-cell-group {
+  background: transparent !important;
+}
+.van-pull-refresh {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.pos {
+  position: inherit !important;
+  margin-top: 10px !important;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.das-page {
+  width: 100%;
+  max-width: var(--das-app-max-width, 960px);
+  min-height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+.das-subpage {
+  min-height: 100%;
+  background: #f7f5ec;
+  color: #17382d;
+}
+.das-content-card {
+  margin: 0 auto;
+  padding: 34px clamp(24px, 6vw, 72px) 45px;
+  max-width: 820px;
+}
+.das-content-card__image {
+  width: 100%;
+  max-height: 390px;
+  margin-bottom: 28px;
+  border-radius: 24px;
+  object-fit: cover;
+}
+.das-rich-text {
+  font-size: 15px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.das-rich-text img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+.das-empty {
+  padding: 70px 0;
+  text-align: center;
+  color: #858d87;
+}
+.das-page-copyright {
+  margin: 20px 0 0;
+  padding: 0 20px 30px;
+  color: #9aa29c;
+  font-size: 10px;
+  text-align: center;
+}
