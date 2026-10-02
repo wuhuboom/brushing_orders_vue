@@ -109,3 +109,10 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.c-cta-con > span {
+  cursor: default;
+}
+.flexi-card-outer:hover {
+  transform: none;
+}

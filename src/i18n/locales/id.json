@@ -229,6 +229,7 @@
       "briefCover": "Gambar pesanan"
     },
     "started": {
+      "pendingAmount": "Jumlah Tertunda",
       "startNow": "Mulai Sekarang",
       "price": "Harga",
       "reviews": "ulasan",

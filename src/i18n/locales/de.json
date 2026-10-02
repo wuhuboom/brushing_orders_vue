@@ -229,6 +229,7 @@
       "briefCover": "Auftragsbild"
     },
     "started": {
+      "pendingAmount": "Ausstehender Betrag",
       "startNow": "Jetzt starten",
       "price": "Gesamtkonto",
       "reviews": "Bewertungen",

@@ -229,6 +229,7 @@
       "briefCover": "Brief cover"
     },
     "started": {
+      "pendingAmount": "Pending Amount",
       "startNow": "Start Now",
       "price": "Price",
       "reviews": "reviews",

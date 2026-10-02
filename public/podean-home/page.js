@@ -85,23 +85,6 @@ Promise.all([document.fonts.ready, heroArt.decode().catch(() => {})]).then(
   },
 );
 window.addEventListener("load", reportLayout);
-document.addEventListener("click", (event) => {
-  const link = event.target.closest("a");
-  if (!link) return;
-  const url = new URL(link.href, location.href);
-  if (
-    url.hostname === "podean.com" &&
-    url.pathname.replace(/\/$/, "") === "/contact"
-  ) {
-    event.preventDefault();
-    parent.postMessage({ type: "amplava-contact" }, location.origin);
-  }
-});
-// Open reference-only resources separately so they cannot replace the embedded homepage.
-for (const link of document.querySelectorAll('a[href^="https:"]')) {
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
-}
 document.addEventListener("visibilitychange", () => {
   $(".slick-initialized").each(function () {
     const slider = $(this);
@@ -109,12 +92,6 @@ document.addEventListener("visibilitychange", () => {
     else if (!reducedMotion && slider.slick("getSlick").options.autoplay)
       slider.slick("slickPlay");
   });
-});
-
-// Copied marketing forms use the existing support flow; no third-party form API is added.
-document.addEventListener("submit", (event) => {
-  event.preventDefault();
-  parent.postMessage({ type: "amplava-contact" }, location.origin);
 });
 
 // The reference requests autoplay and looping but hides the player's controls.

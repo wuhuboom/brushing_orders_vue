@@ -229,6 +229,7 @@
       "briefCover": "Обложка задания"
     },
     "started": {
+      "pendingAmount": "Сумма в ожидании",
       "startNow": "Начать сейчас",
       "price": "Общий счет",
       "reviews": "отзывов",

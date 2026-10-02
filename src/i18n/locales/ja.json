@@ -229,6 +229,7 @@
       "briefCover": "案件画像"
     },
     "started": {
+      "pendingAmount": "保留中の金額",
       "startNow": "今すぐ開始",
       "price": "価格",
       "reviews": "レビュー",

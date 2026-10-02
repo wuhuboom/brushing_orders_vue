@@ -229,6 +229,7 @@
       "briefCover": "Oppgavebilde"
     },
     "started": {
+      "pendingAmount": "Ventende beløp",
       "startNow": "Start nå",
       "price": "Total konto",
       "reviews": "anmeldelser",

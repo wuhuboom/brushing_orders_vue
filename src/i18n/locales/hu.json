@@ -229,6 +229,7 @@
       "briefCover": "Feladat borítóképe"
     },
     "started": {
+      "pendingAmount": "Függőben lévő összeg",
       "startNow": "Indítás most",
       "price": "Teljes számla",
       "reviews": "értékelés",

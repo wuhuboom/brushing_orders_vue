@@ -229,6 +229,7 @@
       "briefCover": "Imagen del pedido"
     },
     "started": {
+      "pendingAmount": "Importe pendiente",
       "startNow": "Empezar ahora",
       "price": "Saldo total",
       "reviews": "reseñas",

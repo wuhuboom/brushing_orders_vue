@@ -229,6 +229,7 @@
       "briefCover": "작업 이미지"
     },
     "started": {
+      "pendingAmount": "대기 금액",
       "startNow": "지금 시작",
       "price": "가격",
       "reviews": "개 리뷰",

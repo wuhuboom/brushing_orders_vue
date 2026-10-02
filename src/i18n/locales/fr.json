@@ -229,6 +229,7 @@
       "briefCover": "Image de la commande"
     },
     "started": {
+      "pendingAmount": "Montant en attente",
       "startNow": "Commencer maintenant",
       "price": "Compte total",
       "reviews": "avis",

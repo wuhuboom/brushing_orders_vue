@@ -1,13 +1,14 @@
 <template>
   <header class="das-header">
-    <button
+    <component
+      :is="navigationEnabled ? 'button' : 'span'"
       class="das-brand"
       type="button"
       aria-label="Amplava home"
-      @click="safeReplace(router, '/')"
+      v-on="navigationEnabled ? { click: () => safeReplace(router, '/') } : {}"
     >
       <img src="@/static/amplava/logo.png" alt="Amplava" />
-    </button>
+    </component>
     <div class="das-header__actions">
       <button class="das-contact" type="button" @click="customer">
         <img src="@/static/amplava/support.png" :alt="$t('das.nav.contact')" />
@@ -15,9 +16,13 @@
           $t("das.nav.contact")
         }}</span>
       </button>
-      <button class="das-avatar" type="button" @click="safePush(router, '/my')">
+      <component
+        :is="navigationEnabled ? 'button' : 'span'"
+        class="das-avatar"
+        v-on="navigationEnabled ? { click: () => safePush(router, '/my') } : {}"
+      >
         <img :src="avatar" alt="" @error="avatarFailed = true" />
-      </button>
+      </component>
     </div>
   </header>
 </template>
@@ -30,6 +35,8 @@ import { safePush, safeReplace } from "@/utils/navigation";
 import { defaultAvatarForUser } from "@/utils/avatar";
 import maleAvatar from "@/static/amplava/avatar-male.png";
 import femaleAvatar from "@/static/amplava/avatar-female.png";
+
+defineProps({ navigationEnabled: { type: Boolean, default: true } });
 
 const router = useRouter();
 const userStore = useUserStore();

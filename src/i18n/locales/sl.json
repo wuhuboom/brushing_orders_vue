@@ -229,6 +229,7 @@
       "briefCover": "Titulný obrázok zadania"
     },
     "started": {
+      "pendingAmount": "Čakajoči znesek",
       "startNow": "Začať teraz",
       "price": "Skupni račun",
       "reviews": "recenzií",

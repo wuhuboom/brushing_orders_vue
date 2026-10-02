@@ -229,6 +229,7 @@
       "briefCover": "Grafika zadania"
     },
     "started": {
+      "pendingAmount": "Kwota oczekująca",
       "startNow": "Rozpocznij teraz",
       "price": "Łączne konto",
       "reviews": "opinii",

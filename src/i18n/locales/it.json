@@ -229,6 +229,7 @@
       "briefCover": "Immagine ordine"
     },
     "started": {
+      "pendingAmount": "Importo in sospeso",
       "startNow": "Inizia ora",
       "price": "Conto totale",
       "reviews": "recensioni",

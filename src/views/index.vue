@@ -28,7 +28,9 @@
           </div>
         </div>
       </div>
-      <section class="legacy-hero home-header"><HeaderTop /></section>
+      <section class="legacy-hero home-header">
+        <HeaderTop :navigation-enabled="false" />
+      </section>
       <iframe
         ref="referenceRef"
         class="home-reference__frame"
@@ -212,8 +214,6 @@ const receiveLayout = async (event) => {
     event.origin !== window.location.origin
   )
     return;
-  if (event.data?.type === "amplava-contact")
-    return goTo({ route: "/contact" });
   if (event.data?.type !== "podean-layout") return;
   const { height, shortcutsY } = event.data;
   if (!Number.isFinite(height) || !Number.isFinite(shortcutsY)) return;
@@ -249,6 +249,11 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+#app .home-header :deep(span.das-brand),
+#app .home-header :deep(span.das-avatar) {
+  cursor: default;
+}
+
 .home-return-top {
   position: fixed;
   z-index: 70;

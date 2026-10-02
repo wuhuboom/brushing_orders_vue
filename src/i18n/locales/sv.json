@@ -229,6 +229,7 @@
       "briefCover": "Uppgiftsbild"
     },
     "started": {
+      "pendingAmount": "Väntande belopp",
       "startNow": "Starta nu",
       "price": "Totalt konto",
       "reviews": "recensioner",

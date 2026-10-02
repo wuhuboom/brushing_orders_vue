@@ -1,81 +1,37 @@
 <template>
-  <main class="das-page started-page started-page--cards">
+  <main class="das-page started-page">
     <div class="work-page-content">
-      <div class="started-bg">
-        <HeaderTop />
-        <section class="started-user">
-          <div>
-            <span>{{ $t("das.profile.hello") }},</span>
-            <strong>{{ userInfo.username || "—" }}</strong>
-          </div>
-        </section>
-      </div>
-      <div class="work-panel">
-        <TaskShowcase tiles />
-        <section class="work-summary">
-          <div class="work-summary__figures">
-            <div class="work-amount-card">
-              <h2>{{ $t("das.started.todayMargin") }}</h2>
-              <strong>{{ money(userInfo.commission, "0.00") }} USD</strong>
-              <p>{{ $t("das.started.marginHint") }}</p>
-            </div>
-            <div class="work-amount-card">
-              <h2>{{ $t("das.started.pendingAmount") }}</h2>
-              <strong>{{ money(userInfo.frozenBalance, "0.00") }} USD</strong>
-            </div>
-          </div>
-          <button
-            class="work-start"
-            type="button"
-            :disabled="creatingOrder"
-            :aria-label="$t('das.started.startNow')"
-            :aria-busy="creatingOrder"
-            @click="handleClick"
+      <section class="work-balance">
+        <h1>{{ $t("das.deposit.totalBalance") }}</h1>
+        <strong
+          >{{
+            money(userInfo.totalBalance ?? userInfo.balance, "0.00")
+          }}
+          USD</strong
+        >
+        <p>{{ $t("das.started.balanceHint") }}</p>
+      </section>
+      <TaskShowcase />
+      <section class="work-summary">
+        <div class="work-summary__figures">
+          <h2>{{ $t("das.started.todayMargin") }}</h2>
+          <strong>{{ money(userInfo.commission, "0.00") }} USD</strong>
+          <p>{{ $t("das.started.marginHint") }}</p>
+          <h2 class="work-summary__pending">{{ $t("das.profile.frozen") }}</h2>
+          <strong>{{ money(userInfo.frozenBalance, "0.00") }} USD</strong>
+        </div>
+        <button
+          class="work-start"
+          type="button"
+          :disabled="creatingOrder"
+          :aria-label="$t('das.started.startNow')"
+          :aria-busy="creatingOrder"
+          @click="handleClick"
+        >
+          <img :src="startButton" alt="" />
+          <span class="work-start__count"
+            >({{ userInfo.dealCount || 0 }}/{{ orderCount || 0 }})</span
           >
-            <img :src="startButton" alt="" />
-            <span class="work-start__count"
-              >({{ userInfo.dealCount || 0 }}/{{ orderCount || 0 }})</span
-            >
-          </button>
-        </section>
-      </div>
-      <section class="work-history">
-        <button
-          class="work-history__link"
-          type="button"
-          @click="safePush(router, '/records')"
-        >
-          <span class="work-history__arrow" aria-hidden="true"></span>
-          {{ $t("das.withdraw.history") }}
-        </button>
-        <button
-          class="work-history__support"
-          type="button"
-          :aria-label="$t('das.nav.contact')"
-          @click="safePush(router, '/contact')"
-        >
-          <svg viewBox="0 0 48 48" aria-hidden="true">
-            <defs>
-              <linearGradient id="work-support-gradient" x2="0" y2="1">
-                <stop stop-color="#ffbf62" />
-                <stop offset="1" stop-color="#ff833d" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M7 27v-5a17 17 0 0 1 34 0v5"
-              fill="none"
-              stroke="#ffac50"
-              stroke-width="3"
-            />
-            <rect x="3" y="22" width="7" height="14" rx="3.5" fill="#ffac50" />
-            <rect x="38" y="22" width="7" height="14" rx="3.5" fill="#ffac50" />
-            <circle cx="24" cy="26" r="15" fill="url(#work-support-gradient)" />
-            <g fill="white">
-              <circle cx="16" cy="26" r="2.4" />
-              <circle cx="24" cy="26" r="2.4" />
-              <circle cx="32" cy="26" r="2.4" />
-            </g>
-          </svg>
         </button>
       </section>
     </div>
@@ -114,7 +70,6 @@ import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { closeToast, showLoadingToast, showToast } from "vant";
 import { createOrder, getTradeConfig, userGetInfo } from "@/api/apis";
-import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
 import BonusDialog from "@/components/BonusDialog.vue";
 import { safePush } from "@/utils/navigation";
@@ -251,75 +206,52 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-#app .started-page--cards {
+#app .started-page {
   background: #fff;
   color: #111;
 }
 .work-page-content {
   max-width: 600px;
   margin: 0 auto;
+  padding-bottom: 24px;
 }
-#app .started-page--cards .started-bg {
-  padding-bottom: 0;
-  background: linear-gradient(105deg, #3f42ff, #fd00ac);
+.work-balance {
+  padding: 6px 16px 0;
 }
-#app .started-page--cards .started-bg::before {
-  display: none;
-}
-#app .started-page--cards .started-user {
-  min-height: 116px;
-  padding-top: 28px;
-}
-#app .started-page--cards .started-user strong {
+.work-balance h1,
+.work-summary h2,
+.work-balance strong,
+.work-summary strong {
   display: block;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
-#app .started-page--cards :deep(.das-avatar) {
-  display: none;
-}
-.work-panel {
-  position: relative;
-  margin-top: -16px;
-  padding: 18px 16px 26px;
-  border-radius: 18px 18px 0 0;
-  background: #fff;
+.work-balance p,
+.work-summary p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
 }
 .work-summary {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 0;
+  padding: 0 16px;
 }
 .work-summary__figures {
-  display: grid;
-  gap: 10px;
+  position: relative;
+  z-index: 1;
 }
-.work-amount-card {
-  padding: 12px 14px;
-  border: 1px solid #f3f3f3;
-  border-radius: 14px;
-  box-shadow: 0 2px 4px #00000017;
-}
-.work-amount-card h2,
-.work-amount-card strong {
-  display: block;
-  margin: 0;
-  font-size: clamp(17px, 4.6vw, 25px);
-  font-weight: 700;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
-}
-.work-amount-card strong {
-  margin-top: 4px;
-}
-.work-amount-card p {
-  margin: 6px 0 0;
-  font-size: 12px;
-  line-height: 1.35;
+.work-summary .work-summary__pending {
+  margin-top: 16px;
 }
 .work-start {
   position: relative;
-  width: calc(100% + 18px);
+  width: calc(100% + 32px);
   aspect-ratio: 1;
   justify-self: center;
   padding: 0;
@@ -340,7 +272,7 @@ onUnmounted(() => {
   left: 26%;
   width: 49%;
   color: #fff;
-  font-size: clamp(16px, 4.8vw, 26px);
+  font-size: clamp(16px, 4.8vw, 24px);
   line-height: 1.4;
   font-weight: 650;
   text-align: center;
@@ -357,46 +289,6 @@ onUnmounted(() => {
   outline: 2px solid #7926e7;
   outline-offset: -18px;
   border-radius: 50%;
-}
-.work-history {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 88px;
-  padding: 16px 28px;
-  background: #f0f0f0;
-}
-.work-history__link {
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #111;
-  font-size: 21px;
-  font-weight: 700;
-  cursor: pointer;
-}
-.work-history__arrow {
-  border-right: 7px solid transparent;
-  border-left: 7px solid transparent;
-  border-bottom: 12px solid #07784e;
-}
-.work-history__support {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  padding: 9px;
-  border: 0;
-  border-radius: 50%;
-  background: #fff;
-  cursor: pointer;
-}
-.work-history__support svg {
-  width: 100%;
-  height: 100%;
 }
 :deep(.van-dialog.amplava-start-loading) {
   width: min(76vw, 280px);
