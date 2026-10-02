@@ -29,7 +29,7 @@
         </div>
       </div>
       <section class="legacy-hero home-header">
-        <HeaderTop :navigation-enabled="false" />
+        <HeaderTop />
       </section>
       <iframe
         ref="referenceRef"
@@ -249,11 +249,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-#app .home-header :deep(span.das-brand),
-#app .home-header :deep(span.das-avatar) {
-  cursor: default;
-}
-
 .home-return-top {
   position: fixed;
   z-index: 70;
