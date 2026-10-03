@@ -1880,23 +1880,6 @@ body,
   background: #f213a1;
   color: white;
 }
-.van-dialog.bonus-dialog {
-  width: min(84vw, 370px) !important;
-  max-width: 370px !important;
-  background: transparent;
-  border-radius: 10px !important;
-}
-.van-dialog .bonus-prize {
-  background: transparent;
-  padding: 0;
-}
-.van-dialog .bonus-prize button {
-  border: 0;
-  border-radius: 7px;
-  background: var(--amplava-gradient);
-  box-shadow: none;
-  color: white;
-}
 .van-dialog.submit-loading-dialog,
 .van-dialog.start-loading-dialog {
   border-radius: 9px !important;

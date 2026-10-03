@@ -82,6 +82,7 @@
     </div>
     <BonusDialog
       :show="bonusVisible"
+      :amount="bonusAmount"
       @close="closeBonus"
       @contact="openBonusContact"
     />
@@ -131,6 +132,7 @@ const userInfo = ref({});
 const tradeInfo = ref({});
 const orderCount = ref(40);
 const bonusVisible = ref(false);
+const bonusAmount = ref("");
 const creatingOrder = ref(false);
 const startAnimationVisible = ref(false);
 let startDelayTimer;
@@ -206,6 +208,7 @@ const handleClick = async () => {
     const res = await createOrder();
     closeToast();
     if (res.resultType === "BONUS") {
+      bonusAmount.value = res.data?.amount ?? "";
       bonusVisible.value = true;
       return;
     }
@@ -215,6 +218,7 @@ const handleClick = async () => {
   } catch (error) {
     closeToast();
     if (Number(error?.code) === 2000) {
+      bonusAmount.value = error?.data?.amount ?? "";
       bonusVisible.value = true;
       return;
     }
