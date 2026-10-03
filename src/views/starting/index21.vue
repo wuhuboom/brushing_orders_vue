@@ -211,8 +211,9 @@ onUnmounted(() => {
   color: #111;
 }
 .work-page-content {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding-bottom: 24px;
 }
 .work-balance {

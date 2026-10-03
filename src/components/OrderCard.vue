@@ -25,6 +25,10 @@
         <small>{{ $t("das.records.commission") }}</small>
         <b>{{ money(item.totalCommission ?? item.commission) }} USD</b>
       </div>
+      <div v-if="profitRate" class="record-profit-rate">
+        <small>{{ $t("das.product.profitRate") }}</small>
+        <b>{{ profitRate }}</b>
+      </div>
       <button
         v-if="isPending(item.status)"
         type="button"
@@ -43,6 +47,7 @@ import { formatTime } from "@/util/times";
 
 defineProps({
   item: { type: Object, required: true },
+  profitRate: { type: String, default: "" },
 });
 defineEmits(["submit"]);
 

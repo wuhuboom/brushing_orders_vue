@@ -223,12 +223,14 @@
       "submitted": "A küldetés teljesítve"
     },
     "product": {
+      "profitRate": "Nyereségráta",
       "totalCommission": "Teljes jutalék",
       "creationTime": "Létrehozás at",
       "briefNo": "Feladat száma",
       "briefCover": "Feladat borítóképe"
     },
     "started": {
+      "commissionResetHint": "A rendszer éjfélkor újraszámítja a napi nyereséget.",
       "pendingAmount": "Függőben lévő összeg",
       "startNow": "Indítás most",
       "price": "Teljes számla",

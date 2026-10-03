@@ -223,12 +223,14 @@
       "submitted": "Oppdrag innsendt fullført"
     },
     "product": {
+      "profitRate": "Fortjenestesats",
       "totalCommission": "Total provisjon",
       "creationTime": "Opprettelse kl",
       "briefNo": "Oppgavenr.",
       "briefCover": "Oppgavebilde"
     },
     "started": {
+      "commissionResetHint": "Systemet beregner dagens fortjeneste på nytt kl. 00.00.",
       "pendingAmount": "Ventende beløp",
       "startNow": "Start nå",
       "price": "Total konto",

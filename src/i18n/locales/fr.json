@@ -223,12 +223,14 @@
       "submitted": "Mission soumise terminée"
     },
     "product": {
+      "profitRate": "Taux de profit",
       "totalCommission": "Commission totale",
       "creationTime": "Création à",
       "briefNo": "N° de commande",
       "briefCover": "Image de la commande"
     },
     "started": {
+      "commissionResetHint": "Le système recalculera les gains du jour à minuit.",
       "pendingAmount": "Montant en attente",
       "startNow": "Commencer maintenant",
       "price": "Compte total",

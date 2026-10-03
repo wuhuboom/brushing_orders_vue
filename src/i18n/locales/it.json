@@ -223,12 +223,14 @@
       "submitted": "Missione inviata completata"
     },
     "product": {
+      "profitRate": "Tasso di profitto",
       "totalCommission": "Commissione totale",
       "creationTime": "Creazione a",
       "briefNo": "N. ordine",
       "briefCover": "Immagine ordine"
     },
     "started": {
+      "commissionResetHint": "Il sistema ricalcolerà il profitto giornaliero a mezzanotte.",
       "pendingAmount": "Importo in sospeso",
       "startNow": "Inizia ora",
       "price": "Conto totale",

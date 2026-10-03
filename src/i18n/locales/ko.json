@@ -223,12 +223,14 @@
       "submitted": "제출했습니다"
     },
     "product": {
+      "profitRate": "수익률",
       "totalCommission": "총 수익",
       "creationTime": "생성 시간",
       "briefNo": "작업 번호",
       "briefCover": "작업 이미지"
     },
     "started": {
+      "commissionResetHint": "시스템은 오전 12시에 당일 수익을 다시 계산합니다.",
       "pendingAmount": "대기 금액",
       "startNow": "지금 시작",
       "price": "가격",

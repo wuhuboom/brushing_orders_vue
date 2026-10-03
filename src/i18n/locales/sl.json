@@ -223,12 +223,14 @@
       "submitted": "Predložena misija je zaključena"
     },
     "product": {
+      "profitRate": "Miera zisku",
       "totalCommission": "Celková provízia",
       "creationTime": "Ustvarjanje pri",
       "briefNo": "Č. zadania",
       "briefCover": "Titulný obrázok zadania"
     },
     "started": {
+      "commissionResetHint": "Sistem bo ob polnoči ponovno izračunal dnevni dobiček.",
       "pendingAmount": "Čakajoči znesek",
       "startNow": "Začať teraz",
       "price": "Skupni račun",

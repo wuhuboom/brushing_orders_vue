@@ -223,12 +223,14 @@
       "submitted": "Misja przesłana, ukończona"
     },
     "product": {
+      "profitRate": "Stopa zysku",
       "totalCommission": "Łączna prowizja",
       "creationTime": "Tworzenie o godz",
       "briefNo": "Nr zadania",
       "briefCover": "Grafika zadania"
     },
     "started": {
+      "commissionResetHint": "System ponownie obliczy dzienny zysk o północy.",
       "pendingAmount": "Kwota oczekująca",
       "startNow": "Rozpocznij teraz",
       "price": "Łączne konto",

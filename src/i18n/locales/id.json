@@ -223,12 +223,14 @@
       "submitted": "Berhasil dikirim"
     },
     "product": {
+      "profitRate": "Tingkat Keuntungan",
       "totalCommission": "Total Komisi",
       "creationTime": "Waktu pembuatan",
       "briefNo": "No. Pesanan",
       "briefCover": "Gambar pesanan"
     },
     "started": {
+      "commissionResetHint": "Sistem akan menghitung ulang keuntungan harian pada pukul 00.00.",
       "pendingAmount": "Jumlah Tertunda",
       "startNow": "Mulai Sekarang",
       "price": "Harga",

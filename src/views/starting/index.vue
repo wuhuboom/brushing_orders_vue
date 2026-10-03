@@ -1,27 +1,28 @@
 <template>
   <main class="das-page started-page started-page--cards">
     <div class="work-page-content">
-      <div class="started-bg">
+      <div class="work-hero">
         <HeaderTop />
-        <section class="started-user">
-          <div>
-            <span>{{ $t("das.profile.hello") }},</span>
-            <strong>{{ userInfo.username || "—" }}</strong>
-          </div>
+        <section class="work-balance">
+          <h1>{{ $t("das.deposit.totalBalance") }}</h1>
+          <strong>
+            {{ money(userInfo.totalBalance ?? userInfo.balance, "0.00") }} USD
+          </strong>
+          <p>{{ $t("das.started.balanceHint") }}</p>
         </section>
       </div>
       <div class="work-panel">
-        <TaskShowcase tiles />
+        <TaskShowcase tiles framed />
         <section class="work-summary">
           <div class="work-summary__figures">
             <div class="work-amount-card">
               <h2>{{ $t("das.started.todayMargin") }}</h2>
               <strong>{{ money(userInfo.commission, "0.00") }} USD</strong>
-              <p>{{ $t("das.started.marginHint") }}</p>
+              <p>{{ $t("das.started.commissionResetHint") }}</p>
             </div>
             <div class="work-amount-card">
               <h2>{{ $t("das.started.pendingAmount") }}</h2>
-              <strong>{{ money(userInfo.frozenBalance, "0.00") }} USD</strong>
+              <strong>{{ money(userInfo.balance, "0.00") }} USD</strong>
             </div>
           </div>
           <button
@@ -252,74 +253,109 @@ onUnmounted(() => {
 
 <style scoped>
 #app .started-page--cards {
-  background: #fff;
+  --work-gutter: clamp(16px, 4.1vw, 40px);
+  background: #000;
   color: #111;
 }
 .work-page-content {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background: linear-gradient(90deg, #3f42ff, #7926e7 48%, #ff00ab);
 }
-#app .started-page--cards .started-bg {
-  padding-bottom: 0;
-  background: linear-gradient(105deg, #3f42ff, #fd00ac);
+.work-hero {
+  padding: 0 var(--work-gutter);
+  color: #fff;
 }
-#app .started-page--cards .started-bg::before {
+#app .work-hero :deep(.das-header) {
+  width: 100%;
+  height: auto;
+  min-height: 72px;
+  padding: 20px 0 16px;
+  background: transparent;
+}
+#app .work-hero :deep(.das-brand) {
+  width: clamp(153px, 40.8vw, 280px);
+  height: auto;
+  aspect-ratio: 153 / 42;
+}
+#app .work-hero :deep(.das-header__actions) {
   display: none;
 }
-#app .started-page--cards .started-user {
-  min-height: 116px;
-  padding-top: 28px;
+.work-balance {
+  padding: 0 0 12px;
 }
-#app .started-page--cards .started-user strong {
+.work-balance h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(13px, 3.47vw, 24px);
+  font-weight: 400;
+  line-height: 1.45;
+}
+.work-balance strong {
   display: block;
+  margin-top: 3px;
+  color: #fff;
+  font-size: clamp(20px, 5.33vw, 36px);
+  font-weight: 750;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
 }
-#app .started-page--cards :deep(.das-avatar) {
-  display: none;
+.work-balance p {
+  margin: 3px 0 0;
+  color: #fff;
+  font-size: clamp(13px, 3.47vw, 22px);
+  line-height: 1.4;
 }
 .work-panel {
-  position: relative;
-  margin-top: -16px;
-  padding: 18px 16px 26px;
-  border-radius: 18px 18px 0 0;
-  background: #fff;
+  padding: 0 var(--work-gutter) 24px;
 }
 .work-summary {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.16fr) minmax(0, 1fr);
   align-items: center;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 8px;
+  margin-top: 7px;
 }
 .work-summary__figures {
+  position: relative;
+  z-index: 1;
   display: grid;
-  gap: 10px;
+  gap: 7px;
 }
 .work-amount-card {
-  padding: 12px 14px;
-  border: 1px solid #f3f3f3;
-  border-radius: 14px;
-  box-shadow: 0 2px 4px #00000017;
+  padding: 11px 13px 13px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 4px #28125024;
 }
 .work-amount-card h2,
 .work-amount-card strong {
   display: block;
   margin: 0;
-  font-size: clamp(17px, 4.6vw, 25px);
-  font-weight: 700;
-  line-height: 1.3;
+  font-weight: 750;
+  line-height: 1.25;
   overflow-wrap: anywhere;
+}
+.work-amount-card h2 {
+  color: #080808;
+  font-size: clamp(16px, 4.27vw, 30px);
+  letter-spacing: 0.3px;
 }
 .work-amount-card strong {
   margin-top: 4px;
+  color: #f51988;
+  font-size: clamp(20px, 5.33vw, 36px);
 }
 .work-amount-card p {
-  margin: 6px 0 0;
-  font-size: 12px;
-  line-height: 1.35;
+  margin: 5px 0 0;
+  color: #111;
+  font-size: clamp(10.5px, 2.8vw, 18px);
+  line-height: 1.25;
 }
 .work-start {
   position: relative;
-  width: calc(100% + 18px);
+  width: calc(100% + 24px);
   aspect-ratio: 1;
   justify-self: center;
   padding: 0;
@@ -340,7 +376,7 @@ onUnmounted(() => {
   left: 26%;
   width: 49%;
   color: #fff;
-  font-size: clamp(16px, 4.8vw, 26px);
+  font-size: clamp(16px, 4.8vw, 30px);
   line-height: 1.4;
   font-weight: 650;
   text-align: center;
@@ -354,7 +390,7 @@ onUnmounted(() => {
   opacity: 0.65;
 }
 .work-start:focus-visible {
-  outline: 2px solid #7926e7;
+  outline: 2px solid #fff;
   outline-offset: -18px;
   border-radius: 50%;
 }
@@ -362,33 +398,34 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 88px;
-  padding: 16px 28px;
-  background: #f0f0f0;
+  min-height: 76px;
+  padding: 16px calc(var(--work-gutter) + 13px);
+  background: #000;
 }
 .work-history__link {
   display: grid;
   justify-items: center;
-  gap: 6px;
+  gap: 7px;
   padding: 0;
   border: 0;
   background: transparent;
-  color: #111;
-  font-size: 21px;
+  color: #fff;
+  font-size: clamp(17px, 4.53vw, 28px);
   font-weight: 700;
+  letter-spacing: 0.5px;
   cursor: pointer;
 }
 .work-history__arrow {
-  border-right: 7px solid transparent;
-  border-left: 7px solid transparent;
-  border-bottom: 12px solid #07784e;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  border-bottom: 11px solid #ff9417;
 }
 .work-history__support {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
-  padding: 9px;
+  width: 42px;
+  height: 42px;
+  padding: 8px;
   border: 0;
   border-radius: 50%;
   background: #fff;
@@ -397,6 +434,38 @@ onUnmounted(() => {
 .work-history__support svg {
   width: 100%;
   height: 100%;
+}
+#app .started-page--cards :deep(.das-footer-space) {
+  background: #000;
+}
+@media (min-width: 768px) {
+  .work-panel {
+    padding-bottom: 40px;
+  }
+  .work-balance {
+    padding-bottom: 24px;
+  }
+  .work-summary {
+    gap: 20px;
+    margin-top: 16px;
+  }
+  .work-summary__figures {
+    gap: 16px;
+  }
+  .work-amount-card {
+    padding: 24px 28px;
+    border-radius: 18px;
+  }
+  .work-history {
+    min-height: 112px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .work-history__support {
+    width: 56px;
+    height: 56px;
+    padding: 10px;
+  }
 }
 :deep(.van-dialog.amplava-start-loading) {
   width: min(76vw, 280px);

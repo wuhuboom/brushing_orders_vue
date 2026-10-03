@@ -4320,6 +4320,23 @@ body,
 #app .product-price {
   font-weight: 750;
 }
+#app .product-details-card > .product-price {
+  margin-bottom: 0;
+  padding-bottom: 6px;
+  border-radius: 0;
+}
+#app .product-details-card > .product-profit-rate {
+  margin: 0 0 16px;
+  padding: 0 16px 16px;
+  border-radius: 0 0 10px 10px;
+  background: white;
+  color: #96a7c0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+#app .product-profit-rate > span {
+  color: #fb05aa;
+}
 #app .product-summary {
   gap: 12px;
 }
@@ -4534,8 +4551,9 @@ body,
   font-size: 13px;
 }
 #app .records-page .record-card footer {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.55fr);
+  align-items: start;
+  gap: 8px;
   padding-top: 12px;
 }
 #app .records-page .record-card footer > div {
@@ -4547,12 +4565,22 @@ body,
   height: 25px;
 }
 #app .records-page .record-card footer small {
-  font-size: 10px;
+  font-size: 9px;
 }
 #app .records-page .record-card footer b {
   font-size: 13px;
   font-weight: 700;
   overflow-wrap: anywhere;
+}
+#app .records-page .record-card footer > .record-profit-rate {
+  padding-left: 12px;
+  border-left: 1px solid #edf1f7;
+}
+#app .records-page .record-card footer > .record-profit-rate::before {
+  content: none;
+}
+#app .records-page .record-card footer .record-profit-rate b {
+  color: #fb05aa;
 }
 #app .records-page .record-card footer button {
   grid-column: 1 / -1;

@@ -223,12 +223,14 @@
       "submitted": "Миссия отправлена завершена"
     },
     "product": {
+      "profitRate": "Ставка прибыли",
       "totalCommission": "Общая комиссия",
       "creationTime": "Создание в",
       "briefNo": "№ задания",
       "briefCover": "Обложка задания"
     },
     "started": {
+      "commissionResetHint": "Система пересчитает прибыль за день в 00:00.",
       "pendingAmount": "Сумма в ожидании",
       "startNow": "Начать сейчас",
       "price": "Общий счет",

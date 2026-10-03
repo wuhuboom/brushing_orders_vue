@@ -223,12 +223,14 @@
       "submitted": "Submitted successfully"
     },
     "product": {
+      "profitRate": "Profit Rate",
       "totalCommission": "Total Commission",
       "creationTime": "Creation Time",
       "briefNo": "Brief No.",
       "briefCover": "Brief cover"
     },
     "started": {
+      "commissionResetHint": "System will recalculate the day's profit at 12:00 AM.",
       "pendingAmount": "Pending Amount",
       "startNow": "Start Now",
       "price": "Price",

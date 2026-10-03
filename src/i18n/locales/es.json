@@ -223,12 +223,14 @@
       "submitted": "Tarea enviada correctamente"
     },
     "product": {
+      "profitRate": "Tasa de beneficio",
       "totalCommission": "Comisión total",
       "creationTime": "Fecha de creación",
       "briefNo": "N.º de pedido",
       "briefCover": "Imagen del pedido"
     },
     "started": {
+      "commissionResetHint": "El sistema recalculará las ganancias del día a las 00:00.",
       "pendingAmount": "Importe pendiente",
       "startNow": "Empezar ahora",
       "price": "Saldo total",

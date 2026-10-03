@@ -223,12 +223,14 @@
       "submitted": "提出しました"
     },
     "product": {
+      "profitRate": "利益率",
       "totalCommission": "コミッション合計",
       "creationTime": "作成日時",
       "briefNo": "案件番号",
       "briefCover": "案件画像"
     },
     "started": {
+      "commissionResetHint": "システムは午前0時に当日の利益を再計算します。",
       "pendingAmount": "保留中の金額",
       "startNow": "今すぐ開始",
       "price": "価格",

@@ -20,6 +20,9 @@
           <span>★</span> {{ ratingText(order.rating) }}
         </p>
         <p class="product-price">{{ money(order.price) }} USD</p>
+        <p class="product-profit-rate">
+          {{ $t("das.product.profitRate") }}: <span>{{ profitRate }}</span>
+        </p>
 
         <div class="product-summary">
           <div>
@@ -94,12 +97,14 @@ import SubmitHourglass from "@/components/SubmitHourglass.vue";
 import { getOrderInfo, getTradeConfig, submitOrder } from "@/api/apis";
 import { formatTime } from "@/util/times";
 import { safeReplace } from "@/utils/navigation";
+import { useProfitRate } from "@/composables/useProfitRate";
 
 const router = useRouter();
 const route = useRoute();
 const { t } = useI18n();
 const imageBaseUrl = window.g?.VITE_API_IMG_URL || "";
 const order = ref({});
+const profitRate = useProfitRate();
 const loading = ref(false);
 const submitting = ref(false);
 const submitAnimationVisible = ref(false);
