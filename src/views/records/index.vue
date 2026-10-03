@@ -34,7 +34,7 @@
               v-for="item in list"
               :key="item.id || item.orderNo"
               :item="item"
-              :profit-rate="profitRate"
+              :profit-rate="formatProfitRate(item.rebatePercentage)"
               @submit="openOrderDetails"
             />
           </van-list>
@@ -53,8 +53,8 @@ import HeaderTop from "@/components/HeaderTop.vue";
 import Footer from "@/components/Footer.vue";
 import OrderCard from "@/components/OrderCard.vue";
 import { safeBack, safePush } from "@/utils/navigation";
-import { useProfitRate } from "@/composables/useProfitRate";
-const profitRate = useProfitRate();
+const formatProfitRate = (value) =>
+  value === undefined || value === null || value === "" ? "—" : `${value}%`;
 const router = useRouter(),
   active = ref(0),
   list = ref([]),
