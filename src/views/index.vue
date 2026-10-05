@@ -24,7 +24,7 @@
         <div class="home-loading__shortcuts" aria-hidden="true">
           <div class="home-loading__caption"></div>
           <div class="home-loading__grid">
-            <div v-for="n in 8" :key="n"><i></i><span></span></div>
+            <div v-for="n in 7" :key="n"><i></i><span></span></div>
           </div>
         </div>
       </div>
@@ -120,13 +120,12 @@ const getSavedScrollTop = () => {
 const savedScrollTop = getSavedScrollTop();
 
 const shortcuts = [
+  { title: "das.home.vip", icon: "vip", route: "/vips" },
   { title: "das.home.deposit", icon: "deposit", route: "/deposit" },
   { title: "das.home.withdraw", icon: "withdraw", route: "/withdraw" },
-  { title: "das.home.faqs", icon: "faq", route: "/faqs" },
   { title: "das.home.activities", icon: "activity", route: "/event" },
+  { title: "das.home.faqs", icon: "faq", route: "/faqs" },
   { title: "das.home.terms", icon: "terms", route: "/clause" },
-  { title: "das.home.vip", icon: "vip", route: "/vips" },
-  { title: "das.home.certificate", icon: "certificate", route: "/cert" },
   { title: "das.home.about", icon: "about", route: "/about" },
 ];
 
