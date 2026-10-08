@@ -13,17 +13,19 @@
         {{ $t("das.nav.contact") }}
       </button>
       <button class="das-avatar" type="button" @click="openMy">
-        <img src="@/static/brain/header-avatar.png" alt="" />
-        <span>{{ initials }}</span>
+        <img :src="avatar" alt="" @error="avatarFailed = true" />
       </button>
     </div>
   </header>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
+import { defaultAvatarForUser } from "@/utils/avatar";
+import avatarFallback from "@/static/brain/avatar-male.png";
+import femaleAvatarFallback from "@/static/brain/avatar-female.png";
 import {
   profileNavigationAction,
   safePush,
@@ -32,15 +34,29 @@ import {
 
 const router = useRouter();
 const userStore = useUserStore();
-const initials = computed(() => {
-  const name = userStore.userInfo?.username || "DL";
-  return name
-    .split(/[\s._-]+/)
-    .filter(Boolean)
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+const userInfo = computed(() => userStore.userInfo || {});
+const base = window.g?.VITE_API_IMG_URL || "";
+const avatarFailed = ref(false);
+const avatarPath = computed(() => String(userInfo.value.avatar ?? "").trim());
+const defaultAvatar = computed(() =>
+  defaultAvatarForUser(userInfo.value, {
+    male: avatarFallback,
+    female: femaleAvatarFallback,
+  }),
+);
+const avatar = computed(() => {
+  const path = avatarPath.value;
+  if (
+    !path ||
+    ["null", "undefined"].includes(path.toLowerCase()) ||
+    avatarFailed.value
+  ) {
+    return defaultAvatar.value;
+  }
+  return /^https?:/i.test(path) ? path : `${base}${path}`;
+});
+watch(userInfo, () => {
+  avatarFailed.value = false;
 });
 const customer = () => safePush(router, "/contact");
 const openMy = () => {
@@ -133,9 +149,6 @@ const openMy = () => {
   height: 100%;
   display: block;
   object-fit: cover;
-}
-.das-avatar span {
-  display: none;
 }
 @media (min-width: 600px) {
   .das-header {
