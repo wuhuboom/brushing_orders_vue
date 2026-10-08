@@ -80,7 +80,7 @@ const openChannel = (url) => {
     isLoggedIn: Boolean(userStore.token),
     user: userStore.userInfo,
   });
-  if (target) window.open(target, "_blank", "noopener,noreferrer");
+  if (target) window.location.assign(target);
 };
 onMounted(async () => {
   try {
