@@ -207,7 +207,9 @@
       "bonusTitle": "Bonus reward",
       "bonusOrder": "Task #{order}",
       "bonusHint": "A bonus is ready for you.",
-      "bonusContinue": "Continue"
+      "bonusContinue": "Continue",
+      "specialLuckyBonus": "Bonus spécial",
+      "claimReward": "Réclamer la récompense"
     },
     "orderErrors": {
       "server": "The service is temporarily unavailable",

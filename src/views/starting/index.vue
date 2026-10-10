@@ -107,6 +107,19 @@
             <p>{{ $t("das.started.frozenHint") }}</p>
           </article>
         </div>
+        <div class="starting-summary__divider"></div>
+        <div class="starting-summary__bonus">
+          <h3>{{ $t("das.started.specialLuckyBonus") }}</h3>
+          <strong>{{ money(specialBonusAmount, "0.00") }} USD</strong>
+          <button
+            v-if="specialBonusAmount !== 0"
+            class="starting-summary__claim"
+            type="button"
+            @click="openBonusContact"
+          >
+            {{ $t("das.started.claimReward") }}
+          </button>
+        </div>
       </section>
       <section class="starting-notice">
         <h2>{{ $t("das.started.notice") }}:</h2>
@@ -154,6 +167,11 @@ const current = ref(0);
 const heroMotion = ref(null);
 const dataTransition = ref(false);
 const bonusVisible = ref(false);
+const bonusAmount = ref(0);
+const specialBonusAmount = computed(() => {
+  const amount = Number(bonusAmount.value);
+  return Number.isFinite(amount) && amount !== 0 ? -Math.abs(amount) : 0;
+});
 const creatingOrder = ref(false);
 let refreshTimer;
 let carouselTimer;
@@ -417,6 +435,7 @@ const handleClick = async () => {
     const res = await createOrder();
     closeToast();
     if (res.resultType === "BONUS") {
+      bonusAmount.value = res.data?.amount ?? 0;
       bonusVisible.value = true;
       return;
     }
@@ -426,6 +445,7 @@ const handleClick = async () => {
   } catch (error) {
     closeToast();
     if (Number(error?.code) === 2000) {
+      bonusAmount.value = error?.data?.amount ?? 0;
       bonusVisible.value = true;
       return;
     }
@@ -449,6 +469,7 @@ onMounted(async () => {
   if (!pageAlive) return;
   if (userResult.status === "fulfilled") {
     userInfo.value = userResult.value.data || {};
+    bonusAmount.value = userInfo.value.pendingBonusAmount ?? 0;
     levelIconFailed.value = false;
     orderCount.value = userResult.value.data?.userLevel?.orderCount || 40;
   }
@@ -467,5 +488,22 @@ onUnmounted(() => {
   clearInterval(carouselTimer);
 });
 </script>
+
+<style scoped>
+.starting-summary__claim {
+  display: block;
+  width: min(100%, 220px);
+  min-height: 44px;
+  margin: 6px auto 0;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 12px;
+  background: #caffad;
+  color: #151514;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+</style>
 
 
