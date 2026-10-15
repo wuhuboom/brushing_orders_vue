@@ -87,12 +87,19 @@
         <button
           v-if="canSubmit"
           class="pd-submit"
+          :class="{ 'pd-submit--docked': submitDocked }"
           type="button"
           :disabled="submitting || loading"
           @click="submitForm"
         >
           {{ submitting ? $t("das.common.loading") : $t("das.common.submit") }}
         </button>
+        <span
+          v-if="canSubmit"
+          ref="submitEnd"
+          class="pd-submit-end"
+          aria-hidden="true"
+        ></span>
       </article>
     </section>
     <van-dialog
@@ -120,7 +127,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { showSuccessToast, showToast } from "vant";
@@ -139,6 +146,8 @@ const loading = ref(false);
 const submitting = ref(false);
 const submitAnimationVisible = ref(false);
 const tradeInfo = ref({});
+const submitEnd = ref(null);
+const submitDocked = ref(false);
 let submitDelayTimer;
 let tradeConfigRequest;
 let pageAlive = true;
@@ -179,6 +188,23 @@ const canSubmit = computed(() => {
     Boolean(order.value.id) &&
     (status === undefined || status === null || String(status) === "1")
   );
+});
+
+
+watch(submitEnd, (element, _previous, onCleanup) => {
+  if (!element) return;
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      submitDocked.value = !entry.isIntersecting;
+    },
+    {
+      root: element.closest(".product-details-page"),
+      rootMargin: "0px 0px -12px 0px",
+      threshold: 1,
+    },
+  );
+  observer.observe(element);
+  onCleanup(() => observer.disconnect());
 });
 
 const delayMs = (value) => {
@@ -498,6 +524,9 @@ onBeforeUnmount(() => {
   text-align: right;
 }
 .pd-submit {
+  position: sticky;
+  bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  z-index: 21;
   width: min(calc(100% - 11px), 620px);
   height: 60px;
   margin: 16px auto 0;
@@ -508,6 +537,33 @@ onBeforeUnmount(() => {
   color: #fff;
   font-size: 20px;
   font-weight: 700;
+  transition:
+    transform 0.24s ease,
+    filter 0.24s ease,
+    opacity 0.24s ease;
+  animation: pd-submit-appear 0.24s ease-out;
+}
+.pd-submit--docked {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 -4px 10px #43575430);
+}
+.pd-submit-end {
+  display: block;
+  height: 1px;
+  margin-top: -1px;
+  pointer-events: none;
+}
+@keyframes pd-submit-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pd-submit {
+    animation: none;
+    transition: none;
+  }
 }
 .pd-submit:disabled {
   opacity: 0.58;
