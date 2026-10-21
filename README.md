@@ -1,6 +1,3 @@
-# World of Good
-
-按提供的 PC PDF 设计稿实现的 Vue 2 静态网站，包含 Home 和 About Us。
 
 ## 运行
 
