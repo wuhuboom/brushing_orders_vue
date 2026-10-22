@@ -1,5 +1,5 @@
 <template>
-  <footer class="site-footer" :class="{ 'site-footer--about': $route.name === 'about' }">
+  <footer class="site-footer">
     <div class="site-footer__inner">
       <router-link to="/" class="footer-brand" aria-label="World of Good home">
         <img src="worldofgood/logo-white.png" alt="World of Good Agency" width="136" height="36" />

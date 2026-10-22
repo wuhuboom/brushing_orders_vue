@@ -29,10 +29,7 @@
       <section class="home-approach" aria-labelledby="approach-title">
         <div class="section-mark"></div>
         <h2 id="approach-title" class="section-heading">Our Approach</h2>
-        <div class="two-columns approach-content">
-          <p class="body-copy">Competition is as fierce in the digital world as it is across virtually every business segment. Brands, businesses and nonprofits that anchor their digital experiences with smart integrated planning, emotional understanding, artful design and insightful analysis create sustainable engagement.</p>
-          <img class="approach-image" src="worldofgood/approach.webp" alt="Integrated digital marketing, design, social media and analytics" width="680" height="311" loading="lazy" />
-        </div>
+        <p class="body-copy">Competition is as fierce in the digital world as it is across virtually every business segment. Brands, businesses and nonprofits that anchor their digital experiences with smart integrated planning, emotional understanding, artful design and insightful analysis create sustainable engagement.</p>
       </section>
 
       <section class="home-expertise two-columns" aria-labelledby="expertise-title">
