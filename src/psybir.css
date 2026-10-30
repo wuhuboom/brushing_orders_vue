@@ -4993,6 +4993,11 @@ body .van-dialog {
   background: #050505 !important;
   padding: 10px 9px 0 !important;
 }
+.starting-page .task-showcase {
+  width: 100% !important;
+  height: var(--starting-showcase-height, auto) !important;
+  margin: 0 auto !important;
+}
 .starting-carousel__track {
   gap: 11px !important;
   display: block !important;
@@ -5184,10 +5189,13 @@ body .van-dialog {
   line-height: 1.6 !important;
 }
 .bonus-dialog.van-dialog {
+  top: 50% !important;
   left: 50% !important;
+  right: auto !important;
+  margin: 0 !important;
   transform: translate3d(-50%, -50%, 0) !important;
   width: min(calc(min(100vw, 620px) * 0.7), 360px) !important;
-  max-width: none !important;
+  max-width: calc((100dvh - 32px) * 260 / 238) !important;
   border: 0 !important;
   background: transparent !important;
   border-radius: 0 !important;

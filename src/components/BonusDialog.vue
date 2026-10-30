@@ -17,6 +17,7 @@ const contact = () => emit("contact");
 <template>
   <van-dialog
     :show="show"
+    teleport="body"
     class="bonus-dialog"
     width="min(92vw, 880px)"
     :show-confirm-button="false"

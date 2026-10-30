@@ -2,7 +2,11 @@
   <main class="das-page started-page starting-page">
     <HeaderTop />
     <div class="starting-top-strip" aria-hidden="true"></div>
-    <div class="starting-main">
+    <div
+      ref="startingMain"
+      class="starting-main"
+      :style="{ '--starting-showcase-height': showcaseHeight }"
+    >
       <section class="psy-start-balance">
         <img src="@/static/brain/started-balance.png" alt="" />
         <h3>{{ $t("das.profile.balance") }}</h3>
@@ -131,6 +135,58 @@ import TaskShowcase from "@/components/TaskShowcase.vue";
 import BonusDialog from "@/components/BonusDialog.vue";
 import { safePush } from "@/utils/navigation";
 import { getOrderErrorMessage } from "@/utils/orderCreate";
+
+const startingMain = ref(null);
+const showcaseHeight = ref("auto");
+let showcaseObserver;
+const resizeShowcase = () => {
+  const main = startingMain.value;
+  if (!main) return;
+  const balance = main.querySelector(".psy-start-balance");
+  const dashboard = main.querySelector(".psy-start-dashboard");
+  const footer = main.parentElement.querySelector(".das-footer");
+  const header = main.parentElement.querySelector(".das-header");
+  const outerHeight = (element) => {
+    const style = getComputedStyle(element);
+    return (
+      element.getBoundingClientRect().height +
+      parseFloat(style.marginTop) +
+      parseFloat(style.marginBottom)
+    );
+  };
+  const viewportHeight = window.visualViewport?.height || window.innerHeight;
+  const footerSpace = viewportHeight - footer.getBoundingClientRect().top + 8;
+  const availableHeight =
+    viewportHeight -
+    header.getBoundingClientRect().height -
+    parseFloat(getComputedStyle(main).paddingTop) -
+    outerHeight(balance) -
+    outerHeight(dashboard) -
+    footerSpace;
+  // Keep the video visible on very short screens, which can still scroll.
+  showcaseHeight.value =
+    Math.min(
+      main.querySelector(".task-showcase").clientWidth / 1.11,
+      Math.max(64, availableHeight),
+    ) + "px";
+};
+onMounted(() => {
+  const main = startingMain.value;
+  showcaseObserver = new ResizeObserver(resizeShowcase);
+  [
+    main,
+    main.querySelector(".psy-start-balance"),
+    main.querySelector(".psy-start-dashboard"),
+    main.parentElement.querySelector(".das-header"),
+    main.parentElement.querySelector(".das-footer"),
+  ].forEach((element) => showcaseObserver.observe(element));
+  window.visualViewport?.addEventListener("resize", resizeShowcase);
+  resizeShowcase();
+});
+onUnmounted(() => {
+  showcaseObserver?.disconnect();
+  window.visualViewport?.removeEventListener("resize", resizeShowcase);
+});
 
 const router = useRouter();
 const { t } = useI18n();

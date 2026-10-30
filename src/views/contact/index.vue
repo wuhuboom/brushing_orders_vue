@@ -67,13 +67,12 @@
       </div>
 
       <aside class="contact-design-service-info">
-        <div class="contact-design-hours">
+        <div v-if="serviceHours" class="contact-design-hours">
           <img src="/psybir/service-hours.png" alt="" />
           <div>
             <small>{{ $t("das.contact.operatingHours") }}</small
-            ><b>{{ $t("das.contact.globalCoverage") }}</b>
+            ><b>{{ serviceHours }}</b>
           </div>
-          <span>{{ $t("das.contact.coverageDays") }}</span>
         </div>
         <p>
           <img src="/psybir/info.png" alt="" /><span>{{
@@ -92,7 +91,7 @@
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import ReferenceLoading from "@/components/ReferenceLoading.vue";
-import { getCustomerService } from "@/api/apis";
+import { getCustomerService, getTradeConfig } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
 import { useUserStore } from "@/store/modules/user";
 import { buildCustomerServiceUrl } from "@/utils/customerServiceUrl";
@@ -100,6 +99,7 @@ import liveChatIcon from "@/static/psybir/live-chat.png";
 
 const userStore = useUserStore();
 const { t } = useI18n();
+const serviceHours = ref("");
 const channels = ref([]),
   loading = ref(true);
 const imageBaseUrl =
@@ -131,6 +131,20 @@ onMounted(async () => {
     channels.value = (await getCustomerService()).data || [];
   } finally {
     loading.value = false;
+  }
+});
+onMounted(async () => {
+  if (!userStore.token) return;
+  try {
+    const config = (await getTradeConfig()).data;
+    if (config?.workTimeStart && config?.workTimeEnd) {
+      serviceHours.value =
+        String(config.workTimeStart).slice(0, 5) +
+        "–" +
+        String(config.workTimeEnd).slice(0, 5);
+    }
+  } catch (_) {
+    // Unavailable hours must not block the customer service channels.
   }
 });
 </script>
