@@ -1,0 +1,1718 @@
+/* Brain Power visual system. Layout-only overrides; page behavior stays in the views. */
+:root {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body .das-page,
+body .das-subpage,
+body .home-body,
+body .started-bg,
+body .records-content,
+body .product-details-content {
+  background-color: var(--bp-bg) !important;
+  color: var(--bp-text) !important;
+}
+
+body .das-page {
+  background-image:
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(0, 104, 255, 0.14),
+      transparent 18%
+    ),
+    linear-gradient(180deg, rgba(10, 25, 56, 0.22), transparent 180px);
+  background-repeat: no-repeat;
+}
+
+body .das-page-copyright,
+body .deposit-copyright,
+body .withdraw-copyright,
+body .transaction-copyright,
+body .records-copyright,
+body .product-copyright,
+body .method-copyright,
+body .profile-copyright,
+body .info-footer,
+body .das-copyright {
+  color: #6f798f !important;
+  background: transparent !important;
+}
+
+body .das-page button,
+body .das-page input,
+body .das-page textarea,
+body .das-page select {
+  font-family: inherit;
+}
+
+body .das-content-card {
+  padding: 16px 16px 30px;
+}
+
+body .das-rich-text,
+body .das-content-card {
+  color: #e8ebf4;
+}
+
+body .das-rich-text > :first-child {
+  margin-top: 0;
+}
+
+body .das-rich-text img,
+body .das-content-card__image,
+body .das-media-frame {
+  border: 1px solid rgba(36, 82, 155, 0.36);
+  border-radius: 4px !important;
+  background: #071229 !important;
+}
+
+/* Home */
+body .home-page {
+  background: #071b42 !important;
+}
+
+body .home-hero {
+  min-height: 390px;
+  background:
+    radial-gradient(
+      circle at 78% 54%,
+      rgba(0, 111, 255, 0.34),
+      transparent 25%
+    ),
+    radial-gradient(circle at 23% 12%, rgba(65, 30, 180, 0.2), transparent 28%),
+    linear-gradient(180deg, #071535, #0b2e68) !important;
+  color: #fff !important;
+}
+
+body .home-hero__copy {
+  padding: 50px 28px 48px;
+  text-align: center;
+}
+
+body .home-hero h1 {
+  max-width: 620px;
+  margin-inline: auto;
+  font-size: clamp(31px, 8vw, 48px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  background: linear-gradient(
+    90deg,
+    #f4ec45,
+    #63e625 38%,
+    #14ccef 72%,
+    #367aff
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+body .home-hero p {
+  margin: 18px auto 0;
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.36;
+}
+
+body .stack {
+  padding: 18px 20px;
+  border-color: rgba(80, 124, 196, 0.2);
+  background: #0b214d;
+}
+
+body .stack > span {
+  color: #7f8da8;
+}
+
+body .stack > div {
+  flex-wrap: wrap;
+  justify-content: center;
+  color: #d8deec;
+  gap: 14px 20px;
+}
+
+body .shortcuts {
+  margin: 24px 16px 0;
+  padding: 20px 5px 24px;
+  border: 1px solid rgba(32, 86, 165, 0.28);
+  border-radius: 14px;
+  background: rgba(5, 20, 47, 0.88);
+}
+
+body .shortcuts h2 {
+  color: #fff;
+}
+
+body .shortcuts button {
+  color: #c9d2e5;
+  font-size: 11px;
+}
+
+body .shortcuts button > span {
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgba(25, 105, 205, 0.35);
+  border-radius: 9px;
+  background: #0d284f;
+  box-shadow: inset 0 0 18px rgba(0, 118, 255, 0.08);
+}
+
+body .shortcuts button .das-icon {
+  filter: hue-rotate(145deg) saturate(2.2) brightness(1.45);
+}
+
+body .what-we-do {
+  padding: 38px 20px 45px;
+  background: linear-gradient(180deg, #07183a, #0b183b);
+}
+
+body .what-we-do h2 {
+  color: #fff;
+  font-size: 29px;
+  font-weight: 800;
+  text-align: center;
+}
+
+body .what-we-do__intro {
+  color: #b0b9cb !important;
+  text-align: center;
+}
+
+body .what-we-do article {
+  padding: 18px;
+  border: 1px solid rgba(34, 88, 173, 0.3);
+  border-radius: 13px;
+  background: linear-gradient(145deg, #0c1f43, #08142d);
+}
+
+body .what-we-do article p {
+  color: #a8b1c3 !important;
+}
+
+/* Shared dark cards and fields */
+body
+  :is(
+    .vip-card,
+    .field-card,
+    .method-item,
+    .method-card,
+    .record-card,
+    .margin-card,
+    .notice-card,
+    .product-details-card,
+    .transaction-item,
+    .history-body article,
+    .deposit-body article,
+    .notice-list button,
+    .profile-section
+  ) {
+  border-color: var(--bp-line) !important;
+  background: var(--bp-surface) !important;
+  color: var(--bp-text) !important;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.2) !important;
+}
+
+body :is(.field-card, .method-card, .method-item, .record-card) {
+  border: 1px solid var(--bp-line) !important;
+  border-radius: 6px !important;
+}
+
+body
+  :is(
+    .field-card span,
+    .method-item__copy span,
+    .method-copyright,
+    .transaction-copy small,
+    .transaction-copy time,
+    .transaction-value small,
+    .notice-list em,
+    .notice-list small
+  ) {
+  color: var(--bp-muted) !important;
+}
+
+/* VIP */
+body .vip-page {
+  background:
+    linear-gradient(
+      125deg,
+      transparent 0 12%,
+      rgba(154, 101, 15, 0.18) 12.2% 12.6%,
+      transparent 12.8%
+    ),
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(12, 107, 211, 0.24),
+      transparent 27%
+    ),
+    #030919 !important;
+}
+
+body .vip-list {
+  position: relative;
+  padding: 126px 24px 8px 69px;
+}
+
+body .vip-list::before {
+  content: "VIP";
+  position: absolute;
+  top: 12px;
+  left: 24px;
+  right: 24px;
+  height: 100px;
+  display: grid;
+  place-items: center;
+  border-bottom: 2px solid #0d8fff;
+  color: #f8c94b;
+  font:
+    800 54px/1 Georgia,
+    serif;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 18px rgba(250, 186, 51, 0.48);
+}
+
+body .vip-list::after {
+  content: "";
+  position: absolute;
+  left: 37px;
+  top: 140px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(#168dff, #29354f 20%, #29354f 80%, transparent);
+}
+
+body .vip-card {
+  min-height: 220px;
+  padding: 22px 18px;
+  grid-template-columns: 48px 1fr;
+  gap: 14px;
+  border: 1px solid rgba(30, 71, 135, 0.28) !important;
+  border-radius: 4px !important;
+  background: rgba(4, 20, 44, 0.84) !important;
+}
+
+body .vip-card::before {
+  content: "";
+  position: absolute;
+  left: -38px;
+  top: 28px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #39465e;
+  z-index: 1;
+}
+
+body .vip-card:first-child::before {
+  background: #168dff;
+  box-shadow: 0 0 14px #168dff;
+}
+
+body .vip-card h2,
+body .vip-card strong {
+  color: #fff;
+}
+
+body .vip-description {
+  color: #c4cbda !important;
+  font-size: 13px;
+}
+
+body .current-badge {
+  top: 18px;
+  right: 18px;
+  padding: 7px 13px;
+  border-radius: 7px;
+  background: #0758c9;
+  color: #fff;
+}
+
+/* Profile and account */
+body .profile-page,
+body .info-page,
+body .profile-edit,
+body .password-page,
+body .method-page {
+  background: #020717 !important;
+  color: #fff !important;
+}
+
+body .profile-brand img {
+  width: 122px !important;
+  height: 40px !important;
+  object-fit: contain !important;
+}
+
+body .profile-card {
+  border: 1px solid #15233c !important;
+  border-radius: 10px !important;
+  background:
+    radial-gradient(circle at 92% 50%, rgba(14, 96, 198, 0.3), transparent 34%),
+    #07142b !important;
+  color: #fff !important;
+}
+
+body .profile-section {
+  overflow: hidden;
+  border-radius: 7px !important;
+}
+
+body .profile-section button,
+body .profile-section a {
+  border-color: #222a3b !important;
+  color: #fff !important;
+}
+
+body .copy-code,
+body .save-button,
+body .method-primary,
+body .confirm-button,
+body .product-submit,
+body .profile-contact,
+body .language-body .confirm {
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: linear-gradient(100deg, #08baff, #0878ff 48%, #4e22cf) !important;
+  color: #fff !important;
+  box-shadow: 0 0 18px rgba(0, 119, 255, 0.18);
+}
+
+body .info-body {
+  padding: 16px 16px 54px;
+}
+
+body .info-body h2 {
+  padding-left: 13px;
+  color: #2de0de;
+  font-size: 14px;
+}
+
+body .field-card {
+  min-height: 78px;
+  margin: 0;
+  padding: 17px 20px;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+body .info-body > .field-card:first-of-type {
+  border-left: 4px solid #18d8dc !important;
+  border-radius: 7px 7px 0 0 !important;
+}
+
+body .info-body > .field-card:nth-of-type(3) {
+  border-radius: 0 0 7px 7px !important;
+}
+
+body .security-card {
+  border-left: 4px solid #ffc433 !important;
+}
+
+body .password-page form {
+  padding: 25px 23px 60px;
+}
+
+body .password-page label {
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+body .password-page label b {
+  display: block;
+  margin: 0 0 9px;
+  color: #e6e9f2;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+body .password-page label div,
+body .input-card,
+body .method-field-card input,
+body .method-field-card textarea {
+  border: 1px solid #252c40 !important;
+  border-radius: 7px !important;
+  background: #111522 !important;
+  color: #fff !important;
+}
+
+body .password-page label div {
+  min-height: 45px;
+  padding: 0 12px;
+}
+
+body .password-page input,
+body .input-card input,
+body .method-field-card input,
+body .method-field-card textarea {
+  color: #fff !important;
+}
+
+/* Funds and activity */
+body :is(.deposit-body, .withdraw-body, .history-body, .transaction-body) {
+  padding: 12px 16px 60px;
+}
+
+body .balance-card,
+body .total-card {
+  border: 1px solid #243657;
+  border-radius: 6px !important;
+  background:
+    radial-gradient(circle at 8% 30%, rgba(20, 92, 219, 0.62), transparent 48%),
+    radial-gradient(
+      circle at 92% 50%,
+      rgba(202, 83, 18, 0.48),
+      transparent 42%
+    ),
+    #15192a !important;
+  color: #fff !important;
+}
+
+body .balance-card {
+  min-height: 248px;
+  text-align: center;
+}
+
+body .balance-card strong,
+body .total-card > strong {
+  color: #fff;
+  font-size: 36px;
+}
+
+body .balance-card button {
+  float: none;
+  width: 100%;
+  height: 58px;
+  border-radius: 7px;
+  background: linear-gradient(100deg, #08baff, #0878ff 48%, #4e22cf);
+  color: #fff;
+  font-size: 20px;
+}
+
+body .recent-title button {
+  color: #13d7da;
+  text-decoration: none;
+}
+
+body .deposit-body article,
+body .transaction-item,
+body .history-body article {
+  min-height: 80px;
+  margin-top: 10px;
+  padding: 14px 12px;
+  border: 1px solid #252c40 !important;
+  border-radius: 5px;
+}
+
+body .deposit-body article i,
+body .history-body article i {
+  background: #14d6df;
+}
+
+body .total-card > strong {
+  color: #13d3de;
+}
+
+body .amounts-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+body .amounts-card p {
+  min-height: 90px;
+  padding: 15px;
+  flex-direction: column;
+  gap: 9px;
+  border: 1px solid #20283a !important;
+  border-radius: 4px;
+  background: #101421;
+  color: #fff;
+}
+
+body .withdraw-body h2 {
+  color: #fff;
+}
+
+body .input-card {
+  height: 56px;
+  margin: 10px 0;
+  padding: 0 10px 0 16px;
+}
+
+body .input-card button {
+  border-radius: 5px;
+  background: #0a333b;
+  color: #10d8df;
+}
+
+body .add-account {
+  border-color: #1879dc;
+  border-radius: 7px;
+  color: #68a9f1;
+}
+
+body .history-tabs,
+body .records-tabs {
+  gap: 8px;
+}
+
+body .history-tabs button,
+body .records-tabs button {
+  height: 38px;
+  border: 1px solid #252d41;
+  border-radius: 6px;
+  background: #101421;
+  color: #939cb1;
+}
+
+body .history-tabs .active,
+body .records-tabs button.active {
+  border-color: transparent;
+  background: linear-gradient(100deg, #08baff, #0878ff 52%, #4e22cf);
+  color: #fff;
+}
+
+/* Contact, notifications, language, logout */
+body .contact-body {
+  padding: 26px 16px 60px;
+}
+
+body .contact-body h2 {
+  color: #fff;
+  font-size: 23px;
+}
+
+body .contact-body > p {
+  color: #aab2c3;
+  text-align: center;
+}
+
+body .contact-channels button {
+  min-height: 88px;
+  border: 1px solid rgba(24, 111, 228, 0.52);
+  border-radius: 14px;
+  background: linear-gradient(145deg, #0a1c3e, #071126);
+  box-shadow: 0 0 16px rgba(0, 102, 255, 0.22);
+}
+
+body .notice-list {
+  padding: 16px 23px 0;
+}
+
+body .notice-list button {
+  min-height: 118px;
+  margin-bottom: 9px;
+  padding: 17px 18px;
+  border: 1px solid #252c40 !important;
+  border-radius: 5px;
+}
+
+body .notice-list button > i {
+  width: 4px;
+  height: 100%;
+  margin-top: 0;
+  border-radius: 0;
+  background: #18dbe1;
+}
+
+body .notice-list b {
+  color: #fff;
+}
+
+body .language-body {
+  padding: 28px 30px 36px;
+}
+
+body .language-body button {
+  height: 59px;
+  border: 1px solid #16375e !important;
+  border-radius: 13px !important;
+  background: #121827 !important;
+  color: #fff !important;
+}
+
+body .language-body button.active {
+  border-color: #186fbd !important;
+  background: #182338 !important;
+  color: #74b6f3 !important;
+}
+
+body .language-body .confirm {
+  margin-top: min(30vh, 245px);
+}
+
+body .logout-body {
+  padding: 34px 23px;
+}
+
+body .logout-icon {
+  width: 190px;
+  height: 190px;
+  border-radius: 0 !important;
+  background:
+    radial-gradient(circle, rgba(0, 120, 255, 0.28), transparent 64%),
+    transparent !important;
+}
+
+body .logout-icon .das-icon {
+  width: 118px !important;
+  height: 118px !important;
+  filter: hue-rotate(145deg) saturate(2.8) brightness(1.5);
+}
+
+body .logout-body h1 {
+  color: #fff;
+  font-size: 29px;
+}
+
+body .logout-body p {
+  color: #929aae;
+}
+
+body .logout-body button {
+  height: 58px;
+  border-radius: 7px;
+}
+
+body .stay {
+  border: 0 !important;
+  background: linear-gradient(100deg, #08baff, #0878ff 48%, #4e22cf) !important;
+  color: #fff !important;
+}
+
+body .exit {
+  border-color: #195fab !important;
+  background: transparent !important;
+  color: #fff !important;
+}
+
+body .info-page .das-page-head__title,
+body .info-page .das-page-head__title button {
+  background: #030817 !important;
+}
+
+/* Get started, product and records */
+body .started-page,
+body .records-page,
+body .product-details-page {
+  background: #020717 !important;
+  color: #fff !important;
+}
+
+body .started-bg {
+  padding-bottom: 15px;
+}
+
+body .started-user,
+body .records-title,
+body .product-details-title {
+  color: #fff;
+}
+
+body .product-stage {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0, 96, 255, 0.35), transparent 46%),
+    #03091a !important;
+}
+
+body .product-stage__hero,
+body .product-stage__mini {
+  border: 1px solid #253456 !important;
+  border-radius: 7px !important;
+  background: #101421 !important;
+}
+
+body .product-copy {
+  color: #fff;
+}
+
+body .product-rating,
+body .product-details-card .product-rating {
+  color: #a4adbf !important;
+}
+
+body .product-copy h2 strong,
+body .product-details-card strong,
+body .record-main strong {
+  color: #2c8cff;
+}
+
+body .product-copy button {
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(100deg, #08baff, #0878ff 48%, #4e22cf);
+  box-shadow: 0 0 18px rgba(0, 111, 255, 0.28);
+}
+
+body .margin-card,
+body .notice-card {
+  border: 1px solid #252c40;
+  border-radius: 7px;
+}
+
+body .margin-card :is(h2, strong, b, span),
+body .notice-card h2 {
+  color: #fff;
+}
+
+body .margin-card p,
+body .margin-card small,
+body .notice-card p {
+  color: #929bad !important;
+}
+
+body .records-content {
+  padding: 18px 16px 28px;
+}
+
+body .records-title h1 {
+  font-size: 20px;
+}
+
+body .record-card {
+  padding: 16px;
+  border-radius: 6px !important;
+}
+
+body .record-card time,
+body .record-card small {
+  color: #8c96aa !important;
+}
+
+body .record-main {
+  border-top: 1px solid #222a3c;
+  border-bottom: 1px solid #222a3c;
+}
+
+body .record-main img {
+  padding: 0;
+  border-radius: 7px;
+  background: #07142a;
+}
+
+body .record-main h2,
+body .record-card footer b {
+  color: #fff;
+}
+
+body .status {
+  border: 1px solid #2d394e;
+  border-radius: 5px;
+  background: #14213a;
+}
+
+body .record-card footer button {
+  border-radius: 7px;
+  background: linear-gradient(110deg, #dc281d, #f47c04);
+}
+
+body .product-details-content {
+  padding: 12px 16px 20px;
+}
+
+body .product-details-title button,
+body .records-title button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(34, 82, 157, 0.42);
+  border-radius: 50%;
+  background: #081226;
+  color: #0aa9ff;
+}
+
+body .product-details-card {
+  padding: 24px 0 0;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body .product-cover {
+  width: min(58%, 220px);
+  border: 1px solid #244269;
+  border-radius: 7px;
+  background: #101421;
+}
+
+body .product-cover img {
+  padding: 0;
+  background: #101421;
+}
+
+body .product-details-card h2 {
+  color: #fff;
+  font-size: 18px;
+}
+
+body .product-summary > div,
+body .product-meta {
+  border: 1px solid #252c40 !important;
+  border-radius: 6px !important;
+  background: #101421 !important;
+  color: #fff !important;
+}
+
+body .product-meta span {
+  color: #919aad;
+}
+
+body .product-meta b {
+  color: #fff;
+}
+
+/* Payment method and dialogs */
+body .method-list-page,
+body .method-form-page {
+  min-height: calc(100vh - 111px);
+  padding: 16px 23px 24px;
+}
+
+body .method-item,
+body .method-card {
+  background: #101421 !important;
+}
+
+body .method-default i {
+  background: #293147;
+}
+
+body .method-default input:checked + i {
+  background: #0878ff;
+}
+
+body .method-upload {
+  border-color: #2a5d9f;
+  color: #77aef0;
+}
+
+body .das-select__trigger,
+body .das-select__menu {
+  border-color: #252c40 !important;
+  background: #111522 !important;
+  color: #fff !important;
+}
+
+body .fund-dialog__backdrop {
+  background: rgba(0, 3, 12, 0.78) !important;
+}
+
+body .fund-dialog__card {
+  border: 1px solid #1783ff !important;
+  background: #07152e !important;
+  color: #fff !important;
+  box-shadow: 0 0 24px rgba(0, 113, 255, 0.55) !important;
+}
+
+body .fund-dialog__field {
+  border-color: #252d41 !important;
+  background: #111522 !important;
+  color: #fff !important;
+}
+
+body .bonus-card {
+  color: #fff !important;
+  background:
+    radial-gradient(circle at 50% 0, rgba(0, 126, 255, 0.45), transparent 42%),
+    #04152f !important;
+}
+
+body .bonus-dialog {
+  border: 1px solid #1884ff !important;
+  box-shadow: 0 0 28px rgba(0, 113, 255, 0.66);
+}
+
+body .bonus-card button {
+  border-radius: 7px !important;
+  background: linear-gradient(#ffac08, #f77b00) !important;
+}
+
+@media (min-width: 760px) {
+  body .home-hero__copy,
+  body .home-body,
+  body .what-we-do,
+  body .shortcuts,
+  body .deposit-body,
+  body .withdraw-body,
+  body .history-body,
+  body .transaction-body {
+    max-width: 820px;
+    margin-inline: auto;
+  }
+
+  body .vip-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 390px) {
+  body .shortcuts__grid {
+    row-gap: 18px;
+  }
+
+  body .shortcuts button > span {
+    width: 52px;
+    height: 52px;
+  }
+
+  body .vip-list {
+    padding-left: 63px;
+    padding-right: 16px;
+  }
+
+  body .vip-list::after {
+    left: 33px;
+  }
+}
+
+/* Scoped-view specificity pass. These declarations intentionally stay visual-only. */
+body .home-hero {
+  position: relative;
+  min-height: 548px !important;
+  overflow: hidden;
+}
+
+body .home-hero::after {
+  display: none !important;
+}
+
+body .home-hero__copy {
+  padding: 54px 20px 12px !important;
+}
+
+body .shortcuts {
+  margin: 0 !important;
+  padding: 20px 20px 34px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #071b42 !important;
+}
+
+body .shortcuts h2 {
+  display: none !important;
+}
+
+body .shortcuts__grid {
+  column-gap: 18px !important;
+  row-gap: 28px !important;
+}
+
+body .shortcuts button {
+  color: #d7deec !important;
+}
+
+body .shortcuts button > span {
+  width: 54px !important;
+  height: 54px !important;
+  border-radius: 7px !important;
+  background: #0b294b !important;
+}
+
+body .what-we-do {
+  padding: 40px 20px 44px !important;
+  background: linear-gradient(180deg, #07183a, #0b183b) !important;
+}
+
+body .what-we-do article {
+  margin-bottom: 16px !important;
+  padding: 18px !important;
+  border-radius: 8px !important;
+  background: linear-gradient(145deg, #0c1f43, #08142d) !important;
+}
+
+body .vip-list {
+  padding: 126px 24px 8px 69px !important;
+  grid-template-columns: 1fr !important;
+}
+
+body .vip-card {
+  min-height: 220px !important;
+  padding: 22px 18px !important;
+  grid-template-columns: 48px 1fr !important;
+  gap: 14px !important;
+}
+
+body .vip-card > img {
+  width: 46px !important;
+  height: 56px !important;
+}
+
+body .vip-description {
+  margin-top: 14px !important;
+}
+
+body .profile-backdrop {
+  min-height: 100vh !important;
+  padding-bottom: 30px !important;
+  display: flex;
+  flex-direction: column;
+  color: #fff !important;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(0, 101, 255, 0.2), transparent 25%),
+    #020717 !important;
+}
+
+body .profile-ambient {
+  display: none !important;
+}
+
+body .profile-top {
+  order: 1;
+  height: 56px !important;
+  padding: 8px 16px !important;
+  align-items: center !important;
+  border-bottom: 1px solid #111d35;
+  background: #050a1c !important;
+}
+
+body .profile-brand {
+  width: 122px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body .profile-contact {
+  min-width: 99px !important;
+  height: 37px !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+  background: linear-gradient(100deg, #ee2c1d, #f28306) !important;
+}
+
+body .profile-initials {
+  width: 38px !important;
+  height: 38px !important;
+  border-color: #196bc8 !important;
+  background: #0b1932 !important;
+}
+
+body .profile-head {
+  order: 2;
+  z-index: 5 !important;
+  height: 55px !important;
+  padding: 0 !important;
+  position: relative;
+  border-bottom: 1px solid #111d35;
+}
+
+body .profile-head::before {
+  content: "My Profile";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+body .profile-head::after {
+  display: none;
+}
+
+body .profile-back-button {
+  position: absolute;
+  z-index: 7;
+  left: 16px;
+  top: 8px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+body .profile-back-button img {
+  width: 40px;
+  height: 40px;
+  display: block;
+  object-fit: contain;
+}
+
+body .profile-avatar {
+  position: absolute;
+  z-index: 4;
+  left: 32px;
+  top: 77px;
+  width: 68px !important;
+  height: 68px !important;
+  filter: drop-shadow(0 0 12px rgba(0, 119, 255, 0.38)) !important;
+}
+
+body .edit-avatar {
+  display: none !important;
+}
+
+body .profile-card {
+  order: 3;
+  min-height: 334px;
+  margin: 13px 16px 10px !important;
+  border-radius: 7px !important;
+  background:
+    radial-gradient(
+      circle at 92% 18%,
+      rgba(23, 73, 183, 0.36),
+      transparent 33%
+    ),
+    #07142b !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.26) !important;
+}
+
+body .profile-card__glow,
+body .profile-card::after {
+  display: none !important;
+}
+
+body .profile-card__content {
+  padding: 19px 20px 20px !important;
+}
+
+body .profile-card__heading,
+body .profile-card h1 {
+  padding-left: 80px;
+}
+
+body .profile-card__heading {
+  min-height: 24px;
+  justify-content: flex-start !important;
+}
+
+body .profile-card .eyebrow {
+  display: none;
+}
+
+body .profile-card h1 {
+  min-height: 30px;
+  margin: 2px 0 22px !important;
+  font-size: 17px !important;
+}
+
+body .profile-tier {
+  margin: 0 !important;
+  padding: 4px 10px !important;
+  border: 1px solid #1555a9;
+  border-radius: 9px !important;
+  background: #0b1c3d !important;
+  color: #79aaf4 !important;
+}
+
+body .profile-stats {
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px !important;
+}
+
+body .profile-stats > div {
+  min-height: 66px;
+  padding: 12px !important;
+  border: 0 !important;
+  background: #061126;
+}
+
+body .profile-stats > div:first-child {
+  grid-column: 1 / -1;
+}
+
+body .profile-stats small,
+body .credit {
+  color: #929bad !important;
+}
+
+body .profile-stats strong {
+  color: #fff !important;
+}
+
+body .credit {
+  margin-top: 10px !important;
+  padding: 14px 10px 0 !important;
+  border-top-color: #202b40 !important;
+}
+
+body .credit-fill {
+  background: linear-gradient(90deg, #176cff, #03d7e4) !important;
+}
+
+body .profile-section {
+  margin: 12px 16px 0 !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body .profile-section:nth-of-type(4) {
+  order: 4;
+}
+
+body .profile-section:nth-of-type(3) {
+  order: 5;
+}
+
+body .profile-section:nth-of-type(5) {
+  order: 6;
+}
+
+body .profile-section h2 {
+  margin: 0 0 8px 2px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+}
+
+body .profile-section button,
+body .profile-section button.sage,
+body .profile-section button.coral,
+body .profile-section button.cream,
+body .profile-section button.grey {
+  height: 60px !important;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  grid-template-columns: 38px 1fr auto !important;
+  gap: 10px !important;
+  border: 0 !important;
+  border-bottom: 1px solid #222a3b !important;
+  border-radius: 0 !important;
+  background: #0a1222 !important;
+  box-shadow: none !important;
+}
+
+body .profile-section button:first-of-type {
+  border-radius: 7px 7px 0 0 !important;
+}
+
+body .profile-section button:last-of-type {
+  border-bottom: 0 !important;
+  border-radius: 0 0 7px 7px !important;
+}
+
+body .profile-section .menu-icon {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 7px !important;
+  background: #0c2853 !important;
+}
+
+body .profile-section button b {
+  color: #fff !important;
+  font-size: 13px !important;
+}
+
+body .profile-section .arrow {
+  filter: brightness(0) invert(1);
+}
+
+body .profile-copyright {
+  order: 7;
+  color: #687287 !important;
+}
+
+body .started-bg {
+  padding-bottom: 28px !important;
+  background: #020717 !important;
+}
+
+body .started-user {
+  min-height: 56px !important;
+  padding: 7px 16px !important;
+  grid-template-columns: 40px 1fr auto 25px !important;
+  background: #050a17 !important;
+  color: #fff !important;
+}
+
+body .product-stage {
+  --hero-half: 100px;
+  --mini-w: 58px;
+  --mini-peek: 6px;
+  --mini-gap: 5px;
+  height: 230px !important;
+  background: #020717 !important;
+}
+
+body .product-stage__hero {
+  width: 200px !important;
+  height: 200px !important;
+  padding: 0 !important;
+  border-width: 1px !important;
+  border-radius: 7px !important;
+  background: #101421 !important;
+  box-shadow: 0 0 28px rgba(0, 104, 255, 0.22) !important;
+}
+
+body .product-stage__hero::before,
+body .product-stage__hero::after {
+  display: none;
+}
+
+body .product-stage__mini {
+  width: 58px !important;
+  height: 58px !important;
+  padding: 0 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+
+body .product-stage__mini:nth-child(n + 5) {
+  display: none !important;
+}
+
+body .product-stage__mini:nth-child(1) {
+  top: 42px !important;
+  left: 25px !important;
+}
+
+body .product-stage__mini:nth-child(2) {
+  top: 113px !important;
+  left: 25px !important;
+}
+
+body .product-stage__mini:nth-child(3) {
+  top: 42px !important;
+  right: 25px !important;
+  left: auto !important;
+}
+
+body .product-stage__mini:nth-child(4) {
+  top: 113px !important;
+  right: 25px !important;
+  left: auto !important;
+}
+
+body .product-dots {
+  background: #020717 !important;
+}
+
+body .product-dots i {
+  background: #49546a !important;
+}
+
+body .product-dots i.active {
+  background: #178cff !important;
+}
+
+body .product-copy {
+  padding: 14px 16px 0 !important;
+  background: #020717 !important;
+}
+
+body .product-copy button {
+  height: 63px !important;
+  margin-top: 20px !important;
+  border-radius: 8px !important;
+  background: linear-gradient(100deg, #08baff, #0878ff 48%, #4e22cf) !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+body .margin-card,
+body .notice-card {
+  margin: 22px 16px 0 !important;
+  border-radius: 7px !important;
+  background: #101421 !important;
+}
+
+body .margin-card {
+  padding: 24px 16px 18px !important;
+}
+
+body .balance-grid {
+  border-top-color: #263047 !important;
+}
+
+body .notice-card {
+  padding: 18px !important;
+  text-align: left !important;
+}
+
+body .balance-card button {
+  border: 0 !important;
+  background: linear-gradient(100deg, #08baff, #0878ff 48%, #4e22cf) !important;
+  color: #fff !important;
+}
+
+body .amounts-card {
+  margin-top: 16px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 14px !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+}
+
+body .amounts-card p {
+  min-height: 90px !important;
+  padding: 15px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 9px !important;
+  border: 1px solid #20283a !important;
+  border-radius: 4px !important;
+  background: #101421 !important;
+  color: #fff !important;
+}
+
+body .amounts-card p + p {
+  border-top: 1px solid #20283a !important;
+}
+
+body .input-card {
+  height: 56px !important;
+  padding: 0 10px 0 16px !important;
+  border-radius: 7px !important;
+}
+
+body .input-card button {
+  border-radius: 5px !important;
+  background: #0a333b !important;
+  color: #10d8df !important;
+}
+
+body .confirm-button {
+  border-radius: 8px !important;
+}
+
+body .records-title button,
+body .product-details-title button {
+  width: 40px !important;
+  height: 40px !important;
+  border: 1px solid rgba(34, 82, 157, 0.42) !important;
+  border-radius: 50% !important;
+  background: #081226 !important;
+  color: #0aa9ff !important;
+}
+
+body .history-tabs button,
+body .records-tabs button {
+  border: 1px solid #252d41 !important;
+  background: #101421 !important;
+  color: #939cb1 !important;
+}
+
+body .history-tabs .active,
+body .records-tabs button.active {
+  border-color: transparent !important;
+  background: linear-gradient(100deg, #08baff, #0878ff 52%, #4e22cf) !important;
+  color: #fff !important;
+}
+
+@media (min-width: 760px) {
+  body .vip-list {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  body .profile-backdrop {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 390px) {
+  body .vip-list {
+    padding-left: 63px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* Design-board corrections: homepage, profile, records and product details. */
+body .home-body {
+  overflow-x: clip !important;
+}
+
+body .home-revenue > img {
+  width: calc(100% + 32px) !important;
+  max-width: none !important;
+  margin-right: -16px !important;
+  margin-left: -16px !important;
+}
+
+body .shortcuts {
+  padding: 20px 16px 30px !important;
+}
+
+body .shortcuts__grid {
+  width: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  column-gap: 8px !important;
+  row-gap: 24px !important;
+}
+
+body .shortcuts button {
+  min-width: 0;
+}
+
+body .profile-card {
+  background: #07142b url("@/static/brain/profile-banner.png") center / cover
+    no-repeat !important;
+}
+
+body .referral-value {
+  width: 100%;
+  justify-content: space-between;
+}
+
+body .copy-code {
+  width: 24px !important;
+  height: 24px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+body .copy-code img {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+body .credit {
+  width: 100%;
+  grid-template-columns: 72px minmax(0, 1fr) 38px !important;
+  gap: 9px !important;
+  box-sizing: border-box;
+}
+
+body .credit > span,
+body .credit > strong {
+  white-space: nowrap;
+}
+
+body .profile-section {
+  overflow: visible !important;
+}
+
+body .profile-section .menu-icon {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+body .profile-section .menu-icon .das-icon,
+body .profile-section .menu-icon img {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+body .info-body > .field-card,
+body .info-body > .field-card:first-of-type,
+body .info-body > .field-card:nth-of-type(3),
+body .info-body > .security-card {
+  margin: 0 0 12px !important;
+  border: 1px solid #252c40 !important;
+  border-radius: 6px !important;
+}
+
+body .info-body > h2 {
+  padding-left: 0 !important;
+}
+
+body .record-card {
+  border: 1px solid #252c40 !important;
+  background: #101421 !important;
+}
+
+body .record-main p {
+  color: #ffab00 !important;
+}
+
+body .record-card footer b {
+  color: #168dff !important;
+}
+
+body .record-card footer b span {
+  color: #8c96aa !important;
+}
+
+body .record-card footer button {
+  background: linear-gradient(110deg, #dc281d, #f47c04) !important;
+  color: #fff !important;
+}
+
+body .record-card .status--pending {
+  border-color: #554716 !important;
+  background: #302910 !important;
+  color: #ffc73c !important;
+}
+
+body .record-card .status--completed {
+  border-color: #125c48 !important;
+  background: #0b3b31 !important;
+  color: #52d7ae !important;
+}
+
+body .record-card .status--frozen {
+  border-color: #63283a !important;
+  background: #3b1722 !important;
+  color: #ff738e !important;
+}
+
+body .product-summary > div {
+  min-height: 78px !important;
+  padding: 11px 10px !important;
+}
+
+body .product-meta {
+  padding: 12px !important;
+}
+
+/* Desktop pages use the full application canvas with a consistent 16px gutter. */
+@media (min-width: 760px) {
+  body .deposit-layout,
+  body .records-design-shell,
+  body .withdraw-design-body,
+  body .withdraw-history-body,
+  body .transaction-body,
+  body .account-info-body,
+  body .language-body,
+  body .contact-design-body,
+  body .detail-page article,
+  body .bp-notifications-list,
+  body .das-content-card {
+    width: calc(100% - 32px) !important;
+    max-width: none !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  body .started-design-product,
+  body .started-design-earnings,
+  body .started-design-notice,
+  body .pd-main,
+  body .pd-submit {
+    width: calc(100% - 32px) !important;
+    max-width: none !important;
+  }
+
+  body .contact-design-hero,
+  body .contact-design-intro {
+    max-width: none !important;
+  }
+}
+
+@media (max-width: 390px) {
+  body .credit {
+    grid-template-columns: 68px minmax(0, 1fr) 36px !important;
+    gap: 7px !important;
+  }
+}
