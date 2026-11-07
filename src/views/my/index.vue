@@ -415,14 +415,25 @@ const openMenuItem = async (item) => {
     try {
       config = (await getCertificateConfig()).data || {};
     } catch (_) {
-      // Keep certificate access unchanged if the configuration is unavailable.
+      if (router.currentRoute.value.fullPath === currentPath) {
+        showToast(tCopy("das.common.requestFailed"));
+      }
+      return;
     } finally {
       certificateRequestPending.value = false;
     }
     if (router.currentRoute.value.fullPath !== currentPath) return;
-    if (Number(config.certificateSwitch) === 1) {
-      certificateMessage.value = config.certificateTip || "";
+    if (
+      [1, "1"].includes(config.certificateSwitch) &&
+      typeof config.certificateTip === "string" &&
+      config.certificateTip.trim()
+    ) {
+      certificateMessage.value = config.certificateTip;
       certificateDialogVisible.value = true;
+      return;
+    }
+    if (![0, "0"].includes(config.certificateSwitch)) {
+      showToast(tCopy("das.common.requestFailed"));
       return;
     }
   }
