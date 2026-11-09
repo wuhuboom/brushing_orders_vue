@@ -515,6 +515,8 @@ export const getCustomerService = (params) =>
     );
 export const getContentConfig = (params) =>
   api.get("/config/content", requestConfig({ params }));
+export const getCertificateConfig = (params) =>
+  api.get("/config/certificate", requestConfig({ params }));
 export const getGlobalConfig = (params) =>
   Promise.all([getWebsiteConfig(params), getContentConfig(params)]).then(
     ([websiteResponse, contentResponse]) => {
