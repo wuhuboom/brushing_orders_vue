@@ -134,9 +134,25 @@
           ]"
           :key="item.path"
           type="button"
+          :disabled="item.path === '/cert' && certificateRequestPending"
+          :aria-busy="item.path === '/cert' && certificateRequestPending"
           @click="openMenuItem(item)"
         >
-          <DasIcon :name="item.icon" /><span>{{ $t(item.label) }}</span>
+          <span
+            v-if="item.path === '/cert' && certificateRequestPending"
+            class="certificate-shortcut__loading"
+            aria-hidden="true"
+          >
+            <VanLoading size="24px" color="currentColor" />
+          </span>
+          <DasIcon v-else :name="item.icon" />
+          <span>{{
+            $t(
+              item.path === "/cert" && certificateRequestPending
+                ? "das.common.loading"
+                : item.label,
+            )
+          }}</span>
         </button>
       </section>
       <div class="profile-credit">
@@ -187,17 +203,55 @@
       ref="withdrawalPasswordDialog"
       @verified="openWithdrawalAccounts"
     />
+    <van-dialog
+      v-model:show="certificateDialogVisible"
+      class="certificate-access-dialog"
+      overlay-class="certificate-access-overlay"
+      teleport="body"
+      aria-labelledby="certificate-access-title"
+      aria-describedby="certificate-access-message"
+      :show-confirm-button="false"
+      close-on-click-overlay
+      @keydown.esc="certificateDialogVisible = false"
+    >
+      <div
+        class="certificate-access"
+        @keydown.esc="certificateDialogVisible = false"
+      >
+        <button
+          class="certificate-access__close"
+          type="button"
+          :aria-label="$t('das.common.close')"
+          @click="certificateDialogVisible = false"
+        >
+          <van-icon name="cross" />
+        </button>
+        <div class="certificate-access__icon" aria-hidden="true">
+          <DasIcon name="certificate" />
+        </div>
+        <h2 id="certificate-access-title">{{ $t("das.page.certificate") }}</h2>
+        <p id="certificate-access-message">{{ certificateMessage }}</p>
+        <button
+          class="certificate-access__confirm"
+          type="button"
+          @click="certificateDialogVisible = false"
+        >
+          {{ $t("das.common.confirm") }}
+          <van-icon name="arrow" aria-hidden="true" />
+        </button>
+      </div>
+    </van-dialog>
   </main>
 </template>
 
 <script setup>
 import PoeticGlyph from "@/components/PoeticGlyph.vue";
 import { computed, onMounted, ref } from "vue";
-import { showToast } from "vant";
+import { Loading as VanLoading, showToast } from "vant";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useUserStore } from "@/store/modules/user";
-import { getLevel, userGetInfo } from "@/api/apis";
+import { getCertificateConfig, getLevel, userGetInfo } from "@/api/apis";
 import DasIcon from "@/components/DasIcon.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
 import ProfileAvatar from "@/components/ProfileAvatar.vue";
@@ -217,6 +271,9 @@ const userInfo = ref(store.userInfo || {});
 const base = window.g?.VITE_API_IMG_URL || "";
 const avatarFailed = ref(false);
 const withdrawalPasswordDialog = ref(null);
+const certificateRequestPending = ref(false);
+const certificateDialogVisible = ref(false);
+const certificateMessage = ref("");
 const levels = ref([]);
 
 const defaultAvatar = computed(() =>
@@ -358,7 +415,37 @@ const sections = [
   },
 ];
 
-const openMenuItem = (item) => {
+const openMenuItem = async (item) => {
+  if (item.path === "/cert") {
+    if (certificateRequestPending.value) return;
+    certificateRequestPending.value = true;
+    const currentPath = router.currentRoute.value.fullPath;
+    let config = {};
+    try {
+      config = (await getCertificateConfig()).data || {};
+    } catch (_) {
+      if (router.currentRoute.value.fullPath === currentPath) {
+        showToast(tCopy("das.common.requestFailed"));
+      }
+      return;
+    } finally {
+      certificateRequestPending.value = false;
+    }
+    if (router.currentRoute.value.fullPath !== currentPath) return;
+    if (
+      [1, "1"].includes(config.certificateSwitch) &&
+      typeof config.certificateTip === "string" &&
+      config.certificateTip.trim()
+    ) {
+      certificateMessage.value = config.certificateTip;
+      certificateDialogVisible.value = true;
+      return;
+    }
+    if (![0, "0"].includes(config.certificateSwitch)) {
+      showToast(tCopy("das.common.requestFailed"));
+      return;
+    }
+  }
   if (item.path === "/paymentMethods") {
     withdrawalPasswordDialog.value?.open();
     return;
@@ -386,3 +473,93 @@ onMounted(async () => {
   }
 });
 </script>
+
+<style scoped>
+.certificate-shortcut__loading {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  color: var(--poetic-purple);
+}
+:global(.van-overlay.certificate-access-overlay) {
+  background: #0009;
+}
+:global(.van-dialog.certificate-access-dialog) {
+  top: 50%;
+  width: min(360px, calc(100vw - 38px));
+  border: 1px solid var(--bp-line);
+  border-radius: 10px !important;
+  background: #fff;
+  color: var(--poetic-ink);
+  box-shadow: 0 16px 48px #2020201a;
+}
+.certificate-access {
+  position: relative;
+  max-height: calc(100dvh - 48px);
+  padding: 28px 24px 24px;
+  overflow-y: auto;
+  text-align: center;
+}
+.certificate-access__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--poetic-paper);
+  color: var(--poetic-muted);
+  cursor: pointer;
+}
+.certificate-access__icon img {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 18px;
+  object-fit: contain;
+}
+.certificate-access h2 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.certificate-access p {
+  max-height: min(38vh, 240px);
+  margin: 0 0 24px;
+  overflow-y: auto;
+  color: var(--poetic-muted);
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.certificate-access__confirm {
+  display: flex;
+  width: 100%;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 12px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--poetic-gradient);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.certificate-access__confirm:active {
+  filter: brightness(0.95);
+}
+.certificate-access button:focus-visible {
+  outline: 2px solid var(--poetic-purple);
+  outline-offset: 3px;
+}
+</style>
