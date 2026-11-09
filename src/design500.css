@@ -1,0 +1,3673 @@
+/* Supplied 500 Designs screens; desktop retains the existing H5 shell. */
+@font-face {
+  font-family: Design500;
+  src: url("/design500/regular.woff2") format("woff2");
+  font-weight: 400;
+  ascent-override: 85%;
+  descent-override: 15%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+@font-face {
+  font-family: Design500;
+  src: url("/design500/bold.woff2") format("woff2");
+  font-weight: 600 900;
+  ascent-override: 85%;
+  descent-override: 15%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+:root {
+  --poetic-paper: #f0eee7;
+  --poetic-ink: #1e1e1b;
+  --poetic-muted: #777772;
+  --poetic-purple: #111;
+  --poetic-gradient: linear-gradient(100deg, #ffe8c8, #ffb29d);
+  --design-width: min(100%, var(--das-app-max-width, 960px), 620px);
+  --van-primary-color: #111;
+}
+html,
+body,
+#app {
+  background: #dedbd8;
+  font-family: Design500, Arial, "PingFang SC", sans-serif !important;
+}
+#app #router-view {
+  font-family: Design500, Arial, "PingFang SC", sans-serif;
+}
+#app #router-view .das-header {
+  height: 66px;
+  padding: 12px 19px;
+  background: #111;
+  border-color: #282828;
+  color: #fff;
+}
+#app #router-view .das-brand,
+#app #router-view .das-brand img {
+  width: 103px;
+}
+#app #router-view .das-header__actions {
+  gap: 12px;
+  padding-right: 0 !important;
+}
+#app #router-view .das-contact,
+#app #router-view:has(.poetic-navigation) > .das-header .das-contact {
+  position: static;
+  display: block;
+  order: 0;
+  width: auto;
+  height: 26px;
+  padding: 0 7px;
+  border: 1px solid #545454;
+  border-radius: 7px;
+  background: transparent;
+  color: inherit;
+  font-size: 10px;
+  white-space: nowrap;
+}
+#app #router-view .das-avatar {
+  width: 32px;
+  height: 32px;
+}
+#app #router-view .das-page-head,
+#app #router-view .pd-page-header {
+  height: 64px;
+  background: #090909;
+  color: #fff;
+}
+#app #router-view .das-page-head .das-header,
+#app #router-view .pd-page-header .das-header {
+  height: 64px;
+  background: transparent;
+}
+#app #router-view .das-page-head .poetic-navigation,
+#app #router-view .pd-page-header .poetic-navigation {
+  display: none;
+}
+#app #router-view .das-page-head__title,
+#app #router-view .pd-titlebar {
+  left: 16px;
+  right: 115px;
+  height: 64px;
+  justify-content: flex-start;
+  gap: 12px;
+  pointer-events: none;
+}
+#app #router-view .das-page-head__title h1,
+#app #router-view .pd-titlebar h1 {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+#app #router-view .das-page-head__title button,
+#app #router-view .pd-titlebar button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 36px;
+  padding: 10px;
+  border: 1px solid #222;
+  border-radius: 6px;
+  pointer-events: auto;
+}
+#app #router-view .das-page-head__title button,
+#app #router-view .pd-titlebar button {
+  background: transparent;
+}
+#app #router-view .poetic-back-arrow {
+  content: url("/design500/back-white.png");
+  width: 15px;
+  height: 15px;
+  transform: none;
+  filter: none;
+}
+#app #router-view .das-page-head .das-contact,
+#app #router-view .pd-page-header .das-contact {
+  right: 16px;
+  top: 19px;
+}
+#app #router-view .poetic-head-actions {
+  right: 16px;
+  top: 15px;
+}
+#app #router-view .withdraw-history {
+  min-width: 30px;
+  min-height: 30px;
+  color: #fff;
+}
+#app #router-view .withdraw-history img {
+  content: url("/design500/history.png");
+  width: 21px;
+  height: 21px;
+}
+#app #router-view .withdraw-history span {
+  display: none;
+}
+#app #router-view .poetic-navigation {
+  position: relative;
+  top: auto;
+  right: auto;
+  z-index: 55;
+}
+#app #router-view .poetic-navigation .poetic-navigation-toggle {
+  width: 25px;
+  height: 24px;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  border-radius: 0;
+  background: linear-gradient(#fff, #fff) center/100% 2px no-repeat;
+}
+#app #router-view .poetic-navigation .das-footer {
+  top: 46px;
+  right: -19px;
+  width: 240px;
+  padding: 12px;
+  background: #111;
+  border: 1px solid #333;
+  color: #fff;
+}
+#app #router-view .das-footer__item {
+  min-height: 48px;
+  padding: 10px;
+  font-size: 14px;
+  border-color: #333;
+  color: #aaa;
+}
+#app #router-view .das-footer__item img {
+  width: 24px;
+  height: 24px;
+  filter: none;
+}
+#app #router-view .das-footer__item--active {
+  color: #fff;
+}
+#app #router-view:is(.bp-home-page, .starting-page, .records-page) {
+  padding-bottom: 70px;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .poetic-navigation {
+  position: static;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .poetic-navigation-toggle {
+  display: none;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .poetic-navigation
+  .das-footer {
+  position: fixed;
+  top: auto;
+  bottom: 0;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: var(--design-width);
+  height: 70px;
+  padding: 0 12px max(0px, env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border: 0;
+  background: #1e1e1c;
+  box-shadow: none;
+  z-index: 60;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .das-footer__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  min-height: 0;
+  min-width: 0;
+  padding: 8px 3px 4px;
+  font-size: 9px;
+  text-align: center;
+  text-transform: uppercase;
+  border: 0;
+  color: #aaa;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .das-footer__item
+  img {
+  width: 26px;
+  height: 26px;
+  opacity: 0.55;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .das-footer__item--active {
+  color: #fff;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .das-footer__item--active
+  img {
+  opacity: 1;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .das-footer__item:nth-child(2) {
+  padding-top: 30px;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .das-footer__item:nth-child(2)
+  img {
+  position: absolute;
+  top: -13px;
+  width: 52px;
+  height: 52px;
+  opacity: 1;
+  content: url("/design500/nav-brand.png");
+}
+#app #router-view.starting-page .das-footer__item:nth-child(2) img {
+  content: url("/design500/nav-start.png");
+}
+#app #router-view .poetic-footer {
+  min-height: 0;
+  padding: 26px 20px;
+  color: #797c83;
+  background: #050505;
+  font-size: 9px;
+}
+#app #router-view .poetic-footer > img {
+  width: 98px;
+  height: auto;
+  opacity: 0.5;
+}
+#app #router-view .profile-footer::before,
+#app #router-view .fp-auth__footer::before,
+#app #router-view .fp-welcome__copyright::before,
+#app #router-view .contact-design-copyright::before {
+  display: none;
+}
+/* Authentication: keep the baseline fields, validation and translations. */
+#app #router-view.fp-auth {
+  display: flex;
+  flex-direction: column;
+  background: #1e1e1e;
+  color: #fff;
+}
+#app #router-view .poetic-auth-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex: none;
+  height: 78px;
+  padding: 0 23px;
+  background: #111;
+  border: 0;
+}
+#app #router-view .poetic-auth-bar > button {
+  position: static;
+  width: 17px;
+  height: 25px;
+  padding: 0;
+}
+#app #router-view .poetic-auth-bar h1,
+#app #router-view .poetic-auth-bar h2 {
+  position: static;
+  font-size: 15px;
+  font-weight: 600;
+}
+#app #router-view .auth-language {
+  top: 29px;
+  right: 17px;
+}
+#app #router-view .language-button {
+  height: 25px;
+  padding: 0 12px;
+  border-radius: 20px;
+  background: #fff;
+  color: #111;
+  font-size: 13px;
+  gap: 5px;
+}
+#app #router-view .auth-top {
+  position: relative;
+  flex: none;
+  height: 73px;
+  padding: 25px 23px 0;
+  background: none;
+}
+#app #router-view .auth-top::before,
+#app #router-view .register-top::before {
+  display: none;
+}
+#app #router-view .auth-logo {
+  position: static;
+  display: block;
+  width: 103px;
+  height: auto;
+  transform: none;
+}
+#app #router-view .auth-form {
+  flex: 1;
+  padding: 0 23px 28px;
+}
+#app #router-view .poetic-login-card {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+#app #router-view .auth-kicker {
+  display: block;
+  margin: 0 0 9px;
+  color: #949494;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+#app #router-view .auth-kicker::before,
+#app #router-view .register-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 15px;
+  margin-right: 8px;
+  border-radius: 1px;
+  background: #db7048;
+  vertical-align: middle;
+}
+#app #router-view .psy-login-hero {
+  display: block;
+  margin: 0;
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -1px;
+}
+#app #router-view .psy-login-hero span,
+#app #router-view .psy-login-hero em {
+  display: block;
+  font-style: normal;
+}
+#app #router-view .psy-login-hero em {
+  color: #cfc5b9;
+}
+#app #router-view .auth-hint {
+  margin: 10px 0 32px;
+  color: #939393;
+  font-size: 13px;
+  line-height: 1.65;
+}
+#app #router-view .auth-hint {
+  display: block;
+}
+#app #router-view .auth-hint em {
+  color: inherit;
+  font-style: normal;
+}
+#app #router-view .poetic-login-card > label {
+  position: relative;
+  display: block;
+  margin: 0 0 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#app #router-view .poetic-login-card > label > span {
+  display: block;
+  margin-bottom: 5px;
+  color: #c5c7ca;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+#app #router-view .poetic-login-card > label > input {
+  width: 100%;
+  height: 49px;
+  padding: 0 16px;
+  border: 1px solid #d9d9de;
+  border-radius: 6px;
+  background: #fff;
+  color: #151515;
+  font-size: 13px;
+}
+#app #router-view .fp-auth__eye {
+  position: absolute;
+  right: 14px;
+  bottom: 13px;
+  top: auto;
+  width: 22px;
+  height: 22px;
+  color: #777;
+}
+#app #router-view .auth-options {
+  margin: 21px 0 24px;
+  color: #b0b0b0;
+  font-size: 11px;
+}
+#app #router-view .auth-options {
+  flex-direction: row;
+}
+#app #router-view .auth-options > button {
+  order: 2;
+  color: #d1c6b9;
+  text-decoration: underline;
+}
+#app #router-view .auth-options > label {
+  order: 1;
+  gap: 7px;
+}
+#app #router-view .auth-options input {
+  accent-color: #fff;
+  width: 15px;
+  height: 15px;
+}
+#app #router-view .auth-submit,
+#app #router-view .register-submit {
+  width: 100%;
+  min-height: 49px;
+  padding: 12px;
+  border-radius: 14px;
+  background: #f8b597;
+  color: #080808;
+  font-size: 14px;
+  font-weight: 700;
+}
+#app #router-view .auth-submit:disabled {
+  opacity: 1;
+}
+#app #router-view .auth-submit img {
+  width: 14px;
+  height: 14px;
+  content: url("/design500/arrow.png");
+  filter: none;
+}
+#app #router-view .auth-submit > img {
+  display: block;
+}
+#app #router-view .auth-link {
+  margin: 32px 0 0;
+  color: #919191;
+  font-size: 11px;
+}
+#app #router-view .auth-link button {
+  color: #fff;
+}
+#app #router-view .auth-support {
+  margin-top: 9px;
+}
+#app #router-view .auth-support button {
+  color: #d0c4b5;
+  text-decoration: underline;
+}
+#app #router-view .fp-auth__footer {
+  flex: none;
+  min-height: 43px;
+  gap: 0;
+  padding: 15px;
+  background: #111;
+  color: #5e5e65;
+  font-size: 9px;
+}
+#app #router-view .register-top {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: none;
+  height: auto;
+  padding: 22px 24px 0;
+  background: transparent;
+}
+#app #router-view .register-kicker {
+  display: block;
+  color: #aaa;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+#app #router-view .register-hint {
+  display: block;
+  color: #999;
+  font-size: 13px;
+  line-height: 1.6;
+}
+#app #router-view .register-logo {
+  display: none;
+}
+#app #router-view .register-form {
+  padding: 12px 24px 30px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+#app #router-view .register-form > h1 {
+  margin-bottom: 26px;
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+}
+#app #router-view .register-form > h1 em {
+  color: inherit;
+  font-style: normal;
+}
+#app #router-view .register-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#app
+  #router-view
+  .register-fields
+  :is(label, .register-field)
+  > span:first-child {
+  display: block;
+  margin-bottom: 6px;
+  color: #c4c4c4;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+#app #router-view .register-fields > label,
+#app #router-view .register-fields > .register-field {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+#app #router-view .register-control,
+#app #router-view .phone-field,
+#app #router-view .gender-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  border: 1px solid #d9d9df;
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+}
+#app #router-view .register-control input {
+  height: 47px;
+  padding: 0 15px;
+  background: transparent;
+  color: #111;
+  font-size: 13px;
+}
+#app #router-view .register-control__icon {
+  display: none;
+}
+#app #router-view .register-control__end-icon {
+  width: 15px;
+  height: 15px;
+  content: url("/design500/eye.png");
+}
+#app #router-view .phone-number-control input {
+  background: transparent;
+  color: #111;
+}
+#app #router-view .register-agree {
+  color: #aaa;
+  font-size: 11px;
+}
+#app #router-view .register-agree button {
+  color: #e3c6ac;
+}
+#app #router-view .register-switch {
+  color: #999;
+  font-size: 12px;
+}
+#app #router-view .register-switch button {
+  color: #fff;
+}
+#app #router-view .register-form {
+  margin: 0;
+}
+#app #router-view .register-form > h1 {
+  display: block;
+}
+#app #router-view .register-top .register-kicker {
+  padding: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+#app #router-view .register-top .register-hint {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+#app #router-view .poetic-auth-bar .poetic-login-back,
+#app #router-view .poetic-auth-bar .psy-register-back {
+  width: 17px;
+  height: 25px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+#app #router-view .poetic-auth-bar .poetic-back-arrow {
+  width: 13px;
+  height: 18px;
+  content: url("/design500/back-white.png");
+  filter: none;
+  transform: none;
+}
+#app #router-view .language-menu {
+  top: 34px;
+  background: #fff;
+  border-color: #ddd;
+  color: #222;
+}
+#app #router-view .language-menu button {
+  color: #222;
+}
+#app #router-view .language-menu button.active {
+  background: #f3e8df;
+  color: #222;
+}
+#app #router-view.welcome-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px 60px;
+  background: #dedbd8;
+  color: #111;
+}
+#app #router-view .psy-welcome-header {
+  height: 66px;
+  padding: 16px 22px;
+  background: #111;
+  color: white;
+}
+#app #router-view .psy-welcome-header > img {
+  width: 103px;
+}
+#app #router-view .psy-welcome-core {
+  position: static;
+  width: 190px;
+  height: auto;
+  margin: 0 0 60px;
+  transform: none;
+  -webkit-box-reflect: below 5px linear-gradient(transparent 20%, #0001);
+}
+#app #router-view .welcome-copy {
+  display: none;
+}
+#app #router-view .welcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 330px;
+  margin-top: 25px;
+  padding: 0;
+}
+#app #router-view .welcome-actions button {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 15px;
+  border: 1px solid #222;
+  border-radius: 7px;
+  background: transparent;
+  color: #111;
+  font-size: 13px;
+}
+#app #router-view .welcome-actions .welcome-secondary {
+  background: #111;
+  color: white;
+}
+#app #router-view .psy-welcome-terms {
+  margin-top: 26px;
+  color: #777;
+  font-size: 10px;
+}
+#app #router-view .welcome-copyright {
+  position: absolute;
+  bottom: 20px;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  color: #777;
+  font-size: 10px;
+}
+/* Cream personal center. */
+#app #router-view.profile-page {
+  background: #f4eedb;
+}
+#app #router-view.profile-page .das-header {
+  background: #f4eedb;
+  border-color: #dcd4bf;
+  color: #111;
+}
+#app #router-view.profile-page .das-brand img {
+  content: url("/design500/logo-black.png");
+}
+#app #router-view.profile-page .das-contact {
+  border-color: #d7cfbc;
+}
+#app #router-view.profile-page .poetic-navigation-toggle {
+  border-color: #222;
+  background-image: linear-gradient(#222, #222);
+}
+#app #router-view .profile-main {
+  padding: 25px 17px 0;
+}
+#app #router-view .profile-heading {
+  display: none;
+}
+#app #router-view .profile-main::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 86px;
+  margin-bottom: 23px;
+  background: url("/design500/profile-heading.png") left top/330px auto
+    no-repeat;
+}
+#app #router-view .profile-main::before {
+  background-size: 247.5px auto;
+}
+#app #router-view .poetic-profile-identity {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  min-height: 145px;
+  margin-bottom: 20px;
+  padding: 22px;
+  border: 1px solid #e6dfcd;
+  border-radius: 8px;
+  background: #faf7ef;
+}
+#app #router-view .profile-avatar-block {
+  width: 56px;
+  flex: none;
+  margin: 0;
+}
+#app #router-view .profile-avatar-block .my-profile-avatar {
+  width: 56px;
+  height: 62px;
+  padding: 0;
+  border: 1px solid #222;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #e7e9ed;
+}
+#app #router-view .profile-avatar-block .profile-avatar {
+  width: 56px;
+  height: 62px;
+}
+#app #router-view .profile-avatar-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#app #router-view .profile-edit-image {
+  position: absolute;
+  left: 60px;
+  top: 68px;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+  background: #111 url("/design500/key.png") center/14px no-repeat;
+}
+#app #router-view .profile-edit-image span,
+#app #router-view .profile-edit-image img {
+  display: none;
+}
+#app #router-view .profile-card {
+  position: static;
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+#app #router-view .profile-card__hello > span {
+  display: none;
+}
+#app #router-view .profile-card__hello > strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+#app #router-view .profile-card__hello > strong {
+  padding-right: 0;
+}
+#app #router-view .profile-card__hello > strong::after {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 8px;
+  background: url("/design500/verified.png") center/contain no-repeat;
+}
+#app #router-view .profile-card__vip {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 9px;
+  padding: 2px 11px;
+  border-radius: 4px;
+  background: #ebe0c5;
+  color: #111;
+  font-size: 10px;
+  line-height: 1.4;
+}
+#app #router-view .profile-card__vip::before {
+  content: "★";
+  display: inline;
+  margin-right: 5px;
+  width: auto;
+  height: auto;
+  background: none;
+  mask: none;
+}
+#app #router-view .profile-card__vip strong {
+  font-size: 10px;
+}
+#app #router-view .profile-referral-inline {
+  position: absolute;
+  left: 22px;
+  right: 20px;
+  bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  padding-top: 10px;
+  border-top: 1px solid #ded4bc;
+  font-size: 10px;
+}
+#app #router-view .profile-referral-inline {
+  min-height: 0;
+  background: transparent;
+  border-radius: 0;
+}
+#app #router-view .profile-referral-inline > span {
+  color: #7d7667;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+#app #router-view .profile-referral-inline__value {
+  gap: 8px;
+}
+#app #router-view .profile-referral-inline b {
+  padding: 2px 6px;
+  border: 1px solid #e9dfc8;
+  border-radius: 3px;
+  background: #f3eddb;
+  color: #111;
+  font-size: 10px;
+}
+#app #router-view .profile-referral-inline button {
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: #eae0c6;
+  color: #111;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+#app #router-view .profile-referral-inline button span {
+  display: inline;
+}
+#app #router-view .profile-referral-inline button img {
+  width: 11px;
+  height: 11px;
+  content: url("/design500/copy.png");
+}
+#app #router-view .poetic-profile-support {
+  display: none;
+}
+#app #router-view .poetic-profile-balance {
+  margin-bottom: 28px;
+  padding: 21px 19px 19px;
+  border: 1px solid #e7dfcc;
+  border-radius: 8px;
+  background: #faf7ef;
+  color: #111;
+}
+#app #router-view .profile-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  padding: 0;
+  background: none;
+}
+#app #router-view .profile-stat:first-child {
+  grid-column: 1/-1;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+#app #router-view .profile-stat > span {
+  margin-bottom: 12px;
+  color: #6c6557;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+#app #router-view .profile-stat > strong {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+#app #router-view .profile-stat:first-child > strong,
+#app #router-view .profile-stat:not(:first-child) > strong {
+  color: #171715;
+  font-style: normal;
+}
+#app #router-view .profile-stat:not(:first-child) {
+  padding: 12px 10px;
+  border: 1px solid #e9dfc7;
+  border-radius: 6px;
+  background: #f3eddb;
+}
+#app #router-view .profile-stat:not(:first-child) > span {
+  margin: 0 0 5px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+#app #router-view .profile-stat:not(:first-child) > strong {
+  font-size: 16px;
+  letter-spacing: 0;
+}
+#app #router-view .poetic-profile-finance {
+  gap: 11px;
+  margin-top: 20px;
+}
+#app #router-view .poetic-profile-finance button {
+  min-height: 42px;
+  padding: 9px 6px;
+  border: 1px solid #8c877c;
+  border-radius: 11px;
+  background: transparent;
+  color: #111;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#app #router-view .poetic-profile-finance button:first-child {
+  background: #131313;
+  border-color: #131313;
+  color: #eee6d4;
+}
+#app #router-view .poetic-profile-finance .das-icon {
+  width: 15px;
+  height: 15px;
+}
+#app #router-view .poetic-profile-finance .das-icon {
+  display: block;
+}
+#app #router-view .poetic-profile-finance > button::before {
+  display: none;
+}
+#app #router-view .poetic-profile-finance button:first-child .das-icon {
+  filter: grayscale(1) brightness(3);
+}
+#app #router-view .poetic-section-title,
+#app #router-view .profile-section > h2 {
+  margin: 0 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+#app #router-view .psy-profile-shortcuts {
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-bottom: 19px;
+  padding: 0;
+  background: none;
+}
+#app #router-view .psy-profile-shortcuts button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 113px;
+  padding: 16px;
+  border: 1px solid #e7deca;
+  border-radius: 7px;
+  background: #faf7ef;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+}
+#app #router-view .psy-profile-shortcuts .das-icon {
+  width: 31px;
+  height: 31px;
+}
+#app #router-view .profile-credit {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 28px;
+  padding: 24px 20px 20px;
+  border: 1px solid #e7deca;
+  border-radius: 8px;
+  background: #faf7ef;
+  color: #111;
+}
+#app #router-view .profile-credit::before {
+  display: none;
+}
+#app #router-view .profile-credit > span {
+  width: 100%;
+  color: #716958;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+#app #router-view .profile-credit > strong {
+  order: 1;
+  font-size: 25px;
+  font-weight: 700;
+}
+#app #router-view .profile-credit > i {
+  order: 2;
+  width: 100%;
+  height: 7px;
+  margin-top: 10px;
+  border: 1px solid #e4dcc7;
+  border-radius: 5px;
+  background: #f0ead8;
+  overflow: hidden;
+}
+#app #router-view .profile-credit > i > b {
+  background: #1c1c18;
+  border-radius: 4px;
+}
+#app #router-view .poetic-credit-detail {
+  order: 3;
+  width: 100%;
+  margin-top: 8px;
+  color: #77705f;
+  font-size: 10px;
+}
+#app #router-view .profile-menu {
+  border: 1px solid #e7deca;
+  border-radius: 9px;
+  background: #faf7ef;
+}
+#app #router-view .profile-menu__row {
+  min-height: 65px;
+  padding: 13px 15px;
+  border-color: #e1d8c3;
+}
+#app #router-view .profile-menu__row b {
+  font-size: 13px;
+  font-weight: 600;
+}
+#app #router-view .profile-menu__icon .das-icon {
+  width: 31px;
+  height: 31px;
+}
+#app #router-view .profile-footer {
+  min-height: 0;
+  padding: 16px 10px 36px;
+  background: transparent;
+  color: #736e61;
+  font-size: 11px;
+}
+#app #router-view .profile-footer::before {
+  content: "";
+  display: block;
+  width: 104px;
+  height: 40px;
+  margin: 0 auto 22px;
+  background: url("/design500/logo-black.png") center/contain no-repeat;
+}
+/* Account details and both password forms. */
+#app #router-view .account-info-page__scroll {
+  padding: 16px;
+}
+#app #router-view .poetic-account-identity {
+  padding: 17px;
+  margin-bottom: 18px;
+  border: 0;
+  border-radius: 5px;
+  background: #fff;
+  color: #222;
+}
+#app #router-view .poetic-account-identity {
+  min-height: 0;
+}
+#app #router-view .poetic-account-tags {
+  display: none;
+}
+#app #router-view .poetic-account-person {
+  gap: 18px;
+}
+#app #router-view .poetic-account-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #e8e9ed;
+}
+#app #router-view .poetic-account-avatar > img {
+  border-radius: 50%;
+}
+#app #router-view .poetic-account-avatar i {
+  width: 22px;
+  height: 22px;
+  right: -2px;
+  bottom: -3px;
+  border-radius: 5px;
+  background: #1e1e19;
+  color: white;
+}
+#app #router-view .poetic-account-person h2 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+#app #router-view .poetic-account-person p {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #888;
+}
+#app #router-view .account-info-section,
+#app #router-view .account-info-actions {
+  margin-bottom: 18px;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+#app #router-view .account-info-section > h2,
+#app #router-view .account-info-actions > h2 {
+  margin: 0 3px 9px;
+  color: #777;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+#app #router-view .account-info-field {
+  display: grid;
+  gap: 3px;
+  min-height: 85px;
+  padding: 16px;
+  background: #fff;
+  border-bottom: 1px solid #e8e5dd;
+}
+#app #router-view .account-info-field strong {
+  color: #858985;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+#app #router-view .account-info-field span {
+  font-size: 16px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+#app #router-view .account-info-field:last-child {
+  border: 0;
+  border-radius: 0 0 5px 5px;
+}
+#app #router-view .account-info-gender span {
+  font-size: 13px;
+}
+#app #router-view .account-info-action {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  min-height: 77px;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  text-align: left;
+}
+#app #router-view .account-info-action > i {
+  order: -1;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+  background: #f4f1e9;
+}
+#app #router-view .account-info-action > i {
+  position: static;
+}
+#app #router-view .account-info-action {
+  margin-top: 0;
+}
+#app #router-view .account-info-action > span {
+  flex: 1;
+  font-size: 17px;
+  font-weight: 600;
+}
+#app #router-view .account-info-action small {
+  display: none;
+}
+#app #router-view .account-info-action::after {
+  content: "›";
+  font-size: 20px;
+}
+#app #router-view .account-info-action:last-child {
+  border: 0;
+  border-radius: 0 0 6px 6px;
+}
+#app #router-view .poetic-security-banner {
+  display: none;
+}
+#app #router-view .security-form {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+}
+#app #router-view .security-form__fields {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+#app #router-view .security-form__fields > h2 {
+  display: none;
+}
+#app #router-view .security-form__field {
+  margin-bottom: 19px;
+}
+#app #router-view .security-form__field > b {
+  margin-bottom: 10px;
+  color: #4d4f4e;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#app #router-view .security-form__field sup {
+  display: none;
+}
+#app #router-view .security-form__input {
+  min-height: 43px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+}
+#app #router-view .security-form__input > .poetic-glyph {
+  display: none;
+}
+#app #router-view .security-form__input input {
+  height: 43px;
+  background: transparent;
+  font-size: 13px;
+}
+#app #router-view .security-form__save {
+  order: 1;
+  min-height: 45px;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 0;
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+#app #router-view .poetic-recovery-card {
+  order: 2;
+  margin: 23px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  font-size: 11px;
+}
+#app #router-view .poetic-recovery-card h2 {
+  display: none;
+}
+#app #router-view .poetic-recovery-card {
+  min-height: 0;
+}
+#app #router-view .poetic-recovery-card .security-form__note {
+  display: block;
+  flex: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+#app #router-view .security-form__note > span,
+#app #router-view .security-form__note > button {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+#app #router-view .security-form__field > b::before {
+  display: none;
+}
+#app #router-view .security-form__copyright {
+  order: 3;
+}
+/* Deposit, withdrawal, histories and account binding. */
+#app #router-view .recharge-content,
+#app #router-view .withdraw-content {
+  padding: 16px;
+}
+#app #router-view .recharge-balance-card,
+#app #router-view .withdraw-balance-card {
+  position: relative;
+  margin-bottom: 15px;
+  padding: 22px 19px;
+  border: 1px solid #e5e2de;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+}
+#app #router-view .recharge-balance-card h2,
+#app #router-view .withdraw-balance-card h2 {
+  margin-bottom: 20px;
+  color: #6d6d6d;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+#app #router-view .poetic-wallet-badge {
+  position: absolute;
+  left: 141px;
+  top: 19px;
+  padding: 4px 8px;
+  border: 1px solid #ece9e5;
+  border-radius: 6px;
+  background: #f5f4f2;
+  color: #444;
+  font-size: 10px;
+}
+#app #router-view .poetic-bank-symbol {
+  right: 18px;
+  top: 18px;
+  width: 30px;
+  height: 30px;
+  background: url("/design500/wallet.png") center/contain no-repeat;
+}
+#app #router-view .recharge-balance-value strong,
+#app #router-view .withdraw-total strong {
+  font-size: 29px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+#app #router-view .recharge-balance-value > span,
+#app #router-view .withdraw-total > span {
+  color: #777;
+  font-size: 13px;
+  font-weight: 600;
+}
+#app #router-view .recharge-topup,
+#app #router-view .withdraw-submit {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#app #router-view .recharge-topup {
+  position: static;
+}
+#app #router-view .poetic-bank-symbol::before,
+#app #router-view .poetic-bank-symbol::after {
+  display: none;
+}
+#app #router-view .poetic-deposit-icon > img,
+#app #router-view .transaction-icon.is-positive {
+  transform: none;
+  filter: none;
+}
+#app #router-view .recharge-activity-tabs {
+  margin: 22px 4px 11px;
+}
+#app #router-view .recharge-activity-tabs h2 {
+  font-size: 17px;
+  font-weight: 700;
+}
+#app #router-view .recharge-activity-tab {
+  color: #777;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+#app #router-view .recharge-log-section {
+  padding: 0 15px;
+  border-radius: 7px;
+  background: #fff;
+}
+#app #router-view .recharge-log-card {
+  gap: 12px;
+  min-height: 94px;
+  margin: 0;
+  padding: 18px 0;
+  border: 0;
+  border-bottom: 1px solid #f0eeea;
+  border-radius: 0;
+  background: transparent;
+}
+#app #router-view .recharge-log-card:last-of-type {
+  border-bottom: 0;
+}
+#app #router-view .poetic-deposit-icon {
+  width: 37px;
+  height: 37px;
+  background: none;
+}
+#app #router-view .poetic-deposit-icon img {
+  width: 100%;
+  height: 100%;
+  content: url("/design500/deposit.png");
+}
+#app #router-view .recharge-log-info b {
+  font-size: 14px;
+  font-weight: 600;
+}
+#app #router-view .recharge-log-info small {
+  color: #888;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+#app #router-view .recharge-log-info strong {
+  color: #008964;
+  font-size: 17px;
+  font-weight: 700;
+}
+#app #router-view .withdraw-balance-card > p {
+  margin: 3px 0 14px;
+  color: #888;
+  font-size: 11px;
+}
+#app #router-view .withdraw-summary-card {
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+  background: none;
+}
+#app #router-view .withdraw-summary-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid #f0eeeb;
+  border-radius: 7px;
+  background: #faf9f7;
+}
+#app #router-view .withdraw-summary-row > span {
+  color: #888;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+#app #router-view .withdraw-summary-row > strong {
+  font-size: 15px;
+  font-weight: 700;
+}
+#app #router-view .withdraw-summary-row > strong {
+  color: #222;
+}
+#app #router-view .withdraw-balance-card > p {
+  position: static;
+  max-width: none;
+}
+#app #router-view .withdraw-form-section {
+  padding: 20px;
+  border: 1px solid #e5e2dd;
+  border-radius: 8px;
+  background: #fff;
+}
+#app #router-view .withdraw-form-section > h2 {
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+  font-weight: 700;
+}
+#app #router-view .withdraw-form-field {
+  margin: 0 0 19px;
+}
+#app #router-view .withdraw-form-field > span {
+  margin-bottom: 7px;
+  color: #555;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+#app #router-view .withdraw-amount-row,
+#app #router-view .withdraw-password-row {
+  height: 47px;
+  padding: 0 12px;
+  border: 1px solid #e9e6e2;
+  border-radius: 7px;
+  background: #faf9f7;
+}
+#app #router-view .withdraw-amount-row input {
+  height: 44px;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 700;
+}
+#app #router-view .withdraw-all-btn {
+  padding: 4px 10px;
+  border-radius: 3px;
+  background: #111;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#app #router-view .withdraw-password-row input {
+  height: 44px;
+  background: transparent;
+  font-size: 13px;
+}
+#app #router-view .withdraw-password-row > .poetic-glyph {
+  display: none;
+}
+#app #router-view .withdraw-form-section .withdraw-submit {
+  margin: 0;
+  border-radius: 6px;
+}
+#app #router-view .psy-withdraw-reminder {
+  margin-top: 14px;
+  padding: 20px;
+  border: 1px solid #e5e2dd;
+  border-radius: 8px;
+  background: #fff;
+  color: #222;
+}
+#app #router-view .psy-withdraw-reminder > img {
+  width: 22px;
+  height: 22px;
+  content: url("/design500/certificate.png");
+}
+#app #router-view .psy-withdraw-reminder > b {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+#app #router-view .psy-withdraw-reminder p {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid #ece8e2;
+  border-radius: 6px;
+  background: #faf9f6;
+  color: #666;
+  font-size: 11px;
+  line-height: 1.8;
+}
+#app #router-view .withdraw-record-tab {
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 6px;
+  background: #fff;
+  color: #777;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#app #router-view .withdraw-record-tab--active {
+  background: #000;
+  color: #fff;
+}
+#app #router-view .withdraw-history-list > article {
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 0;
+  border-radius: 7px;
+  background: #fff;
+}
+#app #router-view .withdraw-history-summary {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 11px;
+}
+#app #router-view .withdraw-history-icon {
+  width: 34px;
+  height: 34px;
+  content: url("/design500/withdraw.png");
+}
+#app #router-view .withdraw-history-label > b {
+  font-size: 16px;
+  font-weight: 700;
+}
+#app #router-view .withdraw-history-label > span {
+  height: 21px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: #f4f2eb;
+  color: #333;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#app #router-view .is-status-1 .withdraw-history-label > span {
+  background: #489800;
+  color: #fff;
+}
+#app #router-view .is-status-3 .withdraw-history-label > span {
+  background: #ffd8d7;
+  color: #ca0000;
+}
+#app #router-view .withdraw-history-copy > small {
+  color: #666;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+#app #router-view .withdraw-history-meta {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  text-align: left;
+}
+#app #router-view .withdraw-history-meta strong {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+#app #router-view .withdraw-history-meta small {
+  color: #777;
+  font-size: 12px;
+}
+#app #router-view .withdraw-history-list > article > p {
+  margin-top: 12px;
+  padding: 11px 13px;
+  border: 0;
+  border-radius: 6px;
+  background: #ffdad8;
+  color: #b50000;
+  font-size: 12px;
+  line-height: 1.7;
+}
+#app #router-view .transaction-item {
+  border: 0;
+  border-radius: 7px;
+  background: #fff;
+}
+#app #router-view .transaction-icon {
+  width: 36px;
+  height: 36px;
+  content: url("/design500/deposit.png");
+}
+#app #router-view .transaction-icon.is-negative {
+  content: url("/design500/withdraw.png");
+}
+#app #router-view .transaction-value .is-positive {
+  color: #008d64;
+}
+#app #router-view .transaction-value .is-negative {
+  color: #b74242;
+}
+#app #router-view .payment-account-card {
+  border: 1px solid #e3dfd5;
+  border-radius: 8px;
+  background: #fff;
+}
+#app #router-view .payment-account-card__add-btn,
+#app #router-view .payment-account-form__submit {
+  background: #111;
+  color: white;
+  border-radius: 6px;
+}
+#app #router-view .pa-wallet-card {
+  border-color: #e5dfd3;
+  background: #f8f6ef;
+  color: #222;
+}
+#app #router-view .pa-wallet-card__status,
+#app #router-view .pa-wallet-card__chain-badge {
+  background: #e5eadc;
+  color: #495442;
+}
+#app #router-view .payment-account-form__field :is(input, textarea) {
+  border: 1px solid #e2dfd9;
+  border-radius: 5px;
+  background: #faf9f6;
+  color: #222;
+}
+#app #router-view .das-select__trigger {
+  border-color: #e8e5de;
+  background: #fff;
+  color: #222;
+}
+#app #router-view .das-select__menu button.is-selected {
+  background: #f1ebdf;
+  color: #222;
+}
+/* Dark task dashboard and records. */
+#app #router-view.starting-page,
+#app #router-view.records-page {
+  background: #050505;
+  color: #fff;
+}
+#app #router-view .starting-main {
+  padding: 17px 20px 0;
+}
+#app #router-view .poetic-task-heading {
+  margin-bottom: 16px;
+}
+#app #router-view .poetic-task-heading h1 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+#app #router-view .psy-start-history {
+  padding: 4px 9px;
+  border: 1px solid #2b2b2b;
+  border-radius: 6px;
+  background: #1b1b1b;
+  color: #afb3bb;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+#app #router-view .psy-start-history img {
+  content: url("/design500/history.png");
+  width: 12px;
+  height: 12px;
+  filter: none;
+}
+#app #router-view .poetic-task-balance {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  position: relative;
+  margin-bottom: 31px;
+  padding: 16px 10px;
+  border: 1px solid #292929;
+  border-radius: 8px;
+  background: #191919;
+  color: #fff;
+}
+#app #router-view .starting-user {
+  grid-column: 1/-1;
+  padding: 0 5px 11px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #303030;
+  font-size: 10px;
+  color: #a9afb8;
+  background: none;
+}
+#app #router-view .starting-user__name {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+#app #router-view .starting-user__name strong {
+  font-size: 11px;
+  color: #fff;
+}
+#app #router-view .starting-user__vip {
+  gap: 7px;
+  color: #bbb;
+}
+#app #router-view .starting-user__vip img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+#app #router-view .starting-user {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#app #router-view .starting-user {
+  width: 100%;
+  max-width: none;
+  grid-area: 1/1/2/-1;
+  justify-self: stretch;
+  align-self: stretch;
+}
+#app #router-view .starting-user__name > strong {
+  max-width: none;
+  text-overflow: clip;
+  overflow: visible;
+  white-space: normal;
+}
+#app #router-view .starting-user__name {
+  flex: 1;
+  min-width: 0;
+}
+#app #router-view .starting-user__vip {
+  flex: none;
+}
+#app #router-view .poetic-task-balance {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#app #router-view .starting-user {
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+#app #router-view .starting-summary__grid article {
+  display: block;
+  text-align: center;
+}
+#app #router-view .starting-summary__grid article > strong {
+  margin-top: 6px;
+  font-size: 13px;
+}
+#app #router-view .starting-summary {
+  margin: 0;
+  gap: 0;
+  grid-template-rows: auto auto;
+  grid-template-areas: none;
+}
+#app #router-view .psy-start-commission {
+  grid-area: 1/1/2/2;
+}
+#app #router-view .starting-summary__grid {
+  grid-area: 1/2/2/3;
+}
+#app #router-view .starting-summary__bonus {
+  grid-area: 2/1/3/3;
+}
+#app #router-view .starting-summary__bonus > strong {
+  color: #fff;
+}
+#app #router-view .psy-start-balance {
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid #3b3b3b;
+  border-radius: 0;
+  background: none;
+  text-align: center;
+}
+#app #router-view .psy-start-balance > img,
+#app #router-view .starting-summary__rocket,
+#app #router-view .starting-summary__grid img {
+  display: none;
+}
+#app #router-view .psy-start-balance > h3,
+#app #router-view .psy-start-commission > h2,
+#app #router-view .starting-summary__grid h3,
+#app #router-view .starting-summary__bonus h3 {
+  color: #a0a9b7;
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
+#app #router-view .psy-start-balance > strong,
+#app #router-view .starting-summary__commission,
+#app #router-view .starting-summary__grid strong,
+#app #router-view .starting-summary__bonus > strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+#app #router-view .psy-start-balance > strong > small,
+#app #router-view .starting-summary__commission > small {
+  display: block;
+  margin-top: 3px;
+  color: #77818e;
+  font-size: 11px;
+  font-weight: 400;
+}
+#app #router-view .psy-start-balance > p,
+#app #router-view .psy-start-commission > p,
+#app #router-view .starting-summary__grid p {
+  display: none;
+}
+#app #router-view .psy-start-dashboard {
+  padding: 0;
+  background: transparent;
+}
+#app #router-view .starting-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: center;
+}
+#app #router-view .psy-start-commission {
+  padding: 0 6px;
+  border-right: 1px solid #3b3b3b;
+}
+#app #router-view .starting-summary__grid {
+  padding: 0 6px;
+  border: 0;
+  margin: 0;
+}
+#app #router-view .starting-summary__grid article {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+#app #router-view .starting-summary__grid strong {
+  color: #c5c8ce;
+}
+#app #router-view .starting-summary__divider {
+  display: none;
+}
+#app #router-view .starting-summary__bonus {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 12px 6px 0;
+  padding: 9px 0 0;
+  border-top: 1px solid #303030;
+  background: none;
+  text-align: left;
+}
+#app #router-view .starting-summary__bonus > strong {
+  margin: 0;
+  font-size: 12px;
+}
+#app #router-view .starting-summary__claim {
+  padding: 4px 7px;
+  border-radius: 4px;
+  background: #f6b193;
+  color: #111;
+  font-size: 9px;
+  font-weight: 600;
+}
+#app #router-view .poetic-featured {
+  position: relative;
+  padding: 0 0 21px;
+  border: 0;
+  background: none;
+}
+#app #router-view .poetic-featured > h2 {
+  margin: 0 4px 17px;
+  font-size: 16px;
+  font-weight: 700;
+}
+#app #router-view .task-showcase--framed {
+  width: calc(100% + 40px);
+  height: 225px;
+  margin: 0 -20px;
+  aspect-ratio: auto;
+  padding: 8px 70px;
+  gap: 10px;
+  grid-auto-columns: 195px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  background: transparent;
+}
+#app #router-view .task-showcase__card {
+  position: relative;
+  flex: 0 0 195px;
+  width: 195px;
+  height: 100%;
+  border: 1px solid #292929;
+  border-radius: 11px;
+  scroll-snap-align: center;
+}
+#app #router-view .task-showcase__card canvas {
+  opacity: 0;
+}
+#app #router-view.starting-page .task-showcase--framed {
+  display: flex;
+  grid-template: none;
+  height: 225px !important;
+}
+#app #router-view.starting-page .task-showcase--framed {
+  padding-left: 0;
+  padding-right: 0;
+}
+#app #router-view.starting-page .task-showcase--framed::before {
+  content: "";
+  flex: 0 0 70px;
+  height: 100%;
+  border: 1px solid #292929;
+  border-radius: 10px;
+  background: #191919 url("/poetic/task-earphones.png") center/cover no-repeat;
+}
+#app #router-view.starting-page .task-showcase__card:nth-child(2) {
+  background-image: url("/poetic/task-phone.png");
+}
+#app #router-view .poetic-showcase-dots {
+  gap: 4px;
+  margin: 12px 0 31px;
+  height: 4px;
+  min-height: 0;
+  padding: 0;
+}
+#app #router-view .poetic-showcase-dots i {
+  width: 5px;
+  height: 4px;
+  border-radius: 0;
+  background: #333;
+}
+#app #router-view .poetic-showcase-dots i:first-child {
+  width: 22px;
+  background: #fff;
+}
+#app #router-view .starting-action {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 108px;
+  padding: 53px 16px 16px;
+  border: 1px solid #292929;
+  border-radius: 9px;
+  background: #191919;
+  color: #111;
+}
+#app #router-view .psy-start-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(100deg, #ffe8c8, #ffb29d);
+  box-shadow: 0 0 7px #ffe2b796;
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#app #router-view .psy-start-label::before {
+  content: "";
+  width: 16px;
+  height: 21px;
+  background: url("/design500/bolt.png") center/contain no-repeat;
+}
+#app #router-view .psy-start-count {
+  position: absolute;
+  right: 22px;
+  top: 15px;
+  color: #b4b8bf;
+  font-size: 12px;
+}
+#app #router-view .starting-action::before {
+  display: none;
+}
+#app #router-view .design-task-progress {
+  position: relative;
+  padding: 15px 17px 0;
+  border: 1px solid #292929;
+  border-bottom: 0;
+  border-radius: 9px 9px 0 0;
+  background: #191919;
+}
+#app #router-view .design-task-progress > b {
+  display: block;
+  margin-bottom: 17px;
+  color: #fff;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+#app #router-view .design-task-progress > i {
+  display: block;
+  height: 5px;
+  border-radius: 5px;
+  background: #333;
+  overflow: hidden;
+}
+#app #router-view .design-task-progress > i > span {
+  display: block;
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #f9cf71, #ffa698);
+}
+#app #router-view .design-task-progress + .starting-action {
+  min-height: 77px;
+  padding-top: 16px;
+  border-top: 0;
+  border-radius: 0 0 9px 9px;
+}
+#app #router-view .design-task-progress + .starting-action .psy-start-count {
+  top: -42px;
+}
+#app #router-view .psy-start-loading {
+  position: absolute;
+  left: 24px;
+  bottom: 28px;
+  z-index: 1;
+  color: #111;
+}
+#app #router-view .starting-footer {
+  margin: 8px 0 12px;
+  color: #767b87;
+  font-size: 9px;
+  text-align: center;
+}
+#app #router-view .or-main {
+  padding: 17px 20px 0;
+}
+#app #router-view .or-titlebar {
+  margin-bottom: 14px;
+  color: #fff;
+}
+#app #router-view .or-titlebar h1 {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+#app #router-view .or-tabs {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 15px;
+  padding: 4px;
+  border: 1px solid #292929;
+  border-radius: 6px;
+  background: #121212;
+}
+#app #router-view .or-tab {
+  flex: 1;
+  min-width: 0;
+  min-height: 31px;
+  padding: 6px 4px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #9aa1ac;
+  font-size: 11px;
+}
+#app #router-view .or-tab--active {
+  background: #fff;
+  color: #111;
+  font-weight: 600;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .das-footer__item--active {
+  background: transparent;
+}
+#app
+  #router-view:is(.bp-home-page, .starting-page, .records-page)
+  .poetic-navigation
+  .das-footer {
+  border-radius: 0;
+}
+#app #router-view .or-card {
+  margin-bottom: 13px;
+  padding: 14px;
+  border: 1px solid #2b2b2b;
+  border-radius: 8px;
+  background: #191919;
+  color: #fff;
+}
+#app #router-view .or-card__head {
+  padding: 0 0 11px;
+  border-bottom: 1px solid #333;
+  color: #9098a6;
+  font-size: 10px;
+}
+#app #router-view .or-card__status {
+  padding: 3px 9px;
+  border: 1px solid #594518;
+  border-radius: 5px;
+  background: #392e12;
+  color: #ffc400;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+#app #router-view .records-design-status--completed {
+  border-color: #184e3b;
+  background: #142f25;
+  color: #00b88b;
+}
+#app #router-view .records-design-status--frozen {
+  border-color: #60303b;
+  background: #341d24;
+  color: #ff4a6e;
+}
+#app #router-view .or-card__body {
+  gap: 10px;
+  margin: 13px 0;
+  padding: 10px;
+  border-radius: 5px;
+  background: #101010;
+}
+#app #router-view .or-card__image {
+  width: 58px;
+  height: 58px;
+  border-radius: 5px;
+  background: #222;
+}
+#app #router-view .or-card__info h2 {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #fff;
+}
+#app #router-view .records-design-description {
+  color: #9299a7;
+  font-size: 10px;
+}
+#app #router-view .or-card__info > p {
+  margin-top: 5px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+#app #router-view .or-card__stars {
+  color: #b8bdc7;
+  font-size: 10px;
+}
+#app #router-view .or-card__stars img {
+  width: 10px;
+  height: 10px;
+  content: url("/design500/star.png");
+}
+#app #router-view .or-card__foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  padding: 10px;
+  border: 0;
+  border-radius: 5px;
+  background: #141414;
+  text-align: center;
+}
+#app #router-view .or-card__foot > div + div {
+  border-left: 1px solid #292929;
+}
+#app #router-view .or-card__foot span {
+  margin-bottom: 6px;
+  color: #929bab;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+#app #router-view .or-card__foot strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+#app #router-view .or-card__foot > div:nth-child(2) strong {
+  color: #00b88b;
+}
+#app #router-view .or-card__foot em {
+  display: block;
+  margin-top: 5px;
+  color: #788392;
+  font-size: 9px;
+  font-weight: 400;
+}
+#app #router-view .or-card__foot button {
+  grid-column: 1/-1;
+  justify-content: center;
+  min-height: 34px;
+  margin-top: 7px;
+  border: 1px solid #5d471b;
+  border-radius: 5px;
+  background: #312811;
+  color: #edc665;
+  font-size: 11px;
+}
+/* The existing order route is laid out as the reference bottom sheet. */
+#app #router-view.product-details-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 30px;
+  background: #090909;
+  color: #111;
+}
+#app #router-view.product-details-page > .pd-page-header {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 66px;
+  filter: blur(4px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+#app #router-view .pd-content {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  max-height: calc(100% - 90px);
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  border-radius: 24px 24px 0 0;
+  background: #fff;
+}
+#app #router-view .pd-main {
+  position: relative;
+  display: grid;
+  grid-template-columns: 65px minmax(0, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding: 82px 24px 30px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+#app #router-view .pd-cover {
+  grid-column: 1;
+  width: 65px;
+  height: 65px;
+  margin: 0;
+  border: 0;
+  border-radius: 11px;
+  background: #f4f2ee;
+  aspect-ratio: 1;
+}
+#app #router-view .pd-cover > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+#app #router-view .pd-cover small {
+  font-size: 8px;
+}
+#app #router-view .poetic-product-heading {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+#app #router-view .poetic-product-heading h2 {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+#app #router-view .pd-rating {
+  margin-top: 5px;
+  font-size: 10px;
+  color: #777;
+}
+#app #router-view .poetic-product-finance {
+  grid-column: 1/-1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+}
+#app #router-view .poetic-product-section-title {
+  display: none;
+}
+#app #router-view .pd-price {
+  margin: 0 0 13px;
+  padding: 10px 12px;
+  border: 1px solid #ece8e3;
+  border-radius: 6px;
+  background: #f8f7f5;
+  font-size: 11px;
+}
+#app #router-view .pd-price img {
+  width: 13px;
+  height: 13px;
+  content: url("/design500/bolt.png");
+}
+#app #router-view .pd-price strong {
+  font-size: 12px;
+  font-weight: 700;
+}
+#app #router-view .pd-price {
+  flex-direction: row;
+  min-height: 42px;
+}
+#app #router-view .pd-price strong {
+  color: #111;
+}
+#app #router-view .pd-price small {
+  font-size: 10px;
+}
+#app #router-view .pd-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 12px;
+  border: 1px solid #ece8e3;
+  border-radius: 7px;
+  background: #f8f7f5;
+}
+#app #router-view .pd-summary__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  min-height: 42px;
+  margin: 0;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid #e8e5df;
+  border-radius: 0;
+  background: none;
+  color: #111;
+}
+#app #router-view .pd-summary__card:last-child {
+  border: 0;
+}
+#app #router-view .pd-summary__heading {
+  flex: 1;
+  color: #777;
+  font-size: 11px;
+}
+#app #router-view .pd-summary__heading b {
+  font-weight: 400;
+}
+#app #router-view .pd-summary__heading img,
+#app #router-view .pd-summary__decoration {
+  display: none;
+}
+#app #router-view .pd-summary__card > strong {
+  margin: 0;
+  color: #111;
+  font-size: 13px;
+  font-weight: 700;
+}
+#app #router-view .pd-summary__card > small {
+  display: inline;
+  margin: 0;
+  color: #111;
+  font-size: 11px;
+}
+#app #router-view .pd-meta {
+  display: contents;
+}
+#app #router-view .pd-meta__time {
+  position: absolute;
+  left: 24px;
+  top: 23px;
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 11px;
+  color: #888;
+}
+#app #router-view .pd-meta__time > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #111;
+  font-size: 15px;
+  font-weight: 700;
+}
+#app #router-view .pd-meta__time img {
+  width: 24px;
+  height: 24px;
+  content: url("/design500/nav-start.png");
+}
+#app #router-view .pd-meta__time > b {
+  font-size: 10px;
+  font-weight: 400;
+}
+#app #router-view .pd-meta__id {
+  grid-column: 1/-1;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #ece8e3;
+  border-radius: 5px;
+  background: #f8f7f5;
+  color: #888;
+  font-size: 10px;
+}
+#app #router-view .pd-meta__id b {
+  font-weight: 400;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+#app #router-view .pd-meta > .pd-meta__id {
+  flex-direction: row;
+  padding: 12px;
+}
+#app #router-view .pd-meta > .pd-meta__id > b {
+  font-size: 10px;
+}
+#app #router-view .pd-meta > .pd-meta__time {
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  margin: 0;
+}
+#app #router-view .pd-price > span {
+  color: #777;
+}
+#app #router-view .pd-price > strong > small {
+  color: #777;
+}
+#app #router-view .pd-submit,
+#app #router-view .pd-submit--docked {
+  position: static;
+  grid-column: 1/-1;
+  width: 100%;
+  min-height: 47px;
+  margin: 7px 0 0;
+  padding: 12px;
+  border-radius: 10px;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: none;
+  transform: none;
+}
+#app #router-view .pd-submit::before {
+  content: "ϟ";
+  margin-right: 9px;
+  font-size: 19px;
+}
+#app #router-view .pd-submit-end {
+  grid-column: 1/-1;
+}
+/* Rich content and membership continue to use API text and image sources. */
+#app
+  #router-view:is(.tc-page, .faq-page, .service-terms-page, .vip-levels-page) {
+  background: #dfe3c8;
+}
+#app
+  #router-view:is(.tc-page, .faq-page, .service-terms-page, .vip-levels-page)
+  .das-page-head {
+  background: #d5dfbf;
+  color: #141718;
+}
+#app
+  #router-view:is(.tc-page, .faq-page, .service-terms-page, .vip-levels-page)
+  .das-header {
+  background: transparent;
+  color: #141718;
+  border-color: #c9d2b6;
+}
+#app
+  #router-view:is(.tc-page, .faq-page, .service-terms-page, .vip-levels-page)
+  .das-contact {
+  border-color: #c4cbb5;
+}
+#app
+  #router-view:is(.tc-page, .faq-page, .service-terms-page, .vip-levels-page)
+  .das-page-head__title
+  button {
+  border: 0;
+}
+#app
+  #router-view:is(.tc-page, .faq-page, .service-terms-page, .vip-levels-page)
+  .poetic-back-arrow {
+  content: url("/design500/back-black.png");
+}
+#app #router-view .das-content-card {
+  margin: 0;
+  padding: 20px 16px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+#app #router-view .das-rich-text {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #373737;
+}
+#app #router-view .das-rich-text h1 {
+  font-size: 25px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+#app #router-view .das-rich-text h2 {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+#app #router-view .poetic-document-card {
+  margin-bottom: 15px;
+  padding: 20px;
+  border: 1px solid #e6e6dc;
+  border-radius: 7px;
+  background: #fff;
+  color: #333;
+}
+#app #router-view .poetic-document-card__heading {
+  padding-bottom: 15px;
+  border-color: #eee;
+  color: #191b1d;
+  font-size: 15px;
+  font-weight: 700;
+}
+#app #router-view .poetic-document-card__badge {
+  border: 1px solid #dfdefe;
+  border-radius: 4px;
+  background: #f1f1ff;
+  color: #5042ff;
+  font-size: 12px;
+}
+#app #router-view .poetic-document-line {
+  gap: 12px;
+}
+#app #router-view .poetic-document-number {
+  color: #4039ff;
+  font-size: 11px;
+  font-weight: 600;
+}
+#app
+  #router-view
+  .poetic-document-card:nth-child(even)
+  .poetic-document-number {
+  color: #008cce;
+}
+#app #router-view .certificate-page .das-content-card {
+  padding: 36px 20px;
+}
+#app #router-view .activity-page .das-content-card {
+  padding: 0;
+}
+#app #router-view .vip-levels-main {
+  padding: 26px 23px;
+}
+#app #router-view .poetic-vip-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 28px;
+  margin-bottom: 28px;
+  border-bottom: 2px solid #151a14;
+}
+#app #router-view .poetic-vip-intro small {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #606554;
+}
+#app #router-view .poetic-vip-intro h1 {
+  margin: 18px 0 14px;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  font-weight: 700;
+}
+#app #router-view .poetic-vip-intro p {
+  font-size: 13px;
+  color: #626656;
+}
+#app #router-view .poetic-vip-intro > b {
+  align-self: flex-start;
+  padding: 4px 11px;
+  border-radius: 4px;
+  background: #070b05;
+  color: white;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+#app #router-view .poetic-vip-tabs button {
+  border-color: #c6cbb5;
+  background: transparent;
+  color: #333;
+}
+#app #router-view .poetic-vip-tabs .active {
+  background: #111;
+  color: white;
+  border-color: #111;
+}
+#app #router-view .vip-levels-list {
+  gap: 24px;
+}
+#app #router-view .vip-levels-card {
+  padding: 20px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: #f1f3e7 !important;
+  color: #222;
+}
+#app #router-view .vip-levels-card.is-current {
+  border-color: #333;
+  background: #fdfef8 !important;
+}
+#app #router-view .poetic-vip-card-head {
+  gap: 12px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid #d8dcce;
+}
+#app #router-view .poetic-vip-api-icon {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  filter: none;
+}
+#app #router-view .vip-levels-card__head h2 {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #222;
+}
+#app #router-view .vip-levels-card__head > span {
+  padding: 3px 6px;
+  border-radius: 3px;
+  background: #111;
+  color: white;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+#app #router-view .poetic-vip-card-head > div > p {
+  margin-top: 6px;
+  color: #646959;
+  font-size: 11px;
+}
+#app #router-view .poetic-vip-yield small {
+  color: #626957;
+  font-size: 9px;
+}
+#app #router-view .poetic-vip-yield strong {
+  color: #222;
+  font-size: 17px;
+  font-weight: 700;
+}
+#app #router-view .poetic-vip-metrics {
+  gap: 9px;
+  margin: 12px 0;
+}
+#app #router-view .poetic-vip-metrics > div {
+  padding: 10px;
+  border: 0;
+  border-radius: 4px;
+  background: #e9edda;
+}
+#app #router-view .poetic-vip-metrics span {
+  color: #5c6252;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+#app #router-view .poetic-vip-metrics strong {
+  color: #222;
+  font-size: 12px;
+  font-weight: 700;
+}
+#app #router-view .poetic-vip-state {
+  border-color: #d6dacb;
+  color: #6c725c;
+  background: transparent;
+}
+#app #router-view .poetic-vip-state.is-current {
+  color: #00694e;
+}
+#app #router-view .poetic-vip-state strong {
+  background: #eef0e8;
+  color: #222;
+  font-size: 9px;
+}
+#app #router-view .poetic-vip-description {
+  color: #626956;
+}
+/* Support, notifications and language list. */
+#app #router-view.contact-page {
+  display: flex;
+  flex-direction: column;
+  background: #f0eee7;
+}
+#app #router-view .contact-design-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 22px 16px 0;
+  background: none;
+}
+#app #router-view .psy-contact-hero {
+  margin-bottom: 31px;
+  padding: 0;
+  background: none;
+}
+#app #router-view .contact-design-hero {
+  display: none;
+}
+#app #router-view .psy-contact-hero {
+  min-height: 0;
+}
+#app #router-view .psy-contact-hero-copy {
+  position: static;
+  padding: 0;
+}
+#app #router-view .contact-design-intro {
+  margin: 0 0 14px;
+}
+#app #router-view .contact-design-body {
+  min-height: calc(100% - 64px);
+}
+#app #router-view .contact-design-channels {
+  margin: 0;
+}
+#app #router-view .psy-contact-hero-copy h2 {
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.7px;
+  color: #1b2434;
+}
+#app #router-view .psy-contact-hero-copy h2 span,
+#app #router-view .psy-contact-hero-copy h2 b {
+  display: inline;
+  font-weight: 700;
+  color: inherit;
+}
+#app #router-view .psy-contact-hero-copy p {
+  margin-top: 12px;
+  color: #52556a;
+  font-size: 13px;
+  line-height: 1.65;
+}
+#app #router-view .contact-design-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: #23283a;
+}
+#app #router-view .contact-design-heading h2 {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+#app #router-view .contact-design-heading h3 {
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: #e8e8fa;
+  font-size: 10px;
+}
+#app #router-view .contact-design-intro {
+  margin-bottom: 14px;
+  color: #666;
+  font-size: 12px;
+}
+#app #router-view .contact-design-channels {
+  gap: 14px;
+}
+#app #router-view .contact-design-channels > button {
+  display: grid;
+  grid-template-columns: 43px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  min-height: 153px;
+  padding: 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #fff;
+  color: #242b3d;
+}
+#app #router-view .contact-design-channel__icon {
+  width: 43px;
+  height: 43px;
+  object-fit: contain;
+  border-radius: 11px;
+}
+#app #router-view .contact-design-channel__copy b {
+  color: #242b3d;
+  font-size: 16px;
+  font-weight: 700;
+}
+#app #router-view .contact-design-channel__copy small {
+  color: #52556a;
+  font-size: 11px;
+}
+#app #router-view .contact-design-channel__action {
+  position: static;
+  grid-column: 1/-1;
+  justify-self: end;
+  padding: 8px 15px;
+  border-radius: 8px;
+  background: #3027d7;
+  color: white;
+  font-size: 12px;
+}
+#app
+  #router-view
+  .contact-design-channels
+  > button:first-child
+  .contact-design-channel__action {
+  background: #2c3345;
+}
+#app #router-view .contact-design-channel__action img {
+  width: 12px;
+  height: 12px;
+  filter: brightness(0) invert(1);
+}
+#app #router-view .contact-design-service-info {
+  padding: 24px 3px;
+  margin-bottom: 25px;
+  border: 0;
+  background: transparent;
+  color: #666;
+  font-size: 11px;
+  line-height: 1.7;
+}
+#app #router-view .contact-design-copyright {
+  display: block;
+  min-height: 0;
+  margin: auto -16px 0;
+  padding: 17px 16px;
+  background: #111;
+  color: #61616a;
+  font-size: 9px;
+}
+#app #router-view .bp-notifications-list {
+  padding: 22px 16px;
+}
+#app #router-view .bp-notification-card {
+  gap: 13px;
+  margin-bottom: 10px;
+  padding: 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #fff;
+}
+#app #router-view .an-card__cover {
+  width: 40px;
+  height: 40px;
+  background: none;
+}
+#app #router-view .an-card__cover img {
+  content: url("/design500/notice.png");
+}
+#app #router-view .bp-notification-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+#app #router-view .bp-notification-card__head b {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+#app #router-view .bp-notification-card__head time {
+  font-size: 11px;
+  color: #888;
+}
+#app #router-view .bp-notification-card__content {
+  margin-top: 11px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #555;
+}
+#app #router-view .poetic-language-current {
+  padding: 18px 17px 0;
+}
+#app #router-view .poetic-language-current > h2,
+#app #router-view .language-body > h2 {
+  margin: 0 7px 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #62655f;
+}
+#app #router-view .poetic-language-current__card {
+  padding: 20px 12px;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+}
+#app #router-view .poetic-language-code {
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  background: #f0eee7;
+  color: #222;
+  font-size: 11px;
+  font-weight: 700;
+}
+#app #router-view .poetic-language-current__card .poetic-language-code {
+  background: #000;
+  color: white;
+}
+#app #router-view .poetic-language-current__card strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+#app #router-view .poetic-language-current__card i {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: #000;
+  color: white;
+  font-size: 12px;
+}
+#app #router-view .language-body {
+  padding: 18px 17px 0;
+}
+#app #router-view .poetic-language-list {
+  gap: 0;
+  background: #fff;
+}
+#app #router-view .poetic-language-list > button {
+  min-height: 82px;
+  padding: 18px 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+#app #router-view .language-option b {
+  font-size: 17px;
+  font-weight: 600;
+}
+#app #router-view .language-option small {
+  color: #70716d;
+  font-size: 11px;
+}
+#app #router-view .poetic-language-check {
+  width: 23px;
+  height: 23px;
+  border-radius: 6px;
+  background: #e5e3dc;
+  color: #fff;
+  font-size: 12px;
+}
+#app #router-view .poetic-language-list > button.active .poetic-language-check {
+  background: #000;
+}
+/* Teleported modal styles share the same palette and type. */
+.van-dialog.das-status-dialog {
+  width: min(76vw, 300px);
+  border-radius: 8px;
+  background: #343433;
+  color: #fff;
+  font-family: Design500, Arial, sans-serif;
+}
+.status-dialog {
+  padding: 18px;
+}
+.status-dialog__icon {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 12px;
+  background: url("/design500/error.png") center/contain no-repeat;
+}
+.status-dialog h2 {
+  font-size: 16px;
+}
+.status-dialog p {
+  color: #a0a0a0;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.status-dialog > button {
+  height: 36px;
+  margin-top: 15px;
+  border-radius: 10px;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+}
+.security-dialog,
+.profile-logout-modal {
+  font-family: Design500, Arial, sans-serif;
+}
+.security-dialog .pay-password-drawer__sheet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  width: min(76vw, 300px);
+  margin: 0;
+  padding: 19px 18px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #343433;
+  color: #fff;
+}
+.security-dialog .psy-security-icon {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 13px;
+}
+.security-dialog .pay-password-drawer__title {
+  margin: 0 0 17px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.security-dialog .pay-password-drawer__field label {
+  margin-bottom: 7px;
+  color: #c7c7ca;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.security-dialog .security-dialog__input-row {
+  height: 39px;
+  padding: 0 10px;
+  border: 1px solid #dedee2;
+  border-radius: 5px;
+  background: white;
+  color: #333;
+}
+.security-dialog .pay-password-drawer__input {
+  height: 36px;
+  background: transparent;
+  color: #111;
+  font-size: 13px;
+}
+.security-dialog .pay-password-drawer__foot {
+  gap: 9px;
+  margin-top: 17px;
+}
+.security-dialog .pay-password-drawer__btn {
+  min-height: 35px;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.security-dialog .pay-password-drawer__btn--cancel {
+  background: #111;
+  color: #bdbdbd;
+}
+.security-dialog .pay-password-drawer__btn--confirm {
+  background: #fff;
+  color: #111;
+}
+.profile-logout-modal__sheet {
+  width: min(83vw, 340px);
+  padding: 22px;
+  border: 1px solid #30302f;
+  border-radius: 12px;
+  background: #1c1c1b;
+  color: #fff;
+}
+.poetic-logout-label {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 15px;
+  background: url("/design500/logout-dialog.png") center/contain no-repeat;
+}
+.poetic-logout-label > * {
+  display: none;
+}
+.profile-logout-modal__sheet h2 {
+  font-size: 17px;
+}
+.profile-logout-modal__sheet p {
+  color: #999;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.profile-logout-modal__actions {
+  gap: 11px;
+  margin-top: 24px;
+}
+.profile-logout-modal__actions > button {
+  min-height: 40px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.profile-logout-modal__actions .profile-logout-modal__cancel {
+  background: #323231;
+  color: #fff;
+}
+.profile-logout-modal__actions .profile-logout-modal__confirm {
+  background: #e72125;
+  color: #fff;
+}
+.van-dialog.bonus-dialog {
+  width: min(90vw, 370px) !important;
+  border-radius: 0;
+  background: transparent;
+}
+.bonus-prize > button {
+  border-radius: 22px;
+  background: #087d1b;
+  color: white;
+}
+#app #router-view .language-option {
+  display: block;
+  color: #222;
+}
+#app #router-view .language-option b,
+#app #router-view .poetic-language-current__card strong {
+  color: #222;
+}
+#app #router-view .language-body {
+  margin: 0;
+  background: transparent;
+  border-radius: 0;
+}
+#app #router-view .poetic-language-check {
+  border: 0;
+}
+#app #router-view .psy-contact-hero-copy p {
+  display: block;
+}
+#app #router-view .psy-contact-hero-copy h2 span {
+  margin-right: 0.2em;
+}
+#app #router-view .profile-footer {
+  width: 100%;
+  margin: 0;
+}
+#app #router-view .profile-stat > strong {
+  color: #111;
+}
+#app #router-view .profile-card__vip {
+  border-color: #e7dcc2;
+}
+#app #router-view .profile-avatar-display__portrait {
+  border-radius: 10px;
+}
+#app #router-view .profile-edit-image::after {
+  display: none;
+}
+#app #router-view .poetic-profile-finance button .das-icon {
+  filter: grayscale(1);
+  opacity: 0.7;
+}
+#app #router-view .poetic-profile-finance button:first-child .das-icon {
+  content: url("/design500/plus.png");
+  filter: none;
+}
+#app #router-view .poetic-profile-finance button:nth-child(2) .das-icon {
+  content: url("/design500/exit.png");
+  filter: none;
+}
+#app #router-view .psy-contact-hero-copy h2 {
+  min-height: 0;
+  font-family: inherit;
+}
+#app #router-view .psy-contact-hero-copy p {
+  font-family: inherit;
+  text-transform: none;
+}
+#app #router-view .contact-design-intro {
+  display: block;
+}
+#app #router-view .contact-design-copyright {
+  width: calc(100% + 32px);
+}
+#app #router-view .security-form__note > button {
+  width: auto;
+  border: 0;
+  justify-content: initial;
+  color: #333;
+  text-decoration: underline;
+}
+#app #router-view .security-form__note > button::after {
+  display: none;
+}
+#app #router-view .withdraw-history-meta {
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+  padding: 0;
+}
+#app #router-view .withdraw-history-list > article > p {
+  margin-left: 0;
+}
+#app #router-view .pd-main {
+  padding-top: 88px;
+}
+#app #router-view .pd-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#app #router-view .pd-price > strong {
+  display: block;
+  margin: 0;
+  font-style: normal;
+}
+.profile-logout-modal__mask {
+  background: #000;
+}
+.profile-logout-modal__sheet::before {
+  display: none;
+}
+.profile-logout-modal__close {
+  width: 27px;
+  height: 27px;
+  border: 1px solid #373736;
+  border-radius: 8px;
+  background: #272726;
+}
+.security-dialog .pay-password-drawer__btn {
+  border: 0;
+}
+.security-dialog .pay-password-drawer__field em {
+  display: none;
+}
+.van-toast--success {
+  background: #1c8a24;
+  color: white;
+}
+.bonus-prize {
+  aspect-ratio: 1168/1064;
+  margin-bottom: 68px;
+}
+.psy-bonus-background {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.psy-bonus-amount {
+  left: 19%;
+  right: 19%;
+  top: 58%;
+  height: 13.5%;
+  background: #fff5df;
+  color: #743b00;
+  font:
+    700 27px/1 Design500,
+    Arial,
+    sans-serif;
+  border-radius: 12px;
+}
+.psy-bonus-hint {
+  top: 103%;
+  left: 0;
+  right: 0;
+  color: #fff;
+  font-family: Design500, Arial, sans-serif;
+}
+.bonus-prize > button {
+  top: 78.5%;
+  left: 20.5%;
+  width: 59%;
+  height: 13%;
+  border: 2px solid #dbef2a;
+  background: #087d1b url("/design500/claim.png") center/100% 100% no-repeat;
+  color: #fff;
+  font:
+    600 15px Design500,
+    Arial,
+    sans-serif;
+  box-shadow: none;
+  text-shadow: none;
+}
+.design-bonus-close {
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+}
+#app #router-view .design-order-close {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 9px;
+  background: #f1f1f1;
+  color: #777;
+  font-size: 24px;
+  line-height: 1;
+}
+#app #router-view .pd-cover,
+#app #router-view .poetic-product-heading {
+  order: 1;
+}
+#app #router-view .poetic-product-finance {
+  order: 2;
+}
+#app #router-view .pd-meta > .pd-meta__id {
+  order: 3;
+}
+#app #router-view .pd-submit {
+  order: 4;
+}
+#app #router-view .pd-submit-end {
+  order: 5;
+}
+#app #router-view .design-order-cancel {
+  grid-column: 1/-1;
+  order: 6;
+  padding: 7px;
+  color: #777;
+  font-size: 11px;
+  text-align: center;
+}
+.van-dialog.submit-loading-dialog {
+  left: 50%;
+  top: auto;
+  bottom: 92px;
+  transform: translateX(-50%);
+  width: min(calc(100vw - 48px), 572px);
+  border-radius: 10px !important;
+  background: #000;
+  color: #fff;
+}
+.submit-loading-dialog .starting-match__card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px;
+}
+.submit-loading-dialog .starting-match__spinner {
+  margin: 0;
+  width: 22px;
+  height: 22px;
+  color: #fff !important;
+}
+.submit-loading-dialog .starting-match__card h2 {
+  margin: 0;
+  font:
+    600 13px Design500,
+    Arial,
+    sans-serif;
+}
+.submit-loading-dialog .starting-match__card p,
+.submit-loading-dialog .starting-match__processing {
+  display: none;
+}
+.submit-loading-overlay {
+  background: transparent;
+}
+#app #router-view .psy-welcome-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+}
+#app #router-view .psy-welcome-header > img {
+  content: url("/design500/logo-white.png");
+  width: 103px;
+  height: auto;
+  filter: none;
+  opacity: 1;
+}
+#app #router-view .register-top {
+  text-align: left;
+}
+.profile-logout-modal {
+  align-items: center;
+  justify-content: center;
+}
+.profile-logout-modal__sheet {
+  position: relative;
+  min-height: 0;
+  text-align: center;
+}
+.profile-logout-modal__sheet h2 {
+  margin: 0 0 8px;
+}
+.profile-logout-modal__sheet p {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+.profile-logout-modal__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.profile-logout-modal__actions .profile-logout-modal__cancel {
+  order: 0;
+}
+.profile-logout-modal__actions .profile-logout-modal__confirm {
+  order: 1;
+}
+#app #router-view.starting-page .task-showcase__card:nth-child(3) {
+  background-image: url("/poetic/task-camera.png");
+}
+.van-dialog.bonus-dialog {
+  width: min(78vw, 330px) !important;
+}
+.psy-bonus-background {
+  clip-path: polygon(
+    0 18%,
+    20% 18%,
+    20% 12%,
+    26% 12%,
+    26% 0,
+    63% 0,
+    63% 8%,
+    85% 8%,
+    85% 18%,
+    100% 18%,
+    100% 100%,
+    0 100%
+  );
+}
+
+#app #router-view .starting-user {
+  display: none;
+}
+#app #router-view .poetic-task-balance {
+  padding: 16px 10px;
+  margin-bottom: 25px;
+}
+#app #router-view .starting-summary h2,
+#app #router-view .starting-summary h3 {
+  margin: 0;
+}
+#app #router-view .language-option b,
+#app #router-view .language-option small {
+  display: block;
+}
+#app #router-view .poetic-language-code {
+  border: 0;
+}
+#app #router-view .or-card__date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+#app #router-view .or-card__date img {
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+}
+#app #router-view .deposit-pending-orders > h2 {
+  margin: 18px 4px 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+#app #router-view.deposit-page .or-card {
+  padding: 13px;
+  background: #fff;
+  border-color: #e6e2d9;
+  color: #222;
+}
+#app #router-view.deposit-page .or-card__body {
+  background: #f8f7f3;
+}
+#app #router-view.deposit-page .or-card__head {
+  border-color: #eee;
+}
+#app #router-view.deposit-page .or-card__info h2,
+#app #router-view.deposit-page .or-card__info > p {
+  color: #222;
+}
+#app #router-view.deposit-page .or-card__foot {
+  background: #f6f5f0;
+}
+#app #router-view.deposit-page .or-card__foot strong {
+  color: #222;
+}
+#app #router-view.deposit-page .or-card__foot > div:nth-child(2) strong {
+  color: #008d64;
+}
+#app #router-view.deposit-page .or-card__foot > div + div {
+  border-color: #e4dfd3;
+}
+#app #router-view.deposit-page .or-card__foot button {
+  background: #111;
+  color: white;
+  border-color: #111;
+}
+@media (max-width: 359px) {
+  #app #router-view .das-header {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  #app #router-view .das-contact {
+    font-size: 9px;
+  }
+  #app #router-view .das-header__actions {
+    gap: 8px;
+  }
+  #app #router-view .profile-main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  #app #router-view .poetic-profile-identity {
+    gap: 13px;
+    padding: 18px 14px;
+  }
+  #app #router-view .profile-referral-inline {
+    left: 14px;
+    right: 14px;
+  }
+  #app #router-view .profile-card__hello > strong {
+    font-size: 17px;
+  }
+  #app #router-view .psy-login-hero {
+    font-size: 26px;
+  }
+}

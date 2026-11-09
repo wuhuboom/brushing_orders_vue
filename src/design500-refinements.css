@@ -1,0 +1,2372 @@
+/* Layout and supplied-icon corrections. PC keeps the same single-column H5 layout. */
+:root {
+  --design-shell: min(100vw, var(--das-app-max-width, 960px), 620px);
+}
+#app #router-view img {
+  content: normal !important;
+  vertical-align: middle;
+}
+#app #router-view button,
+.van-dialog button {
+  font-family: inherit;
+  line-height: 1.25;
+}
+#app #router-view .poetic-glyph {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex: none;
+}
+#app #router-view .poetic-back-arrow {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transform: none;
+  filter: none;
+}
+#app #router-view .das-page-head__title > button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+}
+#app #router-view .das-page-head__title h1 {
+  margin: 0;
+  line-height: 1.25;
+}
+#app #router-view .das-page-head__title {
+  gap: 8px;
+  align-items: center;
+}
+#app #router-view .das-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+#app #router-view .das-select__trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#app #router-view .das-select__label {
+  line-height: 1.3;
+}
+#app #router-view .das-select__chevron {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  transform: rotate(90deg);
+}
+#app #router-view .das-select__check {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+#app #router-view .reference-eye {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: none;
+  opacity: 1;
+}
+#app #router-view .reference-eye.is-hidden {
+  opacity: 0.75;
+}
+#app #router-view .language-current-check,
+#app #router-view .poetic-language-check img {
+  width: 23px;
+  height: 23px;
+  object-fit: contain;
+}
+#app #router-view .poetic-language-current__card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+#app #router-view .poetic-language-current__card strong {
+  flex: 1;
+}
+#app #router-view .method-item__actions button {
+  display: grid;
+  place-items: center;
+}
+#app #router-view .method-item__actions img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+#app #router-view .psy-welcome-header button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+#app #router-view .psy-welcome-header button img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+#app #router-view .psy-language-link img {
+  filter: invert(1);
+}
+#app #router-view .welcome-secondary > img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+#app #router-view .welcome-actions > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 46px;
+}
+#app #router-view.welcome-page {
+  padding: 100px 0 60px;
+}
+#app #router-view .welcome-actions {
+  width: calc(100% - 48px);
+}
+#app #router-view .auth-submit,
+#app #router-view .register-submit,
+#app #router-view .poetic-profile-finance button,
+#app #router-view .profile-menu__row,
+#app #router-view .auth-options,
+#app #router-view .auth-options > label,
+#app #router-view .register-agree,
+#app #router-view .withdraw-submit {
+  display: flex;
+  align-items: center;
+}
+#app #router-view .auth-submit,
+#app #router-view .register-submit,
+#app #router-view .poetic-profile-finance button,
+#app #router-view .withdraw-submit {
+  justify-content: center;
+  gap: 7px;
+}
+#app #router-view .auth-submit::before,
+#app #router-view .auth-submit::after,
+#app #router-view .register-submit::before {
+  display: none;
+}
+#app #router-view .auth-submit img {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+}
+#app #router-view .poetic-auth-bar > button.poetic-login-back,
+#app #router-view .poetic-auth-bar > button.psy-register-back {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  width: 32px;
+  height: 36px;
+  margin-left: -8px;
+}
+#app #router-view .poetic-auth-bar .poetic-back-arrow {
+  width: 32px;
+  height: 32px;
+}
+#app #router-view .poetic-auth-bar {
+  gap: 9px;
+}
+#app #router-view .poetic-auth-bar h1,
+#app #router-view .poetic-auth-bar h2 {
+  margin: 0;
+  line-height: 1.25;
+}
+#app #router-view .auth-language {
+  display: flex;
+  align-items: center;
+  position: static;
+  height: 27px;
+  margin-left: auto;
+  transform: none;
+}
+#app #router-view .language-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 68px;
+  height: 27px;
+  padding: 0 10px;
+  line-height: 1;
+}
+#app #router-view .language-globe {
+  display: block;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  padding: 0;
+}
+#app #router-view .language-globe img {
+  position: static;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: none;
+}
+#app
+  #router-view
+  .language-button
+  > span:not(.language-globe):not(.language-chevron) {
+  display: block;
+  line-height: 1;
+}
+#app #router-view .language-chevron {
+  display: none;
+}
+#app #router-view .language-menu {
+  left: auto;
+  right: 17px;
+  top: 61px;
+  width: 170px;
+}
+#app #router-view .auth-kicker,
+#app #router-view .register-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 15px;
+}
+#app #router-view .auth-kicker::before,
+#app #router-view .register-kicker::before {
+  flex: none;
+  margin: 0;
+}
+#app #router-view .fp-auth__eye {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  right: 8px;
+  bottom: 6px;
+  padding: 0;
+}
+#app #router-view .password-field > input {
+  padding-right: 48px;
+}
+#app #router-view .auth-options {
+  justify-content: space-between;
+  gap: 12px;
+}
+#app #router-view .auth-options > label {
+  gap: 7px;
+  line-height: 18px;
+}
+#app #router-view .auth-options > button {
+  line-height: 18px;
+  padding: 0;
+}
+#app #router-view .auth-options input {
+  appearance: none;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+}
+#app #router-view .auth-options input:checked {
+  background: #fff url("/design500/check-neutral.png") center/16px 16px
+    no-repeat;
+}
+#app #router-view .register-top {
+  align-items: stretch;
+  gap: 0;
+  padding: 23px 24px 0;
+  text-align: left;
+}
+#app #router-view .register-top .register-kicker {
+  margin: 0;
+  text-align: left;
+  justify-content: flex-start;
+}
+#app #router-view .register-form {
+  padding-top: 12px;
+}
+#app #router-view .register-form > h1 {
+  margin: 0 0 12px;
+  font-size: 30px;
+  text-align: left;
+}
+#app #router-view .register-form > h1 em {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+}
+#app #router-view .register-form .register-hint {
+  display: block;
+  margin: 0 0 28px;
+  color: #999;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: left;
+}
+#app #router-view .register-control__end-icon {
+  width: 28px;
+  height: 28px;
+  right: 9px;
+  object-fit: contain;
+}
+#app #router-view .phone-country-button,
+#app #router-view .phone-number-control {
+  display: flex;
+  align-items: center;
+}
+#app #router-view .phone-country-chevron {
+  width: 20px;
+  height: 20px;
+  transform: rotate(90deg);
+}
+#app #router-view .phone-country-code {
+  display: block;
+  line-height: 1;
+}
+#app #router-view .phone-number-control input {
+  height: 46px;
+  line-height: normal;
+}
+#app #router-view .register-agree {
+  gap: 8px;
+  min-height: 24px;
+  margin: 18px 0;
+  line-height: 1.5;
+}
+#app #router-view .register-agree > span {
+  display: block;
+}
+#app #router-view .register-agree input {
+  appearance: none;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1px solid #a3a3a3;
+  border-radius: 2px;
+  background: #fff;
+}
+#app #router-view .register-agree input:checked {
+  border-color: #ec9473;
+  background: #ec9473 url("/design500/check-white.png") center/24px 24px
+    no-repeat;
+}
+#app #router-view .register-submit {
+  min-height: 49px;
+}
+#app #router-view .register-submit::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url("/design500/arrow.png") center/contain no-repeat;
+}
+
+/* Identity card and wallet use normal flow, so referral and avatar never overlap. */
+#app #router-view.profile-page > .das-header .das-brand img {
+  filter: invert(1);
+}
+#app #router-view.profile-page > .das-header .das-avatar {
+  display: none;
+}
+#app #router-view .poetic-profile-identity {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+  min-height: 0;
+  padding: 22px;
+}
+#app #router-view .profile-avatar-block {
+  position: relative;
+  align-self: start;
+}
+#app #router-view .profile-avatar-display__online {
+  display: none;
+}
+#app #router-view .profile-avatar-display,
+#app #router-view .profile-avatar-display__portrait {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: inherit;
+}
+#app #router-view .profile-avatar-block .my-profile-avatar {
+  display: block;
+  height: 56px;
+  border-radius: 12px;
+  box-shadow: none;
+}
+#app #router-view .profile-avatar-block .profile-avatar {
+  height: 56px;
+}
+#app #router-view .profile-avatar-block .profile-avatar--design {
+  border: 0;
+  border-radius: 10px;
+}
+#app #router-view .profile-avatar-block .profile-avatar-display__portrait img {
+  display: block;
+  border: 0;
+  border-radius: inherit;
+}
+#app #router-view .profile-edit-image {
+  left: auto;
+  right: -7px;
+  top: 40px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: transparent;
+}
+#app #router-view .profile-edit-image img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+#app #router-view .profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  min-height: 62px;
+  margin: 0;
+  padding: 0 0 12px;
+  border-bottom: 2px solid #e1d8c2;
+}
+#app #router-view .profile-card__hello {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+#app #router-view .profile-card__hello > strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 20px;
+  line-height: 1.2;
+}
+#app #router-view .profile-card__hello > strong::after {
+  display: none;
+}
+#app #router-view .profile-name-check {
+  display: block;
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+#app #router-view .profile-card__vip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  padding: 4px 9px;
+  min-height: 21px;
+}
+#app #router-view .profile-card__vip::before {
+  display: none;
+}
+#app #router-view .profile-card__vip img {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+}
+#app #router-view .profile-card__vip strong {
+  display: block;
+  padding-top: 2px;
+  line-height: 1;
+}
+#app #router-view .profile-referral-inline {
+  position: static;
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+#app #router-view .profile-referral-inline > span {
+  flex: 1;
+  font-size: 10px;
+  line-height: 1.3;
+}
+#app #router-view .profile-referral-inline__value {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 1 auto;
+  gap: 8px;
+  min-width: 0;
+}
+#app #router-view .profile-referral-inline b {
+  display: block;
+  width: auto;
+  max-width: 130px;
+  white-space: nowrap;
+  font-size: 11px;
+  line-height: 1.2;
+}
+#app #router-view .profile-referral-inline button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 26px;
+  padding: 4px 8px;
+}
+#app #router-view .profile-referral-inline button img {
+  width: 14px;
+  height: 14px;
+}
+#app #router-view .profile-referral-inline button span {
+  line-height: 1;
+}
+#app #router-view .profile-stats {
+  gap: 0;
+}
+#app #router-view .profile-stat:first-child {
+  margin-bottom: 18px;
+}
+#app #router-view .profile-stat:first-child > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 13px;
+}
+#app #router-view .profile-stat:first-child .poetic-glyph {
+  width: 24px;
+  height: 24px;
+}
+#app #router-view .profile-stat:not(:first-child) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  margin: 0;
+  min-height: 62px;
+  padding: 10px;
+  border: 1px solid #e7ddc4;
+  border-radius: 7px 0 0 7px;
+}
+#app #router-view .profile-stat:nth-child(3) {
+  border-left: 0;
+  border-radius: 0 7px 7px 0;
+}
+#app #router-view .profile-stat:not(:first-child) > span {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.35;
+}
+#app #router-view .profile-stat:not(:first-child) > strong {
+  flex: none;
+  font-size: 13px;
+  line-height: 1.2;
+}
+#app #router-view .poetic-profile-finance button {
+  line-height: 1;
+}
+#app #router-view .poetic-profile-finance .das-icon {
+  width: 22px;
+  height: 22px;
+  opacity: 1;
+}
+#app #router-view .profile-menu__row {
+  gap: 12px;
+  min-height: 68px;
+}
+#app #router-view .profile-menu__row b {
+  flex: 1;
+  line-height: 1.3;
+}
+#app #router-view .profile-menu__arrow {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  transform: none;
+}
+#app #router-view.profile-page .profile-section {
+  border-radius: 0;
+  background: #faf7ef;
+  overflow: visible;
+}
+#app #router-view.profile-page .profile-menu {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+#app #router-view.profile-page .profile-credit + .profile-section {
+  border: 1px solid #e1d8c3;
+  border-bottom: 0;
+  border-radius: 9px 9px 0 0;
+}
+#app #router-view.profile-page .profile-section:last-of-type {
+  border: 1px solid #e1d8c3;
+  border-top: 0;
+  border-radius: 0 0 9px 9px;
+  overflow: hidden;
+}
+#app #router-view.profile-page .profile-menu__row {
+  border: 0;
+  border-bottom: 1px solid #e1d8c3;
+  border-radius: 0;
+}
+#app
+  #router-view.profile-page
+  .profile-section:last-of-type
+  .profile-menu__row:last-child {
+  border-bottom: 0;
+}
+#app #router-view .profile-credit {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 14px;
+  min-height: 0;
+  padding: 24px 20px 20px;
+}
+#app #router-view .profile-credit > span {
+  grid-column: 1/-1;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #756e60;
+  font-size: 10px;
+}
+#app #router-view .profile-credit > strong {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  color: #1e1e1b;
+  font-size: 30px;
+  line-height: 1;
+  text-align: left;
+}
+#app #router-view .profile-credit > strong small {
+  margin-left: 4px;
+  color: #756e60;
+  font-size: 14px;
+  font-weight: 400;
+}
+#app #router-view .profile-credit > span::before {
+  display: none;
+}
+#app #router-view .profile-credit > i {
+  grid-column: 1/-1;
+  grid-row: 3;
+  width: 100%;
+  height: 8px;
+  margin: 22px 0 10px;
+  background: #f2ecd9;
+}
+#app #router-view .poetic-credit-detail {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-height: 28px;
+  margin: 0;
+  padding: 5px 12px;
+  border: 1px solid #e2d6b9;
+  border-radius: 7px;
+  background: #ece2c9;
+  color: #1e1e1b;
+  line-height: 1;
+}
+#app #router-view .poetic-credit-detail > .poetic-glyph,
+#app #router-view .poetic-credit-detail span {
+  display: none;
+}
+#app #router-view .poetic-credit-detail b {
+  display: block;
+  margin: 0;
+  color: inherit;
+  font-size: 12px;
+}
+#app #router-view .profile-credit__scale {
+  grid-column: 1/-1;
+  grid-row: 4;
+  display: flex;
+  justify-content: space-between;
+  color: #756e60;
+  font-size: 10px;
+  line-height: 1;
+}
+
+#app #router-view .poetic-document-card__heading .poetic-document-card__badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  min-width: 26px;
+  height: 26px;
+  margin: 0;
+  padding: 2px 0 0;
+  line-height: 1;
+  text-align: center;
+}
+#app #router-view .poetic-language-code {
+  display: grid;
+  place-items: center;
+  padding-top: 2px;
+  line-height: 1;
+}
+#app #router-view.language-page .language-body {
+  padding: 18px 16px 0;
+}
+#app #router-view .language-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 6px 14px;
+  color: #555955;
+}
+#app #router-view .language-list-heading h2,
+#app #router-view .language-list-heading > span {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 1px;
+}
+#app #router-view .language-list-heading h2 {
+  text-transform: uppercase;
+}
+#app #router-view.language-page .poetic-language-list {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+}
+#app #router-view.language-page .poetic-language-list > button {
+  display: grid;
+  grid-template-columns: 35px minmax(0, 1fr) 23px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 72px;
+  padding: 14px 12px;
+  background: transparent;
+  text-align: left;
+}
+#app
+  #router-view.language-page
+  .poetic-language-list
+  > button.active
+  .poetic-language-code {
+  background: #000;
+  color: #fff;
+}
+#app #router-view.language-page .language-option {
+  min-width: 0;
+}
+#app #router-view.language-page .language-option b {
+  font-size: 17px;
+  line-height: 1.25;
+}
+#app #router-view.language-page .language-option small {
+  margin-top: 4px;
+  color: #656965;
+  font-size: 12px;
+  line-height: 1.25;
+}
+#app #router-view.language-page .poetic-language-check {
+  display: grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  border: 0;
+  border-radius: 6px;
+}
+
+/* Account information and security rows. */
+#app #router-view .poetic-account-person {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0;
+}
+#app #router-view .poetic-account-identity {
+  padding: 19px;
+  margin-bottom: 20px;
+}
+#app #router-view .poetic-account-avatar {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  overflow: visible;
+}
+#app #router-view .poetic-account-avatar > img {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+#app #router-view .poetic-account-avatar > i {
+  position: absolute;
+  right: -5px;
+  bottom: -2px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+#app #router-view .poetic-account-avatar .poetic-glyph {
+  width: 24px;
+  height: 24px;
+}
+#app #router-view .poetic-account-person h2 {
+  margin: 0;
+  font-size: 23px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+#app #router-view .poetic-account-person p,
+#app #router-view .poetic-account-tags {
+  display: none;
+}
+#app #router-view .account-info-actions {
+  gap: 0;
+  padding: 0;
+  background: transparent;
+}
+#app #router-view .account-info-action {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 74px;
+  margin: 0;
+  padding: 17px 16px;
+  border: 0;
+  border-radius: 6px 6px 0 0;
+  background: #fff;
+}
+#app #router-view .account-info-action + .account-info-action {
+  border-top: 1px solid #efede6;
+  border-radius: 0 0 6px 6px;
+}
+#app #router-view .account-info-action > i {
+  position: static;
+  display: block;
+  order: -1;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+#app #router-view .account-info-action .poetic-glyph {
+  width: 35px;
+  height: 35px;
+}
+#app #router-view .account-info-action > span {
+  flex: 1;
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.3;
+}
+#app #router-view .account-info-action small {
+  display: none;
+}
+#app #router-view .account-info-action::after {
+  content: "";
+  position: static;
+  width: 20px;
+  height: 20px;
+  background: url("/design500/chevron-black.png") center/contain no-repeat;
+}
+#app #router-view .withdraw-history {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+}
+#app #router-view .withdraw-history img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+#app #router-view .withdraw-form-field--password > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+#app #router-view .withdraw-form-field--password > span > button {
+  color: #777;
+  font-size: 10px;
+  line-height: 1.3;
+  text-decoration: underline;
+  text-transform: none;
+}
+#app #router-view .withdraw-eye-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+}
+#app #router-view .withdraw-submit {
+  min-height: 46px;
+}
+#app #router-view .withdraw-submit > img {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+#app #router-view .psy-withdraw-reminder > img {
+  width: 26px;
+  height: 26px;
+}
+#app #router-view .withdraw-record-tabs {
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+#app #router-view .withdraw-record-tab {
+  min-height: 36px;
+  padding: 8px 7px;
+  border-radius: 6px;
+  background: #fff;
+  color: #727478;
+  font-size: 10px;
+}
+#app #router-view .withdraw-record-tab--active {
+  background: #111;
+  color: #fff;
+}
+#app #router-view .withdraw-history-summary {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+}
+#app #router-view .withdraw-history-icon {
+  width: 30px;
+  height: 30px;
+  margin: 0;
+}
+#app #router-view .withdraw-history-copy {
+  min-width: 0;
+}
+#app #router-view .withdraw-history-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+#app #router-view .withdraw-history-label > b {
+  font-size: 17px;
+  line-height: 1.2;
+}
+#app #router-view .withdraw-history-label > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex: none;
+  margin: 0;
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: #2d2c27;
+  background: #f4f3ed;
+  font-size: 10px;
+  line-height: 1.3;
+}
+#app #router-view .withdraw-history-label > span::before {
+  content: "";
+  display: block;
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: currentColor;
+}
+#app #router-view .is-status-1 .withdraw-history-label > span {
+  background: #489800;
+  color: #fff;
+}
+#app #router-view .is-status-3 .withdraw-history-label > span {
+  background: #ffd8d7;
+  color: #ca0000;
+}
+#app #router-view .withdraw-history-copy > small {
+  display: block;
+  margin: 5px 0 0;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+#app #router-view .withdraw-history-meta {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 9px;
+}
+#app #router-view .withdraw-history-meta > span {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+#app #router-view .withdraw-history-meta strong {
+  font-size: 21px;
+  line-height: 1.2;
+}
+#app #router-view .withdraw-history-meta small {
+  font-size: 10px;
+}
+#app #router-view .withdraw-history-meta time {
+  color: #93949a;
+  font-size: 11px;
+}
+
+/* VIP cards retain every server-provided level icon and metric. */
+#app #router-view .vip-levels-main {
+  padding-top: 24px;
+}
+#app #router-view .poetic-vip-intro {
+  position: relative;
+  margin-bottom: 30px;
+  padding-bottom: 22px;
+  border-bottom: 2px solid #333b2a;
+}
+#app #router-view .poetic-vip-intro > b {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 50%;
+}
+#app #router-view .poetic-vip-intro h1 {
+  max-width: 145px;
+  margin: 23px 0 18px;
+  font-size: 38px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+}
+#app #router-view .poetic-vip-intro h1::first-line {
+  font-style: normal;
+  font-weight: 700;
+}
+#app #router-view .vip-levels-card {
+  position: relative;
+}
+#app #router-view .poetic-vip-intro > b,
+#app #router-view .vip-levels-card__head > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 23px;
+  padding: 4px 11px;
+  line-height: 1;
+  text-align: center;
+}
+#app #router-view .vip-levels-card__head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+#app #router-view .vip-levels-card__head > span {
+  min-height: 20px;
+  padding: 3px 6px;
+}
+#app #router-view .vip-levels-card__head h2 {
+  margin: 0;
+}
+#app #router-view .vip-current-check {
+  position: absolute;
+  top: 19px;
+  right: 19px;
+  width: 22px;
+  height: 22px;
+}
+#app #router-view .vip-levels-card.is-current .poetic-vip-card-head {
+  padding-right: 28px;
+}
+#app #router-view .poetic-vip-card-head {
+  display: block;
+}
+#app #router-view .poetic-vip-yield {
+  display: none;
+}
+#app #router-view .poetic-vip-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+#app #router-view .poetic-vip-metrics > div {
+  min-height: 68px;
+}
+#app #router-view .poetic-vip-metrics > div:nth-child(5) {
+  grid-column: 1/-1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 38px;
+}
+#app #router-view .poetic-vip-metrics > div:nth-child(5) strong {
+  margin: 0;
+}
+#app
+  #router-view:is(.tc-page, .faq-page, .service-terms-page, .vip-levels-page)
+  .poetic-back-arrow {
+  filter: invert(1);
+}
+#app #router-view .poetic-vip-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 11px;
+  border: 0;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+}
+#app #router-view .poetic-vip-state > img {
+  display: block;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: none;
+  opacity: 1;
+}
+#app #router-view .poetic-vip-state.is-current,
+#app #router-view .poetic-vip-state.is-attained {
+  justify-content: space-between;
+  min-height: 30px;
+  padding: 8px 0 0;
+  border-top: 1px solid #d8dcce;
+  border-radius: 0;
+  background: transparent;
+  color: #006c50;
+  font-size: 10px;
+}
+
+/* Support channels and notifications have left-aligned content and supplied assets. */
+#app #router-view.contact-page .das-contact {
+  display: none;
+}
+#app #router-view .contact-design-body {
+  padding-top: 22px;
+}
+#app #router-view .psy-contact-hero {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  height: auto;
+  margin-bottom: 26px;
+}
+#app #router-view .psy-contact-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#app #router-view .psy-contact-hero-copy > p {
+  order: -1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 22px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: #e8eaff;
+  color: #283149;
+  font-size: 11px;
+}
+#app #router-view .psy-contact-hero-copy > p::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: #11b78b;
+}
+#app #router-view .psy-contact-hero-copy > h2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 6px;
+  margin: 0;
+  color: #1b2232;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.7px;
+}
+#app #router-view .contact-design-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 10px 0 14px;
+}
+#app #router-view .contact-design-heading h2 {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.4;
+}
+#app #router-view .contact-design-heading h3 {
+  margin: 0;
+  padding: 4px 7px;
+  font-size: 9px;
+  line-height: 1.2;
+}
+#app #router-view .contact-design-intro {
+  margin: 0 0 20px;
+  color: #555b69;
+  font-size: 13px;
+  line-height: 1.7;
+}
+#app #router-view .contact-design-channels {
+  display: grid;
+  flex: none;
+  gap: 14px;
+}
+#app #router-view .contact-design-channels > button {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  min-height: 136px;
+  padding: 16px;
+  border: 0;
+  border-radius: 7px;
+  background: #fff;
+  text-align: left;
+}
+#app #router-view .contact-design-channel__icon {
+  position: static;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  margin: 0;
+  border-radius: 12px;
+}
+#app #router-view .contact-design-channel__copy {
+  display: block;
+  min-width: 0;
+  padding: 0;
+}
+#app #router-view .contact-design-channel__copy b {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1d2334;
+  font-size: 18px;
+  line-height: 1.3;
+}
+#app #router-view .contact-design-channel__copy b::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: #15b98d;
+}
+#app #router-view .contact-design-channel__copy small {
+  display: block;
+  margin: 4px 0 0;
+  color: #515768;
+  font-size: 11px;
+  line-height: 1.4;
+}
+#app #router-view .contact-design-channel__action {
+  position: static;
+  grid-column: 1/-1;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 90px;
+  min-height: 34px;
+  margin: 4px 0 0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #3725d9;
+  color: white;
+  font-size: 12px;
+}
+#app
+  #router-view
+  .contact-design-channels
+  > button.is-telegram
+  .contact-design-channel__action {
+  background: #2b3142;
+}
+#app #router-view .contact-design-channel__action img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: none;
+}
+#app #router-view .contact-design-service-info {
+  margin: 26px 0 38px;
+  padding: 0;
+  color: #737785;
+}
+#app #router-view .contact-design-hours {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#app #router-view .contact-design-hours > img,
+#app #router-view .contact-design-service-info > p > img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+#app #router-view .contact-design-copyright {
+  display: block;
+  width: calc(100% + 32px);
+  height: auto;
+  min-height: 42px;
+  margin: auto -16px 0;
+  padding: 14px 12px;
+  background: #111;
+  color: #74747a;
+  font-size: 9px;
+  text-align: center;
+}
+#app #router-view .notice-double-check {
+  display: block;
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+#app #router-view .bp-notifications-list {
+  padding: 20px 16px 0;
+}
+#app #router-view .bp-notification-card {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+  width: 100%;
+  min-height: 104px;
+  margin-bottom: 10px;
+  padding: 16px;
+  border: 0;
+  border-radius: 7px;
+  background: white;
+  text-align: left;
+}
+#app #router-view .an-card__cover {
+  position: static;
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+#app #router-view .an-card__cover > img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+#app #router-view .an-card__body {
+  display: block;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+}
+#app #router-view .bp-notification-card__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  text-align: left;
+}
+#app #router-view .bp-notification-card__head > b {
+  margin: 0;
+  color: #242523;
+  font-size: 14px;
+  line-height: 1.4;
+}
+#app #router-view .bp-notification-card__head > time {
+  color: #868988;
+  font-size: 11px;
+  line-height: 1.3;
+}
+#app #router-view .bp-notification-card__content {
+  display: block;
+  margin-top: 12px;
+  color: #606362;
+  font-size: 12px;
+  line-height: 1.8;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+#app #router-view .bp-notification-card__content:empty {
+  display: none;
+}
+
+/* Autoplay product carousel with live indicators. */
+#app #router-view.starting-page {
+  background: #050505;
+}
+#app #router-view .poetic-task-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+#app #router-view .poetic-task-heading > h1 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 72%;
+  margin: 0;
+  padding: 6px 9px;
+  border: 1px solid #292929;
+  border-radius: 6px;
+  background: #191919;
+  color: #c5c8ce;
+  font-size: 9px;
+  line-height: 1.3;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+#app #router-view .poetic-task-heading > h1 > i {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: #13b88e;
+}
+#app #router-view .psy-start-history {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 25px;
+  padding: 3px 7px;
+  font-size: 9px;
+  line-height: 1;
+}
+#app #router-view .psy-start-history > img {
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+}
+#app #router-view .psy-start-history > img:first-child {
+  width: 15px;
+  height: 15px;
+}
+#app #router-view .poetic-task-balance {
+  margin-bottom: 25px;
+  padding: 16px 8px;
+}
+#app #router-view .poetic-task-balance strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.3;
+}
+#app #router-view .poetic-task-balance strong small {
+  display: block;
+  margin-top: 5px;
+  color: #838b97;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 400;
+}
+#app #router-view .poetic-task-balance h2,
+#app #router-view .poetic-task-balance h3 {
+  min-height: 24px;
+  color: #a5adba;
+  font-size: 9px;
+  line-height: 1.3;
+}
+#app #router-view .poetic-featured > h2 {
+  margin: 0 0 18px;
+  padding: 0 3px;
+  font-size: 17px;
+}
+#app #router-view.starting-page .task-showcase {
+  position: relative;
+  display: block;
+  width: calc(100% + 40px);
+  height: auto !important;
+  aspect-ratio: auto;
+  margin: 0 -20px 30px;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+#app #router-view .task-showcase::before,
+#app #router-view .task-showcase::after {
+  display: none;
+}
+#app #router-view .task-showcase__swipe {
+  width: 204px;
+  height: 224px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
+}
+#app #router-view .task-showcase__slide {
+  height: 224px;
+  margin: 0 5px;
+  padding: 8px;
+  border: 1px solid #282828;
+  border-radius: 9px;
+  background: #191919;
+}
+#app #router-view .task-showcase__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+#app #router-view .task-showcase__indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 26px;
+  padding-top: 14px;
+}
+#app #router-view .task-showcase__indicators i {
+  display: block;
+  width: 5px;
+  height: 4px;
+  background: #3b3b3b;
+  transition: width 0.2s;
+}
+#app #router-view .task-showcase__indicators i.active {
+  width: 23px;
+  background: #fff;
+}
+#app #router-view .design-task-progress {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px 8px;
+  margin: 0;
+  padding: 18px 16px 14px;
+  border: 1px solid #303030;
+  border-bottom: 0;
+  border-radius: 9px 9px 0 0;
+  background: #1b1b1b;
+}
+#app #router-view .design-task-progress > b {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.25;
+}
+#app #router-view .design-task-progress > b > img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+#app #router-view .design-task-count {
+  color: #c9ced7;
+  font-size: 12px;
+}
+#app #router-view .design-task-progress > i {
+  grid-column: 1/-1;
+  height: 6px;
+}
+#app #router-view .design-task-progress + .starting-action {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  min-height: 72px;
+  margin: 0;
+  padding: 5px 16px 17px;
+  border: 1px solid #303030;
+  border-top: 0;
+  border-radius: 0 0 9px 9px;
+  background: #1b1b1b;
+}
+#app #router-view .starting-action::before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 5px 16px 17px;
+  border-radius: 14px;
+  background: linear-gradient(100deg, #ffe9ca, #ffb49e);
+  box-shadow: 0 0 9px #f4d4b7;
+}
+#app #router-view .starting-action::after,
+#app #router-view .starting-action .psy-start-count {
+  display: none;
+}
+#app #router-view .starting-action > .psy-start-label {
+  position: relative;
+  display: block;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #050505;
+  font-size: 13px;
+  line-height: 1.2;
+}
+#app #router-view .starting-action > .psy-start-label::before {
+  display: none;
+}
+#app #router-view .starting-action-bolt {
+  position: relative;
+  display: block;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+#app #router-view .starting-action .psy-start-loading {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  margin: 0;
+  color: #111;
+}
+#app #router-view.starting-page .starting-footer {
+  display: none;
+}
+#app #router-view.starting-page .poetic-footer,
+#app #router-view.records-page .poetic-footer {
+  width: auto;
+  margin: 28px 20px 0;
+  padding: 0 0 26px;
+  background: transparent;
+}
+#app #router-view.starting-page .poetic-footer > img,
+#app #router-view.records-page .poetic-footer > img {
+  display: none;
+}
+#app #router-view.starting-page .poetic-footer::after,
+#app #router-view.records-page .poetic-footer::before {
+  content: "—  500 DESIGNS  —";
+  display: block;
+  margin: 18px auto;
+  color: #727680;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+#app #router-view.starting-page .poetic-footer > p {
+  display: none;
+}
+#app #router-view .starting-notice {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #8c94a2;
+  text-align: center;
+}
+#app #router-view .starting-notice h2 {
+  display: inline;
+  margin-right: 4px;
+  font-size: 10px;
+  line-height: 1.6;
+}
+#app #router-view .starting-notice p {
+  display: inline;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+/* Order cards and submission sheet. */
+#app #router-view .or-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 0 14px;
+}
+#app #router-view .or-back {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+#app #router-view .or-titlebar h1 {
+  margin: 0;
+  line-height: 1.25;
+}
+#app #router-view .or-card__head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+#app #router-view .or-card__date {
+  order: 0;
+  min-width: 0;
+  font-size: 10px;
+}
+#app #router-view .or-card__date img {
+  width: 15px;
+  height: 15px;
+}
+#app #router-view .or-card__status {
+  order: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  line-height: 1.2;
+}
+#app #router-view .or-card__status::before {
+  position: static;
+  transform: none;
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: currentColor;
+  margin: 0;
+}
+#app #router-view .or-card__contract {
+  margin-top: 10px;
+  color: #8c94a0;
+  font-size: 9px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+#app #router-view .or-card__contract b {
+  color: #d4d4d5;
+  font-weight: 600;
+}
+#app #router-view .or-card__body {
+  display: flex;
+  align-items: start;
+  gap: 12px;
+  margin: 10px 0;
+  padding: 10px;
+}
+#app #router-view .or-card__image {
+  flex: none;
+  width: 58px;
+  height: 58px;
+}
+#app #router-view .or-card__info {
+  flex: 1;
+  min-width: 0;
+}
+#app #router-view .or-card__info h2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.3;
+}
+#app #router-view .records-design-description {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+#app #router-view .or-card__info > p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.25;
+}
+#app #router-view .or-card__stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 7px;
+  line-height: 1;
+}
+#app #router-view .or-card__stars img {
+  width: 12px;
+  height: 12px;
+}
+#app #router-view .or-card__foot strong,
+#app #router-view .or-card__foot span {
+  display: block;
+}
+#app #router-view .or-card__foot {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px 0;
+  padding: 12px 0;
+}
+#app #router-view .or-card__foot > div {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  align-items: center;
+  justify-items: center;
+  min-width: 0;
+  padding: 0 10px;
+  text-align: center;
+}
+#app #router-view .or-card__foot > div > span,
+#app #router-view .or-card__foot > div > strong,
+#app #router-view .or-card__foot > div > em {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+#app #router-view .or-card__foot > div > span {
+  font-size: 9px;
+  line-height: 1.4;
+}
+#app #router-view .or-card__foot > div > strong {
+  font-size: 14px;
+  line-height: 1.3;
+}
+#app #router-view .or-card__foot > div > em {
+  display: block;
+  font-size: 9px;
+  font-style: normal;
+  line-height: 1;
+}
+#app #router-view .or-card__foot > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: calc(100% - 24px);
+  margin: 7px 12px 0;
+  line-height: 1.3;
+}
+#app #router-view .or-card__foot > button > img {
+  display: block;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+#app #router-view.records-page .or-card {
+  padding: 15px;
+  margin-bottom: 14px;
+  border-radius: 11px;
+}
+#app #router-view.records-page .or-card__contract {
+  margin: 12px 0;
+  font-size: 10px;
+}
+#app #router-view.records-page .or-card__body {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  min-height: 92px;
+  margin: 0 0 12px;
+  padding: 10px;
+  border: 1px solid #202020;
+  border-radius: 7px;
+}
+#app #router-view.records-page .or-card__price-rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  margin-top: 8px;
+}
+#app #router-view.records-page .or-card__price-rating > p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+#app #router-view.records-page .or-card__price-rating > p small {
+  color: #9299a7;
+  font-size: 9px;
+  font-weight: 400;
+}
+#app #router-view.records-page .or-card__stars {
+  margin: 0;
+}
+#app #router-view.product-details-page {
+  position: relative;
+  justify-content: flex-end;
+  padding-top: 72px;
+  background: #070707;
+}
+#app #router-view .design-order-backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  filter: blur(6px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+#app #router-view .design-order-backdrop__bar {
+  width: 70%;
+  height: 24px;
+  margin: 20px;
+  border-radius: 6px;
+  background: #23362e;
+}
+#app #router-view .design-order-backdrop__balance {
+  height: 85px;
+  margin: 15px 20px;
+  border: 1px solid #333;
+  border-radius: 9px;
+  background: linear-gradient(
+    90deg,
+    #191919 32%,
+    #555 33%,
+    #191919 34%,
+    #191919 65%,
+    #555 66%,
+    #191919 67%
+  );
+}
+#app #router-view .design-order-backdrop__products {
+  display: flex;
+  gap: 14px;
+  margin: 45px 20px 0;
+}
+#app #router-view .design-order-backdrop__products img {
+  width: 55%;
+  height: 210px;
+  border-radius: 9px;
+  object-fit: cover;
+}
+#app #router-view .design-order-backdrop .poetic-navigation {
+  display: none;
+}
+#app #router-view .pd-content {
+  width: 100%;
+  max-height: calc(100% - 20px);
+  padding: 0;
+  border-radius: 24px 24px 0 0;
+  overflow: auto;
+}
+#app #router-view .pd-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 24px 24px 20px;
+  background: #fff;
+}
+#app #router-view .design-order-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+#app #router-view .design-order-heading > img {
+  display: block;
+  flex: none;
+  width: 38px;
+  height: 38px;
+}
+#app #router-view .design-order-heading > div {
+  flex: 1;
+  min-width: 0;
+}
+#app #router-view .design-order-heading h1 {
+  margin: 0;
+  color: #080808;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+#app #router-view .design-order-heading p {
+  margin: 4px 0 0;
+  color: #858581;
+  font-size: 11px;
+  line-height: 1.3;
+}
+#app #router-view .design-order-heading .design-order-close {
+  position: static;
+  flex: none;
+  width: 31px;
+  height: 31px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+#app #router-view .design-order-close img {
+  display: block;
+  width: 31px;
+  height: 31px;
+}
+#app #router-view .design-order-product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #eeece8;
+  border-radius: 7px;
+  background: #f8f7f5;
+}
+#app #router-view .pd-cover {
+  order: 0;
+  position: static;
+  flex: none;
+  width: 62px;
+  height: 62px;
+  margin: 0;
+  border: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+#app #router-view .pd-cover > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+#app #router-view .design-order-product__copy {
+  flex: 1;
+  min-width: 0;
+}
+#app #router-view .design-order-product__copy > small {
+  display: block;
+  color: #858581;
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+#app #router-view .design-order-product__copy h2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 5px 0;
+  color: #111;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+#app #router-view .design-order-product__copy p {
+  margin: 4px 0 0;
+  color: #777;
+  font-size: 11px;
+  line-height: 1.3;
+}
+#app #router-view .design-order-product__copy p strong {
+  color: #111;
+}
+#app #router-view .pd-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 10px;
+  line-height: 1;
+}
+#app #router-view .pd-rating img {
+  display: block;
+  width: 11px;
+  height: 11px;
+}
+#app #router-view .design-order-totals {
+  padding: 0 14px;
+  border: 1px solid #eeece8;
+  border-radius: 7px;
+  background: #faf9f7;
+}
+#app #router-view .design-order-totals > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 43px;
+  padding: 10px 0;
+}
+#app #router-view .design-order-totals > div + div {
+  border-top: 1px solid #e9e6e0;
+}
+#app #router-view .design-order-totals span {
+  flex: none;
+  color: #7e7d79;
+  font-size: 12px;
+}
+#app #router-view .design-order-totals strong {
+  color: #111;
+  font-size: 13px;
+  text-align: right;
+}
+#app #router-view .design-order-totals small {
+  color: #858581;
+  font-size: 10px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+#app #router-view .design-order-assurance {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  padding: 12px 10px;
+  border: 1px solid #eeece8;
+  border-radius: 6px;
+  background: #f5f4f1;
+  color: #85827c;
+  font-size: 11px;
+  line-height: 1.5;
+}
+#app #router-view .design-order-assurance img {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+#app #router-view .pd-submit,
+#app #router-view .pd-submit--docked {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  order: 0;
+  width: 100%;
+  min-height: 48px;
+  margin: 2px 0 0;
+  padding: 12px;
+  border: 0;
+  border-radius: 13px;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+#app #router-view .pd-submit::before,
+#app #router-view .pd-submit::after {
+  display: none;
+}
+#app #router-view .pd-submit img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+#app #router-view .pd-submit.is-submitting {
+  opacity: 1;
+}
+#app #router-view .pd-submit__spinner {
+  animation: design-order-submit-spin 0.85s linear infinite;
+}
+@keyframes design-order-submit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+#app #router-view .pd-submit-end {
+  display: block;
+  order: 0;
+  height: 1px;
+  margin: -16px 0 0;
+}
+#app #router-view .design-order-cancel {
+  display: block;
+  order: 0;
+  margin: 0;
+  padding: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+#app #router-view .design-order-cancel:disabled {
+  color: #b3b3b3;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* All teleported masks stay inside the same column as the app. */
+.van-overlay,
+.security-dialog,
+.profile-logout-modal {
+  left: 50% !important;
+  right: auto !important;
+  width: var(--design-shell) !important;
+  max-width: 620px;
+  transform: translateX(-50%);
+}
+.profile-logout-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2050;
+}
+.profile-logout-modal__mask {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0 0 0 / 0.8);
+}
+.profile-logout-modal__sheet {
+  position: relative;
+  width: min(calc(100% - 48px), 340px);
+  margin: 0;
+}
+.profile-logout-modal__actions > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-logout-modal__close {
+  display: grid;
+  place-items: center;
+  background: transparent url("/design500/close.png") center/22px no-repeat;
+}
+.profile-logout-modal__close::before,
+.profile-logout-modal__close::after,
+.profile-logout-modal__close > span {
+  display: none;
+}
+.status-dialog .status-dialog__icon {
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  object-fit: contain;
+}
+.security-dialog .pay-password-drawer__sheet {
+  width: min(calc(100% - 48px), 300px);
+}
+.security-dialog .security-dialog__eye {
+  display: grid;
+  place-items: center;
+}
+.security-dialog .reference-eye {
+  width: 28px;
+  height: 28px;
+  content: normal !important;
+}
+.van-dialog.submit-loading-dialog {
+  width: min(calc(var(--design-shell) - 48px), 572px);
+}
+.van-dialog.bonus-dialog {
+  width: min(calc(var(--design-shell) - 64px), 330px) !important;
+  overflow: visible;
+}
+.bonus-prize {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1168/1064;
+  margin: 0 0 82px;
+}
+.psy-bonus-background {
+  display: block;
+  position: static;
+  width: 100%;
+  height: 100%;
+  clip-path: none;
+  object-fit: contain;
+}
+.psy-bonus-amount {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 19%;
+  right: 20%;
+  top: 58.5%;
+  height: 13%;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: linear-gradient(100deg, #fff7e4, #ffecc7);
+  color: #743b00;
+  font:
+    700 clamp(16px, 6vw, 27px) / 1 Design500,
+    Arial,
+    sans-serif;
+  white-space: nowrap;
+}
+.bonus-prize > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 78.3%;
+  left: 20.5%;
+  width: 58%;
+  height: 13.5%;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 999px;
+  background: #087d1b url("/design500/claim.png") center/100% 100% no-repeat;
+  font-size: 15px;
+  line-height: 1;
+}
+.psy-bonus-hint {
+  top: 104%;
+  left: -8px;
+  right: -8px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.design-bonus-close {
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: url("/design500/close-round.png") center/contain no-repeat;
+  font-size: 0;
+}
+@media (max-width: 360px) {
+  #app #router-view .poetic-profile-identity {
+    padding: 16px;
+    gap: 14px;
+  }
+  #app #router-view .profile-referral-inline > span {
+    font-size: 9px;
+  }
+  #app #router-view .profile-referral-inline b {
+    max-width: 90px;
+  }
+  #app #router-view .profile-stat:not(:first-child) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #app #router-view .pd-main {
+    padding: 20px 16px;
+    gap: 14px;
+  }
+}
