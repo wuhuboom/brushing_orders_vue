@@ -808,6 +808,7 @@
   position: relative;
   width: 58px;
   height: 58px;
+  flex: none;
   padding: 0;
   border: 0;
   border-radius: 50%;
