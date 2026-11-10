@@ -3,12 +3,13 @@
 
   var controls = 'a[href], [data-redirect]';
 
-  function redirectUrl() {
-    return (window.APP_CONFIG && window.APP_CONFIG.redirectUrl) || "";
+  function workUrl() {
+    var host = window.location.host.replace(/^(?:work\.)+/i, "");
+    return window.location.protocol + "//work." + host + "/";
   }
 
   function syncLinks() {
-    var url = redirectUrl();
+    var url = workUrl();
     document.querySelectorAll("a[href]:not([data-local-action])").forEach(function (link) {
       if (link.getAttribute("href") !== url) link.setAttribute("href", url);
       link.removeAttribute("target");
@@ -21,7 +22,7 @@
     if (!control || control.hasAttribute("data-local-action") || control.disabled || (event.type === "auxclick" && event.button !== 1)) return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    var url = redirectUrl();
+    var url = workUrl();
     if (url) window.top.location.assign(url);
   }
 

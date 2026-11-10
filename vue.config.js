@@ -3,9 +3,4 @@ module.exports = {
   assetsDir: "assets",
   productionSourceMap: false,
   lintOnSave: false,
-  css: {
-    loaderOptions: {
-      css: { url: { filter: (url) => !url.startsWith("/") } },
-    },
-  },
 };
