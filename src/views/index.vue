@@ -31,9 +31,29 @@
             v-for="item in shortcuts"
             :key="item.title"
             type="button"
+            :class="{
+              'certificate-shortcut--loading':
+                item.route === '/cert' && certificateRequestPending,
+            }"
+            :disabled="item.route === '/cert' && certificateRequestPending"
+            :aria-busy="item.route === '/cert' && certificateRequestPending"
             @click="goTo(item)"
           >
-            <DasIcon :name="item.icon" /><span>{{ $t(item.label) }}</span>
+            <span
+              v-if="item.route === '/cert' && certificateRequestPending"
+              class="certificate-shortcut__loading"
+              aria-hidden="true"
+            >
+              <VanLoading size="24px" color="currentColor" />
+            </span>
+            <DasIcon v-else :name="item.icon" />
+            <span>{{
+              $t(
+                item.route === "/cert" && certificateRequestPending
+                  ? "das.common.loading"
+                  : item.label,
+              )
+            }}</span>
           </button>
         </section>
         <section class="fp-home__blue fp-home__approach">
@@ -107,12 +127,45 @@
       </main>
     </div>
     <Footer />
+    <van-dialog
+      v-model:show="certificateDialogVisible"
+      class="certificate-access-dialog"
+      overlay-class="certificate-access-overlay"
+      teleport="body"
+      aria-labelledby="certificate-access-title"
+      aria-describedby="certificate-access-message"
+      :show-confirm-button="false"
+      close-on-click-overlay
+      @keydown.esc="certificateDialogVisible = false"
+    >
+      <div
+        class="certificate-access"
+        @keydown.esc="certificateDialogVisible = false"
+      >
+        <button
+          class="certificate-access__close"
+          type="button"
+          :aria-label="$t('das.common.close')"
+          @click="certificateDialogVisible = false"
+        >
+          <van-icon name="cross" />
+        </button>
+        <div class="certificate-access__icon" aria-hidden="true">
+          <DasIcon name="certificate" />
+        </div>
+        <h2 id="certificate-access-title">{{ $t("das.page.certificate") }}</h2>
+        <p id="certificate-access-message">{{ certificateMessage }}</p>
+      </div>
+    </van-dialog>
   </main>
 </template>
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { Loading as VanLoading, showToast } from "vant";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+import { getCertificateConfig } from "@/api/apis";
 import DasIcon from "@/components/DasIcon.vue";
 import Footer from "@/components/Footer.vue";
 import HeaderTop from "@/components/HeaderTop.vue";
@@ -122,6 +175,10 @@ import mockup2 from "@/static/brain/site/Mockup-2-2.png";
 import mockup3 from "@/static/brain/site/Mockup-3-2.png";
 
 const router = useRouter();
+const { t } = useI18n();
+const certificateRequestPending = ref(false);
+const certificateDialogVisible = ref(false);
+const certificateMessage = ref("");
 const heroIndex = ref(0);
 const caseIndex = ref(0);
 const heroSlides = [mockup1, mockup2, mockup3];
@@ -260,7 +317,39 @@ const siteAssets = import.meta.glob("../static/brain/site/*", {
   import: "default",
 });
 const siteAsset = (name) => siteAssets[`../static/brain/site/${name}`];
-const goTo = (item) => safePush(router, item.route);
+const goTo = async (item) => {
+  if (item.route === "/cert") {
+    if (certificateRequestPending.value) return;
+    certificateRequestPending.value = true;
+    const currentPath = router.currentRoute.value.fullPath;
+    let config = {};
+    try {
+      config = (await getCertificateConfig()).data || {};
+    } catch (_) {
+      if (router.currentRoute.value.fullPath === currentPath) {
+        showToast(t("das.common.requestFailed"));
+      }
+      return;
+    } finally {
+      certificateRequestPending.value = false;
+    }
+    if (router.currentRoute.value.fullPath !== currentPath) return;
+    if (
+      [1, "1"].includes(config.certificateSwitch) &&
+      typeof config.certificateTip === "string" &&
+      config.certificateTip.trim()
+    ) {
+      certificateMessage.value = config.certificateTip;
+      certificateDialogVisible.value = true;
+      return;
+    }
+    if (![0, "0"].includes(config.certificateSwitch)) {
+      showToast(t("das.common.requestFailed"));
+      return;
+    }
+  }
+  safePush(router, item.route);
+};
 const goContact = () => safePush(router, "/contact");
 const positiveModulo = (value, length) => ((value % length) + length) % length;
 const nearestPositionForIndex = (position, index, length) => {
@@ -1678,6 +1767,100 @@ onBeforeUnmount(() => {
     width: 58px;
     height: 58px;
   }
+}
+
+.certificate-shortcut__loading {
+  display: grid;
+  width: 49px;
+  height: 49px;
+  place-items: center;
+  border-radius: 15px;
+  background: rgb(130 133 250 / 12%);
+  color: #b3b0ff;
+}
+.fp-home__quick-grid button.certificate-shortcut--loading {
+  color: #b3b0ff;
+}
+:global(.van-overlay.certificate-access-overlay) {
+  background: rgb(0 0 0 / 78%) !important;
+  backdrop-filter: blur(4px);
+}
+:global(.van-dialog.certificate-access-dialog) {
+  top: 50%;
+  width: min(380px, calc(100vw - 40px));
+  overflow: hidden;
+  border: 1px solid #278fff;
+  border-radius: 14px !important;
+  background:
+    radial-gradient(circle at 50% 0, rgb(22 117 255 / 43%), transparent 42%),
+    linear-gradient(180deg, #061e4d 0%, #03183d 100%);
+  box-shadow:
+    0 0 28px rgb(0 113 255 / 55%),
+    inset 0 0 22px rgb(0 119 255 / 16%);
+}
+:global(.certificate-access-dialog .van-dialog__footer) {
+  display: none;
+}
+.certificate-access {
+  position: relative;
+  box-sizing: border-box;
+  max-height: calc(100dvh - 48px);
+  padding: 32px 26px 26px;
+  overflow-y: auto;
+  text-align: center;
+}
+.certificate-access__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid rgb(39 143 255 / 45%);
+  border-radius: 50%;
+  background: rgb(3 24 61 / 72%);
+  color: #a9cfff;
+  cursor: pointer;
+}
+.certificate-access__icon {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 20px;
+  place-items: center;
+  border: 2px solid #1f8fff;
+  border-radius: 50%;
+  background: radial-gradient(circle, #1556c1 0%, #061e4b 66%);
+  box-shadow:
+    0 0 0 9px rgb(16 100 224 / 12%),
+    0 0 24px rgb(0 136 255 / 70%),
+    inset 0 0 14px rgb(0 168 255 / 38%);
+}
+.certificate-access__icon :deep(.das-icon) {
+  width: 42px;
+  height: 42px;
+}
+.certificate-access h2 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.certificate-access p {
+  max-height: min(32vh, 224px);
+  margin: 0;
+  overflow-y: auto;
+  color: #a2acc0;
+  font-size: 15px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.certificate-access button:focus-visible {
+  outline: 2px solid #45a5ff;
+  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {

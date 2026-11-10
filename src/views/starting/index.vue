@@ -170,7 +170,7 @@ const bonusVisible = ref(false);
 const bonusAmount = ref(0);
 const specialBonusAmount = computed(() => {
   const amount = Number(bonusAmount.value);
-  return Number.isFinite(amount) && amount !== 0 ? Math.abs(amount) : 0;
+  return Number.isFinite(amount) ? Math.abs(amount) : 0;
 });
 const creatingOrder = ref(false);
 let refreshTimer;
