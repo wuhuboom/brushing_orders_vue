@@ -1,0 +1,21 @@
+html,
+body {
+  overflow-x: clip;
+}
+
+.heading .word {
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 480px) and (max-width: 1199px) {
+  .hero-container .padding-huge.is-mobile {
+    padding-left: clamp(1.5rem, 4vw, 3rem);
+    padding-right: clamp(1.5rem, 4vw, 3rem);
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  .heading {
+    font-size: clamp(2rem, 6vw, 3.1rem);
+  }
+}
