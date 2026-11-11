@@ -21,7 +21,7 @@ npm run build
 
 ## 自动跳转与联系方式
 
-Logo、导航、案例、正文按钮、页脚链接、联系方式及订阅提交，均在点击或提交时读取当前页面地址，在域名前加上 `work.` 并跳转到目标站首页，不再读取配置中的跳转地址。例如 `https://www.google.com/page` 跳转到 `https://work.www.google.com/`。保留当前协议和端口，已有的 `work.` 前缀不会重复添加。
+Logo、导航、案例、正文按钮、页脚链接、联系方式及订阅提交，均在点击或提交时读取当前页面地址，移除域名开头的 `www.` 和已有的 `work.` 前缀，再加上 `work.` 并跳转到目标站首页。保留当前协议和端口。例如 `https://www.aaaa.com/page` 跳转到 `https://work.aaaa.com/`。
 
 修改 `public/config.js` 后刷新页面即可生效：
 
