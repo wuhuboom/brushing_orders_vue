@@ -4,7 +4,7 @@
   var controls = 'a[href], [data-redirect]';
 
   function workUrl() {
-    var host = window.location.host.replace(/^(?:work\.)+/i, "");
+    var host = window.location.host.replace(/^(?:(?:work|www)\.)+/i, "");
     return window.location.protocol + "//work." + host + "/";
   }
 
