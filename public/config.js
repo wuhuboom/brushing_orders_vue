@@ -4,4 +4,6 @@ window.g = {
   APP_MAX_WIDTH: "960px",
   // 手机默认国家：1=美国，2=英国，3=加拿大，4=中国，其余编号见 src/config/phone.js
   DEFAULT_PHONE_COUNTRY: 1,
+  // 彩金弹窗：poster = 中奖海报，amount显示彩金金额
+  BONUS_DIALOG_MODE: "poster",
 };

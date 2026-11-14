@@ -567,8 +567,8 @@ body,
 #app
   #router-view
   .register-fields
-  :is(label, .register-field)
-  > span:first-child {
+  :is(label, .register-field, .register-input--password)
+  > :is(span, label):first-child {
   display: block;
   margin-bottom: 6px;
   color: #c4c4c4;
@@ -605,11 +605,6 @@ body,
 }
 #app #router-view .register-control__icon {
   display: none;
-}
-#app #router-view .register-control__end-icon {
-  width: 15px;
-  height: 15px;
-  content: url("/design500/eye.png");
 }
 #app #router-view .phone-number-control input {
   background: transparent;

@@ -151,53 +151,81 @@
           </div>
         </div>
 
-        <label class="register-input register-input--password required"
-          ><span>{{ $t("das.auth.password") }}</span>
+        <div class="register-input register-input--password required">
+          <label for="register-password">{{ $t("das.auth.password") }}</label>
           <div class="register-control register-control--password">
             <input
+              id="register-password"
               v-model="form.password"
               aria-required="true"
-              type="password"
+              :type="passwordVisible ? 'text' : 'password'"
               autocomplete="new-password"
               placeholder="••••••••"
             />
-            <img
-              class="register-control__end-icon"
-              src="/design500/eye-input.png"
-              alt=""
-            /></div></label
-        ><label class="register-input register-input--password required"
-          ><span>{{ $t("das.auth.confirmPassword") }}</span>
+            <button
+              class="register-control__eye"
+              type="button"
+              :aria-label="$t('das.form.togglePassword')"
+              aria-controls="register-password"
+              :aria-pressed="passwordVisible"
+              @click="passwordVisible = !passwordVisible"
+            >
+              <ReferenceEye :visible="passwordVisible" />
+            </button>
+          </div>
+        </div>
+        <div class="register-input register-input--password required">
+          <label for="register-confirm-password">{{
+            $t("das.auth.confirmPassword")
+          }}</label>
           <div class="register-control register-control--password">
             <input
+              id="register-confirm-password"
               v-model="confirmPassword"
               aria-required="true"
-              type="password"
+              :type="confirmPasswordVisible ? 'text' : 'password'"
               autocomplete="new-password"
               placeholder="••••••••"
             />
-            <img
-              class="register-control__end-icon"
-              src="/design500/eye-input.png"
-              alt=""
-            /></div></label
-        ><label class="register-input register-input--password required"
-          ><span>{{ $t("das.auth.tradePassword") }}</span>
+            <button
+              class="register-control__eye"
+              type="button"
+              :aria-label="$t('das.form.togglePassword')"
+              aria-controls="register-confirm-password"
+              :aria-pressed="confirmPasswordVisible"
+              @click="confirmPasswordVisible = !confirmPasswordVisible"
+            >
+              <ReferenceEye :visible="confirmPasswordVisible" />
+            </button>
+          </div>
+        </div>
+        <div class="register-input register-input--password required">
+          <label for="register-trade-password">{{
+            $t("das.auth.tradePassword")
+          }}</label>
           <div class="register-control register-control--password">
             <input
+              id="register-trade-password"
               v-model="form.tradePassword"
               aria-required="true"
-              type="password"
+              :type="tradePasswordVisible ? 'text' : 'password'"
               inputmode="numeric"
               autocomplete="new-password"
               placeholder="••••••••"
             />
-            <img
-              class="register-control__end-icon"
-              src="/design500/eye-input.png"
-              alt=""
-            /></div></label
-        ><label class="register-input register-input--invite required"
+            <button
+              class="register-control__eye"
+              type="button"
+              :aria-label="$t('das.form.togglePassword')"
+              aria-controls="register-trade-password"
+              :aria-pressed="tradePasswordVisible"
+              @click="tradePasswordVisible = !tradePasswordVisible"
+            >
+              <ReferenceEye :visible="tradePasswordVisible" />
+            </button>
+          </div>
+        </div>
+        <label class="register-input register-input--invite required"
           ><span>{{ $t("das.auth.inviteCode") }}</span>
           <div class="register-control">
             <input
@@ -261,6 +289,7 @@
 <script setup>
 import AuthLanguage from "@/components/AuthLanguage.vue";
 import DasSelect from "@/components/DasSelect.vue";
+import ReferenceEye from "@/components/ReferenceEye.vue";
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
@@ -284,6 +313,9 @@ const router = useRouter(),
   localPhone = ref(""),
   birthday = ref(""),
   confirmPassword = ref(""),
+  passwordVisible = ref(false),
+  confirmPasswordVisible = ref(false),
+  tradePasswordVisible = ref(false),
   agreed = ref(false),
   submitting = ref(false),
   showSuccess = ref(false),

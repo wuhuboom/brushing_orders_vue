@@ -312,11 +312,17 @@
   line-height: 1.6;
   text-align: left;
 }
-#app #router-view .register-control__end-icon {
-  width: 28px;
-  height: 28px;
-  right: 9px;
-  object-fit: contain;
+#app #router-view .register-control__eye {
+  display: grid;
+  place-items: center;
+  flex: 0 0 52px;
+  height: 47px;
+  padding: 0;
+  border-radius: 5px;
+}
+#app #router-view .register-control__eye:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -3px;
 }
 #app #router-view .phone-country-button,
 #app #router-view .phone-number-control {

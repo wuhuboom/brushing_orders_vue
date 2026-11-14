@@ -493,7 +493,7 @@ body,
   margin-bottom: 13px;
 }
 #router-view .fp-auth__field > span,
-#router-view .register-fields > :is(label, div) > span {
+#router-view .register-fields > :is(label, div) > :is(span, label) {
   display: block;
   margin-bottom: 8px;
   font-size: 14px;
@@ -626,10 +626,6 @@ body,
 }
 #router-view .register-control__icon {
   display: none;
-}
-#router-view .register-control__end-icon {
-  flex: 0 0 20px;
-  margin-right: 12px;
 }
 #router-view .gender-field > .das-select {
   width: 100%;
@@ -3174,7 +3170,7 @@ body,
 #router-view .register-fields > .register-input--invite {
   order: 5;
 }
-#router-view .register-fields > :is(label, div) > span {
+#router-view .register-fields > :is(label, div) > :is(span, label) {
   line-height: 17px;
   margin-bottom: 7px;
 }
@@ -5210,11 +5206,6 @@ body,
   margin-left: 10px;
   filter: none;
   opacity: 1;
-}
-#router-view .register-control__end-icon {
-  width: 25px;
-  height: 25px;
-  object-fit: contain;
 }
 #router-view .phone-country-chevron,
 #router-view .das-select__chevron {
