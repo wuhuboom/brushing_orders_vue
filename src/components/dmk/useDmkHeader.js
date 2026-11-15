@@ -10,13 +10,15 @@ export const profileItems = [
   { labelKey: "das.dmk.myWallet", path: "/paymentMethods", iconName: "balance-o" },
   { labelKey: "das.page.withdraw", path: "/withdraw", iconName: "cash-back-record" },
   { labelKey: "das.dmk.depositHistory", path: "/deposit", iconName: "clock-o" },
-  { labelKey: "das.page.vip", path: "/vips", iconName: "award-o" },
-  { labelKey: "das.dmk.salary", path: "/salary", iconName: "balance-list-o" },
-  { labelKey: "das.home.faqs", path: "/faqs", iconName: "question-o" },
-  { labelKey: "das.home.terms", path: "/clause", iconName: "records-o" },
+  { labelKey: "das.page.vip", path: "/vips", iconName: "award-o", hidden: true },
+  { labelKey: "das.dmk.salary", path: "/salary", iconName: "balance-list-o", hidden: true },
+  { labelKey: "das.home.faqs", path: "/faqs", iconName: "question-o", hidden: true },
+  { labelKey: "das.home.terms", path: "/clause", iconName: "records-o", hidden: true },
   { labelKey: "das.dmk.customerSupport", action: "support", iconName: "service-o" },
   { labelKey: "das.profile.logout", action: "logout", red: true, iconName: "revoke" },
 ];
+
+const visibleProfileItems = profileItems.filter((item) => !item.hidden);
 
 export const services = [
   { nameKey: "das.dmk.seo", path: "/", copyKey: "das.dmk.seoCopy" },
@@ -88,7 +90,7 @@ export const useDmkHeader = (props, closeOverlay = () => {}) => {
   };
 
   return {
-    profileItems,
+    profileItems: visibleProfileItems,
     services,
     avatarFailed,
     isAuthenticated,
