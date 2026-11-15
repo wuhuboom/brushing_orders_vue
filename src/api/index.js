@@ -82,10 +82,15 @@ api.interceptors.request.use((config) => {
   if (userStore.token) config.headers.Authorization = userStore.token;
   const apiLanguage =
     languageMap[commonStore.clientLang] || commonStore.clientLang || "en_US";
+  const isRegionalSpanish = ["mx", "cl", "co"].includes(apiLanguage);
   config.headers.lang = apiLanguage;
-  config.headers["Accept-Language"] = apiLanguage.replace("_", "-");
+  config.headers["Accept-Language"] = isRegionalSpanish
+    ? `es-${apiLanguage.toUpperCase()}`
+    : apiLanguage.replace("_", "-");
 
-  if (config.method?.toLowerCase() === "get") {
+  if (isRegionalSpanish) {
+    config.params = { ...config.params, lang: apiLanguage };
+  } else if (config.method?.toLowerCase() === "get") {
     config.params = { lang: apiLanguage, ...(config.params || {}) };
   }
   return config;

@@ -14,24 +14,40 @@ import ruRU from "vant/es/locale/lang/ru-RU";
 import plPL from "vant/es/locale/lang/pl-PL";
 import esES from "vant/es/locale/lang/es-ES";
 import idID from "vant/es/locale/lang/id-ID";
+import { LANGS } from "@/config/lang";
 
-const supportedLocales = new Set([
-  "en",
-  "it",
-  "es",
-  "fr",
-  "ja",
-  "sv",
-  "de",
-  "no",
-  "ru",
-  "hu",
-  "pl",
-  "sl",
-  "zh",
-  "ko",
-  "id",
-]);
+const supportedLocales = new Set(LANGS.map(({ code }) => code));
+const esLatinAmerica = {
+  ...esES,
+  clear: "Borrar",
+  nameEmpty: "Ingresa el nombre",
+  addContact: "Agregar contacto",
+  vanCalendar: {
+    ...esES.vanCalendar,
+    monthTitle: (year, month) =>
+      new Date(year, month - 1).toLocaleDateString("es", {
+        month: "long",
+        year: "numeric",
+      }),
+    rangePrompt: (maxRange) => `Selecciona hasta ${maxRange} días`,
+  },
+  vanPullRefresh: {
+    pulling: "Desliza para actualizar...",
+    loosing: "Suelta para actualizar...",
+  },
+  vanCouponCell: {
+    ...esES.vanCouponCell,
+    count: (count) =>
+      count === 1 ? "Tienes 1 cupón" : `Tienes ${count} cupones`,
+  },
+  vanAddressEdit: {
+    ...esES.vanAddressEdit,
+    areaEmpty: "Selecciona una zona",
+    addressEmpty: "Ingresa la dirección",
+    defaultAddress: "Establecer como dirección predeterminada",
+  },
+  vanAddressList: { add: "Agregar dirección" },
+};
 
 export function normalizeLocale(value) {
   const normalized = String(value || "en").trim().toLowerCase().replaceAll("_", "-");
@@ -51,6 +67,9 @@ export function useLocale() {
     it: { name: "it", pack: itIT },
     fr: { name: "fr", pack: frFR },
     es: { name: "es-ES", pack: esES },
+    mx: { name: "es-MX", pack: esLatinAmerica },
+    cl: { name: "es-CL", pack: esLatinAmerica },
+    co: { name: "es-CO", pack: esLatinAmerica },
     de: { name: "de", pack: deDE },
     sv: { name: "sv-SE", pack: svSE },
     no: { name: "nb-NO", pack: nbNO },

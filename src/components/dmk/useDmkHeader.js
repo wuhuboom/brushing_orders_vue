@@ -16,6 +16,7 @@ export const profileItems = [
   { labelKey: "das.home.terms", path: "/clause", iconName: "records-o", hidden: true },
   { labelKey: "das.dmk.customerSupport", action: "support", iconName: "service-o" },
   { labelKey: "das.profile.logout", action: "logout", red: true, iconName: "revoke" },
+  { labelKey: "das.dmk.tax", path: "/tax", iconName: "records-o" },
 ];
 
 const visibleProfileItems = profileItems.filter((item) => !item.hidden);

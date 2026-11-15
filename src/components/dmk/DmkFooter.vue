@@ -7,19 +7,19 @@
       </div>
       <nav v-if="isAuthenticated" class="nsg-footer-navigation">
         <div>
-          <button v-for="item in navigation" :key="item.path" type="button" @click="safePush(router, item.path)">{{ $t(item.labelKey) }}</button>
+          <button v-for="item in navigation" v-show="!item.hidden" :key="item.path" type="button" @click="safePush(router, item.path)">{{ $t(item.labelKey) }}</button>
         </div>
         <div>
-          <button v-for="item in links" :key="item.labelKey" type="button" @click="openLink(item)">{{ $t(item.labelKey) }}<span aria-hidden="true">↗</span></button>
+          <button v-for="item in links" v-show="!item.hidden" :key="item.labelKey" type="button" @click="openLink(item)">{{ $t(item.labelKey) }}<span aria-hidden="true">↗</span></button>
         </div>
       </nav>
       <section v-else class="nsg-footer-contact" :aria-label="publicContact.title">
         <h2>{{ publicContact.title }}</h2>
         <div v-for="item in publicContact.items" :key="item.label"><p>{{ item.label }}</p><p>{{ item.value }}</p></div>
       </section>
-      <div class="nsg-footer-countries">
-        <img src="/nsg16/flags.png" alt="" />
-        <p v-if="isAuthenticated">{{ supportEmail }}</p>
+      <div v-if="isAuthenticated" class="nsg-footer-countries">
+        <img v-if="false" src="/nsg16/flags.png" alt="" />
+        <p>{{ supportEmail }}</p>
       </div>
     </div>
   </footer>
@@ -63,14 +63,14 @@ const publicContact = computed(() => {
 });
 const navigation = [
   { labelKey: "das.nav.home", path: "/" },
-  { labelKey: "das.dmk.payPerClick", path: "/ppc" },
-  { labelKey: "das.dmk.webDesign", path: "/web" },
+  { labelKey: "das.dmk.payPerClick", path: "/ppc", hidden: true },
+  { labelKey: "das.dmk.webDesign", path: "/web", hidden: true },
   { labelKey: "das.dmk.seo", path: "/seo" },
 ];
 const links = [
-  { labelKey: "das.dmk.about", path: "/about" },
-  { labelKey: "das.home.terms", path: "/clause" },
-  { labelKey: "das.home.faqs", path: "/faqs" },
+  { labelKey: "das.dmk.about", path: "/about", hidden: true },
+  { labelKey: "das.home.terms", path: "/clause", hidden: true },
+  { labelKey: "das.home.faqs", path: "/faqs", hidden: true },
   { labelKey: "das.dmk.customerSupport", action: "support" },
 ];
 const openLink = (item) => {

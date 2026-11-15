@@ -1,6 +1,9 @@
 import { createI18n } from "vue-i18n";
 import en from "./locales/en.json";
 import es from "./locales/es.json";
+import mx from "./locales/mx.json";
+import cl from "./locales/cl.json";
+import co from "./locales/co.json";
 import fr from "./locales/fr.json";
 import de from "./locales/de.json";
 import zh from "./locales/zh.json";
@@ -19,6 +22,9 @@ import { createDmkMessages } from "./dmk.messages.js";
 const messages = {
   en,
   es,
+  mx,
+  cl,
+  co,
   fr,
   de,
   zh,

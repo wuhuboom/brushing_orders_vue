@@ -208,8 +208,28 @@ const zh = {
   serviceStoryCopy: "以客户需求为核心，将数据转化为能产生结果的体验。",
 };
 
+const taxLabels = {
+  en: "Tax",
+  es: "Impuestos",
+  fr: "Fiscalité",
+  de: "Steuern",
+  zh: "税务",
+  ko: "세금",
+  ja: "税務",
+  it: "Fiscalità",
+  id: "Pajak",
+  sv: "Skatt",
+  no: "Skatt",
+  ru: "Налоги",
+  hu: "Adózás",
+  pl: "Podatki",
+  sl: "Davki",
+};
+
 export const createDmkMessages = (locale, message) => ({
   ...translatedBase(message),
   ...(locale === "en" ? english : null),
   ...(locale === "zh" ? zh : null),
+  tax: taxLabels[locale] ?? taxLabels.en,
+  ...message.das.dmk,
 });
