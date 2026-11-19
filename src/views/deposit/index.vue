@@ -43,7 +43,7 @@
             ><small
               >{{ $t("das.deposit.reference") }}
               {{ item.orderNumber || item.id }}</small
-            ><small>{{ date(item.createTime) }}</small>
+            ><small>{{ date(item.createTimeTimestamp) }}</small>
           </div>
           <strong>{{ money(item.receivedAmount || item.amount) }} USD</strong>
         </article></van-list
@@ -71,10 +71,28 @@ const money = (v) =>
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }),
-  date = (v) =>
-    String(v || "")
-      .replace("T", " | ")
-      .slice(0, 19),
+  date = (v) => {
+    const timestamp = Number(v);
+    if (!Number.isFinite(timestamp) || timestamp <= 0) return "—";
+    const value = timestamp < 1e12 ? timestamp * 1000 : timestamp;
+    const time = new Date(value);
+    if (Number.isNaN(time.getTime())) return "—";
+    const parts = Object.fromEntries(
+      new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      })
+        .formatToParts(time)
+        .filter(({ type }) => type !== "literal")
+        .map(({ type, value: part }) => [type, part]),
+    );
+    return `${parts.month}/${parts.day}/${parts.year} | ${parts.hour}:${parts.minute}:${parts.second} ${parts.dayPeriod}`;
+  },
   contact = () => safePush(router, "/contact"),
   openTransactions = () => safePush(router, "/transactionActivity"),
   load = async () => {

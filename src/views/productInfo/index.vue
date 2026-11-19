@@ -113,7 +113,7 @@ const ratingText = (value) => {
   return number.toLocaleString(undefined, { maximumFractionDigits: 1 });
 };
 const formattedCreateTime = computed(() =>
-  order.value.createTime ? formatTime(order.value.createTime) : "—",
+  formatTime(order.value.createTimeTimestamp),
 );
 const canSubmit = computed(() => {
   const status = order.value.status;

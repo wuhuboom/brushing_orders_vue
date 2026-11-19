@@ -25,7 +25,7 @@
             ><small
               >{{ $t("das.deposit.reference") }}
               {{ item.orderNumber || item.id }}</small
-            ><small>{{ date(item.createTime) }}</small>
+            ><small>{{ formatTime(item.createTimeTimestamp) }}</small>
           </div>
           <strong>{{ money(item.netAmount || item.amount) }} USD</strong>
         </article></van-list
@@ -38,6 +38,7 @@
 import { reactive, ref } from "vue";
 import { getWithdrawals } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import { formatTime } from "@/util/times";
 const tabs = [
     { status: "2", label: "das.withdraw.successful" },
     { status: "1", label: "das.records.pending" },
@@ -53,10 +54,6 @@ const money = (v) =>
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }),
-  date = (v) =>
-    String(v || "")
-      .replace("T", " | ")
-      .slice(0, 19),
   statusLabel = (s) =>
     String(s) === "2"
       ? "das.withdraw.successful"

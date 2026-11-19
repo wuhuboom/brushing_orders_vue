@@ -1,7 +1,7 @@
 <template>
   <article class="record-card">
     <header>
-      <time>{{ formatDate(item.createTime) }}</time>
+      <time>{{ formatTime(item.createTimeTimestamp) }}</time>
       <span :class="statusClass(item.status)">{{
         statusText(item.status)
       }}</span>
@@ -59,10 +59,6 @@ const money = (value) =>
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
-const formatDate = (value) =>
-  value === undefined || value === null || value === ""
-    ? "—"
-    : formatTime(value);
 const isPending = (status) => String(status) === "1";
 const statusKey = (status) =>
   String(status) === "0"

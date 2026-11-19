@@ -20,7 +20,10 @@
           <span
             ><b>{{ item.noticeTitle || item.title }}</b
             ><em>{{ item.noticeContent || item.content || item.summary }}</em
-            ><small>◷&nbsp; {{ relativeDate(item.createTime) }}</small></span
+            ><small
+              >◷&nbsp;
+              {{ formatTime(item.createTimeTimestamp) }}</small
+            ></span
           >
         </button>
       </van-list>
@@ -34,15 +37,12 @@ import { useRouter } from "vue-router";
 import { safePush } from "@/utils/navigation";
 import { getNoticeList } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import { formatTime } from "@/util/times";
 const router = useRouter(),
   list = ref([]),
   loading = ref(false),
   finished = ref(false),
   q = reactive({ pageNum: 1, pageSize: 10 });
-const relativeDate = (v) =>
-  String(v || "")
-    .replace("T", " ")
-    .slice(0, 16);
 const load = async () => {
   if (finished.value) return;
   loading.value = true;
