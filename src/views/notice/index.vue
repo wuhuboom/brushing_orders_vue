@@ -19,7 +19,7 @@
         >
           <span class="bp-notification-card__head">
             <b>{{ item.noticeTitle || item.title }}</b>
-            <time>{{ relativeDate(item.createTime) }}</time>
+            <time>{{ formatTime(item.createTimeTimestamp) }}</time>
           </span>
           <span
             class="bp-notification-card__content"
@@ -37,15 +37,12 @@ import { useRouter } from "vue-router";
 import { safePush } from "@/utils/navigation";
 import { getNoticeList } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import { formatTime } from "@/util/times";
 const router = useRouter(),
   list = ref([]),
   loading = ref(false),
   finished = ref(false),
   q = reactive({ pageNum: 1, pageSize: 10 });
-const relativeDate = (v) =>
-  String(v || "")
-    .replace("T", " ")
-    .slice(0, 16);
 const load = async () => {
   if (finished.value) return;
   loading.value = true;

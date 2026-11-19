@@ -27,7 +27,7 @@
             <small v-if="reference(item)">
               {{ $t("das.transaction.serial") }} {{ reference(item) }}
             </small>
-            <time>{{ date(item.createdTime || item.createTime) }}</time>
+            <time>{{ formatTime(item.createTimeTimestamp) }}</time>
           </div>
           <div class="transaction-value">
             <strong :class="amountClass(item.transactionAmount)">
@@ -51,6 +51,7 @@ import { reactive, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTransactions } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import { formatTime } from "@/util/times";
 
 const { t } = useI18n();
 const items = ref([]);
@@ -120,10 +121,6 @@ const signedMoney = (value) => {
 const amountClass = (value) =>
   numberValue(value) < 0 ? "is-negative" : "is-positive";
 const reference = (item) => item.serialCode || item.transactionCode || "";
-const date = (value) => {
-  const text = String(value || "").replace("T", " ").slice(0, 19);
-  return text || "—";
-};
 
 const load = async () => {
   if (finished.value) {

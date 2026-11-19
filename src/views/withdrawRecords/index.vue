@@ -41,7 +41,7 @@
             </div>
             <div class="withdraw-history-meta">
               <strong>+ ${{ money(item.netAmount || item.amount) }} USD</strong>
-              <small>{{ date(item.createTime) }}</small>
+              <small>{{ formatTime(item.createTimeTimestamp) }}</small>
             </div>
           </div>
           <p v-if="String(item.status) === '3' && rejectionReason(item)">
@@ -59,6 +59,7 @@
 import { reactive, ref } from "vue";
 import { getWithdrawals } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import { formatTime } from "@/util/times";
 const tabs = [
     { status: "2", label: "das.withdraw.successful" },
     { status: "1", label: "das.records.pending" },
@@ -74,10 +75,6 @@ const money = (v) =>
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }),
-  date = (v) =>
-    String(v || "")
-      .slice(0, 19)
-      .replace("T", " | "),
   statusLabel = (s) =>
     String(s) === "2"
       ? "das.withdraw.successful"

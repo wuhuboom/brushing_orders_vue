@@ -1,22 +1,25 @@
-// 将时间戳格式化，时间戳十位或13位，默认 yyyy-MM-dd hh:mm:ss
-export function formatTime(time, format = "yyyy-MM-dd hh:mm:ss") {
-  if (time === undefined || time === null || time === "") return "";
-  const raw = String(time).trim();
-  if (/^\d{10}$/.test(raw)) time = Number(raw) * 1000;
-  else if (/^\d{13}$/.test(raw)) time = Number(raw);
-  const date = new Date(time);
-  if (Number.isNaN(date.getTime())) return raw;
-  const obj = {
-    yyyy: date.getFullYear(),
-    MM: date.getMonth() + 1,
-    dd: date.getDate(),
-    hh: date.getHours(),
-    mm: date.getMinutes(),
-    ss: date.getSeconds(),
-  };
-  return format.replace(/(yyyy|MM|dd|hh|mm|ss)+/g, (result, key) => {
-    return obj[key] < 10 ? "0" + obj[key] : obj[key];
-  });
+// 只使用接口时间戳，格式与 Vue 18 充值记录一致，使用浏览器本地时区。
+export function formatTime(v) {
+  const timestamp = Number(v);
+  if (!Number.isFinite(timestamp) || timestamp <= 0) return "—";
+  const value = timestamp < 1e12 ? timestamp * 1000 : timestamp;
+  const time = new Date(value);
+  if (Number.isNaN(time.getTime())) return "—";
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    })
+      .formatToParts(time)
+      .filter(({ type }) => type !== "literal")
+      .map(({ type, value: part }) => [type, part]),
+  );
+  return `${parts.month}/${parts.day}/${parts.year} | ${parts.hour}:${parts.minute}:${parts.second} ${parts.dayPeriod}`;
 }
 
 // 返回当月的第一天和最后一天

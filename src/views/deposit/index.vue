@@ -53,7 +53,7 @@
             <strong
               >+ {{ money(item.receivedAmount || item.amount) }} USD</strong
             >
-            <small>{{ date(item.createTime) }}</small>
+            <small>{{ formatTime(item.createTimeTimestamp) }}</small>
           </div>
         </article>
       </van-list>
@@ -68,6 +68,7 @@ import { getDeposit, getOrderInfos, userGetInfo } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
 import OrderCard from "@/components/OrderCard.vue";
 import { safePush } from "@/utils/navigation";
+import { formatTime } from "@/util/times";
 const router = useRouter(),
   user = ref({}),
   pendingOrders = ref([]),
@@ -80,10 +81,6 @@ const money = (v) =>
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }),
-  date = (v) =>
-    String(v || "")
-      .slice(0, 19)
-      .replace("T", " | "),
   contact = () => safePush(router, "/contact"),
   openTransactions = () => safePush(router, "/transactionActivity"),
   load = async () => {

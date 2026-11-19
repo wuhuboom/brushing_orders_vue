@@ -37,7 +37,7 @@
             <header class="records-design-card__head">
               <time
                 ><img src="@/static/brain/clock.png" alt="" />{{
-                  formatDate(item.createTime)
+                  formatTime(item.createTimeTimestamp)
                 }}</time
               ><span :class="statusClass(item.status)">{{
                 statusText(item.status)
@@ -111,8 +111,6 @@ const tabs = [
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }),
-  formatDate = (v) =>
-    v === undefined || v === null || v === "" ? "—" : formatTime(v),
   isPending = (s) => String(s) === "1",
   statusKey = (s) =>
     String(s) === "0"

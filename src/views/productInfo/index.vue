@@ -167,7 +167,7 @@ const reviewCount = computed(
     "",
 );
 const formattedCreateTime = computed(() =>
-  order.value.createTime ? formatTime(order.value.createTime) : "—",
+  formatTime(order.value.createTimeTimestamp),
 );
 const canSubmit = computed(() => {
   const status = order.value.status;
