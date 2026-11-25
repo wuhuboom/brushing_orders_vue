@@ -1,0 +1,451 @@
+<template>
+  <main class="register-screen das-page fp-auth fp-auth--register">
+    <div class="poetic-auth-bar">
+      <button
+        class="wester-auth-brand"
+        type="button"
+        :aria-label="$t('das.common.back')"
+        @click="safeReplace(router, '/account/login')"
+      >
+        <img src="/westermedia/back.png" alt="" />
+      </button>
+      <h2 class="wester-auth-bar-title">{{ $t('das.wester.createAccount') }}</h2>
+      <AuthLanguage />
+    </div>
+    <header class="register-top fp-auth__top">
+      <p class="register-kicker fp-auth__title">
+        <img v-if="$i18n.locale === 'en'" src="/westermedia/join-studio.png" :alt="$t('das.wester.joinStudio')" />
+        <template v-else>{{ $t("das.wester.joinStudio") }}</template>
+      </p>
+    </header>
+    <form
+      class="register-form fp-auth__content fp-auth__form"
+      novalidate
+      @invalid.capture.prevent
+      @submit.prevent="submit"
+    >
+      <h1>{{ $t("das.wester.createAccount") }}</h1>
+      <p class="register-design-intro">{{ $t('das.design.registerHint') }}</p>
+      <p class="wester-auth-badge"><img src="/westermedia/portal-lock.png" alt="" />{{ $t("das.wester.securePortal") }}</p>
+      <div class="wester-auth-tabs">
+        <button type="button" @click="safeReplace(router, '/account/login')">
+          {{ $t("das.auth.login") }}
+        </button>
+        <span>{{ $t("das.wester.createAccount") }}</span>
+      </div>
+      <div class="wester-register-card">
+        <h2 class="wester-auth-card-title">{{ $t("das.wester.createAccount") }}</h2>
+        <div class="register-fields">
+          <label class="register-input register-input--username required"
+            ><span>{{ $t("das.auth.username") }}</span>
+            <div class="register-control">
+              <input
+                v-model.trim="form.username"
+                aria-required="true"
+                autocomplete="username"
+                :placeholder="$t('das.auth.username')"
+              />
+            </div>
+          </label>
+
+          <div class="register-field register-field--phone required">
+            <span>{{ $t("das.auth.phone") }}</span>
+            <div ref="phoneFieldRef" class="phone-field">
+              <button
+                class="phone-country-button"
+                type="button"
+                :aria-label="$t('das.auth.phoneCountry')"
+                aria-haspopup="listbox"
+                :aria-expanded="phonePickerOpen"
+                @click.stop="phonePickerOpen = !phonePickerOpen"
+              >
+                <img
+                  :src="selectedCountry.flag"
+                  class="phone-country-flag"
+                  :alt="selectedCountry.name"
+                />
+                <img
+                  class="phone-country-chevron"
+                  src="/westermedia/chevron.png"
+                  alt=""
+                />
+              </button>
+              <div class="phone-number-control">
+                <span class="phone-country-code"
+                  >+{{ selectedCountry.dial }}</span
+                >
+                <input
+                  v-model="localPhone"
+                  aria-required="true"
+                  inputmode="tel"
+                  :maxlength="selectedPhoneRule.pattern.length"
+                  autocomplete="tel-national"
+                  :placeholder="phonePlaceholder"
+                  @input="sanitizePhone"
+                />
+              </div>
+              <div
+                v-if="phonePickerOpen"
+                class="phone-country-menu"
+                role="listbox"
+                :aria-label="$t('das.auth.phoneCountry')"
+              >
+                <button
+                  v-for="country in allCountryList"
+                  :key="`${country.name}-${country.dial}`"
+                  type="button"
+                  role="option"
+                  :aria-selected="country.name === selectedCountry.name"
+                  :class="{
+                    'is-selected': country.name === selectedCountry.name,
+                  }"
+                  @click="selectCountry(country)"
+                >
+                  <img
+                    :src="country.flag"
+                    class="phone-country-flag"
+                    :alt="country.name"
+                  />
+                  <span>{{ country.name }}</span>
+                  <strong>+{{ country.dial }}</strong>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- <label class="required"
+            ><span>{{ $t("das.auth.birthday") }}</span
+            ><input
+              v-model="birthday"
+              aria-required="true"
+              inputmode="numeric"
+              maxlength="10"
+              :placeholder="$t('das.auth.birthdayPlaceholder')"
+              @input="sanitizeBirthday"
+          /></label> -->
+
+          <label class="register-input register-input--email"
+            ><span>{{ $t("das.auth.email") }}</span>
+            <div class="register-control">
+              <input
+                v-model.trim="form.email"
+                type="text"
+                inputmode="email"
+                autocomplete="email"
+                :placeholder="$t('das.auth.optional')"
+              />
+            </div>
+          </label>
+
+          <div class="register-field gender-group required">
+            <span class="gender-field__title">{{ $t("das.auth.gender") }}</span>
+            <div class="gender-field">
+              <DasSelect
+                v-model="form.gender"
+                :options="[
+                  { value: '0', label: $t('das.auth.male') },
+                  { value: '1', label: $t('das.auth.female') },
+                ]"
+                :placeholder="$t('das.auth.select')"
+                :aria-label="$t('das.auth.gender')"
+              />
+            </div>
+          </div>
+
+          <div class="register-input register-input--password register-input--login required">
+            <label for="register-password">{{ $t("das.auth.password") }}</label>
+            <div class="register-control register-control--password">
+              <input
+                id="register-password"
+                v-model="form.password"
+                aria-required="true"
+                :type="passwordVisible ? 'text' : 'password'"
+                autocomplete="new-password"
+                placeholder="••••••••"
+              />
+              <button
+                class="register-control__eye"
+                type="button"
+                :aria-label="$t('das.form.togglePassword')"
+                aria-controls="register-password"
+                :aria-pressed="passwordVisible"
+                @click="passwordVisible = !passwordVisible"
+              >
+                <ReferenceEye :visible="passwordVisible" />
+              </button>
+            </div>
+          </div>
+          <div class="register-input register-input--password register-input--confirm required">
+            <label for="register-confirm-password">{{
+              $t("das.auth.confirmPassword")
+            }}</label>
+            <div class="register-control register-control--password">
+              <input
+                id="register-confirm-password"
+                v-model="confirmPassword"
+                aria-required="true"
+                :type="confirmPasswordVisible ? 'text' : 'password'"
+                autocomplete="new-password"
+                placeholder="••••••••"
+              />
+              <button
+                class="register-control__eye"
+                type="button"
+                :aria-label="$t('das.form.togglePassword')"
+                aria-controls="register-confirm-password"
+                :aria-pressed="confirmPasswordVisible"
+                @click="confirmPasswordVisible = !confirmPasswordVisible"
+              >
+                <ReferenceEye :visible="confirmPasswordVisible" />
+              </button>
+            </div>
+          </div>
+          <div class="register-input register-input--password register-input--trade required">
+            <label for="register-trade-password">{{
+              $t("das.auth.tradePassword")
+            }}</label>
+            <div class="register-control register-control--password">
+              <input
+                id="register-trade-password"
+                v-model="form.tradePassword"
+                aria-required="true"
+                :type="tradePasswordVisible ? 'text' : 'password'"
+                inputmode="numeric"
+                autocomplete="new-password"
+                placeholder="••••••••"
+              />
+              <button
+                class="register-control__eye"
+                type="button"
+                :aria-label="$t('das.form.togglePassword')"
+                aria-controls="register-trade-password"
+                :aria-pressed="tradePasswordVisible"
+                @click="tradePasswordVisible = !tradePasswordVisible"
+              >
+                <ReferenceEye :visible="tradePasswordVisible" />
+              </button>
+            </div>
+          </div>
+          <label class="register-input register-input--invite required"
+            ><span>{{ $t("das.auth.inviteCode") }}</span>
+            <div class="register-control">
+              <input
+                v-model.trim="form.inviteCode"
+                aria-required="true"
+                :placeholder="$t('das.auth.inviteCode')"
+              />
+            </div>
+          </label>
+        </div>
+        <label class="register-agree"
+          ><input v-model="agreed" type="checkbox" /><span
+            >{{ $t("das.auth.agree") }}
+            <button type="button" @click="openTerms">
+              {{ $t("das.auth.terms") }}
+            </button></span
+          ></label
+        ><button
+          class="register-submit fp-auth__submit"
+          type="submit"
+          :disabled="submitting"
+        >
+          {{ $t("das.wester.createAccount") }}
+        </button>
+      </div>
+      <p class="register-switch fp-auth__linkline">
+        {{ $t("das.auth.haveAccount") }}
+        <button type="button" @click="safeReplace(router, '/account/login')">
+          {{ $t("das.auth.loginNow") }}
+        </button>
+      </p>
+      <p class="auth-link auth-support fp-auth__linkline">
+        {{ $t("das.wester.needAssistance") }}
+        <button type="button" @click="safePush(router, '/contact')">{{ $t("das.auth.support") }}</button>
+      </p>
+      <p class="register-legal fp-auth__linkline">
+        {{ $t("das.auth.signupAgreementPrefix") }}
+        <button type="button" @click="openTerms">
+          {{ $t("das.auth.terms") }}
+        </button>
+      </p>
+    </form>
+    <WesterFooter class="fp-auth__footer" />
+    <van-dialog
+      v-model:show="showSuccess"
+      class="register-status-dialog"
+      overlay-class="register-status-overlay"
+      teleport="body"
+      :show-confirm-button="false"
+      ><div class="status-dialog">
+        <img
+          class="status-dialog__icon"
+          src="/westermedia/order-success.png"
+          alt=""
+        />
+        <h2>{{ $t("das.auth.registerSuccess") }}</h2>
+        <p>{{ $t("das.auth.registerSuccessHint") }}</p>
+        <button @click="safeReplace(router, '/account/login')">
+          {{ $t("das.auth.continue") }}
+        </button>
+      </div></van-dialog
+    >
+  </main>
+</template>
+
+<script setup>
+import AuthLanguage from "@/components/AuthLanguage.vue";
+import DasSelect from "@/components/DasSelect.vue";
+import ReferenceEye from "@/components/ReferenceEye.vue";
+import WesterFooter from "@/components/WesterFooter.vue";
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+import { showToast } from "vant";
+import { register } from "@/api/apis";
+import { useRegistrationDraft } from "@/composables/useRegistrationDraft";
+import {
+  PHONE_COUNTRIES,
+  formatPhoneNumber,
+  getPhoneCountry,
+  getPhoneRule,
+  isValidPhone,
+  localPhoneDigits,
+} from "@/config/phone";
+import { safePush, safeReplace } from "@/utils/navigation";
+
+const router = useRouter(),
+  { t } = useI18n(),
+  phonePickerOpen = ref(false),
+  phoneFieldRef = ref(),
+  localPhone = ref(""),
+  birthday = ref(""),
+  confirmPassword = ref(""),
+  passwordVisible = ref(false),
+  confirmPasswordVisible = ref(false),
+  tradePasswordVisible = ref(false),
+  agreed = ref(false),
+  submitting = ref(false),
+  showSuccess = ref(false),
+  form = reactive({
+    username: "",
+    password: "",
+    tradePassword: "",
+    gender: "",
+    inviteCode: "",
+    email: "",
+  });
+
+const { saveDraft, takeDraft, clearDraft } = useRegistrationDraft();
+
+const selectedCountry = ref(getPhoneCountry(window.g?.DEFAULT_PHONE_COUNTRY));
+const allCountryList = PHONE_COUNTRIES;
+
+const draft = takeDraft();
+if (draft) {
+  Object.assign(form, draft.form);
+  selectedCountry.value = getPhoneCountry(draft.selectedCountry?.id);
+  localPhone.value = draft.localPhone;
+  birthday.value = draft.birthday;
+  confirmPassword.value = draft.confirmPassword;
+  agreed.value = draft.agreed;
+}
+
+const openTerms = async () => {
+  saveDraft({
+    form: { ...form },
+    selectedCountry: { ...selectedCountry.value },
+    localPhone: localPhone.value,
+    birthday: birthday.value,
+    confirmPassword: confirmPassword.value,
+    agreed: agreed.value,
+  });
+  try {
+    await safePush(router, "/tc");
+  } catch (error) {
+    clearDraft();
+    throw error;
+  }
+};
+
+const selectedPhoneRule = computed(() => getPhoneRule(selectedCountry.value));
+const phonePlaceholder = computed(() =>
+  selectedPhoneRule.value.pattern.replace(/#/g, "_"),
+);
+
+const selectCountry = (country) => {
+  const phone = localPhoneDigits(localPhone.value);
+  selectedCountry.value = country;
+  localPhone.value = formatPhoneNumber(phone, selectedPhoneRule.value);
+  phonePickerOpen.value = false;
+};
+
+const closePhonePickerOnOutside = (event) => {
+  if (phoneFieldRef.value && !phoneFieldRef.value.contains(event.target)) {
+    phonePickerOpen.value = false;
+  }
+};
+
+onMounted(() =>
+  document.addEventListener("pointerdown", closePhonePickerOnOutside),
+);
+onBeforeUnmount(() =>
+  document.removeEventListener("pointerdown", closePhonePickerOnOutside),
+);
+
+const sanitizePhone = (event) => {
+  const value = formatPhoneNumber(event.target.value, selectedPhoneRule.value);
+  localPhone.value = value;
+  event.target.value = value;
+};
+const sanitizeBirthday = (e) =>
+  (birthday.value = e.target.value.replace(/[^0-9/\s-]/g, ""));
+const isValidBirthday = (value) => {
+  const m = value.match(/^\s*(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})\s*$/);
+  if (!m) return false;
+  const month = +m[1],
+    day = +m[2],
+    year = +m[3],
+    date = new Date(year, month - 1, day);
+  return (
+    year >= 1900 &&
+    date <= new Date() &&
+    date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day
+  );
+};
+const emailReg = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+const submit = async () => {
+  const phone = localPhoneDigits(localPhone.value);
+  if (!isValidPhone(phone, selectedCountry.value.dial, selectedPhoneRule.value))
+    return showToast(t("das.auth.invalidPhone"));
+  if (
+    !form.username ||
+    form.gender === "" ||
+    !form.password ||
+    !confirmPassword.value ||
+    !form.tradePassword
+  )
+    return showToast(t("das.auth.required"));
+  if (form.email && !emailReg.test(form.email))
+    return showToast(t("das.auth.invalidEmail"));
+  if (!form.inviteCode) return showToast(t("das.auth.inviteRequired"));
+  if (birthday.value && !isValidBirthday(birthday.value))
+    return showToast(t("das.auth.invalidBirthday"));
+  if (form.password !== confirmPassword.value)
+    return showToast(t("das.auth.passwordMismatch"));
+  if (!agreed.value) return showToast(t("das.auth.agreeRequired"));
+  submitting.value = true;
+  try {
+    await register({
+      ...form,
+      phoneNumber: `+${selectedCountry.value.dial}${phone}`,
+    });
+    clearDraft();
+    showSuccess.value = true;
+  } finally {
+    submitting.value = false;
+  }
+};
+</script>

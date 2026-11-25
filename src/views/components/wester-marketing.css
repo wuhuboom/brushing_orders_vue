@@ -1,0 +1,86 @@
+/* Match the existing page shell, including the fixed navigation, on PC. */
+#app #router-view.das-page.bp-home-page {
+  width: var(--design-shell);
+  max-width: min(var(--das-app-max-width, 960px), 620px);
+  margin-inline: auto;
+  padding-bottom: 0;
+}
+
+#app #router-view .psg-home-container {
+  container: psg-home / inline-size;
+  width: 100%;
+}
+
+#app #router-view .psg-reference {
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  color: #3a3e40;
+  font-family: PsgPoppins, Helvetica, Arial, Lucida, sans-serif;
+  text-align: start;
+}
+
+#app #router-view .psg-reference #page-container {
+  padding: 0 !important;
+  overflow: visible;
+}
+
+#app #router-view .psg-reference :is(h1, h2, h3, h4, h5, h6) {
+  font-family: PsgRoboto, Helvetica, Arial, Lucida, sans-serif;
+}
+
+#app #router-view .psg-reference img {
+  display: inline;
+}
+
+#app #router-view .psg-reference .psg-hero-video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+#app #router-view .psg-reference .dsm_lottie_wrapper svg {
+  display: block;
+}
+
+#app
+  #router-view
+  .psg-reference
+  .dsm_card_carousel_0.is-in-view
+  .dsm_card_carousel_arrow {
+  background-color: #1975b2;
+}
+
+#app
+  #router-view
+  .psg-reference
+  .dsm_card_carousel_0.is-in-view
+  .dsm_card_carousel_arrow::before {
+  color: #f9f9f9;
+}
+
+#app #router-view .psg-reference .et_pb_section_7 {
+  min-height: 0;
+}
+
+#app #router-view .psg-reference .et_pb_row_9 .et_pb_column_18,
+#app #router-view .psg-reference .et-l--footer .et_pb_column_0_tb_footer {
+  width: 100%;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+#app #router-view .psg-reference .et_pb_row_0_tb_footer.et_pb_row {
+  display: flex;
+  justify-content: center;
+}
+
+#app #router-view .psg-reference .et-l--footer .et_pb_column_0_tb_footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

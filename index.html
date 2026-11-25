@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/westermedia/logo.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <script>
+      document.write(
+        '<script src="/config.js?t=' + Date.now() + '"><\/script>',
+      );
+    </script>
+    <title>WesterMedia</title>
+    <style>
+      .wester-boot {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        width: min(100%, 620px);
+        margin-inline: auto;
+        background: #fbf9f3 url("/westermedia/background.png") center / cover no-repeat;
+      }
+      .wester-boot img { width: min(72%, 282px); height: auto; opacity: .46; }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="wester-boot" role="status" aria-label="WesterMedia">
+        <img src="/westermedia/logo.png" alt="" />
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
