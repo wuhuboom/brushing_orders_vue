@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-23",
+  "reference": "C:/Users/Administrator/Desktop/暂时抓包/shua24",
+  "implementation": "Native Vue 2 templates; no iframe or v-html",
+  "video": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "duration": 14.9,
+    "muted": true,
+    "autoplay": true,
+    "loop": true,
+    "local": true
+  },
+  "redirects": {
+    "businessLinks": 89,
+    "checks": 30,
+    "rule": "Original public/redirect.js retained"
+  },
+  "assets": {
+    "checks": 67,
+    "unusedLocalAssets": 0,
+    "oldHomepageFilesRemoved": 27
+  },
+  "validation": {
+    "lint": "passed",
+    "build": "passed",
+    "responsiveWidths": [
+      320,
+      375,
+      390,
+      768,
+      1024,
+      1440,
+      1920
+    ],
+    "productionPreview": {
+      "pc": 1440,
+      "h5": 390,
+      "localVideoPlaying": true,
+      "noFrames": true,
+      "all89LinksMapped": true,
+      "blogPaginationVerified": true
+    },
+    "localIpNavigationNote": "Existing redirect rule requires a hostname. A click during local IP preview produced an invalid work.127.0.0.1 URL; the unchanged rule passed checks for production hostnames and localhost."
+  },
+  "deployment": "Not deployed; preserve existing server config.js"
+}

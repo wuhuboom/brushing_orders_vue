@@ -1,0 +1,26 @@
+/* Vue controls the original page's menu and media lifecycle. */
+html, body { overflow-x: hidden; }
+.psg-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dd-menu-flex-sub.psg-services-open {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+}
+.et_pb_scroll_top.psg-back-visible { display: block; }
+button.et_pb_scroll_top { border: 0; cursor: pointer; }
+@media (max-width: 980px) {
+  .dd-menu-flex-sub.psg-services-open { width: min(600px, 90vw); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; }
+}

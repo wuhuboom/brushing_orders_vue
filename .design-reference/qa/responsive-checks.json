@@ -1,0 +1,51 @@
+[
+  {
+    "clientWidth": 305,
+    "frames": 0,
+    "hero": 246.421875,
+    "scrollWidth": 305,
+    "width": 320
+  },
+  {
+    "clientWidth": 360,
+    "frames": 0,
+    "hero": 246.421875,
+    "scrollWidth": 360,
+    "width": 375
+  },
+  {
+    "clientWidth": 375,
+    "frames": 0,
+    "hero": 246.421875,
+    "scrollWidth": 375,
+    "width": 390
+  },
+  {
+    "clientWidth": 753,
+    "frames": 0,
+    "hero": 423.5625,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "clientWidth": 1009,
+    "frames": 0,
+    "hero": 432.421875,
+    "scrollWidth": 1009,
+    "width": 1024
+  },
+  {
+    "clientWidth": 1425,
+    "frames": 0,
+    "hero": 610.703125,
+    "scrollWidth": 1425,
+    "width": 1440
+  },
+  {
+    "clientWidth": 1905,
+    "frames": 0,
+    "hero": 816.421875,
+    "scrollWidth": 1905,
+    "width": 1920
+  }
+]
