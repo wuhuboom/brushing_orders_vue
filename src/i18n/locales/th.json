@@ -155,7 +155,7 @@
   "please_enter_a_new_password": "กรุณากรอกรหัสผ่านใหม่",
   "already_have_an_account_2": "มีบัญชีอยู่แล้ว?",
   "withdrawal_successful": "ถอนเงินสำเร็จ",
-  "commission_fee_ratio": "อัตราค่าธรรมเนียมคอมมิชชั่น",
+  "commission_fee_ratio": "อัตราค่าคอมมิชชั่น",
   "please_enter_the_amount": "กรุณากรอกจำนวนเงิน",
   "username_phone_is_request": "ต้องกรอกชื่อผู้ใช้/เบอร์โทร",
   "register_2": "สมัครสมาชิก",
@@ -494,7 +494,7 @@
   "latest_event_details": "รายละเอียดกิจกรรมล่าสุด",
   "sug_profit_earnings_guide": "คู่มือกำไรและรายได้ SUG",
   "welcome_income_overview": "เรียนผู้ใช้งานทุกท่าน ยินดีต้อนรับสู่คู่มือกำไรและรายได้",
-  "income_guide_desc": "คู่มือนี้อธิบายโครงสร้างกำไรและรายได้ภายในบริษัท เพื่อช่วยให้คุณวางแผนการทำงานได้ดียิ่งขึ้น รายได้ของพนักงานประกอบด้วย 3 ส่วน ได้แก่ กำไรประจำวัน โบนัสรีเซ็ต และเงินเดือนพื้นฐาน กำไรประจำวันเป็นแหล่งรายได้หลัก ส่วนโบนัสรีเซ็ตและเงินเดือนพื้นฐานจะได้รับเมื่อทำตามเงื่อนไขที่กำหนดโดยร้านค้า",
+  "income_guide_desc": "คู่มือนี้อธิบายโครงสร้างกำไรและรายได้ภายในบริษัท เพื่อช่วยให้คุณวางแผนการทำงานได้ดียิ่งขึ้น รายได้ของพนักงานประกอบด้วย 2 ส่วน ได้แก่ กำไรประจำวันและเงินเดือนพื้นฐาน กำไรประจำวันเป็นแหล่งรายได้หลัก ส่วนเงินเดือนพื้นฐานจะได้รับเมื่อทำตามเงื่อนไขที่กำหนดโดยร้านค้า",
   "start_earning": "เริ่มสร้างรายได้",
   "view_vip": "ดู VIP",
   "detailed_explanation_rules": "คำอธิบายและกฎการรับรายได้อย่างละเอียด",
@@ -654,91 +654,7 @@
       }
     },
     {
-      "title": "2) โบนัสรีเซ็ต",
-      "image": "",
-      "content": "<p>โบนัสรีเซ็ตเป็นหนึ่งในแหล่งรายได้ที่สำคัญที่สุดเมื่อคุณเริ่มทำงานกับเรา ผู้ใช้แต่ละคนสามารถทำภารกิจได้ <strong>2 ชุดต่อวัน</strong> และร้านค้าจะมอบโบนัสรีเซ็ตเพิ่มเติมเพื่อส่งเสริมการทำภารกิจอย่างต่อเนื่อง</p><p>ภายใต้โครงสร้างโบนัสรีเซ็ต:</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>คุณจะได้รับ <strong>โบนัสเพิ่ม 10 USD</strong> ทุกครั้งที่รีเซ็ตบัญชีเพื่อเริ่มภารกิจแรกด้วยเงิน <strong>100 USD</strong></li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>เมื่อยอดรีเซ็ตทั้งหมดในวันเดียวเกิน <strong>1,500 USD</strong> คุณจะได้รับ <strong>โบนัสเพิ่ม 4%</strong> จากยอดรีเซ็ตสะสมของทั้ง 2 ชุดในวันนั้น</li></ol>",
-      "resetBonusScheme": {
-        "title": "รูปแบบเงินเดือน",
-        "subtitle": "เช็คอิน . ทำงาน . รับเงิน",
-        "plans": [
-          {
-            "name": "มาตรฐาน",
-            "amountLabel": "จำนวนเงิน",
-            "amount": "USD 100",
-            "extraLabel": "โบนัสเพิ่ม",
-            "extra": "USD 10"
-          },
-          {
-            "name": "ยอดนิยม",
-            "amountLabel": "จำนวนเงิน",
-            "amount": "USD 500",
-            "extraLabel": "โบนัสเพิ่ม",
-            "extra": "USD 60"
-          },
-          {
-            "name": "พรีเมียม",
-            "amountLabel": "จำนวนเงิน",
-            "amount": "USD 1000",
-            "extraLabel": "โบนัสเพิ่ม",
-            "extra": "USD 120"
-          },
-          {
-            "name": "เอลีท",
-            "amountLabel": "จำนวนเงิน",
-            "amount": "USD 1600",
-            "extraLabel": "โบนัสเพิ่ม",
-            "extra": "USD 200"
-          },
-          {
-            "name": "แนะนำ",
-            "amountLabel": "จำนวนเงิน",
-            "amount": "USD 5500",
-            "extraLabel": "โบนัสเพิ่ม",
-            "extra": "USD 1200"
-          },
-          {
-            "name": "เอลีทพลัส",
-            "amountLabel": "จำนวนเงิน",
-            "amount": "USD 10000",
-            "extraLabel": "โบนัสเพิ่ม",
-            "extra": "USD 2400"
-          }
-        ],
-        "advanceTitle": "=โบนัสล่วงหน้าสะสมประจำวัน",
-        "advanceRows": [
-          {
-            "title": "ยอดล่วงหน้าต่อวัน(USD)",
-            "range": "1,500-9,999",
-            "desc": "จะได้รับ(USD)",
-            "bonus": "4%",
-            "suffix": "โบนัสล่วงหน้า"
-          },
-          {
-            "title": "ยอดล่วงหน้าต่อวัน(USD)",
-            "range": "10,000-19,999",
-            "desc": "จะได้รับ(USD)",
-            "bonus": "8%",
-            "suffix": "โบนัสล่วงหน้า"
-          },
-          {
-            "title": "ยอดล่วงหน้าต่อวัน(USD)",
-            "range": "20,000-49,999",
-            "desc": "จะได้รับ(USD)",
-            "bonus": "4%",
-            "suffix": "โบนัสล่วงหน้า"
-          },
-          {
-            "title": "ยอดล่วงหน้าต่อวัน(USD)",
-            "range": "50,000 ขึ้นไป",
-            "desc": "จะได้รับ(USD)",
-            "bonus": "4%",
-            "suffix": "โบนัสล่วงหน้า"
-          }
-        ]
-      }
-    },
-    {
-      "title": "3) กำไรประจำวัน",
+      "title": "2) กำไรประจำวัน",
       "image": "",
       "content": "<p>กำไรประจำวันคือแหล่งรายได้หลักของคุณ ระบบจะกำหนดสินค้าจากร้านค้าต่าง ๆ เพื่อเพิ่มประสิทธิภาพตามยอดคงเหลือในบัญชีของคุณ สำหรับแต่ละสินค้าที่คุณทำการเพิ่มประสิทธิภาพ คุณจะได้รับกำไร <strong>0.5% ถึง 2.5%</strong> ของราคาสินค้า</p><p>ระดับกำไรจะขึ้นอยู่กับ <strong>VIP ของคุณ</strong> ยิ่ง VIP สูง อัตรากำไรก็ยิ่งสูงขึ้น นอกจากนี้ จำนวนภารกิจต่อชุดจะเพิ่มขึ้นตามระดับ VIP</p><p>ร้านค้าบางรายมี <strong>สินค้าชุดรวม</strong> ระบบอาจสุ่มแจกสินค้าประเภทนี้ตามยอดคงเหลือของบัญชี คุณอาจได้รับกำไรเพิ่มอีก <strong>5% ถึง 25%</strong> ขึ้นอยู่กับประเภทสินค้า</p>",
       "vipProfitRates": {
@@ -1096,38 +1012,6 @@
   "guide_salary_how_text": "สำหรับรายได้รายเดือน เพียงเช็คอินและรักษาผลกำไร คุณจะได้รับรายได้ที่รับประกัน!",
   "guide_salary_earn_text": "ยิ่งคุณทำกิจกรรมมากเท่าไหร่ คุณก็ยิ่งได้มากขึ้นเท่านั้น! ชวนเพื่อนเริ่มได้เลย!",
   "guide_salary_tip": "การเช็คอินครบจะทำให้คุณมีรายได้สูงสุดถึง USD 7,000 ต่อเดือน!",
-  "guide_reset_scheme_title": "แผนโบนัสรีเซ็ต",
-  "guide_reset_scheme_subtitle": "เติมเงิน . รีเซ็ต . รับมากขึ้น",
-  "guide_reset_plan_1_name": "มาตรฐาน",
-  "guide_reset_plan_2_name": "ยอดนิยม",
-  "guide_reset_plan_3_name": "พรีเมียม",
-  "guide_reset_plan_4_name": "เอลีท",
-  "guide_reset_plan_5_name": "แนะนำ",
-  "guide_reset_plan_6_name": "เอลีทพลัส",
-  "guide_reset_amount_label": "จำนวนเงิน",
-  "guide_reset_extra_label": "โบนัสพิเศษ",
-  "guide_reset_plan_1_amount": "USD100",
-  "guide_reset_plan_2_amount": "USD500",
-  "guide_reset_plan_3_amount": "USD1,000",
-  "guide_reset_plan_4_amount": "USD1,600",
-  "guide_reset_plan_5_amount": "USD5,500",
-  "guide_reset_plan_6_amount": "USD10,000",
-  "guide_reset_plan_1_extra": "USD10",
-  "guide_reset_plan_2_extra": "USD60",
-  "guide_reset_plan_3_extra": "USD120",
-  "guide_reset_plan_4_extra": "USD200",
-  "guide_reset_plan_5_extra": "USD1,200",
-  "guide_reset_plan_6_extra": "USD2,400",
-  "guide_reset_advance_title": "โบนัสรีเซ็ตล่วงหน้า",
-  "guide_reset_advance_day_title": "รีเซ็ตล่วงหน้าในวันเดียวกัน",
-  "guide_reset_range_1500_9999": "USD1,500 - USD9,999",
-  "guide_reset_range_10000_19999": "USD10,000 - USD19,999",
-  "guide_reset_range_20000_49999": "USD20,000 - USD49,999",
-  "guide_reset_range_50000_above": "USD50,000 ขึ้นไป",
-  "guide_reset_will_get": "คุณจะได้รับ",
-  "guide_reset_bonus_4": "4%",
-  "guide_reset_bonus_8": "8%",
-  "guide_reset_advance_bonus": "โบนัสล่วงหน้า",
   "my_referral_code": "รหัสแนะนำของฉัน",
   "todays_commission": "ค่าคอมมิชชันวันนี้",
   "wallet_amount": "ยอดกระเป๋าเงิน",

@@ -122,6 +122,14 @@
                                         USD {{ formatMoney(item.commission) }}
                                     </div>
                                 </div>
+                                <div class="task-card__metric">
+                                    <div class="task-card__metric-label">
+                                        {{ $t("commission_fee_ratio") }}
+                                    </div>
+                                    <div class="task-card__metric-value">
+                                        {{ formatCommissionRate(item.commission, item.price) }}
+                                    </div>
+                                </div>
                             </div>
 
                             <button
@@ -185,6 +193,7 @@
             :price-text="formatMoney(goodsData.price)"
             :total-amount-text="formatMoney(orderAmount(goodsData))"
             :commission-text="formatMoney(goodsData.commission)"
+            :profit-rate-text="formatCommissionRate(goodsData.commission, goodsData.price)"
             :create-time-text="recordCreateTimeText"
             :order-no-text="goodsData.orderNo || '--'"
             :submitting="isSubmitting"
@@ -207,6 +216,7 @@ import { getOrderInfos, submitOrder } from "@/api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { errorMessages } from "@/api/errorCodeMap";
 import { formatWithTimezone } from "@/util/utils";
+import { formatCommissionRate } from "@/utils/commissionRate";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -1508,6 +1518,7 @@ onUnmounted(() => {
 
 .task-card__foot {
     display: flex !important;
+    flex-wrap: wrap;
     align-items: flex-end !important;
     justify-content: space-between !important;
     gap: 10px !important;
@@ -1515,10 +1526,12 @@ onUnmounted(() => {
 }
 
 .task-card__metrics {
-    display: flex !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
     min-width: 0 !important;
-    flex: 1 1 auto !important;
-    gap: 28px !important;
+    flex: 1 1 280px !important;
+    gap: 12px !important;
 }
 
 .task-card__metric {
@@ -1530,7 +1543,7 @@ onUnmounted(() => {
     font-size: 13px !important;
     line-height: 17px !important;
     font-weight: 500 !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
 }
 
 .task-card__metric-value {
@@ -1539,11 +1552,13 @@ onUnmounted(() => {
     font-size: 15px !important;
     line-height: 20px !important;
     font-weight: 500 !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
 }
 
 .grab-btn {
     display: inline-flex !important;
+    margin-left: auto;
     align-items: center !important;
     justify-content: center !important;
     flex: 0 0 auto !important;

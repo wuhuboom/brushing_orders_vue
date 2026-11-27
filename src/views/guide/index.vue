@@ -33,54 +33,11 @@
                 </div>
             </section>
 
-            <section class="guide-section">
-                <h2>{{ guideSectionTitle(1, "Reset Bonus") }}</h2>
-                <p class="section-subtitle">
-                    {{ $t("guide_reset_scheme_subtitle") }}
-                </p>
-                <div class="white-panel bonus-panel">
-                    <p class="panel-copy" v-html="guideSectionContent(1)"></p>
-                    <div class="reset-title">
-                        ▫ {{ $t("guide_reset_scheme_title") }}
-                    </div>
-                    <div
-                        v-for="(plan, index) in resetPlans"
-                        :key="`reset-plan-${index}`"
-                        class="bonus-row"
-                        :class="{
-                            'bonus-row-last': index === resetPlans.length - 1,
-                        }"
-                    >
-                        <span>{{
-                            formatResetAmount(plan.amountLabel, plan.amount)
-                        }}</span>
-                        <em>{{ plan.name }}</em>
-                        <b>{{ formatResetExtra(plan.extra) }}</b>
-                    </div>
-
-                    <div class="deposit-title">
-                        {{ $t("guide_reset_advance_title") }}
-                    </div>
-                    <div class="deposit-head">
-                        <span>{{ $t("guide_reset_advance_day_title") }}</span
-                        ><span>{{ $t("guide_reset_advance_bonus") }}</span>
-                    </div>
-                    <div
-                        v-for="(item, index) in resetAdvanceRows"
-                        :key="`deposit-row-${index}`"
-                        class="deposit-row"
-                    >
-                        <span>{{ formatResetRange(item.range) }}</span>
-                        <b>{{ formatResetBonusRate(item.bonus) }}</b>
-                    </div>
-                </div>
-            </section>
-
             <section class="guide-section daily-section">
-                <h2>{{ guideSectionTitle(2, "Daily Profits") }}</h2>
+                <h2>{{ guideSectionTitle(1, "Daily Profits") }}</h2>
                 <p class="section-subtitle">{{ dailyProfitSubtitle }}</p>
                 <div class="white-panel daily-panel">
-                    <p class="panel-copy" v-html="guideSectionContent(2)"></p>
+                    <p class="panel-copy" v-html="guideSectionContent(1)"></p>
                     <div
                         v-for="item in vipRates"
                         :key="item.label"
@@ -131,33 +88,6 @@ const guideSectionContent = (index) => {
     return guideSection(index).content || "";
 };
 
-const compactCurrencyText = (value = "") => {
-    return String(value)
-        .replace(/USD\s*/gi, "$")
-        .replace(/\$\s+/g, "$")
-        .replace(/:\s+/g, ": ")
-        .trim();
-};
-
-const formatResetAmount = (label = "Amount", amount = "") => {
-    return `${label}: ${compactCurrencyText(amount)}`;
-};
-
-const formatResetExtra = (value = "") => {
-    const text = compactCurrencyText(value);
-    return text && !text.startsWith("+") ? `+${text}` : text;
-};
-
-const formatResetRange = (value = "") => {
-    return compactCurrencyText(value);
-};
-
-const formatResetBonusRate = (value = "") => {
-    return String(value)
-        .replace(/\s*advance\s+bonus\s*/gi, "")
-        .trim();
-};
-
 const salaryRows = computed(() => [
     {
         name: t("guide_salary_sign_in"),
@@ -186,70 +116,8 @@ const salaryRows = computed(() => [
     },
 ]);
 
-const resetPlans = computed(() => [
-    {
-        name: t("guide_reset_plan_1_name"),
-        amountLabel: t("guide_reset_amount_label"),
-        amount: t("guide_reset_plan_1_amount"),
-        extra: t("guide_reset_plan_1_extra"),
-    },
-    {
-        name: t("guide_reset_plan_2_name"),
-        amountLabel: t("guide_reset_amount_label"),
-        amount: t("guide_reset_plan_2_amount"),
-        extra: t("guide_reset_plan_2_extra"),
-    },
-    {
-        name: t("guide_reset_plan_3_name"),
-        amountLabel: t("guide_reset_amount_label"),
-        amount: t("guide_reset_plan_3_amount"),
-        extra: t("guide_reset_plan_3_extra"),
-    },
-    {
-        name: t("guide_reset_plan_4_name"),
-        amountLabel: t("guide_reset_amount_label"),
-        amount: t("guide_reset_plan_4_amount"),
-        extra: t("guide_reset_plan_4_extra"),
-    },
-    {
-        name: t("guide_reset_plan_5_name"),
-        amountLabel: t("guide_reset_amount_label"),
-        amount: t("guide_reset_plan_5_amount"),
-        extra: t("guide_reset_plan_5_extra"),
-    },
-    {
-        name: t("guide_reset_plan_6_name"),
-        amountLabel: t("guide_reset_amount_label"),
-        amount: t("guide_reset_plan_6_amount"),
-        extra: t("guide_reset_plan_6_extra"),
-    },
-]);
-
-const resetAdvanceRows = computed(() => [
-    {
-        range: t("guide_reset_range_1500_9999"),
-        bonus: t("guide_reset_bonus_4"),
-        suffix: t("guide_reset_advance_bonus"),
-    },
-    {
-        range: t("guide_reset_range_10000_19999"),
-        bonus: t("guide_reset_bonus_8"),
-        suffix: t("guide_reset_advance_bonus"),
-    },
-    {
-        range: t("guide_reset_range_20000_49999"),
-        bonus: t("guide_reset_bonus_4"),
-        suffix: t("guide_reset_advance_bonus"),
-    },
-    {
-        range: t("guide_reset_range_50000_above"),
-        bonus: t("guide_reset_bonus_4"),
-        suffix: t("guide_reset_advance_bonus"),
-    },
-]);
-
 const vipRates = computed(() => {
-    const rows = guideSection(2).vipProfitRates?.rows;
+    const rows = guideSection(1).vipProfitRates?.rows;
     if (Array.isArray(rows) && rows.length) {
         return rows.map((row) => ({
             label: row.level,
@@ -269,14 +137,14 @@ const vipRates = computed(() => {
 
 const dailyProfitSubtitle = computed(() => {
     return (
-        guideSection(2).subtitle ||
+        guideSection(1).subtitle ||
         "0.5% - 2.5% Of Product Price Per Optimization"
     );
 });
 
 const vipProfitButton = computed(() => {
     return (
-        guideSection(2).vipProfitRates?.button || "Upgrade VIP to Earn More →"
+        guideSection(1).vipProfitRates?.button || "Upgrade VIP to Earn More →"
     );
 });
 
@@ -411,9 +279,7 @@ const onClickLeft = () => {
     padding-bottom: 10px;
 }
 
-.salary-row,
-.bonus-row,
-.deposit-row {
+.salary-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -427,113 +293,13 @@ const onClickLeft = () => {
     font-weight: 800;
 }
 
-.salary-row:last-child,
-.deposit-row:last-child {
+.salary-row:last-child {
     border-bottom: 0;
 }
 
-.salary-row b,
-.deposit-row b,
-.bonus-row b {
+.salary-row b {
     color: #3264f5;
     font-weight: 900;
-}
-
-.reset-title {
-    margin: 0 0 12px;
-    color: #333b48;
-    font-size: 13px;
-    font-weight: 800;
-}
-
-.bonus-row {
-    min-height: 52px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto max-content;
-    column-gap: 10px;
-    align-items: center;
-    color: #3d4653;
-    font-size: 13px;
-    font-weight: 800;
-}
-
-.bonus-row span {
-    min-width: 0;
-    white-space: nowrap;
-}
-
-.bonus-row em {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 58px;
-    max-width: 110px;
-    height: 22px;
-    padding: 0 8px;
-    border-radius: 4px;
-    background: #3345f5;
-    color: #fff;
-    font-size: 10px;
-    line-height: 12px;
-    font-style: normal;
-    font-weight: 500;
-    white-space: nowrap;
-}
-
-.bonus-row b {
-    text-align: right;
-    white-space: nowrap;
-}
-
-.bonus-row-last {
-    border-bottom: 0;
-}
-
-.deposit-title {
-    margin: 22px 0 12px;
-    color: #333b48;
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: 800;
-}
-
-.deposit-head {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 10px;
-}
-
-.deposit-head span {
-    height: 32px;
-    border-radius: 3px;
-    background: #3345f5;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-}
-
-.deposit-row {
-    min-height: 51px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    font-size: 14px;
-    color: #667080;
-    font-weight: 800;
-}
-
-.deposit-row span,
-.deposit-row b {
-    white-space: nowrap;
-}
-
-.deposit-row b {
-    flex-shrink: 0;
-    text-align: right;
 }
 
 .daily-section {

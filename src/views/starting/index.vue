@@ -290,6 +290,7 @@
                 :price-text="missionPriceText"
                 :total-amount-text="missionTotalAmountText"
                 :commission-text="missionCommissionText"
+                :profit-rate-text="missionProfitRateText"
                 :create-time-text="missionCreateTimeText"
                 :order-no-text="missionOrderNoText"
                 :submitting="isMissionSubmitting"
@@ -359,6 +360,7 @@ import { useRouter } from "vue-router";
 import { errorMessages } from "../../api/errorCodeMap";
 import MissionSubmissionPopup from "@/components/MissionSubmissionPopup.vue";
 import MissionGifLoadingScreen from "@/components/MissionGifLoadingScreen.vue";
+import { formatCommissionRate } from "@/utils/commissionRate";
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -675,6 +677,9 @@ const missionCommissionText = computed(() => {
     const amount = Number(goods.value?.commission || 0);
     return amount ? amount.toFixed(2) : "46.78";
 });
+const missionProfitRateText = computed(() =>
+    formatCommissionRate(goods.value?.commission, goods.value?.price),
+);
 const missionCreateTimeText = computed(() => {
     if (!goods.value?.createTime) return "2025-06-15 19:38:44";
     return formatWithTimezone(

@@ -45,6 +45,11 @@
                                 <strong>USD {{ priceText }}</strong>
                             </div>
 
+                            <div class="mission-card__profit-rate">
+                                <span>{{ $t("commission_fee_ratio") }}:</span>
+                                <strong>{{ profitRateText }}</strong>
+                            </div>
+
                             <div class="mission-card__summary-grid">
                                 <div class="mission-card__summary-box">
                                     <div class="mission-card__summary-label">
@@ -171,6 +176,11 @@
                         <strong>USD {{ priceText }}</strong>
                     </div>
 
+                    <div class="mission-card__profit-rate">
+                        <span>{{ $t("commission_fee_ratio") }}:</span>
+                        <strong>{{ profitRateText }}</strong>
+                    </div>
+
                     <div class="mission-card__summary-grid">
                         <div class="mission-card__summary-box">
                             <div class="mission-card__summary-label">
@@ -289,6 +299,10 @@ const props = defineProps({
     commissionText: {
         type: String,
         default: "46.78",
+    },
+    profitRateText: {
+        type: String,
+        default: "—",
     },
     createTimeText: {
         type: String,
@@ -574,7 +588,8 @@ onUnmounted(() => {
     line-height: 1;
 }
 
-.mission-card__price {
+.mission-card__price,
+.mission-card__profit-rate {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -588,6 +603,12 @@ onUnmounted(() => {
     text-align: center;
     font-style: normal;
     text-transform: none;
+}
+
+.mission-card__profit-rate {
+    flex-wrap: wrap;
+    margin-top: 12px;
+    color: #facc32;
 }
 
 .mission-card__summary-grid {

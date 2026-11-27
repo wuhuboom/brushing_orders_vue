@@ -157,7 +157,7 @@
   "please_enter_a_new_password": "새 비밀번호를 입력하세요",
   "already_have_an_account_2": "이미 계정이 있으신가요?",
   "withdrawal_successful": "출금 성공",
-  "commission_fee_ratio": "수수료 비율",
+  "commission_fee_ratio": "수익률",
   "please_enter_the_amount": "금액을 입력하세요",
   "username_phone_is_request": "사용자명/전화번호는 필수입니다",
   "register_2": "회원가입",
@@ -496,7 +496,7 @@
   "latest_event_details": "최신 이벤트 상세",
   "sug_profit_earnings_guide": "SUG 수익 및 수익 가이드",
   "welcome_income_overview": "사용자 여러분, 수익 및 수익 가이드에 오신 것을 환영합니다.",
-  "income_guide_desc": "이 가이드는 회사 내 수익 구조를 설명하여 업무 계획을 더 잘 세울 수 있도록 돕습니다. 모든 직원 수익은 일일 수익, 리셋 보너스, 기본 급여의 3가지로 구성됩니다. 일일 수익이 주요 수입원이며, 리셋 보너스와 기본 급여는 특정 조건이 충족되면 지급됩니다.",
+  "income_guide_desc": "이 가이드는 회사 내 수익 구조를 설명하여 업무 계획을 더 잘 세울 수 있도록 돕습니다. 모든 직원 수익은 일일 수익과 기본 급여의 2가지로 구성됩니다. 일일 수익이 주요 수입원이며, 기본 급여는 특정 조건이 충족되면 지급됩니다.",
   "start_earning": "수익 시작",
   "view_vip": "VIP 보기",
   "detailed_explanation_rules": "상세 설명 및 수익 규칙",
@@ -656,91 +656,7 @@
       }
     },
     {
-      "title": "2) 리셋 보너스",
-      "image": "",
-      "content": "<p>리셋 보너스는 처음 저희와 함께 시작할 때 가장 중요한 수입원 중 하나입니다. 각 사용자는 하루에 <strong>두 세트의 미션</strong>을 완료할 수 있으며, 상인은 지속적인 미션 완료를 장려하기 위해 추가 리셋 보너스를 제공합니다.</p><p>리셋 인센티브 구조:</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>첫 미션을 <strong>100 USD</strong>로 시작하기 위해 계정을 리셋할 때마다 <strong>추가 10 USD 보너스</strong>를 받습니다.</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>하루 총 리셋 금액이 <strong>1,500 USD를 초과</strong>하면, 해당 일의 두 세트 누적 리셋 금액 기준으로 <strong>추가 4% 보너스</strong>를 받습니다.</li></ol>",
-      "resetBonusScheme": {
-        "title": "급여 스키마",
-        "subtitle": "출근 . 참여 . 급여 지급",
-        "plans": [
-          {
-            "name": "스탠다드",
-            "amountLabel": "금액",
-            "amount": "USD 100",
-            "extraLabel": "추가 보너스",
-            "extra": "USD 10"
-          },
-          {
-            "name": "인기",
-            "amountLabel": "금액",
-            "amount": "USD 500",
-            "extraLabel": "추가 보너스",
-            "extra": "USD 60"
-          },
-          {
-            "name": "프리미엄",
-            "amountLabel": "금액",
-            "amount": "USD 1000",
-            "extraLabel": "추가 보너스",
-            "extra": "USD 120"
-          },
-          {
-            "name": "엘리트",
-            "amountLabel": "금액",
-            "amount": "USD 1600",
-            "extraLabel": "추가 보너스",
-            "extra": "USD 200"
-          },
-          {
-            "name": "추천",
-            "amountLabel": "금액",
-            "amount": "USD 5500",
-            "extraLabel": "추가 보너스",
-            "extra": "USD 1200"
-          },
-          {
-            "name": "엘리트 플러스",
-            "amountLabel": "금액",
-            "amount": "USD 10000",
-            "extraLabel": "추가 보너스",
-            "extra": "USD 2400"
-          }
-        ],
-        "advanceTitle": "=당일 누적 어드밴스 보너스",
-        "advanceRows": [
-          {
-            "title": "당일 어드밴스(USD)",
-            "range": "1,500-9,999",
-            "desc": "획득",
-            "bonus": "4%",
-            "suffix": "어드밴스 보너스"
-          },
-          {
-            "title": "당일 어드밴스(USD)",
-            "range": "10,000-19,999",
-            "desc": "획득",
-            "bonus": "8%",
-            "suffix": "어드밴스 보너스"
-          },
-          {
-            "title": "당일 어드밴스(USD)",
-            "range": "20,000-49,999",
-            "desc": "획득",
-            "bonus": "4%",
-            "suffix": "어드밴스 보너스"
-          },
-          {
-            "title": "당일 어드밴스(USD)",
-            "range": "50,000 이상",
-            "desc": "획득",
-            "bonus": "4%",
-            "suffix": "어드밴스 보너스"
-          }
-        ]
-      }
-    },
-    {
-      "title": "3) 일일 수익",
+      "title": "2) 일일 수익",
       "image": "",
       "content": "<p>일일 수익은 주요 수입원입니다. 시스템은 현재 계정 잔액에 따라 다양한 상인의 상품을 배정하여 최적화를 수행합니다. 각 상품을 최적화할 때마다 상품 가격의 <strong>0.5% ~ 2.5%</strong>를 수익으로 얻습니다.</p><p>수익 수준은 <strong>VIP 등급</strong>에 따라 결정되며, VIP 레벨이 높을수록 수익률도 증가합니다. 또한 VIP 레벨이 올라갈수록 미션 수량도 증가합니다.</p><p>일부 상인은 <strong>조합 상품</strong>도 제공합니다. 시스템은 계정 잔액에 따라 조합 상품을 무작위로 배정할 수 있으며, 상품 유형에 따라 추가로 <strong>5% ~ 25%</strong> 수익을 얻을 수 있습니다.</p>",
       "vipProfitRates": {
@@ -1098,38 +1014,6 @@
   "guide_salary_how_text": "월급 지급을 위해 출근하고 수익을 유지하면 안정적인 수입을 얻을 수 있습니다!",
   "guide_salary_earn_text": "활동할수록 더 많은 수익을 얻습니다. 지금 초대하세요!",
   "guide_salary_tip": "출석을 완벽하게 유지하면 월 최대 USD 7,000까지 받을 수 있습니다!",
-  "guide_reset_scheme_title": "리셋 보너스 구조",
-  "guide_reset_scheme_subtitle": "충전 . 리셋 . 더 많은 수익",
-  "guide_reset_plan_1_name": "스탠다드",
-  "guide_reset_plan_2_name": "인기",
-  "guide_reset_plan_3_name": "프리미엄",
-  "guide_reset_plan_4_name": "엘리트",
-  "guide_reset_plan_5_name": "추천",
-  "guide_reset_plan_6_name": "엘리트 플러스",
-  "guide_reset_amount_label": "금액",
-  "guide_reset_extra_label": "추가 보너스",
-  "guide_reset_plan_1_amount": "USD100",
-  "guide_reset_plan_2_amount": "USD500",
-  "guide_reset_plan_3_amount": "USD1,000",
-  "guide_reset_plan_4_amount": "USD1,600",
-  "guide_reset_plan_5_amount": "USD5,500",
-  "guide_reset_plan_6_amount": "USD10,000",
-  "guide_reset_plan_1_extra": "USD10",
-  "guide_reset_plan_2_extra": "USD60",
-  "guide_reset_plan_3_extra": "USD120",
-  "guide_reset_plan_4_extra": "USD200",
-  "guide_reset_plan_5_extra": "USD1,200",
-  "guide_reset_plan_6_extra": "USD2,400",
-  "guide_reset_advance_title": "선불 리셋 보너스",
-  "guide_reset_advance_day_title": "당일 선불",
-  "guide_reset_range_1500_9999": "USD1,500 - USD9,999",
-  "guide_reset_range_10000_19999": "USD10,000 - USD19,999",
-  "guide_reset_range_20000_49999": "USD20,000 - USD49,999",
-  "guide_reset_range_50000_above": "USD50,000 이상",
-  "guide_reset_will_get": "받게 되는 금액",
-  "guide_reset_bonus_4": "4%",
-  "guide_reset_bonus_8": "8%",
-  "guide_reset_advance_bonus": "선불 보너스",
   "my_referral_code": "내 추천 코드",
   "todays_commission": "오늘의 수수료",
   "wallet_amount": "지갑 금액",

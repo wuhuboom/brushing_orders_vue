@@ -155,7 +155,7 @@
   "please_enter_a_new_password": "新しいパスワードを入力してください",
   "already_have_an_account_2": "すでにアカウントをお持ちですか？",
   "withdrawal_successful": "出金成功",
-  "commission_fee_ratio": "手数料率",
+  "commission_fee_ratio": "利益率",
   "please_enter_the_amount": "金額を入力してください",
   "username_phone_is_request": "ユーザー名/電話番号は必須です",
   "register_2": "登録",
@@ -494,7 +494,7 @@
   "latest_event_details": "最新イベント詳細",
   "sug_profit_earnings_guide": "SUG 利益＆収益ガイド",
   "welcome_income_overview": "ユーザーの皆様、収益ガイドへようこそ。",
-  "income_guide_desc": "本ガイドは当社における利益および収益構造を説明し、より良い業務計画を立てるためのものです。従業員の収益は「日次利益」「リセットボーナス」「基本給」の3つで構成されています。日次利益が主な収入源となり、リセットボーナスと基本給は販売元が定めた条件を満たした場合に支給されます。",
+  "income_guide_desc": "本ガイドは当社における利益および収益構造を説明し、より良い業務計画を立てるためのものです。従業員の収益は「日次利益」「基本給」の2つで構成されています。日次利益が主な収入源となり、基本給は販売元が定めた条件を満たした場合に支給されます。",
   "start_earning": "収益を開始",
   "view_vip": "VIPを見る",
   "detailed_explanation_rules": "詳細説明および収益ルール",
@@ -654,91 +654,7 @@
       }
     },
     {
-      "title": "2) リセットボーナス",
-      "image": "",
-      "content": "<p>リセットボーナスは、当社での勤務を開始した際の主要な収入源の一つです。ユーザーは1日あたり<strong>2セットのタスク</strong>を完了でき、継続的なタスク完了を促すために、取引先から追加のリセットボーナスが提供されます。</p><p>リセットインセンティブ構造：</p><ol><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>アカウントをリセットし、最初のタスク（<strong>100 USD</strong>）を開始するたびに、<strong>追加10 USDボーナス</strong>を受け取ります。</li><li data-list=\"bullet\"><span class=\"ql-ui\" contenteditable=\"false\"></span>1日の<strong>総リセット金額が1,500 USDを超える</strong>場合、その日の2セット分の累計リセット金額に基づき、<strong>追加4%ボーナス</strong>を受け取ります。</li></ol>",
-      "resetBonusScheme": {
-        "title": "給与スキーム",
-        "subtitle": "サインイン・出勤・報酬獲得",
-        "plans": [
-          {
-            "name": "スタンダード",
-            "amountLabel": "金額",
-            "amount": "USD 100",
-            "extraLabel": "追加報酬",
-            "extra": "USD 10"
-          },
-          {
-            "name": "人気",
-            "amountLabel": "金額",
-            "amount": "USD 500",
-            "extraLabel": "追加報酬",
-            "extra": "USD 60"
-          },
-          {
-            "name": "プレミアム",
-            "amountLabel": "金額",
-            "amount": "USD 1000",
-            "extraLabel": "追加報酬",
-            "extra": "USD 120"
-          },
-          {
-            "name": "エリート",
-            "amountLabel": "金額",
-            "amount": "USD 1600",
-            "extraLabel": "追加報酬",
-            "extra": "USD 200"
-          },
-          {
-            "name": "おすすめ",
-            "amountLabel": "金額",
-            "amount": "USD 5500",
-            "extraLabel": "追加報酬",
-            "extra": "USD 1200"
-          },
-          {
-            "name": "エリートプラス",
-            "amountLabel": "金額",
-            "amount": "USD 10000",
-            "extraLabel": "追加報酬",
-            "extra": "USD 2400"
-          }
-        ],
-        "advanceTitle": "=当日累積アドバンス報酬",
-        "advanceRows": [
-          {
-            "title": "当日アドバンス（USD）",
-            "range": "1,500-9,999",
-            "desc": "獲得（USD）",
-            "bonus": "4%",
-            "suffix": "アドバンスボーナス"
-          },
-          {
-            "title": "当日アドバンス（USD）",
-            "range": "10,000-19,999",
-            "desc": "獲得（USD）",
-            "bonus": "8%",
-            "suffix": "アドバンスボーナス"
-          },
-          {
-            "title": "当日アドバンス（USD）",
-            "range": "20,000-49,999",
-            "desc": "獲得（USD）",
-            "bonus": "4%",
-            "suffix": "アドバンスボーナス"
-          },
-          {
-            "title": "当日アドバンス（USD）",
-            "range": "50,000以上",
-            "desc": "獲得（USD）",
-            "bonus": "4%",
-            "suffix": "アドバンスボーナス"
-          }
-        ]
-      }
-    },
-    {
-      "title": "3) デイリープロフィット",
+      "title": "2) デイリープロフィット",
       "image": "",
       "content": "<p>デイリープロフィットは主要な収入源です。システムは現在のアカウント残高に基づき、各種取引先の商品を割り当てます。商品を最適化するごとに、商品価格の<strong>0.5%〜2.5%</strong>の利益を獲得できます。</p><p>利益レベルは<strong>VIPランク</strong>によって決まり、VIPレベルが高いほど利益率も高くなります。また、VIPレベルが上がるにつれて、1セットあたりのタスク数も増加します。</p><p>一部の取引先は<strong>コンビネーション商品</strong>も提供しており、システムはアカウント残高に応じてランダムに割り当てます。商品タイプによっては、さらに<strong>5%〜25%</strong>の追加利益を得ることができます。</p>",
       "vipProfitRates": {
@@ -1096,38 +1012,6 @@
   "guide_salary_how_text": "月給制の場合、サインインを継続して利益を維持すれば、安定収入を得ることができます！",
   "guide_salary_earn_text": "より積極的に参加するほど、収入は増えます。今すぐ招待して開始！",
   "guide_salary_tip": "皆勤で最大USD 7,000/月の収入が可能です！",
-  "guide_reset_scheme_title": "リセットボーナススキーム",
-  "guide_reset_scheme_subtitle": "チャージ・リセット・より多く稼ぐ",
-  "guide_reset_plan_1_name": "スタンダード",
-  "guide_reset_plan_2_name": "人気",
-  "guide_reset_plan_3_name": "プレミアム",
-  "guide_reset_plan_4_name": "エリート",
-  "guide_reset_plan_5_name": "おすすめ",
-  "guide_reset_plan_6_name": "エリートプラス",
-  "guide_reset_amount_label": "金額",
-  "guide_reset_extra_label": "追加ボーナス",
-  "guide_reset_plan_1_amount": "USD100",
-  "guide_reset_plan_2_amount": "USD500",
-  "guide_reset_plan_3_amount": "USD1,000",
-  "guide_reset_plan_4_amount": "USD1,600",
-  "guide_reset_plan_5_amount": "USD5,500",
-  "guide_reset_plan_6_amount": "USD10,000",
-  "guide_reset_plan_1_extra": "USD10",
-  "guide_reset_plan_2_extra": "USD60",
-  "guide_reset_plan_3_extra": "USD120",
-  "guide_reset_plan_4_extra": "USD200",
-  "guide_reset_plan_5_extra": "USD1,200",
-  "guide_reset_plan_6_extra": "USD2,400",
-  "guide_reset_advance_title": "アドバンスリセットボーナス",
-  "guide_reset_advance_day_title": "当日アドバンス",
-  "guide_reset_range_1500_9999": "USD1,500 - USD9,999",
-  "guide_reset_range_10000_19999": "USD10,000 - USD19,999",
-  "guide_reset_range_20000_49999": "USD20,000 - USD49,999",
-  "guide_reset_range_50000_above": "USD50,000以上",
-  "guide_reset_will_get": "獲得内容",
-  "guide_reset_bonus_4": "4%",
-  "guide_reset_bonus_8": "8%",
-  "guide_reset_advance_bonus": "アドバンスボーナス",
   "my_referral_code": "紹介コード",
   "todays_commission": "本日のコミッション",
   "wallet_amount": "ウォレット金額",
