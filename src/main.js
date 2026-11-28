@@ -41,13 +41,6 @@ import {
 } from "vant";
 // 2. 引入组件样式
 import "vant/lib/index.css";
-import { Locale } from "vant";
-import enUS from "vant/es/locale/lang/en-US";
-import frFR from "vant/es/locale/lang/fr-FR";
-import deDE from "vant/es/locale/lang/de-DE";
-import itIT from "vant/es/locale/lang/it-IT";
-import koKR from "vant/es/locale/lang/ko-KR";
-import idID from "vant/es/locale/lang/id-ID";
 installNativeFormValidationGuard();
 installResponsiveMode();
 
@@ -55,8 +48,6 @@ const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
-
-Locale.use("en-US", enUS);
 
 // 设置一个全局的图片上传路径import.meta.env.VITE_UPLOAD_URL
 app.config.globalProperties.$uploadUrl = import.meta.env.VITE_UPLOAD_URL;

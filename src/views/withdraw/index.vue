@@ -29,7 +29,7 @@ const router = useRouter(),
   minimumWithdrawal = ref(null),
   form = reactive({ amount: "", tradePassword: "", withdrawalAccountId: "" });
 const money = (v) =>
-    Number(v || 0).toLocaleString(undefined, {
+    Number(v || 0).toLocaleString("es-MX", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });

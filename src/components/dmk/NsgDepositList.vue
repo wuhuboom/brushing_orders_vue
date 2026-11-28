@@ -24,7 +24,7 @@ defineEmits(["filter", "load"]);
 const tabs = [{status:'1', icon:'clock', label:'das.dmk.reviewing'}, {status:'2', icon:'check', label:'das.common.success'}, {status:'3', icon:'reject', label:'das.dmk.reject'}];
 const tone = status => ({ '1': 'is-reviewing', '2': 'is-success', '3': 'is-reject' }[String(status)] || '');
 const statusLabel = status => ({ '1': 'das.dmk.reviewing', '2': 'das.records.completed', '3': 'das.nsg.depositFailed' }[String(status)]);
-const money = value => Number(value ?? 0).toLocaleString('en-US', { maximumFractionDigits: 2 });
+const money = value => Number(value ?? 0).toLocaleString('es-MX', { maximumFractionDigits: 2 });
 </script>
 <style>
 .nsg-deposit-list { width: calc(100% - 208px); margin: 64px auto 0; padding-bottom: 100px; font: 16px/1.5 "DM Sans", Arial, sans-serif; color: #cbd0e1; }

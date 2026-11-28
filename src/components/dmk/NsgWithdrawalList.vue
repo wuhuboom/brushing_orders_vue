@@ -34,7 +34,7 @@ defineEmits(["filter", "load"]);
 const tone = (status) => String(status) === "2" ? "is-success" : String(status) === "3" ? "is-reject" : "is-reviewing";
 const icon = (status) => String(status) === "2" ? "check" : String(status) === "3" ? "reject" : "clock";
 const statusImage = (status) => `/nsg16/status-${String(status) === "2" ? "success" : String(status) === "3" ? "rejected" : "reviewing"}.png`;
-const shortDate = (value) => props.formatDate(value).replace(/^\d{4}-/, "").slice(0, 11);
+const shortDate = (value) => props.formatDate(value).replace(/\/\d{4}(?= )/, "").slice(0, 11);
 </script>
 <style>
 .nsg-withdraw-list { box-sizing: border-box; width: calc(100% - 208px); margin: 64px auto 0; padding-bottom: 112px; font: 15px/1.5 "DM Sans", Arial, sans-serif; color: #cbd0e1; }

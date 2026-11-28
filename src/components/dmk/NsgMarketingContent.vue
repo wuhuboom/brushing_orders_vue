@@ -5,7 +5,7 @@
 <script setup>
 import { onMounted, ref, watchEffect } from "vue";
 import { useI18n } from "vue-i18n";
-import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
+import { CUSTOMER_SERVICE_ENABLED, openCustomerServiceDialog } from "@/utils/customerServiceDialog";
 import homeHtml from "@/assets/nsg-marketing/home.html?raw";
 import aboutHtml from "@/assets/nsg-marketing/about.html?raw";
 import originalCss from "@/assets/nsg-marketing/original.css?raw";
@@ -48,6 +48,9 @@ onMounted(() => {
   body.className = props.page === "about" ? "body" : "body nsg-home";
   body.innerHTML = props.page === "about" ? aboutHtml : homeHtml;
   const supportButtons = body.querySelectorAll("[data-customer-service]");
+  if (!CUSTOMER_SERVICE_ENABLED) {
+    supportButtons.forEach((button) => button.remove());
+  }
   const translatedHeadings = body.querySelectorAll("[data-i18n]");
   watchEffect(() => {
     const label = t("das.dmk.contactCustomerService");

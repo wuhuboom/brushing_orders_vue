@@ -22,6 +22,7 @@ import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
 import NsgDepositList from "@/components/dmk/NsgDepositList.vue";
 import NsgTransactionNav from "@/components/dmk/NsgTransactionNav.vue";
 import NsgUiIcon from "@/components/dmk/NsgUiIcon.vue";
+import { formatTime } from "@/util/times";
 const active = ref("");
 const filteredItems = computed(() => active.value ? items.value.filter(item => String(item.status) === active.value) : items.value);
 const router = useRouter(),
@@ -31,24 +32,7 @@ const router = useRouter(),
   loading = ref(false),
   finished = ref(false),
   query = reactive({ pageNum: 1, pageSize: 10 });
-const h5Date = (value) => {
-    if (!value) return "—";
-    const parsed = new Date(value);
-    if (!Number.isNaN(parsed.getTime())) {
-      return parsed
-        .toLocaleString("en-US", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        })
-        .replace(/^(\d{2})\/(\d{2})\/(\d{4}), /, "$3-$1-$2 ");
-    }
-    return String(value).replace("T", " ").slice(0, 19);
-  },
+const h5Date = (value) => formatTime(value) || "—",
   contact = () => openCustomerServiceDialog(),
   openTransactions = () => safePush(router, "/transactionActivity"),
   load = async () => {

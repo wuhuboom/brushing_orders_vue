@@ -46,8 +46,8 @@ Object.entries(messages).forEach(([locale, message]) => {
 });
 
 const i18n = createI18n({
-  locale: "en",
-  fallbackLocale: "en",
+  locale: "mx",
+  fallbackLocale: "mx",
   messages,
 });
 

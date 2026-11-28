@@ -25,7 +25,7 @@ const esLatinAmerica = {
   vanCalendar: {
     ...esES.vanCalendar,
     monthTitle: (year, month) =>
-      new Date(year, month - 1).toLocaleDateString("es", {
+      new Date(year, month - 1).toLocaleDateString("es-MX", {
         month: "long",
         year: "numeric",
       }),
@@ -50,10 +50,11 @@ const esLatinAmerica = {
 };
 
 export function normalizeLocale(value) {
-  const normalized = String(value || "en").trim().toLowerCase().replaceAll("_", "-");
+  const normalized = String(value || "mx").trim().toLowerCase().replaceAll("_", "-");
+  if (normalized === "es-mx") return "mx";
   if (supportedLocales.has(normalized)) return normalized;
   const base = normalized.split("-")[0];
-  return supportedLocales.has(base) ? base : "en";
+  return supportedLocales.has(base) ? base : "mx";
 }
 
 export function useLocale() {
@@ -88,6 +89,7 @@ export function useLocale() {
     if (vantLang) {
       Locale.use(vantLang.name, vantLang.pack);
     }
+    document.documentElement.lang = vantLang?.name || normalized;
     return normalized;
   }
 

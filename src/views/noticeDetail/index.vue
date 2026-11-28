@@ -3,11 +3,7 @@
     <DasPageHeader title-key="das.page.notifications" back-to="/notice" />
     <article>
       <h1>{{ notice.noticeTitle }}</h1>
-      <time>{{
-        String(notice.createTime || "")
-          .replace("T", " ")
-          .slice(0, 19)
-      }}</time>
+      <time>{{ formatTime(notice.createTime) }}</time>
       <div class="das-rich-text" v-html="notice.noticeContent"></div>
     </article>
   </main>
@@ -17,6 +13,7 @@ import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { getNotice } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import { formatTime } from "@/util/times";
 const route = useRoute(),
   notice = ref({});
 onMounted(

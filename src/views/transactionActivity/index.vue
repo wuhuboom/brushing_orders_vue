@@ -52,6 +52,7 @@ import { reactive, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { getTransactions } from "@/api/apis";
 import DasPageHeader from "@/components/DasPageHeader.vue";
+import { formatTime } from "@/util/times";
 
 const { t } = useI18n();
 const items = ref([]);
@@ -110,7 +111,7 @@ const numberValue = (value) => {
   return Number.isFinite(number) ? number : 0;
 };
 const money = (value) =>
-  numberValue(value).toLocaleString(undefined, {
+  numberValue(value).toLocaleString("es-MX", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -121,10 +122,7 @@ const signedMoney = (value) => {
 const amountClass = (value) =>
   numberValue(value) < 0 ? "is-negative" : "is-positive";
 const reference = (item) => item.serialCode || item.transactionCode || "";
-const date = (value) => {
-  const text = String(value || "").replace("T", " ").slice(0, 19);
-  return text || "—";
-};
+const date = (value) => formatTime(value) || "—";
 
 const load = async () => {
   if (finished.value) {

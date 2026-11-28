@@ -1,5 +1,6 @@
 <template>
   <van-popup
+    v-if="CUSTOMER_SERVICE_ENABLED"
     v-model:show="visible"
     class="dmk-customer-service-dialog"
     teleport="body"
@@ -54,6 +55,7 @@ import { computed, ref, watch } from "vue";
 import { getCustomerService } from "@/api/apis";
 import { useUserStore } from "@/store/modules/user";
 import { buildCustomerServiceUrl } from "@/utils/customerServiceUrl";
+import { CUSTOMER_SERVICE_ENABLED } from "@/utils/customerServiceDialog";
 
 const props = defineProps({
   show: { type: Boolean, default: false },
@@ -65,7 +67,7 @@ const channels = ref([]);
 const loading = ref(false);
 const loaded = ref(false);
 const visible = computed({
-  get: () => props.show,
+  get: () => CUSTOMER_SERVICE_ENABLED && props.show,
   set: (value) => emit("update:show", value),
 });
 
@@ -84,6 +86,7 @@ const channelIcon = (item, index) => {
 };
 
 const openChannel = (url) => {
+  if (!CUSTOMER_SERVICE_ENABLED) return;
   const target = buildCustomerServiceUrl(url, {
     isLoggedIn: Boolean(userStore.token),
     user: userStore.userInfo,
@@ -92,7 +95,7 @@ const openChannel = (url) => {
 };
 
 const loadChannels = async () => {
-  if (loaded.value || loading.value) return;
+  if (!CUSTOMER_SERVICE_ENABLED || loaded.value || loading.value) return;
   loading.value = true;
   try {
     const response = await getCustomerService();

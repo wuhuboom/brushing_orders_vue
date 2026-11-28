@@ -57,7 +57,7 @@ const submissionSucceeded = ref(false);
 let submitDelayTimer;
 
 const popupVisible = computed({
-  get: () => props.show || submissionSucceeded.value,
+  get: () => props.show,
   set: (value) => {
     if (!submitting.value) {
       if (!value) submissionSucceeded.value = false;
@@ -84,7 +84,7 @@ const hasCover = computed(() => {
 const imageUrl = (path) =>
   /^https?:/i.test(String(path || "")) ? path : `${imageBaseUrl}${path || ""}`;
 const money = (value) =>
-  Number(value || 0).toLocaleString(undefined, {
+  Number(value || 0).toLocaleString("es-MX", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });

@@ -88,6 +88,7 @@
         </div>
         <div
           class="mt-4 px-4 text-right text-white text-base"
+          v-if="CUSTOMER_SERVICE_ENABLED"
         >
           {{ $t("das.dmk.forgotPassword") }}
         </div>
@@ -169,11 +170,12 @@ import { useCommonStore } from "@/store/modules/common";
 import { useLocale } from "@/util/useLocale";
 import DasPageHeader from "@/components/DasPageHeader.vue";
 import { safeBack } from "@/utils/navigation";
+import { CUSTOMER_SERVICE_ENABLED } from "@/utils/customerServiceDialog";
 const commonStore = useCommonStore(),
   router = useRouter(),
   { locale } = useI18n(),
   { setLocale } = useLocale(),
-  selected = ref(commonStore.clientLang || "en"),
+  selected = ref(commonStore.clientLang || "mx"),
   visibleLanguages = LANGS,
   h5Languages = LANGS,
   confirm = () => {

@@ -15,7 +15,7 @@ const translatedBase = (message) => {
     coreService: d.home.what,
     seo: "SEO",
     ppc: "PPC",
-    currencyUsd: "USD",
+    currencyUsd: "MXN",
     webDesign: d.home.creative,
     seoCopy: d.home.strategyText,
     ppcCopy: d.home.mediaText,

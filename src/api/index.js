@@ -81,7 +81,7 @@ api.interceptors.request.use((config) => {
   config.headers = config.headers || {};
   if (userStore.token) config.headers.Authorization = userStore.token;
   const apiLanguage =
-    languageMap[commonStore.clientLang] || commonStore.clientLang || "en_US";
+    languageMap[commonStore.clientLang] || commonStore.clientLang || "mx";
   const isRegionalSpanish = ["mx", "cl", "co"].includes(apiLanguage);
   config.headers.lang = apiLanguage;
   config.headers["Accept-Language"] = isRegionalSpanish

@@ -34,6 +34,7 @@ import { safePush } from "@/utils/navigation";
 import { onMounted, reactive, ref } from "vue";
 import { getWithdrawals } from "@/api/apis";
 import { useI18n } from "vue-i18n";
+import { formatTime } from "@/util/times";
 const router = useRouter();
 const { t } = useI18n();
 const pcTabs = [
@@ -53,14 +54,11 @@ const tabs = [
   query = reactive({ pageNum: 1, pageSize: 10, status: "2" });
 let requestVersion = 0;
 const money = (v) =>
-    Number(v || 0).toLocaleString(undefined, {
+    Number(v || 0).toLocaleString("es-MX", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }),
-  date = (v) =>
-    String(v || "")
-      .replace("T", " | ")
-      .slice(0, 19),
+  date = (v) => formatTime(v) || "—",
   statusLabel = (s) =>
     String(s) === "2"
       ? "das.withdraw.successful"
@@ -114,6 +112,7 @@ const pcHistoryRows = (item) => {
       label: t("das.form.walletName"),
       value:
         item.walletName ||
+        item.branchName ||
         item.bankName ||
         item.accountName ||
         item.withdrawalTypeName ||
@@ -147,24 +146,7 @@ const pcHistoryRows = (item) => {
     },
   ];
 };
-const h5Date = (value) => {
-  if (!value) return "—";
-  const parsed = new Date(value);
-  if (!Number.isNaN(parsed.getTime())) {
-    return parsed
-      .toLocaleString("en-US", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-      })
-      .replace(/^(\d{2})\/(\d{2})\/(\d{4}), /, "$3-$1-$2 ");
-  }
-  return String(value).replace("T", " ").slice(0, 19);
-};
+const h5Date = (value) => formatTime(value) || "—";
 const h5HistoryRows = (item) => {
   const rows = pcHistoryRows(item);
   return rows.map((row) =>

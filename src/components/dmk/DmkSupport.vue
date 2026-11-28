@@ -1,5 +1,6 @@
 <template>
   <button
+    v-if="CUSTOMER_SERVICE_ENABLED"
     type="button"
     :aria-label="$t('das.dmk.customerSupport')"
     class="dmk-support-launcher cursor-pointer hover:scale-110 transition-transform duration-300"
@@ -11,7 +12,7 @@
 </template>
 
 <script setup>
-import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
+import { CUSTOMER_SERVICE_ENABLED, openCustomerServiceDialog } from "@/utils/customerServiceDialog";
 
 defineProps({ inline: { type: Boolean, default: false } });
 const open = () => openCustomerServiceDialog();

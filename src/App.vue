@@ -3,7 +3,7 @@
     <router-view />
   </div>
   <DmkSupport class="dmk-h5-only" />
-  <DmkCustomerServiceDialog v-model:show="showCustomerService" />
+  <DmkCustomerServiceDialog v-if="CUSTOMER_SERVICE_ENABLED" v-model:show="showCustomerService" />
   <WebsiteSplashAd />
 </template>
 
@@ -12,7 +12,7 @@ import { onBeforeUnmount, onMounted, ref } from "vue";
 import WebsiteSplashAd from "@/components/WebsiteSplashAd.vue";
 import DmkSupport from "@/components/dmk/DmkSupport.vue";
 import DmkCustomerServiceDialog from "@/components/dmk/DmkCustomerServiceDialog.vue";
-import { CUSTOMER_SERVICE_DIALOG_EVENT } from "@/utils/customerServiceDialog";
+import { CUSTOMER_SERVICE_DIALOG_EVENT, CUSTOMER_SERVICE_ENABLED } from "@/utils/customerServiceDialog";
 import { useUserStore } from "@/store/modules/user";
 import { useCommonStore } from "@/store/modules/common";
 import { useLocale } from "@/util/useLocale";
@@ -20,6 +20,7 @@ import BigNumber from "bignumber.js";
 const configuredWidth = window.g?.APP_MAX_WIDTH || "100%";
 const showCustomerService = ref(false);
 const handleCustomerServiceOpen = () => {
+  if (!CUSTOMER_SERVICE_ENABLED) return;
   showCustomerService.value = true;
 };
 onMounted(() => {
@@ -55,7 +56,7 @@ if (userStore.token) {
   userStore.getUserInfo();
 }
 userStore.getZone();
-const initialLocale = setLocale(commonStore.lang || "en");
+const initialLocale = setLocale(commonStore.lang || "mx");
 if (initialLocale !== commonStore.lang) commonStore.updateLang(initialLocale);
 </script>
 

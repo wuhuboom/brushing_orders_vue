@@ -127,6 +127,7 @@ import h5Placeholder from "@/static/das/image-placeholder.png";
 import { safeBack, safePush } from "@/utils/navigation";
 import { getPcBreakpoint } from "@/responsiveMode";
 import { useI18n } from "vue-i18n";
+import { formatTime } from "@/util/times";
 const desktopQuery = window.matchMedia(`(min-width: ${getPcBreakpoint()}px)`);
 const isDesktop = ref(desktopQuery.matches);
 const router = useRouter(),
@@ -140,7 +141,7 @@ const router = useRouter(),
   submitTaskVisible = ref(false),
   submitTaskOrder = ref({}),
   query = reactive({ pageNum: 1, pageSize: 10, status: "" });
-const { t, locale } = useI18n();
+const { t } = useI18n();
 const tabs = [
     { label: "das.records.all", status: "" },
     { label: "das.records.pending", status: "1" },
@@ -164,8 +165,8 @@ const refreshAfterSubmit = async () => {
 };
 const h5ImageBase = window.g?.VITE_API_IMG_URL || "";
 const h5ImageUrl = (path) => path ? (/^https?:/i.test(String(path)) ? path : `${h5ImageBase}${path}`) : h5Placeholder;
-const h5Money = (value) => Number(value || 0).toLocaleString(locale.value, { useGrouping: false, minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const h5Amount = (value) => Number(value || 0).toLocaleString(locale.value, { useGrouping: false, minimumFractionDigits: 0, maximumFractionDigits: 2 });
+const h5Money = (value) => Number(value || 0).toLocaleString("es-MX", { useGrouping: false, minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const h5Amount = (value) => Number(value || 0).toLocaleString("es-MX", { useGrouping: false, minimumFractionDigits: 0, maximumFractionDigits: 2 });
 const h5Rate = (value) => {
   if (value === undefined || value === null || value === "") return "—";
   const text = String(value);
@@ -173,14 +174,7 @@ const h5Rate = (value) => {
   const number = Number(value);
   return Number.isFinite(number) ? `${number}%` : text;
 };
-const h5Date = (value) => {
-  if (!value) return "—";
-  const parsed = new Date(value);
-  if (!Number.isNaN(parsed.getTime())) {
-    return parsed.toLocaleString(locale.value, { year: "numeric", month: "2-digit", day: "2-digit", hour: "numeric", minute: "2-digit", second: "2-digit" });
-  }
-  return String(value).replace("T", " ").slice(0, 19);
-};
+const h5Date = (value) => formatTime(value) || "—";
 const h5Status = (status) => String(status) === "0"
   ? t("das.records.completed")
   : String(status) === "2"

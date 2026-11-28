@@ -541,6 +541,7 @@ import DmkPcLayout from "@/components/dmkPc/DmkPcLayout.vue";
 import DmkH5Layout from "@/components/dmkH5/DmkH5Layout.vue";
 import { safePush } from "@/utils/navigation";
 import { getOrderErrorMessage } from "@/utils/orderCreate";
+import { formatTime } from "@/util/times";
 import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
 import DmkSupport from "@/components/dmk/DmkSupport.vue";
 
@@ -733,7 +734,7 @@ const imageUrl = (path) =>
 const money = (value, fallback) =>
   value === undefined || value === null || value === ""
     ? fallback
-    : Number(value).toLocaleString(undefined, {
+    : Number(value).toLocaleString("es-MX", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       });
@@ -757,23 +758,7 @@ const historyStatus = (status) =>
     : String(status) === "2"
       ? t("das.records.frozen")
       : t("das.records.pending");
-const historyDate = (value) => {
-  if (!value) return "—";
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime()))
-    return String(value).replace("T", " ").slice(0, 19);
-  return parsed
-    .toLocaleString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "numeric",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-    })
-    .replace(/^(\d{2})\/(\d{2})\/(\d{4}), /, "$3-$1-$2 ");
-};
+const historyDate = (value) => formatTime(value) || "—";
 const cancelHistoryRequest = () => {
   historyRequestVersion += 1;
   historyController?.abort();
@@ -827,7 +812,7 @@ const switchHistoryTab = (index) => {
 };
 
 const h5Amount = (value) =>
-  Number(value || 0).toLocaleString("en-US", {
+  Number(value || 0).toLocaleString("es-MX", {
     useGrouping: false,
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
@@ -843,11 +828,7 @@ const ratingText = (value) => {
 const formatClock = (value) => {
   if (value === undefined || value === null || value === "") return "";
   if (typeof value === "number" || /^\d{10,13}$/.test(String(value))) {
-    const raw = Number(value);
-    const date = new Date(String(value).length === 10 ? raw * 1000 : raw);
-    if (!Number.isNaN(date.getTime())) {
-      return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
-    }
+    return formatTime(value, "hh:mm");
   }
   const text = String(value).trim();
   const clock = text.match(/(?:^|T|\s)(\d{1,2}):(\d{2})/);

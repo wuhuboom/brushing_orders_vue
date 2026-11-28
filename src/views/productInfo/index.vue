@@ -57,7 +57,7 @@ const hasCover = computed(() => {
 const imageUrl = (path) =>
   /^https?:/i.test(String(path || "")) ? path : `${imageBaseUrl}${path || ""}`;
 const money = (value) =>
-  Number(value || 0).toLocaleString(undefined, {
+  Number(value || 0).toLocaleString("es-MX", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });

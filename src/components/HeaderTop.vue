@@ -9,7 +9,7 @@
       <img src="/nsg16/logo.png" alt="NSG" />
     </button>
     <div class="das-header__actions">
-      <button class="das-contact" type="button" @click="customer">
+      <button v-if="CUSTOMER_SERVICE_ENABLED" class="das-contact" type="button" @click="customer">
         {{ $t("das.nav.contact") }}
       </button>
       <button class="das-avatar" type="button" @click="safePush(router, '/my')">
@@ -25,7 +25,7 @@ import { defaultAvatarForUser, hasUserAvatar } from "@/utils/avatar";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
 import { safePush, safeReplace } from "@/utils/navigation";
-import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
+import { CUSTOMER_SERVICE_ENABLED, openCustomerServiceDialog } from "@/utils/customerServiceDialog";
 
 const router = useRouter();
 const userStore = useUserStore();

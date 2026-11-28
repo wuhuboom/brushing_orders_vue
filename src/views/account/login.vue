@@ -76,6 +76,7 @@
                 </div>
                 <div
                   class="mt-4 px-4 text-right text-white text-base cursor-pointer"
+                  v-if="CUSTOMER_SERVICE_ENABLED"
                   @click="customer"
                 >
                   {{ $t("das.dmk.forgotPassword") }}
@@ -221,6 +222,7 @@
           </div>
           <div
             class="mt-4 px-4 text-right text-white text-base cursor-pointer"
+            v-if="CUSTOMER_SERVICE_ENABLED"
             @click="customer"
           >
             {{ $t("das.dmk.forgotPassword") }}
@@ -281,6 +283,7 @@ import { useCommonStore } from "@/store/modules/common";
 import { useUserStore } from "@/store/modules/user";
 import { login } from "@/api/apis";
 import { safeBack, safePush, safeReplace } from "@/utils/navigation";
+import { CUSTOMER_SERVICE_ENABLED } from "@/utils/customerServiceDialog";
 const router = useRouter(),
   { t } = useI18n(),
   commonStore = useCommonStore(),
@@ -292,7 +295,7 @@ const form = reactive({ username: "", password: "" }),
   errorMessage = ref(""),
   passwordVisible = ref(false),
   pcSupport = ref();
-const language = computed(() => commonStore.clientLang || "en");
+const language = computed(() => commonStore.clientLang || "mx");
 const rememberKeys = {
   enabled: "dasRemember",
   username: "dasUsername",

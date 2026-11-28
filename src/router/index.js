@@ -2,6 +2,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import pinia from "@/store/index.js";
 import { useUserStore } from "@/store/modules/user";
+import { CUSTOMER_SERVICE_ENABLED } from "@/utils/customerServiceDialog";
 
 // 自动导入views目录下所有vue文件作为路由
 const modules = import.meta.glob("../views/**/*.vue");
@@ -32,6 +33,9 @@ const router = createRouter({
 
 // 更新路由拦截
 router.beforeEach((to) => {
+  if (to.name === "contact" && !CUSTOMER_SERVICE_ENABLED) {
+    return { path: "/about", replace: true };
+  }
   const authenticationRoutes = [
     "/account/welcome",
     "/account/login",

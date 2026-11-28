@@ -11,7 +11,7 @@ export default {
   coreService: "Core Service",
   seo: "SEO",
   ppc: "PPC",
-  currencyUsd: "USD",
+  currencyUsd: "MXN",
   webDesign: "Web Design & Dev",
   seoCopy: "Increase your organic reach by outranking competitors",
   ppcCopy: "Meet your customers when they're looking to buy.",

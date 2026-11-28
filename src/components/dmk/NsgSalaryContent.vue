@@ -63,7 +63,7 @@
       <ul>
         <li><span class="nsg-salary__rule-icon"><NsgUiIcon name="user" /></span><p>{{ $t("das.dmk.salaryRule1") }}</p></li>
         <li><span class="nsg-salary__rule-icon"><NsgUiIcon name="gift" /></span><p>{{ $t("das.dmk.salaryRule2") }}</p></li>
-        <li><span class="nsg-salary__rule-icon"><NsgUiIcon name="support" /></span><i18n-t keypath="das.nsg.salaryRuleSupport" tag="p" scope="global"><template #support><button type="button" @click="openCustomerServiceDialog">{{ $t("das.dmk.customerSupport") }}</button></template></i18n-t></li>
+        <li v-if="CUSTOMER_SERVICE_ENABLED"><span class="nsg-salary__rule-icon"><NsgUiIcon name="support" /></span><i18n-t keypath="das.nsg.salaryRuleSupport" tag="p" scope="global"><template #support><button type="button" @click="openCustomerServiceDialog">{{ $t("das.dmk.customerSupport") }}</button></template></i18n-t></li>
       </ul>
     </section>
   </div>
@@ -72,7 +72,7 @@
 <script setup>
 import { computed } from "vue";
 import NsgUiIcon from "./NsgUiIcon.vue";
-import { openCustomerServiceDialog } from "../../utils/customerServiceDialog";
+import { CUSTOMER_SERVICE_ENABLED, openCustomerServiceDialog } from "../../utils/customerServiceDialog";
 
 const props = defineProps({
   mobile: Boolean,

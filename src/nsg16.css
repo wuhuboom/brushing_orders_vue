@@ -4928,7 +4928,7 @@ html .nsg-wallet-form button.van-button span { color: inherit !important; }
 .dmk-payment-methods-scope .van-picker__frame::after { border-color: #7654b0; }
 
 @media (min-width: 1024px) {
-  .nsg-account-panel:has(.nsg-wallet-editing) { max-width: 960px !important; min-height: 0 !important; margin: 70px auto !important; padding: 0 !important; background: linear-gradient(#0f1423, #0f1423) padding-box, var(--nsg-gradient) border-box !important; }
+  .nsg-account-panel:has(.nsg-wallet-editing) { max-width: 960px !important; min-height: 0 !important; margin: 70px auto !important; padding: 0 !important; overflow: visible !important; background: linear-gradient(#0f1423, #0f1423) padding-box, var(--nsg-gradient) border-box !important; }
   .nsg-account-panel:has(.nsg-wallet-editing) .nsg-account-content { min-height: 0 !important; padding: 48px 52px !important; }
   .nsg-wallet-editing .nsg-wallet-title { margin-bottom: 10px; font-size: 20px !important; }
   html.dmk-pc-mode body #app .nsg-wallet-editing > .nsg-wallet-content { width: 100% !important; max-width: none !important; }

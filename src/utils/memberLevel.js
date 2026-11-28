@@ -4,7 +4,7 @@ const hasValue = (value) =>
 const formatNumber = (value, maximumFractionDigits = 2) => {
   if (!hasValue(value) || !Number.isFinite(Number(value))) return "—";
 
-  return new Intl.NumberFormat("en-US", {
+  return new Intl.NumberFormat("es-MX", {
     maximumFractionDigits,
   }).format(Number(value));
 };
@@ -64,9 +64,9 @@ export const getMemberLevelDescriptionLines = (description) => {
 
 export const getMemberLevelMetrics = (level = {}) => ({
   price: hasValue(level.price)
-    ? `${formatNumber(level.price)} USD`
+    ? `${formatNumber(level.price)} MXN`
     : hasValue(level.minBalance)
-      ? `${formatNumber(level.minBalance)} USD`
+      ? `${formatNumber(level.minBalance)} MXN`
       : "—",
   dataPerSet: formatNumber(level.orderCountPerDay, 0),
   profitPerTransaction: formatPercentage(level.minCommissionRate),

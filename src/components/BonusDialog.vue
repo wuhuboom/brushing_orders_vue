@@ -1,6 +1,6 @@
 <script setup>
 import { useI18n } from "vue-i18n";
-import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
+import { CUSTOMER_SERVICE_ENABLED, openCustomerServiceDialog } from "@/utils/customerServiceDialog";
 
 defineProps({
   show: { type: Boolean, default: false },
@@ -23,13 +23,13 @@ const openCustomerService = () => openCustomerServiceDialog();
     @update:show="(value) => !value && close()"
   >
     <div class="bonus-prize">
-      <div class="bonus-prize__art">
-        <img class="bonus-prize__background" src="/nsg16/bonus-prize-bg.png" alt="" />
+      <div class="bonus-prize__art" :class="{ 'is-support-hidden': !CUSTOMER_SERVICE_ENABLED }">
+        <img v-if="CUSTOMER_SERVICE_ENABLED" class="bonus-prize__background" src="/nsg16/bonus-prize-bg.png" alt="" />
         <h2 class="bonus-prize__title" :class="{ 'is-long': t('das.nsg.prizeTitle').length > 20 }">{{ t("das.nsg.prizeTitle") }}</h2>
         <p class="bonus-prize__message">{{ t("das.nsg.prizeMessage") }}</p>
         <strong class="bonus-prize__amount" :style="{ fontSize: Math.min(20, 90 / Math.max(String(amount).length, 1)) + 'cqw' }">{{ amount }}</strong>
-        <span class="bonus-prize__currency">USDT</span>
-        <button type="button" class="bonus-prize__claim" @click="openCustomerService">
+        <span class="bonus-prize__currency">{{ t("das.dmk.currencyUsd") }}</span>
+        <button v-if="CUSTOMER_SERVICE_ENABLED" type="button" class="bonus-prize__claim" @click="openCustomerService">
           <span>{{ t("das.nsg.prizeSupport") }}</span>
         </button>
       </div>
@@ -91,6 +91,25 @@ const openCustomerService = () => openCustomerServiceDialog();
   max-width: none;
   pointer-events: none;
 }
+
+/* The original artwork includes a button base; omit it when support is hidden. */
+.bonus-prize__art.is-support-hidden {
+  aspect-ratio: auto;
+  padding: 32px 24px;
+  border: 1px solid #8468ff;
+  border-radius: 22px;
+  background: radial-gradient(ellipse at top, #33216b, #10142d 75%);
+}
+.bonus-prize__art.is-support-hidden > :is(h2, p, strong, span) {
+  position: static;
+  display: block;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+}
+.bonus-prize__art.is-support-hidden > .bonus-prize__message { margin-top: 16px; }
+.bonus-prize__art.is-support-hidden > .bonus-prize__amount { margin: 22px 0 8px; }
 
 .bonus-prize__title,
 .bonus-prize__message,

@@ -30,7 +30,7 @@ import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
 import { safePush } from "@/utils/navigation";
-import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
+import { CUSTOMER_SERVICE_ENABLED, openCustomerServiceDialog } from "@/utils/customerServiceDialog";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -71,7 +71,7 @@ const links = [
   { labelKey: "das.dmk.about", path: "/about", hidden: true },
   { labelKey: "das.home.terms", path: "/clause", hidden: true },
   { labelKey: "das.home.faqs", path: "/faqs", hidden: true },
-  { labelKey: "das.dmk.customerSupport", action: "support" },
+  { labelKey: "das.dmk.customerSupport", action: "support", hidden: !CUSTOMER_SERVICE_ENABLED },
 ];
 const openLink = (item) => {
   if (item.action === "support") {

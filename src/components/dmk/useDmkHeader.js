@@ -3,7 +3,7 @@ import { defaultAvatarForUser, hasUserAvatar } from "@/utils/avatar";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
 import { safePush } from "@/utils/navigation";
-import { openCustomerServiceDialog } from "@/utils/customerServiceDialog";
+import { CUSTOMER_SERVICE_ENABLED, openCustomerServiceDialog } from "@/utils/customerServiceDialog";
 
 export const profileItems = [
   { labelKey: "das.dmk.editProfile", path: "/profile", iconName: "user-o" },
@@ -14,7 +14,7 @@ export const profileItems = [
   { labelKey: "das.dmk.salary", path: "/salary", iconName: "balance-list-o", hidden: true },
   { labelKey: "das.home.faqs", path: "/faqs", iconName: "question-o", hidden: true },
   { labelKey: "das.home.terms", path: "/clause", iconName: "records-o", hidden: true },
-  { labelKey: "das.dmk.customerSupport", action: "support", iconName: "service-o" },
+  { labelKey: "das.dmk.customerSupport", action: "support", iconName: "service-o", hidden: !CUSTOMER_SERVICE_ENABLED },
   { labelKey: "das.profile.logout", action: "logout", red: true, iconName: "revoke" },
   { labelKey: "das.dmk.tax", path: "/tax", iconName: "records-o" },
 ];
@@ -68,7 +68,7 @@ export const useDmkHeader = (props, closeOverlay = () => {}) => {
     () => userInfo.value.luckyBonus,
   );
   const money = (value) =>
-    Number(value || 0).toLocaleString("en-US", {
+    Number(value || 0).toLocaleString("es-MX", {
       useGrouping: true,
       minimumFractionDigits: 0,
       maximumFractionDigits: 2,
